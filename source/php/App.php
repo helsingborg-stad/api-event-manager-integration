@@ -45,9 +45,6 @@ class App
     {
         wp_enqueue_script('event-manager-integration', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-manager-integration.min.js', null, '1.0.0', true);
         wp_localize_script('event-manager-integration', 'eventintegration', array(
-            'new_data_imported' => __("New data imported", 'eventintegration'),
-            'events'            => __("Events", 'eventintegration'),
-            'time_until_reload' => __("Time until reload", 'eventintegration'),
             'loading'           => __("Loading", 'eventintegration'),
         ));
     }
@@ -66,7 +63,7 @@ class App
             'edit_posts',
             'import-events',
             function () {
-                new \EventManagerIntegration\Parser\HbgEventApi('http://eventmanager.dev/json/wp/v2/event/time?start=2016-11-15&end=2016-11-23');
+                new \EventManagerIntegration\Parser\HbgEventApi('http://eventmanager.dev/json/wp/v2/event/time?start=2016-11-15&end=2016-11-20');
             });
 
             add_submenu_page(

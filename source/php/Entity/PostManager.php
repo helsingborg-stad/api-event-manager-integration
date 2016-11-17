@@ -62,21 +62,22 @@ abstract class PostManager
         }
     }
 
-    /**
-     * Save hooks
-     * @param  string $postType Saved post type
-     * @param  object $object   Saved object
-     * @return void
-     */
-    public function beforeSave()
-    {
+    // TA BORT
+    // /**
+    //  * Save hooks
+    //  * @param  string $postType Saved post type
+    //  * @param  object $object   Saved object
+    //  * @return void
+    //  */
+    // public function beforeSave()
+    // {
 
-    }
+    // }
 
-    public function afterSave()
-    {
-        return true;
-    }
+    // public function afterSave()
+    // {
+    //     return true;
+    // }
 
     /**
      * Get  posts
@@ -117,9 +118,10 @@ abstract class PostManager
      */
     public function removeEmpty($metaValue)
     {
-        if(is_array($metaValue))
+        if (is_array($metaValue)) {
             return $metaValue;
-        return ($metaValue !== NULL && $metaValue !== FALSE && $metaValue !== '');
+        }
+        return ($metaValue !== null && $metaValue !== false && $metaValue !== '');
     }
 
     /**
@@ -160,7 +162,7 @@ abstract class PostManager
         $post['meta_input'] = $meta;
 
         // Check if duplicate by matching "_event_manager_id" meta value
-        if(isset($meta['_event_manager_id'])) {
+        if (isset($meta['_event_manager_id'])) {
             $duplicate = self::get(
                 1,
                 array(
@@ -180,9 +182,7 @@ abstract class PostManager
             $post['ID'] = $duplicate->ID;
             $this->ID = wp_update_post($post);
             $isDuplicate = true;
-        }
-        else
-        {
+        } else {
             // Create if not duplicate
             $this->ID = wp_insert_post($post, true);
         }
@@ -194,8 +194,9 @@ abstract class PostManager
     /**
      * Uploads an image from a specified url and sets it as the current post's featured image
      * @param string $url Image url
+     * @param bool   $featured True if $url is featured image, false if not.
      */
-    public function setFeaturedImageFromUrl($url)
+    public function setFeaturedImageFromUrl($url, $featured)
     {
         if (!isset($this->ID)) {
             return false;
@@ -223,7 +224,7 @@ abstract class PostManager
         }
 
         // Bail if image already exists in library
-        if ($attachmentId = $this->attatchmentExists($uploadDir . '/' . basename($filename))) {
+        if ($attachmentId = $this->attachmentExists($uploadDir . '/' . basename($filename))) {
             set_post_thumbnail($this->ID, $attachmentId);
             return;
         }
@@ -252,7 +253,18 @@ abstract class PostManager
         $attachData = wp_generate_attachment_metadata($attachmentId, $uploadDir . '/' . $filename);
         wp_update_attachment_metadata($attachmentId, $attachData);
 
-        set_post_thumbnail($this->ID, $attachmentId);
+        // Set image as featured image or add to gallery
+        if ($featured) {
+            set_post_thumbnail($this->ID, $attachmentId);
+        } else {
+            $gallery_meta = get_post_meta($this->ID, 'event_gallery', true);
+            if (empty($gallery_meta)) {
+                add_post_meta($this->ID, 'event_gallery', array($attachmentId));
+            } else {
+                $gallery_meta[] .= $attachmentId;
+                update_post_meta($this->ID, 'event_gallery', array_unique($gallery_meta));
+            }
+        }
     }
 
     /**
@@ -274,7 +286,7 @@ abstract class PostManager
      * @param  string $src Media url
      * @return mixed
      */
-    private function attatchmentExists($src)
+    private function attachmentExists($src)
     {
         global $wpdb;
         $query = "SELECT ID FROM {$wpdb->posts} WHERE guid = '$src'";

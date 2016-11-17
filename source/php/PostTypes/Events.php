@@ -28,13 +28,12 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
                 'supports'              =>  array('title', 'revisions', 'editor', 'thumbnail'),
             )
         );
-
-        add_action('manage_posts_extra_tablenav', array($this, 'tablenavButtons'));
-        add_action('wp_ajax_import_events', array($this, 'importEvents'));
-
         $this->addTableColumn('cb', '<input type="checkbox">');
         $this->addTableColumn('title', __('Title', 'event-manager'));
         $this->addTableColumn('date', __('Date', 'event-manager'));
+
+        add_action('manage_posts_extra_tablenav', array($this, 'tablenavButtons'));
+        add_action('wp_ajax_import_events', array($this, 'importEvents'));
     }
 
     /**
@@ -64,7 +63,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
      */
     public function importEvents()
     {
-        $importer = new \EventManagerIntegration\Parser\HbgEventApi('http://eventmanager.dev/json/wp/v2/event/time?start=2016-11-15&end=2016-11-23');
+        $importer = new \EventManagerIntegration\Parser\HbgEventApi('http://eventmanager.dev/json/wp/v2/event/time?start=2016-11-15&end=2016-11-20');
         $data = $importer->getCreatedData();
         wp_send_json($data);
     }
