@@ -13,6 +13,8 @@ class HbgEventApi extends \EventManagerIntegration\Parser
 
     public function start()
     {
+        $this->removeEvents();
+
         $ch = curl_init();
         $options = [
             CURLOPT_SSL_VERIFYPEER => false,
@@ -21,7 +23,7 @@ class HbgEventApi extends \EventManagerIntegration\Parser
         ];
 
         curl_setopt_array($ch, $options);
-        $events = json_decode(curl_exec($ch));
+        $events = json_decode(curl_exec($ch), true);
         curl_close($ch);
         if (!$events || (is_object($events) && $events->code == 'Error')) {
             return false;
@@ -39,12 +41,12 @@ class HbgEventApi extends \EventManagerIntegration\Parser
      */
     public function saveEvent($event)
     {
-        $post_title = ! empty($event->title->rendered) ? $event->title->rendered : null;
+        $post_title = ! empty($event['title']['rendered']) ? $event['title']['rendered'] : null;
         $post_content = ! empty($event->content->rendered) ? $event->content->rendered : null;
         $featured_media = ! empty($event->featured_media->source_url) ? $event->featured_media->source_url : null;
         $categories = ! empty($event->event_categories) ? $event->event_categories : null;
         $tags = ! empty($event->event_tags) ? $event->event_tags : null;
-        $occasions = ! empty($event->occasions) ? $event->occasions : null;
+        $occasions = ! empty($event['occasions']) ? $event['occasions'] : null;
         $event_link = ! empty($event->event_link) ? $event->event_link : null;
         $additional_links = ! empty($event->additional_links) ? $event->additional_links : null;
         $related_events = ! empty($event->related_events) ? $event->related_events : null;
@@ -82,7 +84,7 @@ class HbgEventApi extends \EventManagerIntegration\Parser
             'post_content'          => $post_content,
             ),
             array(
-            '_event_manager_id'     => $event->id,
+            '_event_manager_id'     => $event['id'],
             'categories'            => $categories,
             'tags'                  => $tags,
             'occasions'             => $occasions,
@@ -125,6 +127,41 @@ class HbgEventApi extends \EventManagerIntegration\Parser
         }
     }
 
+
+    public function removeEvents()
+    {
+        global $wpdb;
+        $days = ! empty(get_field('remove_events', 'option')) ? get_field('remove_events', 'option') : null;
+        if ($days) {
+            global $wpdb;
+
+            $date_now = strtotime("midnight tomorrow") - 1;
+            $date_limit = strtotime("- {$days} days", $date_now);
+
+            $db_occasions = $wpdb->prefix . "postmeta";
+            $results = $wpdb->get_results("SELECT post_id, meta_value FROM $db_occasions WHERE meta_key = 'occasions'", OBJECT);
+
+            $valid = false;
+            foreach ($results as $value) {
+                $post_id = $value->post_id;
+                $occasions = unserialize($value->meta_value);
+                if (is_array($occasions)) {
+                    foreach ($occasions as $o) {
+                        if (strtotime($o['end_date']) > $date_limit) {
+                            $valid = true;
+                            break 1;
+                        }
+                    }
+                }
+                if ($valid == false) {
+                    wp_delete_post($post_id);
+                    echo $post_id." PASSED EVENT";
+                }
+            }
+        }
+        return;
+    }
+
     /**
      * Filter, if add or not to add
      * @param  array $categories All categories
@@ -134,7 +171,7 @@ class HbgEventApi extends \EventManagerIntegration\Parser
     {
         $passes = true;
 
-        if (get_field('xcap_filter_categories', 'options')) {
+        if (get_field('xcap_filter_categories', 'option')) {
             $filters = array_map('trim', explode(',', get_field('xcap_filter_categories', 'options')));
             $categoriesLower = array_map('strtolower', $categories);
             $passes = false;

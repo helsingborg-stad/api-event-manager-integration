@@ -29,7 +29,7 @@ class DisplayEvents extends \WP_Widget
         $title = ( ! empty( $instance['title'] ) ) ? $instance['title'] : __( 'Recent Posts' );
         $title = apply_filters( 'widget_title', $title, $instance, $this->id_base );
         $limit = isset($instance['limit']) ? $instance['limit'] : null;
-        $days_ahead = isset($instance['days_ahead']) ? $instance['days_ahead']+=1 : null;
+        $days_ahead = isset($instance['days_ahead']) ? $instance['days_ahead'] : null;
         $show_content = isset( $instance['show_content'] ) ? $instance['show_content'] : false;
         $show_location = isset( $instance['show_location'] ) ? $instance['show_location'] : false;
         $content_limit = isset($instance['content_limit']) ? $instance['content_limit'] : null;

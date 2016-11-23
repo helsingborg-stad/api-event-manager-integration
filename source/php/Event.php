@@ -13,6 +13,7 @@ class Event extends \EventManagerIntegration\Entity\PostManager
     public function beforeSave()
     {
         $this->post_content = strip_tags(html_entity_decode($this->post_content));
+
     }
 
     /**

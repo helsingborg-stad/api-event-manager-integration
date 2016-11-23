@@ -1,0 +1,81 @@
+{
+        "key": "group_583557753bd73",
+        "title": "Event manager integration settings",
+        "fields": [
+            {
+                "key": "field_5835579f883ff",
+                "label": "Days ahead",
+                "name": "days_ahead",
+                "type": "number",
+                "instructions": "Import events that occurs within given number of days.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 30,
+                "placeholder": "",
+                "prepend": "",
+                "append": "days",
+                "min": 1,
+                "max": 365,
+                "step": ""
+            },
+            {
+                "key": "field_583572f05b578",
+                "label": "Remove passed events",
+                "name": "remove_events",
+                "type": "number",
+                "instructions": "Automatically removes events older than given number of days. 1 is equal to yesterday.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 1,
+                "placeholder": "",
+                "prepend": "",
+                "append": "days",
+                "min": 1,
+                "max": 365,
+                "step": ""
+            },
+            {
+                "key": "field_5835581488400",
+                "label": "Daily import",
+                "name": "event_daily_import",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "Enable daily automatic import from Event Manager API",
+                "default_value": 1
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "options_page",
+                    "operator": "==",
+                    "value": "acf-options-options"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": 1,
+        "description": ""
+    }

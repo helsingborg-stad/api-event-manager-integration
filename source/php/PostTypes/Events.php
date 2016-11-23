@@ -50,10 +50,10 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
 
         if (current_user_can('manage_options')) {
             echo '<div class="alignleft actions" style="position: relative;">';
-                echo '<div id="importevents" class="button-primary">' . __('Import', 'event-integration') . '</div>';
-                // TA BORT
-                echo '<a href="' . admin_url('options.php?page=import-events') . '" class="button-primary" id="post-query-submit">Debug</a>';
-                echo '<a href="' . admin_url('options.php?page=delete-all-events') . '" class="button-primary" id="post-query-submit">Delete</a>';
+            echo '<div id="importevents" class="button-primary">' . __('Import', 'event-integration') . '</div>';
+            // TA BORT
+            echo '<a href="' . admin_url('options.php?page=import-events') . '" class="button-primary" id="post-query-submit">Debug</a>';
+            echo '<a href="' . admin_url('options.php?page=delete-all-events') . '" class="button-primary" id="post-query-submit">Delete</a>';
             echo '</div>';
         }
     }
@@ -63,9 +63,13 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
      */
     public function importEvents()
     {
-        $importer = new \EventManagerIntegration\Parser\HbgEventApi('http://eventmanager.dev/json/wp/v2/event/time?start=2016-11-15&end=2016-11-20');
+        $days_ahead = ! empty(get_field('days_ahead', 'options')) ? get_field('days_ahead', 'options'): 30;
+        $from_date = strtotime("midnight now");
+        $to_date = date('Y-m-d', strtotime("+ {$days_ahead} days", $from_date));
+        $api_url = 'http://eventmanager.dev/json/wp/v2/event/time?start='.date('Y-m-d').'&end='.$to_date;
+
+        $importer = new \EventManagerIntegration\Parser\HbgEventApi($api_url);
         $data = $importer->getCreatedData();
         wp_send_json($data);
     }
-
 }
