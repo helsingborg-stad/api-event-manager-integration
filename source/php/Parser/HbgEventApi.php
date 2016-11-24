@@ -13,7 +13,7 @@ class HbgEventApi extends \EventManagerIntegration\Parser
 
     public function start()
     {
-        $this->removeEvents();
+        $this->removeExpiredEvents();
 
         $ch = curl_init();
         $options = [
@@ -23,7 +23,7 @@ class HbgEventApi extends \EventManagerIntegration\Parser
         ];
 
         curl_setopt_array($ch, $options);
-        $events = json_decode(curl_exec($ch), true);
+        $events = json_decode(curl_exec($ch));
         curl_close($ch);
         if (!$events || (is_object($events) && $events->code == 'Error')) {
             return false;
@@ -41,42 +41,42 @@ class HbgEventApi extends \EventManagerIntegration\Parser
      */
     public function saveEvent($event)
     {
-        $post_title = ! empty($event['title']['rendered']) ? $event['title']['rendered'] : null;
-        $post_content = ! empty($event->content->rendered) ? $event->content->rendered : null;
-        $featured_media = ! empty($event->featured_media->source_url) ? $event->featured_media->source_url : null;
-        $categories = ! empty($event->event_categories) ? $event->event_categories : null;
-        $tags = ! empty($event->event_tags) ? $event->event_tags : null;
-        $occasions = ! empty($event['occasions']) ? $event['occasions'] : null;
-        $event_link = ! empty($event->event_link) ? $event->event_link : null;
-        $additional_links = ! empty($event->additional_links) ? $event->additional_links : null;
-        $related_events = ! empty($event->related_events) ? $event->related_events : null;
-        $location = ! empty($event->location) ? $event->location : null;
-        $additional_locations = ! empty($event->additional_locations) ? $event->additional_locations : null;
-        $organizers = ! empty($event->organizers) ? $event->organizers : null;
-        $supporters = ! empty($event->supporters) ? $event->supporters : null;
-        $booking_link = ! empty($event->booking_link) ? $event->booking_link : null;
-        $booking_phone = ! empty($event->booking_phone) ? $event->booking_phone : null;
-        $age_restriction = ! empty($event->age_restriction) ? $event->age_restriction : null;
-        $membership_cards = ! empty($event->membership_cards) ? $event->membership_cards : null;
-        $price_information = ! empty($event->price_information) ? $event->price_information : null;
-        $ticket_includes = ! empty($event->ticket_includes) ? $event->ticket_includes : null;
-        $price_adult = ! empty($event->price_adult) ? $event->price_adult : null;
-        $price_children = ! empty($event->price_children) ? $event->price_children : null;
-        $children_age = ! empty($event->children_age) ? $event->children_age : null;
-        $price_student = ! empty($event->price_student) ? $event->price_student : null;
-        $price_senior = ! empty($event->price_senior) ? $event->price_senior : null;
-        $senior_age = ! empty($event->senior_age) ? $event->senior_age : null;
-        $booking_group = ! empty($event->booking_group) ? $event->booking_group : null;
-        $gallery = ! empty($event->gallery) ? $event->gallery : null;
-        $facebook = ! empty($event->facebook) ? $event->facebook : null;
-        $twitter = ! empty($event->twitter) ? $event->twitter : null;
-        $instagram = ! empty($event->instagram) ? $event->instagram : null;
-        $google_music = ! empty($event->google_music) ? $event->google_music : null;
-        $spotify = ! empty($event->spotify) ? $event->spotify : null;
-        $soundcloud = ! empty($event->soundcloud) ? $event->soundcloud : null;
-        $deezer = ! empty($event->deezer) ? $event->deezer : null;
-        $youtube = ! empty($event->youtube) ? $event->youtube : null;
-        $vimeo = ! empty($event->vimeo) ? $event->vimeo : null;
+        $post_title             = ! empty($event->title->rendered) ? $event->title->rendered : null;
+        $post_content           = ! empty($event->content->rendered) ? $event->content->rendered : null;
+        $featured_media         = ! empty($event->featured_media->source_url) ? $event->featured_media->source_url : null;
+        $categories             = ! empty($event->event_categories) ? $event->event_categories : null;
+        $tags                   = ! empty($event->event_tags) ? $event->event_tags : null;
+        $occasions              = ! empty($event->occasions) ? $event->occasions : null;
+        $event_link             = ! empty($event->event_link) ? $event->event_link : null;
+        $additional_links       = ! empty($event->additional_links) ? $event->additional_links : null;
+        $related_events         = ! empty($event->related_events) ? $event->related_events : null;
+        $location               = ! empty($event->location) ? $event->location : null;
+        $additional_locations   = ! empty($event->additional_locations) ? $event->additional_locations : null;
+        $organizers             = ! empty($event->organizers) ? $event->organizers : null;
+        $supporters             = ! empty($event->supporters) ? $event->supporters : null;
+        $booking_link           = ! empty($event->booking_link) ? $event->booking_link : null;
+        $booking_phone          = ! empty($event->booking_phone) ? $event->booking_phone : null;
+        $age_restriction        = ! empty($event->age_restriction) ? $event->age_restriction : null;
+        $membership_cards       = ! empty($event->membership_cards) ? $event->membership_cards : null;
+        $price_information      = ! empty($event->price_information) ? $event->price_information : null;
+        $ticket_includes        = ! empty($event->ticket_includes) ? $event->ticket_includes : null;
+        $price_adult            = ! empty($event->price_adult) ? $event->price_adult : null;
+        $price_children         = ! empty($event->price_children) ? $event->price_children : null;
+        $children_age           = ! empty($event->children_age) ? $event->children_age : null;
+        $price_student          = ! empty($event->price_student) ? $event->price_student : null;
+        $price_senior           = ! empty($event->price_senior) ? $event->price_senior : null;
+        $senior_age             = ! empty($event->senior_age) ? $event->senior_age : null;
+        $booking_group          = ! empty($event->booking_group) ? $event->booking_group : null;
+        $gallery                = ! empty($event->gallery) ? $event->gallery : null;
+        $facebook               = ! empty($event->facebook) ? $event->facebook : null;
+        $twitter                = ! empty($event->twitter) ? $event->twitter : null;
+        $instagram              = ! empty($event->instagram) ? $event->instagram : null;
+        $google_music           = ! empty($event->google_music) ? $event->google_music : null;
+        $spotify                = ! empty($event->spotify) ? $event->spotify : null;
+        $soundcloud             = ! empty($event->soundcloud) ? $event->soundcloud : null;
+        $deezer                 = ! empty($event->deezer) ? $event->deezer : null;
+        $youtube                = ! empty($event->youtube) ? $event->youtube : null;
+        $vimeo                  = ! empty($event->vimeo) ? $event->vimeo : null;
 
         $event = new Event(
             array(
@@ -84,10 +84,10 @@ class HbgEventApi extends \EventManagerIntegration\Parser
             'post_content'          => $post_content,
             ),
             array(
-            '_event_manager_id'     => $event['id'],
+            '_event_manager_id'     => $event->id,
             'categories'            => $categories,
             'tags'                  => $tags,
-            'occasions'             => $occasions,
+            'occasions_complete'    => $occasions,
             'event_link'            => $event_link,
             'additional_links'      => $additional_links,
             'related_events'        => $related_events,
@@ -127,37 +127,37 @@ class HbgEventApi extends \EventManagerIntegration\Parser
         }
     }
 
-
-    public function removeEvents()
+    /**
+     * Remove expired events
+     * @return void
+     */
+    public function removeExpiredEvents()
     {
         global $wpdb;
-        $days = ! empty(get_field('remove_events', 'option')) ? get_field('remove_events', 'option') : null;
-        if ($days) {
-            global $wpdb;
+        $days = ! empty(get_field('remove_events', 'option')) ? absint(get_field('remove_events', 'option')) : 0;
+        $date_limit = strtotime("- {$days} days", strtotime("midnight now") - 1);
 
-            $date_now = strtotime("midnight tomorrow") - 1;
-            $date_limit = strtotime("- {$days} days", $date_now);
+        $db_occasions = $wpdb->prefix . "postmeta";
+        $meta_key = 'occasion';
 
-            $db_occasions = $wpdb->prefix . "postmeta";
-            $results = $wpdb->get_results("SELECT post_id, meta_value FROM $db_occasions WHERE meta_key = 'occasions'", OBJECT);
+        $query = "SELECT * FROM $db_occasions WHERE meta_key = %s";
+        $completeQuery = $wpdb->prepare($query, $meta_key);
+        $results = $wpdb->get_results($completeQuery);
 
-            $valid = false;
-            foreach ($results as $value) {
-                $post_id = $value->post_id;
-                $occasions = unserialize($value->meta_value);
-                if (is_array($occasions)) {
-                    foreach ($occasions as $o) {
-                        if (strtotime($o['end_date']) > $date_limit) {
-                            $valid = true;
-                            break 1;
-                        }
-                    }
-                }
-                if ($valid == false) {
-                    wp_delete_post($post_id);
-                    echo $post_id." PASSED EVENT";
+        foreach ($results as $r) {
+            $post_id = $r->post_id;
+            echo $post_id."<br><br>";
+
+            $occasion = unserialize($r->meta_value);
+            if (is_array($occasion)) {
+                if (strtotime($occasion['end_date']) < $date_limit) {
+                    echo "REMOVED <br><br>";
+                    print_r($occasion);
+                    echo "REMOVED <br>";
+                    delete_post_meta( $r->post_id, $meta_key, $r->meta_value);
                 }
             }
+
         }
         return;
     }

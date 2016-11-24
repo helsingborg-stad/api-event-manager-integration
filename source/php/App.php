@@ -14,18 +14,13 @@ class App
         add_action('wp_enqueue_scripts', array($this, 'enqueueStyles'));
         add_action('admin_enqueue_scripts', array($this, 'enqueueScripts'));
 
-        /* Json load files and settings */
-        add_filter('acf/settings/load_json', array($this, 'acfJsonLoadPath'));
-        add_action('acf/init', array($this, 'acfSettings'));
-        add_filter('acf/translate_field', array($this, 'acfTranslationFilter'));
-
         /* Register cron action */
         add_action('import_events_daily', array($this, 'importEventsCron'));
 
         /* Init Post types */
         $this->eventsPostType = new PostTypes\Events();
 
-        /* Init functions */
+        new \EventManagerIntegration\Helper\Acf();
         new \EventManagerIntegration\Widget\DisplayEvents();
         new \EventManagerIntegration\Admin\Options();
 
@@ -56,49 +51,6 @@ class App
         wp_localize_script('event-manager-integration', 'eventintegration', array(
             'loading'           => __("Loading", 'eventintegration'),
         ));
-    }
-
-    /**
-     * Set ACF export folder path
-     * @param  array $paths paths
-     * @return array
-     */
-    public function acfJsonLoadPath($paths)
-    {
-        $paths[] = EVENTMANAGERINTEGRATION_PATH . '/acf-exports';
-        return $paths;
-    }
-
-    /**
-     * ACF settings action
-     * @return void
-     */
-    public function acfSettings()
-    {
-        acf_update_setting('l10n', true);
-        acf_update_setting('l10n_textdomain', 'eventintegration');
-    }
-
-    /**
-     * ACF filter to translate specific fields when exporting to PHP
-     * @param  array fields to be translated
-     * @return array updated fields list
-     */
-    public function acfTranslationFilter($field)
-    {
-        if ($field['type'] == 'text' || $field['type'] == 'number') {
-            $field['append'] = acf_translate($field['append']);
-            $field['placeholder'] = acf_translate($field['placeholder']);
-        }
-
-        if ($field['type'] == 'textarea') {
-            $field['placeholder'] = acf_translate($field['placeholder']);
-        }
-
-        if ($field['type'] == 'repeater') {
-            $field['button_label'] = acf_translate($field['button_label']);
-        }
-        return $field;
     }
 
     /**
@@ -140,7 +92,14 @@ class App
             'edit_posts',
             'import-events',
             function () {
-                new \EventManagerIntegration\Parser\HbgEventApi('http://eventmanager.dev/json/wp/v2/event/time?start=2016-11-15&end=2016-11-20');
+            $days_ahead = ! empty(get_field('days_ahead', 'options')) ? get_field('days_ahead', 'options'): 30;
+            $from_date = strtotime("midnight now");
+            $to_date = date('Y-m-d', strtotime("+ {$days_ahead} days", $from_date));
+
+            $api_url = 'http://eventmanager.dev/json/wp/v2/event/time?start='.date('Y-m-d').'&end='.$to_date;
+            //$api_url = 'http://eventmanager.dev/json/wp/v2/event/time?start='.date('2016-09-01').'&end='.$to_date;
+
+            $importer = new \EventManagerIntegration\Parser\HbgEventApi($api_url);
             });
 
             add_submenu_page(

@@ -1,4 +1,4 @@
-{
+    {
         "key": "group_583557753bd73",
         "title": "Event manager integration settings",
         "fields": [
@@ -28,7 +28,7 @@
                 "label": "Remove passed events",
                 "name": "remove_events",
                 "type": "number",
-                "instructions": "Automatically removes events older than given number of days. 1 is equal to yesterday.",
+                "instructions": "Automatically removes events older than given number of days. 0 is equal to today.",
                 "required": 1,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -36,11 +36,11 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": 1,
+                "default_value": 0,
                 "placeholder": "",
                 "prepend": "",
                 "append": "days",
-                "min": 1,
+                "min": 0,
                 "max": 365,
                 "step": ""
             },
