@@ -7,8 +7,8 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
     public function __construct()
     {
         parent::__construct(
-            _x('Events', 'Post type plural', 'event-manager'),
-            _x('Event', 'Post type singular', 'event-manager'),
+            _x('Events', 'Post type plural', 'event-integration'),
+            _x('Event', 'Post type singular', 'event-integration'),
             'event',
             array(
                 'description'          =>   'Events',
@@ -24,16 +24,67 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
                 ),
                 'hierarchical'          =>  false,
                 'exclude_from_search'   =>  false,
-                'taxonomies'            =>  array('event-categories', 'event-tags'),
                 'supports'              =>  array('title', 'revisions', 'editor', 'thumbnail'),
+                // Disable create new post
+                'capability_type' => 'post',
+                'capabilities' => array(
+                    'create_posts' => 'do_not_allow',
+                ),
+                'map_meta_cap' => true, // Set to `false`, if users are not allowed to edit/delete existing posts
             )
         );
         $this->addTableColumn('cb', '<input type="checkbox">');
-        $this->addTableColumn('title', __('Title', 'event-manager'));
-        $this->addTableColumn('date', __('Date', 'event-manager'));
+        $this->addTableColumn('title', __('Title', 'event-integration'));
 
+        $this->addTableColumn('occasion', __('Occasion', 'event-integration'), true, function ($columnKey, $postId) {
+            $occasions = get_post_meta($postId, 'occasion', false);
+            if (!$occasions) {
+                return;
+            }
+
+            $dates = array();
+            foreach ($occasions as $o) {
+                $dates[] = $o['start_date'];
+            }
+
+            echo min($dates);
+            //echo ($this->findClosestDate($dates));
+        });
+
+        $this->addTableColumn('date', __('Date', 'event-integration'));
         add_action('manage_posts_extra_tablenav', array($this, 'tablenavButtons'));
         add_action('wp_ajax_import_events', array($this, 'importEvents'));
+        add_action('pre_get_posts', array($this, 'orderByOccasion'));
+    }
+
+    function orderByOccasion( $query ) {
+        if( ! is_admin() )
+            return;
+
+        $orderby = $query->get( 'orderby');
+
+        if( 'occasion' == $orderby ) {
+            $query->set('meta_key','occasion_timestamp');
+            $query->set('orderby','meta_value_num');
+        }
+    }
+
+    /**
+     * Get closest date compared to today
+     * @param  array $dates Array with occasions
+     * @return string       The closest date
+     */
+    public function findClosestDate($dates)
+    {
+        $today = date('Y-m-d').' 00:00';
+        foreach($dates as $day)
+        {
+            $interval[] = abs(strtotime($today) - strtotime($day));
+        }
+        asort($interval);
+        $closest = key($interval);
+
+        return $dates[$closest];
     }
 
     /**
@@ -63,11 +114,10 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
      */
     public function importEvents()
     {
-        $days_ahead = ! empty(get_field('days_ahead', 'options')) ? get_field('days_ahead', 'options'): 30;
+        $days_ahead = ! empty(get_field('days_ahead', 'options')) ? absint(get_field('days_ahead', 'options')) : 30;
         $from_date = strtotime("midnight now");
         $to_date = date('Y-m-d', strtotime("+ {$days_ahead} days", $from_date));
         $api_url = 'http://eventmanager.dev/json/wp/v2/event/time?start='.date('Y-m-d').'&end='.$to_date;
-
         $importer = new \EventManagerIntegration\Parser\HbgEventApi($api_url);
         $data = $importer->getCreatedData();
         wp_send_json($data);

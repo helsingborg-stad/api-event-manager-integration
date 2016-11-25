@@ -26,7 +26,7 @@ class Acf
         if (!is_plugin_active('advanced-custom-fields-pro/acf.php')) {
             add_action('admin_notices', function () {
                 echo '<div class="notice error"><p>' .
-                        __('To get the full expirience of the <strong>Event Manager Integration</strong> plugin, please activate the <a href="http://www.advancedcustomfields.com/pro/" target="_blank">Advanced Custom Fields Pro</a> plugin.', 'eventintegration') .
+                        __('To get the full expirience of the <strong>Event Manager Integration</strong> plugin, please activate the <a href="http://www.advancedcustomfields.com/pro/" target="_blank">Advanced Custom Fields Pro</a> plugin.', 'event-integration') .
                      '</p></div>';
             });
         }
@@ -45,7 +45,7 @@ class Acf
     public function acfSettings()
     {
         acf_update_setting('l10n', true);
-        acf_update_setting('l10n_textdomain', 'eventintegration');
+        acf_update_setting('l10n_textdomain', 'event-integration');
     }
 
     /**

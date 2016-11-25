@@ -37,6 +37,7 @@ class DisplayEvents extends \WP_Widget
         $end_date = date('Y-m-d', strtotime("+$days_ahead days"));
         $date = ($end_date) ? 'start='.date('Y-m-d').'&end='.$end_date : 'start='.date('Y-m-d');
         $events = $this->getEvents($date);
+
         $i = 0;
 
         ?>
@@ -142,7 +143,27 @@ class DisplayEvents extends \WP_Widget
         <?php
     }
 
+
+    public function getEventsQuery()
+    {
+
+     $querystr = "
+        SELECT $wpdb->posts.*
+        FROM $wpdb->posts, $wpdb->postmeta
+        WHERE $wpdb->posts.ID = $wpdb->postmeta.post_id
+        AND $wpdb->postmeta.meta_key = 'occasion'
+        AND $wpdb->postmeta.meta_value = 'email'
+        AND $wpdb->posts.post_status = 'publish'
+        AND $wpdb->posts.post_type = 'event'
+        ORDER BY $wpdb->posts.post_date DESC
+     ";
+
+     $pageposts = $wpdb->get_results($querystr, OBJECT);
+
+    }
+
     /**
+     * TA BORT
      * Get events as JSON and decode results
      */
     public function getEvents($date)

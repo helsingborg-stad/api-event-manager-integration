@@ -13,6 +13,8 @@ class HbgEventApi extends \EventManagerIntegration\Parser
 
     public function start()
     {
+        // Remove expired occasions meta and event posts
+        $this->removeExpiredOccasions();
         $this->removeExpiredEvents();
 
         $ch = curl_init();
@@ -128,36 +130,64 @@ class HbgEventApi extends \EventManagerIntegration\Parser
     }
 
     /**
-     * Remove expired events
+     * Remove expired occasions from databse
      * @return void
      */
-    public function removeExpiredEvents()
+    public function removeExpiredOccasions()
     {
         global $wpdb;
         $days = ! empty(get_field('remove_events', 'option')) ? absint(get_field('remove_events', 'option')) : 0;
         $date_limit = strtotime("- {$days} days", strtotime("midnight now") - 1);
 
-        $db_occasions = $wpdb->prefix . "postmeta";
+        $postmeta = $wpdb->prefix . "postmeta";
         $meta_key = 'occasion';
 
-        $query = "SELECT * FROM $db_occasions WHERE meta_key = %s";
+        // Get all occasions from databse
+        $query = "SELECT * FROM $postmeta WHERE meta_key = %s";
         $completeQuery = $wpdb->prepare($query, $meta_key);
-        $results = $wpdb->get_results($completeQuery);
+        $occasions = $wpdb->get_results($completeQuery);
 
-        foreach ($results as $r) {
-            $post_id = $r->post_id;
-            echo $post_id."<br><br>";
+        if (empty($occasions)) {
+            return;
+        }
 
-            $occasion = unserialize($r->meta_value);
+        foreach ($occasions as $o) {
+            $occasion = unserialize($o->meta_value);
             if (is_array($occasion)) {
+                // Delete the occasion if expired
                 if (strtotime($occasion['end_date']) < $date_limit) {
-                    echo "REMOVED <br><br>";
-                    print_r($occasion);
-                    echo "REMOVED <br>";
-                    delete_post_meta( $r->post_id, $meta_key, $r->meta_value);
+                    delete_post_meta($o->post_id, $meta_key, $o->meta_value);
+                    delete_post_meta($o->post_id, 'occasion_timestamp', strtotime($occasion['end_date']));
                 }
             }
+        }
 
+        return;
+    }
+
+    /**
+     * Remove expired events from databse
+     * @return void
+     */
+    public function removeExpiredEvents()
+    {
+        global $wpdb;
+        $posts = $wpdb->prefix . "posts";
+        $post_type = 'event';
+        // Get all occasions from databse
+        $query = "SELECT ID FROM $posts WHERE post_type = %s";
+        $completeQuery = $wpdb->prepare($query, $post_type);
+        $events = $wpdb->get_results($completeQuery);
+
+        if (empty($events)) {
+            return;
+        }
+
+        // Loop through event IDs and delete if occasions is empty
+        foreach ($events as $e) {
+            if (! get_post_meta($e->ID, 'occasion', true)) {
+                wp_delete_post($e->ID, true);
+            }
         }
         return;
     }

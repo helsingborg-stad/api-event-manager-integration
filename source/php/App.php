@@ -49,7 +49,7 @@ class App
     {
         wp_enqueue_script('event-manager-integration', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-manager-integration.min.js', null, '1.0.0', true);
         wp_localize_script('event-manager-integration', 'eventintegration', array(
-            'loading'           => __("Loading", 'eventintegration'),
+            'loading'           => __("Loading", 'event-integration'),
         ));
     }
 
@@ -60,11 +60,13 @@ class App
     public function importEventsCron()
     {
         if (get_field('event_daily_import', 'option') == true) {
-            $days_ahead = ! empty(get_field('days_ahead', 'options')) ? get_field('days_ahead', 'options'): 30;
+            $days_ahead = ! empty(get_field('days_ahead', 'options')) ? absint(get_field('days_ahead', 'options')) : 30;
             $from_date = strtotime("midnight now");
             $to_date = date('Y-m-d', strtotime("+ {$days_ahead} days", $from_date));
             $api_url = 'http://eventmanager.dev/json/wp/v2/event/time?start='.date('Y-m-d').'&end='.$to_date;
             $importer = new \EventManagerIntegration\Parser\HbgEventApi($api_url);
+            // TA BORT
+            file_put_contents(dirname(__FILE__)."/Log/import_events.log", "Event parser last run: ".date("Y-m-d H:i:s"));
         }
     }
 
@@ -92,7 +94,7 @@ class App
             'edit_posts',
             'import-events',
             function () {
-            $days_ahead = ! empty(get_field('days_ahead', 'options')) ? get_field('days_ahead', 'options'): 30;
+            $days_ahead = ! empty(get_field('days_ahead', 'options')) ? absint(get_field('days_ahead', 'options')) : 30;
             $from_date = strtotime("midnight now");
             $to_date = date('Y-m-d', strtotime("+ {$days_ahead} days", $from_date));
 

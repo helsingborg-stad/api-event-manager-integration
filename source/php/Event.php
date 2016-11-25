@@ -38,9 +38,11 @@ class Event extends \EventManagerIntegration\Entity\PostManager
     public function saveOccasions()
     {
         delete_post_meta($this->ID, 'occasion');
+        delete_post_meta($this->ID, 'occasion_timestamp');
 
         $today = strtotime("midnight now") - 1;
         $occasion = array();
+
         foreach ($this->occasions_complete as $o) {
             $start_date = ! empty($o->start_date) ? $o->start_date : null;
             $end_date = ! empty($o->end_date) ? $o->end_date : null;
@@ -60,6 +62,7 @@ class Event extends \EventManagerIntegration\Entity\PostManager
                 $occasion['content'] = $content;
 
                 add_post_meta($this->ID, 'occasion', $occasion, false);
+                add_post_meta($this->ID, 'occasion_timestamp', strtotime($occasion['start_date']), false);
             }
         }
     }
