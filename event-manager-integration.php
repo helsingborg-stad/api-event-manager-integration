@@ -33,5 +33,8 @@ $loader->addPrefix('EventManagerIntegration', EVENTMANAGERINTEGRATION_PATH);
 $loader->addPrefix('EventManagerIntegration', EVENTMANAGERINTEGRATION_PATH . 'source/php/');
 $loader->register();
 
+// Create database table when plugin is activated
+register_activation_hook(plugin_basename(__FILE__), '\EventManagerIntegration\App::databaseCreation');
+
 // Start application
 new EventManagerIntegration\App();

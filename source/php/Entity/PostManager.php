@@ -62,23 +62,6 @@ abstract class PostManager
         }
     }
 
-    // TA BORT
-    // /**
-    //  * Save hooks
-    //  * @param  string $postType Saved post type
-    //  * @param  object $object   Saved object
-    //  * @return void
-    //  */
-    // public function beforeSave()
-    // {
-
-    // }
-
-    // public function afterSave()
-    // {
-    //     return true;
-    // }
-
     /**
      * Get  posts
      * @param  integer        $count       Number of posts to get

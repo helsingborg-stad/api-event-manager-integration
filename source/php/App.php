@@ -80,6 +80,32 @@ class App
         wp_clear_scheduled_hook('import_events_daily');
     }
 
+    /**
+     * Creates necessary database table on plugin activation
+     */
+    public static function databaseCreation()
+    {
+        global $wpdb;
+        global $event_db_version;
+        $table_name = $wpdb->prefix . 'integrate_occasions';
+        $charset_collate = $wpdb->get_charset_collate();
+        $sql = "CREATE TABLE $table_name (
+        ID BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+        event_id BIGINT(20) UNSIGNED NOT NULL,
+        start_date DATETIME NOT NULL,
+        end_date DATETIME NOT NULL,
+        door_time DATETIME DEFAULT NULL,
+        status VARCHAR(50) DEFAULT NULL,
+        exeption_information VARCHAR(400) DEFAULT NULL,
+        content_mode VARCHAR(50) DEFAULT NULL,
+        content LONGTEXT DEFAULT NULL,
+        PRIMARY KEY  (ID)
+        ) $charset_collate;";
+        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+        dbDelta($sql);
+        add_option('event_db_version', $event_db_version);
+    }
+
     // TA BORT
     /**
      * Creates a admin page to trigger update data function
@@ -120,6 +146,7 @@ class App
                 $delete = $wpdb->query("TRUNCATE TABLE `event_term_taxonomy`");
                 $delete = $wpdb->query("TRUNCATE TABLE `event_termmeta`");
                 $delete = $wpdb->query("TRUNCATE TABLE `event_terms`");
+                $delete = $wpdb->query("TRUNCATE TABLE `event_integrate_occasions`");
             });
     }
 
