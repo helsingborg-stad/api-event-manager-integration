@@ -28,7 +28,7 @@ class DisplayEvents extends \WP_Widget
         }
         $title = ( ! empty( $instance['title'] ) ) ? $instance['title'] : __( 'Recent Posts' );
         $title = apply_filters( 'widget_title', $title, $instance, $this->id_base );
-        $limit = isset($instance['limit']) ? $instance['limit'] : null;
+        $limit = isset($instance['limit']) ? intval($instance['limit']) : null;
         $days_ahead = isset($instance['days_ahead']) ? $instance['days_ahead'] : null;
         $show_content = isset( $instance['show_content'] ) ? $instance['show_content'] : false;
         $show_location = isset( $instance['show_location'] ) ? $instance['show_location'] : false;
@@ -36,9 +36,8 @@ class DisplayEvents extends \WP_Widget
 
         $start_date = date('Y-m-d H:i:s', strtotime("today midnight"));
         $end_date = date('Y-m-d H:i:s', strtotime("tomorrow midnight +$days_ahead days") - 1);
-        $events = $this->getEventsQuery($start_date, $end_date);
+        $events = $this->getEventsQuery($start_date, $end_date, $limit);
 
-        $i = 0;
         ?>
         <?php echo $args['before_widget']; ?>
         <?php if ( $title ) {
@@ -55,20 +54,21 @@ class DisplayEvents extends \WP_Widget
             <?php endif; ?>
 
             <?php if (! empty($event->start_date && isset($event->start_date))) : ?>
-                <span class="event-date"><?php echo sprintf(__('Start: %s', 'event-wdiget'), $event->start_date) ?></span>
+                <span class="event-date"><?php echo sprintf(__('Start: %s', 'event-integration'), $event->start_date) ?></span>
             <?php endif; ?>
 
             <?php if (! empty($event->end_date && isset($event->end_date))) : ?>
-                <span class="event-date"><?php echo sprintf(__('End: %s', 'event-wdiget'), $event->end_date) ?></span>
+                <span class="event-date"><?php echo sprintf(__('End: %s', 'event-integration'), $event->end_date) ?></span>
             <?php endif; ?>
 
             <?php if (! empty($event->door_time && isset($event->door_time))) : ?>
-               <span class="event-date"><?php echo sprintf(__('Door time: %s', 'event-wdiget'), $event->door_time) ?></span>
+               <span class="event-date"><?php echo sprintf(__('Door time: %s', 'event-integration'), $event->door_time) ?></span>
             <?php endif; ?>
 
-<!--              <?php if ($show_location && ! empty($event->location && isset($event->location))) : ?>
-               <span class="event-date"><?php echo sprintf(__('Location: %s', 'event-wdiget'), $event->location->post_title) ?></span>
-            <?php endif; ?> -->
+            <?php if ($show_location && get_post_meta($event->ID, 'location', true)) : ?>
+                <?php $location = get_post_meta($event->ID, 'location', true); ?>
+                <span><?php echo sprintf(__('Location: %s', 'event-integration'), $location['post_title']) ?></span>
+            <?php endif; ?>
 
             <?php if ($show_content && ! empty($event->post_content && isset($event->post_content))) : ?>
                 <span>
@@ -79,7 +79,6 @@ class DisplayEvents extends \WP_Widget
             <?php endif; ?>
 
             </li>
-            <?php if (++$i == $limit) break; ?>
         <?php endforeach; ?>
         <?php endif; ?>
         </ul>
@@ -143,7 +142,14 @@ class DisplayEvents extends \WP_Widget
     }
 
 
-    public function getEventsQuery($start_date, $end_date)
+    /**
+     * Get events from database within given date range
+     * @param  string $start_date start date range
+     * @param  string $end_date   end date range
+     * @param  int    $limit      maximum events to get
+     * @return array              result with events
+     */
+    public function getEventsQuery($start_date, $end_date, $limit)
     {
         global $wpdb;
         $db_table = $wpdb->prefix . "integrate_occasions";
@@ -151,20 +157,22 @@ class DisplayEvents extends \WP_Widget
         SELECT      *, $wpdb->posts.ID AS ID
         FROM        $wpdb->posts
         LEFT JOIN   $db_table ON ($wpdb->posts.ID = $db_table.event_id)
-        LEFT JOIN   $wpdb->postmeta ON ($wpdb->posts.ID = $wpdb->postmeta.post_id)
         WHERE       $wpdb->posts.post_type = %s
                     AND $wpdb->posts.post_status = %s
                     AND ($db_table.start_date BETWEEN %s AND %s OR $db_table.end_date BETWEEN %s AND %s)
                     GROUP BY $db_table.start_date, $db_table.end_date
                     ORDER BY $db_table.start_date ASC
+                    LIMIT %d
         ";
+        // LEFT JOIN   $wpdb->postmeta ON ($wpdb->posts.ID = $wpdb->postmeta.post_id)
         $postType = 'event';
         $postStatus = 'publish';
-        $completeQuery = $wpdb->prepare($query, $postType, $postStatus, $start_date, $end_date, $start_date, $end_date);
+        $completeQuery = $wpdb->prepare($query, $postType, $postStatus, $start_date, $end_date, $start_date, $end_date, $limit);
         $events = $wpdb->get_results($completeQuery);
 
-        //echo "<pre>";
-        //print_r($events);
+        // TA BORT
+        // echo "<pre>";
+        // print_r($events);
 
         return $events;
     }
@@ -195,8 +203,8 @@ class DisplayEvents extends \WP_Widget
 
     /**
      * Limits event description
-     * @param  string $string [description]
-     * @param  int    $limit  [description]
+     * @param  string $string content string to limit
+     * @param  int    $limit  maximum number of letters
      * @return string
      */
     public function descriptionLimit($string, $limit)

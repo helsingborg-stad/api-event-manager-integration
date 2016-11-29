@@ -114,10 +114,15 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
      */
     public function importEvents()
     {
+        global $wpdb;
+        $db_table = $wpdb->prefix . "integrate_occasions";
+        $occasion = $wpdb->get_results("SELECT start_date FROM $db_table ORDER BY start_date ASC LIMIT 1", OBJECT);
+
+        $from_date = count($occasion) == 1 ? date('Y-m-d', strtotime($occasion[0]->start_date)) : date('Y-m-d');
         $days_ahead = ! empty(get_field('days_ahead', 'options')) ? absint(get_field('days_ahead', 'options')) : 30;
-        $from_date = strtotime("midnight now");
-        $to_date = date('Y-m-d', strtotime("+ {$days_ahead} days", $from_date));
-        $api_url = 'http://eventmanager.dev/json/wp/v2/event/time?start='.date('Y-m-d').'&end='.$to_date;
+        $to_date = date('Y-m-d', strtotime("midnight now + {$days_ahead} days"));
+
+        $api_url = 'http://eventmanager.dev/json/wp/v2/event/time?start=' . $from_date . '&end=' . $to_date;
         $importer = new \EventManagerIntegration\Parser\HbgEventApi($api_url);
         $data = $importer->getCreatedData();
         wp_send_json($data);

@@ -15,7 +15,7 @@ class HbgEventApi extends \EventManagerIntegration\Parser
     {
         // Remove expired occasions meta and event posts
         $this->removeExpiredOccasions();
-        // $this->removeExpiredEvents();
+        $this->removeExpiredEvents();
 
         $ch = curl_init();
         $options = [
@@ -162,12 +162,11 @@ class HbgEventApi extends \EventManagerIntegration\Parser
         global $wpdb;
         $days = ! empty(get_field('remove_events', 'option')) ? absint(get_field('remove_events', 'option')) : 0;
         $date_limit = strtotime("- {$days} days", strtotime("midnight now") - 1);
-        $db_table = $wpdb->prefix . "integrate_occasions";
-
         // Get all occasions from databse
+        $db_table = $wpdb->prefix . "integrate_occasions";
         $occasions = $wpdb->get_results("SELECT * FROM $db_table ORDER BY start_date DESC", ARRAY_A);
 
-        if (empty($occasions)) {
+        if (count($occasions) == 0) {
             return;
         }
 
@@ -188,23 +187,28 @@ class HbgEventApi extends \EventManagerIntegration\Parser
     public function removeExpiredEvents()
     {
         global $wpdb;
-        $posts = $wpdb->prefix . "posts";
         $post_type = 'event';
-        // Get all occasions from databse
-        $query = "SELECT ID FROM $posts WHERE post_type = %s";
-        $completeQuery = $wpdb->prepare($query, $post_type);
+        // Get all events from databse
+        $query = "SELECT ID FROM $wpdb->posts WHERE post_type = %s AND post_status = %s";
+        $completeQuery = $wpdb->prepare($query, $post_type, 'publish');
         $events = $wpdb->get_results($completeQuery);
 
-        if (empty($events)) {
+        if (count($events) == 0) {
             return;
         }
 
-        // Loop through event IDs and delete if occasions is empty
+        $db_table = $wpdb->prefix . "integrate_occasions";
+        $query = "SELECT ID, event_id FROM $db_table WHERE event_id = %s";
+        // Loop through events and check if occasions exist
         foreach ($events as $e) {
-            if (! get_post_meta($e->ID, 'occasion', true)) {
+            $completeQuery = $wpdb->prepare($query, $e->ID);
+            $results = $wpdb->get_results($completeQuery);
+            // Delete event if occasions is empty
+            if (count($results) == 0){
                 wp_delete_post($e->ID, true);
             }
         }
+
         return;
     }
 
