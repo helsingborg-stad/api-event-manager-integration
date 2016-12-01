@@ -1,0 +1,170 @@
+    {
+        "key": "group_583fe4ee88439",
+        "title": "Display events",
+        "fields": [
+            {
+                "key": "field_583fe58262287",
+                "label": "Number of events to show",
+                "name": "mod_event_limit",
+                "type": "number",
+                "instructions": "Set to -1 to show all",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": -1,
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "min": -1,
+                "max": "",
+                "step": ""
+            },
+            {
+                "key": "field_583ffd8d10925",
+                "label": "Days interval",
+                "name": "mod_event_interval",
+                "type": "number",
+                "instructions": "Include events from today to the given number of days. -1 equals no limit.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 7,
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "min": -1,
+                "max": "",
+                "step": ""
+            },
+            {
+                "key": "field_583fefb6634a1",
+                "label": "Fields",
+                "name": "mod_event_fields",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "start_date": "Show start date",
+                    "end_date": "Show end date",
+                    "door_time": "Show door time",
+                    "image": "Show featured image",
+                    "description": "Show description",
+                    "location": "Show location"
+                },
+                "default_value": [],
+                "layout": "horizontal",
+                "toggle": 0,
+                "return_format": "value"
+            },
+            {
+                "key": "field_5840393fb9106",
+                "label": "Date format",
+                "name": "mod_event_date_format",
+                "type": "select",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_583fefb6634a1",
+                            "operator": "==",
+                            "value": "start_date"
+                        }
+                    ],
+                    [
+                        {
+                            "field": "field_583fefb6634a1",
+                            "operator": "==",
+                            "value": "end_date"
+                        }
+                    ],
+                    [
+                        {
+                            "field": "field_583fefb6634a1",
+                            "operator": "==",
+                            "value": "door_time"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "1": "Date & time",
+                    "2": "Date",
+                    "3": "Time"
+                },
+                "default_value": [
+                    1
+                ],
+                "allow_null": 0,
+                "multiple": 0,
+                "ui": 0,
+                "ajax": 0,
+                "return_format": "value",
+                "placeholder": ""
+            },
+            {
+                "key": "field_583fee36634a0",
+                "label": "Description letter limit",
+                "name": "mod_event_descr_limit",
+                "type": "number",
+                "instructions": "Set to -1 to show the whole description.",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_583fefb6634a1",
+                            "operator": "==",
+                            "value": "description"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": -1,
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "min": -1,
+                "max": "",
+                "step": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "mod-event"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": 1,
+        "description": ""
+    }

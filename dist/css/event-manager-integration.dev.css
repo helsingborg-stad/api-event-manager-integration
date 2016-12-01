@@ -4,3 +4,7 @@
 .widget_display_events .event-date {
   display: block;
   font-size: .8em; }
+
+.widget_display_events .event-img {
+  width: 100%;
+  height: auto; }

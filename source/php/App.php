@@ -17,12 +17,15 @@ class App
         /* Register cron action */
         add_action('import_events_daily', array($this, 'importEventsCron'));
 
-        /* Init Post types */
-        $this->eventsPostType = new PostTypes\Events();
-
+        new \EventManagerIntegration\PostTypes\Events();
         new \EventManagerIntegration\Helper\Acf();
         new \EventManagerIntegration\Widget\DisplayEvents();
         new \EventManagerIntegration\Admin\Options();
+
+        /* Modularity modules */
+        add_action('Modularity', function () {
+            new \EventManagerIntegration\Module\EventModule();
+        });
 
         add_action( 'widgets_init', function(){
             register_widget( 'EventManagerIntegration\Widget\DisplayEvents' );

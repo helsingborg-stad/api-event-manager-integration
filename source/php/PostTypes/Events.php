@@ -37,18 +37,12 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         $this->addTableColumn('title', __('Title', 'event-integration'));
 
         $this->addTableColumn('occasion', __('Occasion', 'event-integration'), true, function ($columnKey, $postId) {
-            $occasions = get_post_meta($postId, 'occasion', false);
+            $occasions = $this->getPostOccasions($postId);
             if (!$occasions) {
                 return;
             }
 
-            $dates = array();
-            foreach ($occasions as $o) {
-                $dates[] = $o['start_date'];
-            }
-
-            echo min($dates);
-            //echo ($this->findClosestDate($dates));
+            echo($occasions);
         });
 
         $this->addTableColumn('date', __('Date', 'event-integration'));
@@ -57,7 +51,22 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         add_action('pre_get_posts', array($this, 'orderByOccasion'));
     }
 
-    function orderByOccasion( $query ) {
+
+    public function getPostOccasions($post_id) {
+        global $wpdb;
+
+        $db_table = $wpdb->prefix . "integrate_occasions";
+        $occasions = $wpdb->get_results("SELECT start_date FROM $db_table WHERE $db_table.event_id = $post_id ORDER BY start_date ASC", ARRAY_A);
+
+        if (count($occasions) == 0) {
+            return;
+        }
+
+        return $occasions[0]['start_date'];
+    }
+
+    // TA BORT
+    public function orderByOccasion( $query ) {
         if( ! is_admin() )
             return;
 
@@ -103,8 +112,8 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             echo '<div class="alignleft actions" style="position: relative;">';
             echo '<div id="importevents" class="button-primary">' . __('Import', 'event-integration') . '</div>';
             // TA BORT
-            echo '<a href="' . admin_url('options.php?page=import-events') . '" class="button-primary" id="post-query-submit">Debug</a>';
-            echo '<a href="' . admin_url('options.php?page=delete-all-events') . '" class="button-primary" id="post-query-submit">Delete</a>';
+            // echo '<a href="' . admin_url('options.php?page=import-events') . '" class="button-primary" id="post-query-submit">Debug</a>';
+            // echo '<a href="' . admin_url('options.php?page=delete-all-events') . '" class="button-primary" id="post-query-submit">Delete</a>';
             echo '</div>';
         }
     }
