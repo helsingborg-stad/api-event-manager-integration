@@ -6,26 +6,32 @@ class QueryEvents
 {
     /**
      * Get events with occurance date within given date range
-     * @param  string $start_date start date range
-     * @param  string $end_date   end date range
-     * @param  int    $limit      maximum events to get
-     * @return array              result with events
+     * @param  string       $start_date  start date range
+     * @param  string       $end_date    end date range
+     * @param  int          $limit       maximum events to get
+     * @param  array|bool   $categories  list of categories or false
+     * @return array                     result with events
      */
-    public static function getEventsOccasions($start_date, $end_date, $limit)
+    public static function getEventsOccasions($start_date, $end_date, $limit, $categories)
     {
         global $wpdb;
+        $categories = ($categories && is_array($categories)) ? implode(",", $categories) : false;
+
         $db_table = $wpdb->prefix . "integrate_occasions";
         $query = "
         SELECT      *, $wpdb->posts.ID AS ID
         FROM        $wpdb->posts
         LEFT JOIN   $db_table ON ($wpdb->posts.ID = $db_table.event_id)
+        LEFT JOIN   $wpdb->term_relationships ON ($wpdb->posts.ID = $wpdb->term_relationships.object_id)
         WHERE       $wpdb->posts.post_type = %s
                     AND $wpdb->posts.post_status = %s
                     AND ($db_table.start_date BETWEEN %s AND %s OR $db_table.end_date BETWEEN %s AND %s)
-                    GROUP BY $db_table.start_date, $db_table.end_date
-                    ORDER BY $db_table.start_date ASC
         ";
-        $query .= ($limit == -1) ? '' : 'LIMIT'.' '.intval($limit);
+
+        $query .= (! $categories) ? '' : "AND ($wpdb->term_relationships.term_taxonomy_id IN ($categories))";
+        $query .= "GROUP BY $db_table.start_date, $db_table.end_date ";
+        $query .= "ORDER BY $db_table.start_date ASC";
+        $query .= ($limit == -1) ? '' : ' LIMIT'.' '.intval($limit);
 
         $postType = 'event';
         $postStatus = 'publish';

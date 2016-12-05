@@ -46,9 +46,85 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         });
 
         $this->addTableColumn('date', __('Date', 'event-integration'));
+        add_action('init', array($this, 'registerEventCategories'));
+        add_action('init', array($this, 'registerEventTags'));
         add_action('manage_posts_extra_tablenav', array($this, 'tablenavButtons'));
         add_action('wp_ajax_import_events', array($this, 'importEvents'));
         add_action('pre_get_posts', array($this, 'orderByOccasion'));
+    }
+
+    /**
+     * Register event categories as taxonomy
+     */
+    public function registerEventCategories()
+    {
+        $labels = array(
+            'name'                  => _x('Event categories', 'Taxonomy plural name', 'event-integration'),
+            'singular_name'         => _x('Event category', 'Taxonomy singular name', 'event-integration'),
+            'search_items'          => __('Search categories', 'event-integration'),
+            'popular_items'         => __('Popular categories', 'event-integration'),
+            'all_items'             => __('All categories', 'event-integration'),
+            'parent_item'           => __('Parent category', 'event-integration'),
+            'parent_item_colon'     => __('Parent category', 'event-integration'),
+            'edit_item'             => __('Edit category', 'event-integration'),
+            'update_item'           => __('Update category', 'event-integration'),
+            'add_new_item'          => __('Add new category', 'event-integration'),
+            'new_item_name'         => __('New category', 'event-integration'),
+            'add_or_remove_items'   => __('Add or remove categories', 'event-integration'),
+            'choose_from_most_used' => __('Choose from most used categories', 'event-integration'),
+            'menu_name'             => __('Categories', 'event-integration'),
+        );
+
+        $args = array(
+            'labels'                => $labels,
+            'public'                => true,
+            'show_in_nav_menus'     => true,
+            'show_admin_column'     => true,
+            'hierarchical'          => true,
+            'show_tagcloud'         => true,
+            'show_ui'               => false,
+            'query_var'             => true,
+            'rewrite'               => true
+        );
+
+        register_taxonomy('event_categories', array('event'), $args);
+    }
+
+    /**
+     * Register event tags as taxonomy
+     */
+    public function registerEventTags()
+    {
+        $labels = array(
+            'name'                  => _x('Event tags', 'Taxonomy plural name', 'event-integration'),
+            'singular_name'         => _x('Event tag', 'Taxonomy singular name', 'event-integration'),
+            'search_items'          => __('Search tags', 'event-integration'),
+            'popular_items'         => __('Popular tags', 'event-integration'),
+            'all_items'             => __('All tags', 'event-integration'),
+            'parent_item'           => __('Parent', 'event-integration'),
+            'parent_item_colon'     => __('Parent', 'event-integration'),
+            'edit_item'             => __('Edit tag', 'event-integration'),
+            'update_item'           => __('Update', 'event-integration'),
+            'add_new_item'          => __('Add new tag', 'event-integration'),
+            'new_item_name'         => __('New tag', 'event-integration'),
+            'add_or_remove_items'   => __('Add or remove tags', 'event-integration'),
+            'choose_from_most_used' => __('Choose from most used tags', 'event-integration'),
+            'menu_name'             => __('Tags', 'event-integration'),
+        );
+
+        $args = array(
+            'labels'                => $labels,
+            'public'                => true,
+            'show_in_nav_menus'     => true,
+            'show_admin_column'     => true,
+            'hierarchical'          => false,
+            'show_tagcloud'         => true,
+            'show_ui'               => false,
+            'query_var'             => true,
+            'rewrite'               => true
+        );
+
+        register_taxonomy('event_tags', array('event'), $args);
     }
 
 
@@ -112,8 +188,8 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             echo '<div class="alignleft actions" style="position: relative;">';
             echo '<div id="importevents" class="button-primary">' . __('Import', 'event-integration') . '</div>';
             // TA BORT
-            // echo '<a href="' . admin_url('options.php?page=import-events') . '" class="button-primary" id="post-query-submit">Debug</a>';
-            // echo '<a href="' . admin_url('options.php?page=delete-all-events') . '" class="button-primary" id="post-query-submit">Delete</a>';
+echo '<a href="' . admin_url('options.php?page=import-events') . '" class="button-primary" id="post-query-submit">Debug</a>';
+echo '<a href="' . admin_url('options.php?page=delete-all-events') . '" class="button-primary" id="post-query-submit">Delete</a>';
             echo '</div>';
         }
     }

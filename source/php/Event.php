@@ -12,6 +12,7 @@ class Event extends \EventManagerIntegration\Entity\PostManager
      */
     public function beforeSave()
     {
+        $this->post_title = strip_tags(html_entity_decode($this->post_title));
         $this->post_content = strip_tags(html_entity_decode($this->post_content));
     }
 
@@ -22,6 +23,8 @@ class Event extends \EventManagerIntegration\Entity\PostManager
     public function afterSave()
     {
         $this->saveOccasions();
+        $this->saveCategories();
+        $this->saveTags();
 
         if (! empty($this->gallery)) {
             foreach ($this->gallery as $key => $image) {
@@ -30,6 +33,24 @@ class Event extends \EventManagerIntegration\Entity\PostManager
         }
 
         return true;
+    }
+
+    /**
+     * Saves categories as taxonomy terms
+     * @return void
+     */
+    public function saveCategories()
+    {
+        wp_set_object_terms($this->ID, $this->categories, 'event_categories', true);
+    }
+
+    /**
+     * Saves tags as taxonomy terms
+     * @return void
+     */
+    public function saveTags()
+    {
+        wp_set_object_terms($this->ID, $this->tags, 'event_tags', true);
     }
 
     /**
@@ -59,7 +80,7 @@ class Event extends \EventManagerIntegration\Entity\PostManager
                 $content = ! empty($o['content']) ? $o['content'] : null;
 
                 $wpdb->insert($db_table, array('event_id' => $this->ID, 'start_date' => $start_date, 'end_date' => $end_date, 'door_time' => $door_time, 'status' => $status, 'exeption_information' => $occ_exeption_information, 'content_mode' => $content_mode, 'content' => strip_tags(html_entity_decode($content))));
-            $i++;
+                $i++;
             }
         }
 
@@ -70,6 +91,5 @@ class Event extends \EventManagerIntegration\Entity\PostManager
             wp_delete_post($this->ID, true);
             return false;
         }
-
     }
 }

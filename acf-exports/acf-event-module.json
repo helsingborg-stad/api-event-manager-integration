@@ -28,7 +28,7 @@
                 "label": "Days interval",
                 "name": "mod_event_interval",
                 "type": "number",
-                "instructions": "Include events from today to the given number of days. -1 equals no limit.",
+                "instructions": "Include events from today to the given number of days.",
                 "required": 1,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -40,7 +40,7 @@
                 "placeholder": "",
                 "prepend": "",
                 "append": "",
-                "min": -1,
+                "min": 0,
                 "max": "",
                 "step": ""
             },
@@ -148,6 +148,98 @@
                 "min": -1,
                 "max": "",
                 "step": ""
+            },
+            {
+                "key": "field_58455b0e93178",
+                "label": "Categories",
+                "name": "mod_event_categories_show",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "Show events from all categories",
+                "default_value": 1
+            },
+            {
+                "key": "field_5845578c5f0a0",
+                "label": "Select categories",
+                "name": "mod_event_categories_list",
+                "type": "taxonomy",
+                "instructions": "Show events within the selected categories.",
+                "required": 1,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_58455b0e93178",
+                            "operator": "!=",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "taxonomy": "event_categories",
+                "field_type": "checkbox",
+                "allow_null": 0,
+                "add_term": 0,
+                "save_terms": 0,
+                "load_terms": 0,
+                "return_format": "id",
+                "multiple": 0
+            },
+            {
+                "key": "field_58458b20dde03",
+                "label": "Tags",
+                "name": "mod_event_tags_show",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "Show events from all tags",
+                "default_value": 1
+            },
+            {
+                "key": "field_58458b57dde04",
+                "label": "Select tags",
+                "name": "mod_event_tags_list",
+                "type": "taxonomy",
+                "instructions": "Show events within the selected tags.",
+                "required": 1,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_58458b20dde03",
+                            "operator": "!=",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "taxonomy": "event_tags",
+                "field_type": "checkbox",
+                "allow_null": 0,
+                "add_term": 0,
+                "save_terms": 0,
+                "load_terms": 0,
+                "return_format": "id",
+                "multiple": 0
             }
         ],
         "location": [
