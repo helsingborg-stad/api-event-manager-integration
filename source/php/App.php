@@ -12,6 +12,7 @@ class App
         register_deactivation_hook(plugin_basename(__FILE__), '\EventManagerIntegration\App::removeCronJob');
 
         add_action('wp_enqueue_scripts', array($this, 'enqueueStyles'));
+        add_action('admin_enqueue_scripts', array($this, 'enqueueStylesAdmin'));
         add_action('admin_enqueue_scripts', array($this, 'enqueueScripts'));
 
         /* Register cron action */
@@ -41,8 +42,25 @@ class App
      */
     public function enqueueStyles()
     {
-        wp_enqueue_style('event-manager-integration', EVENTMANAGERINTEGRATION_URL . '/dist/css/event-manager-integration.min.css', null, '1.0.0');
+        wp_enqueue_style('event-manager-integration', EVENTMANAGERINTEGRATION_URL . '/dist/css/event-manager-integration.min.css');
     }
+
+    /**
+     * Enqueue required style
+     * @return void
+     */
+    public function enqueueStylesAdmin()
+    {
+        global $current_screen;
+
+        wp_register_style('event-integration-ui', EVENTMANAGERINTEGRATION_URL . '/dist/css/event-manager-integration-ui.min.css');
+
+        $type = $current_screen->post_type;
+        if ($type == 'event') {
+           wp_enqueue_style('event-integration-ui');
+        }
+    }
+
 
     /**
      * Enqueue required scripts

@@ -170,7 +170,7 @@
                 "label": "Select categories",
                 "name": "mod_event_categories_list",
                 "type": "taxonomy",
-                "instructions": "Show events within the selected categories.",
+                "instructions": "Show events from the selected categories.",
                 "required": 1,
                 "conditional_logic": [
                     [
@@ -216,7 +216,7 @@
                 "label": "Select tags",
                 "name": "mod_event_tags_list",
                 "type": "taxonomy",
-                "instructions": "Show events within the selected tags.",
+                "instructions": "Show events from the selected tags.",
                 "required": 1,
                 "conditional_logic": [
                     [

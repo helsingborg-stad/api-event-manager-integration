@@ -5,17 +5,17 @@ namespace EventManagerIntegration\Helper;
 class QueryEvents
 {
     /**
-     * Get events with occurance date within given date range
+     * Get events with occurance date within given settings/parameters
      * @param  string       $start_date  start date range
      * @param  string       $end_date    end date range
      * @param  int          $limit       maximum events to get
-     * @param  array|bool   $categories  list of categories or false
+     * @param  array|bool   $taxonomies  array of taxonomies IDs, false if not set
      * @return array                     result with events
      */
-    public static function getEventsOccasions($start_date, $end_date, $limit, $categories)
+    public static function getEventsOccasions($start_date, $end_date, $limit, $taxonomies = false)
     {
         global $wpdb;
-        $categories = ($categories && is_array($categories)) ? implode(",", $categories) : false;
+        $taxonomies = (! empty($taxonomies) && is_array($taxonomies)) ? implode(",", $taxonomies) : false;
 
         $db_table = $wpdb->prefix . "integrate_occasions";
         $query = "
@@ -28,7 +28,7 @@ class QueryEvents
                     AND ($db_table.start_date BETWEEN %s AND %s OR $db_table.end_date BETWEEN %s AND %s)
         ";
 
-        $query .= (! $categories) ? '' : "AND ($wpdb->term_relationships.term_taxonomy_id IN ($categories))";
+        $query .= ($taxonomies) ? "AND ($wpdb->term_relationships.term_taxonomy_id IN ($taxonomies))" : '';
         $query .= "GROUP BY $db_table.start_date, $db_table.end_date ";
         $query .= "ORDER BY $db_table.start_date ASC";
         $query .= ($limit == -1) ? '' : ' LIMIT'.' '.intval($limit);

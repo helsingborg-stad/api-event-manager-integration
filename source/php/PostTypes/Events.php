@@ -48,9 +48,12 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         $this->addTableColumn('date', __('Date', 'event-integration'));
         add_action('init', array($this, 'registerEventCategories'));
         add_action('init', array($this, 'registerEventTags'));
+        add_action('admin_head', array($this, 'removeMedia'));
+        add_action('admin_menu', array($this, 'removePublishBox'));
         add_action('manage_posts_extra_tablenav', array($this, 'tablenavButtons'));
         add_action('wp_ajax_import_events', array($this, 'importEvents'));
         add_action('pre_get_posts', array($this, 'orderByOccasion'));
+        add_filter('get_sample_permalink_html', array($this, 'removePermalink'));
     }
 
     /**
@@ -127,8 +130,42 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         register_taxonomy('event_tags', array('event'), $args);
     }
 
+    /**
+     * Remove permalink from edit event
+     * @param  string $return string with permalink
+     * @return string
+     */
+    public function removePermalink($return)
+    {
+        global $current_screen;
+        if ($current_screen->post_type == $this->slug) {
+            $return = '';
+        }
+    return $return;
+    }
 
-    public function getPostOccasions($post_id) {
+    /**
+     * Remove "Add media" button from edit Event view
+     */
+    public function removeMedia()
+    {
+        global $current_screen;
+        if ($current_screen->post_type == $this->slug) {
+            remove_action('media_buttons', 'media_buttons');
+        }
+    }
+
+    /**
+     * Remove publish meta box from edit Event
+     */
+    public function removePublishBox()
+    {
+        remove_meta_box('submitdiv', $this->slug, 'side');
+    }
+
+
+    public function getPostOccasions($post_id)
+    {
         global $wpdb;
 
         $db_table = $wpdb->prefix . "integrate_occasions";
@@ -142,15 +179,17 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
     }
 
     // TA BORT
-    public function orderByOccasion( $query ) {
-        if( ! is_admin() )
+    public function orderByOccasion($query)
+    {
+        if (! is_admin()) {
             return;
+        }
 
-        $orderby = $query->get( 'orderby');
+        $orderby = $query->get('orderby');
 
-        if( 'occasion' == $orderby ) {
-            $query->set('meta_key','occasion_timestamp');
-            $query->set('orderby','meta_value_num');
+        if ('occasion' == $orderby) {
+            $query->set('meta_key', 'occasion_timestamp');
+            $query->set('orderby', 'meta_value_num');
         }
     }
 
@@ -162,8 +201,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
     public function findClosestDate($dates)
     {
         $today = date('Y-m-d').' 00:00';
-        foreach($dates as $day)
-        {
+        foreach ($dates as $day) {
             $interval[] = abs(strtotime($today) - strtotime($day));
         }
         asort($interval);

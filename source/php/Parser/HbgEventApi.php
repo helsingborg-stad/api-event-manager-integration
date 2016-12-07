@@ -48,8 +48,8 @@ class HbgEventApi extends \EventManagerIntegration\Parser
         $post_title             = ! empty($event['title']['rendered']) ? $event['title']['rendered'] : null;
         $post_content           = ! empty($event['content']['rendered']) ? $event['content']['rendered'] : null;
         $featured_media         = ! empty($event['featured_media']['source_url']) ? $event['featured_media']['source_url'] : null;
-        $categories             = ! empty($event['event_categories']) ? $event['event_categories'] : null;
-        $tags                   = ! empty($event['event_tags']) ? $event['event_tags'] : null;
+        $categories             = ! empty($event['event_categories']) ? array_map('ucwords', array_map('trim', $event['event_categories'])) : array();
+        $tags                   = ! empty($event['event_tags']) ? array_map('strtolower', array_map('trim', $event['event_tags'])) : array();
         $occasions              = ! empty($event['occasions']) ? $event['occasions'] : null;
         $event_link             = ! empty($event['event_link']) ? $event['event_link'] : null;
         $additional_links       = ! empty($event['additional_links']) ? $event['additional_links'] : null;
@@ -82,52 +82,68 @@ class HbgEventApi extends \EventManagerIntegration\Parser
         $youtube                = ! empty($event['youtube']) ? $event['youtube'] : null;
         $vimeo                  = ! empty($event['vimeo']) ? $event['vimeo'] : null;
 
-        $event = new Event(
-            array(
-            'post_title'            => $post_title,
-            'post_content'          => $post_content,
-            ),
-            array(
-            '_event_manager_id'     => $event['id'],
-            'categories'            => $categories,
-            'tags'                  => $tags,
-            'occasions_complete'    => $occasions,
-            'event_link'            => $event_link,
-            'additional_links'      => $additional_links,
-            'related_events'        => $related_events,
-            'location'              => $location,
-            'additional_locations'  => $additional_locations,
-            'organizers'            => $organizers,
-            'supporters'            => $supporters,
-            'booking_link'          => $booking_link,
-            'booking_phone'         => $booking_phone,
-            'age_restriction'       => $age_restriction,
-            'membership_cards'      => $membership_cards,
-            'price_information'     => $price_information,
-            'ticket_includes'       => $ticket_includes,
-            'price_adult'           => $price_adult,
-            'price_children'        => $price_children,
-            'children_age'          => $children_age,
-            'price_student'         => $price_student,
-            'price_senior'          => $price_senior,
-            'senior_age'            => $senior_age,
-            'booking_group'         => $booking_group,
-            'gallery'               => $gallery,
-            'facebook'              => $facebook,
-            'twitter'               => $twitter,
-            'instagram'             => $instagram,
-            'google_music'          => $google_music,
-            'spotify'               => $spotify,
-            'soundcloud'            => $soundcloud,
-            'deezer'                => $deezer,
-            'youtube'               => $youtube,
-            'vimeo'                 => $vimeo,
-            )
-        );
-        $createSuccess = $event->save();
+        // Check if category and tag filter is set or not
+        $pass = (empty(get_field('event_filter_cat', 'options')) && empty(get_field('event_filter_tag', 'options'))) ? true : false;
 
-        if ($createSuccess && ! empty($featured_media)) {
-            $event->setFeaturedImageFromUrl($featured_media, true);
+        // Filter by categories
+        if (! empty(get_field('event_filter_cat', 'options'))) {
+            $pass = ($this->filterTaxonomies($categories, 0)) ? true : false;
+        }
+
+        // Filter by tags
+        if (! $pass && ! empty(get_field('event_filter_tag', 'options'))) {
+            $pass = ($this->filterTaxonomies($tags, 1)) ? true : false;
+        }
+
+        // Save event if it passed filters
+        if ($pass) {
+            $event = new Event(
+                array(
+                'post_title'            => $post_title,
+                'post_content'          => $post_content,
+                ),
+                array(
+                '_event_manager_id'     => $event['id'],
+                'categories'            => $categories,
+                'tags'                  => $tags,
+                'occasions_complete'    => $occasions,
+                'event_link'            => $event_link,
+                'additional_links'      => $additional_links,
+                'related_events'        => $related_events,
+                'location'              => $location,
+                'additional_locations'  => $additional_locations,
+                'organizers'            => $organizers,
+                'supporters'            => $supporters,
+                'booking_link'          => $booking_link,
+                'booking_phone'         => $booking_phone,
+                'age_restriction'       => $age_restriction,
+                'membership_cards'      => $membership_cards,
+                'price_information'     => $price_information,
+                'ticket_includes'       => $ticket_includes,
+                'price_adult'           => $price_adult,
+                'price_children'        => $price_children,
+                'children_age'          => $children_age,
+                'price_student'         => $price_student,
+                'price_senior'          => $price_senior,
+                'senior_age'            => $senior_age,
+                'booking_group'         => $booking_group,
+                'gallery'               => $gallery,
+                'facebook'              => $facebook,
+                'twitter'               => $twitter,
+                'instagram'             => $instagram,
+                'google_music'          => $google_music,
+                'spotify'               => $spotify,
+                'soundcloud'            => $soundcloud,
+                'deezer'                => $deezer,
+                'youtube'               => $youtube,
+                'vimeo'                 => $vimeo,
+                )
+            );
+            $createSuccess = $event->save();
+
+            if ($createSuccess && ! empty($featured_media)) {
+                $event->setFeaturedImageFromUrl($featured_media, true);
+            }
         }
     }
 
@@ -174,7 +190,7 @@ class HbgEventApi extends \EventManagerIntegration\Parser
             // Delete the occasion if expired
             if (strtotime($o['end_date']) < $date_limit) {
                 $id = $o['ID'];
-                $wpdb->query( $wpdb->prepare( "DELETE FROM $db_table WHERE ID = $id"));
+                $wpdb->query($wpdb->prepare("DELETE FROM $db_table WHERE ID = $id"));
             }
         }
 
@@ -205,7 +221,7 @@ class HbgEventApi extends \EventManagerIntegration\Parser
             $completeQuery = $wpdb->prepare($query, $e->ID);
             $results = $wpdb->get_results($completeQuery);
             // Delete event if occasions is empty
-            if (count($results) == 0){
+            if (count($results) == 0) {
                 wp_delete_post($e->ID, true);
             }
         }
@@ -215,20 +231,22 @@ class HbgEventApi extends \EventManagerIntegration\Parser
 
     /**
      * Filter, if add or not to add
-     * @param  array $categories All categories
+     * @param  array $taxonomies All taxonomies
+     * @param  int   $type       Type of taxonomy, 0 = category, 1 = tag
      * @return bool
      */
-    public function filter($categories)
+    public function filterTaxonomies($taxonomies, $type)
     {
         $passes = true;
+        $tax_array = ($type == 0) ? get_field('event_filter_cat', 'options') : get_field('event_filter_tag', 'options');
 
-        if (get_field('xcap_filter_categories', 'option')) {
-            $filters = array_map('trim', explode(',', get_field('xcap_filter_categories', 'options')));
-            $categoriesLower = array_map('strtolower', $categories);
+        if (! empty($tax_array)) {
+            $filters = array_map('trim', explode(',', $tax_array));
+            $taxLower = array_map('strtolower', $taxonomies);
             $passes = false;
 
             foreach ($filters as $filter) {
-                if (in_array(strtolower($filter), $categoriesLower)) {
+                if (in_array(strtolower($filter), $taxLower)) {
                     $passes = true;
                 }
             }

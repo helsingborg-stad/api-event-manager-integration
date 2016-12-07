@@ -47,13 +47,25 @@ class EventModule extends \Modularity\Module
         $display_limit = $fields->mod_event_limit;
         $days_ahead = $fields->mod_event_interval;
 
-        $set_categories = $fields->mod_event_categories_show;
-        $categories = (! $set_categories && ! empty($fields->mod_event_categories_list)) ? $fields->mod_event_categories_list : false;
-
+        // Calculate start and end date
         $start_date = date('Y-m-d H:i:s', strtotime("today midnight"));
         $end_date = date('Y-m-d H:i:s', strtotime("tomorrow midnight +$days_ahead days") - 1);
 
-        $events = \EventManagerIntegration\Helper\QueryEvents::getEventsOccasions($start_date, $end_date, $display_limit, $categories);
+        // Save categories and tags IDs to array
+        $taxonomies = array();
+        if ($fields->mod_event_categories_show == false && ! empty($fields->mod_event_categories_list)) {
+            foreach ($fields->mod_event_categories_list as $v) {
+                $taxonomies[] = $v;
+            }
+        }
+        if ($fields->mod_event_tags_show == false && ! empty($fields->mod_event_tags_list)) {
+            foreach ($fields->mod_event_tags_list as $v) {
+                $taxonomies[] = $v;
+            }
+        }
+        $taxonomies = (! empty($taxonomies)) ? $taxonomies : false;
+
+        $events = \EventManagerIntegration\Helper\QueryEvents::getEventsOccasions($start_date, $end_date, $display_limit, $taxonomies);
 
         return $events;
     }
