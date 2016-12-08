@@ -5,14 +5,14 @@ namespace EventManagerIntegration\Helper;
 class QueryEvents
 {
     /**
-     * Get events with occurance date within given settings/parameters
+     * Get events with occurance date within date range and other parameters
      * @param  string       $start_date  start date range
      * @param  string       $end_date    end date range
      * @param  int          $limit       maximum events to get
      * @param  array|bool   $taxonomies  array of taxonomies IDs, false if not set
-     * @return array                     result with events
+     * @return object                    post object with events
      */
-    public static function getEventsOccasions($start_date, $end_date, $limit, $taxonomies = false)
+    public static function getEventsByInterval($start_date, $end_date, $limit, $taxonomies = false)
     {
         global $wpdb;
         $taxonomies = (! empty($taxonomies) && is_array($taxonomies)) ? implode(",", $taxonomies) : false;
@@ -39,6 +39,50 @@ class QueryEvents
         $events = $wpdb->get_results($completeQuery);
 
         return $events;
+    }
+
+    /**
+     * Get event occasions
+     * @param  int $post_id post id
+     * @return array        object with occasions
+     */
+    public static function getEventOccasions($post_id)
+    {
+        global $wpdb;
+        $db_table = $wpdb->prefix . "integrate_occasions";
+
+        $query = "
+        SELECT      *
+        FROM        $db_table
+        WHERE       $db_table.event_id = %d
+        ORDER BY    $db_table.start_date ASC
+        ";
+
+        $completeQuery = $wpdb->prepare($query, $post_id);
+        $occasions = $wpdb->get_results($completeQuery);
+
+        return $occasions;
+    }
+
+   /**
+     * Get event meta data
+     * @param  int $post_id post id
+     * @return array        array with occasions
+     */
+    public static function getEventMeta($post_id)
+    {
+        global $wpdb;
+
+        $query = "
+        SELECT      *
+        FROM        $wpdb->postmeta
+        WHERE       $wpdb->postmeta.post_id = %s
+        ";
+
+        $completeQuery = $wpdb->prepare($query, $post_id);
+        $event_meta = $wpdb->get_results($completeQuery);
+
+        return $event_meta;
     }
 
     /**

@@ -62,7 +62,7 @@
             },
             {
                 "key": "field_5846ca031ffcb",
-                "label": "Import from categories",
+                "label": "Import from selected categories",
                 "name": "event_filter_cat",
                 "type": "text",
                 "instructions": "Enter the name of the categories that you want to import events from. Separate with commas. Leave blank to import from all categories.",
@@ -81,7 +81,7 @@
             },
             {
                 "key": "field_5846db8b3cf78",
-                "label": "Import from tags",
+                "label": "Import from selected tags",
                 "name": "event_filter_tag",
                 "type": "text",
                 "instructions": "Enter the name of the tags that you want to import events from. Separate with commas. Leave blank to import from all tags.",

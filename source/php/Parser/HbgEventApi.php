@@ -190,7 +190,7 @@ class HbgEventApi extends \EventManagerIntegration\Parser
             // Delete the occasion if expired
             if (strtotime($o['end_date']) < $date_limit) {
                 $id = $o['ID'];
-                $wpdb->query($wpdb->prepare("DELETE FROM $db_table WHERE ID = $id"));
+                $wpdb->delete( $db_table, array( 'ID' => $id) );
             }
         }
 

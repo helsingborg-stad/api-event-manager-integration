@@ -22,6 +22,7 @@ class App
         new \EventManagerIntegration\Helper\Acf();
         new \EventManagerIntegration\Widget\DisplayEvents();
         new \EventManagerIntegration\Admin\Options();
+        new \EventManagerIntegration\Admin\AdminDisplayEvent();
 
         /* Modularity modules */
         add_action('Modularity', function () {
@@ -69,6 +70,7 @@ class App
     public function enqueueScripts()
     {
         wp_enqueue_script('event-manager-integration', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-manager-integration.min.js', null, '1.0.0', true);
+
         wp_localize_script('event-manager-integration', 'eventintegration', array(
             'loading'           => __("Loading", 'event-integration'),
         ));
@@ -122,7 +124,7 @@ class App
         end_date DATETIME NOT NULL,
         door_time DATETIME DEFAULT NULL,
         status VARCHAR(50) DEFAULT NULL,
-        exeption_information VARCHAR(400) DEFAULT NULL,
+        exception_information VARCHAR(400) DEFAULT NULL,
         content_mode VARCHAR(50) DEFAULT NULL,
         content LONGTEXT DEFAULT NULL,
         PRIMARY KEY  (ID)
@@ -156,7 +158,6 @@ class App
             $to_date = date('Y-m-d', strtotime("midnight now + {$days_ahead} days"));
 
             $api_url = 'http://eventmanager.dev/json/wp/v2/event/time?start=' . $from_date . '&end=' . $to_date;
-            //$api_url = 'http://eventmanager.dev/json/wp/v2/event/time?start='.date('2016-09-01').'&end='.$to_date;
 
             $importer = new \EventManagerIntegration\Parser\HbgEventApi($api_url);
             });

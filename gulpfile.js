@@ -51,12 +51,19 @@ gulp.task('sass-dev', function() {
 
 // Concatenate & Minify JS
 gulp.task('scripts-dist', function() {
-    gulp.src([
-            'source/js/**/*.js',
-        ])
+    gulp.src('source/js/event-manager-integration.js')
         .pipe(concat('event-manager-integration.dev.js'))
         .pipe(gulp.dest('dist/js'))
         .pipe(rename('event-manager-integration.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('dist/js'));
+});
+
+gulp.task('scripts-dist', function() {
+    gulp.src('source/js/event-integration-front.js')
+        .pipe(concat('event-integration-front.dev.js'))
+        .pipe(gulp.dest('dist/js'))
+        .pipe(rename('event-integration-front.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('dist/js'));
 });

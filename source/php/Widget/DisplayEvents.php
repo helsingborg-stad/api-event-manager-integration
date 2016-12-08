@@ -40,7 +40,7 @@ class DisplayEvents extends \WP_Widget
 
         $start_date = date('Y-m-d H:i:s', strtotime("today midnight"));
         $end_date = date('Y-m-d H:i:s', strtotime("tomorrow midnight +$days_ahead days") - 1);
-        $events = QueryEvents::getEventsOccasions($start_date, $end_date, $limit);
+        $events = QueryEvents::getEventsByInterval($start_date, $end_date, $limit);
 
         ?>
         <?php echo $args['before_widget']; ?>

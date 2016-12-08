@@ -3,7 +3,7 @@
 $fields = json_decode(json_encode(get_fields($module->ID)));
 $events = \EventManagerIntegration\Module\EventModule::getEvents($module);
 
-$descr_limit = $fields->mod_event_descr_limit;
+$descr_limit = (! empty($fields->mod_event_descr_limit)) ? $fields->mod_event_descr_limit : null;
 $fields->mod_event_fields = is_array($fields->mod_event_fields) ? $fields->mod_event_fields : array();
 $grid_size = in_array('image', $fields->mod_event_fields) ? 'class="grid-md-9"' : 'class="grid-md-12"';
 ?>
@@ -12,8 +12,16 @@ $grid_size = in_array('image', $fields->mod_event_fields) ? 'class="grid-md-9"' 
     <?php if (!$module->hideTitle && !empty($module->post_title)) { ?>
         <h4 class="box-title"><?php echo apply_filters('the_title', $module->post_title); ?></h4>
     <?php } ?>
-
         <ul>
+
+<li>
+	<ul id='PaginationExample'>
+	<h2>Test</h2>
+	  <li><?php next_posts_link('&laquo; Older Entries') ?></li>
+	  <li><?php previous_posts_link('Newer Entries &raquo;') ?></li>
+	</ul>
+</li>
+
         <?php if (! $events) : ?>
             <li><?php _e('No events found', 'event-integration'); ?></li>
         <?php else: ?>

@@ -24,13 +24,13 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
                 ),
                 'hierarchical'          =>  false,
                 'exclude_from_search'   =>  false,
-                'supports'              =>  array('title', 'revisions', 'editor', 'thumbnail'),
+                'supports'              =>  array('revisions'),
                 // Disable create new post
                 'capability_type' => 'post',
                 'capabilities' => array(
                     'create_posts' => 'do_not_allow',
                 ),
-                'map_meta_cap' => true, // Set to `false`, if users are not allowed to edit/delete existing posts
+                'map_meta_cap' => true,
             )
         );
         $this->addTableColumn('cb', '<input type="checkbox">');
@@ -46,14 +46,12 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         });
 
         $this->addTableColumn('date', __('Date', 'event-integration'));
+
         add_action('init', array($this, 'registerEventCategories'));
         add_action('init', array($this, 'registerEventTags'));
-        add_action('admin_head', array($this, 'removeMedia'));
-        add_action('admin_menu', array($this, 'removePublishBox'));
         add_action('manage_posts_extra_tablenav', array($this, 'tablenavButtons'));
         add_action('wp_ajax_import_events', array($this, 'importEvents'));
         add_action('pre_get_posts', array($this, 'orderByOccasion'));
-        add_filter('get_sample_permalink_html', array($this, 'removePermalink'));
     }
 
     /**
@@ -130,40 +128,6 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         register_taxonomy('event_tags', array('event'), $args);
     }
 
-    /**
-     * Remove permalink from edit event
-     * @param  string $return string with permalink
-     * @return string
-     */
-    public function removePermalink($return)
-    {
-        global $current_screen;
-        if ($current_screen->post_type == $this->slug) {
-            $return = '';
-        }
-    return $return;
-    }
-
-    /**
-     * Remove "Add media" button from edit Event view
-     */
-    public function removeMedia()
-    {
-        global $current_screen;
-        if ($current_screen->post_type == $this->slug) {
-            remove_action('media_buttons', 'media_buttons');
-        }
-    }
-
-    /**
-     * Remove publish meta box from edit Event
-     */
-    public function removePublishBox()
-    {
-        remove_meta_box('submitdiv', $this->slug, 'side');
-    }
-
-
     public function getPostOccasions($post_id)
     {
         global $wpdb;
@@ -226,8 +190,8 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             echo '<div class="alignleft actions" style="position: relative;">';
             echo '<div id="importevents" class="button-primary">' . __('Import', 'event-integration') . '</div>';
             // TA BORT
-// echo '<a href="' . admin_url('options.php?page=import-events') . '" class="button-primary" id="post-query-submit">Debug</a>';
-// echo '<a href="' . admin_url('options.php?page=delete-all-events') . '" class="button-primary" id="post-query-submit">Delete</a>';
+echo '<a href="' . admin_url('options.php?page=import-events') . '" class="button-primary" id="post-query-submit">Debug</a>';
+echo '<a href="' . admin_url('options.php?page=delete-all-events') . '" class="button-primary" id="post-query-submit">Delete</a>';
             echo '</div>';
         }
     }

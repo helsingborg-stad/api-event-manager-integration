@@ -65,7 +65,7 @@ class EventModule extends \Modularity\Module
         }
         $taxonomies = (! empty($taxonomies)) ? $taxonomies : false;
 
-        $events = \EventManagerIntegration\Helper\QueryEvents::getEventsOccasions($start_date, $end_date, $display_limit, $taxonomies);
+        $events = \EventManagerIntegration\Helper\QueryEvents::getEventsByInterval($start_date, $end_date, $display_limit, $taxonomies);
 
         return $events;
     }
