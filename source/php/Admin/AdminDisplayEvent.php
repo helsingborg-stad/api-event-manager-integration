@@ -14,7 +14,9 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
         add_action('add_meta_boxes', array($this, 'addMetaBoxes'));
     }
 
-    /* Create one or more meta boxes to be displayed on the event editor screen. */
+    /*
+     * Adding meta boxes to be displayed on the event editor view.
+     */
     public function addMetaBoxes()
     {
         global $post;
@@ -22,7 +24,6 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
             return;
         }
 
-        // Event information meta box
         add_meta_box(
             'event-info-box',
             esc_html__('Event', 'event-integration'),
@@ -32,7 +33,6 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
             'high'
         );
 
-        // Event occasions meta box
         add_meta_box(
             'event-occasion-box',
             esc_html__('Occasions', 'event-integration'),
@@ -42,7 +42,6 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
             'default'
         );
 
-        // Event meta data meta box
         add_meta_box(
             'event-meta-box',
             esc_html__('Meta data', 'event-integration'),
@@ -52,7 +51,6 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
             'low'
         );
 
-        // Featured image meta box
         add_meta_box(
             'event-image-box',
             esc_html__('Featured image', 'event-integration'),
@@ -71,7 +69,9 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
         remove_meta_box('submitdiv', 'event', 'side');
     }
 
-    /* Display event-info-box */
+    /*
+     * Display event-info-box
+     */
     public function eventInfo($object, $box)
     {
         $id = $object->ID;
@@ -83,7 +83,9 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
         <?php
     }
 
-    /* Display event-occasion-box */
+    /*
+     * Display event-occasion-box
+     */
     public function eventOccasions($object, $box)
     {
         $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($object->ID);
@@ -123,7 +125,9 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
     <?php
     }
 
-    /* Display event-meta-box */
+    /*
+     * Display event-meta-box
+     */
     public function eventMeta($object, $box)
     {
         $meta_data = \EventManagerIntegration\Helper\QueryEvents::getEventMeta($object->ID);
@@ -139,7 +143,9 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
     <?php
     }
 
-    /* Display event-image-box */
+    /*
+     * Display event-image-box
+     */
     public function eventImage($object, $box)
     {
         ?>
@@ -150,9 +156,9 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
     }
 
     /**
-     * [outputMeta description]
-     * @param  [type] $data [description]
-     * @return [type]       [description]
+     * Unserialize and implode arrays
+     * @param  mixed $data data to be formatted
+     * @return string
      */
     public function outputMeta($data) {
         $unserialized = @unserialize($data);
@@ -163,24 +169,28 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
         }
     }
 
-    function multiImplode($array, $glue) {
-    $str = '';
+    /**
+     * Implode arrays into strings
+     * @param  array  $array  array to be imploded
+     * @param  string $glue   used to separate array objects
+     * @return string
+     */
+    public function multiImplode($array, $glue) {
+    $string = '';
 
     foreach ($array as $key => $item) {
         if (empty($item)) {
             continue;
         }
         if (is_array($item)) {
-            $str .= '<p>' . $this->multiImplode($item, $glue) . $glue . '</p>';
+            $string .= '<p>' . $this->multiImplode($item, $glue) . $glue . '</p>';
         } else {
-            $str .= $item . $glue;
+            $string .= $item . $glue;
         }
     }
-    $str = substr($str, 0, 0-strlen($glue));
+    $string = substr($string, 0, 0-strlen($glue));
 
-    return $str;
+    return $string;
     }
-
-
 
 }

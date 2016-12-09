@@ -1,15 +1,3 @@
-jQuery(document).ready(function(){
-
-	console.log('Hello');
-
-	jQuery('#PaginationExample a').live('click', function(e){
-		e.preventDefault();
-		var link = jQuery(this).attr('href');
-		jQuery('#ID').html('Loading...');
-		jQuery('#ID').load(link+' #contentInner');
-	 });
-});
-
 var EventManagerIntegration = EventManagerIntegration || {};
 EventManagerIntegration.loading = false;
 EventManagerIntegration.data = {'action' : 'import_events', 'value': ''};

@@ -10,12 +10,16 @@ class QueryEvents
      * @param  string       $end_date    end date range
      * @param  int          $limit       maximum events to get
      * @param  array|bool   $taxonomies  array of taxonomies IDs, false if not set
+     * @param  int          $page        selected pagination page number
      * @return object                    post object with events
      */
-    public static function getEventsByInterval($start_date, $end_date, $limit, $taxonomies = false)
+    public static function getEventsByInterval($start_date, $end_date, $limit, $taxonomies = false, $page = 1)
     {
         global $wpdb;
         $taxonomies = (! empty($taxonomies) && is_array($taxonomies)) ? implode(",", $taxonomies) : false;
+
+        // Calculate offset
+        $offset = ($page - 1) * intval($limit);
 
         $db_table = $wpdb->prefix . "integrate_occasions";
         $query = "
@@ -31,7 +35,8 @@ class QueryEvents
         $query .= ($taxonomies) ? "AND ($wpdb->term_relationships.term_taxonomy_id IN ($taxonomies))" : '';
         $query .= "GROUP BY $db_table.start_date, $db_table.end_date ";
         $query .= "ORDER BY $db_table.start_date ASC";
-        $query .= ($limit == -1) ? '' : ' LIMIT'.' '.intval($limit);
+
+        $query .= ($limit == -1) ? '' : ' LIMIT'.' '.$offset . ',' . intval($limit);
 
         $postType = 'event';
         $postStatus = 'publish';

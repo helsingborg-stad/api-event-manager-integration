@@ -1,0 +1,29 @@
+.modularity-mod-event {
+	ul.module-pagination {
+	    display: inline-block;
+	    padding: 0;
+	    margin: 0;
+	}
+
+	ul.module-pagination li {
+		display: inline;
+		border: 0px !important;
+	}
+
+	ul.module-pagination li a {
+	    color: black;
+	    float: left;
+	    padding: 8px 16px;
+	    text-decoration: none;
+	    transition: background-color .3s;
+	}
+
+	ul.module-pagination li a:hover:not(.active) {
+		background-color: #ddd;
+	}
+
+	ul.module-pagination li a.active {
+	    background-color: #999;
+	    color: white;
+	}
+}

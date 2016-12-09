@@ -1,27 +1,40 @@
 <?php
-
 $fields = json_decode(json_encode(get_fields($module->ID)));
-$events = \EventManagerIntegration\Module\EventModule::getEvents($module);
+$events = \EventManagerIntegration\Module\EventModule::getEvents($module->ID);
 
 $descr_limit = (! empty($fields->mod_event_descr_limit)) ? $fields->mod_event_descr_limit : null;
 $fields->mod_event_fields = is_array($fields->mod_event_fields) ? $fields->mod_event_fields : array();
 $grid_size = in_array('image', $fields->mod_event_fields) ? 'class="grid-md-9"' : 'class="grid-md-12"';
 ?>
 
+<div class="<?php echo implode(' ', apply_filters('Modularity/Module/Classes', array('box', 'box-panel'), $module->post_type, $args)); ?>" module-id="<?php echo $module->ID; ?>">
+    <?php if (!$module->hideTitle && !empty($module->post_title)) { ?>
+        <h4 class="box-title"><?php echo apply_filters('the_title', $module->post_title); ?></h4>
+    <?php } ?>
+    <ul>
+    	<div class="module-content">
+			<!-- Ajax insert events here -->
+       	</div>
+
+       	<li>
+       		<ul class="module-pagination">
+			  <li><a href="#">«</a></li>
+			  <li><a href="#">1</a></li>
+			  <li><a href="#">2</a></li>
+			  <li><a href="#">3</a></li>
+			  <li><a href="#">»</a></li>
+			</ul>
+       	</li>
+    </ul>
+</div>
+
+
 <div class="<?php echo implode(' ', apply_filters('Modularity/Module/Classes', array('box', 'box-panel'), $module->post_type, $args)); ?>">
     <?php if (!$module->hideTitle && !empty($module->post_title)) { ?>
         <h4 class="box-title"><?php echo apply_filters('the_title', $module->post_title); ?></h4>
     <?php } ?>
+
         <ul>
-
-<li>
-	<ul id='PaginationExample'>
-	<h2>Test</h2>
-	  <li><?php next_posts_link('&laquo; Older Entries') ?></li>
-	  <li><?php previous_posts_link('Newer Entries &raquo;') ?></li>
-	</ul>
-</li>
-
         <?php if (! $events) : ?>
             <li><?php _e('No events found', 'event-integration'); ?></li>
         <?php else: ?>

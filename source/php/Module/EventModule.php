@@ -34,16 +34,31 @@ class EventModule extends \Modularity\Module
             $paths[] = EVENTMANAGERINTEGRATION_PATH . 'source/php/Templates/';
             return $paths;
         });
+
+        add_action('wp_ajax_nopriv_ajax_pagination', array($this, 'ajaxPagination'));
+        add_action('wp_ajax_ajax_pagination', array($this, 'ajaxPagination'));
+    }
+
+    public function ajaxPagination()
+    {
+        $page = $_POST['page'];
+        $module_id = $_POST['id'];
+
+        $events = self::displayEvents($module_id, $page);
+        echo $events;
+
+        die();
     }
 
     /**
      * Get included Events
-     * @param  object $module Module object
-     * @return array          Array with event objects
+     * @param  int    $module_id Module ID
+     * @param  int    $page      Pagination page number
+     * @return array             Array with event objects
      */
-    public static function getEvents($module)
+    public static function getEvents($module_id, $page = 1)
     {
-        $fields = json_decode(json_encode(get_fields($module->ID)));
+        $fields = json_decode(json_encode(get_fields($module_id)));
         $display_limit = $fields->mod_event_limit;
         $days_ahead = $fields->mod_event_interval;
 
@@ -65,20 +80,20 @@ class EventModule extends \Modularity\Module
         }
         $taxonomies = (! empty($taxonomies)) ? $taxonomies : false;
 
-        $events = \EventManagerIntegration\Helper\QueryEvents::getEventsByInterval($start_date, $end_date, $display_limit, $taxonomies);
+        $events = \EventManagerIntegration\Helper\QueryEvents::getEventsByInterval($start_date, $end_date, $display_limit, $taxonomies, $page);
 
         return $events;
     }
 
     /**
      * Helper to format date and time
-     * @param  object $module Module object
-     * @param  string $date   Date and time string
-     * @return string         Formatted date
+     * @param  int    $module_id Module ID
+     * @param  string $date      Date and time string
+     * @return string            Formatted date
      */
-    public static function formatDate($module, $date)
+    public static function formatDate($module_id, $date)
     {
-        $fields = json_decode(json_encode(get_fields($module->ID)));
+        $fields = json_decode(json_encode(get_fields($module_id)));
 
         $dateTime = new \DateTime($date);
 
@@ -102,5 +117,68 @@ class EventModule extends \Modularity\Module
         }
 
         return $date;
+    }
+
+    /**
+     * Converts array of events into string with markup
+     * @param  int    $module_id Module ID
+     * @param  int    $page      Pagination page number
+     * @return string            String with events and markup
+     */
+    public static function displayEvents($module_id, $page)
+    {
+        $fields = json_decode(json_encode(get_fields($module_id)));
+        $events = self::getEvents($module_id, $page);
+
+        $descr_limit = (! empty($fields->mod_event_descr_limit)) ? $fields->mod_event_descr_limit : null;
+        $fields->mod_event_fields = is_array($fields->mod_event_fields) ? $fields->mod_event_fields : array();
+        $grid_size = in_array('image', $fields->mod_event_fields) ? 'class="grid-md-9"' : 'class="grid-md-12"';
+
+        $ret = '';
+        $ret .= '<ul class="event-module-list">';
+        if (! $events) {
+            $ret .= '<li>' . __('No events found', 'event-integration') . '</li>';
+        } else {
+            foreach ($events as $event) {
+                $ret .= '<li>';
+                $ret .= '<div class="grid">';
+                if (in_array('image', $fields->mod_event_fields)) {
+                    $ret .= '<div class="grid-md-3">';
+                    $ret .= get_the_post_thumbnail($event->ID, 'large', array('class' => 'image-responsive'));
+                    $ret .= '</div>';
+                }
+                $ret .= '<div ' . $grid_size . '>';
+                if (! empty($event->post_title)) {
+                    $ret .= '<a href="' . get_page_link($event->ID).'" class="link-item">' . $event->post_title . '</a>';
+                }
+                if (in_array('start_date', $fields->mod_event_fields) && ! empty($event->start_date)) {
+                    $start_date = \EventManagerIntegration\Module\EventModule::formatDate($module_id, $event->start_date);
+                    $ret .= '<p class="date text-sm text-dark-gray">' . sprintf(__('Start %s', 'event-integration'), $start_date) . '</p>';
+                }
+                if (in_array('end_date', $fields->mod_event_fields) && ! empty($event->end_date)) {
+                    $end_date = \EventManagerIntegration\Module\EventModule::formatDate($module_id, $event->end_date);
+                    $ret .= '<p class="date text-sm text-dark-gray">' . sprintf(__('End %s', 'event-integration'), $end_date) . '</p>';
+                }
+                if (in_array('door_time', $fields->mod_event_fields) && ! empty($event->door_time)) {
+                    $door_time = \EventManagerIntegration\Module\EventModule::formatDate($module_id, $event->door_time);
+                    $ret .= '<p class="date text-sm text-dark-gray">' . sprintf(__('Door time %s', 'event-integration'), $door_time) . '</p>';
+                }
+                if (in_array('location', $fields->mod_event_fields) && get_post_meta($event->ID, 'location', true)) {
+                    $location = get_post_meta($event->ID, 'location', true);
+                    $ret .= '<p>' . $location['title'] . '</p>';
+                }
+                if (in_array('description', $fields->mod_event_fields) && ! empty($event->post_content)) {
+                    $ret .= '<p>';
+                    $ret .= \EventManagerIntegration\Helper\QueryEvents::stringLimiter($event->post_content, $descr_limit);
+                    $ret .= '</p>';
+                }
+                $ret .= '</div>';
+                $ret .= '</div>';
+                $ret .= '</li>';
+            }
+        }
+        $ret .= '</ul>';
+
+        return $ret;
     }
 }

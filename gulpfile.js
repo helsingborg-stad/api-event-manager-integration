@@ -13,12 +13,19 @@ var plumber = require('gulp-plumber');
 // Compile Our Sass
 gulp.task('sass-dist', function() {
     gulp.src('source/sass/event-manager-integration.scss')
-            .pipe(plumber())
-            .pipe(sass())
-            .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1'))
-            .pipe(rename({suffix: '.min'}))
-            .pipe(cssnano())
-            .pipe(gulp.dest('dist/css'));
+        .pipe(plumber())
+        .pipe(sass())
+        .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1'))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(cssnano())
+        .pipe(gulp.dest('dist/css'));
+    gulp.src('source/sass/event-manager-integration-ui.scss')
+        .pipe(plumber())
+        .pipe(sass())
+        .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1'))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(cssnano())
+        .pipe(gulp.dest('dist/css'));
 });
 
 gulp.task('sass-dev', function() {
@@ -28,19 +35,6 @@ gulp.task('sass-dev', function() {
         .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1'))
         .pipe(rename({suffix: '.dev'}))
         .pipe(gulp.dest('dist/css'));
-});
-
-gulp.task('sass-dist', function() {
-    gulp.src('source/sass/event-manager-integration-ui.scss')
-            .pipe(plumber())
-            .pipe(sass())
-            .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1'))
-            .pipe(rename({suffix: '.min'}))
-            .pipe(cssnano())
-            .pipe(gulp.dest('dist/css'));
-});
-
-gulp.task('sass-dev', function() {
     gulp.src('source/sass/event-manager-integration-ui.scss')
         .pipe(plumber())
         .pipe(sass())
@@ -57,13 +51,10 @@ gulp.task('scripts-dist', function() {
         .pipe(rename('event-manager-integration.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('dist/js'));
-});
-
-gulp.task('scripts-dist', function() {
-    gulp.src('source/js/event-integration-front.js')
-        .pipe(concat('event-integration-front.dev.js'))
+    gulp.src('source/js/event-pagination.js')
+        .pipe(concat('event-pagination.dev.js'))
         .pipe(gulp.dest('dist/js'))
-        .pipe(rename('event-integration-front.min.js'))
+        .pipe(rename('event-pagination.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('dist/js'));
 });
