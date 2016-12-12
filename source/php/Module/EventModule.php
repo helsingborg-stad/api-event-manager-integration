@@ -35,10 +35,28 @@ class EventModule extends \Modularity\Module
             return $paths;
         });
 
+        add_action('wp_ajax_nopriv_ajax_get_events', array($this, 'ajaxGetEvents'));
+        add_action('wp_ajax_ajax_get_events', array($this, 'ajaxGetEvents'));
         add_action('wp_ajax_nopriv_ajax_pagination', array($this, 'ajaxPagination'));
         add_action('wp_ajax_ajax_pagination', array($this, 'ajaxPagination'));
     }
 
+    /**
+     * Initial load events with ajax
+     */
+    public function ajaxGetEvents()
+    {
+        $module_id = $_POST['id'];
+
+        $events = self::displayEvents($module_id);
+        echo $events;
+
+        die();
+    }
+
+    /**
+     * Get events when using pagination
+     */
     public function ajaxPagination()
     {
         $page = $_POST['page'];
@@ -50,16 +68,28 @@ class EventModule extends \Modularity\Module
         die();
     }
 
+    public static function countPages($module_id)
+    {
+        $fields = json_decode(json_encode(get_fields($module_id)));
+        $max_per_page = $fields->mod_event_limit;
+        $events = self::getEvents($module_id, 1, false);
+        $total_posts = count($events);  //Total number of posts returned
+        $pages = ceil($total_posts / $max_per_page);
+
+        return $pages;
+    }
+
     /**
      * Get included Events
      * @param  int    $module_id Module ID
      * @param  int    $page      Pagination page number
+     * @param  bool   $useLimit  True = limit by setting, false = get all
      * @return array             Array with event objects
      */
-    public static function getEvents($module_id, $page = 1)
+    public static function getEvents($module_id, $page = 1, $useLimit = true)
     {
         $fields = json_decode(json_encode(get_fields($module_id)));
-        $display_limit = $fields->mod_event_limit;
+        $display_limit = ($useLimit == true) ? $fields->mod_event_limit : -1;
         $days_ahead = $fields->mod_event_interval;
 
         // Calculate start and end date
@@ -86,46 +116,12 @@ class EventModule extends \Modularity\Module
     }
 
     /**
-     * Helper to format date and time
-     * @param  int    $module_id Module ID
-     * @param  string $date      Date and time string
-     * @return string            Formatted date
-     */
-    public static function formatDate($module_id, $date)
-    {
-        $fields = json_decode(json_encode(get_fields($module_id)));
-
-        $dateTime = new \DateTime($date);
-
-        switch ($fields->mod_event_date_format) {
-            // Date & time
-            case 1:
-                $date = $dateTime->format('Y-m-d H:i');
-                break;
-            // Date only
-            case 2:
-                $date = $dateTime->format('Y-m-d');
-                break;
-            // Time only
-            case 3:
-                $date = $dateTime->format('H:i');
-                break;
-
-            default:
-                $date = $date;
-                break;
-        }
-
-        return $date;
-    }
-
-    /**
      * Converts array of events into string with markup
      * @param  int    $module_id Module ID
      * @param  int    $page      Pagination page number
      * @return string            String with events and markup
      */
-    public static function displayEvents($module_id, $page)
+    public static function displayEvents($module_id, $page = 1)
     {
         $fields = json_decode(json_encode(get_fields($module_id)));
         $events = self::getEvents($module_id, $page);
@@ -180,5 +176,39 @@ class EventModule extends \Modularity\Module
         $ret .= '</ul>';
 
         return $ret;
+    }
+
+    /**
+     * Helper to format date and time
+     * @param  int    $module_id Module ID
+     * @param  string $date      Date and time string
+     * @return string            Formatted date
+     */
+    public static function formatDate($module_id, $date)
+    {
+        $fields = json_decode(json_encode(get_fields($module_id)));
+
+        $dateTime = new \DateTime($date);
+
+        switch ($fields->mod_event_date_format) {
+            // Date & time
+            case 1:
+                $date = $dateTime->format('Y-m-d H:i');
+                break;
+            // Date only
+            case 2:
+                $date = $dateTime->format('Y-m-d');
+                break;
+            // Time only
+            case 3:
+                $date = $dateTime->format('H:i');
+                break;
+
+            default:
+                $date = $date;
+                break;
+        }
+
+        return $date;
     }
 }

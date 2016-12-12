@@ -5,42 +5,75 @@ EventManagerIntegration.Event.Module = (function ($) {
 
     function Module() {
         $(function() {
-        	this.handleEvents();
+        	//this.handleEvents();
+        	this.initEventModules();
+        	this.initEventPagination();
         }.bind(this));
     }
 
-    Module.prototype.handleEvents = function () {
-		function find_page_number( element ) {
-			return parseInt(element.html());
-		}
-
-		function find_module_id( element ) {
-			var id = $(element).closest('.box-panel').attr('module-id');
-			return id;
-		}
-
-		$(document).on( 'click', '.module-pagination a', function( event ) {
-			event.preventDefault();
-
-			$(this).addClass("active");
-			$(".modularity-mod-event .module-pagination a").not($(this)).removeClass("active");
-
-			page = find_page_number($(this).clone());
-			moduleId = find_module_id($(this));
+    Module.prototype.initEventModules = function () {
+	    $( ".modularity-mod-event" ).each(function( key, value ) {
+	    	var id = $(value).find('.box-panel').attr('module-id');
+    		var thisModule = $('.modularity-mod-event-' + id);
 
 			$.ajax({
 				url: ajaxpagination.ajaxurl,
 				type: 'post',
 				data: {
-					action: 'ajax_pagination',
-					page: page,
-					id: moduleId
+					action: 'ajax_get_events',
+					id: id
 				},
-				success: function( html ) {
-					$('.modularity-mod-event').find( '.event-module-list' ).remove();
-					$('.modularity-mod-event .module-content').append( html );
+				beforeSend: function() {
+					$(thisModule).find('.event-module-list').remove();
+					$(thisModule).find('.module-content').append('<div class="event-load-box"><div class="loader">Loading...</div></div>');
+				},
+				success: function(html) {
+					$(thisModule).find('.event-load-box').remove();
+					$(thisModule).find('.module-content').append(html).hide().fadeIn(80);
 				}
 			})
+		});
+    };
+
+    Module.prototype.initEventPagination = function () {
+	    $( ".modularity-mod-event" ).each(function( key, value ) {
+			$('.module-pagination').bladePagination({
+			maxPageNum: 3,
+			prevLabel: '&laquo;',
+			nextLabel: '&raquo;',
+			moreLabel: '...',
+			clickPage: function(page, item) {
+				Module.prototype.loadEvents(item, page);
+			}
+			});
+		});
+    };
+
+    Module.prototype.loadEvents = function (item, page) {
+
+		var moduleId = $(item).closest('.box-panel').attr('module-id');
+		var thisModule = $('.modularity-mod-event-' + moduleId);
+		var height = $(thisModule).find('.module-content').height();
+
+		$(thisModule).find(".module-pagination li").not($(item)).removeClass("active");
+		$(item).addClass("active");
+
+		$.ajax({
+			url: ajaxpagination.ajaxurl,
+			type: 'post',
+			data: {
+				action: 'ajax_pagination',
+				page: page,
+				id: moduleId
+			},
+			beforeSend: function() {
+				$(thisModule).find('.event-module-list').remove();
+				$(thisModule).find('.module-content').append('<div class="event-load-box"><div class="loader">Loading...</div></div>').height(height);
+			},
+			success: function(html) {
+				$(thisModule).find('.event-load-box').remove();
+				$(thisModule).find('.module-content').append(html).hide().fadeIn(80);
+			}
 		})
 	};
 

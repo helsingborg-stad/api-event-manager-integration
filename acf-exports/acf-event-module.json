@@ -7,7 +7,7 @@
                 "label": "Number of events to show",
                 "name": "mod_event_limit",
                 "type": "number",
-                "instructions": "Set to -1 to show all",
+                "instructions": "Set to -1 to show all.",
                 "required": 1,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -15,13 +15,29 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": -1,
+                "default_value": 5,
                 "placeholder": "",
                 "prepend": "",
                 "append": "",
                 "min": -1,
                 "max": "",
                 "step": ""
+            },
+            {
+                "key": "field_584ec8318df1d",
+                "label": "Show pagination",
+                "name": "mod_event_pagination",
+                "type": "true_false",
+                "instructions": "Display pagination buttons below the event list.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 1
             },
             {
                 "key": "field_583ffd8d10925",
@@ -32,7 +48,7 @@
                 "required": 1,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "50",
+                    "width": "100",
                     "class": "",
                     "id": ""
                 },

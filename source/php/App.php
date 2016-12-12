@@ -51,6 +51,8 @@ class App
         wp_enqueue_style('event-integration');
 
         // Scripts
+        wp_enqueue_script('vendor-pagination', EVENTMANAGERINTEGRATION_URL . '/source/js/vendor/jquery.blade-pagination.js', 'jquery', false, true);
+
         wp_register_script('ajax-pagination', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-pagination.' . self::$assetSuffix . '.js', 'jquery', false, true);
         wp_enqueue_script('ajax-pagination');
 

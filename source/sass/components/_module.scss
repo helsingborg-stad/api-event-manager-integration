@@ -1,5 +1,5 @@
 .modularity-mod-event {
-	ul.module-pagination {
+/*	ul.module-pagination {
 	    display: inline-block;
 	    padding: 0;
 	    margin: 0;
@@ -10,7 +10,7 @@
 		border: 0px !important;
 	}
 
-	ul.module-pagination li a {
+	ul.module-pagination li {
 	    color: black;
 	    float: left;
 	    padding: 8px 16px;
@@ -18,12 +18,146 @@
 	    transition: background-color .3s;
 	}
 
-	ul.module-pagination li a:hover:not(.active) {
+	ul.module-pagination li:hover {
+		cursor: pointer;
+	}
+
+	ul.module-pagination li:hover:not(.active) {
 		background-color: #ddd;
 	}
 
-	ul.module-pagination li a.active {
+	ul.module-pagination li.active {
 	    background-color: #999;
 	    color: white;
+	}
+
+*/
+
+
+ul.module-pagination {
+	    display: inline-block;
+	    padding: 0;
+	    margin: 0;
+}
+
+ul.module-pagination li {
+	border: 0px !important;
+	font-size: 14px;
+}
+
+ul.module-pagination li.page {
+	float: left;
+	background: #efefef;
+	margin: 3px;
+	border-radius: 3px;
+	cursor: pointer;
+
+    color: black;
+    padding: 4px 12px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+ul.module-pagination li.page:hover {
+	background: #EEE;
+}
+
+ul.module-pagination li.page.active {
+	cursor: default;
+	background-color: #999;
+	color: white;
+}
+
+ul.module-pagination li.page.disabled {
+	background: white;
+	cursor: not-allowed;
+	color: darkgray;
+}
+
+ul.module-pagination li.more {
+	float: left;
+	padding: 5px 8px;
+	margin: 3px;
+}
+
+ul.module-pagination li.end {
+	clear: both;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+	.event-load-box {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    width: 100%;
+    height: auto;
+	display: block;
+	}
+
+	.loader,
+	.loader:before,
+	.loader:after {
+	  border-radius: 50%;
+	  width: 1.7em;
+	  height: 1.7em;
+	  -webkit-animation-fill-mode: both;
+	  animation-fill-mode: both;
+	  -webkit-animation: load7 1.8s infinite ease-in-out;
+	  animation: load7 1.8s infinite ease-in-out;
+	}
+	.loader {
+	  color: #a0a0a0;
+	  font-size: 10px;
+	  margin: 70px auto;
+	  position: relative;
+	  text-indent: -9999em;
+	  -webkit-transform: translateZ(0);
+	  -ms-transform: translateZ(0);
+	  transform: translateZ(0);
+	  -webkit-animation-delay: -0.16s;
+	  animation-delay: -0.16s;
+	}
+	.loader:before,
+	.loader:after {
+	  content: '';
+	  position: absolute;
+	  top: 0;
+	}
+	.loader:before {
+	  left: -3.5em;
+	  -webkit-animation-delay: -0.32s;
+	  animation-delay: -0.32s;
+	}
+	.loader:after {
+	  left: 3.5em;
+	}
+	@-webkit-keyframes load7 {
+	  0%,
+	  80%,
+	  100% {
+	    box-shadow: 0 2.5em 0 -1.3em;
+	  }
+	  40% {
+	    box-shadow: 0 2.5em 0 0;
+	  }
+	}
+	@keyframes load7 {
+	  0%,
+	  80%,
+	  100% {
+	    box-shadow: 0 2.5em 0 -1.3em;
+	  }
+	  40% {
+	    box-shadow: 0 2.5em 0 0;
+	  }
 	}
 }

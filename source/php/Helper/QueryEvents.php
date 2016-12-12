@@ -19,6 +19,9 @@ class QueryEvents
         $taxonomies = (! empty($taxonomies) && is_array($taxonomies)) ? implode(",", $taxonomies) : false;
 
         // Calculate offset
+        if (! is_numeric($page)) {
+            $page = 1;
+        }
         $offset = ($page - 1) * intval($limit);
 
         $db_table = $wpdb->prefix . "integrate_occasions";
