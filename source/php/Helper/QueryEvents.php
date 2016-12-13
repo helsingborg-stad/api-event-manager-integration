@@ -19,10 +19,9 @@ class QueryEvents
         $taxonomies = (! empty($taxonomies) && is_array($taxonomies)) ? implode(",", $taxonomies) : false;
 
         // Calculate offset
-        if (! is_numeric($page)) {
-            $page = 1;
-        }
-        $offset = ($page - 1) * intval($limit);
+        $page = (! is_numeric($page)) ?  1 : $page;
+        $limit = intval($limit);
+        $offset = ($page - 1) * $limit;
 
         $db_table = $wpdb->prefix . "integrate_occasions";
         $query = "
@@ -34,12 +33,10 @@ class QueryEvents
                     AND $wpdb->posts.post_status = %s
                     AND ($db_table.start_date BETWEEN %s AND %s OR $db_table.end_date BETWEEN %s AND %s)
         ";
-
         $query .= ($taxonomies) ? "AND ($wpdb->term_relationships.term_taxonomy_id IN ($taxonomies))" : '';
         $query .= "GROUP BY $db_table.start_date, $db_table.end_date ";
         $query .= "ORDER BY $db_table.start_date ASC";
-
-        $query .= ($limit == -1) ? '' : ' LIMIT'.' '.$offset . ',' . intval($limit);
+        $query .= ($limit == -1) ? '' : ' LIMIT'.' '.$offset . ',' . $limit;
 
         $postType = 'event';
         $postStatus = 'publish';

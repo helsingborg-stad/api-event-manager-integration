@@ -150,7 +150,11 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
     {
         ?>
         <div class="event-integration-box">
-            <?php echo get_the_post_thumbnail( $object->ID, array( 266, 266), array('class' => 'featured-image')); ?>
+            <?php if (get_the_post_thumbnail($object->ID)): ?>
+                <?php echo get_the_post_thumbnail( $object->ID, array( 266, 266), array('class' => 'featured-image')); ?>
+            <?php else: ?>
+                <p><?php _e('Image missing', 'event-integration') ?></p>
+            <?php endif; ?>
         </div>
     <?php
     }

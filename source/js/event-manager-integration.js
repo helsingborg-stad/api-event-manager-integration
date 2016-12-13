@@ -40,7 +40,7 @@ function collectCssFromButton(button)
 function redLoadingButton(button, callback)
 {
     button.fadeOut(500, function() {
-        var texts = [eventintegration.loading + '&nbsp;&nbsp;&nbsp;', eventintegration.loading + '.&nbsp;&nbsp;', eventintegration.loading + '..&nbsp;', eventintegration.loading + '...'];
+        var texts = [eventIntegrationAdmin.loading + '&nbsp;&nbsp;&nbsp;', eventIntegrationAdmin.loading + '.&nbsp;&nbsp;', eventIntegrationAdmin.loading + '..&nbsp;', eventIntegrationAdmin.loading + '...'];
         button.css('background-color', 'rgb(51, 197, 255)');
         button.css('border-color', 'rgb(0, 164, 230)');
         button.css('color', 'white');

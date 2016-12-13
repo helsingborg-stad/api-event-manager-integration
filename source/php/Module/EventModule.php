@@ -35,42 +35,28 @@ class EventModule extends \Modularity\Module
             return $paths;
         });
 
-        add_action('wp_ajax_nopriv_ajax_get_events', array($this, 'ajaxGetEvents'));
-        add_action('wp_ajax_ajax_get_events', array($this, 'ajaxGetEvents'));
         add_action('wp_ajax_nopriv_ajax_pagination', array($this, 'ajaxPagination'));
         add_action('wp_ajax_ajax_pagination', array($this, 'ajaxPagination'));
     }
 
     /**
-     * Initial load events with ajax
-     */
-    public function ajaxGetEvents()
-    {
-        $module_id = $_POST['id'];
-
-        $events = self::displayEvents($module_id);
-        echo $events;
-
-        die();
-    }
-
-    /**
-     * Get events when using pagination
+     * Get events on pagination click
      */
     public function ajaxPagination()
     {
         $page = $_POST['page'];
         $module_id = $_POST['id'];
-
         $events = self::displayEvents($module_id, $page);
         echo $events;
-
         die();
     }
 
     public static function countPages($module_id)
     {
         $fields = json_decode(json_encode(get_fields($module_id)));
+        if ($fields->mod_event_limit == 0) {
+            return $fields->mod_event_limit;
+        }
         $max_per_page = $fields->mod_event_limit;
         $events = self::getEvents($module_id, 1, false);
         $total_posts = count($events);  //Total number of posts returned
@@ -130,8 +116,7 @@ class EventModule extends \Modularity\Module
         $fields->mod_event_fields = is_array($fields->mod_event_fields) ? $fields->mod_event_fields : array();
         $grid_size = in_array('image', $fields->mod_event_fields) ? 'class="grid-md-9"' : 'class="grid-md-12"';
 
-        $ret = '';
-        $ret .= '<ul class="event-module-list">';
+        $ret = '<ul class="event-module-list">';
         if (! $events) {
             $ret .= '<li>' . __('No events found', 'event-integration') . '</li>';
         } else {
@@ -140,7 +125,11 @@ class EventModule extends \Modularity\Module
                 $ret .= '<div class="grid">';
                 if (in_array('image', $fields->mod_event_fields)) {
                     $ret .= '<div class="grid-md-3">';
-                    $ret .= get_the_post_thumbnail($event->ID, 'large', array('class' => 'image-responsive'));
+                    if (get_the_post_thumbnail($event->ID)) {
+                        $ret .= get_the_post_thumbnail($event->ID, 'large', array('class' => 'image-responsive'));
+                    } elseif ($fields->mod_event_def_image) {
+                        $ret .= wp_get_attachment_image( $fields->mod_event_def_image->ID, array('700', '500'), "", array( "class" => "image-responsive" ) );
+                    }
                     $ret .= '</div>';
                 }
                 $ret .= '<div ' . $grid_size . '>';
@@ -179,7 +168,7 @@ class EventModule extends \Modularity\Module
     }
 
     /**
-     * Helper to format date and time
+     * Format date and time after defined settings
      * @param  int    $module_id Module ID
      * @param  string $date      Date and time string
      * @return string            Formatted date

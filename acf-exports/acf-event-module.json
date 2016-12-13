@@ -256,6 +256,30 @@
                 "load_terms": 0,
                 "return_format": "id",
                 "multiple": 0
+            },
+            {
+                "key": "field_584f9e68aa31a",
+                "label": "Default image",
+                "name": "mod_event_def_image",
+                "type": "image",
+                "instructions": "Will display if event image is missing.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "array",
+                "preview_size": "thumbnail",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": "jpg, jpeg, png, gif"
             }
         ],
         "location": [

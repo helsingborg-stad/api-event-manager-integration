@@ -1,0 +1,384 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Event Manager Integration\n"
+"POT-Creation-Date: 2016-12-13 15:47+0100\n"
+"PO-Revision-Date: 2016-12-13 16:05+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: event-manager-integration.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: source/php/Admin/AdminDisplayEvent.php:29
+msgid "Event"
+msgstr ""
+
+#: source/php/Admin/AdminDisplayEvent.php:38
+msgid "Occasions"
+msgstr ""
+
+#: source/php/Admin/AdminDisplayEvent.php:47
+msgid "Meta data"
+msgstr ""
+
+#: source/php/Admin/AdminDisplayEvent.php:56
+msgid "Featured image"
+msgstr ""
+
+#: source/php/Admin/AdminDisplayEvent.php:95
+msgid "Start date"
+msgstr ""
+
+#: source/php/Admin/AdminDisplayEvent.php:98
+msgid "End date"
+msgstr ""
+
+#: source/php/Admin/AdminDisplayEvent.php:102
+msgid "Door time"
+msgstr ""
+
+#: source/php/Admin/AdminDisplayEvent.php:107
+msgid "Status"
+msgstr ""
+
+#: source/php/Admin/AdminDisplayEvent.php:112
+msgid "Exception information"
+msgstr ""
+
+#: source/php/Admin/AdminDisplayEvent.php:117
+msgid "Custom content"
+msgstr ""
+
+#: source/php/Admin/AdminDisplayEvent.php:156
+msgid "Image missing"
+msgstr ""
+
+#: source/php/Admin/Options.php:11
+msgctxt "ACF"
+msgid "Event manager integration options"
+msgstr ""
+
+#: source/php/Admin/Options.php:12
+msgctxt "Event manager integration options"
+msgid "Options"
+msgstr ""
+
+#: source/php/App.php:60 source/php/App.php:85
+msgid "Loading"
+msgstr "Hämtar"
+
+#: source/php/App.php:156 source/php/App.php:157
+msgid "Import events"
+msgstr ""
+
+#: source/php/App.php:177 source/php/App.php:178
+msgid "Delete all events"
+msgstr ""
+
+#: source/php/Entity/CustomPostType.php:47
+#: source/php/Entity/CustomPostType.php:48
+#, php-format
+msgid "Add new %s"
+msgstr ""
+
+#: source/php/Entity/CustomPostType.php:49
+#, php-format
+msgid "Edit %s"
+msgstr ""
+
+#: source/php/Entity/CustomPostType.php:50
+#, php-format
+msgid "New %s"
+msgstr ""
+
+#: source/php/Entity/CustomPostType.php:51
+#, php-format
+msgid "View %s"
+msgstr ""
+
+#: source/php/Entity/CustomPostType.php:52
+#, php-format
+msgid "Search %s"
+msgstr ""
+
+#: source/php/Entity/CustomPostType.php:53
+#, php-format
+msgid "No %s found"
+msgstr ""
+
+#: source/php/Entity/CustomPostType.php:54
+#, php-format
+msgid "No %s found in trash"
+msgstr ""
+
+#: source/php/Entity/CustomPostType.php:55
+#, php-format
+msgid "Parent %s:"
+msgstr ""
+
+#: source/php/Entity/PostManager.php:200
+msgid "Could not create folder"
+msgstr ""
+
+#: source/php/Entity/PostManager.php:200
+msgid "please go ahead and create it manually and rerun the import."
+msgstr ""
+
+#: source/php/Helper/Acf.php:29
+msgid ""
+"To get the full expirience of the <strong>Event Manager Integration</strong> "
+"plugin, please activate the <a href=\"http://www.advancedcustomfields.com/"
+"pro/\" target=\"_blank\">Advanced Custom Fields Pro</a> plugin."
+msgstr ""
+
+#: source/php/Module/EventModule.php:121 source/php/Widget/DisplayEvents.php:52
+msgid "No events found"
+msgstr ""
+
+#: source/php/Module/EventModule.php:141
+#, php-format
+msgid "Start %s"
+msgstr ""
+
+#: source/php/Module/EventModule.php:145
+#, php-format
+msgid "End %s"
+msgstr ""
+
+#: source/php/Module/EventModule.php:149
+#, php-format
+msgid "Door time %s"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:10
+msgctxt "Post type plural"
+msgid "Events"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:11
+msgctxt "Post type singular"
+msgid "Event"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:37
+msgid "Title"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:39
+msgid "Occasion"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:48
+msgid "Date"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:63
+msgctxt "Taxonomy plural name"
+msgid "Event categories"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:64
+msgctxt "Taxonomy singular name"
+msgid "Event category"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:65
+msgid "Search categories"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:66
+msgid "Popular categories"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:67
+msgid "All categories"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:68 source/php/PostTypes/Events.php:69
+msgid "Parent category"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:70
+msgid "Edit category"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:71
+msgid "Update category"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:72
+msgid "Add new category"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:73
+msgid "New category"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:74
+msgid "Add or remove categories"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:75
+msgid "Choose from most used categories"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:76
+msgid "Categories"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:100
+msgctxt "Taxonomy plural name"
+msgid "Event tags"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:101
+msgctxt "Taxonomy singular name"
+msgid "Event tag"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:102
+msgid "Search tags"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:103
+msgid "Popular tags"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:104
+msgid "All tags"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:105 source/php/PostTypes/Events.php:106
+msgid "Parent"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:107
+msgid "Edit tag"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:108
+msgid "Update"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:109
+msgid "Add new tag"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:110
+msgid "New tag"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:111
+msgid "Add or remove tags"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:112
+msgid "Choose from most used tags"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:113
+msgid "Tags"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:191
+msgid "Import"
+msgstr "Importera"
+
+#: source/php/Widget/DisplayEvents.php:13
+msgid "Upcoming events"
+msgstr ""
+
+#: source/php/Widget/DisplayEvents.php:15
+msgid "Display upcoming events from Event Manager API."
+msgstr ""
+
+#: source/php/Widget/DisplayEvents.php:31
+msgid "Recent Posts"
+msgstr ""
+
+#: source/php/Widget/DisplayEvents.php:65
+#, php-format
+msgid "Start: %s"
+msgstr ""
+
+#: source/php/Widget/DisplayEvents.php:69
+#, php-format
+msgid "End: %s"
+msgstr ""
+
+#: source/php/Widget/DisplayEvents.php:73
+#, php-format
+msgid "Door time: %s"
+msgstr ""
+
+#: source/php/Widget/DisplayEvents.php:78
+#, php-format
+msgid "Location: %s"
+msgstr ""
+
+#: source/php/Widget/DisplayEvents.php:131
+msgid "Title:"
+msgstr ""
+
+#: source/php/Widget/DisplayEvents.php:134
+msgid "Number of events to show:"
+msgstr ""
+
+#: source/php/Widget/DisplayEvents.php:137
+msgid "Days interval:"
+msgstr ""
+
+#: source/php/Widget/DisplayEvents.php:141
+msgid "Display date"
+msgstr ""
+
+#: source/php/Widget/DisplayEvents.php:144
+msgid "Display featured image"
+msgstr ""
+
+#: source/php/Widget/DisplayEvents.php:147
+msgid "Display location"
+msgstr ""
+
+#: source/php/Widget/DisplayEvents.php:150
+msgid "Display description"
+msgstr ""
+
+#: source/php/Widget/DisplayEvents.php:152
+msgid "Description letter limit:"
+msgstr ""
+
+#: source/php/Widget/DisplayEvents.php:153
+msgid "-1 equals no limit"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Event Manager Integration"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/helsingborg-stad/api-event-manager-integration"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Manage and integrate events from API Event Manager."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Sebastian Thulin, Jonatan Hanson"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://www.helsingborg.se"
+msgstr ""

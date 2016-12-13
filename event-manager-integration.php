@@ -22,7 +22,7 @@ define('EVENTMANAGERINTEGRATION_PATH', plugin_dir_path(__FILE__));
 define('EVENTMANAGERINTEGRATION_URL', plugins_url('', __FILE__));
 define('EVENTMANAGERINTEGRATION_TEMPLATE_PATH', EVENTMANAGERINTEGRATION_PATH . 'templates/');
 
-load_plugin_textdomain('event-manager-integration', false, plugin_basename(dirname(__FILE__)) . '/languages');
+load_plugin_textdomain('event-integration', false, plugin_basename(dirname(__FILE__)) . '/languages');
 
 require_once EVENTMANAGERINTEGRATION_PATH . 'source/php/Vendor/Psr4ClassLoader.php';
 require_once EVENTMANAGERINTEGRATION_PATH . 'Public.php';

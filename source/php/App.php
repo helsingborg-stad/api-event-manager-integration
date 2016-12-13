@@ -51,20 +51,19 @@ class App
         wp_enqueue_style('event-integration');
 
         // Scripts
-        wp_enqueue_script('vendor-pagination', EVENTMANAGERINTEGRATION_URL . '/source/js/vendor/jquery.blade-pagination.js', 'jquery', false, true);
+        wp_enqueue_script('vendor-pagination', EVENTMANAGERINTEGRATION_URL . '/source/js/vendor/jquery.simplePagination.js', 'jquery', false, true);
 
-        wp_register_script('ajax-pagination', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-pagination.' . self::$assetSuffix . '.js', 'jquery', false, true);
-        wp_enqueue_script('ajax-pagination');
+        wp_register_script('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-pagination.' . self::$assetSuffix . '.js', 'jquery', false, true);
 
-        wp_localize_script('ajax-pagination', 'ajaxpagination', array(
+        wp_localize_script('event-integration', 'ajaxpagination', array(
             'ajaxurl' => admin_url( 'admin-ajax.php' )
         ));
 
-        global $wp_query;
-        wp_localize_script( 'ajax-pagination', 'ajaxpagination', array(
-            'ajaxurl' => admin_url( 'admin-ajax.php' ),
-            'query_vars' => json_encode( $wp_query->query )
+        wp_localize_script('event-integration', 'eventIntegrationFront', array(
+            'loading'   => __("Loading", 'event-integration'),
         ));
+
+        wp_enqueue_script('event-integration');
     }
 
     /**
@@ -85,10 +84,11 @@ class App
 
         // Scripts
         wp_register_script('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-manager-integration.' . self::$assetSuffix . '.js', true);
-        wp_localize_script('event-integration', 'eventintegration', array(
+        wp_enqueue_script('event-integration');
+
+        wp_localize_script('event-integration', 'eventIntegrationAdmin', array(
             'loading'   => __("Loading", 'event-integration'),
         ));
-        wp_enqueue_script('event-integration');
     }
 
     /**
