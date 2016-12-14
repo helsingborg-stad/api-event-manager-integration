@@ -51,11 +51,11 @@ class App
         wp_enqueue_style('event-integration');
 
         // Scripts
-        wp_enqueue_script('vendor-pagination', EVENTMANAGERINTEGRATION_URL . '/source/js/vendor/jquery.simplePagination.js', 'jquery', false, true);
+        wp_enqueue_script('vendor-pagination', EVENTMANAGERINTEGRATION_URL . '/source/js/vendor/jquery.simplePagination.min.js', 'jquery', false, true);
 
         wp_register_script('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-pagination.' . self::$assetSuffix . '.js', 'jquery', false, true);
 
-        wp_localize_script('event-integration', 'ajaxpagination', array(
+        wp_localize_script('event-integration', 'eventintegration', array(
             'ajaxurl' => admin_url( 'admin-ajax.php' )
         ));
 
@@ -79,12 +79,16 @@ class App
         }
 
         // Styles
-        wp_register_style('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/css/event-manager-integration-ui.' . self::$assetSuffix . '.css');
+        wp_register_style('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/css/event-manager-integration-admin.' . self::$assetSuffix . '.css');
         wp_enqueue_style('event-integration');
 
         // Scripts
         wp_register_script('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-manager-integration.' . self::$assetSuffix . '.js', true);
         wp_enqueue_script('event-integration');
+
+        wp_localize_script('event-integration', 'eventintegration', array(
+            'ajaxurl' => admin_url( 'admin-ajax.php' )
+        ));
 
         wp_localize_script('event-integration', 'eventIntegrationAdmin', array(
             'loading'   => __("Loading", 'event-integration'),

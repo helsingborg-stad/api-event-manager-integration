@@ -35,7 +35,6 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         );
         $this->addTableColumn('cb', '<input type="checkbox">');
         $this->addTableColumn('title', __('Title', 'event-integration'));
-
         $this->addTableColumn('occasion', __('Occasion', 'event-integration'), true, function ($columnKey, $postId) {
             $occasions = $this->getPostOccasions($postId);
             if (!$occasions) {
@@ -44,13 +43,26 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
 
             echo($occasions);
         });
+        $this->addTableColumn('acceptAndDeny', __('Public', 'event-manager'), false, function ($column, $postId) {
+            $post_status = get_post_status( $postId );
 
+            $first = '';
+            $second = '';
+            if ($post_status == 'publish') {
+                $first = 'hidden';
+            } elseif ($post_status == 'draft' || $post_status == 'trash') {
+                $second = 'hidden';
+            }
+            echo '<a href="#" class="accept button-primary ' . $first . '" postid="' . $postId . '">' . __('Accept', 'event-integration') . '</a>
+            <a href="#" class="deny button-primary ' . $second . '" postid="' . $postId . '">' . __('Deny', 'event-integration') . '</a>';
+        });
         $this->addTableColumn('date', __('Date', 'event-integration'));
 
         add_action('init', array($this, 'registerEventCategories'));
         add_action('init', array($this, 'registerEventTags'));
         add_action('manage_posts_extra_tablenav', array($this, 'tablenavButtons'));
         add_action('wp_ajax_import_events', array($this, 'importEvents'));
+        add_action('wp_ajax_accept_or_deny', array($this, 'acceptOrDeny'));
         add_action('pre_get_posts', array($this, 'orderByOccasion'));
     }
 
@@ -213,5 +225,37 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         $importer = new \EventManagerIntegration\Parser\HbgEventApi($api_url);
         $data = $importer->getCreatedData();
         wp_send_json($data);
+    }
+
+    /**
+     * Accept or deny an event. Changes post status to draft if denied.
+     * @return int $value
+     */
+    public function acceptOrDeny()
+    {
+        if (! isset($_POST['postId']) || ! isset($_POST['value'])) {
+            echo _e('Something went wrong!', 'event-integration');
+            die();
+        }
+
+        $postId =  $_POST['postId'];
+        $value = $_POST['value'];
+
+        $post = get_post($postId);
+        if ($value == 0) {
+            $post->post_status = 'draft';
+        }
+        if ($value == 1) {
+            $post->post_status = 'publish';
+        }
+
+        $update = wp_update_post($post, true);
+        if (is_wp_error($update)) {
+            echo _e('Error', 'event-integration');
+            die();
+        }
+
+        echo $value;
+        die();
     }
 }
