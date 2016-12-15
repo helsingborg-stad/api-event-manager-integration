@@ -8,6 +8,9 @@ namespace EventManagerIntegration\Admin;
 
 class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
 {
+
+    public $post_type = 'event';
+
     public function __construct()
     {
         add_action('admin_menu', array($this, 'removePublishBox'));
@@ -19,16 +22,11 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
      */
     public function addMetaBoxes()
     {
-        global $post;
-        if ($post->post_type != 'event') {
-            return;
-        }
-
         add_meta_box(
             'event-info-box',
             esc_html__('Event', 'event-integration'),
             array($this, 'eventInfo'),
-            $this->slug,
+            $this->post_type,
             'normal',
             'high'
         );
@@ -37,7 +35,7 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
             'event-occasion-box',
             esc_html__('Occasions', 'event-integration'),
             array($this, 'eventOccasions'),
-            $this->slug,
+            $this->post_type,
             'normal',
             'default'
         );
@@ -46,7 +44,7 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
             'event-meta-box',
             esc_html__('Meta data', 'event-integration'),
             array($this, 'eventMeta'),
-            $this->slug,
+            $this->post_type,
             'normal',
             'low'
         );
@@ -55,7 +53,7 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
             'event-image-box',
             esc_html__('Featured image', 'event-integration'),
             array($this, 'eventImage'),
-            $this->slug,
+            $this->post_type,
             'side',
             'high'
         );
@@ -66,7 +64,7 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
      */
     public function removePublishBox()
     {
-        remove_meta_box('submitdiv', 'event', 'side');
+        remove_meta_box('submitdiv', $this->post_type, 'side');
     }
 
     /*
@@ -137,7 +135,11 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
             <?php if (substr($m->meta_key, 0, 1) === '_' || $m->meta_key == 'occasions_complete') { continue; } ?>
 
             <h3><?php echo ucfirst(str_replace('_', ' ', $m->meta_key)); ?></h3>
-            <p><?php echo $this->outputMeta($m->meta_value); ?></p>
+            <?php if($this->outputMeta($m->meta_value)): ?>
+                <p><?php echo $this->outputMeta($m->meta_value); ?></p>
+            <?php else: ?>
+                <p><?php echo "n/a" ?></p>
+            <?php endif; ?>
         <?php endforeach ?>
 
     <?php

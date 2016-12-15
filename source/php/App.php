@@ -26,6 +26,7 @@ class App
         new Widget\DisplayEvents();
         new Admin\Options();
         new Admin\AdminDisplayEvent();
+        new Shortcodes\eventShortcode();
 
         /* Modularity modules */
         add_action('Modularity', function () {
@@ -52,17 +53,13 @@ class App
 
         // Scripts
         wp_enqueue_script('vendor-pagination', EVENTMANAGERINTEGRATION_URL . '/source/js/vendor/jquery.simplePagination.min.js', 'jquery', false, true);
-
         wp_register_script('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-pagination.' . self::$assetSuffix . '.js', 'jquery', false, true);
-
         wp_localize_script('event-integration', 'eventintegration', array(
             'ajaxurl' => admin_url( 'admin-ajax.php' )
         ));
-
         wp_localize_script('event-integration', 'eventIntegrationFront', array(
             'loading'   => __("Loading", 'event-integration'),
         ));
-
         wp_enqueue_script('event-integration');
     }
 
@@ -84,15 +81,13 @@ class App
 
         // Scripts
         wp_register_script('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-manager-integration.' . self::$assetSuffix . '.js', true);
-        wp_enqueue_script('event-integration');
-
         wp_localize_script('event-integration', 'eventintegration', array(
             'ajaxurl' => admin_url( 'admin-ajax.php' )
         ));
-
         wp_localize_script('event-integration', 'eventIntegrationAdmin', array(
             'loading'   => __("Loading", 'event-integration'),
         ));
+        wp_enqueue_script('event-integration');
     }
 
     /**

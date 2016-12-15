@@ -109,3 +109,12 @@
 .widget_display_events .event-img {
   width: 100%;
   height: auto; }
+
+.event-info-shortcode span {
+  display: block; }
+
+.event-info-shortcode ul, .event-info-shortcode li {
+  list-style: none !important; }
+
+.event-info-shortcode .shortcode-box {
+  border: 1px solid #ccc; }

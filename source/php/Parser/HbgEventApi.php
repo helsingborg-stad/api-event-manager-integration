@@ -95,12 +95,20 @@ class HbgEventApi extends \EventManagerIntegration\Parser
             $pass = ($this->filterTaxonomies($tags, 1)) ? true : false;
         }
 
+        // Check if event already exist and find it's post status
+        $post_status = 'publish';
+        $event_id = $this->checkIfEventExists($event['id']);
+        if ($event_id) {
+            $post_status = get_post_status($event_id);
+        }
+
         // Save event if it passed filters
         if ($pass) {
             $event = new Event(
                 array(
                 'post_title'            => $post_title,
                 'post_content'          => $post_content,
+                'post_status'           => $post_status,
                 ),
                 array(
                 '_event_manager_id'     => $event['id'],

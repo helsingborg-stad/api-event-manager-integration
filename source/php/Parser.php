@@ -22,6 +22,22 @@ abstract class Parser
     }
 
     /**
+     * Check if event already exist and return it's id
+     * @param  [type] $event_manager_id [description]
+     * @return [type]                   [description]
+     */
+    public function checkIfEventExists($event_manager_id)
+    {
+        global $wpdb;
+        $results = $wpdb->get_results("SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '_event_manager_id' AND meta_value = $event_manager_id LIMIT 1", ARRAY_A);
+        if (! empty($results[0]['post_id'])) {
+            return $results[0]['post_id'];
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Used to start the parsing
      */
     abstract public function start();

@@ -94,6 +94,13 @@ abstract class PostManager
         return $posts;
     }
 
+
+    public function filterMeta($meta)
+    {
+        $meta = array_filter($meta, array($this, 'removeEmpty'));
+        return $meta;
+    }
+
     /**
      * Remove all values that are empty, except the value 0
      * @param  $metaValue
@@ -104,7 +111,38 @@ abstract class PostManager
         if (is_array($metaValue)) {
             return $metaValue;
         }
+
         return ($metaValue !== null && $metaValue !== false && $metaValue !== '');
+    }
+
+    /**
+     * Get all values that are empty
+     * @param  $metaValue
+     * @return $metaValue
+     */
+    public function getEmptyValues($metaValue)
+    {
+        if (is_array($metaValue) && empty($metaValue)) {
+            return $metaValue;
+        }
+
+        return ($metaValue == null || $metaValue == false || $metaValue == '');
+    }
+
+    /**
+     * Delete meta data from db if it's deleted from API
+     * @param  array $meta     empty meta data fields
+     * @param  int   $post_id  post object id
+     * @return void
+     */
+    public function removeEmptyMeta($meta, $post_id)
+    {
+        foreach ($meta as $key => $value) {
+            $meta = get_post_meta($post_id, $key, true);
+            if ($meta) {
+                delete_post_meta($post_id, $key);
+            }
+        }
     }
 
     /**
@@ -138,6 +176,9 @@ abstract class PostManager
             $meta[$key] = $value;
         }
 
+        // Save empty meta to array
+        $empty_meta_values = array_filter($meta, array($this, 'getEmptyValues'));
+
         // Do not include null values in meta
         $meta = array_filter($meta, array($this, 'removeEmpty'));
 
@@ -169,6 +210,9 @@ abstract class PostManager
             // Create if not duplicate
             $this->ID = wp_insert_post($post, true);
         }
+
+        // Remove empty meta values from db
+        $this->removeEmptyMeta($empty_meta_values, $this->ID);
 
         return $this->afterSave();
     }

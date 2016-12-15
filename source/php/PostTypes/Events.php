@@ -35,7 +35,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         );
         $this->addTableColumn('cb', '<input type="checkbox">');
         $this->addTableColumn('title', __('Title', 'event-integration'));
-        $this->addTableColumn('occasion', __('Occasion', 'event-integration'), true, function ($columnKey, $postId) {
+        $this->addTableColumn('occasion', __('Occasion', 'event-integration'), false, function ($columnKey, $postId) {
             $occasions = $this->getPostOccasions($postId);
             if (!$occasions) {
                 return;
@@ -44,7 +44,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             echo($occasions);
         });
         $this->addTableColumn('acceptAndDeny', __('Public', 'event-manager'), false, function ($column, $postId) {
-            $post_status = get_post_status( $postId );
+            $post_status = get_post_status($postId);
 
             $first = '';
             $second = '';
@@ -202,8 +202,8 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             echo '<div class="alignleft actions" style="position: relative;">';
             echo '<div id="importevents" class="button-primary">' . __('Import', 'event-integration') . '</div>';
             // TA BORT
-// echo '<a href="' . admin_url('options.php?page=import-events') . '" class="button-primary" id="post-query-submit">Debug</a>';
-// echo '<a href="' . admin_url('options.php?page=delete-all-events') . '" class="button-primary" id="post-query-submit">Delete</a>';
+echo '<a href="' . admin_url('options.php?page=import-events') . '" class="button-primary" id="post-query-submit">Debug</a>';
+echo '<a href="' . admin_url('options.php?page=delete-all-events') . '" class="button-primary" id="post-query-submit">Delete</a>';
             echo '</div>';
         }
     }
