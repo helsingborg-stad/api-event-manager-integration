@@ -111,7 +111,6 @@ class EventModule extends \Modularity\Module
     {
         $fields = json_decode(json_encode(get_fields($module_id)));
         $events = self::getEvents($module_id, $page);
-
         $descr_limit = (! empty($fields->mod_event_descr_limit)) ? $fields->mod_event_descr_limit : null;
         $fields->mod_event_fields = is_array($fields->mod_event_fields) ? $fields->mod_event_fields : array();
         $grid_size = in_array('image', $fields->mod_event_fields) ? 'class="grid-md-9"' : 'class="grid-md-12"';
@@ -134,17 +133,23 @@ class EventModule extends \Modularity\Module
                 }
                 $ret .= '<div ' . $grid_size . '>';
                 if (! empty($event->post_title)) {
-                    $ret .= '<a href="' . get_page_link($event->ID).'" class="link-item">' . $event->post_title . '</a>';
+                    if ($event->content_mode == 'custom' && ! empty($event->content)) {
+                        $date_url = preg_replace('/\D/', '', $event->start_date);
+                        $post_link = get_page_link($event->ID) . '?date=' . $date_url;
+                    } else {
+                        $post_link = get_page_link($event->ID);
+                    }
+                    $ret .= '<a href="' . $post_link .'" class="link-item">' . $event->post_title . '</a>';
                 }
-                if (in_array('start_date', $fields->mod_event_fields) && ! empty($event->start_date)) {
+                if (! empty($event->start_date) && in_array('start_date', $fields->mod_event_fields)) {
                     $start_date = \EventManagerIntegration\Module\EventModule::formatDate($module_id, $event->start_date);
                     $ret .= '<p class="date text-sm text-dark-gray">' . sprintf(__('Start %s', 'event-integration'), $start_date) . '</p>';
                 }
-                if (in_array('end_date', $fields->mod_event_fields) && ! empty($event->end_date)) {
+                if (! empty($event->end_date) && in_array('end_date', $fields->mod_event_fields)) {
                     $end_date = \EventManagerIntegration\Module\EventModule::formatDate($module_id, $event->end_date);
                     $ret .= '<p class="date text-sm text-dark-gray">' . sprintf(__('End %s', 'event-integration'), $end_date) . '</p>';
                 }
-                if (in_array('door_time', $fields->mod_event_fields) && ! empty($event->door_time)) {
+                if (! empty($event->door_time) && in_array('door_time', $fields->mod_event_fields)) {
                     $door_time = \EventManagerIntegration\Module\EventModule::formatDate($module_id, $event->door_time);
                     $ret .= '<p class="date text-sm text-dark-gray">' . sprintf(__('Door time %s', 'event-integration'), $door_time) . '</p>';
                 }
@@ -152,10 +157,11 @@ class EventModule extends \Modularity\Module
                     $location = get_post_meta($event->ID, 'location', true);
                     $ret .= '<p>' . $location['title'] . '</p>';
                 }
-                if (in_array('description', $fields->mod_event_fields) && ! empty($event->post_content)) {
-                    $ret .= '<p>';
-                    $ret .= \EventManagerIntegration\Helper\QueryEvents::stringLimiter($event->post_content, $descr_limit);
-                    $ret .= '</p>';
+
+                if (in_array('description', $fields->mod_event_fields) && $event->content_mode == 'custom' && ! empty($event->content)) {
+                    $ret .= '<p>' . \EventManagerIntegration\Helper\QueryEvents::stringLimiter($event->content, $descr_limit) . '</p>';
+                } elseif(! empty($event->post_content) && in_array('description', $fields->mod_event_fields)) {
+                    $ret .= '<p>' . \EventManagerIntegration\Helper\QueryEvents::stringLimiter($event->post_content, $descr_limit) . '</p>';
                 }
                 $ret .= '</div>';
                 $ret .= '</div>';

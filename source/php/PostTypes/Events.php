@@ -63,7 +63,46 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         add_action('manage_posts_extra_tablenav', array($this, 'tablenavButtons'));
         add_action('wp_ajax_import_events', array($this, 'importEvents'));
         add_action('wp_ajax_accept_or_deny', array($this, 'acceptOrDeny'));
-        add_action('pre_get_posts', array($this, 'orderByOccasion'));
+
+        add_filter('the_content', array($this, 'eventContent'));
+        add_filter('the_lead', array($this, 'eventContentLead'));
+    }
+
+
+    /**
+     * Replace content if the occasion has custom content
+     * @param  string $content Content of the current post.
+     * @return string
+     */
+    public function eventContent($content)
+    {
+        $get_date = (isset($_GET["date"])) ? $_GET["date"] : false;
+        if (is_singular($this->slug) && $get_date != false) {
+            global $post;
+            $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($post->ID, true);
+            foreach ($occasions as $o) {
+            $url_date = preg_replace('/\D/', '', $o->start_date);
+            if ($get_date == $url_date) {
+                $content = $o->content;
+            }
+            }
+        }
+
+        return $content;
+    }
+
+    /**
+     * Remove lead content if the occasion has custom content
+     * @param  string $lead Lead content of the current post.
+     * @return string
+     */
+    public function eventContentLead($lead)
+    {
+        $date = (isset($_GET["date"])) ? $_GET["date"] : false;
+        if (is_singular($this->slug) && $date != false) {
+            return;
+        }
+        return $lead;
     }
 
     /**
@@ -154,38 +193,6 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         return $occasions[0]['start_date'];
     }
 
-    // TA BORT
-    public function orderByOccasion($query)
-    {
-        if (! is_admin()) {
-            return;
-        }
-
-        $orderby = $query->get('orderby');
-
-        if ('occasion' == $orderby) {
-            $query->set('meta_key', 'occasion_timestamp');
-            $query->set('orderby', 'meta_value_num');
-        }
-    }
-
-    /**
-     * Get closest date compared to today
-     * @param  array $dates Array with occasions
-     * @return string       The closest date
-     */
-    public function findClosestDate($dates)
-    {
-        $today = date('Y-m-d').' 00:00';
-        foreach ($dates as $day) {
-            $interval[] = abs(strtotime($today) - strtotime($day));
-        }
-        asort($interval);
-        $closest = key($interval);
-
-        return $dates[$closest];
-    }
-
     /**
      * Add buttons to start parsing event import
      * @return void
@@ -203,7 +210,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             echo '<div id="importevents" class="button-primary">' . __('Import', 'event-integration') . '</div>';
             // TA BORT
 echo '<a href="' . admin_url('options.php?page=import-events') . '" class="button-primary" id="post-query-submit">Debug</a>';
-echo '<a href="' . admin_url('options.php?page=delete-all-events') . '" class="button-primary" id="post-query-submit">Delete</a>';
+            echo '<a href="' . admin_url('options.php?page=delete-all-events') . '" class="button-primary" id="post-query-submit">Delete</a>';
             echo '</div>';
         }
     }

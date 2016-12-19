@@ -105,7 +105,8 @@
                     "occasion": "Occasions",
                     "location": "Location",
                     "additional_locations": "Additional locations",
-                    "organizer": "Organizers",
+                    "organizers": "Organizers",
+                    "sponsors": "Sponsors",
                     "booking": "Booking information",
                     "links": "Links"
                 },
@@ -114,13 +115,52 @@
                     "occasion",
                     "location",
                     "additional_locations",
-                    "organizer",
+                    "organizers",
+                    "sponsors",
                     "booking",
                     "links"
                 ],
                 "layout": "vertical",
                 "toggle": 0,
                 "return_format": "value"
+            },
+            {
+                "key": "field_5857b799e4d02",
+                "label": "Wrapper class",
+                "name": "event_shortc_wrapper",
+                "type": "text",
+                "instructions": "Add custom classes to div that wraps around the info boxes. Useful when creating responsive grids. Separate with comma.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_5857b7f0e4d03",
+                "label": "Inner div box class",
+                "name": "event_shortc_inner",
+                "type": "text",
+                "instructions": "Add custom classes to inner div boxes that contains the event information. Useful when creating responsive grids. Separate with comma.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
             },
             {
                 "key": "field_585270b4dad2b",

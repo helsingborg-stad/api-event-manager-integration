@@ -189,7 +189,7 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
             continue;
         }
         if (is_array($item)) {
-            $string .= '<p>' . $this->multiImplode($item, $glue) . $glue . '</p>';
+            $string .= '<p>' . $this->multiImplode($item, $glue) . '</p>';
         } else {
             $string .= $item . $glue;
         }

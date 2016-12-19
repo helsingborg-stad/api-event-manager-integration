@@ -49,9 +49,10 @@ class QueryEvents
     /**
      * Get event occasions
      * @param  int $post_id post id
+     * @param  bool $custom True to get occasions with custom content
      * @return array        object with occasions
      */
-    public static function getEventOccasions($post_id)
+    public static function getEventOccasions($post_id, $custom = false)
     {
         global $wpdb;
         $db_table = $wpdb->prefix . "integrate_occasions";
@@ -60,8 +61,9 @@ class QueryEvents
         SELECT      *
         FROM        $db_table
         WHERE       $db_table.event_id = %d
-        ORDER BY    $db_table.start_date ASC
         ";
+        $query .= ($custom == true) ? "AND $db_table.content_mode = 'custom'" : '';
+        $query .= "ORDER BY $db_table.start_date ASC";
 
         $completeQuery = $wpdb->prepare($query, $post_id);
         $occasions = $wpdb->get_results($completeQuery);
