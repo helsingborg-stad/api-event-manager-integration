@@ -58,7 +58,8 @@ class DisplayEvents extends \WP_Widget
             <?php endif; ?>
 
             <?php if (! empty($event->post_title && isset($event->post_title))) : ?>
-                <a href="<?php echo get_page_link($event->ID); ?>"><?php echo $event->post_title ?></a>
+                <?php $date_url = preg_replace('/\D/', '', $event->start_date); ?>
+                <a href="<?php echo esc_url( add_query_arg( 'date', $date_url, get_page_link($event->ID) ) )?>"><?php echo $event->post_title ?></a>
             <?php endif; ?>
 
             <?php if ($show_date && ! empty($event->start_date && isset($event->start_date))) : ?>
@@ -78,10 +79,10 @@ class DisplayEvents extends \WP_Widget
                 <span><?php echo sprintf(__('Location: %s', 'event-integration'), $location['title']) ?></span>
             <?php endif; ?>
 
-            <?php if ($show_content && ! empty($event->post_content && isset($event->post_content))) : ?>
-                <span>
+            <?php if ($show_content && $event->content_mode == 'custom' && ! empty($event->content)) : ?>
+                <?php echo QueryEvents::stringLimiter( $event->content, $content_limit ); ?>
+            <?php elseif($show_content && ! empty($event->post_content)): ?>
                 <?php echo QueryEvents::stringLimiter( $event->post_content, $content_limit ); ?>
-                </span>
             <?php endif; ?>
             </li>
         <?php endforeach; ?>

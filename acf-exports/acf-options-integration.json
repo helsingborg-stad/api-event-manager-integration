@@ -97,6 +97,22 @@
                 "prepend": "",
                 "append": "",
                 "maxlength": ""
+            },
+            {
+                "key": "field_5859206f23f1b",
+                "label": "Single event image",
+                "name": "event_single_image",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "Display attached event image below title header on single events.",
+                "default_value": 1
             }
         ],
         "location": [

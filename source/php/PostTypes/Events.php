@@ -66,26 +66,54 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
 
         add_filter('the_content', array($this, 'eventContent'));
         add_filter('the_lead', array($this, 'eventContentLead'));
+        add_filter('query_vars', array($this, 'addDateQueryVar'));
     }
 
 
     /**
-     * Replace content if the occasion has custom content
+     * Add date query var
+     * @param array $vars query variables
+     */
+    public function addDateQueryVar($vars)
+    {
+        $vars[] = "date";
+        return $vars;
+    }
+
+    /**
+     * Add image and date to single event content. Replace content if occasion has custom content.
      * @param  string $content Content of the current post.
      * @return string
      */
     public function eventContent($content)
     {
-        $get_date = (isset($_GET["date"])) ? $_GET["date"] : false;
-        if (is_singular($this->slug) && $get_date != false) {
-            global $post;
-            $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($post->ID, true);
+        if (! is_singular($this->slug)) {
+            return $content;
+        }
+
+        global $post;
+
+        $get_date = (! empty (get_query_var('date'))) ? get_query_var('date') : false;
+        $display_image = (get_field('event_single_image', 'options')) ? get_field('event_single_image', 'options') : false;
+        $thumbnail = (has_post_thumbnail() && $display_image) ? get_the_post_thumbnail() : '';
+
+        // Add date below header
+        if($get_date != false) {
+
+            $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($post->ID, false);
             foreach ($occasions as $o) {
-            $url_date = preg_replace('/\D/', '', $o->start_date);
-            if ($get_date == $url_date) {
-                $content = $o->content;
+                $event_date = preg_replace('/\D/', '', $o->start_date);
+                $date_div = '<div class="single-event-date"><p>' . date('Y-m-d', strtotime($o->start_date)) . '</p></div>';
+
+                // Replace content with occasion custom content
+                if ($get_date == $event_date && ! empty($o->content) && $o->content_mode == 'custom') {
+                    $content = $date_div . $thumbnail . $o->content;
+                } elseif ($get_date == $event_date) {
+                    $content = $date_div . $thumbnail . $post->post_content;
+                }
             }
-            }
+        } else {
+            $content = $thumbnail . $post->post_content;
         }
 
         return $content;
@@ -98,8 +126,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
      */
     public function eventContentLead($lead)
     {
-        $date = (isset($_GET["date"])) ? $_GET["date"] : false;
-        if (is_singular($this->slug) && $date != false) {
+        if (is_singular($this->slug)) {
             return;
         }
         return $lead;
@@ -190,7 +217,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             return;
         }
 
-        return $occasions[0]['start_date'];
+        return date('Y-m-d H:i', strtotime($occasions[0]['start_date']));
     }
 
     /**
@@ -209,8 +236,8 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             echo '<div class="alignleft actions" style="position: relative;">';
             echo '<div id="importevents" class="button-primary">' . __('Import', 'event-integration') . '</div>';
             // TA BORT
-echo '<a href="' . admin_url('options.php?page=import-events') . '" class="button-primary" id="post-query-submit">Debug</a>';
-            echo '<a href="' . admin_url('options.php?page=delete-all-events') . '" class="button-primary" id="post-query-submit">Delete</a>';
+//echo '<a href="' . admin_url('options.php?page=import-events') . '" class="button-primary" id="post-query-submit">Debug</a>';
+//echo '<a href="' . admin_url('options.php?page=delete-all-events') . '" class="button-primary" id="post-query-submit">Delete</a>';
             echo '</div>';
         }
     }

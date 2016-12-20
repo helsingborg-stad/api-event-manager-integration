@@ -3,58 +3,6 @@
         "title": "Shortcode settings",
         "fields": [
             {
-                "key": "field_5852707ddad2a",
-                "label": "Featured Image",
-                "name": "",
-                "type": "tab",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "placement": "top",
-                "endpoint": 0
-            },
-            {
-                "key": "field_58526e2ddf3a4",
-                "label": "Featured image shortcode",
-                "name": "",
-                "type": "message",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "message": "Shortcode to display featured image of the event. Add the shortcode to your single event template file.\r\n\r\n[single_event_image]",
-                "new_lines": "wpautop",
-                "esc_html": 0
-            },
-            {
-                "key": "field_58526d70471fe",
-                "label": "Image class",
-                "name": "event_shortc_class",
-                "type": "text",
-                "instructions": "Add custom classes to the featured image. Separate with comma.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
-            },
-            {
                 "key": "field_585278962daaf",
                 "label": "Event information",
                 "name": "",
@@ -191,7 +139,7 @@
                     "class": "",
                     "id": ""
                 },
-                "message": "Shortcode to display image gallery of the event. Add the shortcode to your single event template file.\r\n\r\n[single_event_gallery]",
+                "message": "Gallery images is stored as attached images. You can use WordPress own shortcode [gallery] to display the images.",
                 "new_lines": "wpautop",
                 "esc_html": 0
             }

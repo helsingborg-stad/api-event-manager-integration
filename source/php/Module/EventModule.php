@@ -127,19 +127,14 @@ class EventModule extends \Modularity\Module
                     if (get_the_post_thumbnail($event->ID)) {
                         $ret .= get_the_post_thumbnail($event->ID, 'large', array('class' => 'image-responsive'));
                     } elseif ($fields->mod_event_def_image) {
-                        $ret .= wp_get_attachment_image( $fields->mod_event_def_image->ID, array('700', '500'), "", array( "class" => "image-responsive" ) );
+                        $ret .= wp_get_attachment_image($fields->mod_event_def_image->ID, array('700', '500'), "", array( "class" => "image-responsive" ));
                     }
                     $ret .= '</div>';
                 }
                 $ret .= '<div ' . $grid_size . '>';
                 if (! empty($event->post_title)) {
-                    if ($event->content_mode == 'custom' && ! empty($event->content)) {
-                        $date_url = preg_replace('/\D/', '', $event->start_date);
-                        $post_link = get_page_link($event->ID) . '?date=' . $date_url;
-                    } else {
-                        $post_link = get_page_link($event->ID);
-                    }
-                    $ret .= '<a href="' . $post_link .'" class="link-item">' . $event->post_title . '</a>';
+                    $date_url = preg_replace('/\D/', '', $event->start_date);
+                    $ret .= '<a href="' . esc_url( add_query_arg( 'date', $date_url, get_page_link($event->ID))) .'" class="link-item">' . $event->post_title . '</a>';
                 }
                 if (! empty($event->start_date) && in_array('start_date', $fields->mod_event_fields)) {
                     $start_date = \EventManagerIntegration\Module\EventModule::formatDate($module_id, $event->start_date);
@@ -160,7 +155,7 @@ class EventModule extends \Modularity\Module
 
                 if (in_array('description', $fields->mod_event_fields) && $event->content_mode == 'custom' && ! empty($event->content)) {
                     $ret .= '<p>' . \EventManagerIntegration\Helper\QueryEvents::stringLimiter($event->content, $descr_limit) . '</p>';
-                } elseif(! empty($event->post_content) && in_array('description', $fields->mod_event_fields)) {
+                } elseif (! empty($event->post_content) && in_array('description', $fields->mod_event_fields)) {
                     $ret .= '<p>' . \EventManagerIntegration\Helper\QueryEvents::stringLimiter($event->post_content, $descr_limit) . '</p>';
                 }
                 $ret .= '</div>';

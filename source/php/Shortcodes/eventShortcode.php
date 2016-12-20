@@ -16,34 +16,10 @@ class eventShortcode
     // Create shortcodes
     public function addShortcodes()
     {
-        add_shortcode('single_event_image', array($this, 'singleEventImage'));
         add_shortcode('single_event_information', array($this, 'singleEventInformation'));
     }
 
-    // Shortcode to display deatured image on single event
-    public function singleEventImage()
-    {
-        global $post;
-        $id = $post->ID;
-        $post_type = get_post_type($id);
-        if ($post_type != 'event') {
-            return;
-        }
-
-        // Get custom image classes
-        $class = (! empty(get_field('event_shortc_class', 'options'))) ? get_field('event_shortc_class', 'options') : '';
-        $class = str_replace(' ', '', $class);
-        $class = str_replace(',', ' ', $class);
-
-        $ret = '';
-        if (get_the_post_thumbnail($id)) {
-            $ret .= get_the_post_thumbnail($id, 'large', array('class' => $class));
-        }
-
-        return $ret;
-    }
-
-    // Shortcode to display event information
+    // Shortcode to display complete event information
     public function singleEventInformation()
     {
         global $post;
@@ -67,6 +43,8 @@ class eventShortcode
 
         $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($id);
 
+        $query_var_date = (! empty (get_query_var('date'))) ? get_query_var('date') : false;
+
         $meta = array();
         foreach ($get_meta as $key => $value) {
             if (is_array($value) && count($value) == 1) {
@@ -82,6 +60,23 @@ class eventShortcode
         if (in_array('information', $fields)) {
             $ret .= '<div class="shortcode-box shortcode-information '.$box_class.'">';
             $ret .= '<ul><li><h3>'.__('Information', 'event-integration').'</h3></li></ul>';
+
+            // Get current occasion
+            if ($query_var_date) {
+                foreach ($occasions as $occasion) {
+                    $event_date = preg_replace('/\D/', '', $occasion->start_date);
+                    if ($query_var_date == $event_date) {
+                        $ret .= '<ul>';
+                        $ret .= '<li><strong>' . __('Start', 'event-integration') . '</strong></li>';
+                        $ret .= (! empty($occasion->start_date)) ? '<li>' . $occasion->start_date . '</li>' : '';
+                        $ret .= '<li><strong>' . __('End', 'event-integration') . '</strong></li>';
+                        $ret .= (! empty($occasion->end_date)) ? '<li>' . $occasion->end_date . '</li>' : '';
+                        $ret .= '<li><strong>' . __('Door time', 'event-integration') . '</strong></li>';
+                        $ret .= (! empty($occasion->door_time)) ? '<li>' . $occasion->door_time . '</li>' : '';
+                        $ret .= '</ul>';
+                    }
+                }
+            }
 
             if (! empty($meta['categories']) && is_array($meta['categories'])) {
                 $ret .= '<ul><li><strong>' . __('Categories', 'event-integration') . '</strong></li></ul>';
@@ -187,24 +182,11 @@ class eventShortcode
             $ret .= '<ul><li><h3>'.__('Organizer', 'event-integration').'</h3></li></ul>';
             if (! empty($meta['organizers']) && is_array($meta['organizers'])) {
                 foreach ($meta['organizers'] as $organizer) {
-                    if ($organizer['main_organizer']) {
                         $ret .= '<ul>';
-                        $ret .= '<li><strong>'.__('Main organizer', 'event-integration').'</strong></li>';
                         $ret .= (! empty($organizer['organizer'])) ? '<li>' . $organizer['organizer'] . '</li>' : '';
                         $ret .= (! empty($organizer['organizer_link'])) ? '<li>' . $organizer['organizer_link'] . '</li>' : '';
                         $ret .= (! empty($organizer['organizer_phone'])) ? '<li>' . $organizer['organizer_phone'] . '</li>' : '';
                         $ret .= '</ul>';
-                    }
-                }
-                foreach ($meta['organizers'] as $organizer) {
-                    if (! $organizer['main_organizer']) {
-                        $ret .= '<ul>';
-                        $ret .= '<li><strong>'.__('Co organizer', 'event-integration').'</strong></li>';
-                        $ret .= (! empty($organizer['organizer'])) ? '<li>' . $organizer['organizer'] . '</li>' : '';
-                        $ret .= (! empty($organizer['organizer_link'])) ? '<li>' . $organizer['organizer_link'] . '</li>' : '';
-                        $ret .= (! empty($organizer['organizer_phone'])) ? '<li>' . $organizer['organizer_phone'] . '</li>' : '';
-                        $ret .= '</ul>';
-                    }
                 }
 
             // Sponsors
