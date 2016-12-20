@@ -105,7 +105,7 @@ class App
             $days_ahead = ! empty(get_field('days_ahead', 'options')) ? absint(get_field('days_ahead', 'options')) : 30;
             $to_date = date('Y-m-d', strtotime("midnight now + {$days_ahead} days"));
 
-            $api_url = 'http://eventmanager.dev/json/wp/v2/event/time?start=' . $from_date . '&end=' . $to_date;
+            $api_url = 'http://api.helsingborg.se/json/wp/v2/event/time?start=' . $from_date . '&end=' . $to_date;
             $importer = new \EventManagerIntegration\Parser\HbgEventApi($api_url);
             // TA BORT
             file_put_contents(dirname(__FILE__)."/Log/import_events.log", "Event parser last run: ".date("Y-m-d H:i:s"));
@@ -171,7 +171,7 @@ class App
             $days_ahead = ! empty(get_field('days_ahead', 'options')) ? absint(get_field('days_ahead', 'options')) : 30;
             $to_date = date('Y-m-d', strtotime("midnight now + {$days_ahead} days"));
 
-            $api_url = 'http://eventmanager.dev/json/wp/v2/event/time?start=' . $from_date . '&end=' . $to_date;
+            $api_url = 'http://api.helsingborg.se/json/wp/v2/event/time?start=' . $from_date . '&end=' . $to_date;
 
             $importer = new \EventManagerIntegration\Parser\HbgEventApi($api_url);
             });

@@ -255,7 +255,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         $days_ahead = ! empty(get_field('days_ahead', 'options')) ? absint(get_field('days_ahead', 'options')) : 30;
         $to_date = date('Y-m-d', strtotime("midnight now + {$days_ahead} days"));
 
-        $api_url = 'http://eventmanager.dev/json/wp/v2/event/time?start=' . $from_date . '&end=' . $to_date;
+        $api_url = 'http://api.helsingborg.se/json/wp/v2/event/time?start=' . $from_date . '&end=' . $to_date;
         $importer = new \EventManagerIntegration\Parser\HbgEventApi($api_url);
         $data = $importer->getCreatedData();
         wp_send_json($data);
