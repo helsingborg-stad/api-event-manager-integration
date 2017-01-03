@@ -61,6 +61,28 @@
                 "default_value": 1
             },
             {
+                "key": "field_586bc598f2777",
+                "label": "Import from selected publishing groups",
+                "name": "event_filter_group",
+                "type": "taxonomy",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "taxonomy": "event_groups",
+                "field_type": "checkbox",
+                "allow_null": 0,
+                "add_term": 0,
+                "save_terms": 1,
+                "load_terms": 0,
+                "return_format": "id",
+                "multiple": 0
+            },
+            {
                 "key": "field_5846ca031ffcb",
                 "label": "Import from selected categories",
                 "name": "event_filter_cat",

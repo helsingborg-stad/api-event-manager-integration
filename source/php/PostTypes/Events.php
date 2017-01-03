@@ -60,6 +60,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
 
         add_action('init', array($this, 'registerEventCategories'));
         add_action('init', array($this, 'registerEventTags'));
+        add_action('init', array($this, 'registerEventGroups'));
         add_action('manage_posts_extra_tablenav', array($this, 'tablenavButtons'));
         add_action('wp_ajax_import_events', array($this, 'importEvents'));
         add_action('wp_ajax_accept_or_deny', array($this, 'acceptOrDeny'));
@@ -204,6 +205,43 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         );
 
         register_taxonomy('event_tags', array('event'), $args);
+    }
+
+    /**
+     * Register event groups as taxonomy
+     */
+    public function registerEventGroups()
+    {
+        $labels = array(
+            'name'                  => _x('Event groups', 'Taxonomy plural name', 'event-integration'),
+            'singular_name'         => _x('Event group', 'Taxonomy singular name', 'event-integration'),
+            'search_items'          => __('Search groups', 'event-integration'),
+            'popular_items'         => __('Popular groups', 'event-integration'),
+            'all_items'             => __('All groups', 'event-integration'),
+            'parent_item'           => __('Parent group', 'event-integration'),
+            'parent_item_colon'     => __('Parent group', 'event-integration'),
+            'edit_item'             => __('Edit group', 'event-integration'),
+            'update_item'           => __('Update group', 'event-integration'),
+            'add_new_item'          => __('Add new group', 'event-integration'),
+            'new_item_name'         => __('New group', 'event-integration'),
+            'add_or_remove_items'   => __('Add or remove groups', 'event-integration'),
+            'choose_from_most_used' => __('Choose from most used groups', 'event-integration'),
+            'menu_name'             => __('Groups', 'event-integration'),
+        );
+
+        $args = array(
+            'labels'                => $labels,
+            'public'                => true,
+            'show_in_nav_menus'     => true,
+            'show_admin_column'     => true,
+            'hierarchical'          => false,
+            'show_tagcloud'         => true,
+            'show_ui'               => false,
+            'query_var'             => true,
+            'rewrite'               => true
+        );
+
+        register_taxonomy('event_groups', array('event'), $args);
     }
 
     public function getPostOccasions($post_id)
