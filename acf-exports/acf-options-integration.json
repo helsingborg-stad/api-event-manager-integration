@@ -65,7 +65,7 @@
                 "label": "Import from selected publishing groups",
                 "name": "event_filter_group",
                 "type": "taxonomy",
-                "instructions": "",
+                "instructions": "Select the groups that you want to import events from. Leave empty to import from all groups.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -79,7 +79,7 @@
                 "add_term": 0,
                 "save_terms": 1,
                 "load_terms": 0,
-                "return_format": "id",
+                "return_format": "object",
                 "multiple": 0
             },
             {

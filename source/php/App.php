@@ -11,10 +11,6 @@ class App
 
     public function __construct()
     {
-        /* Activation hooks */
-        register_activation_hook(plugin_basename(__FILE__), '\EventManagerIntegration\App::addCronJob');
-        register_deactivation_hook(plugin_basename(__FILE__), '\EventManagerIntegration\App::removeCronJob');
-
         add_action('admin_enqueue_scripts', array($this, 'enqueueAdmin'), 950);
         add_action('wp_enqueue_scripts', array($this, 'enqueueFront'), 950);
 
@@ -33,8 +29,8 @@ class App
             new Module\EventModule();
         });
 
-        add_action( 'widgets_init', function(){
-            register_widget( 'EventManagerIntegration\Widget\DisplayEvents' );
+        add_action('widgets_init', function () {
+            register_widget('EventManagerIntegration\Widget\DisplayEvents');
         });
 
         // TA BORT
@@ -55,7 +51,7 @@ class App
         wp_enqueue_script('vendor-pagination', EVENTMANAGERINTEGRATION_URL . '/source/js/vendor/jquery.simplePagination.min.js', 'jquery', false, true);
         wp_register_script('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-pagination.' . self::$assetSuffix . '.js', 'jquery', false, true);
         wp_localize_script('event-integration', 'eventintegration', array(
-            'ajaxurl' => admin_url( 'admin-ajax.php' )
+            'ajaxurl' => admin_url('admin-ajax.php')
         ));
         wp_localize_script('event-integration', 'eventIntegrationFront', array(
             'loading'   => __("Loading", 'event-integration'),
@@ -82,7 +78,7 @@ class App
         // Scripts
         wp_register_script('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-manager-integration.' . self::$assetSuffix . '.js', true);
         wp_localize_script('event-integration', 'eventintegration', array(
-            'ajaxurl' => admin_url( 'admin-ajax.php' )
+            'ajaxurl' => admin_url('admin-ajax.php')
         ));
         wp_localize_script('event-integration', 'eventIntegrationAdmin', array(
             'loading'   => __("Loading", 'event-integration'),
@@ -105,8 +101,10 @@ class App
             $days_ahead = ! empty(get_field('days_ahead', 'options')) ? absint(get_field('days_ahead', 'options')) : 30;
             $to_date = date('Y-m-d', strtotime("midnight now + {$days_ahead} days"));
 
+            // Parsing events
             $api_url = 'http://api.helsingborg.se/json/wp/v2/event/time?start=' . $from_date . '&end=' . $to_date;
             $importer = new \EventManagerIntegration\Parser\HbgEventApi($api_url);
+
             // TA BORT
             file_put_contents(dirname(__FILE__)."/Log/import_events.log", "Event parser last run: ".date("Y-m-d H:i:s"));
         }
@@ -123,7 +121,17 @@ class App
     }
 
     /**
-     * Creates necessary database table on plugin activation
+     * Import publishing groups from Event Manager API
+     * @return void
+     */
+    public function importPublishingGroups()
+    {
+        $api_url = 'http://api.helsingborg.se/json/wp/v2/event_groups/';
+        $importer = new \EventManagerIntegration\Parser\HbgEventGroups($api_url);
+    }
+
+    /**
+     * Creates event occasion database table on plugin activation
      */
     public static function databaseCreation()
     {
@@ -176,7 +184,18 @@ class App
             $importer = new \EventManagerIntegration\Parser\HbgEventApi($api_url);
             });
 
-            add_submenu_page(
+        add_submenu_page(
+            null,
+            __('Import Groups', 'event-integration'),
+            __('Import groups', 'event-integration'),
+            'edit_posts',
+            'import-groups',
+            function () {
+                $api_url = 'http://api.helsingborg.se/json/wp/v2/event_groups/';
+                $importer = new \EventManagerIntegration\Parser\HbgEventGroups($api_url);
+            });
+
+        add_submenu_page(
             null,
             __('Delete all events', 'event-integration'),
             __('Delete all events', 'event-integration'),
@@ -195,5 +214,4 @@ class App
                 $delete = $wpdb->query("TRUNCATE TABLE `event_integrate_occasions`");
             });
     }
-
 }

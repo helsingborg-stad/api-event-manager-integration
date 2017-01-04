@@ -82,10 +82,15 @@ class EventModule extends \Modularity\Module
         $start_date = date('Y-m-d H:i:s', strtotime("today midnight"));
         $end_date = date('Y-m-d H:i:s', strtotime("tomorrow midnight +$days_ahead days") - 1);
 
-        // Save categories and tags IDs to array
+        // Save categories, groups and tags IDs to array
         $taxonomies = array();
         if ($fields->mod_event_categories_show == false && ! empty($fields->mod_event_categories_list)) {
             foreach ($fields->mod_event_categories_list as $v) {
+                $taxonomies[] = $v;
+            }
+        }
+        if ($fields->mod_event_groups_show == false && ! empty($fields->mod_event_groups_list)) {
+            foreach ($fields->mod_event_groups_list as $v) {
                 $taxonomies[] = $v;
             }
         }

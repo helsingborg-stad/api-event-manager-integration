@@ -166,6 +166,52 @@
                 "step": ""
             },
             {
+                "key": "field_586cf5c8d3686",
+                "label": "Groups",
+                "name": "mod_event_groups_show",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "Show events from all groups",
+                "default_value": 1
+            },
+            {
+                "key": "field_586cf5d0d3687",
+                "label": "Select groups",
+                "name": "mod_event_groups_list",
+                "type": "taxonomy",
+                "instructions": "Show events from the selected groups.",
+                "required": 1,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_586cf5c8d3686",
+                            "operator": "!=",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "taxonomy": "event_groups",
+                "field_type": "checkbox",
+                "allow_null": 0,
+                "add_term": 0,
+                "save_terms": 0,
+                "load_terms": 0,
+                "return_format": "id",
+                "multiple": 0
+            },
+            {
                 "key": "field_58455b0e93178",
                 "label": "Categories",
                 "name": "mod_event_categories_show",

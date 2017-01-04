@@ -33,6 +33,10 @@ $loader->addPrefix('EventManagerIntegration', EVENTMANAGERINTEGRATION_PATH);
 $loader->addPrefix('EventManagerIntegration', EVENTMANAGERINTEGRATION_PATH . 'source/php/');
 $loader->register();
 
+// Activation & deactivation hooks
+register_activation_hook(plugin_basename(__FILE__), '\EventManagerIntegration\App::addCronJob');
+register_deactivation_hook(plugin_basename(__FILE__), '\EventManagerIntegration\App::removeCronJob');
+
 // Create database table when plugin is activated
 register_activation_hook(plugin_basename(__FILE__), '\EventManagerIntegration\App::databaseCreation');
 

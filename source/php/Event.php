@@ -24,6 +24,7 @@ class Event extends \EventManagerIntegration\Entity\PostManager
     {
         $this->saveOccasions();
         $this->saveCategories();
+        $this->saveGroups();
         $this->saveTags();
 
         if (! empty($this->gallery)) {
@@ -41,7 +42,24 @@ class Event extends \EventManagerIntegration\Entity\PostManager
      */
     public function saveCategories()
     {
-        wp_set_object_terms($this->ID, $this->categories, 'event_categories', true);
+        wp_set_object_terms($this->ID, $this->categories, 'event_categories', false);
+    }
+
+    /**
+     * Saves groups as taxonomy terms
+     * @return void
+     */
+    public function saveGroups()
+    {
+        // Save group names as new array
+        $event_groups = array();
+        if (! empty($this->groups) && is_array($this->groups)) {
+            foreach ($this->groups as $group) {
+                $event_groups[] .= $group['name'];
+            }
+        }
+
+        wp_set_object_terms($this->ID, $event_groups, 'event_groups', false);
     }
 
     /**
@@ -50,7 +68,7 @@ class Event extends \EventManagerIntegration\Entity\PostManager
      */
     public function saveTags()
     {
-        wp_set_object_terms($this->ID, $this->tags, 'event_tags', true);
+        wp_set_object_terms($this->ID, $this->tags, 'event_tags', false);
     }
 
     /**

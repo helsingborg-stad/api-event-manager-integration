@@ -13,6 +13,9 @@ class HbgEventApi extends \EventManagerIntegration\Parser
 
     public function start()
     {
+        // Import publishing groups from API
+        \EventManagerIntegration\App::importPublishingGroups();
+
         // Remove expired occasions meta and event posts
         $this->removeExpiredOccasions();
         $this->removeExpiredEvents();
@@ -50,6 +53,7 @@ class HbgEventApi extends \EventManagerIntegration\Parser
         $featured_media         = ! empty($event['featured_media']['source_url']) ? $event['featured_media']['source_url'] : null;
         $categories             = ! empty($event['event_categories']) ? array_map('ucwords', array_map('trim', $event['event_categories'])) : array();
         $tags                   = ! empty($event['event_tags']) ? array_map('strtolower', array_map('trim', $event['event_tags'])) : array();
+        $groups                 = ! empty($event['event_groups']) ? $event['event_groups'] : array();
         $occasions              = ! empty($event['occasions']) ? $event['occasions'] : null;
         $event_link             = ! empty($event['event_link']) ? $event['event_link'] : null;
         $additional_links       = ! empty($event['additional_links']) ? $event['additional_links'] : null;
@@ -82,17 +86,22 @@ class HbgEventApi extends \EventManagerIntegration\Parser
         $youtube                = ! empty($event['youtube']) ? $event['youtube'] : null;
         $vimeo                  = ! empty($event['vimeo']) ? $event['vimeo'] : null;
 
-        // Check if category and tag filter is set or not
-        $pass = (empty(get_field('event_filter_cat', 'options')) && empty(get_field('event_filter_tag', 'options'))) ? true : false;
+        // Check if category, tag and group filter is set or not
+        $tax_filter = (empty(get_field('event_filter_cat', 'options')) && empty(get_field('event_filter_tag', 'options')) && empty(get_field('event_filter_group', 'options'))) ? true : false;
 
         // Filter by categories
         if (! empty(get_field('event_filter_cat', 'options'))) {
-            $pass = ($this->filterTaxonomies($categories, 0)) ? true : false;
+            $tax_filter = ($this->filterTaxonomies($categories, 0)) ? true : false;
         }
 
         // Filter by tags
-        if (! $pass && ! empty(get_field('event_filter_tag', 'options'))) {
-            $pass = ($this->filterTaxonomies($tags, 1)) ? true : false;
+        if (! $tax_filter && ! empty(get_field('event_filter_tag', 'options'))) {
+            $tax_filter = ($this->filterTaxonomies($tags, 1)) ? true : false;
+        }
+
+        // Filter by groups
+        if (! $tax_filter && ! empty(get_field('event_filter_group', 'options'))) {
+            $tax_filter = $this->filterGroups($groups);
         }
 
         // Check if event already exist and find it's post status
@@ -102,8 +111,8 @@ class HbgEventApi extends \EventManagerIntegration\Parser
             $post_status = get_post_status($event_id);
         }
 
-        // Save event if it passed filters
-        if ($pass) {
+        // Save event if it passed taxonomy and group filters
+        if ($tax_filter) {
             $event = new Event(
                 array(
                 'post_title'            => $post_title,
@@ -114,6 +123,7 @@ class HbgEventApi extends \EventManagerIntegration\Parser
                 '_event_manager_id'     => $event['id'],
                 'categories'            => $categories,
                 'tags'                  => $tags,
+                'groups'                => $groups,
                 'occasions_complete'    => $occasions,
                 'event_link'            => $event_link,
                 'additional_links'      => $additional_links,
@@ -198,7 +208,7 @@ class HbgEventApi extends \EventManagerIntegration\Parser
             // Delete the occasion if expired
             if (strtotime($o['end_date']) < $date_limit) {
                 $id = $o['ID'];
-                $wpdb->delete( $db_table, array( 'ID' => $id) );
+                $wpdb->delete($db_table, array( 'ID' => $id));
             }
         }
 
@@ -238,7 +248,7 @@ class HbgEventApi extends \EventManagerIntegration\Parser
     }
 
     /**
-     * Filter, if add or not to add
+     * Filter by taxonomies, if add or not to add
      * @param  array $taxonomies All taxonomies
      * @param  int   $type       Type of taxonomy, 0 = category, 1 = tag
      * @return bool
@@ -255,6 +265,35 @@ class HbgEventApi extends \EventManagerIntegration\Parser
 
             foreach ($filters as $filter) {
                 if (in_array(strtolower($filter), $taxLower)) {
+                    $passes = true;
+                }
+            }
+        }
+
+        return $passes;
+    }
+
+    /**
+     * Filter by groups, if add or not to add
+     * @param  array $groups Event groups
+     * @return bool
+     */
+    public function filterGroups($groups)
+    {
+        $passes = true;
+        $filter_array = get_field('event_filter_group', 'options');
+
+        if (! empty($filter_array)) {
+            $passes = false;
+
+            // Save group slug as new array
+            $event_groups = array();
+            foreach ($groups as $group) {
+                $event_groups[] .= $group['slug'];
+            }
+
+            foreach ($filter_array as $filter) {
+                if (in_array($filter->slug, $event_groups)) {
                     $passes = true;
                 }
             }
