@@ -1,4 +1,8 @@
-var EventManagerIntegration = EventManagerIntegration || {};
+// Init
+var EventManagerIntegration = {};
+
+// Init event pagination
+EventManagerIntegration = EventManagerIntegration || {};
 EventManagerIntegration.Event = EventManagerIntegration.Event || {};
 
 EventManagerIntegration.Event.Module = (function ($) {
@@ -9,9 +13,7 @@ EventManagerIntegration.Event.Module = (function ($) {
         }.bind(this));
     }
 
-    /**
-     * Load pagination bar to event modules
-     */
+    // Load pagination bar to event modules
     Module.prototype.initEventPagination = function () {
     	$(".modularity-mod-event").each(function( key, value ) {
     		var moduleId = $(this).find('.box-panel').attr('module-id');
@@ -34,9 +36,7 @@ EventManagerIntegration.Event.Module = (function ($) {
 		});
     };
 
-    /**
-     * Get event list with Ajax on pagination click
-     */
+    // Get event list with Ajax on pagination click
     Module.prototype.loadEvents = function (page, moduleId) {
 		var thisModule = $('.modularity-mod-event-' + moduleId);
 		var height = $(thisModule).find('.module-content').height();
