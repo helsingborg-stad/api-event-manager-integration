@@ -37,7 +37,13 @@ class HbgEventGroups extends \EventManagerIntegration\Parser
             // Save groups if it contains any events
             foreach ($groups as $group) {
                 if ($group->count > 0) {
-                    wp_insert_term($group->name, $taxonomy, $args = array('slug' => $group->slug));
+                    $term = get_term_by('slug', $group->slug, $taxonomy);
+                    // Save term if not exist, else update.
+                    if ($term == false) {
+                        wp_insert_term($group->name, $taxonomy, $args = array('slug' => $group->slug));
+                    } else {
+                        wp_update_term($term->term_id, $taxonomy, array('name' => $group->name));
+                    }
                 }
             }
 

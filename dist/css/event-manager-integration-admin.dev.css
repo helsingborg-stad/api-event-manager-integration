@@ -39,3 +39,12 @@
 
 .deny.button-primary:active {
   box-shadow: inset 0 2px 0 #ac2925; }
+
+.import-buttons {
+  margin-bottom: 8px; }
+
+.import-buttons .button-primary {
+  display: block;
+  padding: 4px 8px;
+  line-height: normal;
+  height: auto; }

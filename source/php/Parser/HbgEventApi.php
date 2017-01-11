@@ -16,7 +16,7 @@ class HbgEventApi extends \EventManagerIntegration\Parser
         // Import publishing groups from API
         \EventManagerIntegration\App::importPublishingGroups();
 
-        // Remove expired occasions meta and event posts
+        // Remove expired occasions meta and event posts.
         $this->removeExpiredOccasions();
         $this->removeExpiredEvents();
 
@@ -194,8 +194,7 @@ class HbgEventApi extends \EventManagerIntegration\Parser
     public function removeExpiredOccasions()
     {
         global $wpdb;
-        $days = ! empty(get_field('remove_events', 'option')) ? absint(get_field('remove_events', 'option')) : 0;
-        $date_limit = strtotime("- {$days} days", strtotime("midnight now") - 1);
+        $date_limit = strtotime("midnight now") - 1;
         // Get all occasions from databse
         $db_table = $wpdb->prefix . "integrate_occasions";
         $occasions = $wpdb->get_results("SELECT * FROM $db_table ORDER BY start_date DESC", ARRAY_A);

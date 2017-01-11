@@ -24,7 +24,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
                 ),
                 'hierarchical'          =>  false,
                 'exclude_from_search'   =>  false,
-                'supports'              =>  array('revisions'),
+                'supports'              =>  false,
                 // Disable create new post
                 'capability_type' => 'post',
                 'capabilities' => array(
@@ -61,15 +61,26 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         add_action('init', array($this, 'registerEventCategories'));
         add_action('init', array($this, 'registerEventTags'));
         add_action('init', array($this, 'registerEventGroups'));
-        add_action('manage_posts_extra_tablenav', array($this, 'tablenavButtons'));
         add_action('wp_ajax_import_events', array($this, 'importEvents'));
         add_action('wp_ajax_accept_or_deny', array($this, 'acceptOrDeny'));
-
+        add_filter('views_edit-event', array($this, 'addImportButtons'));
         add_filter('the_content', array($this, 'eventContent'));
         add_filter('the_lead', array($this, 'eventContentLead'));
         add_filter('query_vars', array($this, 'addDateQueryVar'));
+        add_filter('acf/fields/taxonomy/wp_list_categories/name=mod_event_groups_list', array($this, 'filterGroupTaxonomy'), 10, 3);
     }
 
+    /**
+     * Filter to hide empty groups on module settings
+     * @param  array  $args   An array of arguments passed to the wp_list_categories function
+     * @param  array  $field  An array containing all the field settings
+     * @return array  $args
+     */
+    public function filterGroupTaxonomy($args, $field)
+    {
+        $args['hide_empty'] = 1;
+        return $args;
+    }
 
     /**
      * Add date query var
@@ -259,26 +270,24 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
     }
 
     /**
-     * Add buttons to start parsing event import
+     * Add buttons to start parsing xcap and Cbis
      * @return void
      */
-    public function tablenavButtons($which)
+    public function addImportButtons($views)
     {
-        global $current_screen;
+        if (current_user_can('administrator')) {
+            $button  = '<div class="import-buttons actions" style="position: relative;">';
+            $button .= '<div id="importevents" class="button-primary">' . __('Import events', 'event-integration') . '</div>';
 
-        if ($current_screen->id != 'edit-event' || $which != 'top') {
-            return;
-        }
+            // Debug code
+            // $button .= '<a href="' . admin_url('options.php?page=import-events') . '" class="button" id="post-query-submit">Debug</a>';
+            // $button .= '<a href="' . admin_url('options.php?page=import-groups') . '" class="button" id="post-query-submit">Groups</a>';
+            // $button .= '<a href="' . admin_url('options.php?page=delete-all-events') . '" class="button" id="post-query-submit">Delete</a>';
 
-        if (current_user_can('manage_options')) {
-            echo '<div class="alignleft actions" style="position: relative;">';
-            echo '<div id="importevents" class="button-primary">' . __('Import', 'event-integration') . '</div>';
-            // TA BORT
-// echo '<a href="' . admin_url('options.php?page=import-events') . '" class="button-primary" id="post-query-submit">Debug</a>';
-// echo '<a href="' . admin_url('options.php?page=import-groups') . '" class="button-primary" id="post-query-submit">Groups</a>';
-// echo '<a href="' . admin_url('options.php?page=delete-all-events') . '" class="button-primary" id="post-query-submit">Delete</a>';
-            echo '</div>';
+            $button .= '</div>';
+            $views['import-buttons'] = $button;
         }
+        return $views;
     }
 
     /**

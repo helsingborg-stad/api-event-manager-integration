@@ -102,7 +102,8 @@ class App
             $to_date = date('Y-m-d', strtotime("midnight now + {$days_ahead} days"));
 
             // Parsing events
-            $api_url = 'http://api.helsingborg.se/json/wp/v2/event/time?start=' . $from_date . '&end=' . $to_date;
+            //$api_url = 'http://api.helsingborg.se/json/wp/v2/event/time?start=' . $from_date . '&end=' . $to_date;
+            $api_url = 'http://eventmanager.dev/json/wp/v2/event/time?start=' . $from_date . '&end=' . $to_date;
             $importer = new \EventManagerIntegration\Parser\HbgEventApi($api_url);
 
             // TA BORT
@@ -124,9 +125,10 @@ class App
      * Import publishing groups from Event Manager API
      * @return void
      */
-    public function importPublishingGroups()
+    public static function importPublishingGroups()
     {
-        $api_url = 'http://api.helsingborg.se/json/wp/v2/event_groups/';
+        //$api_url = 'http://api.helsingborg.se/json/wp/v2/event_groups/';
+        $api_url = 'http://eventmanager.dev/json/wp/v2/event_groups/';
         $importer = new \EventManagerIntegration\Parser\HbgEventGroups($api_url);
     }
 
@@ -179,8 +181,8 @@ class App
             $days_ahead = ! empty(get_field('days_ahead', 'options')) ? absint(get_field('days_ahead', 'options')) : 30;
             $to_date = date('Y-m-d', strtotime("midnight now + {$days_ahead} days"));
 
-            $api_url = 'http://api.helsingborg.se/json/wp/v2/event/time?start=' . $from_date . '&end=' . $to_date;
-
+            //$api_url = 'http://api.helsingborg.se/json/wp/v2/event/time?start=' . $from_date . '&end=' . $to_date;
+            $api_url = 'http://eventmanager.dev/json/wp/v2/event/time?start=' . $from_date . '&end=' . $to_date;
             $importer = new \EventManagerIntegration\Parser\HbgEventApi($api_url);
             });
 
@@ -191,7 +193,8 @@ class App
             'edit_posts',
             'import-groups',
             function () {
-                $api_url = 'http://api.helsingborg.se/json/wp/v2/event_groups/';
+                //$api_url = 'http://api.helsingborg.se/json/wp/v2/event_groups/';
+                $api_url = 'http://eventmanager.dev/json/wp/v2/event_groups/';
                 $importer = new \EventManagerIntegration\Parser\HbgEventGroups($api_url);
             });
 
