@@ -67,12 +67,10 @@ class eventShortcode
                     $event_date = preg_replace('/\D/', '', $occasion->start_date);
                     if ($query_var_date == $event_date) {
                         $ret .= '<ul>';
-                        $ret .= '<li><strong>' . __('Start', 'event-integration') . '</strong></li>';
-                        $ret .= (! empty($occasion->start_date)) ? '<li>' . $occasion->start_date . '</li>' : '';
-                        $ret .= '<li><strong>' . __('End', 'event-integration') . '</strong></li>';
-                        $ret .= (! empty($occasion->end_date)) ? '<li>' . $occasion->end_date . '</li>' : '';
+                        $ret .= '<li><strong>' . __('Occasion', 'event-integration') . '</strong></li>';
+                        $ret .= (! empty($occasion->start_date) && ! empty($occasion->end_date)) ? '<li>' . \EventManagerIntegration\App::formatEventDate($occasion->start_date, $occasion->end_date) . '</li>' : '';
                         $ret .= '<li><strong>' . __('Door time', 'event-integration') . '</strong></li>';
-                        $ret .= (! empty($occasion->door_time)) ? '<li>' . $occasion->door_time . '</li>' : '';
+                        $ret .= (! empty($occasion->door_time)) ? '<li>' . \EventManagerIntegration\App::formatDoorTime($occasion->door_time) . '</li>' : '';
                         $ret .= '</ul>';
                     }
                 }
@@ -210,12 +208,7 @@ class eventShortcode
             $ret .= '<ul><li><h3>' . __('Occasions', 'event-integration') . '</h3></li></ul>';
             foreach ($occasions as $occasion) {
                 $ret .= '<ul>';
-                $ret .= '<li><strong>' . __('Start', 'event-integration') . '</strong></li>';
-                $ret .= (! empty($occasion->start_date)) ? '<li>' . $occasion->start_date . '</li>' : '';
-                $ret .= '<li><strong>' . __('End', 'event-integration') . '</strong></li>';
-                $ret .= (! empty($occasion->end_date)) ? '<li>' . $occasion->end_date . '</li>' : '';
-                $ret .= '<li><strong>' . __('Door time', 'event-integration') . '</strong></li>';
-                $ret .= (! empty($occasion->door_time)) ? '<li>' . $occasion->door_time . '</li>' : '';
+                $ret .= (! empty($occasion->start_date) && ! empty($occasion->end_date)) ? '<li>' . \EventManagerIntegration\App::formatEventDate($occasion->start_date, $occasion->end_date) . '</li>' : '';
                 $ret .= '</ul>';
             }
             $ret .= '</div>';

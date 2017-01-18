@@ -115,7 +115,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($post->ID, false);
             foreach ($occasions as $o) {
                 $event_date = preg_replace('/\D/', '', $o->start_date);
-                $date_div = '<div class="single-event-date"><p>' . date('Y-m-d', strtotime($o->start_date)) . '</p></div>';
+                $date_div = '<div class="single-event-date"><p>' . \EventManagerIntegration\App::formatEventDate($o->start_date, $o->end_date) . '</p></div>';
 
                 // Replace content with occasion custom content
                 if ($get_date == $event_date && ! empty($o->content) && $o->content_mode == 'custom') {

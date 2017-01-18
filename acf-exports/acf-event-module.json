@@ -74,67 +74,15 @@
                     "id": ""
                 },
                 "choices": {
-                    "start_date": "Show start date",
-                    "end_date": "Show end date",
-                    "door_time": "Show door time",
+                    "occasion": "Show occasion",
                     "image": "Show featured image",
-                    "description": "Show description",
-                    "location": "Show location"
+                    "location": "Show location",
+                    "description": "Show description"
                 },
                 "default_value": [],
-                "layout": "horizontal",
-                "toggle": 0,
+                "layout": "vertical",
+                "toggle": 1,
                 "return_format": "value"
-            },
-            {
-                "key": "field_5840393fb9106",
-                "label": "Date format",
-                "name": "mod_event_date_format",
-                "type": "select",
-                "instructions": "",
-                "required": 1,
-                "conditional_logic": [
-                    [
-                        {
-                            "field": "field_583fefb6634a1",
-                            "operator": "==",
-                            "value": "start_date"
-                        }
-                    ],
-                    [
-                        {
-                            "field": "field_583fefb6634a1",
-                            "operator": "==",
-                            "value": "end_date"
-                        }
-                    ],
-                    [
-                        {
-                            "field": "field_583fefb6634a1",
-                            "operator": "==",
-                            "value": "door_time"
-                        }
-                    ]
-                ],
-                "wrapper": {
-                    "width": "50",
-                    "class": "",
-                    "id": ""
-                },
-                "choices": {
-                    "1": "Date & time",
-                    "2": "Date",
-                    "3": "Time"
-                },
-                "default_value": [
-                    1
-                ],
-                "allow_null": 0,
-                "multiple": 0,
-                "ui": 0,
-                "ajax": 0,
-                "return_format": "value",
-                "placeholder": ""
             },
             {
                 "key": "field_583fee36634a0",
@@ -153,7 +101,7 @@
                     ]
                 ],
                 "wrapper": {
-                    "width": "50",
+                    "width": "",
                     "class": "",
                     "id": ""
                 },

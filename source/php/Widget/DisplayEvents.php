@@ -63,15 +63,7 @@ class DisplayEvents extends \WP_Widget
             <?php endif; ?>
 
             <?php if ($show_date && ! empty($event->start_date && isset($event->start_date))) : ?>
-                <span class="event-date"><?php echo sprintf(__('Start: %s', 'event-integration'), $event->start_date) ?></span>
-            <?php endif; ?>
-
-            <?php if ($show_date && ! empty($event->end_date && isset($event->end_date))) : ?>
-                <span class="event-date"><?php echo sprintf(__('End: %s', 'event-integration'), $event->end_date) ?></span>
-            <?php endif; ?>
-
-            <?php if ($show_date && ! empty($event->door_time && isset($event->door_time))) : ?>
-               <span class="event-date"><?php echo sprintf(__('Door time: %s', 'event-integration'), $event->door_time) ?></span>
+                <span><?php echo \EventManagerIntegration\App::formatEventDate($event->start_date, $event->end_date) ?></span>
             <?php endif; ?>
 
            <?php if ($show_location && get_post_meta($event->ID, 'location', true)) : ?>

@@ -141,17 +141,9 @@ class EventModule extends \Modularity\Module
                     $date_url = preg_replace('/\D/', '', $event->start_date);
                     $ret .= '<a href="' . esc_url( add_query_arg( 'date', $date_url, get_page_link($event->ID))) .'" class="link-item">' . $event->post_title . '</a>';
                 }
-                if (! empty($event->start_date) && in_array('start_date', $fields->mod_event_fields)) {
-                    $start_date = \EventManagerIntegration\Module\EventModule::formatDate($module_id, $event->start_date);
-                    $ret .= '<p class="date text-sm text-dark-gray">' . sprintf(__('Start %s', 'event-integration'), $start_date) . '</p>';
-                }
-                if (! empty($event->end_date) && in_array('end_date', $fields->mod_event_fields)) {
-                    $end_date = \EventManagerIntegration\Module\EventModule::formatDate($module_id, $event->end_date);
-                    $ret .= '<p class="date text-sm text-dark-gray">' . sprintf(__('End %s', 'event-integration'), $end_date) . '</p>';
-                }
-                if (! empty($event->door_time) && in_array('door_time', $fields->mod_event_fields)) {
-                    $door_time = \EventManagerIntegration\Module\EventModule::formatDate($module_id, $event->door_time);
-                    $ret .= '<p class="date text-sm text-dark-gray">' . sprintf(__('Door time %s', 'event-integration'), $door_time) . '</p>';
+                if (! empty($event->start_date) && ! empty($event->end_date) && in_array('occasion', $fields->mod_event_fields)) {
+                    $occasion = \EventManagerIntegration\App::formatEventDate($event->start_date, $event->end_date);
+                    $ret .= '<p class="date text-sm text-dark-gray">' . $occasion . '</p>';
                 }
                 if (in_array('location', $fields->mod_event_fields) && get_post_meta($event->ID, 'location', true)) {
                     $location = get_post_meta($event->ID, 'location', true);
@@ -171,39 +163,5 @@ class EventModule extends \Modularity\Module
         $ret .= '</ul>';
 
         return $ret;
-    }
-
-    /**
-     * Format date and time after defined settings
-     * @param  int    $module_id Module ID
-     * @param  string $date      Date and time string
-     * @return string            Formatted date
-     */
-    public static function formatDate($module_id, $date)
-    {
-        $fields = json_decode(json_encode(get_fields($module_id)));
-
-        $dateTime = new \DateTime($date);
-
-        switch ($fields->mod_event_date_format) {
-            // Date & time
-            case 1:
-                $date = $dateTime->format('Y-m-d H:i');
-                break;
-            // Date only
-            case 2:
-                $date = $dateTime->format('Y-m-d');
-                break;
-            // Time only
-            case 3:
-                $date = $dateTime->format('H:i');
-                break;
-
-            default:
-                $date = $date;
-                break;
-        }
-
-        return $date;
     }
 }
