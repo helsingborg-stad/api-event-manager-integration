@@ -1,3 +1,5 @@
+"use strict";
+
 //Init event widget
 EventManagerIntegration = EventManagerIntegration || {};
 EventManagerIntegration.Widget = EventManagerIntegration.Widget || {};
@@ -23,7 +25,11 @@ EventManagerIntegration.Widget.TemplateParser = (function ($) {
                 dataApiurl          = dataApiurl.replace(/\/$/, "");
                 dataApiurl          = dataApiurl + '/time?start=' + year + '-' + mm + '-' + dd + '&end=' + (year+1) + '-' + mm + '-' + dd;
             var dataLimit           = ($(module).attr('data-limit'));
+            var dataGroupId         = ($(module).attr('group-id'));
+            var dataCategoryId      = ($(module).attr('category-id'));
             var apiUrl = (typeof dataLimit != 'undefined' && $.isNumeric(dataLimit)) ? dataApiurl + '&post-limit=' + dataLimit : dataApiurl + '&post-limit=' + 10;
+                apiUrl = (typeof dataGroupId != 'undefined') ? apiUrl + '&group-id=' + dataGroupId : apiUrl;
+                apiUrl = (typeof dataCategoryId != 'undefined') ? apiUrl + '&category-id=' + dataCategoryId : apiUrl;
             this.storeErrorTemplate($(module));
             this.storeTemplate($(module));
             this.storeModalTemplate($(module));

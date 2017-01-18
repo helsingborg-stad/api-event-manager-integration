@@ -40,6 +40,30 @@
                 "default_value": 1
             },
             {
+                "key": "field_587f86dc8f7b7",
+                "label": "Post status",
+                "name": "event_post_status",
+                "type": "radio",
+                "instructions": "Select status of imported events.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "draft": "Draft",
+                    "publish": "Published"
+                },
+                "allow_null": 0,
+                "other_choice": 0,
+                "save_other_choice": 0,
+                "default_value": "publish",
+                "layout": "vertical",
+                "return_format": "value"
+            },
+            {
                 "key": "field_586bc598f2777",
                 "label": "Import from selected publishing groups",
                 "name": "event_filter_group",

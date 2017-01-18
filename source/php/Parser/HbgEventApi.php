@@ -85,6 +85,7 @@ class HbgEventApi extends \EventManagerIntegration\Parser
         $deezer                 = ! empty($event['deezer']) ? $event['deezer'] : null;
         $youtube                = ! empty($event['youtube']) ? $event['youtube'] : null;
         $vimeo                  = ! empty($event['vimeo']) ? $event['vimeo'] : null;
+        $post_status            = get_field('event_post_status', 'option') ? get_field('event_post_status', 'option') : 'publish';
 
         // Check if category, tag and group filter is set or not
         $tax_filter = (empty(get_field('event_filter_cat', 'options')) && empty(get_field('event_filter_tag', 'options')) && empty(get_field('event_filter_group', 'options'))) ? true : false;
@@ -104,8 +105,7 @@ class HbgEventApi extends \EventManagerIntegration\Parser
             $tax_filter = $this->filterGroups($groups);
         }
 
-        // Check if event already exist and find it's post status
-        $post_status = 'publish';
+        // Check if event already exist and get the post status
         $event_id = $this->checkIfEventExists($event['id']);
         if ($event_id) {
             $post_status = get_post_status($event_id);
