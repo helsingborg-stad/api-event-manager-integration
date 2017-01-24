@@ -40,10 +40,9 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             if (!$occasions) {
                 return;
             }
-
             echo($occasions);
         });
-        $this->addTableColumn('acceptAndDeny', __('Public', 'event-manager'), false, function ($column, $postId) {
+        $this->addTableColumn('acceptAndDeny', __('Public', 'event-integration'), false, function ($column, $postId) {
             $post_status = get_post_status($postId);
 
             $first = '';
@@ -57,7 +56,6 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             <a href="#" class="deny button-primary ' . $second . '" postid="' . $postId . '">' . __('Deny', 'event-integration') . '</a>';
         });
         $this->addTableColumn('date', __('Date', 'event-integration'));
-
         add_action('init', array($this, 'registerEventCategories'));
         add_action('init', array($this, 'registerEventTags'));
         add_action('init', array($this, 'registerEventGroups'));

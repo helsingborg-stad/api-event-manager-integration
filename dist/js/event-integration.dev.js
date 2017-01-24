@@ -89,12 +89,13 @@ EventManagerIntegration.Widget.TemplateParser = (function ($) {
             var dataApiurl          = ($(module).attr('data-apiurl'));
                 dataApiurl          = dataApiurl.replace(/\/$/, "");
                 dataApiurl          = dataApiurl + '/time?start=' + year + '-' + mm + '-' + dd + '&end=' + (year+1) + '-' + mm + '-' + dd;
-            var dataLimit           = ($(module).attr('data-limit'));
+            var dataLimit           = ($(module).attr('post-limit'));
             var dataGroupId         = ($(module).attr('group-id'));
             var dataCategoryId      = ($(module).attr('category-id'));
             var apiUrl = (typeof dataLimit != 'undefined' && $.isNumeric(dataLimit)) ? dataApiurl + '&post-limit=' + dataLimit : dataApiurl + '&post-limit=' + 10;
-                apiUrl = (typeof dataGroupId != 'undefined') ? apiUrl + '&group-id=' + dataGroupId : apiUrl;
-                apiUrl = (typeof dataCategoryId != 'undefined') ? apiUrl + '&category-id=' + dataCategoryId : apiUrl;
+                apiUrl += (typeof dataGroupId != 'undefined') ? '&group-id=' + dataGroupId : apiUrl;
+                apiUrl += (typeof dataCategoryId != 'undefined') ? '&category-id=' + dataCategoryId : apiUrl;
+                apiUrl += '&_jsonp=getevents';
             this.storeErrorTemplate($(module));
             this.storeTemplate($(module));
             this.storeModalTemplate($(module));
@@ -118,16 +119,19 @@ EventManagerIntegration.Widget.TemplateParser = (function ($) {
     };
 
     TemplateParser.prototype.loadEvent = function(module, resource) {
-
-        $.ajax(resource).done(function(response) {
-
-            if(typeof response.data == 'undefined') {
-
+        $.ajax({
+            type: "GET",
+            url: resource,
+            cache: false,
+            dataType: "jsonp",
+            jsonpCallback: 'getevents',
+            crossDomain: true,
+            success: function( response ) {
                 //Store response on module
                 module.data('json-response', response);
 
                 //Clear target div
-                this.clear(module);
+                TemplateParser.prototype.clear(module);
 
                 $(response).each(function(index,event){
 
@@ -153,21 +157,16 @@ EventManagerIntegration.Widget.TemplateParser = (function ($) {
                     //Append
                     module.append(moduleTemplate);
                 });
-
                 //bind click
-                this.click(module);
-
-            } else {
-                this.clear(module);
+                TemplateParser.prototype.click(module);
+            },
+            error: function( response ) {
+                TemplateParser.prototype.clear(module);
                 module.html(module.data('error-template'));
             }
+        });
 
-        }.bind(this)).fail(function() {
 
-            this.clear(module);
-            module.html(module.data('error-template'));
-
-        }.bind(this));
     };
 
     TemplateParser.prototype.clear = function(module){
