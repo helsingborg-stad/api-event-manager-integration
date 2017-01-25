@@ -24,12 +24,12 @@ EventManagerIntegration.Admin.AcceptDeny = (function ($) {
                 value     : postStatus,
                 postId    : postId
             },
-            success: function( response ) {
+            beforeSend: function(response) {
                 var postElement = $('#post-' + postId);
-                if (response == 1) {
+                if (postStatus == 1) {
                     postElement.find('.deny').removeClass('hidden');
                     postElement.find('.accept').addClass('hidden');
-                } else if(response == 0) {
+                } else if(postStatus == 0) {
                     postElement.find('.deny').addClass('hidden');
                     postElement.find('.accept').removeClass('hidden');
                 }
