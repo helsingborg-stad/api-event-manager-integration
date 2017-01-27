@@ -74,10 +74,10 @@
                     "id": ""
                 },
                 "choices": {
-                    "occasion": "Show occasion",
-                    "image": "Show featured image",
-                    "location": "Show location",
-                    "description": "Show description"
+                    "occasion": "Occasion",
+                    "image": "Image",
+                    "location": "Location",
+                    "description": "Description"
                 },
                 "default_value": [],
                 "layout": "vertical",

@@ -47,8 +47,9 @@ class EventModule extends \Modularity\Module
         $page = $_POST['page'];
         $module_id = $_POST['id'];
         $events = self::displayEvents($module_id, $page);
+
         echo $events;
-        die();
+        wp_die();
     }
 
     public static function countPages($module_id)

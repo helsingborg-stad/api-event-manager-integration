@@ -10,7 +10,7 @@ class DisplayEvents extends \WP_Widget
     {
         parent::__construct(
             'display_events',
-            __('Upcoming events', 'event-integration'),
+            __('Events', 'event-integration'),
             array(
                 "description" => __('Display upcoming events from Event Manager API.', 'event-integration')
             )

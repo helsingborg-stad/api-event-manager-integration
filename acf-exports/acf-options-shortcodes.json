@@ -1,54 +1,12 @@
     {
-        "key": "group_583557753bd73",
-        "title": "Event manager integration settings",
+        "key": "group_58526d565e1f5",
+        "title": "Shortcode settings",
         "fields": [
             {
-                "key": "field_5835579f883ff",
-                "label": "Days ahead",
-                "name": "days_ahead",
-                "type": "number",
-                "instructions": "Import events that occurs within given number of days.",
-                "required": 1,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "50",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": 30,
-                "placeholder": "",
-                "prepend": "",
-                "append": "days",
-                "min": 1,
-                "max": 365,
-                "step": ""
-            },
-            {
-                "key": "field_583572f05b578",
-                "label": "Remove passed events",
-                "name": "remove_events",
-                "type": "number",
-                "instructions": "Automatically removes events older than given number of days. 0 is equal to today.",
-                "required": 1,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "50",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": 0,
-                "placeholder": "",
-                "prepend": "",
-                "append": "days",
-                "min": 0,
-                "max": 365,
-                "step": ""
-            },
-            {
-                "key": "field_5835581488400",
-                "label": "Daily import",
-                "name": "event_daily_import",
-                "type": "true_false",
+                "key": "field_585278962daaf",
+                "label": "Information",
+                "name": "",
+                "type": "tab",
                 "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
@@ -57,15 +15,69 @@
                     "class": "",
                     "id": ""
                 },
-                "message": "Enable daily automatic import from Event Manager API",
-                "default_value": 1
+                "placement": "top",
+                "endpoint": 0
             },
             {
-                "key": "field_5846ca031ffcb",
-                "label": "Import from selected categories",
-                "name": "event_filter_cat",
+                "key": "field_585278b82dab0",
+                "label": "Information shortcode",
+                "name": "",
+                "type": "message",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "Shortcode to display event information. Add the shortcode to your single event template file.\r\n\r\n[single_event_information]",
+                "new_lines": "wpautop",
+                "esc_html": 0
+            },
+            {
+                "key": "field_585279446b5da",
+                "label": "Display fields",
+                "name": "event_shortc_fields",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "information": "Information",
+                    "occasion": "Occasions",
+                    "location": "Location",
+                    "additional_locations": "Additional locations",
+                    "organizers": "Organizers",
+                    "sponsors": "Sponsors",
+                    "booking": "Booking information",
+                    "links": "Links"
+                },
+                "default_value": [
+                    "information",
+                    "occasion",
+                    "location",
+                    "additional_locations",
+                    "organizers",
+                    "sponsors",
+                    "booking",
+                    "links"
+                ],
+                "layout": "vertical",
+                "toggle": 0,
+                "return_format": "value"
+            },
+            {
+                "key": "field_5857b799e4d02",
+                "label": "Wrapper div class",
+                "name": "event_shortc_wrapper",
                 "type": "text",
-                "instructions": "Enter the name of the categories that you want to import events from. Separate with commas. Leave blank to import from all categories.",
+                "instructions": "Add custom classes to div that wraps around the info boxes. Useful when creating responsive grids. Separate with comma.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -80,11 +92,11 @@
                 "maxlength": ""
             },
             {
-                "key": "field_5846db8b3cf78",
-                "label": "Import from selected tags",
-                "name": "event_filter_tag",
+                "key": "field_5857b7f0e4d03",
+                "label": "Inner div box class",
+                "name": "event_shortc_inner",
                 "type": "text",
-                "instructions": "Enter the name of the tags that you want to import events from. Separate with commas. Leave blank to import from all tags.",
+                "instructions": "Add custom classes to inner div boxes that contains the event information. Useful when creating responsive grids. Separate with comma.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -99,10 +111,10 @@
                 "maxlength": ""
             },
             {
-                "key": "field_5859206f23f1b",
-                "label": "Single event image",
-                "name": "event_single_image",
-                "type": "true_false",
+                "key": "field_585270b4dad2b",
+                "label": "Gallery",
+                "name": "",
+                "type": "tab",
                 "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
@@ -111,8 +123,25 @@
                     "class": "",
                     "id": ""
                 },
-                "message": "Display attached event image below title header on single events.",
-                "default_value": 1
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5852713b299b6",
+                "label": "Gallery shortcode",
+                "name": "",
+                "type": "message",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "Gallery images is stored as attached images. You can use WordPress own shortcode [gallery] to display the images.",
+                "new_lines": "wpautop",
+                "esc_html": 0
             }
         ],
         "location": [
@@ -124,7 +153,7 @@
                 }
             ]
         ],
-        "menu_order": 0,
+        "menu_order": 1,
         "position": "normal",
         "style": "default",
         "label_placement": "top",

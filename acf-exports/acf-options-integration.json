@@ -1,6 +1,6 @@
     {
         "key": "group_583557753bd73",
-        "title": "Event manager integration settings",
+        "title": "Event Manager Integration",
         "fields": [
             {
                 "key": "field_5835579f883ff",
@@ -65,10 +65,10 @@
             },
             {
                 "key": "field_586bc598f2777",
-                "label": "Import from selected publishing groups",
+                "label": "Import from selected user groups",
                 "name": "event_filter_group",
                 "type": "taxonomy",
-                "instructions": "Select the groups that you want to import events from. Leave empty to import from all groups.",
+                "instructions": "Select the user groups that you want to import events from. Leave empty to import from all groups.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {

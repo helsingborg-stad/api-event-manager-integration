@@ -18,7 +18,8 @@ class App
         add_action('import_events_daily', array($this, 'importEventsCron'));
 
         new PostTypes\Events();
-        new Helper\Acf();
+        new Acf\AcfConfig();
+        new Acf\AcfFields();
         new Widget\DisplayEvents();
         new Admin\Options();
         new Admin\AdminDisplayEvent();
@@ -47,7 +48,7 @@ class App
     {
         $start = date('Y-m-d H:i:s', strtotime($start_date));
         $end = date('Y-m-d H:i:s', strtotime($end_date));
-        $date = mysql2date('j F Y', $start, true) . ', ' . mysql2date('H:i', $start, true) . __(' to ', 'event-integration') . mysql2date('j F Y', $end, true) . ', ' . mysql2date('H:i', $end, true);
+        $date = mysql2date('j F Y', $start, true) . ', ' . mysql2date('H:i', $start, true) . ' ' . __('to', 'event-integration') . ' ' . mysql2date('j F Y', $end, true) . ', ' . mysql2date('H:i', $end, true);
 
         if (date('Y-m-d', strtotime($start)) == date('Y-m-d', strtotime($end))) {
             $date = mysql2date('j F Y', $start, true) . ', ' . mysql2date('H:i', $start, true) . ' - ' . mysql2date('H:i', $end, true);
@@ -87,7 +88,7 @@ class App
             'ajaxurl' => admin_url('admin-ajax.php')
         ));
         wp_localize_script('event-integration', 'eventIntegrationFront', array(
-            'loading'   => __("Loading", 'event-integration'),
+            'event_pagination_error'   => __("Something went wrong, please try again later.", 'event-integration'),
         ));
         wp_enqueue_script('event-integration');
     }

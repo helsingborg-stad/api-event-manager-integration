@@ -16,9 +16,10 @@ EventManagerIntegration.Event.Module = (function ($) {
     // Load pagination bar to event modules
     Module.prototype.initEventPagination = function () {
     	$(".modularity-mod-event").each(function( key, value ) {
-    		var moduleId = $(this).find('.box-panel').attr('module-id');
-    		var pages = $(this).find('.module-pagination').attr('data-pages');
-		    $('.modularity-mod-event-'+moduleId+' .module-pagination').pagination({
+    		var moduleId = $(this).find('[module-id]').attr('module-id');
+    		var pages 	 = $(this).find('.module-pagination').attr('data-pages');
+    		var module   = $(this);
+		    $(this).find('.module-pagination').pagination({
 		    	pages: pages,
 		    	displayedPages: 3,
 		        edges: 1,
@@ -29,17 +30,16 @@ EventManagerIntegration.Event.Module = (function ($) {
 		       	currentPage: 1,
 		       	selectOnClick: false,
 		        onPageClick: function(page, event) {
-		        	Module.prototype.loadEvents(page, moduleId);
-					$('.modularity-mod-event-'+moduleId+' .module-pagination').pagination('redraw');
+		        	Module.prototype.loadEvents(page, moduleId, module);
+					$(module).find('.module-pagination').pagination('redraw');
 		        },
 		    });
 		});
     };
 
     // Get event list with Ajax on pagination click
-    Module.prototype.loadEvents = function (page, moduleId) {
-		var thisModule = $('.modularity-mod-event-' + moduleId);
-		var height = $(thisModule).find('.module-content').height();
+    Module.prototype.loadEvents = function (page, moduleId, module) {
+		var height = $(module).find('.module-content').height();
 		$.ajax({
 			url: eventintegration.ajaxurl,
 			type: 'post',
@@ -49,14 +49,23 @@ EventManagerIntegration.Event.Module = (function ($) {
 				id: moduleId
 			},
 			beforeSend: function() {
-				$(thisModule).find('.event-module-list').remove();
-				$(thisModule).find('.module-content').append('<div class="event-load-box"><div class="loader">' + eventIntegrationFront.loading + '...</div></div>');
-				$(thisModule).find('.event-load-box').height(height);
+				$(module).find('.event-module-list').remove();
+				$(module).find('.module-content').append('<li class="event-loader"><i class="loading-dots"></i></li>');
+				$(module).find('.event-loader').height(height);
+				$('html, body').animate({
+			        scrollTop: $(module).offset().top
+			    }, 100);
 			},
 			success: function(html) {
-				$(thisModule).find('.event-load-box').remove();
-				$(thisModule).find('.module-content').append(html).hide().fadeIn(80).height('auto');
-			}
+				$(module).find('.module-content').append(html).hide().fadeIn(80).height('auto');
+			},
+			error: function() {
+				$(module).find('.module-content').append('<ul class="event-module-list"><li><p>' + eventIntegrationFront.event_pagination_error + '</p></li></ul>').hide().fadeIn(80).height('auto');
+			},
+			complete: function() {
+				$(module).find('.event-loader').remove();
+			},
+
 		})
 	};
 

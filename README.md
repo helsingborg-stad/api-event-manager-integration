@@ -14,7 +14,7 @@ Here is a code example to display a list of events. Use the attributes listed be
 ```html
 <div class="box box-panel box-primary">
 <h4 class="box-title">Evenemang</h4>
-    <<ul class="event-api" data-apiurl="http://api.helsingborg.se/json/wp/v2/event" post-limit="10" group-id="1" category-id="2,3">
+    <ul class="event-api" data-apiurl="http://api.helsingborg.se/json/wp/v2/event" post-limit="10" group-id="1" category-id="2,3">
         <li class="event-loading-template"><i class="loading-dots" style="margin: 10px auto;"></i></li>
         <div class="template hidden">
             <li>
