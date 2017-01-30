@@ -275,7 +275,10 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
     {
         if (current_user_can('administrator')) {
             $button  = '<div class="import-buttons actions" style="position: relative;">';
-            $button .= '<div id="importevents" class="button-primary">' . __('Import events', 'event-integration') . '</div>';
+
+            if (get_field('event_api_url', 'option')) {
+                $button .= '<div id="importevents" class="button-primary">' . __('Import events', 'event-integration') . '</div>';
+            }
 
             // Debug code
             // $button .= '<a href="' . admin_url('options.php?page=import-events') . '" class="button" id="post-query-submit">Debug</a>';
@@ -301,10 +304,16 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         $days_ahead = ! empty(get_field('days_ahead', 'options')) ? absint(get_field('days_ahead', 'options')) : 30;
         $to_date = date('Y-m-d', strtotime("midnight now + {$days_ahead} days"));
 
-        $api_url = 'http://api.helsingborg.se/json/wp/v2/event/time?start=' . $from_date . '&end=' . $to_date;
-        $importer = new \EventManagerIntegration\Parser\HbgEventApi($api_url);
-        $data = $importer->getCreatedData();
-        wp_send_json($data);
+        $api_url = get_field('event_api_url', 'option');
+        if ($api_url) {
+            $api_url = rtrim($api_url, '/') . '/event/time?start=' . $from_date . '&end=' . $to_date;
+            $importer = new \EventManagerIntegration\Parser\EventManagerApi($api_url);
+            $data = $importer->getCreatedData();
+            wp_send_json($data);
+            wp_die();
+        }
+
+        return;
     }
 
     /**

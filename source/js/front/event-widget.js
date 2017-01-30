@@ -23,7 +23,7 @@ EventManagerIntegration.Widget.TemplateParser = (function ($) {
         $(".event-api").each(function(index,module){
             var dataApiurl          = ($(module).attr('data-apiurl'));
                 dataApiurl          = dataApiurl.replace(/\/$/, "");
-                dataApiurl          = dataApiurl + '/time?start=' + year + '-' + mm + '-' + dd + '&end=' + (year+1) + '-' + mm + '-' + dd;
+                dataApiurl          = dataApiurl + '/event/time?start=' + year + '-' + mm + '-' + dd + '&end=' + (year+1) + '-' + mm + '-' + dd;
             var dataLimit           = ($(module).attr('post-limit'));
             var dataGroupId         = ($(module).attr('group-id'));
             var dataCategoryId      = ($(module).attr('category-id'));

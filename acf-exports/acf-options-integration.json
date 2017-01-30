@@ -1,7 +1,24 @@
+[
     {
         "key": "group_583557753bd73",
         "title": "Event Manager Integration",
         "fields": [
+            {
+                "key": "field_588f3ef76094c",
+                "label": "API url",
+                "name": "event_api_url",
+                "type": "url",
+                "instructions": "Link to Event Manager API root",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
             {
                 "key": "field_5835579f883ff",
                 "label": "Days ahead",
@@ -158,3 +175,4 @@
         "active": 1,
         "description": ""
     }
+]

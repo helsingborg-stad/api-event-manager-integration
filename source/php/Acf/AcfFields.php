@@ -23,6 +23,22 @@ class AcfFields
 			'title' => __('Event Manager Integration', 'event-integration'),
 			'fields' => array (
 				array (
+					'key' => 'field_588f3ef76094c',
+					'label' => __('API url', 'event-integration'),
+					'name' => 'event_api_url',
+					'type' => 'url',
+					'instructions' => __('Link to Event Manager API root', 'event-integration'),
+					'required' => 1,
+					'conditional_logic' => 0,
+					'wrapper' => array (
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'default_value' => '',
+					'placeholder' => '',
+				),
+				array (
 					'key' => 'field_5835579f883ff',
 					'label' => __('Days ahead', 'event-integration'),
 					'name' => 'days_ahead',
@@ -177,7 +193,6 @@ class AcfFields
 			'hide_on_screen' => '',
 			'active' => 1,
 			'description' => '',
-			'local' => 'json',
 		));
 
 		// Shortcode settings

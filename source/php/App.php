@@ -137,7 +137,7 @@ class App
 
             // Parsing events
             $api_url = 'http://api.helsingborg.se/json/wp/v2/event/time?start=' . $from_date . '&end=' . $to_date;
-            $importer = new \EventManagerIntegration\Parser\HbgEventApi($api_url);
+            $importer = new \EventManagerIntegration\Parser\EventManagerApi($api_url);
 
             // TA BORT
             file_put_contents(dirname(__FILE__)."/Log/import_events.log", "Event parser last run: ".date("Y-m-d H:i:s"));
@@ -160,9 +160,11 @@ class App
      */
     public static function importPublishingGroups()
     {
-        //$api_url = 'http://api.helsingborg.se/json/wp/v2/event_groups/';
-        $api_url = 'http://api.helsingborg.se/json/wp/v2/event_groups/';
-        $importer = new \EventManagerIntegration\Parser\HbgEventGroups($api_url);
+        $api_url = get_field('event_api_url', 'option');
+        if ($api_url) {
+            $api_url = rtrim($api_url, '/') . '/user_groups';
+            $importer = new \EventManagerIntegration\Parser\EventManagerGroups($api_url);
+        }
     }
 
     /**
@@ -214,8 +216,9 @@ class App
             $days_ahead = ! empty(get_field('days_ahead', 'options')) ? absint(get_field('days_ahead', 'options')) : 30;
             $to_date = date('Y-m-d', strtotime("midnight now + {$days_ahead} days"));
 
-            $api_url = 'http://api.helsingborg.se/json/wp/v2/event/time?start=' . $from_date . '&end=' . $to_date;
-            $importer = new \EventManagerIntegration\Parser\HbgEventApi($api_url);
+            $api_url = get_field('event_api_url', 'option');
+            $api_url = rtrim($api_url, '/') . '/event/time?start=' . $from_date . '&end=' . $to_date;
+            $importer = new \EventManagerIntegration\Parser\EventManagerApi($api_url);
             });
 
         add_submenu_page(
@@ -225,8 +228,11 @@ class App
             'edit_posts',
             'import-groups',
             function () {
-                $api_url = 'http://api.helsingborg.se/json/wp/v2/event_groups/';
-                $importer = new \EventManagerIntegration\Parser\HbgEventGroups($api_url);
+                $api_url = get_field('event_api_url', 'option');
+                if ($api_url) {
+                    $api_url = rtrim($api_url, '/') . '/user_groups';
+                    $importer = new \EventManagerIntegration\Parser\EventManagerGroups($api_url);
+                }
             });
 
         add_submenu_page(

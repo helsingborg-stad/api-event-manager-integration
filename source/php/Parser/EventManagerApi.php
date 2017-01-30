@@ -4,7 +4,7 @@ namespace EventManagerIntegration\Parser;
 
 use \EventManagerIntegration\Event as Event;
 
-class HbgEventApi extends \EventManagerIntegration\Parser
+class EventManagerApi extends \EventManagerIntegration\Parser
 {
     public function __construct($url)
     {
@@ -53,7 +53,7 @@ class HbgEventApi extends \EventManagerIntegration\Parser
         $featured_media         = ! empty($event['featured_media']['source_url']) ? $event['featured_media']['source_url'] : null;
         $categories             = ! empty($event['event_categories']) ? array_map('ucwords', array_map('trim', $event['event_categories'])) : array();
         $tags                   = ! empty($event['event_tags']) ? array_map('strtolower', array_map('trim', $event['event_tags'])) : array();
-        $groups                 = ! empty($event['event_groups']) ? $event['event_groups'] : array();
+        $groups                 = ! empty($event['user_groups']) ? $event['user_groups'] : array();
         $occasions              = ! empty($event['occasions']) ? $event['occasions'] : null;
         $event_link             = ! empty($event['event_link']) ? $event['event_link'] : null;
         $additional_links       = ! empty($event['additional_links']) ? $event['additional_links'] : null;

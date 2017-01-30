@@ -5,7 +5,7 @@
 
 namespace EventManagerIntegration\Parser;
 
-class HbgEventGroups extends \EventManagerIntegration\Parser
+class EventManagerGroups extends \EventManagerIntegration\Parser
 {
     public function __construct($url)
     {

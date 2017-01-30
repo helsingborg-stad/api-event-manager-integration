@@ -14,7 +14,6 @@ jQuery(document).ready(function ($) {
                 EventManagerIntegration.data.value = button.attr('id');
                 jQuery.post(ajaxurl, EventManagerIntegration.data, function(response) {
                     var newPosts = response;
-                    console.log(newPosts);
                     EventManagerIntegration.loadingOccasions = false;
                     restoreButton(button, storedCss);
                     location.reload();
