@@ -28,8 +28,8 @@ EventManagerIntegration.Widget.TemplateParser = (function ($) {
             var dataGroupId         = ($(module).attr('group-id'));
             var dataCategoryId      = ($(module).attr('category-id'));
             var apiUrl = (typeof dataLimit != 'undefined' && $.isNumeric(dataLimit)) ? dataApiurl + '&post-limit=' + dataLimit : dataApiurl + '&post-limit=' + 10;
-                apiUrl += (typeof dataGroupId != 'undefined') ? '&group-id=' + dataGroupId : apiUrl;
-                apiUrl += (typeof dataCategoryId != 'undefined') ? '&category-id=' + dataCategoryId : apiUrl;
+                apiUrl += (typeof dataGroupId != 'undefined' && dataGroupId) ? '&group-id=' + dataGroupId : '';
+                apiUrl += (typeof dataCategoryId != 'undefined' && dataCategoryId) ? '&category-id=' + dataCategoryId : '';
                 apiUrl += '&_jsonp=getevents';
             this.storeErrorTemplate($(module));
             this.storeTemplate($(module));
