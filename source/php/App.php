@@ -92,8 +92,9 @@ class App
         ));
         wp_enqueue_script('event-integration');
 
-        // Submit event form script
+
         wp_enqueue_script('submit-event', EVENTMANAGERINTEGRATION_URL . '/source/js/submit-event.js', 'jquery', false, true);
+
 
     }
 
