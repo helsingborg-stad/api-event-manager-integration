@@ -2,14 +2,14 @@
 
 Integrate and display events from Event Manager API.
 
-## JavaScript widget
+## JavaScript widgets
+
+### Event List code example
 Here is a code example to display a list of events. Use the attributes listed below to set API-url and filters. 
 `data-apiurl` = Url to Event manager API root.
 `post-limit` = Desired number of events to show.
 `group-id` = Add one or many(separated with comma) group ID to get events from specific groups.
 `category-id` = Add one or many(separated with comma) category ID to get events from specific categories.
-
-### Event List code example
 
 ```html
 <div class="box box-panel box-primary">
@@ -63,4 +63,176 @@ Here is a code example to display a list of events. Use the attributes listed be
         </div>
     </ul>
 </div>
+```
+
+### External submit form code example
+
+```html
+<div class="box box-panel box-primary">
+<h4 class="box-title">Submit event</h4>
+    <div class="gutter">
+        <form name="submit-event" class="submit-event">
+            <div class="form-group">
+                <label for="title">Namn på evenemang</label>
+                <input type="text" name="title" id="title" placeholder="Namn" required>
+            </div>
+
+            <div class="form-group">
+                <label for="content">Beskrivning</label>
+                <textarea name="content" id="content textarea" placeholder="Beskrivning"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="radio">Evenemanget inträffar</label>
+                <label class="radio">
+                    <input data-id="single-event" type="radio" name="radio" checked> Enstaka händelse
+                </label>
+                <label class="radio">
+                    <input data-id="recurring-event" type="radio" name="radio"> Återkommande
+                </label>
+            </div>
+
+            <div id="single-event" class="event-occasion form-group">
+                <div class="box box-panel box-panel-secondary">
+                    <h4 class="box-title">Datum</h4>
+                    <div class="box-content">
+                        <div class="form-group">
+                            <label for="start_date">Startdatum</label>
+                            <input type="text" name="start_date" id="start_date" placeholder="Datum" value="" class="datepicker">
+                        </div>
+                        <div class="form-group form-horizontal">
+                            <label for="start_time_h">Starttid</label>
+                            <div class="form-group">
+                                <input type="number" name="start_time_h" id="start_time_h" placeholder="HH" value="" min="0" max="24">
+                            </div>
+                            <div class="form-group">
+                                <i>: </i><input type="number" name="start_time_m" id="start_time_m" placeholder="MM" value="" min="0" max="60">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="end_date">Slutdatum</label>
+                            <input type="text" name="end_date" id="end_date" placeholder="Datum" value="" class="datepicker">
+                        </div>
+                        <div class="form-group form-horizontal">
+                            <label for="end_time_h">Sluttid</label>
+                            <div class="form-group">
+                                <input type="number" name="end_time_h" id="end_time_h" placeholder="HH" value="" min="0" max="24">
+                            </div>
+                            <div class="form-group">
+                                <i>: </i><input type="number" name="end_time_m" id="end_time_m" placeholder="MM" value="" min="0" max="60">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="recurring-event" class="event-occasion form-group">
+                <div class="box box-panel box-panel-secondary">
+                    <h4 class="box-title">Regel för återkommande evenemang</h4>
+                    <div class="box-content">
+                        <div class="form-group">
+                            <label for="weekday">Veckodag</label>
+                            <small>Evenemanget inträffar på vald veckodag</small>
+                            <select name="weekday" id="weekday">
+                                <option value="Monday">Måndag</option>
+                                <option value="Tuesday">Tisdag</option>
+                                <option value="Wednesday">Onsdag</option>
+                                <option value="Thursday">Torsdag</option>
+                                <option value="Friday">Fredag</option>
+                                <option value="Saturday">Lördag</option>
+                                <option value="Sunday">Söndag</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group form-horizontal">
+                            <label for="recurring_start_h">Starttid</label>
+                            <small>Evenemangets starttid</small>
+                            <div class="form-group">
+                                <input type="number" name="recurring_start_h" id="recurring_start_h" placeholder="HH" value="" min="0" max="24">
+                            </div>
+                            <div class="form-group">
+                                <i>: </i><input type="number" name="recurring_start_m" id="recurring_start_m" placeholder="MM" value="" min="0" max="60">
+                            </div>
+                        </div>
+                        <div class="form-group form-horizontal">
+                            <label for="recurring_end_h">Sluttid</label>
+                            <small>Evenemangets sluttid</small>
+                            <div class="form-group">
+                                <input type="number" name="recurring_end_h" id="recurring_end_h" placeholder="HH" value="" min="0" max="24">
+                            </div>
+                            <div class="form-group">
+                                <i>: </i><input type="number" name="recurring_end_m" id="recurring_end_m" placeholder="MM" value="" min="0" max="60">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="recurring_start_d">Startdatum </label>
+                            <small>Evenemanget inträffar löpande fr.o.m. detta datum</small>
+                            <input type="text" name="recurring_start_d" id="recurring_start_d" placeholder="Startdatum" value="" class="datepicker">
+                        </div>
+                        <div class="form-group">
+                            <label for="recurring_end_d">Slutdatum</label>
+                            <small>Evenemanget inträffar löpande t.o.m. detta datum</small>
+                            <input type="text" name="recurring_end_d" id="recurring_end_d" placeholder="Startdatum" value="" class="datepicker">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+           <div class="form-group">
+                <label for="organizer">Arrangörens namn</label>
+                <input type="text" name="organizer" id="organizer" placeholder="Arrangör">
+            </div>
+
+           <div class="form-group">
+                <label for="event_link">Webbplats</label>
+                <input type="url" name="event_link" id="event_link" placeholder="Webbplats">
+            </div>
+
+           <div class="form-group">
+                <label for="price_adult">Pris</label>
+                <input type="number" name="price_adult" id="price_adult" placeholder="Pris">
+            </div>
+
+            <div class="form-group">
+                <label for="location">Plats</label>
+                <select name="location" id="location">
+                    <option value="">Hämtar...</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="user_groups">Grupper</label>
+                <select name="user_groups" id="user_groups" multiple>
+                    <option value="">Hämtar...</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="event_categories">Kategorier</label>
+                <select name="event_categories" id="event_categories" multiple>
+                    <option value="">Hämtar...</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="image-input">Bild</label>
+                <input name="image-input" id="image-input" type="file" accept="image/gif, image/jpeg, image/png">
+
+                <div class="upload-error hidden gutter gutter-margin gutter-vertical">
+                    <li class="notice warning">
+                        <i class="fa fa-warning"></i> Uppladningen misslyckades, vänligen försök igen.
+                    </li>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Skicka">
+            </div>
+        </form>
+    </div> <!-- /.event-form -->
+</div> <!-- /.box-panel -->
+
+
 ```

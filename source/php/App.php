@@ -91,11 +91,6 @@ class App
             'event_pagination_error'   => __("Something went wrong, please try again later.", 'event-integration'),
         ));
         wp_enqueue_script('event-integration');
-
-
-        wp_enqueue_script('submit-event', EVENTMANAGERINTEGRATION_URL . '/source/js/submit-event.js', 'jquery', false, true);
-
-
     }
 
     /**
