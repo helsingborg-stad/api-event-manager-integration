@@ -220,9 +220,10 @@ EventManagerIntegration.Event.Form = (function ($) {
 			            console.log(data);
 			            $('.submit-error', eventForm).addClass('hidden');
 			        },
-			        error: function(error) {
-			            console.log(error);
-			        }
+				    error: function(jqXHR, textStatus) {
+				    	$('.submit-error', eventForm).removeClass('hidden');
+						$('.submit-error .warning', eventForm).empty().append('<i class="fa fa-warning"></i>'+textStatus+'</li>');
+				    }
 			    });
     };
 
@@ -235,26 +236,30 @@ EventManagerIntegration.Event.Form = (function ($) {
 	            data : formData
 	        },
 	        success: function(response) {
-	        	console.log(response);
-	            if (response) {
+	            if (response.success) {
+	            	console.log(response);
+	            	$('.submit-success', eventForm).removeClass('hidden');
+					$('.submit-success .success', eventForm).empty().append('<i class="fa fa-thumbs-up"></i>Evenemanget har skickats!</li>');
 	            	Form.prototype.cleanForm(eventForm);
-	           		$(':submit', eventForm).fadeOut(function() {
-						$(this).val("Skickat!").fadeIn();
-					});
 	            } else {
-	            	console.log("Something went wrong");
+	            	console.log(response.data);
+	            	$('.submit-error', eventForm).removeClass('hidden');
+					$('.submit-error .warning', eventForm).empty().append('<i class="fa fa-warning"></i>'+response.data+'</li>');
 	            }
 	        },
-		    error: function(errorThrown) {
-		     	console.log(errorThrown);
+		    error: function(jqXHR, textStatus) {
+		    	$('.submit-error', eventForm).removeClass('hidden');
+				$('.submit-error .warning', eventForm).empty().append('<i class="fa fa-warning"></i>'+textStatus+'</li>');
 		    }
 	    });
     };
 
     Form.prototype.handleEvents = function(eventForm, apiUrl) {
-
 		$(eventForm).on('submit', function(e) {
 		    e.preventDefault();
+
+		   	$('.submit-error', eventForm).addClass('hidden');
+		   	$('.submit-success', eventForm).addClass('hidden');
 
 		    var fileInput  	= eventForm.find('#image-input'),
     			formData 	= Form.prototype.jsonData(eventForm),
@@ -274,7 +279,6 @@ EventManagerIntegration.Event.Form = (function ($) {
 					Form.prototype.submitEventAjax(eventForm, formData);
 				});
 		    } else {
-		    	$('.submit-error', eventForm).addClass('hidden');
 		    	Form.prototype.submitEventAjax(eventForm, formData);
 		    }
 

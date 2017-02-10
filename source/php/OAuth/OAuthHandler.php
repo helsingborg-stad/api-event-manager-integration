@@ -266,9 +266,8 @@ class OAuthHandler
     }
 
     public function submitEvent() {
-        if (! isset($_POST['data']) || get_option('_event_authorized') == false) {
-            echo _e('Form data is missing or the client is not authorized', 'event-integration');
-            wp_die();
+        if (! isset($_POST['data'])) {
+            wp_send_json_error(__('Form data is missing, please try again.', 'event-integration'), 'event-integration');
         }
 
         $postData = json_encode($_POST['data']);
@@ -308,65 +307,13 @@ class OAuthHandler
             )));
 
         $result = file_get_contents($apiResourceUrl, false, $context);
+        if ($result === false) {
+            wp_send_json_error(__('Unauthorized to publish events.', 'event-integration'));
+        }
 
-        wp_send_json($result);
+        // return success results
+        wp_send_json_success($result);
     }
-
-    // Request credentials from consumer
-    public function request() {
-        $accessTokenUrl = "http://eventmanager.dev/oauth1/request";
-        $consumerKey    = "CWCU1RB4FKxu";
-        $nonce          = md5(mt_rand());
-        $oauthTimestamp = time();
-        $oauthToken     = "g1i6Nd10Xr3Gs8KuX5lDi81i";
-        $consumerSecret = rawurlencode("jG9Cb6O9fApzoAzOe2doqa0jHSuoczWklD1400z28kiWHokP");
-        $tokenSecret    = rawurlencode("XjntOUWgIPB9vxa8vWB1Gwja7t1Lhvih7dGzfkBrLSo5sv9S");
-        $oauthVersion   = "1.0";
-        $oauthSignatureMethod = "HMAC-SHA1";
-
-        $sigBase = "GET&" . rawurlencode($accessTokenUrl) . "&"
-        . rawurlencode("oauth_consumer_key=" . rawurlencode($consumerKey)
-        . "&oauth_nonce=" . rawurlencode($nonce)
-        . "&oauth_signature_method=" . rawurlencode($oauthSignatureMethod)
-        . "&oauth_timestamp=" . rawurlencode($oauthTimestamp)
-        . "&oauth_token=" . rawurlencode($oauthToken)
-        //. "&oauth_verifier=" . rawurlencode($oauthVerifier)
-        . "&oauth_version=" . rawurlencode($oauthVersion));
-
-        $sigKey = $consumerSecret . "&";
-
-        $oauthSig = base64_encode(hash_hmac("sha1", $sigBase, $sigKey, true));
-
-        $requestUrl = $accessTokenUrl . "?"
-        . "oauth_consumer_key=" . rawurlencode($consumerKey)
-        . "&oauth_nonce=" . rawurlencode($nonce)
-        . "&oauth_signature_method=" . rawurlencode($oauthSignatureMethod)
-        . "&oauth_timestamp=" . rawurlencode($oauthTimestamp)
-        . "&oauth_token=" . rawurlencode($oauthToken)
-        //. "&oauth_verifier=" . rawurlencode($oauthVerifier)
-        . "&oauth_version=". rawurlencode($oauthVersion)
-        . "&oauth_signature=" . rawurlencode($oauthSig);
-
-        $data = array();
-        $context = stream_context_create(array(
-            'http' => array(
-                'header' => "Content-Type: application/x-www-form-urlencoded\r\n".'Authorization: OAuth oauth_consumer_key="'.$consumerKey.'",oauth_token="'.$oauthToken.'",oauth_signature_method="'.$oauthSignatureMethod.'",oauth_timestamp="'.$oauthTimestamp.'",oauth_nonce="'.$nonce.'",oauth_version="'.$oauthVersion.'",oauth_signature="'.$oauthSig.'"'."\r\n",
-                'method'  => 'POST',
-                'content' => http_build_query($data)
-            ),
-        ));
-
-        //$response = file_get_contents($accessTokenUrl, false, $context);
-        $response = file_get_contents($requestUrl);
-
-        parse_str($response, $values);
-
-        $_SESSION["accessToken"] = $values["oauth_token"];
-        $_SESSION["accessTokenSecret"] = $values["oauth_token_secret"];
-
-        var_dump($response);
-    }
-
 
 
 
