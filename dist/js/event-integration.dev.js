@@ -79,18 +79,17 @@ EventManagerIntegration = EventManagerIntegration || {};
 EventManagerIntegration.Event = EventManagerIntegration.Event || {};
 
 EventManagerIntegration.Event.Form = (function ($) {
-	var apiUrl 	 		 = 'http://eventmanager.dev/json/wp/v2';
-
-	// Object used for encoding and decoding a base64 string
-	var Base64 = {_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9\+\/\=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/\r\n/g,"\n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}};
 
     function Form() {
     	$(".submit-event").each(function(index, eventForm) {
+    		var apiUrl = eventintegration.apiurl,
+    			apiUrl = apiUrl.replace(/\/$/, "");
+
         	$(eventForm).find('#end_date').datepicker();
 			$(eventForm).find('#start_date').datepicker();
 			$('#recurring-event', eventForm).children('.box').hide();
 
-        	this.handleEvents($(eventForm));
+        	this.handleEvents($(eventForm), apiUrl);
         	this.loadLocations($(eventForm), apiUrl);
         	this.loadTaxonomy($(eventForm), apiUrl, 'user_groups');
         	this.loadTaxonomy($(eventForm), apiUrl, 'event_categories');
@@ -279,7 +278,7 @@ EventManagerIntegration.Event.Form = (function ($) {
 	    return objData;
 	};
 
-    Form.prototype.uploadImageAjax = function(eventForm, imageData){
+    Form.prototype.uploadImageAjax = function(eventForm, imageData, apiUrl){
     	return $.ajax({
 			        url: apiUrl + '/media',
 			        method: 'POST',
@@ -288,12 +287,12 @@ EventManagerIntegration.Event.Form = (function ($) {
 			        contentType: false,
 			        processData: false,
 			        beforeSend: function (xhr) {
-		            	xhr.setRequestHeader('Authorization', 'Basic ' + Base64.encode('external-form:test'));
+		            	xhr.setRequestHeader('Authorization', 'Basic ' + Base64.encode(usr+":"+usrHash));
 			        },
 			        success: function(data) {
 			        	console.log('Image uploaded:');
 			            console.log(data);
-			            $('.upload-error', eventForm).addClass('hidden');
+			            $('.submit-error', eventForm).addClass('hidden');
 			        },
 			        error: function(error) {
 			            console.log(error);
@@ -302,30 +301,31 @@ EventManagerIntegration.Event.Form = (function ($) {
     };
 
     Form.prototype.submitEventAjax = function(eventForm, formData){
-    	return $.ajax({
-			        url: apiUrl + '/event',
-			        method: 'POST',
-			        data: formData,
-			        crossDomain: true,
-			        contentType: 'application/json',
-			        beforeSend: function(xhr) {
-			            xhr.setRequestHeader('Authorization', 'Basic ' + Base64.encode('external-form:test'));
-			        },
-			        success: function(data) {
-			        	console.log("Event saved:");
-			            console.log(data);
-			            Form.prototype.cleanForm(eventForm);
-			           	$(':submit', eventForm).fadeOut(function() {
-							$(this).val("Skickat!").fadeIn();
-						});
-			        },
-			        error: function(error) {
-			            console.log(error);
-			        }
-			    });
+		$.ajax({
+	        url: eventintegration.ajaxurl,
+	        type: "POST",
+	        data: {
+	            action : "submit_event",
+	            data : formData
+	        },
+	        success: function(response) {
+	        	console.log(response);
+	            if (response) {
+	            	Form.prototype.cleanForm(eventForm);
+	           		$(':submit', eventForm).fadeOut(function() {
+						$(this).val("Skickat!").fadeIn();
+					});
+	            } else {
+	            	console.log("Something went wrong");
+	            }
+	        },
+		    error: function(errorThrown) {
+		     	console.log(errorThrown);
+		    }
+	    });
     };
 
-    Form.prototype.handleEvents = function(eventForm) {
+    Form.prototype.handleEvents = function(eventForm, apiUrl) {
 
 		$(eventForm).on('submit', function(e) {
 		    e.preventDefault();
@@ -336,19 +336,20 @@ EventManagerIntegration.Event.Form = (function ($) {
 
 		    if (fileInput.val()) {
 		    	imageData.append('file', fileInput[0].files[0]);
-			    $.when(Form.prototype.uploadImageAjax(eventForm, imageData))
+			    $.when(Form.prototype.uploadImageAjax(eventForm, imageData, apiUrl))
 			    .fail(function() {
-					$('.upload-error', eventForm).removeClass('hidden');
+					$('.submit-error', eventForm).removeClass('hidden');
+					$('.submit-error .warning', eventForm).empty().append('<i class="fa fa-warning"></i>Uppladningen misslyckades, vänligen försök igen.</li>');
 				})
 			    .then(function(data, textStatus, jqXHR) {
 					console.log(jqXHR.status); // Alerts 200
 					console.log(data.id);
 					formData['featured_media'] 	= data.id;
-					Form.prototype.submitEventAjax(eventForm, JSON.stringify(formData));
+					Form.prototype.submitEventAjax(eventForm, formData);
 				});
 		    } else {
-		    	$('.upload-error', eventForm).addClass('hidden');
-		    	Form.prototype.submitEventAjax(eventForm, JSON.stringify(formData));
+		    	$('.submit-error', eventForm).addClass('hidden');
+		    	Form.prototype.submitEventAjax(eventForm, formData);
 		    }
 
 		});
@@ -358,7 +359,6 @@ EventManagerIntegration.Event.Form = (function ($) {
     		$('#' + id).children('.form-group .box').show();
     		$('#' + id).siblings('.event-occasion').children('.box').hide();
 		});
-
     };
 
     // Clean up form

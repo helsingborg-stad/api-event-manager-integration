@@ -7,6 +7,9 @@
   width: 100%;
   height: auto; }
 
+.message-success {
+  color: #33cc33; }
+
 .hidden {
   display: none !important; }
 

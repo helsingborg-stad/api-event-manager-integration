@@ -17,13 +17,14 @@ class App
         /* Register cron action */
         add_action('import_events_daily', array($this, 'importEventsCron'));
 
+        new OAuth\OAuthHandler();
         new PostTypes\Events();
         new Acf\AcfConfig();
         new Acf\AcfFields();
         new Widget\DisplayEvents();
         new Admin\Options();
         new Admin\AdminDisplayEvent();
-        new Shortcodes\eventShortcode();
+        new Shortcodes\EventShortcode();
 
         /* Modularity modules */
         add_action('Modularity', function () {
@@ -82,10 +83,11 @@ class App
         wp_enqueue_style('event-integration');
 
         // Scripts
-        wp_enqueue_script('vendor-pagination', EVENTMANAGERINTEGRATION_URL . '/source/js/vendor/jquery.simplePagination.min.js', 'jquery', false, true);
+        wp_enqueue_script('vendor-pagination', EVENTMANAGERINTEGRATION_URL . '/source/js/vendor/simple-pagination/jquery.simplePagination.min.js', 'jquery', false, true);
         wp_register_script('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-integration.' . self::$assetSuffix . '.js', 'jquery', false, true);
         wp_localize_script('event-integration', 'eventintegration', array(
-            'ajaxurl' => admin_url('admin-ajax.php')
+            'ajaxurl' => admin_url('admin-ajax.php'),
+            'apiurl'  => get_field('event_api_url', 'option'),
         ));
         wp_localize_script('event-integration', 'eventIntegrationFront', array(
             'event_pagination_error'   => __("Something went wrong, please try again later.", 'event-integration'),
