@@ -337,7 +337,7 @@ class OAuthHandler
         // );
 
         $target = EVENTMANAGERINTEGRATION_PATH . 'testtest.png';
-        $data = base64_encode(file_get_contents(EVENTMANAGERINTEGRATION_PATH . 'testtest.png'));
+        $img_data = base64_encode(file_get_contents(EVENTMANAGERINTEGRATION_PATH . 'testtest.png'));
 
         echo $target;
 
@@ -417,9 +417,7 @@ class OAuthHandler
         // );
 
         $target = EVENTMANAGERINTEGRATION_PATH . 'testtest.png';
-        $data = base64_encode(file_get_contents(EVENTMANAGERINTEGRATION_PATH . 'testtest.png'));
-
-        echo $target;
+        $img_data = base64_encode(file_get_contents(EVENTMANAGERINTEGRATION_PATH . 'testtest.png'));
 
         $endPoint             = '/media';
 
@@ -455,8 +453,6 @@ class OAuthHandler
             . "oauth_token=" . rawurlencode($accessToken) . ","
             . "oauth_version=" . rawurlencode($oauthVersion);
 
-        $array = json_encode(array("file"=>$data));
-
         // $context = stream_context_create(array("http" => array(
         //     "method" => "POST",
         //     "header" => "Content-type: application/json\r\n"
@@ -467,34 +463,34 @@ class OAuthHandler
 
         // $result = file_get_contents($apiResourceUrl, false, $context);
 
+        $eol = "\r\n";
+        $data = '';
 
-$eol = "\r\n";
-$data = '';
+        $mime_boundary=md5(time());
 
-$mime_boundary=md5(time());
+        // $data .= '--' . $mime_boundary . $eol;
+        // $data .= 'Content-Disposition: form-data; name="file"' . $eol . $eol;
+        // $data .= "File" . $eol;
+        $data .= '--' . $mime_boundary . $eol;
+        $data .= 'Content-Disposition: form-data; name="file"; filename="'.$_FILES['file']['name'].'"' . $eol;
+        $data .= 'Content-Type: text/plain' . $eol;
+        $data .= 'Content-Transfer-Encoding: base64' . $eol . $eol;
+        $data .= chunk_split(base64_encode(file_get_contents($_FILES['file']['tmp_name']))) . $eol;
+        $data .= "--" . $mime_boundary . "--" . $eol . $eol; // finish with two eol's!!
 
-$data .= '--' . $mime_boundary . $eol;
-$data .= 'Content-Disposition: form-data; name="somedata"' . $eol . $eol;
-$data .= "Some Data" . $eol;
-$data .= '--' . $mime_boundary . $eol;
-$data .= 'Content-Disposition: form-data; name="'.$_FILES['file']['name'].'"; filename="'.$_FILES['file']['name'].'"' . $eol;
-$data .= 'Content-Type: text/plain' . $eol;
-$data .= 'Content-Transfer-Encoding: base64' . $eol . $eol;
-$data .= chunk_split(base64_encode(file_get_contents($_FILES['file']['tmp_name']))) . $eol;
-$data .= "--" . $mime_boundary . "--" . $eol . $eol; // finish with two eol's!!
+        echo "<pre>".print_r($_FILES,true)."</pre>";
+        echo $data;
 
-echo $data;
+        $params = array('http' => array(
+                          'method' => 'POST',
+                          'header' => 'Content-Type: multipart/form-data; boundary=' . $mime_boundary . $eol
+                            . "Content-Disposition: attachment filename=\"" . rawurlencode($_FILES['file']['name']) . "\"\r\n"
+                            . 'Authorization: Basic '. base64_encode("admin:^ZlKdhREtrctHVo0M@5XV0n@") . $eol,
+                          'content' => $data
+                       ));
 
-$params = array('http' => array(
-                  'method' => 'POST',
-                  'header' => 'Content-Type: multipart/form-data; boundary=' . $mime_boundary . $eol
-                  . 'Authorization: Basic '. base64_encode("admin:^ZlKdhREtrctHVo0M@5XV0n@") . $eol,
-                  'content' => $data
-               ));
-
-$context = stream_context_create($params);
-$result = file_get_contents($apiResourceUrl, false, $context);
-
+        $context = stream_context_create($params);
+        $result = file_get_contents($apiResourceUrl, false, $context);
 
         if ($result === false) {
             var_dump($http_response_header);
