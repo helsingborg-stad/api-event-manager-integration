@@ -9,13 +9,10 @@ class OAuthHandler
         add_action('wp_ajax_request_oauth', array($this, 'requestOAuth'));
         add_action('wp_ajax_access_oauth', array($this, 'accessOAuth'));
         add_action('wp_ajax_delete_oauth', array($this, 'deleteOAuth'));
-
         add_action('wp_ajax_nopriv_submit_event', array($this, 'submitEvent'));
         add_action('wp_ajax_submit_event', array($this, 'submitEvent'));
-
         add_action('wp_ajax_nopriv_submit_image', array($this, 'submitImage'));
         add_action('wp_ajax_submit_image', array($this, 'submitImage'));
-
         add_action('admin_menu', array($this, 'createOauthPage'));
         add_action('init', array($this, 'startSession'), 1);
     }
@@ -265,6 +262,7 @@ class OAuthHandler
         update_option('_event_token',  $values["oauth_token"]);
         update_option('_event_token_secret', $values["oauth_token_secret"]);
         update_option('_event_authorized', true);
+        session_destroy();
 
         wp_send_json_success(__('You are authorized!', 'event-integration'));
     }
@@ -319,7 +317,7 @@ class OAuthHandler
 
         $result = file_get_contents($apiResourceUrl, false, $context);
         if ($result === false) {
-            wp_send_json_error(__('Unauthorized to publish to API.', 'event-integration'));
+            wp_send_json_error(__('Something went wrong posting the event', 'event-integration'));
         }
 
         // return success results
@@ -328,103 +326,14 @@ class OAuthHandler
 
 
     /**
-     * Submit an event to Event Manager API
-     */
-    public function test() {
-        if (! isset($_FILES['file'])) {
-            wp_send_json_error(__('Image is not selected, please try again.', 'event-integration'), 'event-integration');
-        }
-
-        // $request_file = array(
-        //         'file'     => file_get_contents($_FILES['file']['tmp_name']),
-        //         'name'     => $_FILES['file']['name']
-        // );
-
-        $target = EVENTMANAGERINTEGRATION_PATH . 'testtest.png';
-        $img_data = base64_encode(file_get_contents(EVENTMANAGERINTEGRATION_PATH . 'testtest.png'));
-
-        echo $target;
-
-        // $request_file = array(
-        //     "title" => "test.jpg",
-        //     "source_url" => $target,
-        //     "file" => $target,
-        // );
-
-        $endPoint             = '/media';
-
-        $consumerKey          = get_option('_event_client');
-        $consumerSecret       = get_option('_event_secret');
-        $accessToken          = get_option('_event_token');
-        $accessTokenSecret    = get_option('_event_token_secret');
-        $oauthVersion         = "1.0";
-        $apiUrl               = rtrim(get_field('event_api_url', 'option'), '/');
-        $apiResourceUrl       = $apiUrl . $endPoint;
-        $nonce                = md5(mt_rand());
-        $oauthSignatureMethod = "HMAC-SHA1";
-        $oauthTimestamp       = time();
-
-        $sigBase = "POST&" . rawurlencode($apiResourceUrl) . "&"
-            . rawurlencode("oauth_consumer_key=" . rawurlencode($consumerKey)
-            . "&oauth_nonce=" . rawurlencode($nonce)
-            . "&oauth_signature_method=" . rawurlencode($oauthSignatureMethod)
-            . "&oauth_timestamp=" . $oauthTimestamp
-            . "&oauth_token=" . rawurlencode($accessToken)
-            . "&oauth_version=" . rawurlencode($oauthVersion)
-
-            //. "&file=" . rawurlencode($data)
-            );
-
-        $sigKey = rawurlencode($consumerSecret) . "&" . rawurlencode($accessTokenSecret);
-        $oauthSig = base64_encode(hash_hmac("sha1", $sigBase, $sigKey, true));
-        $authHeader = "OAuth oauth_consumer_key=" . rawurlencode($consumerKey) . ","
-            . "oauth_nonce=" . rawurlencode($nonce) . ","
-            . "oauth_signature_method=" . rawurlencode($oauthSignatureMethod) . ","
-            . "oauth_signature=" . rawurlencode($oauthSig) . ","
-            . "oauth_timestamp=". rawurlencode($oauthTimestamp) . ","
-            . "oauth_token=" . rawurlencode($accessToken) . ","
-            . "oauth_version=" . rawurlencode($oauthVersion);
-
-        $httpPostDataUrl = rawurlencode($data);
-
-        $context = stream_context_create(array("http" => array(
-            "method" => "POST",
-            "header" => "Content-Type: multipart/form-data\r\n"
-                        . "Content-Disposition: attachment filename=\"" . rawurlencode('testtest.png') . "\"\r\n"
-                        . 'Authorization: Basic '. base64_encode("admin:^ZlKdhREtrctHVo0M@5XV0n@") . "\r\n",
-            "content" => "file=".rawurlencode($data)
-            )));
-
-        $result = file_get_contents($apiResourceUrl, false, $context);
-
-        if ($result === false) {
-            var_dump($http_response_header);
-            //wp_send_json_error(__('Unauthorized to publish to API.', 'event-integration'));
-        }
-
-        // return success results
-        wp_send_json_success($result);
-    }
-
-
-    /**
-     * Submit an event to Event Manager API
+     * Upload media to Event Manager API
      */
     public function submitImage() {
         if (! isset($_FILES['file'])) {
             wp_send_json_error(__('Image is not selected, please try again.', 'event-integration'), 'event-integration');
         }
 
-        // $request_file = array(
-        //         'file'     => file_get_contents($_FILES['file']['tmp_name']),
-        //         'name'     => $_FILES['file']['name']
-        // );
-
-        $target = EVENTMANAGERINTEGRATION_PATH . 'testtest.png';
-        $img_data = base64_encode(file_get_contents(EVENTMANAGERINTEGRATION_PATH . 'testtest.png'));
-
         $endPoint             = '/media';
-
         $consumerKey          = get_option('_event_client');
         $consumerSecret       = get_option('_event_secret');
         $accessToken          = get_option('_event_token');
@@ -436,6 +345,16 @@ class OAuthHandler
         $oauthSignatureMethod = "HMAC-SHA1";
         $oauthTimestamp       = time();
 
+        $eol = "\r\n";
+        define('MULTIPART_BOUNDARY', '--------------------------'.microtime(true));
+        $fileContents = file_get_contents($_FILES['file']['tmp_name']);
+
+        $content =  "--" . MULTIPART_BOUNDARY . $eol .
+                    "Content-Disposition: form-data; name=\"file\"; filename=\"".rawurlencode($_FILES['file']['name'])."\"". $eol .
+                    "Content-Type: " . $_FILES['file']['type']. $eol . $eol .
+                    $fileContents . $eol;
+        $content .= "--" . MULTIPART_BOUNDARY . "--" . $eol;
+
         $sigBase = "POST&" . rawurlencode($apiResourceUrl) . "&"
             . rawurlencode("oauth_consumer_key=" . rawurlencode($consumerKey)
             . "&oauth_nonce=" . rawurlencode($nonce)
@@ -443,9 +362,7 @@ class OAuthHandler
             . "&oauth_timestamp=" . $oauthTimestamp
             . "&oauth_token=" . rawurlencode($accessToken)
             . "&oauth_version=" . rawurlencode($oauthVersion)
-
-            //. "&file=" . rawurlencode($data)
-            );
+         );
 
         $sigKey = rawurlencode($consumerSecret) . "&" . rawurlencode($accessTokenSecret);
         $oauthSig = base64_encode(hash_hmac("sha1", $sigBase, $sigKey, true));
@@ -457,57 +374,24 @@ class OAuthHandler
             . "oauth_token=" . rawurlencode($accessToken) . ","
             . "oauth_version=" . rawurlencode($oauthVersion);
 
-        // $context = stream_context_create(array("http" => array(
-        //     "method" => "POST",
-        //     "header" => "Content-type: application/json\r\n"
-        //                 . "Content-Disposition: attachment filename=\"" . rawurlencode('testtest.png') . "\"\r\n"
-        //           . 'Authorization: Basic '. base64_encode("admin:^ZlKdhREtrctHVo0M@5XV0n@") . "\r\n",
-        //     //"content" => $array
-        //     )));
-
-        // $result = file_get_contents($apiResourceUrl, false, $context);
-
-        $eol = "\r\n";
-        $data = '';
-
-        $mime_boundary=md5(time());
-
-        // $data .= '--' . $mime_boundary . $eol;
-        // $data .= 'Content-Disposition: form-data; name="file"' . $eol . $eol;
-        // $data .= "File" . $eol;
-        $data .= '--' . $mime_boundary . $eol;
-        $data .= 'Content-Disposition: form-data; name="file"; filename="'.$_FILES['file']['name'].'"' . $eol;
-        $data .= 'Content-Type: text/plain' . $eol;
-        $data .= 'Content-Transfer-Encoding: base64' . $eol . $eol;
-        $data .= chunk_split(base64_encode(file_get_contents($_FILES['file']['tmp_name']))) . $eol;
-        $data .= "--" . $mime_boundary . "--" . $eol . $eol; // finish with two eol's!!
-
-        echo "<pre>".print_r($_FILES,true)."</pre>";
-        echo $data;
-
         $params = array('http' => array(
-                          'method' => 'POST',
-                          'header' => 'Content-Type: multipart/form-data; boundary=' . $mime_boundary . $eol
-                            . "Content-Disposition: attachment filename=\"" . rawurlencode($_FILES['file']['name']) . "\"\r\n"
-                            . 'Authorization: Basic '. base64_encode("admin:^ZlKdhREtrctHVo0M@5XV0n@") . $eol,
-                          'content' => $data
+                            'method' => 'POST',
+                            'header' => 'Content-Type: multipart/form-data; boundary=' . MULTIPART_BOUNDARY . $eol
+                                        . "Content-Disposition: attachment filename=\"" . rawurlencode($_FILES['file']['name']) . "\"\r\n"
+                                        . "Authorization: " . $authHeader . $eol,
+                            'content' => $content
                        ));
 
         $context = stream_context_create($params);
         $result = file_get_contents($apiResourceUrl, false, $context);
 
         if ($result === false) {
-            var_dump($http_response_header);
-            //wp_send_json_error(__('Unauthorized to publish to API.', 'event-integration'));
+            wp_send_json_error(__('Something went wrong uploading your image', 'event-integration'));
         }
 
-        // return success results
-        wp_send_json_success($result);
+        // return media id
+        $resObj = json_decode($result);
+        wp_send_json_success($resObj->id);
     }
-
-
-
-
-
 
 }

@@ -140,7 +140,7 @@ EventManagerIntegration.Event.Form = (function ($) {
         });
     };
 
-    // Save+format and return as JSON
+    // Save+format input data and return as object
 	Form.prototype.jsonData = function(form) {
 	    var arrData 	= form.serializeArray(),
 	        objData 	= {},
@@ -198,39 +198,14 @@ EventManagerIntegration.Event.Form = (function ($) {
 		objData['user_groups'] 		= groups;
 		objData['event_categories'] = categories;
 
-	    console.log(objData);
-	    console.log(JSON.stringify(objData));
+	    // console.log(objData);
+	    // console.log(JSON.stringify(objData));
 	    return objData;
 	};
 
-    Form.prototype.uploadImageAjax = function(eventForm, imageData){
-    	return $.ajax({
-			        url: apiUrl + '/media',
-			        method: 'POST',
-			        data: imageData,
-			        crossDomain: true,
-			        contentType: false,
-			        processData: false,
-			        beforeSend: function (xhr) {
-		            	xhr.setRequestHeader('Authorization', 'Basic ' + Base64.encode(usr+":"+usrHash));
-			        },
-			        success: function(data) {
-			        	console.log('Image uploaded:');
-			            console.log(data);
-			            $('.submit-error', eventForm).addClass('hidden');
-			        },
-				    error: function(jqXHR, textStatus) {
-				    	$('.submit-error', eventForm).removeClass('hidden');
-						$('.submit-error .warning', eventForm).empty().append('<i class="fa fa-warning"></i>'+textStatus+'</li>');
-				    }
-			    });
-    };
-
+    // Send Ajax request with media data
     Form.prototype.submitImageAjax = function(eventForm, imageData){
-    	console.log(imageData);
-
     	imageData.append('action', 'submit_image');
-
 		return $.ajax({
 	        url: eventintegration.ajaxurl,
 	        type: "POST",
@@ -238,31 +213,13 @@ EventManagerIntegration.Event.Form = (function ($) {
             contentType: false,
             processData: false,
             data: imageData,
-	        success: function(response) {
-	        	console.log(response);
-
-	            if (response.success) {
-	            	console.log('Success');
-	            	console.log(response);
-	    //         	$('.submit-success', eventForm).removeClass('hidden');
-					// $('.submit-success .success', eventForm).empty().append('<i class="fa fa-send"></i>Evenemanget har skickats!</li>');
-	            	Form.prototype.cleanForm(eventForm);
-	            } else {
-	            	console.log('Failed');
-	            	console.log(response);
-	    //         	$('.submit-error', eventForm).removeClass('hidden');
-					// $('.submit-error .warning', eventForm).empty().append('<i class="fa fa-warning"></i>'+response.data+'</li>');
-	            }
-	        },
 		    error: function(jqXHR, textStatus) {
-		    	console.log('ERROR');
 		    	console.log(textStatus);
-		  //   	$('.submit-error', eventForm).removeClass('hidden');
-				// $('.submit-error .warning', eventForm).empty().append('<i class="fa fa-warning"></i>'+textStatus+'</li>');
 		    }
 	    });
     };
 
+    // Send Ajax request with post data
     Form.prototype.submitEventAjax = function(eventForm, formData){
 		$.ajax({
 	        url: eventintegration.ajaxurl,
@@ -272,15 +229,15 @@ EventManagerIntegration.Event.Form = (function ($) {
 	            data : formData
 	        },
 	        success: function(response) {
+	        //console.log(response);
 	            if (response.success) {
-	            	console.log(response);
 	            	$('.submit-success', eventForm).removeClass('hidden');
 					$('.submit-success .success', eventForm).empty().append('<i class="fa fa-send"></i>Evenemanget har skickats!</li>');
 	            	Form.prototype.cleanForm(eventForm);
 	            } else {
 	            	console.log(response.data);
 	            	$('.submit-error', eventForm).removeClass('hidden');
-					$('.submit-error .warning', eventForm).empty().append('<i class="fa fa-warning"></i>'+response.data+'</li>');
+					$('.submit-error .warning', eventForm).empty().append('<i class="fa fa-warning"></i>' + response.data + '</li>');
 	            }
 	        },
 		    error: function(jqXHR, textStatus) {
@@ -301,28 +258,27 @@ EventManagerIntegration.Event.Form = (function ($) {
     			formData 	= Form.prototype.jsonData(eventForm),
 		    	imageData 	= new FormData();
 
+		    // Upload media first and append it to the post.
 		    if (fileInput.val()) {
 		    	imageData.append('file', fileInput[0].files[0]);
-		  		console.log(imageData);
-		  		Form.prototype.submitImageAjax(eventForm, imageData);
-
-			 //    $.when(Form.prototype.submitImageAjax(eventForm, imageData))
-			 //    .fail(function() {
-				// 	$('.submit-error', eventForm).removeClass('hidden');
-				// 	$('.submit-error .warning', eventForm).empty().append('<i class="fa fa-warning"></i>Uppladningen misslyckades, vänligen försök igen.</li>');
-				// })
-			 //    .then(function(data, textStatus) {
-				// 	console.log(data);
-				// 	console.log(textStatus);
-				// 	//formData['featured_media'] 	= data.id;
-				// 	//Form.prototype.submitEventAjax(eventForm, formData);
-				// });
+			    $.when(Form.prototype.submitImageAjax(eventForm, imageData))
+			    .then(function(response, textStatus) {
+			    	if (response.success) {
+			    		formData['featured_media'] 	= response.data;
+						Form.prototype.submitEventAjax(eventForm, formData);
+			    	} else {
+						$('.submit-error', eventForm).removeClass('hidden');
+						$('.submit-error .warning', eventForm).empty().append('<i class="fa fa-warning"></i>' + response.data + '</li>');
+			    	}
+				});
+			// Submit post if media is not set
 		    } else {
 		    	Form.prototype.submitEventAjax(eventForm, formData);
 		    }
 
 		});
 
+		// Show / hide occasion and reccuring occasion rules
 		$(':radio', eventForm).change(function (event) {
     		var id = $(this).data('id');
     		$('#' + id).children('.form-group .box').show();
