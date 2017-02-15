@@ -269,7 +269,6 @@ EventManagerIntegration.Event.Form = (function ($) {
 		    						"main_organizer": true
 		    						}];
 	    }
-		objData['import_client'] 	= "integration plugin";
 		objData['user_groups'] 		= groups;
 		objData['event_categories'] = categories;
 

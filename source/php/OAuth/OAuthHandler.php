@@ -277,17 +277,21 @@ class OAuthHandler
             wp_send_json_error(__('Form data is missing, please try again.', 'event-integration'), 'event-integration');
         }
 
-        $postData = json_encode($_POST['data']);
-        $consumerKey       = get_option('_event_client');
-        $consumerSecret    = get_option('_event_secret');
-        $accessToken       = get_option('_event_token');
-        $accessTokenSecret = get_option('_event_token_secret');
-        $oauthVersion      = "1.0";
-        $apiUrl            = rtrim(get_field('event_api_url', 'option'), '/');
-        $apiResourceUrl    = $apiUrl . '/event';
-        $nonce = md5(mt_rand());
-        $oauthSignatureMethod = "HMAC-SHA1";
-        $oauthTimestamp = time();
+        $postData                    = $_POST['data'];
+        // Add consumer name to postData
+        $clientUrl                   = parse_url(get_site_url());
+        $postData['consumer_client'] = $clientUrl['host'];
+        $postData                    = json_encode($postData);
+        $consumerKey                 = get_option('_event_client');
+        $consumerSecret              = get_option('_event_secret');
+        $accessToken                 = get_option('_event_token');
+        $accessTokenSecret           = get_option('_event_token_secret');
+        $oauthVersion                = "1.0";
+        $apiUrl                      = rtrim(get_field('event_api_url', 'option'), '/');
+        $apiResourceUrl              = $apiUrl . '/event';
+        $nonce                       = md5(mt_rand());
+        $oauthSignatureMethod        = "HMAC-SHA1";
+        $oauthTimestamp              = time();
 
         $sigBase = "POST&" . rawurlencode($apiResourceUrl) . "&"
             . rawurlencode("oauth_consumer_key=" . rawurlencode($consumerKey)
