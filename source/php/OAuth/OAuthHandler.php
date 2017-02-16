@@ -14,32 +14,10 @@ class OAuthHandler
         add_action('wp_ajax_nopriv_submit_image', array($this, 'submitImage'));
         add_action('wp_ajax_submit_image', array($this, 'submitImage'));
         add_action('admin_menu', array($this, 'createOauthPage'));
-        add_action('init', array($this, 'startSession'), 1);
-    }
-
-    function startSession() {
-        if(! session_id()) {
-            session_start();
-        }
     }
 
     /**
-     * Remove client tokens
-     */
-    function deleteOAuth()
-    {
-        delete_option('_event_authorized');
-        delete_option('_event_client');
-        delete_option('_event_secret');
-        delete_option('_event_token');
-        delete_option('_event_token_secret');
-
-        echo "Client removed";
-        wp_die();
-    }
-
-    /**
-     * Adds a submenu page under a custom post type parent.
+     * Adds submenu page "API authentication", under custom post type parent.
      */
     function createOauthPage() {
         add_submenu_page(
@@ -53,7 +31,7 @@ class OAuthHandler
     }
 
     /**
-     * Display callback for the submenu page.
+     * Callback for the submenu page. Forms to complete authorization.
      */
     function oauthRequestCallback() {
         ?>
@@ -140,7 +118,26 @@ class OAuthHandler
     }
 
     /**
-     * Send OAuth request to API and return verification url
+     * Remove all client tokens
+     */
+    function deleteOAuth()
+    {
+        delete_option('_event_authorized');
+        delete_option('_event_client');
+        delete_option('_event_secret');
+        delete_option('_event_token');
+        delete_option('_event_token_secret');
+        delete_option('_temp_request_token');
+        delete_option('_temp_request_token_secret');
+
+        echo "Client removed";
+        wp_die();
+    }
+
+    /**
+     * OAuth1 verification step 1: Send a request to API with client keys. Return verification URL if succeeded.
+     * OAuth1 verification step 2 (handled by OAuth1 server): User authorizes the client from the verification URL and will be given a verifier key,
+     * that will be used in step 3
      * @return string
      */
     public function requestOAuth()
@@ -164,16 +161,18 @@ class OAuthHandler
         $nonce                = md5(mt_rand());
         $oauthSignatureMethod = "HMAC-SHA1";
         $oauthVersion         = "1.0";
+        // Create OAuth signature base string
         $sigBase = "GET&" . rawurlencode($requestTokenUrl) . "&"
             . rawurlencode("oauth_consumer_key=" . rawurlencode($consumerKey)
             . "&oauth_nonce=" . rawurlencode($nonce)
             . "&oauth_signature_method=" . rawurlencode($oauthSignatureMethod)
             . "&oauth_timestamp=" . $oauthTimestamp
             . "&oauth_version=" . $oauthVersion);
-
+        // URL encode consumer secret key to bo used in signature
         $sigKey = rawurlencode($consumerSecret) . "&";
+        // Signature = HMAC-SHA1 hash base string + key
         $oauthSig = base64_encode(hash_hmac("sha1", $sigBase, $sigKey, true));
-
+        // Create OAuth request url with our signature
         $requestUrl = $requestTokenUrl . "?"
             . "oauth_consumer_key=" . rawurlencode($consumerKey)
             . "&oauth_nonce=" . rawurlencode($nonce)
@@ -181,7 +180,7 @@ class OAuthHandler
             . "&oauth_timestamp=" . rawurlencode($oauthTimestamp)
             . "&oauth_version=" . rawurlencode($oauthVersion)
             . "&oauth_signature=" . rawurlencode($oauthSig);
-
+        // Get results from request
         $response = file_get_contents($requestUrl);
         // Return error message if request failed
         if ($response === false) {
@@ -190,24 +189,22 @@ class OAuthHandler
 
         parse_str(trim($response), $values);
 
-        // Save client key and secret to db
+        // Save client keys and temporary tokens to db
         $user_id = get_current_user_id();
         update_option('_event_client', $consumerKey);
         update_option('_event_secret', $consumerSecret);
+        update_option('_temp_request_token', $values["oauth_token"]);
+        update_option('_temp_request_token_secret', $values["oauth_token_secret"]);
 
-        // Save temporary tokens to session
-        $_SESSION["requestToken"] = $values["oauth_token"];
-        $_SESSION["requestTokenSecret"] = $values["oauth_token_secret"];
+        $verificationUrl = $authorizeUrl . "?oauth_token=" . $values["oauth_token"];
 
-        $verificationUrl = $authorizeUrl . "?oauth_token=" . $_SESSION["requestToken"];
-
-        // Send JSON response with verification url
+        // Return JSON response with verification url
         $data = array("message" => __('Request succeeded!', 'event-integration'), "url" => '<a href="' . $verificationUrl . '" target="_blank">' . __('Click here to authorize this client and get verification token', 'event-integration') . '</a>');
         wp_send_json_success($data);
     }
 
     /**
-     * Access API and get access tokens
+     * OAuth1 verification step 3: Request access to API and save returned tokens if succeeded.
      * @return string
      */
     public function accessOAuth()
@@ -234,11 +231,11 @@ class OAuthHandler
             . "&oauth_nonce=" . rawurlencode($nonce)
             . "&oauth_signature_method=" . rawurlencode($oauthSignatureMethod)
             . "&oauth_timestamp=" . rawurlencode($oauthTimestamp)
-            . "&oauth_token=" . rawurlencode($_SESSION["requestToken"])
+            . "&oauth_token=" . rawurlencode(get_option('_temp_request_token'))
             . "&oauth_verifier=" . rawurlencode($oauthVerifier)
             . "&oauth_version=" . rawurlencode($oauthVersion));
 
-        $sigKey = rawurlencode($consumerSecret) . "&" . rawurlencode($_SESSION["requestTokenSecret"]);
+        $sigKey = rawurlencode($consumerSecret) . "&" . rawurlencode(get_option('_temp_request_token_secret'));
         $oauthSig = base64_encode(hash_hmac("sha1", $sigBase, $sigKey, true));
 
         $requestUrl = $accessTokenUrl . "?"
@@ -246,7 +243,7 @@ class OAuthHandler
             . "&oauth_nonce=" . rawurlencode($nonce)
             . "&oauth_signature_method=" . rawurlencode($oauthSignatureMethod)
             . "&oauth_timestamp=" . rawurlencode($oauthTimestamp)
-            . "&oauth_token=" . rawurlencode($_SESSION["requestToken"])
+            . "&oauth_token=" . rawurlencode(get_option('_temp_request_token'))
             . "&oauth_verifier=" . rawurlencode($oauthVerifier)
             . "&oauth_version=". rawurlencode($oauthVersion)
             . "&oauth_signature=" . rawurlencode($oauthSig);
@@ -258,11 +255,13 @@ class OAuthHandler
         }
 
         parse_str(trim($response), $values);
-        // Save tokens to db
+        // Save new tokens to db
         update_option('_event_token',  $values["oauth_token"]);
         update_option('_event_token_secret', $values["oauth_token_secret"]);
         update_option('_event_authorized', true);
-        session_destroy();
+        // Remove temporary tokens
+        delete_option('_temp_request_token');
+        delete_option('_temp_request_token_secret');
 
         wp_send_json_success(__('You are authorized!', 'event-integration'));
     }
@@ -326,7 +325,7 @@ class OAuthHandler
 
 
     /**
-     * Upload media to Event Manager API
+     * Upload image to Event Manager API media end point
      */
     public function submitImage() {
         if (! isset($_FILES['file'])) {
@@ -345,10 +344,10 @@ class OAuthHandler
         $oauthSignatureMethod = "HMAC-SHA1";
         $oauthTimestamp       = time();
 
+        // Create multipart content body. Holds media to be uploaded
         $eol = "\r\n";
         define('MULTIPART_BOUNDARY', '--------------------------'.microtime(true));
         $fileContents = file_get_contents($_FILES['file']['tmp_name']);
-
         $content =  "--" . MULTIPART_BOUNDARY . $eol .
                     "Content-Disposition: form-data; name=\"file\"; filename=\"".rawurlencode($_FILES['file']['name'])."\"". $eol .
                     "Content-Type: " . $_FILES['file']['type']. $eol . $eol .
@@ -363,7 +362,6 @@ class OAuthHandler
             . "&oauth_token=" . rawurlencode($accessToken)
             . "&oauth_version=" . rawurlencode($oauthVersion)
          );
-
         $sigKey = rawurlencode($consumerSecret) . "&" . rawurlencode($accessTokenSecret);
         $oauthSig = base64_encode(hash_hmac("sha1", $sigBase, $sigKey, true));
         $authHeader = "OAuth oauth_consumer_key=" . rawurlencode($consumerKey) . ","
@@ -374,22 +372,21 @@ class OAuthHandler
             . "oauth_token=" . rawurlencode($accessToken) . ","
             . "oauth_version=" . rawurlencode($oauthVersion);
 
-        $params = array('http' => array(
-                            'method' => 'POST',
-                            'header' => 'Content-Type: multipart/form-data; boundary=' . MULTIPART_BOUNDARY . $eol
-                                        . "Content-Disposition: attachment filename=\"" . rawurlencode($_FILES['file']['name']) . "\"\r\n"
-                                        . "Authorization: " . $authHeader . $eol,
-                            'content' => $content
-                       ));
+        $context = stream_context_create(array("http" => array(
+            'method' => 'POST',
+            'header' => 'Content-Type: multipart/form-data; boundary=' . MULTIPART_BOUNDARY . $eol
+                            . "Content-Disposition: attachment filename=\"" . rawurlencode($_FILES['file']['name']) . "\"\r\n"
+                            . "Authorization: " . $authHeader . $eol,
+                        'content' => $content
+            )));
 
-        $context = stream_context_create($params);
         $result = file_get_contents($apiResourceUrl, false, $context);
 
         if ($result === false) {
             wp_send_json_error(__('Something went wrong uploading your image', 'event-integration'));
         }
 
-        // return media id
+        // return uploaded media id
         $resObj = json_decode($result);
         wp_send_json_success($resObj->id);
     }

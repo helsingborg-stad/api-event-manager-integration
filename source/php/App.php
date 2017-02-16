@@ -7,7 +7,7 @@ class App
     /*
      * Set to 'dev' or 'min'
      */
-    public static $assetSuffix = 'dev';
+    public static $assetSuffix = 'min';
 
     public function __construct()
     {
