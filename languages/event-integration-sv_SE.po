@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2017-01-30 15:56+0100\n"
-"PO-Revision-Date: 2017-01-30 15:56+0100\n"
+"POT-Creation-Date: 2017-02-16 13:32+0100\n"
+"PO-Revision-Date: 2017-02-16 13:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -37,50 +37,54 @@ msgid "API url"
 msgstr "API-url"
 
 #: source/php/Acf/AcfFields.php:30
-msgid "Link to Event Manager API root"
-msgstr "Länk till Event Manager API"
+msgid ""
+"Url to Event Manager API wp/v2 namespace.\n"
+"\t\tE.g. https://host/wp-json/wp/v2"
+msgstr ""
+"Url till Event Manager API wp/v2 namespace.\n"
+"\t\tT.ex. https://host/wp-json/wp/v2"
 
-#: source/php/Acf/AcfFields.php:43
+#: source/php/Acf/AcfFields.php:44
 msgid "Days ahead"
 msgstr "Dagar framåt"
 
-#: source/php/Acf/AcfFields.php:46
+#: source/php/Acf/AcfFields.php:47
 msgid "Import events that occurs within given number of days."
 msgstr "Importera evenemang som inträffar inom angivet antal dagar."
 
-#: source/php/Acf/AcfFields.php:57
+#: source/php/Acf/AcfFields.php:58
 msgid "days"
 msgstr "dagar"
 
-#: source/php/Acf/AcfFields.php:64
+#: source/php/Acf/AcfFields.php:65
 msgid "Daily import"
 msgstr "Daglig import"
 
-#: source/php/Acf/AcfFields.php:75
+#: source/php/Acf/AcfFields.php:76
 msgid "Enable daily automatic import from Event Manager API"
 msgstr "Daglig automatisk import från Event Manager API"
 
-#: source/php/Acf/AcfFields.php:80
+#: source/php/Acf/AcfFields.php:81
 msgid "Post status"
 msgstr "Poststatus"
 
-#: source/php/Acf/AcfFields.php:83
+#: source/php/Acf/AcfFields.php:84
 msgid "Select status of imported events."
 msgstr "Välj status för importerade evenemang."
 
-#: source/php/Acf/AcfFields.php:92
+#: source/php/Acf/AcfFields.php:93
 msgid "Draft"
 msgstr "Utkast"
 
-#: source/php/Acf/AcfFields.php:93
+#: source/php/Acf/AcfFields.php:94
 msgid "Published"
 msgstr "Publicerad"
 
-#: source/php/Acf/AcfFields.php:104
+#: source/php/Acf/AcfFields.php:105
 msgid "Import from selected user groups"
 msgstr "Importera från angivna användargrupper"
 
-#: source/php/Acf/AcfFields.php:107
+#: source/php/Acf/AcfFields.php:108
 msgid ""
 "Select the user groups that you want to import events from. Leave empty to "
 "import from all groups."
@@ -88,11 +92,11 @@ msgstr ""
 "Välj användargrupper att importera evenemang ifrån. Lämna tomt för att "
 "importera från samtliga grupper."
 
-#: source/php/Acf/AcfFields.php:126
+#: source/php/Acf/AcfFields.php:127
 msgid "Import from selected categories"
 msgstr "Importera från angivna kategorier"
 
-#: source/php/Acf/AcfFields.php:129
+#: source/php/Acf/AcfFields.php:130
 msgid ""
 "Enter the name of the categories that you want to import events from. "
 "Separate with commas. Leave blank to import from all categories."
@@ -100,11 +104,11 @@ msgstr ""
 "Skriv namnet på de kategorier ni vill importera evenemang ifrån. Separera "
 "med kommatecken. Lämna tomt för att importera från samtliga kategorier."
 
-#: source/php/Acf/AcfFields.php:145
+#: source/php/Acf/AcfFields.php:146
 msgid "Import from selected tags"
 msgstr "Importera från angivna taggar"
 
-#: source/php/Acf/AcfFields.php:148
+#: source/php/Acf/AcfFields.php:149
 msgid ""
 "Enter the name of the tags that you want to import events from. Separate "
 "with commas. Leave blank to import from all tags."
@@ -112,28 +116,47 @@ msgstr ""
 "Skriv namnet på de taggar ni vill importera evenemang ifrån. Separera med "
 "kommatecken. Lämna tomt för att importera från samtliga taggar."
 
-#: source/php/Acf/AcfFields.php:164
+#: source/php/Acf/AcfFields.php:165
 msgid "Single event image"
 msgstr "Bild för enskilt evenemang"
 
-#: source/php/Acf/AcfFields.php:175
+#: source/php/Acf/AcfFields.php:176
 msgid "Display attached event image below title header on single events."
 msgstr "Visa utvald bild under rubriken på enskilda evenemang."
 
-#: source/php/Acf/AcfFields.php:201
+#: source/php/Acf/AcfFields.php:181
+msgid "OAuth1 endpoint URL"
+msgstr "OAuth1 endpoint hemkatalog"
+
+#: source/php/Acf/AcfFields.php:184
+msgid ""
+"OAuth1 endpoint can be found under section \"authentication\" in your API "
+"root.\n"
+"\t\tE.g. https://host/oauth1\n"
+"\n"
+"\t\tThis is optional and only needed when you want to post data to the API."
+msgstr ""
+"OAuth1 endpoint hittas under sektionen \"authentication\" i API:ets "
+"hemkatalog.\n"
+"\t\tT.ex. https://host/oauth1\n"
+"\n"
+"\t\\Detta är valfritt och behövs endast om du vill kunna skicka evenemang "
+"till Event Manager API."
+
+#: source/php/Acf/AcfFields.php:223
 msgid "Shortcode settings"
 msgstr "Shortcode inställningar"
 
-#: source/php/Acf/AcfFields.php:205 source/php/Acf/AcfFields.php:250
+#: source/php/Acf/AcfFields.php:227 source/php/Acf/AcfFields.php:272
 #: source/php/Shortcodes/eventShortcode.php:62
 msgid "Information"
 msgstr "Information"
 
-#: source/php/Acf/AcfFields.php:221
+#: source/php/Acf/AcfFields.php:243
 msgid "Information shortcode"
 msgstr "Shortcode för information"
 
-#: source/php/Acf/AcfFields.php:232
+#: source/php/Acf/AcfFields.php:254
 msgid ""
 "Shortcode to display event information. Add the shortcode to your single "
 "event template file.<br> <br> [single_event_information]"
@@ -141,48 +164,48 @@ msgstr ""
 "Shortcode som visar information om evenemanget. Lägg till shortcode i "
 "template för enskilda evenemang.<br> <br> [single_event_information]"
 
-#: source/php/Acf/AcfFields.php:238
+#: source/php/Acf/AcfFields.php:260
 msgid "Display fields"
 msgstr "Visa fält"
 
-#: source/php/Acf/AcfFields.php:251 source/php/Admin/AdminDisplayEvent.php:36
+#: source/php/Acf/AcfFields.php:273 source/php/Admin/AdminDisplayEvent.php:36
 #: source/php/Shortcodes/eventShortcode.php:208
 msgid "Occasions"
 msgstr "Datum"
 
-#: source/php/Acf/AcfFields.php:252 source/php/Acf/AcfFields.php:445
+#: source/php/Acf/AcfFields.php:274 source/php/Acf/AcfFields.php:467
 #: source/php/Shortcodes/eventShortcode.php:112
 msgid "Location"
 msgstr "Plats"
 
-#: source/php/Acf/AcfFields.php:253
+#: source/php/Acf/AcfFields.php:275
 msgid "Additional locations"
 msgstr "Fler platser"
 
-#: source/php/Acf/AcfFields.php:254
+#: source/php/Acf/AcfFields.php:276
 msgid "Organizers"
 msgstr "Arrangörer"
 
-#: source/php/Acf/AcfFields.php:255
+#: source/php/Acf/AcfFields.php:277
 #: source/php/Shortcodes/eventShortcode.php:192
 msgid "Sponsors"
 msgstr "Sponsorer"
 
-#: source/php/Acf/AcfFields.php:256
+#: source/php/Acf/AcfFields.php:278
 #: source/php/Shortcodes/eventShortcode.php:142
 msgid "Booking information"
 msgstr "Information om bokning"
 
-#: source/php/Acf/AcfFields.php:257
+#: source/php/Acf/AcfFields.php:279
 #: source/php/Shortcodes/eventShortcode.php:224
 msgid "Links"
 msgstr "Länkar"
 
-#: source/php/Acf/AcfFields.php:275
+#: source/php/Acf/AcfFields.php:297
 msgid "Wrapper div class"
 msgstr "Wrapper div-klass"
 
-#: source/php/Acf/AcfFields.php:278
+#: source/php/Acf/AcfFields.php:300
 msgid ""
 "Add custom classes to div that wraps around the info boxes. Useful when "
 "creating responsive grids. Separate with comma."
@@ -190,11 +213,11 @@ msgstr ""
 "Lägg till klasser för \"wrapper div\" som omsluter denna shortcode. "
 "Användbart för att göra responsivt. Separera med kommatecken."
 
-#: source/php/Acf/AcfFields.php:294
+#: source/php/Acf/AcfFields.php:316
 msgid "Inner div box class"
 msgstr "Inner div-klass"
 
-#: source/php/Acf/AcfFields.php:297
+#: source/php/Acf/AcfFields.php:319
 msgid ""
 "Add custom classes to inner div boxes that contains the event information. "
 "Useful when creating responsive grids. Separate with comma."
@@ -202,15 +225,15 @@ msgstr ""
 "Lägg till klasser för \"div boxar\" som finns inuti \"wrapper div\". "
 "Användbart för att göra responsivt. Separera med kommatecken."
 
-#: source/php/Acf/AcfFields.php:313
+#: source/php/Acf/AcfFields.php:335
 msgid "Gallery"
 msgstr "Bildgalleri"
 
-#: source/php/Acf/AcfFields.php:329
+#: source/php/Acf/AcfFields.php:351
 msgid "Gallery shortcode"
 msgstr "Shortcode för galleri"
 
-#: source/php/Acf/AcfFields.php:340
+#: source/php/Acf/AcfFields.php:362
 msgid ""
 "Gallery images is stored as attached images. You can use WordPress own "
 "shortcode [gallery] to display the images."
@@ -218,113 +241,113 @@ msgstr ""
 "Galleribilder är sparade som \"attached images\", ni kan därför använda "
 "WordPress inbyggda shortcode [gallery] för att visa bilderna."
 
-#: source/php/Acf/AcfFields.php:369
+#: source/php/Acf/AcfFields.php:391
 msgid "Display events"
 msgstr "Visning av evenemang"
 
-#: source/php/Acf/AcfFields.php:373
+#: source/php/Acf/AcfFields.php:395
 msgid "Number of events to show"
 msgstr "Visa antal evenemang"
 
-#: source/php/Acf/AcfFields.php:376
+#: source/php/Acf/AcfFields.php:398
 msgid "Set to -1 to show all."
 msgstr "-1 för att visa alla."
 
-#: source/php/Acf/AcfFields.php:394
+#: source/php/Acf/AcfFields.php:416
 msgid "Show pagination"
 msgstr "Visa paginering"
 
-#: source/php/Acf/AcfFields.php:397
+#: source/php/Acf/AcfFields.php:419
 msgid "Display pagination buttons below the event list."
 msgstr "Lägger till paginering under evenemangslistan."
 
-#: source/php/Acf/AcfFields.php:410
+#: source/php/Acf/AcfFields.php:432
 msgid "Days interval"
 msgstr "Tidsperiod"
 
-#: source/php/Acf/AcfFields.php:413
+#: source/php/Acf/AcfFields.php:435
 msgid "Include events from today to the given number of days."
 msgstr "Visa evenemang som inträffar inom angivet antal dagar."
 
-#: source/php/Acf/AcfFields.php:431
+#: source/php/Acf/AcfFields.php:453
 msgid "Fields"
 msgstr "Fält"
 
-#: source/php/Acf/AcfFields.php:443 source/php/PostTypes/Events.php:38
+#: source/php/Acf/AcfFields.php:465 source/php/PostTypes/Events.php:38
 #: source/php/Shortcodes/eventShortcode.php:70
 msgid "Occasion"
 msgstr "Datum"
 
-#: source/php/Acf/AcfFields.php:444
+#: source/php/Acf/AcfFields.php:466
 msgid "Image"
 msgstr "Bild"
 
-#: source/php/Acf/AcfFields.php:446
+#: source/php/Acf/AcfFields.php:468
 msgid "Description"
 msgstr "Beskrivning"
 
-#: source/php/Acf/AcfFields.php:456
+#: source/php/Acf/AcfFields.php:478
 msgid "Description letter limit"
 msgstr "Teckenbegränsning av beskrivning"
 
-#: source/php/Acf/AcfFields.php:459
+#: source/php/Acf/AcfFields.php:481
 msgid "Set to -1 to show the whole description."
 msgstr "-1 för att visa hela beskrivningen."
 
-#: source/php/Acf/AcfFields.php:485 source/php/PostTypes/Events.php:238
+#: source/php/Acf/AcfFields.php:507 source/php/PostTypes/Events.php:238
 msgid "Groups"
 msgstr "Grupper"
 
-#: source/php/Acf/AcfFields.php:496
+#: source/php/Acf/AcfFields.php:518
 msgid "Show events from all groups"
 msgstr "Visa evenemang inom samtliga grupper"
 
-#: source/php/Acf/AcfFields.php:501
+#: source/php/Acf/AcfFields.php:523
 msgid "Select groups"
 msgstr "Välj grupper"
 
-#: source/php/Acf/AcfFields.php:504
+#: source/php/Acf/AcfFields.php:526
 msgid "Show events from the selected groups."
 msgstr "Visa evenemang inom angivna grupper."
 
-#: source/php/Acf/AcfFields.php:531 source/php/PostTypes/Events.php:164
+#: source/php/Acf/AcfFields.php:553 source/php/PostTypes/Events.php:164
 #: source/php/Shortcodes/eventShortcode.php:80
 msgid "Categories"
 msgstr "Kategorier"
 
-#: source/php/Acf/AcfFields.php:542
+#: source/php/Acf/AcfFields.php:564
 msgid "Show events from all categories"
 msgstr "Visa evenemang inom samtliga kategorier"
 
-#: source/php/Acf/AcfFields.php:547
+#: source/php/Acf/AcfFields.php:569
 msgid "Select categories"
 msgstr "Välj kategorier"
 
-#: source/php/Acf/AcfFields.php:550
+#: source/php/Acf/AcfFields.php:572
 msgid "Show events from the selected categories."
 msgstr "Visa evenemang inom angivna kategorier."
 
-#: source/php/Acf/AcfFields.php:577 source/php/PostTypes/Events.php:201
+#: source/php/Acf/AcfFields.php:599 source/php/PostTypes/Events.php:201
 msgid "Tags"
 msgstr "Taggar"
 
-#: source/php/Acf/AcfFields.php:588
+#: source/php/Acf/AcfFields.php:610
 msgid "Show events from all tags"
 msgstr "Visa evenemang inom samtliga taggar"
 
-#: source/php/Acf/AcfFields.php:593
+#: source/php/Acf/AcfFields.php:615
 msgid "Select tags"
 msgstr "Välj taggar"
 
-#: source/php/Acf/AcfFields.php:596
+#: source/php/Acf/AcfFields.php:618
 msgid "Show events from the selected tags."
 msgstr "Visa evenemang inom angivna taggar."
 
-#: source/php/Acf/AcfFields.php:623
+#: source/php/Acf/AcfFields.php:645
 msgid "Default image"
 msgstr "Standardbild"
 
-#: source/php/Acf/AcfFields.php:626
+#: source/php/Acf/AcfFields.php:648
 msgid "Will display if event image is missing."
 msgstr "Visas om bild saknas."
 
@@ -379,32 +402,32 @@ msgctxt "Event Manager Integration settings"
 msgid "Options"
 msgstr "Inställningar"
 
-#: source/php/App.php:51
+#: source/php/App.php:52
 msgid "to"
 msgstr "till"
 
-#: source/php/App.php:91
+#: source/php/App.php:93
 msgid "Something went wrong, please try again later."
 msgstr "Något gick fel, vänligen försök igen senare."
 
-#: source/php/App.php:118
+#: source/php/App.php:120
 msgid "Loading"
 msgstr "Hämtar"
 
-#: source/php/App.php:205 source/php/App.php:206
+#: source/php/App.php:207 source/php/App.php:208
 #: source/php/PostTypes/Events.php:280
 msgid "Import events"
 msgstr "Importera evenemang"
 
-#: source/php/App.php:226
+#: source/php/App.php:228
 msgid "Import Groups"
 msgstr "Importera grupper"
 
-#: source/php/App.php:227
+#: source/php/App.php:229
 msgid "Import groups"
 msgstr "Importera grupper"
 
-#: source/php/App.php:240 source/php/App.php:241
+#: source/php/App.php:242 source/php/App.php:243
 msgid "Delete all events"
 msgstr "Ta bort alla evenemang"
 
@@ -460,6 +483,109 @@ msgstr "vänligen skapa den manuellt och gör om importen."
 #: source/php/Module/EventModule.php:126 source/php/Widget/DisplayEvents.php:52
 msgid "No events found"
 msgstr "Inga evenemang hittades"
+
+#: source/php/OAuth/OAuthHandler.php:29 source/php/OAuth/OAuthHandler.php:30
+#: source/php/OAuth/OAuthHandler.php:43
+msgid "API authentication"
+msgstr "API autentisering"
+
+#: source/php/OAuth/OAuthHandler.php:51
+msgid "Request authorization"
+msgstr "Autentiseringsbegäran"
+
+#: source/php/OAuth/OAuthHandler.php:52
+msgid ""
+"To publish events from this client to the API you need authentication. Enter "
+"your given client keys and send request."
+msgstr ""
+"För att publicera evenemang från din klient till API:et behövs godkänd "
+"autentisering. Fyll i dina nycklar och skicka begäran."
+
+#: source/php/OAuth/OAuthHandler.php:57 source/php/OAuth/OAuthHandler.php:106
+msgid "Client key"
+msgstr ""
+
+#: source/php/OAuth/OAuthHandler.php:65
+msgid "Client secret"
+msgstr ""
+
+#: source/php/OAuth/OAuthHandler.php:73
+msgid "Send request"
+msgstr "Skicka begäran"
+
+#: source/php/OAuth/OAuthHandler.php:79
+msgid "Enter verification token"
+msgstr "Ange verifieringskod"
+
+#: source/php/OAuth/OAuthHandler.php:84
+msgid "Verification token"
+msgstr "Verifieringskod"
+
+#: source/php/OAuth/OAuthHandler.php:92
+msgid "Grant access"
+msgstr "Bevilja åtkomst"
+
+#: source/php/OAuth/OAuthHandler.php:100
+msgid "Authorized"
+msgstr "Autentiserad"
+
+#: source/php/OAuth/OAuthHandler.php:101
+msgid "This client is authorized to submit events to the API."
+msgstr "Denna klient är autentiserad för att publicera evenemang till API."
+
+#: source/php/OAuth/OAuthHandler.php:116
+msgid "Remove client"
+msgstr "Ta bort klient"
+
+#: source/php/OAuth/OAuthHandler.php:150
+msgid "Request credentials is missing"
+msgstr "Nycklar saknas"
+
+#: source/php/OAuth/OAuthHandler.php:158
+msgid ""
+"You must enter OAuth1 endpoint url found under Event settings to proceed."
+msgstr ""
+"Du måste ange \"OAuth1 endpoint URL\" under inställningar för att fortsätta."
+
+#: source/php/OAuth/OAuthHandler.php:190
+msgid "The credentials you supplied were not correct"
+msgstr "Du har angivit fel uppgifter"
+
+#: source/php/OAuth/OAuthHandler.php:205
+msgid "Request succeeded!"
+msgstr "Begäran lyckades!"
+
+#: source/php/OAuth/OAuthHandler.php:205
+msgid "Click here to authorize this client and get verification token"
+msgstr "Klicka här för att godkänna klienten och få verifieringskod"
+
+#: source/php/OAuth/OAuthHandler.php:216
+msgid "Verifier is missing"
+msgstr "Verifieringskod saknas"
+
+#: source/php/OAuth/OAuthHandler.php:256
+msgid "The verifier you supplied were not correct"
+msgstr "Du har angivit fel verifieringskod"
+
+#: source/php/OAuth/OAuthHandler.php:268
+msgid "You are authorized!"
+msgstr "Du är nu auktoriserad!"
+
+#: source/php/OAuth/OAuthHandler.php:276
+msgid "Form data is missing, please try again."
+msgstr "Formulärdata saknas, försök igen."
+
+#: source/php/OAuth/OAuthHandler.php:321
+msgid "Something went wrong posting the event"
+msgstr "Något gick fel med att skicka evenemanget"
+
+#: source/php/OAuth/OAuthHandler.php:334
+msgid "Image is not selected, please try again."
+msgstr "Bild saknas, vänligen försök igen."
+
+#: source/php/OAuth/OAuthHandler.php:388
+msgid "Something went wrong uploading your image"
+msgstr "Något gick fel med att ladda upp din bild"
 
 #: source/php/PostTypes/Events.php:10
 msgctxt "Post type plural"
@@ -641,11 +767,11 @@ msgstr "Lägg till eller ta bort grupper"
 msgid "Choose from most used groups"
 msgstr "Välj från de mest använda grupperna"
 
-#: source/php/PostTypes/Events.php:327
+#: source/php/PostTypes/Events.php:326
 msgid "Something went wrong!"
 msgstr "Något gick fel!"
 
-#: source/php/PostTypes/Events.php:344
+#: source/php/PostTypes/Events.php:343
 msgid "Error"
 msgstr "Fel"
 
@@ -781,6 +907,29 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "http://www.helsingborg.se"
 msgstr ""
+
+#~ msgid ""
+#~ "Enter your Event Manager API OAuth credentials to be able to submit "
+#~ "events to the API."
+#~ msgstr ""
+#~ "Fyll i dina Event Manager API OAuth1 uppgifter för att kunna skicka "
+#~ "evenemang till API:et."
+
+#~ msgid ""
+#~ "Url can be found under section \"authentication\" in your API root.\n"
+#~ "\t\tE.g. https://host/oauth1\n"
+#~ "\n"
+#~ "\t\tThis is optional and only needed when you want to post data to the "
+#~ "API."
+#~ msgstr ""
+#~ "OAuth1 hemkatalog hittas under sektionen \"authentication\" i API root.\n"
+#~ "\t\tT.ex. https://host/oauth1\n"
+#~ "\n"
+#~ "\t\tFältet är valfritt och behövs endast om du vill kunna skapa evenemang "
+#~ "till Event Manager API."
+
+#~ msgid "Link to Event Manager API root"
+#~ msgstr "Länk till Event Manager API"
 
 #~ msgid "Link to Event Manager API"
 #~ msgstr "Länk till Event Manager API"

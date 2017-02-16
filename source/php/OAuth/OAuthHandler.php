@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * OAuth1 functions to authenticate clients and publish to wp rest api
+ */
+
 namespace EventManagerIntegration\OAuth;
 
 class OAuthHandler
@@ -45,12 +49,12 @@ class OAuthHandler
         <?php if (get_option('_event_authorized') == false): ?>
         <div class="wrap oauth-request">
         <h3><?php _e('Request authorization', 'event-integration'); ?></h3>
-        <p><?php _e('Enter your Event Manager API OAuth credentials to be able to submit events to the API.', 'event-integration' ); ?></p>
+        <p><?php _e('To publish events from this client to the API you need authentication. Enter your given client keys and send request.', 'event-integration' ); ?></p>
             <form method="post" id="oauth-request" action="/wp-admin/admin-ajax.php">
                 <table class="form-table">
                     <tr>
                         <th scope="row">
-                            <label for="client-key"><?php _e( 'Client Key', 'event-integration' )?></label>
+                            <label for="client-key"><?php _e( 'Client key', 'event-integration' )?></label>
                         </th>
                         <td>
                             <input type="text" class="client-key" name="client-key" id="client-key" value="<?php echo esc_attr(get_option('_event_client')); ?>" />
@@ -85,7 +89,7 @@ class OAuthHandler
                     </tr>
                 </table>
                 <p class="submit">
-                    <input name='submit' type='submit' class='button-primary' value='<?php _e('Access', 'event-integration');  ?>' />
+                    <input name='submit' type='submit' class='button-primary' value='<?php _e('Grant access', 'event-integration');  ?>' />
                 </p>
             </form>
         </div>
@@ -99,7 +103,7 @@ class OAuthHandler
                 <table class="form-table">
                     <tr>
                         <th scope="row">
-                            <?php _e( 'Client Key', 'event-integration' ); ?>
+                            <?php _e( 'Client key', 'event-integration' ); ?>
                         </th>
                         <td>
                             <code>
@@ -149,14 +153,13 @@ class OAuthHandler
         $consumerKey = $_POST['client'];
         $consumerSecret = $_POST['secret'];
         // Get API base url
-        $api_url = get_field('event_api_url', 'option');
-        if (! $api_url) {
-            wp_send_json_error(__('You must enter API url found in event settings to proceed.', 'event-integration'));
+        $apiOauthUrl = get_field('event_api_oauth_url', 'option');
+        if (! $apiOauthUrl) {
+            wp_send_json_error(__('You must enter OAuth1 endpoint url found under Event settings to proceed.', 'event-integration'));
         }
-        $url = parse_url($api_url);
-        $url = $url['scheme'] . "://" . $url['host'];
-        $requestTokenUrl      = $url . "/oauth1/request";
-        $authorizeUrl         = $url . "/oauth1/authorize";
+        $url                  = rtrim($apiOauthUrl, '/');
+        $requestTokenUrl      = $url . "/request";
+        $authorizeUrl         = $url . "/authorize";
         $oauthTimestamp       = time();
         $nonce                = md5(mt_rand());
         $oauthSignatureMethod = "HMAC-SHA1";
@@ -184,7 +187,7 @@ class OAuthHandler
         $response = file_get_contents($requestUrl);
         // Return error message if request failed
         if ($response === false) {
-            wp_send_json_error(__('The credentials you supplied were not correct or did not grant access to this resource', 'event-integration'));
+            wp_send_json_error(__('The credentials you supplied were not correct', 'event-integration'));
         }
 
         parse_str(trim($response), $values);
@@ -217,14 +220,13 @@ class OAuthHandler
         $consumerSecret = get_option('_event_secret');
 
         // Get API base url
-        $api_url = get_field('event_api_url', 'option');
-        $url = parse_url($api_url);
-        $url = $url['scheme'] . "://" . $url['host'];
-        $accessTokenUrl = $url."/oauth1/access";
-        $oauthVersion = "1.0";
+        $apiOauthUrl          = get_field('event_api_oauth_url', 'option');
+        $url                  = rtrim($apiOauthUrl, '/');
+        $accessTokenUrl       = $url."/access";
+        $oauthVersion         = "1.0";
         $oauthSignatureMethod = "HMAC-SHA1";
-        $nonce = md5(mt_rand());
-        $oauthTimestamp = time();
+        $nonce                = md5(mt_rand());
+        $oauthTimestamp       = time();
 
         $sigBase = "GET&" . rawurlencode($accessTokenUrl) . "&"
             . rawurlencode("oauth_consumer_key=" . rawurlencode($consumerKey)
@@ -251,7 +253,7 @@ class OAuthHandler
         $response = file_get_contents($requestUrl);
         // Return error message if request failed
         if ($response === false) {
-            wp_send_json_error(__('The verifier you supplied were not correct or did not grant access to this resource', 'event-integration'));
+            wp_send_json_error(__('The verifier you supplied were not correct', 'event-integration'));
         }
 
         parse_str(trim($response), $values);

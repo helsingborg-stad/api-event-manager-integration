@@ -7,7 +7,7 @@
                 "label": "API url",
                 "name": "event_api_url",
                 "type": "url",
-                "instructions": "Link to Event Manager API root",
+                "instructions": "Url to Event Manager API wp\/v2 namespace. \r\nE.g. https:\/\/host\/wp-json\/wp\/v2",
                 "required": 1,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -154,6 +154,22 @@
                 },
                 "message": "Display attached event image below title header on single events.",
                 "default_value": 1
+            },
+            {
+                "key": "field_58a56eaa0c2ad",
+                "label": "OAuth1 endpoint URL",
+                "name": "event_api_oauth_url",
+                "type": "url",
+                "instructions": "OAuth1 endpoint can be found under section \"authentication\" in your API root.\r\nE.g. https:\/\/host\/oauth1\r\n\r\nThis is optional and only needed when you want to post data to the API.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
             }
         ],
         "location": [

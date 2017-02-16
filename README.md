@@ -65,13 +65,13 @@ Here is a code example to display a list of events. Use the attributes listed be
 </div>
 ```
 
-### External submit form code example
+### External event submit form code example
 
 ```html
 <div class="box box-panel box-primary">
-<h4 class="box-title">Submit event</h4>
+<h4 class="box-title">Registrera evenemang</h4>
     <div class="gutter">
-        <form name="submit-event" class="submit-event">
+        <form name="submit-event" class="submit-event" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="title">Namn på evenemang</label>
                 <input type="text" name="title" id="title" placeholder="Namn" required>
@@ -79,7 +79,7 @@ Here is a code example to display a list of events. Use the attributes listed be
 
             <div class="form-group">
                 <label for="content">Beskrivning</label>
-                <textarea name="content" id="content textarea" placeholder="Beskrivning"></textarea>
+                <textarea name="content" id="content textarea" placeholder="Beskrivning" required></textarea>
             </div>
 
             <div class="form-group">
@@ -202,13 +202,6 @@ Here is a code example to display a list of events. Use the attributes listed be
             </div>
 
             <div class="form-group">
-                <label for="user_groups">Grupper</label>
-                <select name="user_groups" id="user_groups" multiple>
-                    <option value="">Hämtar...</option>
-                </select>
-            </div>
-
-            <div class="form-group">
                 <label for="event_categories">Kategorier</label>
                 <select name="event_categories" id="event_categories" multiple>
                     <option value="">Hämtar...</option>
@@ -216,15 +209,22 @@ Here is a code example to display a list of events. Use the attributes listed be
             </div>
 
             <div class="form-group">
+                <label for="user_groups">Grupp</label>
+                <select name="user_groups" id="user_groups" multiple>
+                    <option value="">Hämtar...</option>
+                </select>
+            </div>
+
+            <div class="form-group">
                 <label for="image-input">Bild</label>
                 <input name="image-input" id="image-input" type="file" accept="image/gif, image/jpeg, image/png">
+            </div>
 
-                <div class="upload-error hidden gutter gutter-margin gutter-vertical">
-                    <li class="notice warning">
-                        <i class="fa fa-warning"></i> Uppladningen misslyckades, vänligen försök igen.
-                    </li>
-                </div>
-
+            <div class="form-group submit-error hidden">
+                <li class="notice warning"></li>
+            </div>
+            <div class="form-group submit-success hidden">
+                <li class="notice success"></li>
             </div>
 
             <div class="form-group">

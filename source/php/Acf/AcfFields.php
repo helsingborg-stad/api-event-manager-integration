@@ -27,7 +27,8 @@ class AcfFields
 					'label' => __('API url', 'event-integration'),
 					'name' => 'event_api_url',
 					'type' => 'url',
-					'instructions' => __('Link to Event Manager API root', 'event-integration'),
+					'instructions' => __('Url to Event Manager API wp/v2 namespace.
+		E.g. https://host/wp-json/wp/v2', 'event-integration'),
 					'required' => 1,
 					'conditional_logic' => 0,
 					'wrapper' => array (
@@ -175,6 +176,25 @@ class AcfFields
 					'message' => __('Display attached event image below title header on single events.', 'event-integration'),
 					'default_value' => 1,
 				),
+				array (
+					'key' => 'field_58a56eaa0c2ad',
+					'label' => __('OAuth1 endpoint URL', 'event-integration'),
+					'name' => 'event_api_oauth_url',
+					'type' => 'url',
+					'instructions' => __('OAuth1 endpoint can be found under section "authentication" in your API root.
+		E.g. https://host/oauth1
+
+		This is optional and only needed when you want to post data to the API.', 'event-integration'),
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array (
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'default_value' => '',
+					'placeholder' => '',
+				),
 			),
 			'location' => array (
 				array (
@@ -194,6 +214,8 @@ class AcfFields
 			'active' => 1,
 			'description' => '',
 		));
+
+
 
 		// Shortcode settings
 		acf_add_local_field_group(array (

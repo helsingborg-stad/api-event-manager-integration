@@ -310,11 +310,13 @@ EventManagerIntegration.Event.Form = (function ($) {
 	            	Form.prototype.cleanForm(eventForm);
 	            } else {
 	            	console.log(response.data);
+	            	$('.submit-success', eventForm).addClass('hidden');
 	            	$('.submit-error', eventForm).removeClass('hidden');
 					$('.submit-error .warning', eventForm).empty().append('<i class="fa fa-warning"></i>' + response.data + '</li>');
 	            }
 	        },
 		    error: function(jqXHR, textStatus) {
+		    	$('.submit-success', eventForm).addClass('hidden');
 		    	$('.submit-error', eventForm).removeClass('hidden');
 				$('.submit-error .warning', eventForm).empty().append('<i class="fa fa-warning"></i>'+textStatus+'</li>');
 		    }
@@ -326,7 +328,8 @@ EventManagerIntegration.Event.Form = (function ($) {
 		    e.preventDefault();
 
 		   	$('.submit-error', eventForm).addClass('hidden');
-		   	$('.submit-success', eventForm).addClass('hidden');
+        	$('.submit-success', eventForm).removeClass('hidden');
+			$('.submit-success .success', eventForm).empty().append('<i class="fa fa-send"></i>Skickar...</li>');
 
 		    var fileInput  	= eventForm.find('#image-input'),
     			formData 	= Form.prototype.jsonData(eventForm),
@@ -341,6 +344,7 @@ EventManagerIntegration.Event.Form = (function ($) {
 			    		formData['featured_media'] 	= response.data;
 						Form.prototype.submitEventAjax(eventForm, formData);
 			    	} else {
+			    		$('.submit-success', eventForm).addClass('hidden');
 						$('.submit-error', eventForm).removeClass('hidden');
 						$('.submit-error .warning', eventForm).empty().append('<i class="fa fa-warning"></i>' + response.data + '</li>');
 			    	}
