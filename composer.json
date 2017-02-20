@@ -1,0 +1,13 @@
+{
+    "name": "helsingborg-stad/event-manager-integration",
+    "description": "Import and display events from Event Manager API.",
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jonatan Hanson",
+            "email": "jonatan.hanson@hiq.se"
+        }
+    ],
+    "require": {}
+}
