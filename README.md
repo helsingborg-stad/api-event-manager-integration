@@ -1,6 +1,6 @@
 # Event Manager Integration
 
-Integrate and display events from Event Manager API.
+Import and display events from Event Manager API.
 
 ## JavaScript widgets
 

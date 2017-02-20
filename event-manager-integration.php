@@ -5,7 +5,7 @@
  * Plugin URI:        https://github.com/helsingborg-stad/api-event-manager-integration
  * Description:       Integrate and display events from Event Manager API.
  * Version:           1.0.0
- * Author:            Sebastian Thulin, Jonatan Hanson
+ * Author:            Jonatan Hanson, Sebastian Thulin
  * Author URI:        http://www.helsingborg.se
  * License:           MIT
  * License URI:       https://opensource.org/licenses/MIT

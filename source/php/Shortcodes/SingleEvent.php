@@ -6,7 +6,7 @@
 
 namespace EventManagerIntegration\Shortcodes;
 
-class EventShortcode
+class SingleEvent
 {
     public function __construct()
     {

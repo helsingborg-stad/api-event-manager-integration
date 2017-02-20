@@ -24,7 +24,7 @@ class App
         new Widget\DisplayEvents();
         new Admin\Options();
         new Admin\AdminDisplayEvent();
-        new Shortcodes\EventShortcode();
+        new Shortcodes\SingleEvent();
 
         /* Modularity modules */
         add_action('Modularity', function () {
@@ -35,7 +35,7 @@ class App
             register_widget('EventManagerIntegration\Widget\DisplayEvents');
         });
 
-        // TA BORT
+        // Remove
         add_action('admin_menu', array($this, 'createParsePage'));
     }
 
