@@ -427,9 +427,14 @@ EventManagerIntegration.Widget.TemplateParser = (function ($) {
             var dataLimit           = ($(module).attr('post-limit'));
             var dataGroupId         = ($(module).attr('group-id'));
             var dataCategoryId      = ($(module).attr('category-id'));
+            var latlng              = ($(module).attr('latlng'));
+            var distance            = ($(module).attr('distance'));
+
             var apiUrl = (typeof dataLimit != 'undefined' && $.isNumeric(dataLimit)) ? dataApiurl + '&post-limit=' + dataLimit : dataApiurl + '&post-limit=' + 10;
                 apiUrl += (typeof dataGroupId != 'undefined' && dataGroupId) ? '&group-id=' + dataGroupId : '';
                 apiUrl += (typeof dataCategoryId != 'undefined' && dataCategoryId) ? '&category-id=' + dataCategoryId : '';
+                apiUrl += (typeof latlng != 'undefined' && latlng) ? '&latlng=' + latlng : '';
+                apiUrl += (typeof distance != 'undefined' && distance) ? '&distance=' + distance : '';
                 apiUrl += '&_jsonp=getevents';
             this.storeErrorTemplate($(module));
             this.storeTemplate($(module));

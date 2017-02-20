@@ -15,7 +15,7 @@ class AcfFields
 
     public function addLocalFieldGroups()
     {
-		if( function_exists('acf_add_local_field_group')) {
+		if(function_exists('acf_add_local_field_group')) {
 
 		// Event manager settings group
 		acf_add_local_field_group(array (

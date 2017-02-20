@@ -5,16 +5,19 @@ Import and display events from Event Manager API.
 ## JavaScript widgets
 
 ### Event List code example
-Here is a code example to display a list of events. Use the attributes listed below to set API-url and filters. 
-`data-apiurl` = Url to Event manager API root.
-`post-limit` = Desired number of events to show.
-`group-id` = Add one or many(separated with comma) group ID to get events from specific groups.
-`category-id` = Add one or many(separated with comma) category ID to get events from specific categories.
+Here is a code example to display a list of events. Use the attributes listed below to set API-url and filters.<br>
+`data-apiurl` = Url to Event manager API root.<br>
+`post-limit` = Desired number of events to show.<br>
+`group-id` = Add one or many(separated with comma) group ID to get events from specific groups.<br>
+`category-id` = Add one or many(separated with comma) category ID to get events from specific categories.<br>
+`latlng` = Enter latitude and longotide(separated with comma) to get events occurring at a certain location.<br>
+`distance` = Used with `latlng` attribute to get events within a given radius. Enter value in kilometers.
 
 ```html
 <div class="box box-panel box-primary">
 <h4 class="box-title">Evenemang</h4>
-    <ul class="event-api" data-apiurl="http://api.helsingborg.se/event/json/wp/v2" post-limit="10" group-id="1" category-id="2,3">
+    <ul class="event-api" data-apiurl="http://api.helsingborg.se/event/json/wp/v2" post-limit="10" group-id="" category-id="" latlng="56.0464674,12.694512099999997" distance="1">
+
         <li class="event-loading-template"><i class="loading-dots" style="margin: 10px auto;"></i></li>
         <div class="template hidden">
             <li>

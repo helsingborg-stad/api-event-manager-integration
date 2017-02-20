@@ -137,9 +137,13 @@ class App
             $days_ahead = ! empty(get_field('days_ahead', 'options')) ? absint(get_field('days_ahead', 'options')) : 30;
             $to_date = date('Y-m-d', strtotime("midnight now + {$days_ahead} days"));
 
-            // Parsing events
-            $api_url = 'http://api.helsingborg.se/json/wp/v2/event/time?start=' . $from_date . '&end=' . $to_date;
-            $importer = new \EventManagerIntegration\Parser\EventManagerApi($api_url);
+            // Get nearby events from location
+            $location   = get_field('event_import_geographic', 'option');
+            $latlng     = ($location) ? '&latlng=' . $location['lat'] . ',' . $location['lng'] : '';
+            $distance   = (get_field('event_geographic_distance', 'option')) ? '&distance=' . get_field('event_geographic_distance', 'option') : '';
+
+            $api_url    = get_field('event_api_url', 'option');
+            $api_url    = rtrim($api_url, '/') . '/event/time?start=' . $from_date . '&end=' . $to_date . $latlng . $distance;
 
             // TA BORT
             file_put_contents(dirname(__FILE__)."/Log/import_events.log", "Event parser last run: ".date("Y-m-d H:i:s"));
@@ -211,16 +215,21 @@ class App
             function () {
 
             global $wpdb;
-            $db_table = $wpdb->prefix . "integrate_occasions";
-            $occasion = $wpdb->get_results("SELECT start_date FROM $db_table ORDER BY start_date ASC LIMIT 1", OBJECT);
+            $db_table   = $wpdb->prefix . "integrate_occasions";
+            $occasion   = $wpdb->get_results("SELECT start_date FROM $db_table ORDER BY start_date ASC LIMIT 1", OBJECT);
 
-            $from_date = count($occasion) == 1 ? date('Y-m-d', strtotime($occasion[0]->start_date)) : date('Y-m-d');
+            $from_date  = count($occasion) == 1 ? date('Y-m-d', strtotime($occasion[0]->start_date)) : date('Y-m-d');
             $days_ahead = ! empty(get_field('days_ahead', 'options')) ? absint(get_field('days_ahead', 'options')) : 30;
-            $to_date = date('Y-m-d', strtotime("midnight now + {$days_ahead} days"));
+            $to_date    = date('Y-m-d', strtotime("midnight now + {$days_ahead} days"));
+            // Get nearby events from location
+            $location   = get_field('event_import_geographic', 'option');
+            $latlng     = ($location) ? '&latlng=' . $location['lat'] . ',' . $location['lng'] : '';
+            $distance   = (get_field('event_geographic_distance', 'option')) ? '&distance=' . get_field('event_geographic_distance', 'option') : '';
 
-            $api_url = get_field('event_api_url', 'option');
-            $api_url = rtrim($api_url, '/') . '/event/time?start=' . $from_date . '&end=' . $to_date;
-            $importer = new \EventManagerIntegration\Parser\EventManagerApi($api_url);
+            $api_url    = get_field('event_api_url', 'option');
+            $api_url    = rtrim($api_url, '/') . '/event/time?start=' . $from_date . '&end=' . $to_date . $latlng . $distance;
+
+            $importer   = new \EventManagerIntegration\Parser\EventManagerApi($api_url);
             });
 
         add_submenu_page(

@@ -13,7 +13,7 @@ class AcfConfig
         });
         add_action('init', array($this, 'includeAcf'), 11);
         //Remove jsonLoadPath when loading acf with php
-        //add_filter('acf/settings/load_json', array($this, 'jsonLoadPath'));
+        add_filter('acf/settings/load_json', array($this, 'jsonLoadPath'));
         add_action('acf/init', array($this, 'acfSettings'));
         add_filter('acf/translate_field', array($this, 'acfTranslationFilter'));
     }
@@ -47,6 +47,7 @@ class AcfConfig
     {
         acf_update_setting('l10n', true);
         acf_update_setting('l10n_textdomain', 'event-integration');
+        acf_update_setting('google_api_key', get_field('google_geocode_key', 'option'));
     }
 
     /**

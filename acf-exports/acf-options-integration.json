@@ -157,10 +157,10 @@
             },
             {
                 "key": "field_58a56eaa0c2ad",
-                "label": "OAuth1 endpoint URL",
+                "label": "OAuth1 end point root url",
                 "name": "event_api_oauth_url",
                 "type": "url",
-                "instructions": "OAuth1 endpoint can be found under section \"authentication\" in your API root.\r\nE.g. https:\/\/host\/oauth1\r\n\r\nThis is optional and only needed when you want to post data to the API.",
+                "instructions": "Url can be found under section \"authentication\" in your API root.\r\nE.g. https:\/\/host\/oauth1\r\n\r\nAuthorization is only needed when you want to post data to the API.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -170,6 +170,64 @@
                 },
                 "default_value": "",
                 "placeholder": ""
+            },
+            {
+                "key": "field_58aaf2615abcb",
+                "label": "Google Geocode API key",
+                "name": "google_geocode_key",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_58aaeaa46781b",
+                "label": "Import from location",
+                "name": "event_import_geographic",
+                "type": "google_map",
+                "instructions": "Import events that occurs at a specified adress.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "center_lat": "56.046467",
+                "center_lng": "12.694512",
+                "zoom": 16,
+                "height": ""
+            },
+            {
+                "key": "field_58aaec066781c",
+                "label": "Distance from location",
+                "name": "event_geographic_distance",
+                "type": "number",
+                "instructions": "To get events occurring nearby the entered location, enter maximum distance in km. Leave blank to get only get events from the exact position.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "min": "",
+                "max": "",
+                "step": ""
             }
         ],
         "location": [

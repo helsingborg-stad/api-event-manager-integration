@@ -281,7 +281,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             }
 
             // Debug code
-            // $button .= '<a href="' . admin_url('options.php?page=import-events') . '" class="button" id="post-query-submit">Debug</a>';
+            $button .= '<a href="' . admin_url('options.php?page=import-events') . '" class="button" id="post-query-submit">Debug</a>';
             // $button .= '<a href="' . admin_url('options.php?page=import-groups') . '" class="button" id="post-query-submit">Groups</a>';
             // $button .= '<a href="' . admin_url('options.php?page=delete-all-events') . '" class="button" id="post-query-submit">Delete</a>';
 
@@ -304,9 +304,14 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         $days_ahead = ! empty(get_field('days_ahead', 'options')) ? absint(get_field('days_ahead', 'options')) : 30;
         $to_date = date('Y-m-d', strtotime("midnight now + {$days_ahead} days"));
 
+        // Get nearby events from location
+        $location   = get_field('event_import_geographic', 'option');
+        $latlng     = ($location) ? '&latlng=' . $location['lat'] . ',' . $location['lng'] : '';
+        $distance   = (get_field('event_geographic_distance', 'option')) ? '&distance=' . get_field('event_geographic_distance', 'option') : '';
+
         $api_url = get_field('event_api_url', 'option');
         if ($api_url) {
-            $api_url = rtrim($api_url, '/') . '/event/time?start=' . $from_date . '&end=' . $to_date;
+            $api_url  = rtrim($api_url, '/') . '/event/time?start=' . $from_date . '&end=' . $to_date . $latlng . $distance;
             $importer = new \EventManagerIntegration\Parser\EventManagerApi($api_url);
             $data = $importer->getCreatedData();
             wp_send_json($data);
