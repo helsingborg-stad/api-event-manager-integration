@@ -1,5 +1,5 @@
 {
-  "name": "event-manager-integration",
+  "name": "helsingborg-stad/api-event-manager-integration",
   "version": "1.0.0",
   "description": "Import and display events from Event Manager API.",
   "main": "",

@@ -1,5 +1,5 @@
 {
-    "name": "helsingborg-stad/event-manager-integration",
+    "name": "helsingborg-stad/api-event-manager-integration",
     "description": "Import and display events from Event Manager API.",
     "type": "wordpress-plugin",
     "license": "MIT",
