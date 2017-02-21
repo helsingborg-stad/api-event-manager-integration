@@ -274,6 +274,45 @@
                 "max_height": "",
                 "max_size": "",
                 "mime_types": "jpg, jpeg, png, gif"
+            },
+            {
+                "key": "field_58abf724d46f6",
+                "label": "Location",
+                "name": "mod_event_geographic",
+                "type": "google_map",
+                "instructions": "Show events that occurs at a specified location.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "center_lat": "56.046467",
+                "center_lng": "12.694512",
+                "zoom": 16,
+                "height": ""
+            },
+            {
+                "key": "field_58abf72bd46f7",
+                "label": "Distance from location",
+                "name": "mod_event_distance",
+                "type": "number",
+                "instructions": "To show events occurring nearby the given location, enter maximum distance in km. Leave blank to only show events from the exact position.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "min": "",
+                "max": "",
+                "step": ""
             }
         ],
         "location": [

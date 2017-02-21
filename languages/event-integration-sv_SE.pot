@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2017-02-16 13:52+0100\n"
+"POT-Creation-Date: 2017-02-21 13:54+0100\n"
 "PO-Revision-Date: 2016-12-13 15:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -39,7 +39,7 @@ msgstr ""
 #: source/php/Acf/AcfFields.php:30
 msgid ""
 "Url to Event Manager API wp/v2 namespace.\n"
-"\t\tE.g. https://host/wp-json/wp/v2"
+"\tE.g. https://host/wp-json/wp/v2"
 msgstr ""
 
 #: source/php/Acf/AcfFields.php:44
@@ -117,216 +117,244 @@ msgid "Display attached event image below title header on single events."
 msgstr ""
 
 #: source/php/Acf/AcfFields.php:181
-msgid "OAuth1 endpoint URL"
+msgid "OAuth1 end point root url"
 msgstr ""
 
 #: source/php/Acf/AcfFields.php:184
 msgid ""
-"OAuth1 endpoint can be found under section \"authentication\" in your API "
-"root.\n"
-"\t\tE.g. https://host/oauth1\n"
+"Url can be found under section \"authentication\" in your API root.\n"
+"\tE.g. https://host/oauth1\n"
 "\n"
-"\t\tThis is optional and only needed when you want to post data to the API."
+"\tAuthorization is only needed when you want to post data to the API."
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:223
+#: source/php/Acf/AcfFields.php:200
+msgid "Google Geocode API key"
+msgstr ""
+
+#: source/php/Acf/AcfFields.php:219
+msgid "Import from location"
+msgstr ""
+
+#: source/php/Acf/AcfFields.php:222
+msgid "Import events that occurs at a specified location."
+msgstr ""
+
+#: source/php/Acf/AcfFields.php:237 source/php/Acf/AcfFields.php:743
+msgid "Distance from location"
+msgstr ""
+
+#: source/php/Acf/AcfFields.php:240
+msgid ""
+"To get events occurring nearby the given location, enter maximum distance in "
+"km. Leave blank to only get events from the exact position."
+msgstr ""
+
+#: source/php/Acf/AcfFields.php:279
 msgid "Shortcode settings"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:227 source/php/Acf/AcfFields.php:272
-#: source/php/Shortcodes/eventShortcode.php:62
+#: source/php/Acf/AcfFields.php:283 source/php/Acf/AcfFields.php:328
+#: source/php/Shortcodes/SingleEvent.php:62
 msgid "Information"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:243
+#: source/php/Acf/AcfFields.php:299
 msgid "Information shortcode"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:254
+#: source/php/Acf/AcfFields.php:310
 msgid ""
 "Shortcode to display event information. Add the shortcode to your single "
 "event template file.<br> <br> [single_event_information]"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:260
+#: source/php/Acf/AcfFields.php:316
 msgid "Display fields"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:273 source/php/Admin/AdminDisplayEvent.php:36
-#: source/php/Shortcodes/eventShortcode.php:208
+#: source/php/Acf/AcfFields.php:329 source/php/Admin/AdminDisplayEvent.php:36
+#: source/php/Shortcodes/SingleEvent.php:208
 msgid "Occasions"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:274 source/php/Acf/AcfFields.php:467
-#: source/php/Shortcodes/eventShortcode.php:112
+#: source/php/Acf/AcfFields.php:330 source/php/Acf/AcfFields.php:523
+#: source/php/Acf/AcfFields.php:725 source/php/Shortcodes/SingleEvent.php:112
 msgid "Location"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:275
+#: source/php/Acf/AcfFields.php:331
 msgid "Additional locations"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:276
+#: source/php/Acf/AcfFields.php:332
 msgid "Organizers"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:277
-#: source/php/Shortcodes/eventShortcode.php:192
+#: source/php/Acf/AcfFields.php:333 source/php/Shortcodes/SingleEvent.php:192
 msgid "Sponsors"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:278
-#: source/php/Shortcodes/eventShortcode.php:142
+#: source/php/Acf/AcfFields.php:334 source/php/Shortcodes/SingleEvent.php:142
 msgid "Booking information"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:279
-#: source/php/Shortcodes/eventShortcode.php:224
+#: source/php/Acf/AcfFields.php:335 source/php/Shortcodes/SingleEvent.php:224
 msgid "Links"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:297
+#: source/php/Acf/AcfFields.php:353
 msgid "Wrapper div class"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:300
+#: source/php/Acf/AcfFields.php:356
 msgid ""
 "Add custom classes to div that wraps around the info boxes. Useful when "
 "creating responsive grids. Separate with comma."
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:316
+#: source/php/Acf/AcfFields.php:372
 msgid "Inner div box class"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:319
+#: source/php/Acf/AcfFields.php:375
 msgid ""
 "Add custom classes to inner div boxes that contains the event information. "
 "Useful when creating responsive grids. Separate with comma."
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:335
+#: source/php/Acf/AcfFields.php:391
 msgid "Gallery"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:351
+#: source/php/Acf/AcfFields.php:407
 msgid "Gallery shortcode"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:362
+#: source/php/Acf/AcfFields.php:418
 msgid ""
 "Gallery images is stored as attached images. You can use WordPress own "
 "shortcode [gallery] to display the images."
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:391
+#: source/php/Acf/AcfFields.php:447
 msgid "Display events"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:395
+#: source/php/Acf/AcfFields.php:451
 msgid "Number of events to show"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:398
+#: source/php/Acf/AcfFields.php:454
 msgid "Set to -1 to show all."
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:416
+#: source/php/Acf/AcfFields.php:472
 msgid "Show pagination"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:419
+#: source/php/Acf/AcfFields.php:475
 msgid "Display pagination buttons below the event list."
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:432
+#: source/php/Acf/AcfFields.php:488
 msgid "Days interval"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:435
+#: source/php/Acf/AcfFields.php:491
 msgid "Include events from today to the given number of days."
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:453
+#: source/php/Acf/AcfFields.php:509
 msgid "Fields"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:465 source/php/PostTypes/Events.php:38
-#: source/php/Shortcodes/eventShortcode.php:70
+#: source/php/Acf/AcfFields.php:521 source/php/PostTypes/Events.php:38
+#: source/php/Shortcodes/SingleEvent.php:70
 msgid "Occasion"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:466
+#: source/php/Acf/AcfFields.php:522
 msgid "Image"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:468
+#: source/php/Acf/AcfFields.php:524
 msgid "Description"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:478
+#: source/php/Acf/AcfFields.php:534
 msgid "Description letter limit"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:481
+#: source/php/Acf/AcfFields.php:537
 msgid "Set to -1 to show the whole description."
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:507 source/php/PostTypes/Events.php:238
+#: source/php/Acf/AcfFields.php:563 source/php/PostTypes/Events.php:238
 msgid "Groups"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:518
+#: source/php/Acf/AcfFields.php:574
 msgid "Show events from all groups"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:523
+#: source/php/Acf/AcfFields.php:579
 msgid "Select groups"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:526
+#: source/php/Acf/AcfFields.php:582
 msgid "Show events from the selected groups."
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:553 source/php/PostTypes/Events.php:164
-#: source/php/Shortcodes/eventShortcode.php:80
+#: source/php/Acf/AcfFields.php:609 source/php/PostTypes/Events.php:164
+#: source/php/Shortcodes/SingleEvent.php:80
 msgid "Categories"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:564
+#: source/php/Acf/AcfFields.php:620
 msgid "Show events from all categories"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:569
+#: source/php/Acf/AcfFields.php:625
 msgid "Select categories"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:572
+#: source/php/Acf/AcfFields.php:628
 msgid "Show events from the selected categories."
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:599 source/php/PostTypes/Events.php:201
+#: source/php/Acf/AcfFields.php:655 source/php/PostTypes/Events.php:201
 msgid "Tags"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:610
+#: source/php/Acf/AcfFields.php:666
 msgid "Show events from all tags"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:615
+#: source/php/Acf/AcfFields.php:671
 msgid "Select tags"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:618
+#: source/php/Acf/AcfFields.php:674
 msgid "Show events from the selected tags."
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:645
+#: source/php/Acf/AcfFields.php:701
 msgid "Default image"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:648
+#: source/php/Acf/AcfFields.php:704
 msgid "Will display if event image is missing."
+msgstr ""
+
+#: source/php/Acf/AcfFields.php:728
+msgid "Show events that occurs at a specified location."
+msgstr ""
+
+#: source/php/Acf/AcfFields.php:746
+msgid ""
+"To show events occurring nearby the given location, enter maximum distance "
+"in km. Leave blank to only show events from the exact position."
 msgstr ""
 
 #: source/php/Admin/AdminDisplayEvent.php:27
@@ -350,7 +378,7 @@ msgid "End date"
 msgstr ""
 
 #: source/php/Admin/AdminDisplayEvent.php:100
-#: source/php/Shortcodes/eventShortcode.php:72
+#: source/php/Shortcodes/SingleEvent.php:72
 msgid "Door time"
 msgstr ""
 
@@ -392,20 +420,20 @@ msgstr ""
 msgid "Loading"
 msgstr ""
 
-#: source/php/App.php:207 source/php/App.php:208
+#: source/php/App.php:211 source/php/App.php:212
 #: source/php/PostTypes/Events.php:280
 msgid "Import events"
 msgstr ""
 
-#: source/php/App.php:228
+#: source/php/App.php:237
 msgid "Import Groups"
 msgstr ""
 
-#: source/php/App.php:229
+#: source/php/App.php:238
 msgid "Import groups"
 msgstr ""
 
-#: source/php/App.php:242 source/php/App.php:243
+#: source/php/App.php:251 source/php/App.php:252
 msgid "Delete all events"
 msgstr ""
 
@@ -458,7 +486,7 @@ msgstr ""
 msgid "please go ahead and create it manually and rerun the import."
 msgstr ""
 
-#: source/php/Module/EventModule.php:126 source/php/Widget/DisplayEvents.php:52
+#: source/php/Module/EventModule.php:134 source/php/Widget/DisplayEvents.php:56
 msgid "No events found"
 msgstr ""
 
@@ -742,75 +770,75 @@ msgstr ""
 msgid "Choose from most used groups"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:326
+#: source/php/PostTypes/Events.php:331
 msgid "Something went wrong!"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:343
+#: source/php/PostTypes/Events.php:348
 msgid "Error"
 msgstr ""
 
-#: source/php/Shortcodes/eventShortcode.php:85
+#: source/php/Shortcodes/SingleEvent.php:85
 msgid "Link"
 msgstr ""
 
-#: source/php/Shortcodes/eventShortcode.php:90
+#: source/php/Shortcodes/SingleEvent.php:90
 msgid "Other links"
 msgstr ""
 
-#: source/php/Shortcodes/eventShortcode.php:98
+#: source/php/Shortcodes/SingleEvent.php:98
 msgid "Related events"
 msgstr ""
 
-#: source/php/Shortcodes/eventShortcode.php:124
+#: source/php/Shortcodes/SingleEvent.php:124
 msgid "Other locations"
 msgstr ""
 
-#: source/php/Shortcodes/eventShortcode.php:146
+#: source/php/Shortcodes/SingleEvent.php:146
 msgid "Age restriction"
 msgstr ""
 
-#: source/php/Shortcodes/eventShortcode.php:147
+#: source/php/Shortcodes/SingleEvent.php:147
 msgid "Price adult"
 msgstr ""
 
-#: source/php/Shortcodes/eventShortcode.php:148
+#: source/php/Shortcodes/SingleEvent.php:148
 msgid "Price children"
 msgstr ""
 
-#: source/php/Shortcodes/eventShortcode.php:149
+#: source/php/Shortcodes/SingleEvent.php:149
 msgid "Children price is valid up to"
 msgstr ""
 
-#: source/php/Shortcodes/eventShortcode.php:150
+#: source/php/Shortcodes/SingleEvent.php:150
 msgid "Price student"
 msgstr ""
 
-#: source/php/Shortcodes/eventShortcode.php:151
+#: source/php/Shortcodes/SingleEvent.php:151
 msgid "Price senior"
 msgstr ""
 
-#: source/php/Shortcodes/eventShortcode.php:152
+#: source/php/Shortcodes/SingleEvent.php:152
 msgid "Senior price is valid from"
 msgstr ""
 
-#: source/php/Shortcodes/eventShortcode.php:156
+#: source/php/Shortcodes/SingleEvent.php:156
 msgid "Group prices"
 msgstr ""
 
-#: source/php/Shortcodes/eventShortcode.php:165
+#: source/php/Shortcodes/SingleEvent.php:165
 msgid "Included in membership cards"
 msgstr ""
 
-#: source/php/Shortcodes/eventShortcode.php:172
+#: source/php/Shortcodes/SingleEvent.php:172
 msgid "Price information"
 msgstr ""
 
-#: source/php/Shortcodes/eventShortcode.php:173
+#: source/php/Shortcodes/SingleEvent.php:173
 msgid "Ticket includes"
 msgstr ""
 
-#: source/php/Shortcodes/eventShortcode.php:180
+#: source/php/Shortcodes/SingleEvent.php:180
 msgid "Organizer"
 msgstr ""
 
@@ -826,44 +854,44 @@ msgstr ""
 msgid "Recent Posts"
 msgstr ""
 
-#: source/php/Widget/DisplayEvents.php:71
+#: source/php/Widget/DisplayEvents.php:75
 #, php-format
 msgid "Location: %s"
 msgstr ""
 
-#: source/php/Widget/DisplayEvents.php:124
+#: source/php/Widget/DisplayEvents.php:128
 msgid "Title:"
 msgstr ""
 
-#: source/php/Widget/DisplayEvents.php:127
+#: source/php/Widget/DisplayEvents.php:131
 msgid "Number of events to show:"
 msgstr ""
 
-#: source/php/Widget/DisplayEvents.php:130
+#: source/php/Widget/DisplayEvents.php:134
 msgid "Days interval:"
 msgstr ""
 
-#: source/php/Widget/DisplayEvents.php:134
+#: source/php/Widget/DisplayEvents.php:138
 msgid "Display date"
 msgstr ""
 
-#: source/php/Widget/DisplayEvents.php:137
+#: source/php/Widget/DisplayEvents.php:141
 msgid "Display featured image"
 msgstr ""
 
-#: source/php/Widget/DisplayEvents.php:140
+#: source/php/Widget/DisplayEvents.php:144
 msgid "Display location"
 msgstr ""
 
-#: source/php/Widget/DisplayEvents.php:143
+#: source/php/Widget/DisplayEvents.php:147
 msgid "Display description"
 msgstr ""
 
-#: source/php/Widget/DisplayEvents.php:145
+#: source/php/Widget/DisplayEvents.php:149
 msgid "Description letter limit:"
 msgstr ""
 
-#: source/php/Widget/DisplayEvents.php:146
+#: source/php/Widget/DisplayEvents.php:150
 msgid "-1 equals no limit"
 msgstr ""
 
@@ -876,7 +904,7 @@ msgid "Integrate and display events from Event Manager API."
 msgstr ""
 
 #. Author of the plugin/theme
-msgid "Sebastian Thulin, Jonatan Hanson"
+msgid "Jonatan Hanson, Sebastian Thulin"
 msgstr ""
 
 #. Author URI of the plugin/theme

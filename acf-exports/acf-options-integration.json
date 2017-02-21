@@ -195,7 +195,7 @@
                 "label": "Import from location",
                 "name": "event_import_geographic",
                 "type": "google_map",
-                "instructions": "Import events that occurs at a specified adress.",
+                "instructions": "Import events that occurs at a specified location.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -213,7 +213,7 @@
                 "label": "Distance from location",
                 "name": "event_geographic_distance",
                 "type": "number",
-                "instructions": "To get events occurring nearby the entered location, enter maximum distance in km. Leave blank to get only get events from the exact position.",
+                "instructions": "To get events occurring nearby the given location, enter maximum distance in km. Leave blank to only get events from the exact position.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {

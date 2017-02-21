@@ -280,10 +280,10 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
                 $button .= '<div id="importevents" class="button-primary">' . __('Import events', 'event-integration') . '</div>';
             }
 
-            // Debug code
-            $button .= '<a href="' . admin_url('options.php?page=import-events') . '" class="button" id="post-query-submit">Debug</a>';
+            // Testing
+            // $button .= '<a href="' . admin_url('options.php?page=import-events') . '" class="button" id="post-query-submit">Events</a>';
             // $button .= '<a href="' . admin_url('options.php?page=import-groups') . '" class="button" id="post-query-submit">Groups</a>';
-            // $button .= '<a href="' . admin_url('options.php?page=delete-all-events') . '" class="button" id="post-query-submit">Delete</a>';
+            // $button .= '<a href="' . admin_url('options.php?page=delete-all-events') . '" class="button" id="post-query-submit">Delete all</a>';
 
             $button .= '</div>';
             $views['import-buttons'] = $button;

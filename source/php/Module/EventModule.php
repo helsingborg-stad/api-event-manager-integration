@@ -100,9 +100,17 @@ class EventModule extends \Modularity\Module
                 $taxonomies[] = $v;
             }
         }
-        $taxonomies = (! empty($taxonomies)) ? $taxonomies : false;
+        $taxonomies = (! empty($taxonomies)) ? $taxonomies : null;
 
-        $events = \EventManagerIntegration\Helper\QueryEvents::getEventsByInterval($start_date, $end_date, $display_limit, $taxonomies, $page);
+        $params = array('start_date'    => $start_date,
+                        'end_date'      => $end_date,
+                        'display_limit' => $display_limit,
+                        'taxonomies'    => $taxonomies,
+                        'location'      => $fields->mod_event_geographic,
+                        'distance'      => $fields->mod_event_distance
+                        );
+
+        $events = \EventManagerIntegration\Helper\QueryEvents::getEventsByInterval($params, $page);
 
         return $events;
     }

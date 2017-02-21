@@ -59,6 +59,8 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         $additional_links       = ! empty($event['additional_links']) ? $event['additional_links'] : null;
         $related_events         = ! empty($event['related_events']) ? $event['related_events'] : null;
         $location               = ! empty($event['location']) ? $event['location'] : null;
+        $latitude               = is_array($location) && ! empty($location['latitude']) ? $location['latitude'] : null;
+        $longitude              = is_array($location) && ! empty($location['longitude']) ? $location['longitude'] : null;
         $additional_locations   = ! empty($event['additional_locations']) ? $event['additional_locations'] : null;
         $organizers             = ! empty($event['organizers']) ? $event['organizers'] : null;
         $supporters             = ! empty($event['supporters']) ? $event['supporters'] : null;
@@ -129,6 +131,8 @@ class EventManagerApi extends \EventManagerIntegration\Parser
                 'additional_links'      => $additional_links,
                 'related_events'        => $related_events,
                 'location'              => $location,
+                'latitude'              => $latitude,
+                'longitude'             => $longitude,
                 'additional_locations'  => $additional_locations,
                 'organizers'            => $organizers,
                 'supporters'            => $supporters,
