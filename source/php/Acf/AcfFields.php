@@ -197,7 +197,7 @@ class AcfFields
 			),
 			array (
 				'key' => 'field_58aaf2615abcb',
-				'label' => __('Google Geocode API key', 'event-integration'),
+				'label' => __('Google Maps JavaScript API key', 'event-integration'),
 				'name' => 'google_geocode_key',
 				'type' => 'text',
 				'instructions' => '',

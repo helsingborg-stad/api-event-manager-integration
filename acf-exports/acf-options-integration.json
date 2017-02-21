@@ -173,7 +173,7 @@
             },
             {
                 "key": "field_58aaf2615abcb",
-                "label": "Google Geocode API key",
+                "label": "Google Maps JavaScript API key",
                 "name": "google_geocode_key",
                 "type": "text",
                 "instructions": "",
