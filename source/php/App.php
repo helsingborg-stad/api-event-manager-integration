@@ -17,7 +17,8 @@ class App
         /* Register cron action */
         add_action('import_events_daily', array($this, 'importEventsCron'));
 
-        new OAuth\OAuthHandler();
+        new OAuth\OAuthAdmin();
+        new OAuth\OAuthRequests();
         new PostTypes\Events();
         new Acf\AcfConfig();
         new Acf\AcfFields();
@@ -50,7 +51,6 @@ class App
         $start = date('Y-m-d H:i:s', strtotime($start_date));
         $end = date('Y-m-d H:i:s', strtotime($end_date));
         $date = mysql2date('j F Y', $start, true) . ', ' . mysql2date('H:i', $start, true) . ' ' . __('to', 'event-integration') . ' ' . mysql2date('j F Y', $end, true) . ', ' . mysql2date('H:i', $end, true);
-
         if (date('Y-m-d', strtotime($start)) == date('Y-m-d', strtotime($end))) {
             $date = mysql2date('j F Y', $start, true) . ', ' . mysql2date('H:i', $start, true) . ' - ' . mysql2date('H:i', $end, true);
         }
@@ -66,9 +66,7 @@ class App
     public static function formatDoorTime($door_time)
     {
         $start = date('Y-m-d H:i:s', strtotime($door_time));
-
         $date = mysql2date('j F Y', $start, true) . ', ' . mysql2date('H:i', $start, true);
-
         return $date;
     }
 
@@ -143,7 +141,7 @@ class App
             $distance   = (get_field('event_geographic_distance', 'option')) ? '&distance=' . get_field('event_geographic_distance', 'option') : '';
 
             $api_url    = get_field('event_api_url', 'option');
-            $api_url    = rtrim($api_url, '/') . '/event/time?start=' . $from_date . '&end=' . $to_date . $latlng . $distance;
+            $api_url    = rtrim($api_url, '/') . '/event/time?start=' . $from_date . '&end=' . $to_date . $latlng . $distance . '&_embed';
 
             // TA BORT
             file_put_contents(dirname(__FILE__)."/Log/import_events.log", "Event parser last run: ".date("Y-m-d H:i:s"));
@@ -227,7 +225,7 @@ class App
             $distance   = (get_field('event_geographic_distance', 'option')) ? '&distance=' . get_field('event_geographic_distance', 'option') : '';
 
             $api_url    = get_field('event_api_url', 'option');
-            $api_url    = rtrim($api_url, '/') . '/event/time?start=' . $from_date . '&end=' . $to_date . $latlng . $distance;
+            $api_url    = rtrim($api_url, '/') . '/event/time?start=' . $from_date . '&end=' . $to_date . $latlng . $distance . '&_embed';
 
             $importer   = new \EventManagerIntegration\Parser\EventManagerApi($api_url);
             });

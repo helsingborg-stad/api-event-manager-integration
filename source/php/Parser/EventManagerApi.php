@@ -20,24 +20,14 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         $this->removeExpiredOccasions();
         $this->removeExpiredEvents();
 
-        $ch = curl_init();
-        $options = [
-            CURLOPT_SSL_VERIFYPEER => false,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_URL            => $this->url,
-        ];
-
-        curl_setopt_array($ch, $options);
-        $events = json_decode(curl_exec($ch), true);
-        curl_close($ch);
-        if (!$events || (is_object($events) && $events->code == 'Error')) {
-            return false;
-        }
+        $events = \EventManagerIntegration\Parser::curlApi($this->url);
 
         // Remove duplicates and save to database
         //$events_unique = $this->uniqueArray($events, 'id');
-        foreach ($events as $event) {
-            $this->saveEvent($event);
+        if ($events) {
+            foreach ($events as $event) {
+                $this->saveEvent($event);
+            }
         }
     }
 
@@ -58,10 +48,6 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         $event_link             = ! empty($event['event_link']) ? $event['event_link'] : null;
         $additional_links       = ! empty($event['additional_links']) ? $event['additional_links'] : null;
         $related_events         = ! empty($event['related_events']) ? $event['related_events'] : null;
-        $location               = ! empty($event['location']) ? $event['location'] : null;
-        $latitude               = is_array($location) && ! empty($location['latitude']) ? $location['latitude'] : null;
-        $longitude              = is_array($location) && ! empty($location['longitude']) ? $location['longitude'] : null;
-        $additional_locations   = ! empty($event['additional_locations']) ? $event['additional_locations'] : null;
         $organizers             = ! empty($event['organizers']) ? $event['organizers'] : null;
         $supporters             = ! empty($event['supporters']) ? $event['supporters'] : null;
         $booking_link           = ! empty($event['booking_link']) ? $event['booking_link'] : null;
@@ -88,6 +74,11 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         $youtube                = ! empty($event['youtube']) ? $event['youtube'] : null;
         $vimeo                  = ! empty($event['vimeo']) ? $event['vimeo'] : null;
         $post_status            = get_field('event_post_status', 'option') ? get_field('event_post_status', 'option') : 'publish';
+        // Save embedded location data
+        $location               = ! empty($event['_embedded']['location'][0]) ? $event['_embedded']['location'][0] : null;
+        $additional_locations   = ! empty($event['_embedded']['additional_locations']) ? $event['_embedded']['additional_locations'] : null;
+        $latitude               = is_array($location) && ! empty($location['latitude']) ? $location['latitude'] : null;
+        $longitude              = is_array($location) && ! empty($location['longitude']) ? $location['longitude'] : null;
 
         // Check if category, tag and group filter is set or not
         $tax_filter = (empty(get_field('event_filter_cat', 'options')) && empty(get_field('event_filter_tag', 'options')) && empty(get_field('event_filter_group', 'options'))) ? true : false;

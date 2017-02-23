@@ -6,7 +6,7 @@
 
 namespace EventManagerIntegration\OAuth;
 
-class OAuthHandler
+class OAuthRequests
 {
     public function __construct()
     {
@@ -17,125 +17,6 @@ class OAuthHandler
         add_action('wp_ajax_submit_event', array($this, 'submitEvent'));
         add_action('wp_ajax_nopriv_submit_image', array($this, 'submitImage'));
         add_action('wp_ajax_submit_image', array($this, 'submitImage'));
-        add_action('admin_menu', array($this, 'createOauthPage'));
-    }
-
-    /**
-     * Adds submenu page "API authentication", under custom post type parent.
-     */
-    function createOauthPage() {
-        add_submenu_page(
-            'edit.php?post_type=event',
-            __( 'API authentication', 'event-integration' ),
-            __( 'API authentication', 'event-integration' ),
-            'manage_options',
-            'oauth-request',
-            array($this, 'oauthRequestCallback')
-        );
-    }
-
-    /**
-     * Callback for the submenu page. Forms to complete authorization.
-     */
-    function oauthRequestCallback() {
-        ?>
-        <div class="wrap">
-            <h1><?php _e('API authentication', 'event-integration' ); ?></h1>
-        </div>
-
-        <div class="error notice hidden"></div>
-        <div class="updated notice hidden"></div>
-
-        <?php if (get_option('_event_authorized') == false): ?>
-        <div class="wrap oauth-request">
-        <h3><?php _e('Request authorization', 'event-integration'); ?></h3>
-        <p><?php _e('To publish events from this client to the API you need authentication. Enter your given client keys and send request.', 'event-integration' ); ?></p>
-            <form method="post" id="oauth-request" action="/wp-admin/admin-ajax.php">
-                <table class="form-table">
-                    <tr>
-                        <th scope="row">
-                            <label for="client-key"><?php _e( 'Client key', 'event-integration' )?></label>
-                        </th>
-                        <td>
-                            <input type="text" class="client-key" name="client-key" id="client-key" value="<?php echo esc_attr(get_option('_event_client')); ?>" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            <label for="client-secret"><?php _e( 'Client secret', 'event-integration' )?></label>
-                        </th>
-                        <td>
-                            <input type="text" class="client-secret" name="client-secret" id="client-secret" value="<?php echo esc_attr(get_option('_event_secret')); ?>" />
-                        </td>
-                    </tr>
-                </table>
-                <p class="submit">
-                    <input name='submit' type='submit' id='oauth-request-submit' class='button-primary' value='<?php _e('Send request', 'event-integration') ?>' />
-                </p>
-            </form>
-        </div>
-
-        <div class="wrap oauth-access">
-        <h3><?php _e('Enter verification token', 'event-integration'); ?></h3>
-            <form method="post" id="oauth-access" action="/wp-admin/admin-ajax.php">
-                <table class="form-table">
-                    <tr>
-                        <th scope="row">
-                            <label for="verification-token"><?php _e('Verification token', 'event-integration'); ?></label>
-                        </th>
-                        <td>
-                            <input type="text" class="verification-token" name="verification-token" id="verification-token"/>
-                        </td>
-                    </tr>
-                </table>
-                <p class="submit">
-                    <input name='submit' type='submit' class='button-primary' value='<?php _e('Grant access', 'event-integration');  ?>' />
-                </p>
-            </form>
-        </div>
-        <?php endif ?>
-
-        <?php if (get_option('_event_authorized') == true): ?>
-        <div class="wrap oauth-authorized">
-        <h3 class="message-success"><?php _e('Authorized', 'event-integration' ); ?></h3>
-        <p><?php _e('This client is authorized to submit events to the API.', 'event-integration' ); ?></p>
-            <form method="post" id="oauth-authorized" action="/wp-admin/admin-ajax.php">
-                <table class="form-table">
-                    <tr>
-                        <th scope="row">
-                            <?php _e( 'Client key', 'event-integration' ); ?>
-                        </th>
-                        <td>
-                            <code>
-                                <?php echo get_option('_event_client'); ?>
-                            </code>
-                        </td>
-                    </tr>
-                </table>
-            <p class="submit">
-                <input name='submit' type='submit' class='button' value='<?php _e('Remove client', 'event-integration') ?>' />
-            </p>
-            </form>
-        </div>
-        <?php endif ?>
-    <?php
-    }
-
-    /**
-     * Remove all client tokens
-     */
-    function deleteOAuth()
-    {
-        delete_option('_event_authorized');
-        delete_option('_event_client');
-        delete_option('_event_secret');
-        delete_option('_event_token');
-        delete_option('_event_token_secret');
-        delete_option('_temp_request_token');
-        delete_option('_temp_request_token_secret');
-
-        echo "Client removed";
-        wp_die();
     }
 
     /**
@@ -146,7 +27,7 @@ class OAuthHandler
      */
     public function requestOAuth()
     {
-        if ( (!isset($_POST['client'])) || (!isset($_POST['secret'])) || (empty($_POST['client'])) || (empty($_POST['secret'])) ) {
+        if ((!isset($_POST['client'])) || (!isset($_POST['secret'])) || (empty($_POST['client'])) || (empty($_POST['secret']))) {
             wp_send_json_error(__('Request credentials is missing', 'event-integration'));
         }
 
@@ -212,7 +93,7 @@ class OAuthHandler
      */
     public function accessOAuth()
     {
-        if ( (!isset($_POST['verifier'])) || (empty($_POST['verifier'])) ) {
+        if ((!isset($_POST['verifier'])) || (empty($_POST['verifier']))) {
             wp_send_json_error(__('Verifier is missing', 'event-integration'));
         }
         $oauthVerifier = $_POST['verifier'];
@@ -271,7 +152,8 @@ class OAuthHandler
     /**
      * Submit an event to Event Manager API
      */
-    public function submitEvent() {
+    public function submitEvent()
+    {
         if (! isset($_POST['data'])) {
             wp_send_json_error(__('Form data is missing, please try again.', 'event-integration'), 'event-integration');
         }
@@ -329,7 +211,8 @@ class OAuthHandler
     /**
      * Upload image to Event Manager API media end point
      */
-    public function submitImage() {
+    public function submitImage()
+    {
         if (! isset($_FILES['file'])) {
             wp_send_json_error(__('Image is not selected, please try again.', 'event-integration'), 'event-integration');
         }
@@ -393,4 +276,20 @@ class OAuthHandler
         wp_send_json_success($resObj->id);
     }
 
+    /**
+     * Remove all client tokens
+     */
+    public function deleteOAuth()
+    {
+        delete_option('_event_authorized');
+        delete_option('_event_client');
+        delete_option('_event_secret');
+        delete_option('_event_token');
+        delete_option('_event_token_secret');
+        delete_option('_temp_request_token');
+        delete_option('_temp_request_token_secret');
+
+        echo "Client removed";
+        wp_die();
+    }
 }

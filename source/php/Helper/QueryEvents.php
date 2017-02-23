@@ -124,7 +124,6 @@ class QueryEvents
         }
     }
 
-
     /**
      * Get event that occurs nearby a locations and within given distance
      * @param  string       $lat       latitude

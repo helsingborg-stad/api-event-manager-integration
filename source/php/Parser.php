@@ -41,4 +41,29 @@ abstract class Parser
      * Used to start the parsing
      */
     abstract public function start();
+
+    /**
+     * Curl reuqest to Api
+     * @param  string $url url to curl
+     * @return array
+     */
+    public static function curlApi($url)
+    {
+        $ch = curl_init();
+        $options = [
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_URL            => $url,
+        ];
+
+        curl_setopt_array($ch, $options);
+        $events = json_decode(curl_exec($ch), true);
+        curl_close($ch);
+        if (!$events || (is_object($events) && $events->code == 'Error')) {
+            return false;
+        }
+
+        return $events;
+    }
+
 }

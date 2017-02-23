@@ -26,6 +26,8 @@ class Event extends \EventManagerIntegration\Entity\PostManager
         $this->saveCategories();
         $this->saveGroups();
         $this->saveTags();
+        $this->saveLocation();
+        $this->saveAddLocations();
 
         if (! empty($this->gallery)) {
             foreach ($this->gallery as $key => $image) {
@@ -34,6 +36,62 @@ class Event extends \EventManagerIntegration\Entity\PostManager
         }
 
         return true;
+    }
+
+    /**
+     * Saves location as meta data
+     * @return void
+     */
+    public function saveLocation()
+    {
+        $location = $this->mergeParentLocation($this->ID, $this->location);
+        if (! empty($location['latitude']) && ! empty($location['longitude'])) {
+            update_post_meta($this->ID, 'latitude', $location['latitude']);
+            update_post_meta($this->ID, 'longitude', $location['longitude']);
+        }
+        update_post_meta($this->ID, 'location', $location);
+    }
+
+    /**
+     * Saves additional locations as meta data
+     * @return void
+     */
+    public function saveAddLocations()
+    {
+        $add_locations = array();
+        if (! empty($this->additional_locations)) {
+            foreach ($this->additional_locations as $key => $location) {
+                $add_locations[] = $this->mergeParentLocation($this->ID, $location);
+            }
+        }
+        update_post_meta($this->ID, 'additional_locations', $add_locations);
+    }
+
+    /**
+     * Clean location array and merge with parent
+     * @param  int      $post_id
+     * @param  array    $location location
+     * @return array    new location
+     */
+    public function mergeParentLocation($post_id, $location)
+    {
+        $location['title'] = $location['title']['rendered'];
+        if (! empty($location['parent']) &&  $location['parent'] > 0) {
+            $parent     = $location['parent'];
+            $api_url    = get_field('event_api_url', 'option');
+            $api_url    = rtrim($api_url, '/') . '/location/' . $parent;
+            $parent = \EventManagerIntegration\Parser::curlApi($api_url);
+            if ($parent) {
+                $location['title'] = $parent['title']['rendered'] . ', ' . $location['title'];
+                foreach ($location as $key => $value) {
+                    if (empty($location[$key])) {
+                        $location[$key] = $parent[$key];
+                    }
+                }
+            }
+        }
+        unset($location['_links'], $location['id'], $location['slug'], $location['date'], $location['parent']);
+        return $location;
     }
 
     /**
@@ -80,7 +138,7 @@ class Event extends \EventManagerIntegration\Entity\PostManager
 
         // Delete all occasions related to the event
         $db_table = $wpdb->prefix . "integrate_occasions";
-        $wpdb->delete($db_table, array( 'event_id' => $this->ID ), array( '%d' ));
+        $wpdb->delete($db_table, array('event_id' => $this->ID), array('%d'));
 
         // Remove post if occasions is missing
         if ($this->occasions_complete == null || empty($this->occasions_complete)) {
