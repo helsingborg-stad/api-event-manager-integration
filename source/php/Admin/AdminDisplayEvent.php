@@ -32,15 +32,6 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
         );
 
         add_meta_box(
-            'event-occasion-box',
-            esc_html__('Occasions', 'event-integration'),
-            array($this, 'eventOccasions'),
-            $this->post_type,
-            'normal',
-            'default'
-        );
-
-        add_meta_box(
             'event-meta-box',
             esc_html__('Meta data', 'event-integration'),
             array($this, 'eventMeta'),
@@ -50,9 +41,27 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
         );
 
         add_meta_box(
+            'event-gallery-box',
+            esc_html__('Gallery', 'event-integration'),
+            array($this, 'eventGallery'),
+            $this->post_type,
+            'normal',
+            'low'
+        );
+
+        add_meta_box(
             'event-image-box',
             esc_html__('Featured image', 'event-integration'),
             array($this, 'eventImage'),
+            $this->post_type,
+            'side',
+            'high'
+        );
+
+        add_meta_box(
+            'event-occasion-box',
+            esc_html__('Occasions', 'event-integration'),
+            array($this, 'eventOccasions'),
             $this->post_type,
             'side',
             'high'
@@ -89,38 +98,15 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
         $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($object->ID);
         ?>
 
+        <ul>
         <?php foreach ($occasions as $o): ?>
-            <strong><?php _e('Start date', 'event-integration'); ?></strong>
-            <p><?php echo $o->start_date; ?></p>
-
-            <strong><?php _e('End date', 'event-integration'); ?></strong>
-            <p><?php echo $o->end_date; ?></p>
-
-            <?php if (! empty($o->door_time)): ?>
-                <strong><?php _e('Door time', 'event-integration') ?></strong>
-                <p><?php echo $o->door_time; ?></p>
-            <?php endif ?>
-
-            <?php if (! empty($o->status)): ?>
-                <strong><?php _e('Status', 'event-integration') ?></strong>
-                <p><?php echo $o->status; ?></p>
-            <?php endif ?>
-
-            <?php if (! empty($o->exception_information)): ?>
-                <strong><?php _e('Exception information', 'event-integration') ?></strong>
-                <p><?php echo $o->exception_information; ?></p>
-            <?php endif ?>
-
-            <?php if (! empty($o->content)): ?>
-                <strong><?php _e('Custom content', 'event-integration') ?></strong>
-                <p><?php echo $o->content; ?></p>
-            <?php endif ?>
-
-            <hr>
-
+            <li>
+                <span><?php echo \EventManagerIntegration\App::formatEventDate($o->start_date, $o->end_date) ?></span>
+            </li>
         <?php endforeach ?>
+        </ul>
 
-    <?php
+        <?php
     }
 
     /*
@@ -128,21 +114,15 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
      */
     public function eventMeta($object, $box)
     {
-        $meta_data = \EventManagerIntegration\Helper\QueryEvents::getEventMeta($object->ID);
-        ?>
+        echo do_shortcode('[single_event_information]');
+    }
 
-        <?php foreach ($meta_data as $m): ?>
-            <?php if (substr($m->meta_key, 0, 1) === '_' || $m->meta_key == 'occasions_complete') { continue; } ?>
-
-            <h3><?php echo ucfirst(str_replace('_', ' ', $m->meta_key)); ?></h3>
-            <?php if($this->outputMeta($m->meta_value)): ?>
-                <p><?php echo $this->outputMeta($m->meta_value); ?></p>
-            <?php else: ?>
-                <p><?php echo "n/a" ?></p>
-            <?php endif; ?>
-        <?php endforeach ?>
-
-    <?php
+    /*
+     * Display event-gallery-box
+     */
+    public function eventGallery($object, $box)
+    {
+        echo do_shortcode('[gallery]');
     }
 
     /*
