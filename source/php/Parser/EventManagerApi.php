@@ -281,13 +281,12 @@ class EventManagerApi extends \EventManagerIntegration\Parser
             $passes = false;
 
             // Save group slug as new array
-            $event_groups = array();
-            foreach ($groups as $group) {
-                $event_groups[] .= $group['slug'];
+            foreach ($groups as &$group) {
+                $group = $group['slug'];
             }
 
             foreach ($filter_array as $filter) {
-                if (in_array($filter->slug, $event_groups)) {
+                if (in_array($filter->slug, $groups)) {
                     $passes = true;
                 }
             }

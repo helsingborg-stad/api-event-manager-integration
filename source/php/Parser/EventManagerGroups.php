@@ -34,15 +34,18 @@ class EventManagerGroups extends \EventManagerIntegration\Parser
                 return false;
             }
 
-            // Save groups if it contains any events
             foreach ($groups as $group) {
-                if ($group->count > 0) {
-                    $term = get_term_by('slug', $group->slug, $taxonomy);
-                    // Save term if not exist, else update.
-                    if ($term == false) {
-                        wp_insert_term($group->name, $taxonomy, $args = array('slug' => $group->slug));
-                    } else {
-                        wp_update_term($term->term_id, $taxonomy, array('name' => $group->name));
+                if ($group->parent == 0) {
+                    $parent_term = $this->saveTerms($group->name, $group->slug, $taxonomy);
+                    if ($group->children) {
+                        foreach ($group->children as $child) {
+                            $child_term = $this->saveTerms($child->name, $child->name, $taxonomy, $parent_term);
+                            if ($child->children) {
+                                foreach ($child->children as $grand_child) {
+                                    $grand_child_term = $this->saveTerms($grand_child->name, $grand_child->name, $taxonomy, $child_term);
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -50,4 +53,27 @@ class EventManagerGroups extends \EventManagerIntegration\Parser
             $page++;
         }
     }
+
+    /**
+     * Save or update taxonomy term
+     * @param  string  $name     name
+     * @param  string  $slug     slug
+     * @param  string  $taxonomy taxonomy
+     * @param  integer $parent   parent id
+     * @return int
+     */
+    public function saveTerms($name, $slug, $taxonomy, $parent = 0)
+    {
+        $term = get_term_by('slug', $slug, $taxonomy);
+        if ($term == false) {
+            $new_term = wp_insert_term($name, $taxonomy, array('slug' => $slug, 'parent' => $parent));
+            $term_id = $new_term['term_id'];
+        } else {
+            wp_update_term($term->term_id, $taxonomy, array('name' => $name, 'parent' => $parent));
+            $term_id = $term->term_id;
+        }
+
+        return $term_id;
+    }
+
 }

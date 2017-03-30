@@ -79,7 +79,7 @@ class EventModule extends \Modularity\Module
         $display_limit = ($useLimit == true) ? $fields->mod_event_limit : -1;
         $days_ahead = $fields->mod_event_interval;
 
-        // Calculate start and end date
+        // Set start and end date
         $start_date = date('Y-m-d H:i:s', strtotime("today midnight"));
         $end_date = date('Y-m-d H:i:s', strtotime("tomorrow midnight +$days_ahead days") - 1);
 
@@ -100,8 +100,8 @@ class EventModule extends \Modularity\Module
                 $taxonomies[] = $v;
             }
         }
-        $taxonomies = (! empty($taxonomies)) ? $taxonomies : null;
 
+        $taxonomies = (! empty($taxonomies)) ? $taxonomies : null;
         $params = array('start_date'    => $start_date,
                         'end_date'      => $end_date,
                         'display_limit' => $display_limit,

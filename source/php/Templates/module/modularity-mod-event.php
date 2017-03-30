@@ -12,7 +12,7 @@ $pagesCount = \EventManagerIntegration\Module\EventModule::countPages($module->I
     	<div class="module-content">
     		<?php echo \EventManagerIntegration\Module\EventModule::displayEvents($module->ID); ?>
     	</div>
-		<?php if ($pagination && $pagesCount > 0) : ?>
+		<?php if ($pagination && $pagesCount > 1) : ?>
 			<ul class="module-pagination" data-pages="<?php echo $pagesCount; ?>"></ul>
 		<?php endif; ?>
 	</ul>

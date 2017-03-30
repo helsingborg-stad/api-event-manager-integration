@@ -65,7 +65,31 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         add_filter('the_content', array($this, 'eventContent'));
         add_filter('the_lead', array($this, 'eventContentLead'));
         add_filter('query_vars', array($this, 'addDateQueryVar'));
+
         add_filter('acf/fields/taxonomy/wp_list_categories/name=mod_event_groups_list', array($this, 'filterGroupTaxonomy'), 10, 3);
+        add_filter('acf/update_value/name=event_filter_group', array($this, 'updateGroupValue'), 10, 3);
+        add_filter('acf/update_value/name=mod_event_groups_list', array($this, 'updateGroupValue'), 10, 3);
+    }
+
+    /**
+     * Add term children to user group value
+     * @param  string $value   the value of the field
+     * @param  int    $post_id the post id to save against
+     * @param  array  $field   the field object
+     * @return string          the new value
+     */
+    public function updateGroupValue($value, $post_id, $field) {
+        if (! empty($value)) {
+            foreach ($value as $v) {
+                $term_children = get_term_children($v, 'event_groups');
+                if ($term_children) {
+                    $value = array_merge($value, $term_children);
+                }
+            }
+            $value = array_unique($value);
+        }
+
+        return $value;
     }
 
     /**
@@ -243,7 +267,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             'public'                => true,
             'show_in_nav_menus'     => true,
             'show_admin_column'     => true,
-            'hierarchical'          => false,
+            'hierarchical'          => true,
             'show_tagcloud'         => true,
             'show_ui'               => false,
             'query_var'             => true,
