@@ -69,6 +69,23 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         add_filter('acf/fields/taxonomy/wp_list_categories/name=mod_event_groups_list', array($this, 'filterGroupTaxonomy'), 10, 3);
         add_filter('acf/update_value/name=event_filter_group', array($this, 'updateGroupValue'), 10, 3);
         add_filter('acf/update_value/name=mod_event_groups_list', array($this, 'updateGroupValue'), 10, 3);
+        add_filter('acf/update_value/name=event_api_url', array($this, 'getUserGroups'), 10, 3);
+    }
+
+    /**
+     * Import user groups when saving settings
+     * @param  string $value   the value of the field
+     * @param  int    $post_id the post id to save against
+     * @param  array  $field   the field object
+     * @return string          the new value
+     */
+    public function getUserGroups($value, $post_id, $field)
+    {
+        if (! empty($value)) {
+            \EventManagerIntegration\App::importPublishingGroups();
+        }
+
+        return $value;
     }
 
     /**
