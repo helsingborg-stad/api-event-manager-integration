@@ -59,6 +59,25 @@ class App
     }
 
     /**
+     * Format short start date
+     * @param  string $start_date occasion start date
+     * @return array              date values
+     */
+    public static function formatShortDate($start_date)
+    {
+        $start = date('Y-m-d H:i:s', strtotime($start_date));
+        $today = (date('Ymd') == date('Ymd', strtotime($start_date))) ? true : false;
+        $date = array(
+                    'today' => $today,
+                    'date'  => mysql2date('j', $start, true),
+                    'month' => substr(mysql2date('F', $start, true), 0, 3),
+                    'time'  => mysql2date('H:i', $start, true),
+                );
+
+        return $date;
+    }
+
+    /**
      * Format start and end date
      * @param  string $start_date occasion start date
      * @return string             formatted date

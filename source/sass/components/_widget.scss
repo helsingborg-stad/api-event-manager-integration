@@ -1,13 +1,15 @@
-.widget_display_events ul li span {
-	display: block;
-}
+.widget_display_events {
+	ul li span {
+		display: block;
+	}
 
-.widget_display_events .event-date {
-    display: block;
-    font-size: .8em;
-}
+	.event-date {
+    	display: block;
+    	font-size: .8em;
+	}
 
-.widget_display_events .event-img {
-    width:100%;
-    height: auto;
+	.event-img {
+    	width:100%;
+    	height: auto;
+	}
 }

@@ -23,7 +23,7 @@ EventManagerIntegration.Event.Module = (function ($) {
 		    	pages: pages,
 		    	displayedPages: 3,
 		        edges: 1,
-		        cssStyle: 'light-theme',
+		        cssStyle: '',
 		        ellipsePageSet: false,
 		        prevText: '&laquo;',
 		        nextText: '&raquo;',

@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2017-02-21 13:54+0100\n"
+"POT-Creation-Date: 2017-03-31 16:30+0200\n"
 "PO-Revision-Date: 2016-12-13 15:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.0\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: event-manager-integration.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -129,7 +129,7 @@ msgid ""
 msgstr ""
 
 #: source/php/Acf/AcfFields.php:200
-msgid "Google Geocode API key"
+msgid "Google Maps JavaScript API key"
 msgstr ""
 
 #: source/php/Acf/AcfFields.php:219
@@ -140,7 +140,7 @@ msgstr ""
 msgid "Import events that occurs at a specified location."
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:237 source/php/Acf/AcfFields.php:743
+#: source/php/Acf/AcfFields.php:237 source/php/Acf/AcfFields.php:775
 msgid "Distance from location"
 msgstr ""
 
@@ -173,13 +173,13 @@ msgstr ""
 msgid "Display fields"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:329 source/php/Admin/AdminDisplayEvent.php:36
+#: source/php/Acf/AcfFields.php:329 source/php/Admin/AdminDisplayEvent.php:63
 #: source/php/Shortcodes/SingleEvent.php:208
 msgid "Occasions"
 msgstr ""
 
 #: source/php/Acf/AcfFields.php:330 source/php/Acf/AcfFields.php:523
-#: source/php/Acf/AcfFields.php:725 source/php/Shortcodes/SingleEvent.php:112
+#: source/php/Acf/AcfFields.php:757 source/php/Shortcodes/SingleEvent.php:112
 msgid "Location"
 msgstr ""
 
@@ -223,7 +223,7 @@ msgid ""
 "Useful when creating responsive grids. Separate with comma."
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:391
+#: source/php/Acf/AcfFields.php:391 source/php/Admin/AdminDisplayEvent.php:45
 msgid "Gallery"
 msgstr ""
 
@@ -283,75 +283,87 @@ msgid "Description"
 msgstr ""
 
 #: source/php/Acf/AcfFields.php:534
+msgid "Occasion position"
+msgstr ""
+
+#: source/php/Acf/AcfFields.php:554
+msgid "Below title"
+msgstr ""
+
+#: source/php/Acf/AcfFields.php:555
+msgid "Left column"
+msgstr ""
+
+#: source/php/Acf/AcfFields.php:566
 msgid "Description letter limit"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:537
+#: source/php/Acf/AcfFields.php:569
 msgid "Set to -1 to show the whole description."
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:563 source/php/PostTypes/Events.php:238
+#: source/php/Acf/AcfFields.php:595 source/php/PostTypes/Events.php:279
 msgid "Groups"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:574
+#: source/php/Acf/AcfFields.php:606
 msgid "Show events from all groups"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:579
+#: source/php/Acf/AcfFields.php:611
 msgid "Select groups"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:582
+#: source/php/Acf/AcfFields.php:614
 msgid "Show events from the selected groups."
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:609 source/php/PostTypes/Events.php:164
+#: source/php/Acf/AcfFields.php:641 source/php/PostTypes/Events.php:205
 #: source/php/Shortcodes/SingleEvent.php:80
 msgid "Categories"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:620
+#: source/php/Acf/AcfFields.php:652
 msgid "Show events from all categories"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:625
+#: source/php/Acf/AcfFields.php:657
 msgid "Select categories"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:628
+#: source/php/Acf/AcfFields.php:660
 msgid "Show events from the selected categories."
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:655 source/php/PostTypes/Events.php:201
+#: source/php/Acf/AcfFields.php:687 source/php/PostTypes/Events.php:242
 msgid "Tags"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:666
+#: source/php/Acf/AcfFields.php:698
 msgid "Show events from all tags"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:671
+#: source/php/Acf/AcfFields.php:703
 msgid "Select tags"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:674
+#: source/php/Acf/AcfFields.php:706
 msgid "Show events from the selected tags."
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:701
+#: source/php/Acf/AcfFields.php:733
 msgid "Default image"
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:704
+#: source/php/Acf/AcfFields.php:736
 msgid "Will display if event image is missing."
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:728
+#: source/php/Acf/AcfFields.php:760
 msgid "Show events that occurs at a specified location."
 msgstr ""
 
-#: source/php/Acf/AcfFields.php:746
+#: source/php/Acf/AcfFields.php:778
 msgid ""
 "To show events occurring nearby the given location, enter maximum distance "
 "in km. Leave blank to only show events from the exact position."
@@ -361,7 +373,7 @@ msgstr ""
 msgid "Event"
 msgstr ""
 
-#: source/php/Admin/AdminDisplayEvent.php:45
+#: source/php/Admin/AdminDisplayEvent.php:36
 msgid "Meta data"
 msgstr ""
 
@@ -369,32 +381,7 @@ msgstr ""
 msgid "Featured image"
 msgstr ""
 
-#: source/php/Admin/AdminDisplayEvent.php:93
-msgid "Start date"
-msgstr ""
-
-#: source/php/Admin/AdminDisplayEvent.php:96
-msgid "End date"
-msgstr ""
-
-#: source/php/Admin/AdminDisplayEvent.php:100
-#: source/php/Shortcodes/SingleEvent.php:72
-msgid "Door time"
-msgstr ""
-
-#: source/php/Admin/AdminDisplayEvent.php:105
-msgid "Status"
-msgstr ""
-
-#: source/php/Admin/AdminDisplayEvent.php:110
-msgid "Exception information"
-msgstr ""
-
-#: source/php/Admin/AdminDisplayEvent.php:115
-msgid "Custom content"
-msgstr ""
-
-#: source/php/Admin/AdminDisplayEvent.php:158
+#: source/php/Admin/AdminDisplayEvent.php:138
 msgid "Image missing"
 msgstr ""
 
@@ -408,32 +395,32 @@ msgctxt "Event Manager Integration settings"
 msgid "Options"
 msgstr ""
 
-#: source/php/App.php:52
+#: source/php/App.php:53
 msgid "to"
 msgstr ""
 
-#: source/php/App.php:93
+#: source/php/App.php:110
 msgid "Something went wrong, please try again later."
 msgstr ""
 
-#: source/php/App.php:120
+#: source/php/App.php:137
 msgid "Loading"
 msgstr ""
 
-#: source/php/App.php:211 source/php/App.php:212
-#: source/php/PostTypes/Events.php:280
+#: source/php/App.php:229 source/php/App.php:230
+#: source/php/PostTypes/Events.php:321
 msgid "Import events"
 msgstr ""
 
-#: source/php/App.php:237
+#: source/php/App.php:255
 msgid "Import Groups"
 msgstr ""
 
-#: source/php/App.php:238
+#: source/php/App.php:256
 msgid "Import groups"
 msgstr ""
 
-#: source/php/App.php:251 source/php/App.php:252
+#: source/php/App.php:269 source/php/App.php:270
 msgid "Delete all events"
 msgstr ""
 
@@ -490,103 +477,107 @@ msgstr ""
 msgid "No events found"
 msgstr ""
 
-#: source/php/OAuth/OAuthHandler.php:29 source/php/OAuth/OAuthHandler.php:30
-#: source/php/OAuth/OAuthHandler.php:43
+#: source/php/Module/EventModule.php:143
+msgid "Today"
+msgstr ""
+
+#: source/php/OAuth/OAuthAdmin.php:22 source/php/OAuth/OAuthAdmin.php:23
+#: source/php/OAuth/OAuthAdmin.php:36
 msgid "API authentication"
 msgstr ""
 
-#: source/php/OAuth/OAuthHandler.php:51
+#: source/php/OAuth/OAuthAdmin.php:44
 msgid "Request authorization"
 msgstr ""
 
-#: source/php/OAuth/OAuthHandler.php:52
+#: source/php/OAuth/OAuthAdmin.php:45
 msgid ""
 "To publish events from this client to the API you need authentication. Enter "
 "your given client keys and send request."
 msgstr ""
 
-#: source/php/OAuth/OAuthHandler.php:57 source/php/OAuth/OAuthHandler.php:106
+#: source/php/OAuth/OAuthAdmin.php:50 source/php/OAuth/OAuthAdmin.php:99
 msgid "Client key"
 msgstr ""
 
-#: source/php/OAuth/OAuthHandler.php:65
+#: source/php/OAuth/OAuthAdmin.php:58
 msgid "Client secret"
 msgstr ""
 
-#: source/php/OAuth/OAuthHandler.php:73
+#: source/php/OAuth/OAuthAdmin.php:66
 msgid "Send request"
 msgstr ""
 
-#: source/php/OAuth/OAuthHandler.php:79
+#: source/php/OAuth/OAuthAdmin.php:72
 msgid "Enter verification token"
 msgstr ""
 
-#: source/php/OAuth/OAuthHandler.php:84
+#: source/php/OAuth/OAuthAdmin.php:77
 msgid "Verification token"
 msgstr ""
 
-#: source/php/OAuth/OAuthHandler.php:92
+#: source/php/OAuth/OAuthAdmin.php:85
 msgid "Grant access"
 msgstr ""
 
-#: source/php/OAuth/OAuthHandler.php:100
+#: source/php/OAuth/OAuthAdmin.php:93
 msgid "Authorized"
 msgstr ""
 
-#: source/php/OAuth/OAuthHandler.php:101
+#: source/php/OAuth/OAuthAdmin.php:94
 msgid "This client is authorized to submit events to the API."
 msgstr ""
 
-#: source/php/OAuth/OAuthHandler.php:116
+#: source/php/OAuth/OAuthAdmin.php:109
 msgid "Remove client"
 msgstr ""
 
-#: source/php/OAuth/OAuthHandler.php:150
+#: source/php/OAuth/OAuthRequests.php:31
 msgid "Request credentials is missing"
 msgstr ""
 
-#: source/php/OAuth/OAuthHandler.php:158
+#: source/php/OAuth/OAuthRequests.php:39
 msgid ""
 "You must enter OAuth1 endpoint url found under Event settings to proceed."
 msgstr ""
 
-#: source/php/OAuth/OAuthHandler.php:190
+#: source/php/OAuth/OAuthRequests.php:71
 msgid "The credentials you supplied were not correct"
 msgstr ""
 
-#: source/php/OAuth/OAuthHandler.php:205
+#: source/php/OAuth/OAuthRequests.php:86
 msgid "Request succeeded!"
 msgstr ""
 
-#: source/php/OAuth/OAuthHandler.php:205
+#: source/php/OAuth/OAuthRequests.php:86
 msgid "Click here to authorize this client and get verification token"
 msgstr ""
 
-#: source/php/OAuth/OAuthHandler.php:216
+#: source/php/OAuth/OAuthRequests.php:97
 msgid "Verifier is missing"
 msgstr ""
 
-#: source/php/OAuth/OAuthHandler.php:256
+#: source/php/OAuth/OAuthRequests.php:137
 msgid "The verifier you supplied were not correct"
 msgstr ""
 
-#: source/php/OAuth/OAuthHandler.php:268
+#: source/php/OAuth/OAuthRequests.php:149
 msgid "You are authorized!"
 msgstr ""
 
-#: source/php/OAuth/OAuthHandler.php:276
+#: source/php/OAuth/OAuthRequests.php:158
 msgid "Form data is missing, please try again."
 msgstr ""
 
-#: source/php/OAuth/OAuthHandler.php:321
+#: source/php/OAuth/OAuthRequests.php:203
 msgid "Something went wrong posting the event"
 msgstr ""
 
-#: source/php/OAuth/OAuthHandler.php:334
+#: source/php/OAuth/OAuthRequests.php:217
 msgid "Image is not selected, please try again."
 msgstr ""
 
-#: source/php/OAuth/OAuthHandler.php:388
+#: source/php/OAuth/OAuthRequests.php:271
 msgid "Something went wrong uploading your image"
 msgstr ""
 
@@ -620,162 +611,166 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:151
+#: source/php/PostTypes/Events.php:192
 msgctxt "Taxonomy plural name"
 msgid "Event categories"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:152
+#: source/php/PostTypes/Events.php:193
 msgctxt "Taxonomy singular name"
 msgid "Event category"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:153
+#: source/php/PostTypes/Events.php:194
 msgid "Search categories"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:154
+#: source/php/PostTypes/Events.php:195
 msgid "Popular categories"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:155
+#: source/php/PostTypes/Events.php:196
 msgid "All categories"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:156 source/php/PostTypes/Events.php:157
+#: source/php/PostTypes/Events.php:197 source/php/PostTypes/Events.php:198
 msgid "Parent category"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:158
+#: source/php/PostTypes/Events.php:199
 msgid "Edit category"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:159
+#: source/php/PostTypes/Events.php:200
 msgid "Update category"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:160
+#: source/php/PostTypes/Events.php:201
 msgid "Add new category"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:161
+#: source/php/PostTypes/Events.php:202
 msgid "New category"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:162
+#: source/php/PostTypes/Events.php:203
 msgid "Add or remove categories"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:163
+#: source/php/PostTypes/Events.php:204
 msgid "Choose from most used categories"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:188
+#: source/php/PostTypes/Events.php:229
 msgctxt "Taxonomy plural name"
 msgid "Event tags"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:189
+#: source/php/PostTypes/Events.php:230
 msgctxt "Taxonomy singular name"
 msgid "Event tag"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:190
+#: source/php/PostTypes/Events.php:231
 msgid "Search tags"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:191
+#: source/php/PostTypes/Events.php:232
 msgid "Popular tags"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:192
+#: source/php/PostTypes/Events.php:233
 msgid "All tags"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:193 source/php/PostTypes/Events.php:194
+#: source/php/PostTypes/Events.php:234 source/php/PostTypes/Events.php:235
 msgid "Parent"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:195
+#: source/php/PostTypes/Events.php:236
 msgid "Edit tag"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:196
+#: source/php/PostTypes/Events.php:237
 msgid "Update"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:197
+#: source/php/PostTypes/Events.php:238
 msgid "Add new tag"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:198
+#: source/php/PostTypes/Events.php:239
 msgid "New tag"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:199
+#: source/php/PostTypes/Events.php:240
 msgid "Add or remove tags"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:200
+#: source/php/PostTypes/Events.php:241
 msgid "Choose from most used tags"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:225
+#: source/php/PostTypes/Events.php:266
 msgctxt "Taxonomy plural name"
 msgid "Event groups"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:226
+#: source/php/PostTypes/Events.php:267
 msgctxt "Taxonomy singular name"
 msgid "Event group"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:227
+#: source/php/PostTypes/Events.php:268
 msgid "Search groups"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:228
+#: source/php/PostTypes/Events.php:269
 msgid "Popular groups"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:229
+#: source/php/PostTypes/Events.php:270
 msgid "All groups"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:230 source/php/PostTypes/Events.php:231
+#: source/php/PostTypes/Events.php:271 source/php/PostTypes/Events.php:272
 msgid "Parent group"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:232
+#: source/php/PostTypes/Events.php:273
 msgid "Edit group"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:233
+#: source/php/PostTypes/Events.php:274
 msgid "Update group"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:234
+#: source/php/PostTypes/Events.php:275
 msgid "Add new group"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:235
+#: source/php/PostTypes/Events.php:276
 msgid "New group"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:236
+#: source/php/PostTypes/Events.php:277
 msgid "Add or remove groups"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:237
+#: source/php/PostTypes/Events.php:278
 msgid "Choose from most used groups"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:331
+#: source/php/PostTypes/Events.php:372
 msgid "Something went wrong!"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:348
+#: source/php/PostTypes/Events.php:389
 msgid "Error"
+msgstr ""
+
+#: source/php/Shortcodes/SingleEvent.php:72
+msgid "Door time"
 msgstr ""
 
 #: source/php/Shortcodes/SingleEvent.php:85

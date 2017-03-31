@@ -1,34 +1,51 @@
-.modularity-mod-event {
-  /* jQuery Pagination style  */ }
-  .modularity-mod-event .module-content {
-    min-height: 80px; }
-  .modularity-mod-event .module-pagination {
-    border-top: 2px solid #e7e5e1; }
-  .modularity-mod-event ul.module-pagination li {
+.modularity-mod-event .event-date {
+  display: table-cell;
+  width: 60px;
+  padding: 7px;
+  border-right: 1px solid #e7e5e1;
+  font-weight: 300;
+  font-size: .8rem;
+  color: #252525;
+  height: 100%;
+  line-height: 140%;
+  vertical-align: middle;
+  text-align: center; }
+  .modularity-mod-event .event-date span {
+    display: block; }
+
+.modularity-mod-event .event-content {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 10px 15px; }
+
+.modularity-mod-event .loading-dots {
+  margin: 20px auto;
+  height: auto; }
+
+.modularity-mod-event .module-content {
+  min-height: 80px; }
+  .modularity-mod-event .module-content li {
+    padding: 0px !important; }
+
+.modularity-mod-event .module-pagination {
+  background-color: #f7f7f7;
+  border-top: 1px solid #e7e5e1;
+  display: block;
+  overflow: hidden;
+  padding: 5px 5px 5px 5px;
+  margin: 0; }
+  .modularity-mod-event .module-pagination ul {
+    list-style: none;
+    padding: 0;
+    margin: 0; }
+  .modularity-mod-event .module-pagination li {
+    list-style: none;
+    margin: 0;
+    float: left;
     border: 0px !important;
     font-size: 14px;
-    padding: 5px 5px; }
-  .modularity-mod-event ul.simple-pagination {
-    list-style: none; }
-  .modularity-mod-event .simple-pagination {
-    display: block;
-    overflow: hidden;
-    padding: 5px 5px 5px 5px;
-    margin: 0; }
-  .modularity-mod-event .simple-pagination ul {
-    list-style: none;
-    padding: 0;
-    margin: 0; }
-  .modularity-mod-event .simple-pagination li {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    float: left; }
-  .modularity-mod-event span.ellipse.clickable {
-    cursor: pointer; }
-  .modularity-mod-event .ellipse input {
-    width: 3em; }
-  .modularity-mod-event .light-theme a, .modularity-mod-event .light-theme span {
+    padding: 5px !important; }
+  .modularity-mod-event .module-pagination a, .modularity-mod-event .module-pagination span {
     float: left;
     color: #666;
     font-size: 14px;
@@ -40,27 +57,21 @@
     padding: 0 7px;
     margin: 0 5px 0 0;
     border-radius: 3px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     background: #efefef; }
-  .modularity-mod-event .light-theme a:hover {
+  .modularity-mod-event .module-pagination a:hover {
     text-decoration: none;
-    background: #FCFCFC; }
-  .modularity-mod-event .light-theme .current {
+    background: #fcfcfc; }
+  .modularity-mod-event .module-pagination .current {
     background: #666;
-    color: #FFF;
+    color: #fff;
     border-color: #444;
-    box-shadow: 0 1px 0 white, 0 0 2px rgba(0, 0, 0, 0.3) inset;
     cursor: default; }
-  .modularity-mod-event .light-theme .ellipse {
+  .modularity-mod-event .module-pagination .ellipse {
     background: none;
     border: none;
     border-radius: 0;
     box-shadow: none;
-    font-weight: bold;
     cursor: default; }
-  .modularity-mod-event .loading-dots {
-    margin: 20px auto;
-    height: auto; }
 
 .widget_display_events ul li span {
   display: block; }

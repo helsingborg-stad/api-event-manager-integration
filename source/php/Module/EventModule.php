@@ -135,6 +135,21 @@ class EventModule extends \Modularity\Module
         } else {
             foreach ($events as $event) {
                 $ret .= '<li>';
+
+                if (! empty($event->start_date) && in_array('occasion', $fields->mod_event_fields) && $fields->mod_event_occ_pos == 'left') {
+                    $occasion = \EventManagerIntegration\App::formatShortDate($event->start_date);
+                    $ret .= '<div class="event-date">';
+                    if ($occasion['today'] == true) {
+                        $ret .= '<span><strong>' . __('Today', 'event-integration') . '</strong></span>';
+                        $ret .= '<span>' . $occasion['time'] . '</span>';
+                    } else {
+                        $ret .= '<span>' . $occasion['date'] . '</span>';
+                        $ret .= '<span>' . $occasion['month'] . '</span>';
+                    }
+                    $ret .= '</div>';
+                }
+
+                $ret .= '<div class="event-content">';
                 $ret .= '<div class="grid">';
                 if (in_array('image', $fields->mod_event_fields)) {
                     $ret .= '<div class="grid-md-3">';
@@ -145,12 +160,14 @@ class EventModule extends \Modularity\Module
                     }
                     $ret .= '</div>';
                 }
+
                 $ret .= '<div ' . $grid_size . '>';
+
                 if (! empty($event->post_title)) {
                     $date_url = preg_replace('/\D/', '', $event->start_date);
-                    $ret .= '<a href="' . esc_url( add_query_arg( 'date', $date_url, get_page_link($event->ID))) .'" class="link-item">' . $event->post_title . '</a>';
+                    $ret .= '<a href="' . esc_url(add_query_arg('date', $date_url, get_page_link($event->ID))) .'" class="link-item">' . $event->post_title . '</a>';
                 }
-                if (! empty($event->start_date) && ! empty($event->end_date) && in_array('occasion', $fields->mod_event_fields)) {
+                if (! empty($event->start_date) && ! empty($event->end_date) && in_array('occasion', $fields->mod_event_fields) && $fields->mod_event_occ_pos == 'below') {
                     $occasion = \EventManagerIntegration\App::formatEventDate($event->start_date, $event->end_date);
                     $ret .= '<p class="date text-sm text-dark-gray">' . $occasion . '</p>';
                 }
@@ -164,6 +181,7 @@ class EventModule extends \Modularity\Module
                 } elseif (! empty($event->post_content) && in_array('description', $fields->mod_event_fields)) {
                     $ret .= '<p>' . \EventManagerIntegration\Helper\QueryEvents::stringLimiter($event->post_content, $descr_limit) . '</p>';
                 }
+                $ret .= '</div>';
                 $ret .= '</div>';
                 $ret .= '</div>';
                 $ret .= '</li>';
