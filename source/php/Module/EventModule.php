@@ -131,14 +131,14 @@ class EventModule extends \Modularity\Module
 
         $ret = '<ul class="event-module-list">';
         if (! $events) {
-            $ret .= '<li>' . __('No events found', 'event-integration') . '</li>';
+            $ret .= '<li><span class="event-content">' . __('No events found', 'event-integration') . '</span></li>';
         } else {
             foreach ($events as $event) {
                 $ret .= '<li>';
 
                 if (! empty($event->start_date) && in_array('occasion', $fields->mod_event_fields) && $fields->mod_event_occ_pos == 'left') {
                     $occasion = \EventManagerIntegration\App::formatShortDate($event->start_date);
-                    $ret .= '<div class="event-date">';
+                    $ret .= '<span class="event-date">';
                     if ($occasion['today'] == true) {
                         $ret .= '<span><strong>' . __('Today', 'event-integration') . '</strong></span>';
                         $ret .= '<span>' . $occasion['time'] . '</span>';
@@ -146,10 +146,10 @@ class EventModule extends \Modularity\Module
                         $ret .= '<span>' . $occasion['date'] . '</span>';
                         $ret .= '<span>' . $occasion['month'] . '</span>';
                     }
-                    $ret .= '</div>';
+                    $ret .= '</span>';
                 }
 
-                $ret .= '<div class="event-content">';
+                $ret .= '<span class="event-content">';
                 $ret .= '<div class="grid">';
                 if (in_array('image', $fields->mod_event_fields)) {
                     $ret .= '<div class="grid-md-3">';
@@ -183,7 +183,7 @@ class EventModule extends \Modularity\Module
                 }
                 $ret .= '</div>';
                 $ret .= '</div>';
-                $ret .= '</div>';
+                $ret .= '</span>';
                 $ret .= '</li>';
             }
         }

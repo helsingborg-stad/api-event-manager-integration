@@ -25,12 +25,12 @@
 	}
 
 	.loading-dots {
-		margin: 20px auto;
-		height: auto;
+		margin: 0px auto;
+		top: 20px;
 	}
 
 	.module-content {
-		min-height: 80px;
+		min-height: 48px;
 
 		li {
 			padding: 0px !important;
@@ -38,7 +38,7 @@
 	}
 
 	.module-pagination {
-		background-color: #f7f7f7;
+		background-color: #f6f5f2;
 		border-top: 1px solid #e7e5e1;
 		display: block;
 		overflow: hidden;
@@ -72,12 +72,12 @@
 			padding: 0 7px;
 			margin: 0 5px 0 0;
 			border-radius: 3px;
-			background: #efefef;
+			background: #fcfcfc;
 		}
 
 		a:hover {
 			text-decoration: none;
-			background: #fcfcfc;
+			background: #fff;
 		}
 
 		.current {
@@ -94,7 +94,5 @@
 			box-shadow: none;
 			cursor: default;
 		}
-
 	}
-
 }
