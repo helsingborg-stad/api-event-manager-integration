@@ -27,8 +27,7 @@ class AcfFields
 				'label' => __('API url', 'event-integration'),
 				'name' => 'event_api_url',
 				'type' => 'url',
-				'instructions' => __('Url to Event Manager API wp/v2 namespace.
-	E.g. https://host/wp-json/wp/v2', 'event-integration'),
+				'instructions' => __('Url to Event Manager API wp/v2 namespace. <br> E.g. https://host/wp-json/wp/v2', 'event-integration'),
 				'required' => 1,
 				'conditional_logic' => 0,
 				'wrapper' => array (
@@ -177,14 +176,27 @@ class AcfFields
 				'default_value' => 1,
 			),
 			array (
+				'key' => 'field_58e380646fa6f',
+				'label' => __('Show update button on edit event page', 'event-integration'),
+				'name' => 'event_update_button',
+				'type' => 'true_false',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array (
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'message' => __('Show update button', 'event-integration'),
+				'default_value' => 0,
+			),
+			array (
 				'key' => 'field_58a56eaa0c2ad',
 				'label' => __('OAuth1 end point root url', 'event-integration'),
 				'name' => 'event_api_oauth_url',
 				'type' => 'url',
-				'instructions' => __('Url can be found under section "authentication" in your API root.
-	E.g. https://host/oauth1
-
-	Authorization is only needed when you want to post data to the API.', 'event-integration'),
+				'instructions' => __('Url can be found under section "authentication" in your API root.<br> E.g. https://host/oauth1<br> <br> Authorization is only needed when you want to post data to the API.', 'event-integration'),
 				'required' => 0,
 				'conditional_logic' => 0,
 				'wrapper' => array (
@@ -197,7 +209,7 @@ class AcfFields
 			),
 			array (
 				'key' => 'field_58aaf2615abcb',
-				'label' => __('Google Maps JavaScript API key', 'event-integration'),
+				'label' => 'Google Maps JavaScript API key',
 				'name' => 'google_geocode_key',
 				'type' => 'text',
 				'instructions' => '',

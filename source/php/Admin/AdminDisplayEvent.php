@@ -73,7 +73,9 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
      */
     public function removePublishBox()
     {
-        remove_meta_box('submitdiv', $this->post_type, 'side');
+        if (get_field('event_update_button', 'option') == false) {
+            remove_meta_box('submitdiv', $this->post_type, 'side');
+        }
     }
 
     /*

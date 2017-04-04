@@ -1,3 +1,4 @@
+[
     {
         "key": "group_583557753bd73",
         "title": "Event Manager Integration",
@@ -7,7 +8,7 @@
                 "label": "API url",
                 "name": "event_api_url",
                 "type": "url",
-                "instructions": "Url to Event Manager API wp\/v2 namespace. \r\nE.g. https:\/\/host\/wp-json\/wp\/v2",
+                "instructions": "Url to Event Manager API wp\/v2 namespace. <br> E.g. https:\/\/host\/wp-json\/wp\/v2",
                 "required": 1,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -156,11 +157,27 @@
                 "default_value": 1
             },
             {
+                "key": "field_58e380646fa6f",
+                "label": "Show update button on edit event page",
+                "name": "event_update_button",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "Show update button",
+                "default_value": 0
+            },
+            {
                 "key": "field_58a56eaa0c2ad",
                 "label": "OAuth1 end point root url",
                 "name": "event_api_oauth_url",
                 "type": "url",
-                "instructions": "Url can be found under section \"authentication\" in your API root.\r\nE.g. https:\/\/host\/oauth1\r\n\r\nAuthorization is only needed when you want to post data to the API.",
+                "instructions": "Url can be found under section \"authentication\" in your API root.<br> E.g. https:\/\/host\/oauth1<br> <br> Authorization is only needed when you want to post data to the API.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -248,3 +265,4 @@
         "active": 1,
         "description": ""
     }
+]
