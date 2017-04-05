@@ -107,7 +107,7 @@ class SingleEvent
         }
 
         // Location
-        if (in_array('location', $fields) && ! empty($meta['location'])) {
+        if (in_array('location', $fields) && ! empty($meta['location']['title'])) {
             $ret .= '<div class="shortcode-box shortcode-location '.$box_class.'">';
             $ret .= '<ul><li><h3>'.__('Location', 'event-integration').'</h3></li></ul>';
             $location = $meta['location'];

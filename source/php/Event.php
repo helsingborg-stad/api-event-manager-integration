@@ -156,7 +156,7 @@ class Event extends \EventManagerIntegration\Entity\PostManager
             $content_mode = ! empty($o['content_mode']) ? $o['content_mode'] : null;
             $content = ! empty($o['content']) ? $o['content'] : null;
 
-            $wpdb->insert($db_table, array('event_id' => $this->ID, 'start_date' => $start_date, 'end_date' => $end_date, 'door_time' => $door_time, 'status' => $status, 'exception_information' => $occ_exeption_information, 'content_mode' => $content_mode, 'content' => strip_tags(html_entity_decode($content))));
+            $wpdb->insert($db_table, array('event_id' => $this->ID, 'start_date' => $start_date, 'end_date' => $end_date, 'door_time' => $door_time, 'status' => $status, 'exception_information' => $occ_exeption_information, 'content_mode' => $content_mode, 'content' => ($content)));
         }
 
         return true;
