@@ -1,3 +1,4 @@
+[
     {
         "key": "group_583fe4ee88439",
         "title": "Display events",
@@ -11,7 +12,7 @@
                 "required": 1,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "50",
+                    "width": "33",
                     "class": "",
                     "id": ""
                 },
@@ -32,12 +33,28 @@
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "50",
+                    "width": "33",
                     "class": "",
                     "id": ""
                 },
-                "message": "",
+                "message": "Show pagination",
                 "default_value": 1
+            },
+            {
+                "key": "field_58e6370d4f34c",
+                "label": "Archive link",
+                "name": "mod_event_archive",
+                "type": "true_false",
+                "instructions": "Show link to event archive page.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "33",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "Show link",
+                "default_value": 0
             },
             {
                 "key": "field_583ffd8d10925",
@@ -365,3 +382,4 @@
         "active": 1,
         "description": ""
     }
+]

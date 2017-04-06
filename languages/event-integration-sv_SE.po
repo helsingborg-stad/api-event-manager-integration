@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2017-04-06 13:37+0200\n"
-"PO-Revision-Date: 2017-04-06 13:38+0200\n"
+"POT-Creation-Date: 2017-04-06 14:44+0200\n"
+"PO-Revision-Date: 2017-04-06 14:45+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -167,7 +167,7 @@ msgstr "Importera från en plats"
 msgid "Import events that occurs at a specified location."
 msgstr "Importera evenemang som inträffar vid en specifik plats."
 
-#: source/php/Acf/AcfFields.php:249 source/php/Acf/AcfFields.php:787
+#: source/php/Acf/AcfFields.php:249 source/php/Acf/AcfFields.php:802
 msgid "Distance from location"
 msgstr "Avstånd från plats"
 
@@ -212,8 +212,8 @@ msgstr "Visa fält"
 msgid "Occasions"
 msgstr "Datum"
 
-#: source/php/Acf/AcfFields.php:342 source/php/Acf/AcfFields.php:535
-#: source/php/Acf/AcfFields.php:769 source/php/Shortcodes/SingleEvent.php:88
+#: source/php/Acf/AcfFields.php:342 source/php/Acf/AcfFields.php:550
+#: source/php/Acf/AcfFields.php:784 source/php/Shortcodes/SingleEvent.php:88
 #: source/php/Shortcodes/SingleEvent.php:210
 msgid "Location"
 msgstr "Plats"
@@ -279,132 +279,144 @@ msgstr ""
 "Galleribilder är sparade som \"attached images\", ni kan därför använda "
 "WordPress inbyggda shortcode [gallery] för att visa bilderna."
 
-#: source/php/Acf/AcfFields.php:459
+#: source/php/Acf/AcfFields.php:458
 msgid "Display events"
 msgstr "Visning av evenemang"
 
-#: source/php/Acf/AcfFields.php:463
+#: source/php/Acf/AcfFields.php:462
 msgid "Number of events to show"
 msgstr "Visa antal evenemang"
 
-#: source/php/Acf/AcfFields.php:466
+#: source/php/Acf/AcfFields.php:465
 msgid "Set to -1 to show all."
 msgstr "-1 för att visa alla."
 
-#: source/php/Acf/AcfFields.php:484
+#: source/php/Acf/AcfFields.php:483 source/php/Acf/AcfFields.php:494
 msgid "Show pagination"
 msgstr "Visa paginering"
 
-#: source/php/Acf/AcfFields.php:487
+#: source/php/Acf/AcfFields.php:486
 msgid "Display pagination buttons below the event list."
 msgstr "Lägger till paginering under evenemangslistan."
 
-#: source/php/Acf/AcfFields.php:500
+#: source/php/Acf/AcfFields.php:499
+msgid "Archive link"
+msgstr "Länk till arkiv"
+
+#: source/php/Acf/AcfFields.php:502
+msgid "Show link to event archive page."
+msgstr "Visa länk till arkivsida för evenemang."
+
+#: source/php/Acf/AcfFields.php:510
+msgid "Show link"
+msgstr "Visa länk"
+
+#: source/php/Acf/AcfFields.php:515
 msgid "Days interval"
 msgstr "Tidsperiod"
 
-#: source/php/Acf/AcfFields.php:503
+#: source/php/Acf/AcfFields.php:518
 msgid "Include events from today to the given number of days."
 msgstr "Visa evenemang som inträffar inom angivet antal dagar."
 
-#: source/php/Acf/AcfFields.php:521
+#: source/php/Acf/AcfFields.php:536
 msgid "Fields"
 msgstr "Fält"
 
-#: source/php/Acf/AcfFields.php:533 source/php/PostTypes/Events.php:38
+#: source/php/Acf/AcfFields.php:548 source/php/PostTypes/Events.php:38
 #: source/php/Shortcodes/SingleEvent.php:265
 msgid "Occasion"
 msgstr "Datum"
 
-#: source/php/Acf/AcfFields.php:534
+#: source/php/Acf/AcfFields.php:549
 msgid "Image"
 msgstr "Bild"
 
-#: source/php/Acf/AcfFields.php:536
+#: source/php/Acf/AcfFields.php:551
 msgid "Description"
 msgstr "Beskrivning"
 
-#: source/php/Acf/AcfFields.php:546
+#: source/php/Acf/AcfFields.php:561
 msgid "Occasion position"
 msgstr "Position för datum"
 
-#: source/php/Acf/AcfFields.php:566
+#: source/php/Acf/AcfFields.php:581
 msgid "Below title"
 msgstr "Under titel"
 
-#: source/php/Acf/AcfFields.php:567
+#: source/php/Acf/AcfFields.php:582
 msgid "Left column"
 msgstr "Vänsterkolumn"
 
-#: source/php/Acf/AcfFields.php:578
+#: source/php/Acf/AcfFields.php:593
 msgid "Description letter limit"
 msgstr "Teckenbegränsning av beskrivning"
 
-#: source/php/Acf/AcfFields.php:581
+#: source/php/Acf/AcfFields.php:596
 msgid "Set to -1 to show the whole description."
 msgstr "-1 för att visa hela beskrivningen."
 
-#: source/php/Acf/AcfFields.php:607 source/php/PostTypes/Events.php:285
+#: source/php/Acf/AcfFields.php:622 source/php/PostTypes/Events.php:285
 msgid "Groups"
 msgstr "Grupper"
 
-#: source/php/Acf/AcfFields.php:618
+#: source/php/Acf/AcfFields.php:633
 msgid "Show events from all groups"
 msgstr "Visa evenemang inom samtliga grupper"
 
-#: source/php/Acf/AcfFields.php:623
+#: source/php/Acf/AcfFields.php:638
 msgid "Select groups"
 msgstr "Välj grupper"
 
-#: source/php/Acf/AcfFields.php:626
+#: source/php/Acf/AcfFields.php:641
 msgid "Show events from the selected groups."
 msgstr "Visa evenemang inom angivna grupper."
 
-#: source/php/Acf/AcfFields.php:653 source/php/PostTypes/Events.php:211
+#: source/php/Acf/AcfFields.php:668 source/php/PostTypes/Events.php:211
 msgid "Categories"
 msgstr "Kategorier"
 
-#: source/php/Acf/AcfFields.php:664
+#: source/php/Acf/AcfFields.php:679
 msgid "Show events from all categories"
 msgstr "Visa evenemang inom samtliga kategorier"
 
-#: source/php/Acf/AcfFields.php:669
+#: source/php/Acf/AcfFields.php:684
 msgid "Select categories"
 msgstr "Välj kategorier"
 
-#: source/php/Acf/AcfFields.php:672
+#: source/php/Acf/AcfFields.php:687
 msgid "Show events from the selected categories."
 msgstr "Visa evenemang inom angivna kategorier."
 
-#: source/php/Acf/AcfFields.php:699 source/php/PostTypes/Events.php:248
+#: source/php/Acf/AcfFields.php:714 source/php/PostTypes/Events.php:248
 msgid "Tags"
 msgstr "Taggar"
 
-#: source/php/Acf/AcfFields.php:710
+#: source/php/Acf/AcfFields.php:725
 msgid "Show events from all tags"
 msgstr "Visa evenemang inom samtliga taggar"
 
-#: source/php/Acf/AcfFields.php:715
+#: source/php/Acf/AcfFields.php:730
 msgid "Select tags"
 msgstr "Välj taggar"
 
-#: source/php/Acf/AcfFields.php:718
+#: source/php/Acf/AcfFields.php:733
 msgid "Show events from the selected tags."
 msgstr "Visa evenemang inom angivna taggar."
 
-#: source/php/Acf/AcfFields.php:745
+#: source/php/Acf/AcfFields.php:760
 msgid "Default image"
 msgstr "Standardbild"
 
-#: source/php/Acf/AcfFields.php:748
+#: source/php/Acf/AcfFields.php:763
 msgid "Will display if event image is missing."
 msgstr "Visas om bild saknas."
 
-#: source/php/Acf/AcfFields.php:772
+#: source/php/Acf/AcfFields.php:787
 msgid "Show events that occurs at a specified location."
 msgstr "Visa evenemang som inträffar vid en angiven plats."
 
-#: source/php/Acf/AcfFields.php:790
+#: source/php/Acf/AcfFields.php:805
 msgid ""
 "To show events occurring nearby the given location, enter maximum distance "
 "in km. Leave blank to only show events from the exact position."
@@ -516,11 +528,11 @@ msgstr "Kunde inte skapa mappen"
 msgid "please go ahead and create it manually and rerun the import."
 msgstr "vänligen skapa den manuellt och gör om importen."
 
-#: source/php/Module/EventModule.php:134 source/php/Widget/DisplayEvents.php:56
+#: source/php/Module/EventModule.php:137 source/php/Widget/DisplayEvents.php:56
 msgid "No events found"
 msgstr "Inga evenemang hittades"
 
-#: source/php/Module/EventModule.php:143
+#: source/php/Module/EventModule.php:146
 msgid "Today"
 msgstr "Idag"
 
@@ -1039,9 +1051,6 @@ msgstr ""
 
 #~ msgid "Link to Event Manager API"
 #~ msgstr "Länk till Event Manager API"
-
-#~ msgid "Show occasion"
-#~ msgstr "Visa datum"
 
 #~ msgid "Upcoming events"
 #~ msgstr "Kommande evenemang"
