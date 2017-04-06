@@ -3,8 +3,16 @@
 		display: block;
 	}
 
+	ul {
+		margin-bottom: 10px;
+	}
+
 	ul, li {
 		list-style: none !important;
+	}
+
+	a {
+		word-break: break-all;
 	}
 
 	.shortcode-box {

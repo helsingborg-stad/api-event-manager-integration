@@ -87,8 +87,14 @@
 .event-info-shortcode span {
   display: block; }
 
+.event-info-shortcode ul {
+  margin-bottom: 10px; }
+
 .event-info-shortcode ul, .event-info-shortcode li {
   list-style: none !important; }
+
+.event-info-shortcode a {
+  word-break: break-all; }
 
 .event-info-shortcode .shortcode-box {
   margin-top: 20px; }
