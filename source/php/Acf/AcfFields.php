@@ -160,22 +160,6 @@ class AcfFields
 				'maxlength' => '',
 			),
 			array (
-				'key' => 'field_5859206f23f1b',
-				'label' => __('Single event image', 'event-integration'),
-				'name' => 'event_single_image',
-				'type' => 'true_false',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array (
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'message' => __('Display attached event image below title header on single events.', 'event-integration'),
-				'default_value' => 1,
-			),
-			array (
 				'key' => 'field_58e380646fa6f',
 				'label' => __('Show update button on edit event page', 'event-integration'),
 				'name' => 'event_update_button',

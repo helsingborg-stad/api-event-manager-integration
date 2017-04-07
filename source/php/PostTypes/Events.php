@@ -132,7 +132,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
     }
 
     /**
-     * Add image and date to single event content. Replace content if occasion has custom content.
+     * Replace content if occasion has custom content.
      * @param  string $content Content of the current post.
      * @return string
      */
@@ -142,35 +142,9 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             return $content;
         }
 
-        global $post;
-
-        $get_date = (! empty (get_query_var('date'))) ? get_query_var('date') : false;
-        $display_image = (get_field('event_single_image', 'options')) ? get_field('event_single_image', 'options') : false;
-        $thumbnail = (has_post_thumbnail() && $display_image) ? get_the_post_thumbnail() : '';
-
-        // Add date below header
-        if ($get_date != false) {
-            $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($post->ID, false);
-            foreach ($occasions as $o) {
-                $event_date = preg_replace('/\D/', '', $o->start_date);
-                // Ta bort
-                $date_div = '<div class="single-event-meta">
-                            <p><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 512 512"><path d="M144 128c17.7 0 32-14.3 32-32V64c0-17.7-14.3-32-32-32s-32 14.3-32 32v32c0 17.7 14.3 32 32 32zm224 0c17.7 0 32-14.3 32-32V64c0-17.7-14.3-32-32-32s-32 14.3-32 32v32c0 17.7 14.3 32 32 32z"/><path d="M472 64h-56v40.7c0 22.5-23.2 39.3-47.2 39.3S320 127.2 320 104.7V64H192v40.7c0 22.5-24 39.3-48 39.3s-48-16.8-48-39.3V64H40c-4.4 0-8 3.6-8 8v400c0 4.4 3.6 8 8 8h432c4.4 0 8-3.6 8-8V72c0-4.4-3.6-8-8-8zm-40 368H80V176h352v256z"/></svg>
-                                <strong>' . __('Date', 'event-integration') . ':</strong> ' . \EventManagerIntegration\App::formatEventDate($o->start_date, $o->end_date) . '</p>
-                            </div>';
-
-                // Replace content with occasion custom content
-                if ($get_date == $event_date && ! empty($o->content) && $o->content_mode == 'custom') {
-                    //$content = $date_div . $thumbnail . $o->content;
-                    $content = $o->content;
-                } elseif ($get_date == $event_date) {
-                    //$content = $date_div . $thumbnail . $post->post_content;
-                    $content = $post->post_content;
-                }
-            }
-        } else {
-            //$content = $thumbnail . $post->post_content;
-            $content = $post->post_content;
+        $custom_content = $this->getCustomContent();
+        if ($custom_content) {
+            $content = $custom_content;
         }
 
         return $content;
@@ -183,10 +157,37 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
      */
     public function eventContentLead($lead)
     {
-        if (is_singular($this->slug)) {
-            return;
+        if (! is_singular($this->slug)) {
+            return $lead;
         }
+
+        $custom_content = $this->getCustomContent();
+        if ($custom_content) {
+            $lead = null;
+        }
+
         return $lead;
+    }
+
+    /**
+     * Get custom occasion content
+     * @return string
+     */
+    public function getCustomContent()
+    {
+        global $post;
+        $get_date = (! empty (get_query_var('date'))) ? get_query_var('date') : false;
+
+        if ($get_date != false) {
+            $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($post->ID, false);
+            foreach ($occasions as $o) {
+                $event_date = preg_replace('/\D/', '', $o->start_date);
+                // Replace content with occasion custom content
+                if ($get_date == $event_date && ! empty($o->content) && $o->content_mode == 'custom') {
+                    return $o->content;
+                }
+            }
+        }
     }
 
     /**
