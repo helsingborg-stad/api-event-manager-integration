@@ -44,12 +44,14 @@ class Event extends \EventManagerIntegration\Entity\PostManager
      */
     public function saveLocation()
     {
-        $location = $this->mergeParentLocation($this->ID, $this->location);
-        if (! empty($location['latitude']) && ! empty($location['longitude'])) {
-            update_post_meta($this->ID, 'latitude', $location['latitude']);
-            update_post_meta($this->ID, 'longitude', $location['longitude']);
+        if ($this->location != null) {
+            $location = $this->mergeParentLocation($this->ID, $this->location);
+            if (! empty($location['latitude']) && ! empty($location['longitude'])) {
+                update_post_meta($this->ID, 'latitude', $location['latitude']);
+                update_post_meta($this->ID, 'longitude', $location['longitude']);
+            }
+            update_post_meta($this->ID, 'location', $location);
         }
-        update_post_meta($this->ID, 'location', $location);
     }
 
     /**
