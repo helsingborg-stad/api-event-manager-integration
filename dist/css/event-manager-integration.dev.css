@@ -45,8 +45,9 @@
     float: left;
     border: 0px !important;
     font-size: 14px;
-    padding: 5px !important; }
+    padding: 5px 1px 5px 5px !important; }
   .modularity-mod-event .module-footer .module-archive {
+    float: right;
     padding: 5px 0 0 0; }
   .modularity-mod-event .module-footer .module-pagination a, .modularity-mod-event .module-footer .module-pagination span {
     float: left;
@@ -70,6 +71,7 @@
   .modularity-mod-event .module-footer .module-pagination .disabled {
     cursor: default; }
   .modularity-mod-event .module-footer .module-pagination .ellipse {
+    padding: 0px;
     background: none;
     border: none;
     border-radius: 0;
