@@ -50,7 +50,7 @@ EventManagerIntegration.Event.Module = (function ($) {
 			},
 			beforeSend: function() {
 				$(module).find('.event-module-list').remove();
-				$(module).find('.module-content').append('<li class="event-loader"><i class="loading-dots"></i></li>');
+				$(module).find('.module-content').append('<li class="event-loader"><div class="loading-wrapper"><div class="loading"><div></div><div></div><div></div><div></div></div></div></li>');
 				$(module).find('.event-loader').height(height);
 				$('html, body').animate({
 			        scrollTop: $(module).offset().top
