@@ -16,7 +16,7 @@ class OAuthAdmin
     /**
      * Adds submenu page "API authentication", under custom post type parent.
      */
-    function createOauthPage() {
+    public function createOauthPage() {
         add_submenu_page(
             'edit.php?post_type=event',
             __( 'API authentication', 'event-integration' ),
@@ -30,7 +30,7 @@ class OAuthAdmin
     /**
      * Callback for the submenu page. Forms to complete authorization.
      */
-    function oauthRequestCallback() {
+    public function oauthRequestCallback() {
         ?>
         <div class="wrap">
             <h1><?php _e('API authentication', 'event-integration' ); ?></h1>
