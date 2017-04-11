@@ -25,7 +25,7 @@ class SingleEvent
      * @param  mixed $data data to be formatted
      * @return string
      */
-    public function unserData($data)
+    public static function unserData($data)
     {
         $unserialized = @unserialize($data);
         if ($unserialized !== false) {
@@ -80,7 +80,7 @@ class SingleEvent
         }
 
         // Location
-        if (in_array('location', $fields) && ! empty($meta['location']['title'])) {
+        if (in_array('location', $fields) && ! empty($meta['location'])) {
             $i++;
             $ret .= '<section class="accordion-section">';
             $ret .= '<input type="radio" name="active-section" id="accordion-section-' . $i . '">';
@@ -197,10 +197,11 @@ class SingleEvent
         $ret  = '<div class="event-info-shortcode '.$wrapper_class.'">';
 
         // Information
-        if (in_array('information', $fields)) {
+        $event_info = $this->eventInfo($query_var_date, $occasions, $meta);
+        if (in_array('information', $fields) && !empty($event_info)) {
             $ret .= '<div class="shortcode-box shortcode-information '.$box_class.'">';
             $ret .= '<ul><li><h3>'.__('Information', 'event-integration').'</h3></li></ul>';
-            $ret .= $this->eventInfo($query_var_date, $occasions, $meta);
+            $ret .= $event_info;
             $ret .= '</div>';
         }
 
@@ -213,10 +214,11 @@ class SingleEvent
         }
 
         // Booking information
-        if (in_array('booking', $fields)) {
+        $booking_info = $this->eventBooking($meta);
+        if (in_array('booking', $fields) && strpos($booking_info, '<li>')) {
             $ret .= '<div class="shortcode-box shortcode-booking '.$box_class.'">';
             $ret .= '<ul><li><h3>'.__('Booking', 'event-integration').'</h3></li></ul>';
-            $ret .= $this->eventBooking($meta);
+            $ret .= $booking_info;
             $ret .= '</div>';
         }
 
@@ -253,7 +255,7 @@ class SingleEvent
         return $ret;
     }
 
-    public function eventInfo($query_var_date, $occasions, $meta)
+    public static function eventInfo($query_var_date = false, $occasions = array(), $meta = array())
     {
         $ret = '';
         // Get current occasion
@@ -296,10 +298,10 @@ class SingleEvent
         return $ret;
     }
 
-    public function eventLocation($meta, $fields)
+    public static function eventLocation($meta = array(), $fields = array('additional_locations'))
     {
         $ret = '';
-        $location = $meta['location'];
+        $location = (isset($meta['location'])) ? $meta['location'] : null;
         if (is_array($location) && ! empty($location)) {
             $ret .= '<ul>';
             $ret .= (! empty($location['title'])) ? '<li><strong>' . $location['title'] . '</strong></li>' : '';
@@ -326,7 +328,7 @@ class SingleEvent
         return $ret;
     }
 
-    public function eventBooking($meta)
+    public static function eventBooking($meta = array())
     {
         $ret = '<ul>';
         $ret .= (! empty($meta['price_adult'])) ? '<li>' . __('Adult', 'event-integration') . ': ' . $meta['price_adult'] . ' kr</li>' : '';
@@ -363,7 +365,7 @@ class SingleEvent
         return $ret;
     }
 
-    public function eventOrganizer($meta, $fields)
+    public static function eventOrganizer($meta = array(), $fields = array('sponsors'))
     {
         $ret = '';
         if (! empty($meta['organizers']) && is_array($meta['organizers'])) {
@@ -391,7 +393,7 @@ class SingleEvent
         return $ret;
     }
 
-    public function eventOccasions($occasions)
+    public static function eventOccasions($occasions = array())
     {
         $ret = '';
         foreach ($occasions as $occasion) {
@@ -403,7 +405,7 @@ class SingleEvent
         return $ret;
     }
 
-    public function eventLinks($meta)
+    public static function eventLinks($meta = array())
     {
         $ret = '<ul>';
         $ret .= (! empty($meta['facebook'])) ? '<li><i class="pricon pricon-external-link"></i> <a href="' . $meta['facebook'] . '" target="_blank">Facebook</a></li>' : '';
@@ -427,4 +429,31 @@ class SingleEvent
 
         return $ret;
     }
+
+    public static function eventTaxonomies($meta = array())
+    {
+        $ret = '<ul>';
+        if (isset($meta['groups']) && ! empty($meta['groups']) && is_array($meta['groups'])) {
+            $ret .= '<ul><li><h4>' . __('Groups', 'event-integration') . '</li></ul></h4>';
+            foreach ($meta['groups'] as $group) {
+                $ret .= '<li>' . $group['name'] . '</li>';
+            }
+        }
+        if (isset($meta['categories']) && ! empty($meta['categories']) && is_array($meta['categories'])) {
+            $ret .= '<ul><li><h4>' . __('Categories', 'event-integration') . '</li></ul></h4>';
+            foreach ($meta['categories'] as $category) {
+                $ret .= '<li>' . $category . '</li>';
+            }
+        }
+        if (isset($meta['tags']) && ! empty($meta['tags']) && is_array($meta['tags'])) {
+            $ret .= '<ul><li><h4>' . __('Tags', 'event-integration') . '</li></ul></h4>';
+            foreach ($meta['tags'] as $tag) {
+                $ret .= '<li>' . $tag . '</li>';
+            }
+        }
+        $ret .= '</ul>';
+
+        return $ret;
+    }
+
 }

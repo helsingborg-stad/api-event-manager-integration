@@ -116,7 +116,62 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
      */
     public function eventMeta($object, $box)
     {
-        echo do_shortcode('[single_event_information]');
+        $id = $object->ID;
+        $get_meta = get_post_meta($id);
+        $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($id);
+        $meta = array();
+        foreach ($get_meta as $key => $value) {
+            if (is_array($value) && count($value) == 1) {
+                $meta[$key] = \EventManagerIntegration\Shortcodes\SingleEvent::unserData($value[0]);
+            } else {
+                $meta[$key] = $value;
+            }
+        }
+
+        $ret = '';
+
+        // Information
+        $event_info = \EventManagerIntegration\Shortcodes\SingleEvent::eventInfo(false, false, $meta);
+        if (! empty($event_info)) {
+            $ret .= '<ul><li><h3>' . __('Information', 'event-integration') . '</h3></li></ul>';
+            $ret .= $event_info;
+        }
+
+        // Location
+        $event_location = \EventManagerIntegration\Shortcodes\SingleEvent::eventLocation($meta);
+        if (isset($meta['location'])) {
+            $ret .= '<ul><li><h3>'.__('Location', 'event-integration').'</h3></li></ul>';
+            $ret .= $event_location;
+        }
+
+        // Booking information
+        $booking_info = \EventManagerIntegration\Shortcodes\SingleEvent::eventBooking($meta);
+        if (strpos($booking_info, '<li>')) {
+            $ret .= '<ul><li><h3>'.__('Booking', 'event-integration').'</h3></li></ul>';
+            $ret .= $booking_info;
+        }
+
+        // Organizers
+        $event_organizer = \EventManagerIntegration\Shortcodes\SingleEvent::eventOrganizer($meta);
+        if (! empty($meta['organizers'])) {
+            $ret .= '<ul><li><h3>'.__('Organizer', 'event-integration').'</h3></li></ul>';
+            $ret .= $event_organizer;
+        }
+
+        // Social media and streaming links
+        $link_keys = array('facebook', 'twitter', 'instagram', 'google_music', 'spotify', 'soundcloud', 'deezer', 'youtube', 'vimeo');
+        $links_exist = (count(array_intersect_key(array_flip($link_keys), $meta)) > 0) ? true : false;
+        $event_links = \EventManagerIntegration\Shortcodes\SingleEvent::eventLinks($meta);
+        if ($links_exist) {
+            $ret .= '<ul><li><h3>' . __('Links', 'event-integration') . '</h3></li></ul>';
+            $ret .= $event_links;
+        }
+
+        $even_taxonomies = \EventManagerIntegration\Shortcodes\SingleEvent::eventTaxonomies($meta);
+        $ret .= '<ul><li><h3>' . __('Taxonomier', 'event-integration') . '</h3></li></ul>';
+        $ret .= $even_taxonomies;
+
+        echo $ret;
     }
 
     /*
