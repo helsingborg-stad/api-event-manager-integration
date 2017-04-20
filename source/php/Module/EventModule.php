@@ -76,8 +76,8 @@ class EventModule extends \Modularity\Module
     public static function getEvents($module_id, $page = 1, $useLimit = true)
     {
         $fields = json_decode(json_encode(get_fields($module_id)));
-        $display_limit = ($useLimit == true) ? $fields->mod_event_limit : -1;
-        $days_ahead = $fields->mod_event_interval;
+        $display_limit = ($useLimit == true && isset($fields->mod_event_limit)) ? $fields->mod_event_limit : -1;
+        $days_ahead = isset($fields->mod_event_interval) ? $fields->mod_event_interval: 0;
 
         // Set start and end date
         $start_date = date('Y-m-d H:i:s', strtotime("today midnight"));
@@ -85,17 +85,17 @@ class EventModule extends \Modularity\Module
 
         // Save categories, groups and tags IDs to array
         $taxonomies = array();
-        if ($fields->mod_event_categories_show == false && ! empty($fields->mod_event_categories_list)) {
+        if (isset($fields->mod_event_categories_show) && $fields->mod_event_categories_show == false && isset($fields->mod_event_categories_list) && ! empty($fields->mod_event_categories_list)) {
             foreach ($fields->mod_event_categories_list as $v) {
                 $taxonomies[] = $v;
             }
         }
-        if ($fields->mod_event_groups_show == false && ! empty($fields->mod_event_groups_list)) {
+        if (isset($fields->mod_event_groups_show) && $fields->mod_event_groups_show == false && isset($fields->mod_event_groups_list) && ! empty($fields->mod_event_groups_list)) {
             foreach ($fields->mod_event_groups_list as $v) {
                 $taxonomies[] = $v;
             }
         }
-        if ($fields->mod_event_tags_show == false && ! empty($fields->mod_event_tags_list)) {
+        if (isset($fields->mod_event_tags_show) && $fields->mod_event_tags_show == false && isset($fields->mod_event_tags_list) && ! empty($fields->mod_event_tags_list)) {
             foreach ($fields->mod_event_tags_list as $v) {
                 $taxonomies[] = $v;
             }
@@ -106,8 +106,8 @@ class EventModule extends \Modularity\Module
                         'end_date'      => $end_date,
                         'display_limit' => $display_limit,
                         'taxonomies'    => $taxonomies,
-                        'location'      => $fields->mod_event_geographic,
-                        'distance'      => $fields->mod_event_distance
+                        'location'      => (isset($fields->mod_event_geographic)) ? $fields->mod_event_geographic : null,
+                        'distance'      => (isset($fields->mod_event_distance)) ? $fields->mod_event_distance : null,
                         );
 
         $events = \EventManagerIntegration\Helper\QueryEvents::getEventsByInterval($params, $page);
