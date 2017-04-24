@@ -40,6 +40,9 @@
     .modularity-mod-event .module-footer .module-archive li {
       line-height: 3; }
 
+.modularity-mod-event .passed-event .event-content a, .modularity-mod-event .passed-event .event-date {
+  color: #8c8c8c; }
+
 .widget_display_events ul li span {
   display: block; }
 

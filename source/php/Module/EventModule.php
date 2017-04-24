@@ -134,7 +134,7 @@ class EventModule extends \Modularity\Module
             $ret .= '<li><span class="event-content">' . __('No events found', 'event-integration') . '</span></li>';
         } else {
             foreach ($events as $event) {
-                $ret .= '<li>';
+                $ret .= (isset($event->end_date) && (strtotime($event->end_date) <  strtotime('now'))) ? '<li class="passed-event">' : '<li>';
 
                 if (! empty($event->start_date) && in_array('occasion', $fields->mod_event_fields) && $fields->mod_event_occ_pos == 'left') {
                     $occasion = \EventManagerIntegration\App::formatShortDate($event->start_date);
