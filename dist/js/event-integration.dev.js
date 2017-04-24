@@ -52,7 +52,7 @@ EventManagerIntegration.Event.Module = (function ($) {
 				$(module).find('.event-module-list').remove();
 				$(module).find('.module-content').append('<li class="event-loader"><div class="loading-wrapper"><div class="loading"><div></div><div></div><div></div><div></div></div></div></li>');
 				$(module).find('.event-loader').height(height);
-				if ($(window).scrollTop() !== 0) {
+				if ($(window).scrollTop() != 0) {
 					$('html, body').animate({
 			        scrollTop: $(module).offset().top
 			    	}, 100);

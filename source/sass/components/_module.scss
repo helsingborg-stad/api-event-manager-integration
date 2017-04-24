@@ -2,7 +2,6 @@
 	.event-date {
 	    display: table-cell;
 	    width: 60px;
-	    //padding: 7px;
 	    border-right: 1px solid #e7e5e1;
 	    font-weight: 300;
 	    font-size: .8rem;
@@ -29,7 +28,7 @@
 	}
 
 	.module-content {
-		min-height: 48px;
+		min-height: 47px;
 
 		li {
 			padding: 0px !important;
@@ -38,73 +37,22 @@
 
 	.module-footer {
 		background-color: #f6f5f2;
-		border-top: 1px solid #e7e5e1;
-		display: block;
-		overflow: hidden;
 		margin: 0;
 
-		a {
-			color: #666;
-			font-size:14px;
-		}
-
-		ul {
-			list-style: none;
-			padding: 0;
-			margin: 0;
-		}
-
 		li {
-			list-style: none;
-			margin: 0;
-			float: left;
-			border: 0px !important;
-			font-size: 14px;
-			padding: 5px 1px 5px 5px !important;
+			margin-right: 6px;
+		}
+
+		.disabled {
+			cursor: default;
 		}
 
 		.module-archive {
-			float: right;
-			padding: 5px 0 0 0;
-		}
+			font-size: 14px;
+			color: #666;
 
-		.module-pagination {
-			a, span {
-				float: left;
-				line-height:24px;
-				font-weight: normal;
-				text-align: center;
-				border: 1px solid #d9d9d9;
-				min-width: 14px;
-				padding: 0 7px;
-				margin: 0 5px 0 0;
-				border-radius: 3px;
-				background: #fcfcfc;
-			}
-
-			a:hover {
-				text-decoration: none;
-				background: #fff;
-			}
-
-			.current {
-				background: #666;
-				color: #fff;
-				border-color: #444;
-				cursor: default;
-			}
-
-			.disabled {
-				cursor: default;
-			}
-
-			.ellipse {
-				padding: 0px;
-				background: none;
-				border: none;
-				border-radius: 0;
-				box-shadow: none;
-				cursor: default;
+			li {
+				line-height: 3;
 			}
 		}
 	}
