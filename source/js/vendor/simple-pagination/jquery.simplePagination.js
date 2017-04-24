@@ -299,12 +299,12 @@
 
 			if (pageIndex == o.currentPage || o.disabled) {
 				if (o.disabled || options.classes === 'prev' || options.classes === 'next') {
-					$linkWrapper.addClass('disabled');
+					$linkWrapper.addClass('disabled hidden');
 				}
 				// else {
 				// 	$linkWrapper.addClass('current');
 				// }
-				$link = $('<a class="page current">' + (options.text) + '</a>');
+				$link = $('<span class="page current">' + (options.text) + '</span>');
 			} else {
 				$link = $('<a href="' + o.hrefTextPrefix + (pageIndex + 1) + o.hrefTextSuffix + '" class="page">' + (options.text) + '</a>');
 				$link.click(function(event) {

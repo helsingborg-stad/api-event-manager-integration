@@ -45,6 +45,10 @@
 
 		.disabled {
 			cursor: default;
+
+			&.temporary {
+				opacity: 1 !important;
+			}
 		}
 
 		.module-archive {

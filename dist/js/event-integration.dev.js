@@ -31,7 +31,10 @@ EventManagerIntegration.Event.Module = (function ($) {
 		       	selectOnClick: false,
 		        onPageClick: function(page, event) {
 		        	Module.prototype.loadEvents(page, moduleId, module);
-					$(module).find('.module-pagination').pagination('redraw');
+		        	$(module).find('.module-pagination').pagination('redraw');
+		        	$(module).find('.pagination a:not(.current)').each(function() {
+						$(this).parent().addClass('disabled temporary');
+					});
 		        },
 		    });
 		});
@@ -66,6 +69,9 @@ EventManagerIntegration.Event.Module = (function ($) {
 			},
 			complete: function() {
 				$(module).find('.event-loader').remove();
+				$(module).find('.pagination .temporary').each(function() {
+					$(this).removeClass('disabled temporary');
+				});
 			},
 
 		})

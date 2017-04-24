@@ -32,6 +32,8 @@
     margin-right: 6px; }
   .modularity-mod-event .module-footer .disabled {
     cursor: default; }
+    .modularity-mod-event .module-footer .disabled.temporary {
+      opacity: 1 !important; }
   .modularity-mod-event .module-footer .module-archive {
     font-size: 14px;
     color: #666; }
