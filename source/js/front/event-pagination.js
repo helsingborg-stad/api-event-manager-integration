@@ -52,9 +52,11 @@ EventManagerIntegration.Event.Module = (function ($) {
 				$(module).find('.event-module-list').remove();
 				$(module).find('.module-content').append('<li class="event-loader"><div class="loading-wrapper"><div class="loading"><div></div><div></div><div></div><div></div></div></div></li>');
 				$(module).find('.event-loader').height(height);
-				$('html, body').animate({
+				if ($(window).scrollTop() !== 0) {
+					$('html, body').animate({
 			        scrollTop: $(module).offset().top
-			    }, 100);
+			    	}, 100);
+				}
 			},
 			success: function(html) {
 				$(module).find('.module-content').append(html).hide().fadeIn(80).height('auto');
