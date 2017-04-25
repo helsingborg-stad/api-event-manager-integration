@@ -1,3 +1,4 @@
+[
     {
         "key": "group_583557753bd73",
         "title": "Event Manager Integration",
@@ -53,7 +54,7 @@
                     "id": ""
                 },
                 "message": "Enable daily automatic import from Event Manager API",
-                "default_value": 1
+                "default_value": 0
             },
             {
                 "key": "field_587f86dc8f7b7",
@@ -64,7 +65,7 @@
                 "required": 1,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "",
+                    "width": "50",
                     "class": "",
                     "id": ""
                 },
@@ -78,6 +79,27 @@
                 "default_value": "publish",
                 "layout": "vertical",
                 "return_format": "value"
+            },
+            {
+                "key": "field_58feee2f256cd",
+                "label": "Unpublish long lasting events",
+                "name": "event_unpublish_limit",
+                "type": "number",
+                "instructions": "Automatically unpublish events lasting longer than given limit. Set to -1 to set no limit.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 5,
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "min": -1,
+                "max": "",
+                "step": ""
             },
             {
                 "key": "field_586bc598f2777",
@@ -248,3 +270,4 @@
         "active": 1,
         "description": ""
     }
+]

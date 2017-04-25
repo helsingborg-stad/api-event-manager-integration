@@ -129,12 +129,17 @@ class EventModule extends \Modularity\Module
         $fields->mod_event_fields = is_array($fields->mod_event_fields) ? $fields->mod_event_fields : array();
         $grid_size = in_array('image', $fields->mod_event_fields) ? 'class="grid-md-9"' : 'class="grid-md-12"';
 
+        if (get_option('timezone_string')) {
+            date_default_timezone_set(get_option('timezone_string'));
+        }
+        $date_now = strtotime('now');
+
         $ret = '<ul class="event-module-list">';
         if (! $events) {
             $ret .= '<li><span class="event-content">' . __('No events found', 'event-integration') . '</span></li>';
         } else {
             foreach ($events as $event) {
-                $ret .= (isset($event->end_date) && (strtotime($event->end_date) <  strtotime('now'))) ? '<li class="passed-event">' : '<li>';
+                $ret .= (isset($event->end_date) && (strtotime($event->end_date) < $date_now)) ? '<li class="passed-event">' : '<li>';
 
                 if (! empty($event->start_date) && in_array('occasion', $fields->mod_event_fields) && $fields->mod_event_occ_pos == 'left') {
                     $occasion = \EventManagerIntegration\App::formatShortDate($event->start_date);

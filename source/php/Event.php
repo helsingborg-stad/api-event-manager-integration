@@ -150,15 +150,28 @@ class Event extends \EventManagerIntegration\Entity\PostManager
 
         // Loop through occasions for the event
         foreach ($this->occasions_complete as $o) {
-            $start_date = ! empty($o['start_date']) ? $o['start_date'] : null;
-            $end_date = ! empty($o['end_date']) ? $o['end_date'] : null;
-            $door_time = ! empty($o['door_time']) ? $o['door_time'] : null;
-            $status = ! empty($o['status']) ? $o['status'] : null;
+            $start_date               = ! empty($o['start_date']) ? $o['start_date'] : null;
+            $end_date                 = ! empty($o['end_date']) ? $o['end_date'] : null;
+            $door_time                = ! empty($o['door_time']) ? $o['door_time'] : null;
+            $status                   = ! empty($o['status']) ? $o['status'] : null;
             $occ_exeption_information = ! empty($o['occ_exeption_information']) ? $o['occ_exeption_information'] : null;
-            $content_mode = ! empty($o['content_mode']) ? $o['content_mode'] : null;
-            $content = ! empty($o['content']) ? $o['content'] : null;
+            $content_mode             = ! empty($o['content_mode']) ? $o['content_mode'] : null;
+            $content                  = ! empty($o['content']) ? $o['content'] : null;
 
             $wpdb->insert($db_table, array('event_id' => $this->ID, 'start_date' => $start_date, 'end_date' => $end_date, 'door_time' => $door_time, 'status' => $status, 'exception_information' => $occ_exeption_information, 'content_mode' => $content_mode, 'content' => ($content)));
+
+            // Unpublish the event if occasion is longer than limit option
+            $start           = new \DateTime($start_date);
+            $end             = new \Datetime($end_date);
+            $difference      = $end->diff($start)->format("%a");
+            $unpublish_limit = get_field('event_unpublish_limit', 'option');
+
+            if ($unpublish_limit != null && $unpublish_limit >= 0 && ($difference > $unpublish_limit)) {
+                wp_update_post(array(
+                    'ID'    =>  $this->ID,
+                    'post_status'   =>  'draft'
+                    ));
+            }
         }
 
         return true;
