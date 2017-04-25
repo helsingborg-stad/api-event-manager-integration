@@ -35,9 +35,6 @@ class App
         add_action('widgets_init', function () {
             register_widget('EventManagerIntegration\Widget\DisplayEvents');
         });
-
-        // Remove
-        add_action('admin_menu', array($this, 'createParsePage'));
     }
 
     /**
@@ -215,72 +212,5 @@ class App
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         dbDelta($sql);
         add_option('event_db_version', $event_db_version);
-    }
-
-    // TA BORT
-    /**
-     * Creates a admin page to trigger update data function
-     * @return void
-     */
-    public function createParsePage()
-    {
-        add_submenu_page(
-            null,
-            __('Import events', 'event-integration'),
-            __('Import events', 'event-integration'),
-            'edit_posts',
-            'import-events',
-            function () {
-
-            global $wpdb;
-            $db_table   = $wpdb->prefix . "integrate_occasions";
-            $occasion   = $wpdb->get_results("SELECT start_date FROM $db_table ORDER BY start_date ASC LIMIT 1", OBJECT);
-
-            $from_date  = count($occasion) == 1 ? date('Y-m-d', strtotime($occasion[0]->start_date)) : date('Y-m-d');
-            $days_ahead = ! empty(get_field('days_ahead', 'options')) ? absint(get_field('days_ahead', 'options')) : 30;
-            $to_date    = date('Y-m-d', strtotime("midnight now + {$days_ahead} days"));
-            // Get nearby events from location
-            $location   = get_field('event_import_geographic', 'option');
-            $latlng     = ($location) ? '&latlng=' . $location['lat'] . ',' . $location['lng'] : '';
-            $distance   = (get_field('event_geographic_distance', 'option')) ? '&distance=' . get_field('event_geographic_distance', 'option') : '';
-
-            $api_url    = get_field('event_api_url', 'option');
-            $api_url    = rtrim($api_url, '/') . '/event/time?start=' . $from_date . '&end=' . $to_date . $latlng . $distance . '&_embed';
-
-            $importer   = new \EventManagerIntegration\Parser\EventManagerApi($api_url);
-            });
-
-        add_submenu_page(
-            null,
-            __('Import Groups', 'event-integration'),
-            __('Import groups', 'event-integration'),
-            'edit_posts',
-            'import-groups',
-            function () {
-                $api_url = get_field('event_api_url', 'option');
-                if ($api_url) {
-                    $api_url = rtrim($api_url, '/') . '/user_groups';
-                    $importer = new \EventManagerIntegration\Parser\EventManagerGroups($api_url);
-                }
-            });
-
-        add_submenu_page(
-            null,
-            __('Delete all events', 'event-integration'),
-            __('Delete all events', 'event-integration'),
-            'edit_posts',
-            'delete-all-events',
-            function () {
-                global $wpdb;
-                $delete = $wpdb->query("TRUNCATE TABLE `event_postmeta`");
-                $delete = $wpdb->query("TRUNCATE TABLE `event_posts`");
-                $delete = $wpdb->query("TRUNCATE TABLE `event_stream`");
-                $delete = $wpdb->query("TRUNCATE TABLE `event_stream_meta`");
-                $delete = $wpdb->query("TRUNCATE TABLE `event_term_relationships`");
-                $delete = $wpdb->query("TRUNCATE TABLE `event_term_taxonomy`");
-                $delete = $wpdb->query("TRUNCATE TABLE `event_termmeta`");
-                $delete = $wpdb->query("TRUNCATE TABLE `event_terms`");
-                $delete = $wpdb->query("TRUNCATE TABLE `event_integrate_occasions`");
-            });
     }
 }
