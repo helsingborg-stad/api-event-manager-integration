@@ -182,10 +182,11 @@ class EventModule extends \Modularity\Module
                 }
 
                 if (in_array('description', $fields->mod_event_fields) && $event->content_mode == 'custom' && ! empty($event->content)) {
-                    $ret .= '<p>' . \EventManagerIntegration\Helper\QueryEvents::stringLimiter($event->content, $descr_limit) . '</p>';
+                    $ret .= \EventManagerIntegration\Helper\QueryEvents::stringLimiter($event->content, $descr_limit);
                 } elseif (! empty($event->post_content) && in_array('description', $fields->mod_event_fields)) {
-                    $ret .= '<p>' . \EventManagerIntegration\Helper\QueryEvents::stringLimiter($event->post_content, $descr_limit) . '</p>';
+                    $ret .= \EventManagerIntegration\Helper\QueryEvents::stringLimiter($event->post_content, $descr_limit);
                 }
+
                 $ret .= '</div>';
                 $ret .= '</div>';
                 $ret .= '</span>';

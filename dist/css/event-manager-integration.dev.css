@@ -16,7 +16,8 @@
 .modularity-mod-event .event-content {
   display: table-cell;
   vertical-align: middle;
-  padding: 10px 15px; }
+  padding: 10px 15px;
+  word-break: break-word; }
 
 .modularity-mod-event .loading-wrapper {
   padding-top: 20px; }
