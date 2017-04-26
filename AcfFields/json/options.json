@@ -1,0 +1,273 @@
+[{
+    "key": "group_583557753bd73",
+    "title": "Event Manager Integration",
+    "fields": [
+        {
+            "key": "field_588f3ef76094c",
+            "label": "API url",
+            "name": "event_api_url",
+            "type": "url",
+            "instructions": "Url to Event Manager API wp\/v2 namespace. <br> E.g. https:\/\/host\/wp-json\/wp\/v2",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_5835579f883ff",
+            "label": "Days ahead",
+            "name": "days_ahead",
+            "type": "number",
+            "instructions": "Import events that occurs within given number of days.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 30,
+            "placeholder": "",
+            "prepend": "",
+            "append": "days",
+            "min": 1,
+            "max": 365,
+            "step": ""
+        },
+        {
+            "key": "field_5835581488400",
+            "label": "Daily import",
+            "name": "event_daily_import",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "Enable daily automatic import from Event Manager API",
+            "default_value": 0
+        },
+        {
+            "key": "field_587f86dc8f7b7",
+            "label": "Post status",
+            "name": "event_post_status",
+            "type": "radio",
+            "instructions": "Select status of imported events.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "draft": "Draft",
+                "publish": "Published"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "save_other_choice": 0,
+            "default_value": "publish",
+            "layout": "vertical",
+            "return_format": "value"
+        },
+        {
+            "key": "field_58feee2f256cd",
+            "label": "Unpublish long lasting events",
+            "name": "event_unpublish_limit",
+            "type": "number",
+            "instructions": "Automatically unpublish events lasting longer than given limit. Set to -1 to set no limit.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 5,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": -1,
+            "max": "",
+            "step": ""
+        },
+        {
+            "key": "field_586bc598f2777",
+            "label": "Import from selected user groups",
+            "name": "event_filter_group",
+            "type": "taxonomy",
+            "instructions": "Select the user groups that you want to import events from. Leave empty to import from all groups.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "event_groups",
+            "field_type": "checkbox",
+            "allow_null": 0,
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 0,
+            "return_format": "object",
+            "multiple": 0
+        },
+        {
+            "key": "field_5846ca031ffcb",
+            "label": "Import from selected categories",
+            "name": "event_filter_cat",
+            "type": "text",
+            "instructions": "Enter the name of the categories that you want to import events from. Separate with commas. Leave blank to import from all categories.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5846db8b3cf78",
+            "label": "Import from selected tags",
+            "name": "event_filter_tag",
+            "type": "text",
+            "instructions": "Enter the name of the tags that you want to import events from. Separate with commas. Leave blank to import from all tags.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_58e380646fa6f",
+            "label": "Show update button on edit event page",
+            "name": "event_update_button",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Show update button",
+            "default_value": 0
+        },
+        {
+            "key": "field_58a56eaa0c2ad",
+            "label": "OAuth1 end point root url",
+            "name": "event_api_oauth_url",
+            "type": "url",
+            "instructions": "Url can be found under section \"authentication\" in your API root.<br> E.g. https:\/\/host\/oauth1<br> <br> Authorization is only needed when you want to post data to the API.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_58aaf2615abcb",
+            "label": "Google Maps JavaScript API key",
+            "name": "google_geocode_key",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_58aaeaa46781b",
+            "label": "Import from location",
+            "name": "event_import_geographic",
+            "type": "google_map",
+            "instructions": "Import events that occurs at a specified location.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "center_lat": "56.046467",
+            "center_lng": "12.694512",
+            "zoom": 16,
+            "height": ""
+        },
+        {
+            "key": "field_58aaec066781c",
+            "label": "Distance from location",
+            "name": "event_geographic_distance",
+            "type": "number",
+            "instructions": "To get events occurring nearby the given location, enter maximum distance in km. Leave blank to only get events from the exact position.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": "",
+            "max": "",
+            "step": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-options"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "local": "php"
+}]
+

@@ -26,12 +26,26 @@ load_plugin_textdomain('event-integration', false, plugin_basename(dirname(__FIL
 
 require_once EVENTMANAGERINTEGRATION_PATH . 'source/php/Vendor/Psr4ClassLoader.php';
 require_once EVENTMANAGERINTEGRATION_PATH . 'Public.php';
+if (! class_exists('\\AcfExportManager\\AcfExportManager')) {
+	require_once EVENTMANAGERINTEGRATION_PATH . 'vendor/helsingborg-stad/acf-export-manager/src/AcfExportManager.php';
+}
 
 // Instantiate and register the autoloader
 $loader = new EventManagerIntegration\Vendor\Psr4ClassLoader();
 $loader->addPrefix('EventManagerIntegration', EVENTMANAGERINTEGRATION_PATH);
 $loader->addPrefix('EventManagerIntegration', EVENTMANAGERINTEGRATION_PATH . 'source/php/');
 $loader->register();
+
+// Acf auto import and export
+$acfExportManager = new AcfExportManager\AcfExportManager();
+$acfExportManager->setTextdomain('event-integration');
+$acfExportManager->setExportFolder(EVENTMANAGERINTEGRATION_PATH . 'AcfFields/');
+$acfExportManager->autoExport(array(
+    'event-module' 		=> 'group_583fe4ee88439',
+    'options' 			=> 'group_583557753bd73',
+    'shortcodes' 		=> 'group_58526d565e1f5',
+));
+$acfExportManager->import();
 
 // Activation & deactivation hooks
 register_activation_hook(plugin_basename(__FILE__), '\EventManagerIntegration\App::addCronJob');

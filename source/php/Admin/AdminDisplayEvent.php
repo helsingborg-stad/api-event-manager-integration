@@ -168,7 +168,7 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
         }
 
         $even_taxonomies = \EventManagerIntegration\Shortcodes\SingleEvent::eventTaxonomies($meta);
-        $ret .= '<ul><li><h3>' . __('Taxonomier', 'event-integration') . '</h3></li></ul>';
+        $ret .= '<ul><li><h3>' . __('Taxonomies', 'event-integration') . '</h3></li></ul>';
         $ret .= $even_taxonomies;
 
         echo $ret;

@@ -21,7 +21,6 @@ class App
         new OAuth\OAuthRequests();
         new PostTypes\Events();
         new Acf\AcfConfig();
-        new Acf\AcfFields();
         new Widget\DisplayEvents();
         new Admin\Options();
         new Admin\AdminDisplayEvent();

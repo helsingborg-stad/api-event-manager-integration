@@ -1,0 +1,165 @@
+[{
+    "key": "group_58526d565e1f5",
+    "title": "Shortcode settings",
+    "fields": [
+        {
+            "key": "field_585278962daaf",
+            "label": "Information",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_585278b82dab0",
+            "label": "Information shortcode",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Shortcode to display event information. Add the shortcode to your single event template file.<br><br>[single_event_information]",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_585279446b5da",
+            "label": "Display fields",
+            "name": "event_shortc_fields",
+            "type": "checkbox",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "information": "Information",
+                "occasion": "Occasions",
+                "location": "Location",
+                "additional_locations": "Additional locations",
+                "organizers": "Organizers",
+                "sponsors": "Sponsors",
+                "booking": "Booking information",
+                "links": "Links"
+            },
+            "default_value": [
+                "information",
+                "occasion",
+                "location",
+                "additional_locations",
+                "organizers",
+                "sponsors",
+                "booking",
+                "links"
+            ],
+            "layout": "vertical",
+            "toggle": 0,
+            "return_format": "value"
+        },
+        {
+            "key": "field_5857b799e4d02",
+            "label": "Wrapper div class",
+            "name": "event_shortc_wrapper",
+            "type": "text",
+            "instructions": "Add custom classes to div that wraps around the info boxes. Useful when creating responsive grids. Separate with comma.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5857b7f0e4d03",
+            "label": "Inner div box class",
+            "name": "event_shortc_inner",
+            "type": "text",
+            "instructions": "Add custom classes to inner div boxes that contains the event information. Useful when creating responsive grids. Separate with comma.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_585270b4dad2b",
+            "label": "Gallery",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5852713b299b6",
+            "label": "Gallery shortcode",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Gallery images is stored as attached images. You can use WordPress own shortcode [gallery] to display the images.",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-options"
+            }
+        ]
+    ],
+    "menu_order": 1,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": ""
+}]
+

@@ -9,5 +9,13 @@
             "email": "jonatan.hanson@hiq.se"
         }
     ],
-    "require": {}
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/helsingborg-stad/acf-export-manager.git"
+        }
+    ],
+    "require": {
+        "helsingborg-stad/acf-export-manager": ">=1.0.0"
+    }
 }
