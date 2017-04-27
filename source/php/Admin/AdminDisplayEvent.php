@@ -13,8 +13,20 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
 
     public function __construct()
     {
-        add_action('admin_menu', array($this, 'removePublishBox'));
+        add_action('admin_menu', array($this, 'removeMetaBoxes'));
         add_action('add_meta_boxes', array($this, 'addMetaBoxes'));
+    }
+
+    /**
+     * Remove meta boxes from edit Event view
+     */
+    public function removeMetaBoxes()
+    {
+        if (get_field('event_update_button', 'option') == false) {
+            remove_meta_box('submitdiv', $this->post_type, 'side');
+        }
+        remove_meta_box('acf-group_56c33cf1470dc', $this->post_type, 'side');
+        remove_meta_box('pageparentdiv', $this->post_type, 'side');
     }
 
     /*
@@ -66,16 +78,6 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
             'side',
             'high'
         );
-    }
-
-    /**
-     * Remove publish meta box from edit Event view
-     */
-    public function removePublishBox()
-    {
-        if (get_field('event_update_button', 'option') == false) {
-            remove_meta_box('submitdiv', $this->post_type, 'side');
-        }
     }
 
     /*
