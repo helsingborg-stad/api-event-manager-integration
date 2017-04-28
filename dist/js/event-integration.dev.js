@@ -42,7 +42,10 @@ EventManagerIntegration.Event.Module = (function ($) {
 
     // Get event list with Ajax on pagination click
     Module.prototype.loadEvents = function (page, moduleId, module) {
-		var height = $(module).find('.module-content').height();
+		var height 	  = $(module).find('.event-module-content').height();
+	    var windowTop = $(window).scrollTop();
+	    var moduleTop = $(module).offset().top;
+
 		$.ajax({
 			url: eventintegration.ajaxurl,
 			type: 'post',
@@ -53,19 +56,19 @@ EventManagerIntegration.Event.Module = (function ($) {
 			},
 			beforeSend: function() {
 				$(module).find('.event-module-list').remove();
-				$(module).find('.module-content').append('<li class="event-loader"><div class="loading-wrapper"><div class="loading"><div></div><div></div><div></div><div></div></div></div></li>');
+				$(module).find('.event-module-content').append('<li class="event-loader"><div class="loading-wrapper"><div class="loading"><div></div><div></div><div></div><div></div></div></div></li>');
 				$(module).find('.event-loader').height(height);
-				if ($(window).scrollTop() != 0) {
+			    if (moduleTop < windowTop) {
 					$('html, body').animate({
-			        scrollTop: $(module).offset().top
+			        scrollTop: moduleTop
 			    	}, 100);
 				}
 			},
 			success: function(html) {
-				$(module).find('.module-content').append(html).hide().fadeIn(80).height('auto');
+				$(module).find('.event-module-content').append(html).hide().fadeIn(80).height('auto');
 			},
 			error: function() {
-				$(module).find('.module-content').append('<ul class="event-module-list"><li><p>' + eventIntegrationFront.event_pagination_error + '</p></li></ul>').hide().fadeIn(80).height('auto');
+				$(module).find('.event-module-content').append('<ul class="event-module-list"><li><p>' + eventIntegrationFront.event_pagination_error + '</p></li></ul>').hide().fadeIn(80).height('auto');
 			},
 			complete: function() {
 				$(module).find('.event-loader').remove();

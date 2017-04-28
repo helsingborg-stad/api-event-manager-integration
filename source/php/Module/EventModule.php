@@ -127,7 +127,6 @@ class EventModule extends \Modularity\Module
         $events = self::getEvents($module_id, $page);
         $descr_limit = (! empty($fields->mod_event_descr_limit)) ? $fields->mod_event_descr_limit : null;
         $fields->mod_event_fields = is_array($fields->mod_event_fields) ? $fields->mod_event_fields : array();
-        $grid_size = in_array('image', $fields->mod_event_fields) ? 'class="grid-md-9"' : 'class="grid-md-12"';
 
         if (get_option('timezone_string')) {
             date_default_timezone_set(get_option('timezone_string'));
@@ -136,7 +135,7 @@ class EventModule extends \Modularity\Module
 
         $ret = '<ul class="event-module-list">';
         if (! $events) {
-            $ret .= '<li><span class="event-content">' . __('No events found', 'event-integration') . '</span></li>';
+            $ret .= '<li><span class="event-info">' . __('No events found', 'event-integration') . '</span></li>';
         } else {
             foreach ($events as $event) {
                 $ret .= (isset($event->end_date) && (strtotime($event->end_date) < $date_now)) ? '<li class="passed-event">' : '<li>';
@@ -154,31 +153,27 @@ class EventModule extends \Modularity\Module
                     $ret .= '</span>';
                 }
 
-                $ret .= '<span class="event-content">';
-                $ret .= '<div class="grid">';
+                $ret .= '<span class="event-info">';
+
                 if (in_array('image', $fields->mod_event_fields)) {
-                    $ret .= '<div class="grid-md-3">';
                     if (get_the_post_thumbnail($event->ID)) {
                         $ret .= get_the_post_thumbnail($event->ID, 'large', array('class' => 'image-responsive'));
                     } elseif ($fields->mod_event_def_image) {
                         $ret .= wp_get_attachment_image($fields->mod_event_def_image->ID, array('700', '500'), "", array( "class" => "image-responsive" ));
                     }
-                    $ret .= '</div>';
                 }
-
-                $ret .= '<div ' . $grid_size . '>';
 
                 if (! empty($event->post_title)) {
                     $date_url = preg_replace('/\D/', '', $event->start_date);
-                    $ret .= '<a href="' . esc_url(add_query_arg('date', $date_url, get_page_link($event->ID))) .'" class="link-item">' . $event->post_title . '</a>';
+                    $ret .= '<a href="' . esc_url(add_query_arg('date', $date_url, get_page_link($event->ID))) .'" class="title"><span class="link-item">' . $event->post_title . '</span></a>';
                 }
                 if (! empty($event->start_date) && ! empty($event->end_date) && in_array('occasion', $fields->mod_event_fields) && $fields->mod_event_occ_pos == 'below') {
                     $occasion = \EventManagerIntegration\App::formatEventDate($event->start_date, $event->end_date);
-                    $ret .= '<p class="date text-sm text-dark-gray">' . $occasion . '</p>';
+                    $ret .= '<p class="text-sm"><i class="pricon pricon-calendar"></i> <strong>' . __('Date', 'event-integration') . ':</strong> ' . $occasion . '</p>';
                 }
                 if (in_array('location', $fields->mod_event_fields) && get_post_meta($event->ID, 'location', true)) {
                     $location = get_post_meta($event->ID, 'location', true);
-                    $ret .= '<p>' . $location['title'] . '</p>';
+                    $ret .= '<p class="text-sm"><i class="pricon pricon-location-pin"></i> <strong>' . __('Location', 'event-integration') . ':</strong> ' . $location['title'] . '</p>';
                 }
 
                 if (in_array('description', $fields->mod_event_fields) && $event->content_mode == 'custom' && ! empty($event->content)) {
@@ -187,8 +182,6 @@ class EventModule extends \Modularity\Module
                     $ret .= \EventManagerIntegration\Helper\QueryEvents::stringLimiter($event->post_content, $descr_limit);
                 }
 
-                $ret .= '</div>';
-                $ret .= '</div>';
                 $ret .= '</span>';
                 $ret .= '</li>';
             }

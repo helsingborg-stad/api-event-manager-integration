@@ -1,45 +1,54 @@
 .modularity-mod-event {
-	.event-date {
-	    display: table-cell;
-	    width: 60px;
-	    min-width: 60px;
-	    border-right: 1px solid #e7e5e1;
-	    font-weight: 300;
-	    font-size: .8rem;
-	    color: #252525;
-
-	    height: 100%;
-	    line-height: 140%;
-	    vertical-align: middle;
-	    text-align: center;
-
-	    span {
-	    	display: block;
-	    }
-	}
-
-	.event-content {
-	    display: table-cell;
-	    vertical-align: middle;
-	    padding: 10px 15px;
-	    word-break: break-word;
-	}
-
-	.loading-wrapper {
-		padding-top: 20px;
-	}
-
-	.module-content {
+	.event-module-content {
 		min-height: 47px;
 
 		li {
 			padding: 0px !important;
 		}
+
+		img {
+			padding: 5px 0;
+		}
+
+		.title + p {
+			padding: 6px 0 0 0;
+		}
+
+		.event-date {
+		    display: table-cell;
+		    width: 60px;
+		    min-width: 60px;
+		    border-right: 1px solid #e7e5e1;
+		    font-weight: 300;
+		    font-size: .8rem;
+		    height: 100%;
+		    line-height: 140%;
+		    vertical-align: middle;
+		    text-align: center;
+
+		    span {
+		    	display: block;
+		    }
+		}
+
+		.event-info {
+		    display: table-cell;
+		    vertical-align: middle;
+		    word-break: break-word;
+		}
+
+		.loading-wrapper {
+			padding-top: 20px;
+		}
 	}
 
-	.module-footer {
+	.event-module-footer {
 		background-color: #f6f5f2;
 		margin: 0;
+
+		a {
+			text-decoration: none;
+		}
 
 		li {
 			margin-right: 6px;
@@ -53,9 +62,12 @@
 			}
 		}
 
-		.module-archive {
-			font-size: 14px;
-			color: #666;
+		.event-module-archive {
+			a {
+				text-decoration: none;
+				font-size: 14px;
+				color: #666;
+			}
 
 			li {
 				line-height: 3;
@@ -63,10 +75,47 @@
 		}
 	}
 
-	.passed-event {
-		.event-content a, .event-date {
-			color: #8c8c8c;
+	.box-panel {
+		.event-info {
+			padding: 10px 15px;
+		}
+
+		.passed-event {
+			.event-info a, .event-date {
+				color: #8c8c8c;
+			}
 		}
 	}
+
+	.box-filled {
+		padding: 0px;
+
+		.event-module-list {
+			padding: 0 5px;
+		}
+
+		.box-title {
+			padding: 15px 15px 0 15px;
+		}
+
+		.event-date + .event-info {
+			padding: 10px 15px;
+		}
+
+		.event-info {
+			p:last-child {
+				padding: 0 0 15px 0;
+			}
+
+			.pricon {
+				display: none;
+			}
+		}
+
+		.text-sm {
+			opacity: 0.85;
+		}
+	}
+
 
 }
