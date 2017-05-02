@@ -29,6 +29,8 @@ class EventManagerApi extends \EventManagerIntegration\Parser
                 $this->saveEvent($event);
             }
         }
+
+        $this->deleteEmptyTaxonomies();
     }
 
     /**
@@ -294,4 +296,28 @@ class EventManagerApi extends \EventManagerIntegration\Parser
 
         return $passes;
     }
+
+    /**
+     * Delete empty event taxonomies
+     * @return void
+     */
+    public function deleteEmptyTaxonomies()
+    {
+        if (!empty(get_object_taxonomies('event'))) {
+            foreach (get_object_taxonomies('event') as $taxonomy) {
+                $terms = get_terms( array(
+                    'taxonomy'      => $taxonomy,
+                    'hide_empty'    => false,
+                    'childless'     => true,
+                ));
+
+                foreach ($terms as $term) {
+                    if ($term->count == 0) {
+                        wp_delete_term($term->term_id, $taxonomy);
+                    }
+                }
+            }
+        }
+    }
+
 }
