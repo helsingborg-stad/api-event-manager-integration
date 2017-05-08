@@ -165,7 +165,7 @@ class EventModule extends \Modularity\Module
 
                 if (! empty($event->post_title)) {
                     $date_url = preg_replace('/\D/', '', $event->start_date);
-                    $ret .= '<a href="' . esc_url(add_query_arg('date', $date_url, get_page_link($event->ID))) .'" class="title"><span class="link-item title">' . $event->post_title . '</span></a>';
+                    $ret .= '<a href="' . esc_url(add_query_arg('date', $date_url, get_permalink($event->ID))) .'" class="title"><span class="link-item title">' . $event->post_title . '</span></a>';
                 }
                 if (! empty($event->start_date) && ! empty($event->end_date) && in_array('occasion', $fields->mod_event_fields) && $fields->mod_event_occ_pos == 'below') {
                     $occasion = \EventManagerIntegration\App::formatEventDate($event->start_date, $event->end_date);
