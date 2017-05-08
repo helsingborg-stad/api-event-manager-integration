@@ -41,6 +41,8 @@
     text-decoration: none;
     font-size: 14px;
     color: #666; }
+    .modularity-mod-event .event-module-footer .event-module-archive a:hover {
+      text-decoration: underline; }
   .modularity-mod-event .event-module-footer .event-module-archive li {
     line-height: 3; }
 
