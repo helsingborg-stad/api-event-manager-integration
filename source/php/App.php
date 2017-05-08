@@ -159,8 +159,6 @@ class App
             $api_url    = rtrim($api_url, '/') . '/event/time?start=' . $from_date . '&end=' . $to_date . $latlng . $distance . '&_embed';
 
             $importer   = new \EventManagerIntegration\Parser\EventManagerApi($api_url);
-
-            file_put_contents(dirname(__FILE__)."/Log/import_events.log", "Event parser last run: ".date("Y-m-d H:i:s"));
         }
     }
 
