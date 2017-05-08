@@ -158,7 +158,7 @@ class OAuthRequests
             wp_send_json_error(__('Form data is missing, please try again.', 'event-integration'), 'event-integration');
         }
 
-        $postData                    = $_POST['data'];
+        $postData                    = $this->sanitizeInput($_POST['data']);
         // Add consumer name to postData
         $clientUrl                   = parse_url(get_site_url());
         $postData['consumer_client'] = $clientUrl['host'];
@@ -206,7 +206,6 @@ class OAuthRequests
         // return success results
         wp_send_json_success($result);
     }
-
 
     /**
      * Upload image to Event Manager API media end point
@@ -291,5 +290,22 @@ class OAuthRequests
 
         echo "Client removed";
         wp_die();
+    }
+
+    /**
+     * Sanitize array with input data
+     * @param  array &$array Defualt array
+     * @return array         Sanitized array
+     */
+    public function sanitizeInput(&$array) {
+        foreach ($array as &$value) {
+            if(!is_array($value)) {
+                $value = sanitize_text_field($value);
+            } else {
+                $this->sanitizeInput($value);
+            }
+        }
+
+        return $array;
     }
 }
