@@ -13,17 +13,13 @@ $pagesCount = \EventManagerIntegration\Module\EventModule::countPages($module->I
     	</div>
 	</ul>
 
+    <?php if (isset($fields->mod_event_pagination) && $fields->mod_event_pagination == true && $pagesCount > 1) : ?>
     <div class="event-module-footer gutter gutter-sm gutter-horizontal">
-        <?php if (isset($fields->mod_event_pagination) && $fields->mod_event_pagination == true && $pagesCount > 1) : ?>
-            <ul class="module-pagination pagination" data-pages="<?php echo $pagesCount; ?>"></ul>
-        <?php endif; ?>
-
-        <?php if (isset($fields->mod_event_archive) && $fields->mod_event_archive == true) : ?>
-            <ul class="event-module-archive">
-                <li>
-                    <a href="<?php echo get_post_type_archive_link('event'); ?>"><i class="pricon pricon-plus-o"></i> <?php _e('More events', 'event-integration') ?></a>
-                </li>
-            </ul>
-        <?php endif; ?>
+        <ul class="module-pagination pagination" data-pages="<?php echo $pagesCount; ?>"></ul>
     </div>
+    <?php endif; ?>
+
+    <?php if (isset($fields->mod_event_archive) && $fields->mod_event_archive == true) : ?>
+        <a class="read-more" href="<?php echo get_post_type_archive_link('event'); ?>"><i class="pricon pricon-plus-o"></i> <?php _e('More events', 'event-integration') ?></a>
+    <?php endif; ?>
 </div>
