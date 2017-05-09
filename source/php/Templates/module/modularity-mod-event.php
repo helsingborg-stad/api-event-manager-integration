@@ -20,6 +20,6 @@ $pagesCount = \EventManagerIntegration\Module\EventModule::countPages($module->I
     <?php endif; ?>
 
     <?php if (isset($fields->mod_event_archive) && $fields->mod_event_archive == true) : ?>
-        <a class="read-more" href="<?php echo get_post_type_archive_link('event'); ?>"><i class="pricon pricon-plus-o"></i> <?php _e('More events', 'event-integration') ?></a>
+        <a class="read-more" href="<?php echo get_post_type_archive_link('event'); ?>"><?php _e('More events', 'event-integration') ?></a>
     <?php endif; ?>
 </div>
