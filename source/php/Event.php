@@ -105,7 +105,17 @@ class Event extends \EventManagerIntegration\Entity\PostManager
      */
     public function saveCategories()
     {
-        wp_set_object_terms($this->ID, $this->categories, 'event_categories', false);
+        if (empty($this->categories)) {
+            $terms = wp_get_post_terms($this->ID, 'event_categories', array('fields' => 'all'));
+            if (!empty($terms)) {
+                foreach ($terms as $term) {
+                    wp_remove_object_terms($this->ID, $term->term_id, 'event_categories');
+                }
+            }
+            delete_post_meta($this->ID, 'categories');
+        } else {
+            wp_set_object_terms($this->ID, $this->categories, 'event_categories', false);
+        }
     }
 
     /**
