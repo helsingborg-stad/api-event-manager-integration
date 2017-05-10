@@ -60,13 +60,16 @@ class Event extends \EventManagerIntegration\Entity\PostManager
      */
     public function saveAddLocations()
     {
-        $add_locations = array();
         if (! empty($this->additional_locations)) {
-            foreach ($this->additional_locations as $key => $location) {
+            $add_locations = array();
+            foreach ($this->additional_locations as $location) {
+                if (in_array('rest_post_invalid_id', $location)) {
+                    continue;
+                }
                 $add_locations[] = $this->mergeParentLocation($this->ID, $location);
             }
+            update_post_meta($this->ID, 'additional_locations', $add_locations);
         }
-        update_post_meta($this->ID, 'additional_locations', $add_locations);
     }
 
     /**
@@ -78,7 +81,7 @@ class Event extends \EventManagerIntegration\Entity\PostManager
     public function mergeParentLocation($post_id, $location)
     {
         $location['title'] = $location['title']['rendered'];
-        if (! empty($location['parent']) &&  $location['parent'] > 0) {
+        if (! empty($location['parent']) && $location['parent'] > 0) {
             $parent     = $location['parent'];
             $api_url    = get_field('event_api_url', 'option');
             $api_url    = rtrim($api_url, '/') . '/location/' . $parent;
@@ -165,7 +168,6 @@ class Event extends \EventManagerIntegration\Entity\PostManager
             $end             = new \Datetime($end_date);
             $difference      = $end->diff($start)->format("%a");
             $unpublish_limit = get_field('event_unpublish_limit', 'option');
-
             if ($unpublish_limit != null && $unpublish_limit >= 0 && ($difference > $unpublish_limit)) {
                 wp_update_post(array(
                     'ID'    =>  $this->ID,
