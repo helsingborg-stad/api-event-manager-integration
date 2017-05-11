@@ -111,8 +111,8 @@ class Event extends \EventManagerIntegration\Entity\PostManager
                 foreach ($terms as $term) {
                     wp_remove_object_terms($this->ID, $term->term_id, 'event_categories');
                 }
-            }
             delete_post_meta($this->ID, 'categories');
+            }
         } else {
             wp_set_object_terms($this->ID, $this->categories, 'event_categories', false);
         }
@@ -140,7 +140,17 @@ class Event extends \EventManagerIntegration\Entity\PostManager
      */
     public function saveTags()
     {
-        wp_set_object_terms($this->ID, $this->tags, 'event_tags', false);
+        if (empty($this->tags)) {
+            $terms = wp_get_post_terms($this->ID, 'event_tags', array('fields' => 'all'));
+            if (!empty($terms)) {
+                foreach ($terms as $term) {
+                    wp_remove_object_terms($this->ID, $term->term_id, 'event_tags');
+                }
+            delete_post_meta($this->ID, 'tags');
+            }
+        } else {
+            wp_set_object_terms($this->ID, $this->tags, 'event_tags', false);
+        }
     }
 
     /**
