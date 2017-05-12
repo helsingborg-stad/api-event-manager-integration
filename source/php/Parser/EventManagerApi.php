@@ -13,6 +13,10 @@ class EventManagerApi extends \EventManagerIntegration\Parser
 
     public function start()
     {
+        if (function_exists('kses_remove_filters')) {
+            kses_remove_filters();
+        }
+
         // Import publishing groups from API
         \EventManagerIntegration\App::importPublishingGroups();
 
