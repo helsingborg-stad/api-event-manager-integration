@@ -182,18 +182,6 @@ class Event extends \EventManagerIntegration\Entity\PostManager
             $content                  = ! empty($o['content']) ? $o['content'] : null;
 
             $wpdb->insert($db_table, array('event_id' => $this->ID, 'start_date' => $start_date, 'end_date' => $end_date, 'door_time' => $door_time, 'status' => $status, 'exception_information' => $occ_exeption_information, 'content_mode' => $content_mode, 'content' => ($content)));
-
-            // Unpublish the event if occasion is longer than limit option
-            $start           = new \DateTime($start_date);
-            $end             = new \Datetime($end_date);
-            $difference      = $end->diff($start)->format("%a");
-            $unpublish_limit = get_field('event_unpublish_limit', 'option');
-            if ($unpublish_limit != null && $unpublish_limit >= 0 && ($difference > $unpublish_limit)) {
-                wp_update_post(array(
-                    'ID'    =>  $this->ID,
-                    'post_status'   =>  'draft'
-                    ));
-            }
         }
 
         return true;

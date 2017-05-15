@@ -108,6 +108,17 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         $event_id = $this->checkIfEventExists($event['id']);
         if ($event_id) {
             $post_status = get_post_status($event_id);
+        } elseif (is_array($occasions) && ! empty($occasions)) {
+            // Unpublish the event if occasion is longer than limit option
+            $unpublish_limit = get_field('event_unpublish_limit', 'option');
+            foreach ($occasions as $occasion) {
+                $start           = new \DateTime($occasion['start_date']);
+                $end             = new \Datetime($occasion['end_date']);
+                $difference      = $end->diff($start)->format("%a");
+                if ($unpublish_limit != null && $unpublish_limit >= 0 && ($difference > $unpublish_limit)) {
+                    $post_status = 'draft';
+                }
+            }
         }
 
         // Save event if it passed taxonomy and group filters
