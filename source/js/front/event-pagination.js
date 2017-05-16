@@ -16,17 +16,19 @@ EventManagerIntegration.Event.Module = (function ($) {
     // Load pagination bar to event modules
     Module.prototype.initEventPagination = function () {
     	$(".modularity-mod-event").each(function( key, value ) {
-    		var moduleId = $(this).find('[module-id]').attr('module-id');
-    		var pages 	 = $(this).find('.module-pagination').attr('data-pages');
-    		var module   = $(this);
+    		var moduleId 	= $(this).find('[module-id]').attr('module-id');
+    		var pages 	 	= $(this).find('.module-pagination').attr('data-pages');
+    		var showArrows 	= $(this).find('.module-pagination').attr('show-arrows');
+    		var module   	= $(this);
+
 		    $(this).find('.module-pagination').pagination({
 		    	pages: pages,
 		    	displayedPages: 4,
 		        edges: 0,
 		        cssStyle: '',
 		        ellipsePageSet: false,
-		        prevText: '&laquo;',
-		        nextText: '&raquo;',
+		        prevText: (showArrows) ? '&laquo;' : '',
+		        nextText: (showArrows) ? '&raquo;' : '',
 		       	currentPage: 1,
 		       	selectOnClick: false,
 		        onPageClick: function(page, event) {
