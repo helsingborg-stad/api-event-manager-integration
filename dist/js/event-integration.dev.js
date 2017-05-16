@@ -122,36 +122,30 @@ EventManagerIntegration.Event.Form = (function ($) {
             success: function(response) {
             	// Clear select
             	$(select).html('');
-
-            	if (taxonomy === 'event_categories') {
-            		var taxonomies = Form.prototype.hierarchicalTax(response);
-					// Add select option and it's children taxonomies(1 level)
-	            	$(taxonomies.children).each(function(index,tax){
-					    // Parent option
-					    var opt 		= document.createElement('option');
-					    opt.value 		= tax.data.id;
-					    opt.innerHTML 	= tax.data.name;
-					    select.appendChild(opt);
-					    // Children options
-					    $(tax.children).each(function(index,tax){
-						    var opt 		= document.createElement('option');
-						    opt.value 		= tax.data.id;
-							opt.innerHTML 	+= typeof tax.parent != "undefined" && tax.parent != 0 ? ' – ' : '';
-						    opt.innerHTML 	+= tax.data.name;
-						    select.appendChild(opt);
-		    			});
-		    		});
-            	} else {
-            		$(response).each(function(index,tax){
-						    var opt 		= document.createElement('option');
-						    opt.value 		= tax.id;
-						    opt.innerHTML 	= tax.name;
-						    select.appendChild(opt);
-		    		});
-            	}
-
+        		var taxonomies = Form.prototype.hierarchicalTax(response);
+				// Add select option and it's children taxonomies
+            	$(taxonomies.children).each(function(index, tax) {
+            		// Parent option
+				    Form.prototype.addOption(tax, select, '');
+				    $(tax.children).each(function(index, tax) {
+				    	// Children option
+				    	Form.prototype.addOption(tax, select, ' – ');
+						$(tax.children).each(function(index, tax) {
+						   	// Grand children options
+							Form.prototype.addOption(tax, select, ' – – ');
+			    		});
+	    			});
+	    		});
             }
         });
+    };
+
+	Form.prototype.addOption = function(taxonomy, select, depth) {
+     	var opt 			= document.createElement('option');
+			opt.value 		= taxonomy.data.id;
+			opt.innerHTML 	+= depth;
+			opt.innerHTML 	+= taxonomy.data.name;
+			select.appendChild(opt);
     };
 
 	function TreeNode(data) {
@@ -164,9 +158,9 @@ EventManagerIntegration.Event.Form = (function ($) {
 	  	return a.data.name < b.data.name ? 0 : 1;
 	};
 
-	TreeNode.prototype.sortRecursive = function () {
+	TreeNode.prototype.sortRecursive = function() {
  		this.children.sort(Form.prototype.comparer);
-  		for (var i=0, l=this.children.length; i<l; i++) {
+  		for (var i = 0, l = this.children.length; i < l; i++) {
     		this.children[i].sortRecursive();
  		}
  		return this;
@@ -180,15 +174,16 @@ EventManagerIntegration.Event.Form = (function ($) {
 		nodeById[0] = new TreeNode();
 
 		// Make TreeNode objects for each item
-		for (i=0; i<l; i++) {
+		for (i = 0; i < l; i++) {
 			nodeById[data[i].id ] = new TreeNode(data[i]);
 		}
 		// Link all TreeNode objects
-		for (i=0; i<l; i++) {
-			node = nodeById[ data[i].id ];
+		for (i = 0; i < l; i++) {
+			node = nodeById[data[i].id];
 			node.parent = nodeById[node.data.parent];
 			node.parent.children.push(node);
 		}
+
 		return nodeById[0].sortRecursive();
 	};
 
@@ -314,7 +309,6 @@ EventManagerIntegration.Event.Form = (function ($) {
 	            data : formData
 	        },
 	        success: function(response) {
-	        //console.log(response);
 	            if (response.success) {
 	            	$('.submit-success', eventForm).removeClass('hidden');
 					$('.submit-success .success', eventForm).empty().append('<i class="fa fa-send"></i>Evenemanget har skickats!</li>');
