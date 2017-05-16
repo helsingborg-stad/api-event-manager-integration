@@ -8,10 +8,10 @@ $pagesCount = \EventManagerIntegration\Module\EventModule::countPages($module->I
         <h4 class="box-title"><?php echo apply_filters('the_title', $module->post_title); ?></h4>
     <?php } ?>
     <ul>
-    	<div class="event-module-content">
-    		<?php echo \EventManagerIntegration\Module\EventModule::displayEvents($module->ID); ?>
-    	</div>
-	</ul>
+        <div class="event-module-content">
+            <?php echo \EventManagerIntegration\Module\EventModule::displayEvents($module->ID); ?>
+        </div>
+    </ul>
 
     <?php if (isset($fields->mod_event_pagination) && $fields->mod_event_pagination == true && $pagesCount > 1) : ?>
     <div class="event-module-footer gutter gutter-sm gutter-horizontal">
