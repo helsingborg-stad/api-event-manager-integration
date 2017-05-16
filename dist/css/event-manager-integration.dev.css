@@ -34,6 +34,8 @@
   -ms-flex-pack: justify;
       justify-content: space-between;
   background-color: #f6f5f2;
+  border: 1px solid #e7e5e1;
+  border-top: 0px;
   margin: 0; }
   .modularity-mod-event .event-module-footer a {
     text-decoration: none; }
