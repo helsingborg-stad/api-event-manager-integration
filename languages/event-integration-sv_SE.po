@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2017-04-26 15:31+0200\n"
-"PO-Revision-Date: 2017-04-27 09:59+0200\n"
+"POT-Creation-Date: 2017-05-16 15:16+0200\n"
+"PO-Revision-Date: 2017-05-16 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -49,125 +49,134 @@ msgid "Show link"
 msgstr "Visa länk"
 
 #: AcfFields/php/event-module.php:63
+msgid "Pagination button limit"
+msgstr "Begränsa pagineringssidor"
+
+#: AcfFields/php/event-module.php:66
+msgid "Limit number of pagination buttons. -1 to show all."
+msgstr "Begränsa antal pagineringssidor. -1 för att visa alla."
+
+#: AcfFields/php/event-module.php:92
 msgid "Days interval"
 msgstr "Tidsperiod"
 
-#: AcfFields/php/event-module.php:66
+#: AcfFields/php/event-module.php:95
 msgid "Include events from today to the given number of days."
 msgstr "Visa evenemang som inträffar inom angivet antal dagar."
 
-#: AcfFields/php/event-module.php:84
+#: AcfFields/php/event-module.php:113
 msgid "Fields"
 msgstr "Fält"
 
-#: AcfFields/php/event-module.php:96 source/php/PostTypes/Events.php:38
+#: AcfFields/php/event-module.php:125 source/php/PostTypes/Events.php:38
 #: source/php/Shortcodes/SingleEvent.php:267
 msgid "Occasion"
 msgstr "Datum"
 
-#: AcfFields/php/event-module.php:97
+#: AcfFields/php/event-module.php:126
 msgid "Image"
 msgstr "Bild"
 
-#: AcfFields/php/event-module.php:98 AcfFields/php/event-module.php:332
-#: AcfFields/php/shortcodes.php:57 source/php/Admin/AdminDisplayEvent.php:143
+#: AcfFields/php/event-module.php:127 AcfFields/php/event-module.php:361
+#: AcfFields/php/shortcodes.php:57 source/php/Admin/AdminDisplayEvent.php:145
+#: source/php/Module/EventModule.php:182
 #: source/php/Shortcodes/SingleEvent.php:88
 #: source/php/Shortcodes/SingleEvent.php:211
 msgid "Location"
 msgstr "Plats"
 
-#: AcfFields/php/event-module.php:99
+#: AcfFields/php/event-module.php:128
 msgid "Description"
 msgstr "Beskrivning"
 
-#: AcfFields/php/event-module.php:109
+#: AcfFields/php/event-module.php:138
 msgid "Occasion position"
 msgstr "Position för datum"
 
-#: AcfFields/php/event-module.php:129
+#: AcfFields/php/event-module.php:158
 msgid "Below title"
 msgstr "Under titel"
 
-#: AcfFields/php/event-module.php:130
+#: AcfFields/php/event-module.php:159
 msgid "Left column"
 msgstr "Vänsterkolumn"
 
-#: AcfFields/php/event-module.php:141
+#: AcfFields/php/event-module.php:170
 msgid "Description letter limit"
 msgstr "Teckenbegränsning av beskrivning"
 
-#: AcfFields/php/event-module.php:144
+#: AcfFields/php/event-module.php:173
 msgid "Set to -1 to show the whole description."
 msgstr "-1 för att visa hela beskrivningen."
 
-#: AcfFields/php/event-module.php:170 source/php/PostTypes/Events.php:286
+#: AcfFields/php/event-module.php:199 source/php/PostTypes/Events.php:286
 #: source/php/Shortcodes/SingleEvent.php:437
 msgid "Groups"
 msgstr "Grupper"
 
-#: AcfFields/php/event-module.php:181
+#: AcfFields/php/event-module.php:210
 msgid "Show events from all groups"
 msgstr "Visa evenemang inom samtliga grupper"
 
-#: AcfFields/php/event-module.php:186
+#: AcfFields/php/event-module.php:215
 msgid "Select groups"
 msgstr "Välj grupper"
 
-#: AcfFields/php/event-module.php:189
+#: AcfFields/php/event-module.php:218
 msgid "Show events from the selected groups."
 msgstr "Visa evenemang inom angivna grupper."
 
-#: AcfFields/php/event-module.php:216 source/php/PostTypes/Events.php:212
+#: AcfFields/php/event-module.php:245 source/php/PostTypes/Events.php:212
 #: source/php/Shortcodes/SingleEvent.php:443
 msgid "Categories"
 msgstr "Kategorier"
 
-#: AcfFields/php/event-module.php:227
+#: AcfFields/php/event-module.php:256
 msgid "Show events from all categories"
 msgstr "Visa evenemang inom samtliga kategorier"
 
-#: AcfFields/php/event-module.php:232
+#: AcfFields/php/event-module.php:261
 msgid "Select categories"
 msgstr "Välj kategorier"
 
-#: AcfFields/php/event-module.php:235
+#: AcfFields/php/event-module.php:264
 msgid "Show events from the selected categories."
 msgstr "Visa evenemang inom angivna kategorier."
 
-#: AcfFields/php/event-module.php:262 source/php/PostTypes/Events.php:249
+#: AcfFields/php/event-module.php:291 source/php/PostTypes/Events.php:249
 #: source/php/Shortcodes/SingleEvent.php:449
 msgid "Tags"
 msgstr "Taggar"
 
-#: AcfFields/php/event-module.php:273
+#: AcfFields/php/event-module.php:302
 msgid "Show events from all tags"
 msgstr "Visa evenemang inom samtliga taggar"
 
-#: AcfFields/php/event-module.php:278
+#: AcfFields/php/event-module.php:307
 msgid "Select tags"
 msgstr "Välj taggar"
 
-#: AcfFields/php/event-module.php:281
+#: AcfFields/php/event-module.php:310
 msgid "Show events from the selected tags."
 msgstr "Visa evenemang inom angivna taggar."
 
-#: AcfFields/php/event-module.php:308
+#: AcfFields/php/event-module.php:337
 msgid "Default image"
 msgstr "Standardbild"
 
-#: AcfFields/php/event-module.php:311
+#: AcfFields/php/event-module.php:340
 msgid "Will display if event image is missing."
 msgstr "Visas om bild saknas."
 
-#: AcfFields/php/event-module.php:335
+#: AcfFields/php/event-module.php:364
 msgid "Show events that occurs at a specified location."
 msgstr "Visa evenemang som inträffar vid en angiven plats."
 
-#: AcfFields/php/event-module.php:350 AcfFields/php/options.php:237
+#: AcfFields/php/event-module.php:379 AcfFields/php/options.php:237
 msgid "Distance from location"
 msgstr "Avstånd från plats"
 
-#: AcfFields/php/event-module.php:353
+#: AcfFields/php/event-module.php:382
 msgid ""
 "To show events occurring nearby the given location, enter maximum distance "
 "in km. Leave blank to only show events from the exact position."
@@ -307,7 +316,7 @@ msgid "Shortcode settings"
 msgstr "Shortcode inställningar"
 
 #: AcfFields/php/shortcodes.php:10 AcfFields/php/shortcodes.php:55
-#: source/php/Admin/AdminDisplayEvent.php:136
+#: source/php/Admin/AdminDisplayEvent.php:138
 #: source/php/Shortcodes/SingleEvent.php:74
 #: source/php/Shortcodes/SingleEvent.php:203
 msgid "Information"
@@ -329,7 +338,7 @@ msgstr ""
 msgid "Display fields"
 msgstr "Visa fält"
 
-#: AcfFields/php/shortcodes.php:56 source/php/Admin/AdminDisplayEvent.php:63
+#: AcfFields/php/shortcodes.php:56 source/php/Admin/AdminDisplayEvent.php:75
 #: source/php/Shortcodes/SingleEvent.php:131
 #: source/php/Shortcodes/SingleEvent.php:236
 msgid "Occasions"
@@ -351,7 +360,7 @@ msgstr "Sponsorer"
 msgid "Booking information"
 msgstr "Information om bokning"
 
-#: AcfFields/php/shortcodes.php:62 source/php/Admin/AdminDisplayEvent.php:166
+#: AcfFields/php/shortcodes.php:62 source/php/Admin/AdminDisplayEvent.php:168
 #: source/php/Shortcodes/SingleEvent.php:149
 #: source/php/Shortcodes/SingleEvent.php:248
 msgid "Links"
@@ -381,7 +390,7 @@ msgstr ""
 "Lägg till klasser för \"div boxar\" som finns inuti \"wrapper div\". "
 "Användbart för att göra responsivt. Separera med kommatecken."
 
-#: AcfFields/php/shortcodes.php:118 source/php/Admin/AdminDisplayEvent.php:45
+#: AcfFields/php/shortcodes.php:118 source/php/Admin/AdminDisplayEvent.php:57
 msgid "Gallery"
 msgstr "Bildgalleri"
 
@@ -404,35 +413,35 @@ msgid ""
 "pro/\" target=\"_blank\">Advanced Custom Fields Pro</a> plugin."
 msgstr ""
 
-#: source/php/Admin/AdminDisplayEvent.php:27
+#: source/php/Admin/AdminDisplayEvent.php:39
 msgid "Event"
 msgstr "Evenemang"
 
-#: source/php/Admin/AdminDisplayEvent.php:36
+#: source/php/Admin/AdminDisplayEvent.php:48
 msgid "Meta data"
 msgstr "Metadata"
 
-#: source/php/Admin/AdminDisplayEvent.php:54
+#: source/php/Admin/AdminDisplayEvent.php:66
 msgid "Featured image"
 msgstr "Bild"
 
-#: source/php/Admin/AdminDisplayEvent.php:150
+#: source/php/Admin/AdminDisplayEvent.php:152
 #: source/php/Shortcodes/SingleEvent.php:103
 #: source/php/Shortcodes/SingleEvent.php:220
 msgid "Booking"
 msgstr "Bokning"
 
-#: source/php/Admin/AdminDisplayEvent.php:157
+#: source/php/Admin/AdminDisplayEvent.php:159
 #: source/php/Shortcodes/SingleEvent.php:117
 #: source/php/Shortcodes/SingleEvent.php:228
 msgid "Organizer"
 msgstr "Arrangör"
 
-#: source/php/Admin/AdminDisplayEvent.php:171
+#: source/php/Admin/AdminDisplayEvent.php:173
 msgid "Taxonomies"
 msgstr "Taxonomier"
 
-#: source/php/Admin/AdminDisplayEvent.php:212
+#: source/php/Admin/AdminDisplayEvent.php:214
 msgid "Image missing"
 msgstr "Bild saknas"
 
@@ -507,13 +516,17 @@ msgstr "Kunde inte skapa mappen"
 msgid "please go ahead and create it manually and rerun the import."
 msgstr "vänligen skapa den manuellt och gör om importen."
 
-#: source/php/Module/EventModule.php:139 source/php/Widget/DisplayEvents.php:56
+#: source/php/Module/EventModule.php:144 source/php/Widget/DisplayEvents.php:56
 msgid "No events found"
 msgstr "Inga evenemang hittades"
 
-#: source/php/Module/EventModule.php:148
+#: source/php/Module/EventModule.php:153
 msgid "Today"
 msgstr "Idag"
+
+#: source/php/Module/EventModule.php:178 source/php/PostTypes/Events.php:58
+msgid "Date"
+msgstr "Datum"
 
 #: source/php/OAuth/OAuthAdmin.php:22 source/php/OAuth/OAuthAdmin.php:23
 #: source/php/OAuth/OAuthAdmin.php:36
@@ -610,11 +623,11 @@ msgstr "Formulärdata saknas, försök igen."
 msgid "Something went wrong posting the event"
 msgstr "Något gick fel med att skicka evenemanget"
 
-#: source/php/OAuth/OAuthRequests.php:217
+#: source/php/OAuth/OAuthRequests.php:216
 msgid "Image is not selected, please try again."
 msgstr "Bild saknas, vänligen försök igen."
 
-#: source/php/OAuth/OAuthRequests.php:271
+#: source/php/OAuth/OAuthRequests.php:270
 msgid "Something went wrong uploading your image"
 msgstr "Något gick fel med att ladda upp din bild"
 
@@ -643,10 +656,6 @@ msgstr "Godkänn"
 #: source/php/PostTypes/Events.php:56
 msgid "Deny"
 msgstr "Neka"
-
-#: source/php/PostTypes/Events.php:58
-msgid "Date"
-msgstr "Datum"
 
 #: source/php/PostTypes/Events.php:199
 msgctxt "Taxonomy plural name"

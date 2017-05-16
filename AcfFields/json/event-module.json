@@ -56,6 +56,35 @@
             "default_value": 0
         },
         {
+            "key": "field_591af4eeb1561",
+            "label": "Pagination button limit",
+            "name": "mod_event_pagination_limit",
+            "type": "number",
+            "instructions": "Limit number of pagination buttons. -1 to show all.",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_584ec8318df1d",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": -1,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": "",
+            "max": "",
+            "step": ""
+        },
+        {
             "key": "field_583ffd8d10925",
             "label": "Days interval",
             "name": "mod_event_interval",
@@ -382,3 +411,4 @@
     "description": "",
     "local": "php"
 }]
+
