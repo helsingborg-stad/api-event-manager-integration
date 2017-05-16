@@ -67,6 +67,9 @@
   .modularity-mod-event .box-filled .text-sm {
     opacity: 0.85; }
 
+.modularity-mod-event .read-more {
+  border-radius: 0 2px; }
+
 .widget_display_events ul li span {
   display: block; }
 
