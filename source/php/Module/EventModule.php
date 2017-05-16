@@ -55,13 +55,19 @@ class EventModule extends \Modularity\Module
     public static function countPages($module_id)
     {
         $fields = json_decode(json_encode(get_fields($module_id)));
-        if ($fields->mod_event_limit == 0) {
+
+        if (isset($fields->mod_event_limit) && $fields->mod_event_limit == 0) {
             return $fields->mod_event_limit;
         }
-        $max_per_page = $fields->mod_event_limit;
+
+        $max_per_page = (isset($fields->mod_event_limit)) ? $fields->mod_event_limit : 10;
         $events = self::getEvents($module_id, 1, false);
         $total_posts = count($events);  //Total number of posts returned
         $pages = ceil($total_posts / $max_per_page);
+
+        if (isset($fields->mod_event_pagination_limit) && $fields->mod_event_pagination_limit >= 0 && $fields->mod_event_pagination_limit <= $pages) {
+            $pages = $fields->mod_event_pagination_limit;
+        }
 
         return $pages;
     }

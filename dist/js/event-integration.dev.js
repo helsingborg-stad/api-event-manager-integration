@@ -18,8 +18,6 @@ EventManagerIntegration.Event.Module = (function ($) {
     	$(".modularity-mod-event").each(function( key, value ) {
     		var moduleId = $(this).find('[module-id]').attr('module-id');
     		var pages 	 = $(this).find('.module-pagination').attr('data-pages');
-			var buttons  = $(this).find('.module-pagination').attr('button-limit');
-
     		var module   = $(this);
 		    $(this).find('.module-pagination').pagination({
 		    	pages: pages,
