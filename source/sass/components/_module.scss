@@ -43,6 +43,9 @@
 	}
 
 	.event-module-footer {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
 		background-color: #f6f5f2;
 		margin: 0;
 
@@ -121,7 +124,4 @@
 		}
 	}
 
-	.read-more {
-  		border-radius: 0 2px;
-	}
 }
