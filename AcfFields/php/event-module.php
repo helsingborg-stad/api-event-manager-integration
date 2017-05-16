@@ -94,7 +94,15 @@
             'type' => 'true_false',
             'instructions' => '',
             'required' => 0,
-            'conditional_logic' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_584ec8318df1d',
+                        'operator' => '==',
+                        'value' => '1',
+                    ),
+                ),
+            ),
             'wrapper' => array(
                 'width' => '50',
                 'class' => '',
