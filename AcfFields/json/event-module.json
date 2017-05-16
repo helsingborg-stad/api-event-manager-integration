@@ -72,7 +72,7 @@
                 ]
             ],
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -83,6 +83,22 @@
             "min": "",
             "max": "",
             "step": ""
+        },
+        {
+            "key": "field_591b06d53284e",
+            "label": "Show pagination arrows",
+            "name": "mod_event_nav_arrows",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "Show previous and next page arrows on pagination",
+            "default_value": 1
         },
         {
             "key": "field_583ffd8d10925",
