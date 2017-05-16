@@ -27,6 +27,12 @@
     padding-top: 20px; }
 
 .modularity-mod-event .event-module-footer {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
   background-color: #f6f5f2;
   margin: 0; }
   .modularity-mod-event .event-module-footer a {
@@ -66,9 +72,6 @@
     display: none; }
   .modularity-mod-event .box-filled .text-sm {
     opacity: 0.85; }
-
-.modularity-mod-event .read-more {
-  border-radius: 0 2px; }
 
 .widget_display_events ul li span {
   display: block; }
