@@ -11,6 +11,7 @@ class App
 
     public function __construct()
     {
+        add_action('admin_init', array($this, 'checkDatabaseTable'));
         add_action('admin_enqueue_scripts', array($this, 'enqueueAdmin'), 950);
         add_action('wp_enqueue_scripts', array($this, 'enqueueFront'), 950);
 
@@ -183,6 +184,21 @@ class App
             $api_url = rtrim($api_url, '/') . '/user_groups';
             $importer = new \EventManagerIntegration\Parser\EventManagerGroups($api_url);
         }
+    }
+
+    /**
+     * Create database table if not exist
+     * @return void
+     */
+    public static function checkDatabaseTable()
+    {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'integrate_occasions';
+        if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
+            $this->databaseCreation();
+        }
+
+        return;
     }
 
     /**
