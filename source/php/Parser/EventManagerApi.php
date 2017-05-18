@@ -80,9 +80,8 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         $youtube                = ! empty($event['youtube']) ? $event['youtube'] : null;
         $vimeo                  = ! empty($event['vimeo']) ? $event['vimeo'] : null;
         $post_status            = get_field('event_post_status', 'option') ? get_field('event_post_status', 'option') : 'publish';
-        // Save embedded location data
-        $location               = (! empty($event['location']) && ! empty($event['_embedded']['location'][0] && !in_array('rest_post_invalid_id', $event['_embedded']['location'][0]))) ? $event['_embedded']['location'][0] : null;
-        $additional_locations   = ! empty($event['_embedded']['additional_locations']) ? $event['_embedded']['additional_locations'] : null;
+        $location               = ! empty($event['location']) ? $event['location'] : null;
+        $additional_locations   = ! empty($event['additional_locations']) ? $event['additional_locations'] : null;
         $latitude               = is_array($location) && ! empty($location['latitude']) ? $location['latitude'] : null;
         $longitude              = is_array($location) && ! empty($location['longitude']) ? $location['longitude'] : null;
 

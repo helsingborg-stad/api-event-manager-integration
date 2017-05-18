@@ -45,13 +45,19 @@ class Event extends \EventManagerIntegration\Entity\PostManager
     public function saveLocation()
     {
         if ($this->location != null) {
-            $location = $this->mergeParentLocation($this->ID, $this->location);
+            if (! empty($this->location['parent']) && $this->location['parent']['id'] > 0) {
+                var_dump("Add parent");
+                $this->location['title'] = $this->location['parent']['title'] . ', ' . $this->location['title'];
+            }
+
             if (! empty($location['latitude']) && ! empty($location['longitude'])) {
                 update_post_meta($this->ID, 'latitude', $location['latitude']);
                 update_post_meta($this->ID, 'longitude', $location['longitude']);
             }
-            update_post_meta($this->ID, 'location', $location);
+            update_post_meta($this->ID, 'location', $this->location);
         }
+
+        var_dump($this->location);
     }
 
     /**
@@ -60,43 +66,16 @@ class Event extends \EventManagerIntegration\Entity\PostManager
      */
     public function saveAddLocations()
     {
-        if (! empty($this->additional_locations)) {
-            $add_locations = array();
-            foreach ($this->additional_locations as $location) {
-                if (in_array('rest_post_invalid_id', $location)) {
-                    continue;
-                }
-                $add_locations[] = $this->mergeParentLocation($this->ID, $location);
-            }
-            update_post_meta($this->ID, 'additional_locations', $add_locations);
-        }
-    }
-
-    /**
-     * Clean location array and merge with parent
-     * @param  int      $post_id
-     * @param  array    $location location
-     * @return array    new location
-     */
-    public function mergeParentLocation($post_id, $location)
-    {
-        $location['title'] = $location['title']['rendered'];
-        if (! empty($location['parent']) && $location['parent'] > 0) {
-            $parent     = $location['parent'];
-            $api_url    = get_field('event_api_url', 'option');
-            $api_url    = rtrim($api_url, '/') . '/location/' . $parent;
-            $parent = \EventManagerIntegration\Parser::curlApi($api_url);
-            if ($parent) {
-                $location['title'] = $parent['title']['rendered'] . ', ' . $location['title'];
-                foreach ($location as $key => $value) {
-                    if (empty($location[$key])) {
-                        $location[$key] = $parent[$key];
-                    }
+        if (is_array($this->additional_locations) && ! empty($this->additional_locations)) {
+            foreach ($this->additional_locations as &$location) {
+                if (! empty($location['parent']) && $location['parent']['id'] > 0) {
+                    var_dump("Add parent");
+                    $location['title'] = $location['parent']['title'] . ', ' . $location['title'];
                 }
             }
+            var_dump($this->additional_locations);
+            update_post_meta($this->ID, 'additional_locations', $this->additional_locations);
         }
-        unset($location['_links'], $location['id'], $location['slug'], $location['date'], $location['parent']);
-        return $location;
     }
 
     /**
