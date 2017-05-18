@@ -354,11 +354,10 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
 
         $api_url = get_field('event_api_url', 'option');
         if ($api_url) {
-            $api_url  = rtrim($api_url, '/') . '/event/time?start=' . $from_date . '&end=' . $to_date . $latlng . $distance  . '&_embed';
+            $api_url  = rtrim($api_url, '/') . '/event/time?start=' . $from_date . '&end=' . $to_date . $latlng . $distance;
             $importer = new \EventManagerIntegration\Parser\EventManagerApi($api_url);
             $data = $importer->getCreatedData();
             wp_send_json($data);
-            wp_die();
         }
 
         return;

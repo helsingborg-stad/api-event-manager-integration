@@ -157,7 +157,7 @@ class App
             $distance   = (get_field('event_geographic_distance', 'option')) ? '&distance=' . get_field('event_geographic_distance', 'option') : '';
 
             $api_url    = get_field('event_api_url', 'option');
-            $api_url    = rtrim($api_url, '/') . '/event/time?start=' . $from_date . '&end=' . $to_date . $latlng . $distance . '&_embed';
+            $api_url    = rtrim($api_url, '/') . '/event/time?start=' . $from_date . '&end=' . $to_date . $latlng . $distance;
 
             $importer   = new \EventManagerIntegration\Parser\EventManagerApi($api_url);
         }
