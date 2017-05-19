@@ -46,7 +46,6 @@ class Event extends \EventManagerIntegration\Entity\PostManager
     {
         if ($this->location != null) {
             if (! empty($this->location['parent']) && $this->location['parent']['id'] > 0) {
-                var_dump("Add parent");
                 $this->location['title'] = $this->location['parent']['title'] . ', ' . $this->location['title'];
             }
 
@@ -56,8 +55,6 @@ class Event extends \EventManagerIntegration\Entity\PostManager
             }
             update_post_meta($this->ID, 'location', $this->location);
         }
-
-        var_dump($this->location);
     }
 
     /**
@@ -69,11 +66,9 @@ class Event extends \EventManagerIntegration\Entity\PostManager
         if (is_array($this->additional_locations) && ! empty($this->additional_locations)) {
             foreach ($this->additional_locations as &$location) {
                 if (! empty($location['parent']) && $location['parent']['id'] > 0) {
-                    var_dump("Add parent");
                     $location['title'] = $location['parent']['title'] . ', ' . $location['title'];
                 }
             }
-            var_dump($this->additional_locations);
             update_post_meta($this->ID, 'additional_locations', $this->additional_locations);
         }
     }
