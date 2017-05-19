@@ -327,7 +327,6 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             if (get_field('event_api_url', 'option')) {
                 $button .= '<div id="importevents" class="button-primary">' . __('Import events', 'event-integration') . '</div>';
             }
-
             $button .= '</div>';
             $views['import-buttons'] = $button;
         }
@@ -340,10 +339,17 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
     public function importEvents()
     {
         global $wpdb;
-        $db_table = $wpdb->prefix . "integrate_occasions";
-        $occasion = $wpdb->get_results("SELECT start_date FROM $db_table ORDER BY start_date ASC LIMIT 1", OBJECT);
+        $db_table   = $wpdb->prefix . "integrate_occasions";
+        $occasion   = $wpdb->get_results(
+        "SELECT     $db_table.start_date
+        FROM        $db_table
+        LEFT JOIN   $wpdb->posts ON ($wpdb->posts.ID = $db_table.event_id)
+        WHERE       $wpdb->posts.post_type = 'event'
+                    AND $wpdb->posts.post_status = 'publish'
+        ORDER BY    $db_table.start_date
+        ASC LIMIT 1", ARRAY_A);
 
-        $from_date = count($occasion) == 1 ? date('Y-m-d', strtotime($occasion[0]->start_date)) : date('Y-m-d');
+        $from_date  = (is_array($occasion) && isset($occasion[0]['start_date']) && strtotime($occasion[0]['start_date']) < strtotime('now')) ? date('Y-m-d', strtotime($occasion[0]['start_date'])) : date('Y-m-d');
         $days_ahead = ! empty(get_field('days_ahead', 'options')) ? absint(get_field('days_ahead', 'options')) : 30;
         $to_date = date('Y-m-d', strtotime("midnight now + {$days_ahead} days"));
 
