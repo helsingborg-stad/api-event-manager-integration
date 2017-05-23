@@ -371,8 +371,9 @@ class SingleEvent
         if (! empty($meta['organizers']) && is_array($meta['organizers'])) {
             foreach ($meta['organizers'] as $organizer) {
                     $ret .= '<ul>';
-                    $ret .= (! empty($organizer['organizer'])) ? '<li>' . $organizer['organizer'] . '</li>' : '';
+                    $ret .= (! empty($organizer['organizer'])) ? '<li><strong>' . $organizer['organizer'] . '</strong></li>' : '';
                     $ret .= (! empty($organizer['organizer_phone'])) ? '<li>' . $organizer['organizer_phone'] . '</li>' : '';
+                    $ret .= (! empty($organizer['organizer_email'])) ? '<li>' . $organizer['organizer_email'] . '</li>' : '';
                     $ret .= (! empty($organizer['organizer_link'])) ? '<li><i class="pricon pricon-external-link"></i> <a href="' . $organizer['organizer_link'] . '" target="_blank">' . preg_replace("(^https?://)", "", $organizer['organizer_link']) . '</a></li>' : '';
                     $ret .= '</ul>';
             }

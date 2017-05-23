@@ -3,7 +3,7 @@
 if (function_exists('acf_add_local_field_group')) {
     acf_add_local_field_group(array(
     'key' => 'group_58526d565e1f5',
-    'title' => __('Shortcode settings', 'event-integration'),
+    'title' => 'Shortcode settings',
     'fields' => array(
         0 => array(
             'key' => 'field_585278962daaf',
@@ -23,7 +23,7 @@
         ),
         1 => array(
             'key' => 'field_585278b82dab0',
-            'label' => __('Information shortcode', 'event-integration'),
+            'label' => __('Shortcodes', 'event-integration'),
             'name' => '',
             'type' => 'message',
             'instructions' => '',
@@ -34,7 +34,7 @@
                 'class' => '',
                 'id' => '',
             ),
-            'message' => __('Shortcode to display event information. Add the shortcode to your single event template file.<br><br>[single_event_information]', 'event-integration'),
+            'message' => __('Shortcodes to display event information. Add the shortcode to your single event template file.<br><br>Display as accordion:<br>[single_event_accordion]<br><br>Display as table:<br>[single_event_information]', 'event-integration'),
             'new_lines' => 'wpautop',
             'esc_html' => 0,
         ),
@@ -80,7 +80,7 @@
             'label' => __('Wrapper div class', 'event-integration'),
             'name' => 'event_shortc_wrapper',
             'type' => 'text',
-            'instructions' => __('Add custom classes to div that wraps around the info boxes. Useful when creating responsive grids. Separate with comma.', 'event-integration'),
+            'instructions' => __('Add custom classes to div that wraps around the info boxes on shortcode: [single_event_information]. Useful when creating responsive grids. Separate with comma.', 'event-integration'),
             'required' => 0,
             'conditional_logic' => 0,
             'wrapper' => array(
@@ -99,7 +99,7 @@
             'label' => __('Inner div box class', 'event-integration'),
             'name' => 'event_shortc_inner',
             'type' => 'text',
-            'instructions' => __('Add custom classes to inner div boxes that contains the event information. Useful when creating responsive grids. Separate with comma.', 'event-integration'),
+            'instructions' => __('Add custom classes to inner div boxes that contains the event information on shortcode: [single_event_information]. Useful when creating responsive grids. Separate with comma.', 'event-integration'),
             'required' => 0,
             'conditional_logic' => 0,
             'wrapper' => array(
@@ -164,5 +164,6 @@
     'hide_on_screen' => '',
     'active' => 1,
     'description' => '',
+    'local' => 'php',
 ));
 }
