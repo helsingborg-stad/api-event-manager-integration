@@ -3,7 +3,7 @@
 if (function_exists('acf_add_local_field_group')) {
     acf_add_local_field_group(array(
     'key' => 'group_583557753bd73',
-    'title' => 'Event Manager Integration',
+    'title' => __('Event Manager Integration', 'event-integration'),
     'fields' => array(
         0 => array(
             'key' => 'field_588f3ef76094c',
@@ -165,7 +165,7 @@
         ),
         8 => array(
             'key' => 'field_58e380646fa6f',
-            'label' => 'Show update button on edit event page',
+            'label' => __('Show update button on edit event page', 'event-integration'),
             'name' => 'event_update_button',
             'type' => 'true_false',
             'instructions' => '',
@@ -176,7 +176,7 @@
                 'class' => '',
                 'id' => '',
             ),
-            'message' => 'Show update button',
+            'message' => __('Show update button', 'event-integration'),
             'default_value' => 0,
         ),
         9 => array(
@@ -197,7 +197,7 @@
         ),
         10 => array(
             'key' => 'field_58aaf2615abcb',
-            'label' => 'Google Maps JavaScript API key',
+            'label' => __('Google Maps JavaScript API key', 'event-integration'),
             'name' => 'google_geocode_key',
             'type' => 'text',
             'instructions' => '',

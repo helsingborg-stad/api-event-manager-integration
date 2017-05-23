@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2017-05-16 15:16+0200\n"
+"POT-Creation-Date: 2017-05-23 13:24+0200\n"
 "PO-Revision-Date: 2016-12-13 15:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -57,27 +57,35 @@ msgid "Limit number of pagination buttons. -1 to show all."
 msgstr ""
 
 #: AcfFields/php/event-module.php:92
+msgid "Show pagination arrows"
+msgstr ""
+
+#: AcfFields/php/event-module.php:111
+msgid "Show previous and next page arrows on pagination"
+msgstr ""
+
+#: AcfFields/php/event-module.php:116
 msgid "Days interval"
 msgstr ""
 
-#: AcfFields/php/event-module.php:95
+#: AcfFields/php/event-module.php:119
 msgid "Include events from today to the given number of days."
 msgstr ""
 
-#: AcfFields/php/event-module.php:113
+#: AcfFields/php/event-module.php:137
 msgid "Fields"
 msgstr ""
 
-#: AcfFields/php/event-module.php:125 source/php/PostTypes/Events.php:38
+#: AcfFields/php/event-module.php:149 source/php/PostTypes/Events.php:38
 #: source/php/Shortcodes/SingleEvent.php:267
 msgid "Occasion"
 msgstr ""
 
-#: AcfFields/php/event-module.php:126
+#: AcfFields/php/event-module.php:150
 msgid "Image"
 msgstr ""
 
-#: AcfFields/php/event-module.php:127 AcfFields/php/event-module.php:361
+#: AcfFields/php/event-module.php:151 AcfFields/php/event-module.php:385
 #: AcfFields/php/shortcodes.php:57 source/php/Admin/AdminDisplayEvent.php:145
 #: source/php/Module/EventModule.php:182
 #: source/php/Shortcodes/SingleEvent.php:88
@@ -85,101 +93,106 @@ msgstr ""
 msgid "Location"
 msgstr ""
 
-#: AcfFields/php/event-module.php:128
+#: AcfFields/php/event-module.php:152
 msgid "Description"
 msgstr ""
 
-#: AcfFields/php/event-module.php:138
+#: AcfFields/php/event-module.php:162
 msgid "Occasion position"
 msgstr ""
 
-#: AcfFields/php/event-module.php:158
+#: AcfFields/php/event-module.php:182
 msgid "Below title"
 msgstr ""
 
-#: AcfFields/php/event-module.php:159
+#: AcfFields/php/event-module.php:183
 msgid "Left column"
 msgstr ""
 
-#: AcfFields/php/event-module.php:170
+#: AcfFields/php/event-module.php:194
 msgid "Description letter limit"
 msgstr ""
 
-#: AcfFields/php/event-module.php:173
+#: AcfFields/php/event-module.php:197
 msgid "Set to -1 to show the whole description."
 msgstr ""
 
-#: AcfFields/php/event-module.php:199 source/php/PostTypes/Events.php:286
-#: source/php/Shortcodes/SingleEvent.php:437
+#: AcfFields/php/event-module.php:223 source/php/PostTypes/Events.php:286
+#: source/php/Shortcodes/SingleEvent.php:438
 msgid "Groups"
 msgstr ""
 
-#: AcfFields/php/event-module.php:210
+#: AcfFields/php/event-module.php:234
 msgid "Show events from all groups"
 msgstr ""
 
-#: AcfFields/php/event-module.php:215
+#: AcfFields/php/event-module.php:239
 msgid "Select groups"
 msgstr ""
 
-#: AcfFields/php/event-module.php:218
+#: AcfFields/php/event-module.php:242
 msgid "Show events from the selected groups."
 msgstr ""
 
-#: AcfFields/php/event-module.php:245 source/php/PostTypes/Events.php:212
-#: source/php/Shortcodes/SingleEvent.php:443
+#: AcfFields/php/event-module.php:269 source/php/PostTypes/Events.php:212
+#: source/php/Shortcodes/SingleEvent.php:444
 msgid "Categories"
 msgstr ""
 
-#: AcfFields/php/event-module.php:256
+#: AcfFields/php/event-module.php:280
 msgid "Show events from all categories"
 msgstr ""
 
-#: AcfFields/php/event-module.php:261
+#: AcfFields/php/event-module.php:285
 msgid "Select categories"
 msgstr ""
 
-#: AcfFields/php/event-module.php:264
+#: AcfFields/php/event-module.php:288
 msgid "Show events from the selected categories."
 msgstr ""
 
-#: AcfFields/php/event-module.php:291 source/php/PostTypes/Events.php:249
-#: source/php/Shortcodes/SingleEvent.php:449
+#: AcfFields/php/event-module.php:315 source/php/PostTypes/Events.php:249
+#: source/php/Shortcodes/SingleEvent.php:450
 msgid "Tags"
 msgstr ""
 
-#: AcfFields/php/event-module.php:302
+#: AcfFields/php/event-module.php:326
 msgid "Show events from all tags"
 msgstr ""
 
-#: AcfFields/php/event-module.php:307
+#: AcfFields/php/event-module.php:331
 msgid "Select tags"
 msgstr ""
 
-#: AcfFields/php/event-module.php:310
+#: AcfFields/php/event-module.php:334
 msgid "Show events from the selected tags."
 msgstr ""
 
-#: AcfFields/php/event-module.php:337
+#: AcfFields/php/event-module.php:361
 msgid "Default image"
 msgstr ""
 
-#: AcfFields/php/event-module.php:340
+#: AcfFields/php/event-module.php:364
 msgid "Will display if event image is missing."
 msgstr ""
 
-#: AcfFields/php/event-module.php:364
+#: AcfFields/php/event-module.php:388
 msgid "Show events that occurs at a specified location."
 msgstr ""
 
-#: AcfFields/php/event-module.php:379 AcfFields/php/options.php:237
+#: AcfFields/php/event-module.php:403 AcfFields/php/options.php:237
 msgid "Distance from location"
 msgstr ""
 
-#: AcfFields/php/event-module.php:382
+#: AcfFields/php/event-module.php:406
 msgid ""
 "To show events occurring nearby the given location, enter maximum distance "
 "in km. Leave blank to only show events from the exact position."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+#: AcfFields/php/options.php:6
+msgid "Event Manager Integration"
 msgstr ""
 
 #: AcfFields/php/options.php:10
@@ -268,6 +281,14 @@ msgid ""
 "with commas. Leave blank to import from all tags."
 msgstr ""
 
+#: AcfFields/php/options.php:168
+msgid "Show update button on edit event page"
+msgstr ""
+
+#: AcfFields/php/options.php:179
+msgid "Show update button"
+msgstr ""
+
 #: AcfFields/php/options.php:184
 msgid "OAuth1 end point root url"
 msgstr ""
@@ -277,6 +298,10 @@ msgid ""
 "Url can be found under section \"authentication\" in your API root.<br> E.g. "
 "https://host/oauth1<br> <br> Authorization is only needed when you want to "
 "post data to the API."
+msgstr ""
+
+#: AcfFields/php/options.php:200
+msgid "Google Maps JavaScript API key"
 msgstr ""
 
 #: AcfFields/php/options.php:219
@@ -293,10 +318,6 @@ msgid ""
 "km. Leave blank to only get events from the exact position."
 msgstr ""
 
-#: AcfFields/php/shortcodes.php:6
-msgid "Shortcode settings"
-msgstr ""
-
 #: AcfFields/php/shortcodes.php:10 AcfFields/php/shortcodes.php:55
 #: source/php/Admin/AdminDisplayEvent.php:138
 #: source/php/Shortcodes/SingleEvent.php:74
@@ -305,13 +326,15 @@ msgid "Information"
 msgstr ""
 
 #: AcfFields/php/shortcodes.php:26
-msgid "Information shortcode"
+msgid "Shortcodes"
 msgstr ""
 
 #: AcfFields/php/shortcodes.php:37
 msgid ""
-"Shortcode to display event information. Add the shortcode to your single "
-"event template file.<br><br>[single_event_information]"
+"Shortcodes to display event information. Add the shortcode to your single "
+"event template file.<br><br>Display as accordion:"
+"<br>[single_event_accordion]<br><br>Display as table:"
+"<br>[single_event_information]"
 msgstr ""
 
 #: AcfFields/php/shortcodes.php:43
@@ -332,7 +355,7 @@ msgstr ""
 msgid "Organizers"
 msgstr ""
 
-#: AcfFields/php/shortcodes.php:60 source/php/Shortcodes/SingleEvent.php:382
+#: AcfFields/php/shortcodes.php:60 source/php/Shortcodes/SingleEvent.php:383
 msgid "Sponsors"
 msgstr ""
 
@@ -352,8 +375,9 @@ msgstr ""
 
 #: AcfFields/php/shortcodes.php:83
 msgid ""
-"Add custom classes to div that wraps around the info boxes. Useful when "
-"creating responsive grids. Separate with comma."
+"Add custom classes to div that wraps around the info boxes on shortcode: "
+"[single_event_information]. Useful when creating responsive grids. Separate "
+"with comma."
 msgstr ""
 
 #: AcfFields/php/shortcodes.php:99
@@ -362,8 +386,9 @@ msgstr ""
 
 #: AcfFields/php/shortcodes.php:102
 msgid ""
-"Add custom classes to inner div boxes that contains the event information. "
-"Useful when creating responsive grids. Separate with comma."
+"Add custom classes to inner div boxes that contains the event information on "
+"shortcode: [single_event_information]. Useful when creating responsive "
+"grids. Separate with comma."
 msgstr ""
 
 #: AcfFields/php/shortcodes.php:118 source/php/Admin/AdminDisplayEvent.php:57
@@ -429,15 +454,15 @@ msgctxt "Event Manager Integration settings"
 msgid "Options"
 msgstr ""
 
-#: source/php/App.php:49
+#: source/php/App.php:50
 msgid "to"
 msgstr ""
 
-#: source/php/App.php:106
+#: source/php/App.php:107
 msgid "Something went wrong, please try again later."
 msgstr ""
 
-#: source/php/App.php:133
+#: source/php/App.php:134
 msgid "Loading"
 msgstr ""
 
@@ -782,11 +807,11 @@ msgstr ""
 msgid "Import events"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:374
+#: source/php/PostTypes/Events.php:379
 msgid "Something went wrong!"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:391
+#: source/php/PostTypes/Events.php:396
 msgid "Error"
 msgstr ""
 
@@ -850,7 +875,7 @@ msgstr ""
 msgid "Ticket includes"
 msgstr ""
 
-#: source/php/Templates/module/modularity-mod-event.php:24
+#: source/php/Templates/module/modularity-mod-event.php:25
 msgid "More events"
 msgstr ""
 
@@ -914,10 +939,6 @@ msgstr ""
 #: vendor/helsingborg-stad/acf-export-manager/src/AcfExportManager.php:401
 #, php-format
 msgid "Exported %d fieldgroup(s)."
-msgstr ""
-
-#. Plugin Name of the plugin/theme
-msgid "Event Manager Integration"
 msgstr ""
 
 #. Plugin URI of the plugin/theme

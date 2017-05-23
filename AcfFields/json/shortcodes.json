@@ -20,7 +20,7 @@
         },
         {
             "key": "field_585278b82dab0",
-            "label": "Information shortcode",
+            "label": "Shortcodes",
             "name": "",
             "type": "message",
             "instructions": "",
@@ -31,7 +31,7 @@
                 "class": "",
                 "id": ""
             },
-            "message": "Shortcode to display event information. Add the shortcode to your single event template file.<br><br>[single_event_information]",
+            "message": "Shortcodes to display event information. Add the shortcode to your single event template file.<br><br>Display as accordion:<br>[single_event_accordion]<br><br>Display as table:<br>[single_event_information]",
             "new_lines": "wpautop",
             "esc_html": 0
         },
@@ -77,7 +77,7 @@
             "label": "Wrapper div class",
             "name": "event_shortc_wrapper",
             "type": "text",
-            "instructions": "Add custom classes to div that wraps around the info boxes. Useful when creating responsive grids. Separate with comma.",
+            "instructions": "Add custom classes to div that wraps around the info boxes on shortcode: [single_event_information]. Useful when creating responsive grids. Separate with comma.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -96,7 +96,7 @@
             "label": "Inner div box class",
             "name": "event_shortc_inner",
             "type": "text",
-            "instructions": "Add custom classes to inner div boxes that contains the event information. Useful when creating responsive grids. Separate with comma.",
+            "instructions": "Add custom classes to inner div boxes that contains the event information on shortcode: [single_event_information]. Useful when creating responsive grids. Separate with comma.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -160,5 +160,7 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": 1,
-    "description": ""
+    "description": "",
+    "local": "php"
 }]
+

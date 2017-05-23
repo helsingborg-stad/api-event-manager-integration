@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2017-05-16 15:16+0200\n"
-"PO-Revision-Date: 2017-05-16 15:18+0200\n"
+"POT-Creation-Date: 2017-05-23 13:24+0200\n"
+"PO-Revision-Date: 2017-05-23 13:31+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -57,27 +57,35 @@ msgid "Limit number of pagination buttons. -1 to show all."
 msgstr "Begränsa antal pagineringssidor. -1 för att visa alla."
 
 #: AcfFields/php/event-module.php:92
+msgid "Show pagination arrows"
+msgstr "Visa navigeringspilar"
+
+#: AcfFields/php/event-module.php:111
+msgid "Show previous and next page arrows on pagination"
+msgstr "Visa navigeringspilar på sidnumrering"
+
+#: AcfFields/php/event-module.php:116
 msgid "Days interval"
 msgstr "Tidsperiod"
 
-#: AcfFields/php/event-module.php:95
+#: AcfFields/php/event-module.php:119
 msgid "Include events from today to the given number of days."
 msgstr "Visa evenemang som inträffar inom angivet antal dagar."
 
-#: AcfFields/php/event-module.php:113
+#: AcfFields/php/event-module.php:137
 msgid "Fields"
 msgstr "Fält"
 
-#: AcfFields/php/event-module.php:125 source/php/PostTypes/Events.php:38
+#: AcfFields/php/event-module.php:149 source/php/PostTypes/Events.php:38
 #: source/php/Shortcodes/SingleEvent.php:267
 msgid "Occasion"
 msgstr "Datum"
 
-#: AcfFields/php/event-module.php:126
+#: AcfFields/php/event-module.php:150
 msgid "Image"
 msgstr "Bild"
 
-#: AcfFields/php/event-module.php:127 AcfFields/php/event-module.php:361
+#: AcfFields/php/event-module.php:151 AcfFields/php/event-module.php:385
 #: AcfFields/php/shortcodes.php:57 source/php/Admin/AdminDisplayEvent.php:145
 #: source/php/Module/EventModule.php:182
 #: source/php/Shortcodes/SingleEvent.php:88
@@ -85,104 +93,109 @@ msgstr "Bild"
 msgid "Location"
 msgstr "Plats"
 
-#: AcfFields/php/event-module.php:128
+#: AcfFields/php/event-module.php:152
 msgid "Description"
 msgstr "Beskrivning"
 
-#: AcfFields/php/event-module.php:138
+#: AcfFields/php/event-module.php:162
 msgid "Occasion position"
 msgstr "Position för datum"
 
-#: AcfFields/php/event-module.php:158
+#: AcfFields/php/event-module.php:182
 msgid "Below title"
 msgstr "Under titel"
 
-#: AcfFields/php/event-module.php:159
+#: AcfFields/php/event-module.php:183
 msgid "Left column"
 msgstr "Vänsterkolumn"
 
-#: AcfFields/php/event-module.php:170
+#: AcfFields/php/event-module.php:194
 msgid "Description letter limit"
 msgstr "Teckenbegränsning av beskrivning"
 
-#: AcfFields/php/event-module.php:173
+#: AcfFields/php/event-module.php:197
 msgid "Set to -1 to show the whole description."
 msgstr "-1 för att visa hela beskrivningen."
 
-#: AcfFields/php/event-module.php:199 source/php/PostTypes/Events.php:286
-#: source/php/Shortcodes/SingleEvent.php:437
+#: AcfFields/php/event-module.php:223 source/php/PostTypes/Events.php:286
+#: source/php/Shortcodes/SingleEvent.php:438
 msgid "Groups"
 msgstr "Grupper"
 
-#: AcfFields/php/event-module.php:210
+#: AcfFields/php/event-module.php:234
 msgid "Show events from all groups"
 msgstr "Visa evenemang inom samtliga grupper"
 
-#: AcfFields/php/event-module.php:215
+#: AcfFields/php/event-module.php:239
 msgid "Select groups"
 msgstr "Välj grupper"
 
-#: AcfFields/php/event-module.php:218
+#: AcfFields/php/event-module.php:242
 msgid "Show events from the selected groups."
 msgstr "Visa evenemang inom angivna grupper."
 
-#: AcfFields/php/event-module.php:245 source/php/PostTypes/Events.php:212
-#: source/php/Shortcodes/SingleEvent.php:443
+#: AcfFields/php/event-module.php:269 source/php/PostTypes/Events.php:212
+#: source/php/Shortcodes/SingleEvent.php:444
 msgid "Categories"
 msgstr "Kategorier"
 
-#: AcfFields/php/event-module.php:256
+#: AcfFields/php/event-module.php:280
 msgid "Show events from all categories"
 msgstr "Visa evenemang inom samtliga kategorier"
 
-#: AcfFields/php/event-module.php:261
+#: AcfFields/php/event-module.php:285
 msgid "Select categories"
 msgstr "Välj kategorier"
 
-#: AcfFields/php/event-module.php:264
+#: AcfFields/php/event-module.php:288
 msgid "Show events from the selected categories."
 msgstr "Visa evenemang inom angivna kategorier."
 
-#: AcfFields/php/event-module.php:291 source/php/PostTypes/Events.php:249
-#: source/php/Shortcodes/SingleEvent.php:449
+#: AcfFields/php/event-module.php:315 source/php/PostTypes/Events.php:249
+#: source/php/Shortcodes/SingleEvent.php:450
 msgid "Tags"
 msgstr "Taggar"
 
-#: AcfFields/php/event-module.php:302
+#: AcfFields/php/event-module.php:326
 msgid "Show events from all tags"
 msgstr "Visa evenemang inom samtliga taggar"
 
-#: AcfFields/php/event-module.php:307
+#: AcfFields/php/event-module.php:331
 msgid "Select tags"
 msgstr "Välj taggar"
 
-#: AcfFields/php/event-module.php:310
+#: AcfFields/php/event-module.php:334
 msgid "Show events from the selected tags."
 msgstr "Visa evenemang inom angivna taggar."
 
-#: AcfFields/php/event-module.php:337
+#: AcfFields/php/event-module.php:361
 msgid "Default image"
 msgstr "Standardbild"
 
-#: AcfFields/php/event-module.php:340
+#: AcfFields/php/event-module.php:364
 msgid "Will display if event image is missing."
 msgstr "Visas om bild saknas."
 
-#: AcfFields/php/event-module.php:364
+#: AcfFields/php/event-module.php:388
 msgid "Show events that occurs at a specified location."
 msgstr "Visa evenemang som inträffar vid en angiven plats."
 
-#: AcfFields/php/event-module.php:379 AcfFields/php/options.php:237
+#: AcfFields/php/event-module.php:403 AcfFields/php/options.php:237
 msgid "Distance from location"
 msgstr "Avstånd från plats"
 
-#: AcfFields/php/event-module.php:382
+#: AcfFields/php/event-module.php:406
 msgid ""
 "To show events occurring nearby the given location, enter maximum distance "
 "in km. Leave blank to only show events from the exact position."
 msgstr ""
 "För att visa evenemang i närheten av den angivna platsen, fyll i maximalt "
 "avstånd i km. Lämna tomt för att visa evenemang från den exakta positionen."
+
+#. Plugin Name of the plugin/theme
+#: AcfFields/php/options.php:6
+msgid "Event Manager Integration"
+msgstr ""
 
 #: AcfFields/php/options.php:10
 msgid "API url"
@@ -280,6 +293,14 @@ msgstr ""
 "Skriv namnet på de taggar ni vill importera evenemang ifrån. Separera med "
 "kommatecken. Lämna tomt för att importera från samtliga taggar."
 
+#: AcfFields/php/options.php:168
+msgid "Show update button on edit event page"
+msgstr "Visa knapp för att uppdatera importerade evenemang"
+
+#: AcfFields/php/options.php:179
+msgid "Show update button"
+msgstr "Visa uppdatera-knapp"
+
 #: AcfFields/php/options.php:184
 msgid "OAuth1 end point root url"
 msgstr "OAuth1 endpoint hemkatalog"
@@ -293,6 +314,12 @@ msgstr ""
 "OAuth1 endpoint hittas under sektionen \"authentication\" i API:ets "
 "hemkatalog.<br>T.ex. https://host/oauth1<br><br>Detta är valfritt och behövs "
 "endast om du vill kunna skicka evenemang till Event Manager API."
+
+#: AcfFields/php/options.php:200
+#, fuzzy
+#| msgid "Google Geocode API key"
+msgid "Google Maps JavaScript API key"
+msgstr "Google Geocode API-nyckel"
 
 #: AcfFields/php/options.php:219
 msgid "Import from location"
@@ -311,10 +338,6 @@ msgstr ""
 "maximalt avstånd i km. Lämna tomt för att importera evenemang från den "
 "exakta positionen."
 
-#: AcfFields/php/shortcodes.php:6
-msgid "Shortcode settings"
-msgstr "Shortcode inställningar"
-
 #: AcfFields/php/shortcodes.php:10 AcfFields/php/shortcodes.php:55
 #: source/php/Admin/AdminDisplayEvent.php:138
 #: source/php/Shortcodes/SingleEvent.php:74
@@ -323,16 +346,20 @@ msgid "Information"
 msgstr "Information"
 
 #: AcfFields/php/shortcodes.php:26
-msgid "Information shortcode"
-msgstr "Shortcode för information"
+msgid "Shortcodes"
+msgstr "Shortcodes"
 
 #: AcfFields/php/shortcodes.php:37
 msgid ""
-"Shortcode to display event information. Add the shortcode to your single "
-"event template file.<br><br>[single_event_information]"
+"Shortcodes to display event information. Add the shortcode to your single "
+"event template file.<br><br>Display as accordion:"
+"<br>[single_event_accordion]<br><br>Display as table:"
+"<br>[single_event_information]"
 msgstr ""
 "Shortcode som visar information om evenemanget. Lägg till shortcode i "
-"template för enskilda evenemang.<br><br>[single_event_information]"
+"template för enskilda evenemang.<br><br>Visa som “accordion”:"
+"<br>[single_event_accordion]<br><br>Visa som lista:"
+"<br>[single_event_information]"
 
 #: AcfFields/php/shortcodes.php:43
 msgid "Display fields"
@@ -352,7 +379,7 @@ msgstr "Fler platser"
 msgid "Organizers"
 msgstr "Arrangörer"
 
-#: AcfFields/php/shortcodes.php:60 source/php/Shortcodes/SingleEvent.php:382
+#: AcfFields/php/shortcodes.php:60 source/php/Shortcodes/SingleEvent.php:383
 msgid "Sponsors"
 msgstr "Sponsorer"
 
@@ -372,11 +399,13 @@ msgstr "Wrapper div-klass"
 
 #: AcfFields/php/shortcodes.php:83
 msgid ""
-"Add custom classes to div that wraps around the info boxes. Useful when "
-"creating responsive grids. Separate with comma."
+"Add custom classes to div that wraps around the info boxes on shortcode: "
+"[single_event_information]. Useful when creating responsive grids. Separate "
+"with comma."
 msgstr ""
-"Lägg till klasser för \"wrapper div\" som omsluter denna shortcode. "
-"Användbart för att göra responsivt. Separera med kommatecken."
+"Lägg till klasser för \"wrapper div\" som omsluter shortcoden "
+"[single_event_information]. Användbart för att göra responsivt. Separera med "
+"kommatecken."
 
 #: AcfFields/php/shortcodes.php:99
 msgid "Inner div box class"
@@ -384,11 +413,13 @@ msgstr "Inner div-klass"
 
 #: AcfFields/php/shortcodes.php:102
 msgid ""
-"Add custom classes to inner div boxes that contains the event information. "
-"Useful when creating responsive grids. Separate with comma."
+"Add custom classes to inner div boxes that contains the event information on "
+"shortcode: [single_event_information]. Useful when creating responsive "
+"grids. Separate with comma."
 msgstr ""
-"Lägg till klasser för \"div boxar\" som finns inuti \"wrapper div\". "
-"Användbart för att göra responsivt. Separera med kommatecken."
+"Lägg till klasser för \"div boxar\" som finns inuti \"wrapper div\" på "
+"shortcoden [single_event_information]. Användbart för att göra responsivt. "
+"Separera med kommatecken."
 
 #: AcfFields/php/shortcodes.php:118 source/php/Admin/AdminDisplayEvent.php:57
 msgid "Gallery"
@@ -455,15 +486,15 @@ msgctxt "Event Manager Integration settings"
 msgid "Options"
 msgstr "Inställningar"
 
-#: source/php/App.php:49
+#: source/php/App.php:50
 msgid "to"
 msgstr "till"
 
-#: source/php/App.php:106
+#: source/php/App.php:107
 msgid "Something went wrong, please try again later."
 msgstr "Något gick fel, vänligen försök igen senare."
 
-#: source/php/App.php:133
+#: source/php/App.php:134
 msgid "Loading"
 msgstr "Hämtar"
 
@@ -811,11 +842,11 @@ msgstr "Välj från de mest använda grupperna"
 msgid "Import events"
 msgstr "Importera evenemang"
 
-#: source/php/PostTypes/Events.php:374
+#: source/php/PostTypes/Events.php:379
 msgid "Something went wrong!"
 msgstr "Något gick fel!"
 
-#: source/php/PostTypes/Events.php:391
+#: source/php/PostTypes/Events.php:396
 msgid "Error"
 msgstr "Fel"
 
@@ -879,7 +910,7 @@ msgstr "Prisinformation"
 msgid "Ticket includes"
 msgstr "Ingår i biljett"
 
-#: source/php/Templates/module/modularity-mod-event.php:24
+#: source/php/Templates/module/modularity-mod-event.php:25
 msgid "More events"
 msgstr "Fler evenemang"
 
@@ -945,10 +976,6 @@ msgstr ""
 msgid "Exported %d fieldgroup(s)."
 msgstr ""
 
-#. Plugin Name of the plugin/theme
-msgid "Event Manager Integration"
-msgstr ""
-
 #. Plugin URI of the plugin/theme
 msgid "https://github.com/helsingborg-stad/api-event-manager-integration"
 msgstr ""
@@ -965,11 +992,8 @@ msgstr ""
 msgid "http://www.helsingborg.se"
 msgstr ""
 
-#~ msgid "Show update button on edit event page"
-#~ msgstr "Visa knapp för att uppdatera importerade evenemang"
-
-#~ msgid "Show update button"
-#~ msgstr "Visa uppdatera-knapp"
+#~ msgid "Information shortcode"
+#~ msgstr "Shortcode för information"
 
 #~ msgid "Display events"
 #~ msgstr "Visning av evenemang"
@@ -1003,11 +1027,6 @@ msgstr ""
 
 #~ msgid "Senior price is valid from"
 #~ msgstr "Pensionärspris är giltigt från angiven ålder"
-
-#, fuzzy
-#~| msgid "Google Geocode API key"
-#~ msgid "Google Maps JavaScript API key"
-#~ msgstr "Google Geocode API-nyckel"
 
 #~ msgid "Start date"
 #~ msgstr "Startdatum"
