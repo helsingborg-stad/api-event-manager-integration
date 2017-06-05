@@ -82,11 +82,13 @@ Here is a code example to display a list of events. Use the attributes listed be
 
             <div class="form-group">
                 <label for="content">Beskrivning</label>
+                <small class="text-dark-gray">Information om evenemanget.</small>
                 <textarea name="content" id="content textarea" placeholder="Beskrivning" required></textarea>
             </div>
 
             <div class="form-group">
                 <label for="radio">Evenemanget inträffar</label>
+                <small class="text-dark-gray">Lägg till tidpunkter för evenemanget. Återkommer evenemanget varje vecka? Lägg då till en regel för återkommande evenemang.</small>
                 <label class="radio">
                     <input data-id="single-event" type="radio" name="radio" checked> Enstaka händelse
                 </label>
@@ -136,7 +138,7 @@ Here is a code example to display a list of events. Use the attributes listed be
                     <div class="box-content">
                         <div class="form-group">
                             <label for="weekday">Veckodag</label>
-                            <small>Evenemanget inträffar på vald veckodag</small>
+                            <small>Evenemanget inträffar på vald veckodag.</small>
                             <select name="weekday" id="weekday">
                                 <option value="Monday">Måndag</option>
                                 <option value="Tuesday">Tisdag</option>
@@ -183,13 +185,15 @@ Here is a code example to display a list of events. Use the attributes listed be
             </div>
 
            <div class="form-group">
-                <label for="organizer">Arrangörens namn</label>
-                <input type="text" name="organizer" id="organizer" placeholder="Arrangör">
+                <label for="event_link">Webbplats</label>
+                <small class="text-dark-gray">Länk till evenemangets webbplats.</small>
+                <input type="url" name="event_link" id="event_link" placeholder="Webbplats">
             </div>
 
            <div class="form-group">
-                <label for="event_link">Webbplats</label>
-                <input type="url" name="event_link" id="event_link" placeholder="Webbplats">
+                <label for="booking_link">Länk till bokning</label>
+                <small class="text-dark-gray">Länk till evenemangets bokningssida.</small>
+                <input type="url" name="booking_link" id="booking_link" placeholder="Länk till bokning">
             </div>
 
            <div class="form-group">
@@ -198,7 +202,16 @@ Here is a code example to display a list of events. Use the attributes listed be
             </div>
 
             <div class="form-group">
+                <label for="organizer">Arrangör</label>
+                <small class="text-dark-gray">Företaget, organisationen eller privatpersonen som står bakom evenemanget.</small>
+                <select name="organizer" id="organizer">
+                    <option value="">Hämtar...</option>
+                </select>
+            </div>
+
+            <div class="form-group">
                 <label for="location">Plats</label>
+                <small class="text-dark-gray">Plats eller adress för evenemanget.</small>
                 <select name="location" id="location">
                     <option value="">Hämtar...</option>
                 </select>
@@ -206,13 +219,14 @@ Here is a code example to display a list of events. Use the attributes listed be
 
             <div class="form-group">
                 <label for="event_categories">Kategorier</label>
+                <small class="text-dark-gray">Välj kategorier som evenemanget tillhör.</small>
                 <select name="event_categories" id="event_categories" multiple>
                     <option value="">Hämtar...</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label for="user_groups">Grupp</label>
+                <label for="user_groups">Användarorganisation</label>
                 <select name="user_groups" id="user_groups" multiple>
                     <option value="">Hämtar...</option>
                 </select>
@@ -234,8 +248,8 @@ Here is a code example to display a list of events. Use the attributes listed be
                 <input type="submit" class="btn btn-primary" value="Skicka">
             </div>
         </form>
-    </div> <!-- /.event-form -->
-</div> <!-- /.box-panel -->
+    </div>
+</div>
 
 
 ```
