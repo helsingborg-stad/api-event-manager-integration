@@ -8,8 +8,10 @@ EventManagerIntegration.Event.Form = (function ($) {
 
     function Form() {
     	$(".submit-event").each(function(index, eventForm) {
-    		var apiUrl = eventintegration.apiurl,
-    			apiUrl = apiUrl.replace(/\/$/, "");
+    		var apiUrl 		= eventintegration.apiurl,
+    			apiUrl 		= apiUrl.replace(/\/$/, ""),
+    			groups 		= document.getElementById('user_groups'),
+    			categories 	= document.getElementById('event_categories');
 
         	$(eventForm).find('#end_date').datepicker();
 			$(eventForm).find('#start_date').datepicker();
@@ -17,8 +19,12 @@ EventManagerIntegration.Event.Form = (function ($) {
 
         	this.handleEvents($(eventForm), apiUrl);
         	this.loadLocations($(eventForm), apiUrl);
-        	this.loadTaxonomy($(eventForm), apiUrl, 'user_groups');
-        	this.loadTaxonomy($(eventForm), apiUrl, 'event_categories');
+        	if (groups !== null) {
+        		this.loadTaxonomy($(eventForm), apiUrl, 'user_groups');
+        	}
+        	if (categories !== null) {
+        		this.loadTaxonomy($(eventForm), apiUrl, 'event_categories');
+        	}
         }.bind(this));
     }
 
