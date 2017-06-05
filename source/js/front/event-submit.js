@@ -9,20 +9,23 @@ EventManagerIntegration.Event.Form = (function ($) {
     function Form() {
     	$(".submit-event").each(function(index, eventForm) {
     		var apiUrl 		= eventintegration.apiurl,
-    			apiUrl 		= apiUrl.replace(/\/$/, ""),
-    			groups 		= document.getElementById('user_groups'),
-    			categories 	= document.getElementById('event_categories');
+    			apiUrl 		= apiUrl.replace(/\/$/, "");
 
         	$(eventForm).find('#end_date').datepicker();
 			$(eventForm).find('#start_date').datepicker();
 			$('#recurring-event', eventForm).children('.box').hide();
 
         	this.handleEvents($(eventForm), apiUrl);
-        	this.loadLocations($(eventForm), apiUrl);
-        	if (groups !== null) {
+        	if (document.getElementById('location') !== null) {
+        		this.loadPostType($(eventForm), apiUrl, 'location');
+        	}
+        	if (document.getElementById('organizer') !== null) {
+        		this.loadPostType($(eventForm), apiUrl, 'organizer');
+        	}
+        	if (document.getElementById('user_groups') !== null) {
         		this.loadTaxonomy($(eventForm), apiUrl, 'user_groups');
         	}
-        	if (categories !== null) {
+        	if (document.getElementById('event_categories') !== null) {
         		this.loadTaxonomy($(eventForm), apiUrl, 'event_categories');
         	}
         }.bind(this));
@@ -108,17 +111,17 @@ EventManagerIntegration.Event.Form = (function ($) {
 		return nodeById[0].sortRecursive();
 	};
 
-    // Get locations from API and add to select box
-    Form.prototype.loadLocations = function(eventForm, resource) {
-    	resource += '/location/complete?_jsonp=getlocations';
-    	var select = document.getElementById('location');
+    // Get a post type from API and add to select box
+    Form.prototype.loadPostType = function(eventForm, resource, postType) {
+    	resource += '/' + postType + '/complete?_jsonp=get' + postType;
+    	var select = document.getElementById(postType);
 
         $.ajax({
             type: "GET",
             url: resource,
             cache: false,
             dataType: "jsonp",
-            jsonpCallback: 'getlocations',
+            jsonpCallback: 'get' + postType,
             crossDomain: true,
             success: function(response) {
             	//Clear select
@@ -127,14 +130,14 @@ EventManagerIntegration.Event.Form = (function ($) {
 				//Add empty select choice
 			    var opt 		= document.createElement('option');
 			    opt.value 		= '';
-			    opt.innerHTML 	= "Välj plats";
+			    opt.innerHTML 	= "- Välj -";
 			    select.appendChild(opt);
 
 				//Add select options
-            	$(response).each(function(index,location){
+            	$(response).each(function(index, item) {
 				    var opt 		= document.createElement('option');
-				    opt.value 		= location.id;
-				    opt.innerHTML 	= location.title;
+				    opt.value 		= item.id;
+				    opt.innerHTML 	= item.title;
 				    select.appendChild(opt);
 	    		});
             }
