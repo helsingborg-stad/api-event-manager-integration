@@ -232,8 +232,30 @@ Here is a code example to display a list of events. Use the attributes listed be
                 </select>
             </div>
 
-            <div class="form-group">
-                <label for="image-input">Bild</label>
+            <div class="form-group gutter creamy image-box text-center">
+                <p class="text-center"><i class="pricon pricon-badge pricon-badge-red-1 pricon-3x pricon-picture"></i></p>
+                <p><button class="btn btn-secondary img-button">Ladda upp bild</button></p>
+            </div>
+
+            <div class="form-group gutter creamy image-approve" style="display:none;">
+                <label>Innan du kan ladda upp en bild behöver du bekräfta nedanstående punkter:</label>
+                <label class="checkbox">
+                    <input type="checkbox" name="approve" id="first-approve"> Jag har rätt att använda denna bild för att marknadsföra detta evenemang.
+                </label>
+                <label>Finns det identifierbara personer på bilden/bilderna?</label>
+                <label class="radio">
+                    <input type="radio" name="approve" value="1"> Ja
+                </label>
+                <label class="radio">
+                    <input type="radio" name="approve" value="0"> Nej
+                </label>
+                <label class="checkbox hidden" id="persons-approve">
+                    <input type="checkbox" name="approve" id="second-approve"> De har godkänt att bilden används för att marknadsföra detta evenemang och har informerats om att  efter att bilden lagts in i plats- och evenemangsdatabasen kan komma att synas i olika kanaler för att marknadsföra evenemanget.
+                </label>
+            </div>
+
+            <div class="form-group image-upload" style="display:none;">
+                <label for="image-input">Ladda upp bild</label>
                 <input name="image-input" id="image-input" type="file" accept="image/gif, image/jpeg, image/png">
             </div>
 

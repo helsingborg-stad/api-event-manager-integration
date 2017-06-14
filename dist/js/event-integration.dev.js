@@ -369,8 +369,34 @@ EventManagerIntegration.Event.Form = (function ($) {
 		    } else {
 		    	Form.prototype.submitEventAjax(eventForm, formData);
 		    }
-
 		});
+
+		// Show image approval terms
+		$('.img-button', eventForm).click(function(e) {
+			e.preventDefault();
+			$('.image-box', eventForm).hide();
+			$('.image-approve', eventForm).fadeIn();
+		});
+
+		// Show additional terms
+        $('input:radio[name=approve]', eventForm).change(function() {
+            if (this.value == 1) {
+                $('#persons-approve', eventForm).removeClass('hidden');
+            } else {
+                $('#persons-approve', eventForm).addClass('hidden');
+            }
+        });
+
+        // Show uploader if terms is approved
+        $('input[name=approve]', eventForm).change(function() {
+            var firstCheck  = $('input:checkbox[id=first-approve]:checked', eventForm).length > 0,
+                radioCheck  = $('input:radio[name=approve]:checked', eventForm).val(),
+                secondCheck = $('input:checkbox[id=second-approve]:checked', eventForm).length > 0;
+            if (firstCheck && radioCheck == 0 || firstCheck && secondCheck) {
+                $('.image-approve', eventForm).hide();
+                $('.image-upload', eventForm).fadeIn();
+            }
+        });
 
 		// Show / hide occasion and reccuring occasion rules
 		$(':radio', eventForm).change(function (event) {
