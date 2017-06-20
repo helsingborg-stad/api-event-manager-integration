@@ -15,7 +15,7 @@
 			    	<li><span>{{ $location->postal_code }} {{ $location->city }}</span></li>
 			    @endif
 			   	@if (isset($location->latitude) && !empty($location->latitude) && isset($location->longitude) && !empty($location->longitude))
-			    	<li><a class="link-item" href="https://www.google.com/maps/place/{{ $location->latitude }},{{ $location->longitude }}" target="_blank">{{ __('Show map', 'event-integration') }}</a></li>
+			    	<li><a class="link-item" href="https://www.google.com/maps/place/{{ $location->latitude }},{{ $location->longitude }}" target="_blank"><span><?php _e('Show map', 'event-integration'); ?></span></a></li>
 			    @endif
 			</ul>
 		@endif
