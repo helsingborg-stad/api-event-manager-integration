@@ -27,7 +27,7 @@
 							<span>
 							<strong>{{ ucfirst(mysql2date('l', $open_hour->weekday, true)) }}</strong>
 							@if(isset($open_hour->closed) && $open_hour->closed == true)
-								{{ __('Closed', 'event-integration') }}
+								<?php _e('Closed', 'event-integration'); ?>
 							@elseif(isset($open_hour->opening) && isset($open_hour->closing))
 								{{ $open_hour->opening }} - {{ $open_hour->closing }}
 							@endif
