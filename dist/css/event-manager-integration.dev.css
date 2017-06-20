@@ -1,3 +1,6 @@
+.modularity-mod-location ul + ul {
+  padding: 10px 0 0 0; }
+
 .modularity-mod-event .event-module-content {
   min-height: 47px; }
   .modularity-mod-event .event-module-content li {

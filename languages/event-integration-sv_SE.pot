@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2017-05-23 13:24+0200\n"
+"POT-Creation-Date: 2017-06-20 11:59+0200\n"
 "PO-Revision-Date: 2016-12-13 15:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.1\n"
+"X-Generator: Poedit 2.0.2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: event-manager-integration.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -86,8 +86,10 @@ msgid "Image"
 msgstr ""
 
 #: AcfFields/php/event-module.php:151 AcfFields/php/event-module.php:385
-#: AcfFields/php/shortcodes.php:57 source/php/Admin/AdminDisplayEvent.php:145
+#: AcfFields/php/location-module.php:6 AcfFields/php/shortcodes.php:57
+#: source/php/Admin/AdminDisplayEvent.php:145
 #: source/php/Module/EventModule.php:182
+#: source/php/Module/Location/Location.php:12
 #: source/php/Shortcodes/SingleEvent.php:88
 #: source/php/Shortcodes/SingleEvent.php:211
 msgid "Location"
@@ -188,6 +190,37 @@ msgstr ""
 msgid ""
 "To show events occurring nearby the given location, enter maximum distance "
 "in km. Leave blank to only show events from the exact position."
+msgstr ""
+
+#: AcfFields/php/location-module.php:10
+msgid "Display information"
+msgstr ""
+
+#: AcfFields/php/location-module.php:13
+msgid "Choose which information to display."
+msgstr ""
+
+#: AcfFields/php/location-module.php:22
+msgid "Address"
+msgstr ""
+
+#: AcfFields/php/location-module.php:23
+msgid "Open hours"
+msgstr ""
+
+#: AcfFields/php/location-module.php:24 AcfFields/php/shortcodes.php:59
+msgid "Organizers"
+msgstr ""
+
+#: AcfFields/php/location-module.php:25
+msgid "Prices"
+msgstr ""
+
+#: AcfFields/php/location-module.php:26 AcfFields/php/shortcodes.php:62
+#: source/php/Admin/AdminDisplayEvent.php:168
+#: source/php/Shortcodes/SingleEvent.php:149
+#: source/php/Shortcodes/SingleEvent.php:248
+msgid "Links"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
@@ -351,22 +384,12 @@ msgstr ""
 msgid "Additional locations"
 msgstr ""
 
-#: AcfFields/php/shortcodes.php:59
-msgid "Organizers"
-msgstr ""
-
 #: AcfFields/php/shortcodes.php:60 source/php/Shortcodes/SingleEvent.php:383
 msgid "Sponsors"
 msgstr ""
 
 #: AcfFields/php/shortcodes.php:61
 msgid "Booking information"
-msgstr ""
-
-#: AcfFields/php/shortcodes.php:62 source/php/Admin/AdminDisplayEvent.php:168
-#: source/php/Shortcodes/SingleEvent.php:149
-#: source/php/Shortcodes/SingleEvent.php:248
-msgid "Links"
 msgstr ""
 
 #: AcfFields/php/shortcodes.php:80
@@ -454,15 +477,15 @@ msgctxt "Event Manager Integration settings"
 msgid "Options"
 msgstr ""
 
-#: source/php/App.php:50
+#: source/php/App.php:58
 msgid "to"
 msgstr ""
 
-#: source/php/App.php:107
+#: source/php/App.php:115
 msgid "Something went wrong, please try again later."
 msgstr ""
 
-#: source/php/App.php:134
+#: source/php/App.php:142
 msgid "Loading"
 msgstr ""
 
@@ -525,6 +548,26 @@ msgstr ""
 
 #: source/php/Module/EventModule.php:178 source/php/PostTypes/Events.php:58
 msgid "Date"
+msgstr ""
+
+#: source/php/Module/Location/Location.php:13
+msgid "Locations"
+msgstr ""
+
+#: source/php/Module/Location/Location.php:14
+msgid "Displays a specific location"
+msgstr ""
+
+#: source/php/Module/Location/Location.php:37
+msgid "Choose location"
+msgstr ""
+
+#: source/php/Module/Location/Location.php:57
+msgid "Something went wrong, pleae check your API url."
+msgstr ""
+
+#: source/php/Module/Location/Location.php:71
+msgid "No locations found"
 msgstr ""
 
 #: source/php/OAuth/OAuthAdmin.php:22 source/php/OAuth/OAuthAdmin.php:23
