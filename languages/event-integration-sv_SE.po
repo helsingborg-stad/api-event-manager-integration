@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2017-06-20 11:59+0200\n"
-"PO-Revision-Date: 2017-06-20 12:04+0200\n"
+"POT-Creation-Date: 2017-06-20 14:50+0200\n"
+"PO-Revision-Date: 2017-06-20 14:51+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -93,7 +93,7 @@ msgstr "Bild"
 #: source/php/Shortcodes/SingleEvent.php:88
 #: source/php/Shortcodes/SingleEvent.php:211
 msgid "Location"
-msgstr "Plats"
+msgstr "Platskategori"
 
 #: AcfFields/php/event-module.php:152
 msgid "Description"
@@ -601,6 +601,10 @@ msgstr "Något gick fel, vänligen kontrollera angiven API-url."
 #: source/php/Module/Location/Location.php:71
 msgid "No locations found"
 msgstr "Inga platser hittades"
+
+#: source/php/Module/Location/views/location.blade.php:18
+msgid "Show map"
+msgstr "Visa karta"
 
 #: source/php/OAuth/OAuthAdmin.php:22 source/php/OAuth/OAuthAdmin.php:23
 #: source/php/OAuth/OAuthAdmin.php:36
