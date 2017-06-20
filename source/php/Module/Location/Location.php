@@ -9,17 +9,93 @@ class Location extends \Modularity\Module
 
     public function init()
     {
-        $this->nameSingular = __('Location', 'modularity');
-        $this->namePlural = __('Locations', 'modularity');
-        $this->description = __('Displays a specific location', 'modularity');
+        $this->nameSingular = __('Location', 'event-integration');
+        $this->namePlural = __('Locations', 'event-integration');
+        $this->description = __('Displays a specific location', 'event-integration');
+
+        add_action('add_meta_boxes_mod-' . $this->slug, array($this, 'registerMetaBoxes'), 10, 2);
+        add_action('save_post_mod-' . $this->slug, array($this, 'saveLocation'), 10, 3);
     }
 
     public function data() : array
     {
         $data = array();
-        $data['location'] = get_field('location_module', $this->ID);
+        $data['location'] = get_field('mod_location_data', $this->ID);
+        $data['fields'] = get_field('mod_location_fields', $this->ID);
         $data['classes'] = implode(' ', apply_filters('Modularity/Module/Classes', array('box', 'box-panel'), $this->post_type, $this->args));
         return $data;
+    }
+
+    /**
+     * Register location meta box
+     * @return void
+     */
+    public function registerMetaBoxes($post)
+    {
+        add_meta_box(
+            'mod-location-meta',
+            __('Choose location', 'event-integration'),
+            array($this, 'renderLocationList'),
+            $post->post_type,
+            'normal',
+            'default'
+        );
+    }
+
+    /**
+     * Display a list with location from API
+     * @param  Obj $post Current post object
+     * @return string Markup
+     */
+    public function renderLocationList($post)
+    {
+        $api_url = get_field('event_api_url', 'option');
+        $location_endpoint = rtrim($api_url, '/') . '/location/complete';
+        @$json = file_get_contents($location_endpoint);
+
+        if ($json == false) {
+            $markup = '<em>' . __('Something went wrong, pleae check your API url.', 'event-integration') . '</em>';
+        } else {
+            $locations = json_decode($json);
+            $location_data = get_field('mod_location_data', $post->ID);
+            $current = ($location_data) ? $location_data->id : false;
+
+            if (!empty($locations)) {
+                $markup = '<select name="mod_location">';
+                foreach ($locations as $location) {
+                    $selected = ($current == $location->id) ? 'selected' : '';
+                    $markup .= '<option value="' . $location->id . '" ' . $selected . '>' . $location->title . '</option>';
+                }
+                $markup .= '</select>';
+            } else {
+                $markup = '<em>' . __('No locations found', 'event-integration') . '</em>';
+            }
+        }
+
+        echo $markup;
+    }
+
+    /**
+     * Save location module metadata on save
+     * @param int   $post_id    The post ID
+     * @param post  $post       The post object
+     * @param bool  $update     Whether this is an existing post being updated or not
+     */
+    public function saveLocation($post_id, $post, $update)
+    {
+        $api_url = get_field('event_api_url', 'option');
+        $location_endpoint = rtrim($api_url, '/') . '/location/';
+
+        if (isset($_POST['mod_location'])) {
+            $location_endpoint = rtrim($api_url, '/') . '/location/' . $_POST['mod_location'] . '?_embed';
+            @$json = file_get_contents($location_endpoint);
+            if ($json != false) {
+                $location = json_decode($json);
+                update_post_meta($post_id, 'mod_location_data', $location);
+            }
+        }
+
+        return;
     }
 
     /**

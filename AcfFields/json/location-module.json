@@ -1,0 +1,51 @@
+[{
+    "key": "group_5948e8bc3bf75",
+    "title": "Location",
+    "fields": [
+        {
+            "key": "field_5948e8d9bd5f1",
+            "label": "Display information",
+            "name": "mod_location_fields",
+            "type": "checkbox",
+            "instructions": "Choose which information to display.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "address": "Address",
+                "open_hours": "Open hours",
+                "organizers": "Organizers",
+                "prices": "Prices",
+                "links": "Links"
+            },
+            "default_value": [
+                "address"
+            ],
+            "layout": "vertical",
+            "toggle": 0,
+            "return_format": "value"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "mod-location"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": ""
+}]
+
