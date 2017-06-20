@@ -76,7 +76,7 @@
 				@endif
 				@if(isset($location->price_children) && !empty($location->price_children))
 					@if(isset($location->children_age) && !empty($location->children_age))
-						<li><span>{{ __('Children', 'event-integration') }} ({{ __('below', 'event-integration') . ' ' . $location->children_age . ' ' . __('years', 'event-integration') }}): {{ $location->price_children }} kr</span></li>
+						<li><span>{{ __('Children', 'event-integration') }} ({{ __('below', 'event-integration') . ' ' . $location->children_age }}): {{ $location->price_children }} kr</span></li>
 					@else
 						<li><span>{{ __('Children', 'event-integration') }}: {{ $location->price_children }} kr</span></li>
 					@endif
@@ -86,7 +86,7 @@
 				@endif
 				@if(isset($location->price_senior) && !empty($location->price_senior))
 					@if(isset($location->senior_age) && !empty($location->senior_age))
-						<li><span>{{ __('Senior', 'event-integration') }} ({{ __('above', 'event-integration') . ' ' . $location->senior_age . ' ' . __('years', 'event-integration') }}): {{ $location->price_senior }} kr</span></li>
+						<li><span>{{ __('Senior', 'event-integration') }} ({{ __('above', 'event-integration') . ' ' . $location->senior_age }}): {{ $location->price_senior }} kr</span></li>
 					@else
 						<li><span>{{ __('Senior', 'event-integration') }}: {{ $location->price_senior }} kr</span></li>
 					@endif

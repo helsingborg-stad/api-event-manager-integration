@@ -332,12 +332,12 @@ class SingleEvent
     {
         $ret = '<ul>';
         $ret .= (! empty($meta['price_adult'])) ? '<li>' . __('Adult', 'event-integration') . ': ' . $meta['price_adult'] . ' kr</li>' : '';
-        $children_age = (! empty($meta['children_age'])) ? ' (-' . $meta['children_age'] . ')' : '';
+        $children_age = (! empty($meta['children_age'])) ? ' (' . __('below', 'event-integration') . ' ' . $meta['children_age'] . ')' : '';
         $ret .= (! empty($meta['price_children'])) ? '<li>' . __('Children', 'event-integration') . $children_age .': ' . $meta['price_children'] . ' kr</li>' : '';
-        $senior_age = (! empty($meta['senior_age'])) ? ' (' . $meta['senior_age'] . '+)' : '';
+        $senior_age = (! empty($meta['senior_age'])) ? ' (' . __('above', 'event-integration') . ' ' . $meta['senior_age'] . ')' : '';
         $ret .= (! empty($meta['price_senior'])) ? '<li>' . __('Senior', 'event-integration') . $senior_age . ': ' . $meta['price_senior'] . ' kr</li>' : '';
         $ret .= (! empty($meta['price_student'])) ? '<li>' . __('Student', 'event-integration') . ': ' . $meta['price_student'] . ' kr</li>' : '';
-        $ret .= (! empty($meta['age_restriction'])) ? '<li>' . __('Age restriction', 'event-integration') . ': ' . $meta['age_restriction'] . '</li>' : '';
+        $ret .= (! empty($meta['age_restriction'])) ? '<li>' . __('Age restriction', 'event-integration') . ': ' . $meta['age_restriction'] . ' ' . __('years', 'event-integration') . '</li>' : '';
         $ret .= (! empty($meta['booking_phone'])) ? '<li><i class="pricon pricon-phone"></i> ' . $meta['booking_phone'] . '</li>' : '';
         $ret .= (! empty($meta['booking_link'])) ? '<li><i class="pricon pricon-external-link"></i> <a href="' . $meta['booking_link'] . '" target="_blank">' . __('Book here', 'event-integration') . '</a></li>' : '';
         $ret .= '</ul>';
