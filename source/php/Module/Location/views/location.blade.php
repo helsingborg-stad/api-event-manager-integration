@@ -62,7 +62,7 @@
 							<li><a class="link-item" href="mailto:{{ $organizer->email }}">{{ $organizer->email }}</a></li>
 						@endif
 						@if(isset($organizer->website) && !empty($organizer->website))
-							<li><a class="link-item" href="{{ $organizer->website }}" target="_blank">{{ __('Website', 'event-integration') }}</a></li>
+							<li><a class="link-item" href="{{ $organizer->website }}" target="_blank"><?php _e('Website', 'event-integration'); ?></a></li>
 						@endif
 					@endforeach
 				@endif
