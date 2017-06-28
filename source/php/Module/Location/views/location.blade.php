@@ -3,7 +3,7 @@
     <h4 class="box-title">{!! apply_filters('the_title', $post_title) !!}</h4>
     @endif
     <div class="box-content">
-    	@if(is_array($fields) && in_array('address', $fields))
+    	@if($address)
 	    	<ul>
 			    @if (isset($location->title->rendered) && !empty($location->title->rendered))
 			    	<li><strong>{{ $location->title->rendered }}</strong></li>
@@ -19,7 +19,7 @@
 			    @endif
 			</ul>
 		@endif
-		@if(is_array($fields) && in_array('open_hours', $fields))
+		@if($open_hours)
 			<ul>
 			   	@if (isset($location->open_hours) && !empty($location->open_hours))
 					@foreach($location->open_hours as $open_hour)
@@ -48,7 +48,7 @@
 				@endif
 		    </ul>
 		@endif
-		@if(is_array($fields) && in_array('organizers', $fields))
+		@if($organizers)
 		    <ul>
 				@if(isset($location->_embedded->organizers) && !empty($location->_embedded->organizers))
 					@foreach($location->_embedded->organizers as $organizer)
@@ -68,7 +68,7 @@
 				@endif
 		    </ul>
 		@endif
-		@if(is_array($fields) && in_array('prices', $fields))
+		@if($prices)
 			<ul>
 				<li><strong>{{ __('Prices', 'event-integration') }}</strong></li>
 				@if(isset($location->price_adult) && !empty($location->price_adult))
@@ -106,7 +106,7 @@
 
 			</ul>
 		@endif
-		@if(is_array($fields) && in_array('links', $fields))
+		@if($links)
 			<ul>
 				@if(isset($location->links) && !empty($location->links))
 					@foreach($location->links as $link)

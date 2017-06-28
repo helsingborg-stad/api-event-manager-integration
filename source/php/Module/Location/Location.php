@@ -19,9 +19,16 @@ class Location extends \Modularity\Module
 
     public function data() : array
     {
-        $data = array();
+        $fields = json_decode(json_encode(get_fields($this->ID)));
         $data['location'] = get_field('mod_location_data', $this->ID);
-        $data['fields'] = get_field('mod_location_fields', $this->ID);
+
+        $location_fields = (isset($fields->mod_location_fields) && is_array($fields->mod_location_fields)) ? $fields->mod_location_fields : array();
+        $data['address'] = (in_array('address', $location_fields)) ? true : false;
+        $data['open_hours'] = (in_array('open_hours', $location_fields)) ? true : false;
+        $data['organizers'] = (in_array('organizers', $location_fields)) ? true : false;
+        $data['prices'] = (in_array('prices', $location_fields)) ? true : false;
+        $data['links'] = (in_array('links', $location_fields)) ? true : false;
+
         $data['classes'] = implode(' ', apply_filters('Modularity/Module/Classes', array('box', 'box-panel'), $this->post_type, $this->args));
         return $data;
     }
