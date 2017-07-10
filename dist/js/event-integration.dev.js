@@ -98,8 +98,6 @@ EventManagerIntegration.Event.Form = (function ($) {
     		var apiUrl 		= eventintegration.apiurl,
     			apiUrl 		= apiUrl.replace(/\/$/, "");
 
-        	$(eventForm).find('#end_date').datepicker();
-			$(eventForm).find('#start_date').datepicker();
 			$('#recurring-event', eventForm).children('.box').hide();
 
         	this.handleEvents($(eventForm), apiUrl);
@@ -252,16 +250,20 @@ EventManagerIntegration.Event.Form = (function ($) {
 	    });
 
 	    // Occasion
-	   	var startDate 	= this.formatDate($(form).find("#start_date").val(), $(form).find("#start_time_h").val(), $(form).find("#start_time_m").val());
-	    var endDate 	= this.formatDate($(form).find("#end_date").val(), $(form).find("#end_time_h").val(), $(form).find("#end_time_m").val());
-	    if (startDate && endDate) {
-	    	objData['occasions'] 	= [{
-	    						"start_date": startDate,
-	    						"end_date": endDate,
-	    						"status": "scheduled",
-	    						"content_mode": "master"
-	    						}]
-	    }
+	    objData['occasions'] = [];
+	    $('.occurance-group', form).each(function(index) {
+			var startDate 	= Form.prototype.formatDate($('[name="start_date"]', this).val(), $('[name="start_time_h"]', this).val(), $('[name="start_time_m"]', this).val());
+		    var endDate 	= Form.prototype.formatDate($('[name="end_date"]', this).val(), $('[name="end_time_h"]', this).val(), $('[name="end_time_m"]', this).val());
+		    if (startDate && endDate) {
+		    	objData['occasions'].push({
+		    						"start_date": startDate,
+		    						"end_date": endDate,
+		    						"status": "scheduled",
+		    						"content_mode": "master"
+		    						});
+		    }
+		});
+
 	    // Recurring occasions
 	    var rcrStartH 		= $(form).find("#recurring_start_h").val(),
 	    	rcrStartM 		= $(form).find("#recurring_start_m").val();
@@ -323,7 +325,7 @@ EventManagerIntegration.Event.Form = (function ($) {
 	            if (response.success) {
 	            	$('.submit-success', eventForm).removeClass('hidden');
 					$('.submit-success .success', eventForm).empty().append('<i class="fa fa-send"></i>Evenemanget har skickats!</li>');
-	            	Form.prototype.cleanForm(eventForm);
+	            	//Form.prototype.cleanForm(eventForm);
 	            } else {
 	            	console.log(response.data);
 	            	$('.submit-success', eventForm).addClass('hidden');
@@ -405,6 +407,28 @@ EventManagerIntegration.Event.Form = (function ($) {
     			find('input').prop('required', true);
     		$('#' + id).siblings('.event-occasion').children('.box').hide().
     			find('input').prop('required', false);
+		});
+
+		// Add new occurance
+		$('.add-occurance', eventForm).click(function(e) {
+			e.preventDefault();
+			var $occuranceGroup = $(this).parent().prev('.occurance-group'),
+        		$duplicate = $occuranceGroup.clone().find('input').val('')
+        					.removeClass('hasDatepicker')
+        					.removeAttr('id').end()
+        					.insertAfter($occuranceGroup)
+        					.find('.datepicker').datepicker().end();
+
+			if ($('.remove-occurance', $duplicate).length === 0) {
+				var $removeButton = $('<div class="form-group"><button class="btn btn btn-sm remove-occurance"><i class="pricon pricon-minus-o"></i> Ta bort</button></div>');
+        		$duplicate.append($removeButton);
+			}
+		});
+
+		// Remove occurance
+		$(document).on('click', '.remove-occurance', function(e) {
+			e.preventDefault();
+			$(this).closest('.occurance-group').remove();
 		});
     };
 
