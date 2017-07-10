@@ -311,11 +311,13 @@ EventManagerIntegration.Event.Form = (function ($) {
             }
         });
 
-		// Show / hide occasion and reccuring occasion rules
-		$(':radio', eventForm).change(function (event) {
+		// Show/hide occasion and reccuring occasion rules. And add required fields.
+		$('input:radio[name=occurance-type]', eventForm).change(function (event) {
     		var id = $(this).data('id');
-    		$('#' + id).children('.form-group .box').show();
-    		$('#' + id).siblings('.event-occasion').children('.box').hide();
+    		$('#' + id).children('.form-group .box').show().
+    			find('input').prop('required', true);
+    		$('#' + id).siblings('.event-occasion').children('.box').hide().
+    			find('input').prop('required', false);
 		});
     };
 
