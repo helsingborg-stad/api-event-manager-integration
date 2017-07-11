@@ -72,28 +72,29 @@ Here is a code example to display a list of events. Use the attributes listed be
 
 ```html
 <div class="box box-panel box-primary">
-<h4 class="box-title">Registrera evenemang</h4>
+    <h4 class="box-title">Registrera evenemang</h4>
     <div class="gutter">
         <form name="submit-event" class="submit-event" enctype="multipart/form-data">
             <div class="form-group">
-                <label for="title">Namn på evenemang</label>
+                <label for="title">Namn på evenemang <span class="text-danger">*</span></label>
                 <input type="text" name="title" id="title" placeholder="Namn" required>
             </div>
 
             <div class="form-group">
-                <label for="content">Beskrivning</label>
-                <small class="text-dark-gray">Information om evenemanget.</small>
+                <label for="content">Beskrivning <span class="text-danger">*</span></label>
+                <small class="text-dark-gray">Beskriv ditt evenemang. Vad händer där och varför ska man besöka det?</small>
                 <textarea name="content" id="content textarea" placeholder="Beskrivning" required></textarea>
             </div>
 
             <div class="form-group">
-                <label for="radio">Evenemanget inträffar</label>
-                <small class="text-dark-gray">Lägg till tidpunkter för evenemanget. Återkommer evenemanget varje vecka? Lägg då till en regel för återkommande evenemang.</small>
+                <label for="radio">Evenemanget inträffar <span class="text-danger">*</span></label>
+                <small class="text-dark-gray">Lägg till tidpunkter för evenemanget. Återkommer evenemanget varje vecka? Lägg då till ett schema för återkommande evenemang.
+                </small>
                 <label class="radio">
-                    <input data-id="single-event" type="radio" name="radio" checked> Enstaka händelse
+                    <input data-id="single-event" type="radio" name="occurance-type" checked> Enstaka händelse
                 </label>
                 <label class="radio">
-                    <input data-id="recurring-event" type="radio" name="radio"> Återkommande
+                    <input data-id="recurring-event" type="radio" name="occurance-type"> Schema
                 </label>
             </div>
 
@@ -101,32 +102,36 @@ Here is a code example to display a list of events. Use the attributes listed be
                 <div class="box box-panel box-panel-secondary">
                     <h4 class="box-title">Datum</h4>
                     <div class="box-content">
+                        <div class="form-group occurance-group-single gutter gutter-bottom" style="border-bottom:1px solid #ddd;">
+                            <div class="form-group">
+                                <label for="start_date">Startdatum <span class="text-danger">*</span></label>
+                                <input type="text" name="start_date" placeholder="Datum" value="" class="datepicker" required="required">
+                            </div>
+                            <div class="form-group form-horizontal">
+                                <label for="start_time_h">Starttid <span class="text-danger">*</span></label>
+                                <div class="form-group">
+                                    <input type="number" name="start_time_h" placeholder="HH" value="" min="0" max="24" required="required">
+                                </div>
+                                <div class="form-group">
+                                    <i>: </i><input type="number" name="start_time_m" placeholder="MM" value="" min="0" max="60" required="required">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="end_date">Slutdatum <span class="text-danger">*</span></label>
+                                <input type="text" name="end_date" placeholder="Datum" value="" class="datepicker" required="required">
+                            </div>
+                            <div class="form-group form-horizontal">
+                                <label for="end_time_h">Sluttid <span class="text-danger">*</span></label>
+                                <div class="form-group">
+                                    <input type="number" name="end_time_h" placeholder="HH" value="" min="0" max="24" required="required">
+                                </div>
+                                <div class="form-group">
+                                    <i>: </i><input type="number" name="end_time_m" placeholder="MM" value="" min="0" max="60" required="required">
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group">
-                            <label for="start_date">Startdatum</label>
-                            <input type="text" name="start_date" id="start_date" placeholder="Datum" value="" class="datepicker">
-                        </div>
-                        <div class="form-group form-horizontal">
-                            <label for="start_time_h">Starttid</label>
-                            <div class="form-group">
-                                <input type="number" name="start_time_h" id="start_time_h" placeholder="HH" value="" min="0" max="24">
-                            </div>
-                            <div class="form-group">
-                                <i>: </i><input type="number" name="start_time_m" id="start_time_m" placeholder="MM" value="" min="0" max="60">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="end_date">Slutdatum</label>
-                            <input type="text" name="end_date" id="end_date" placeholder="Datum" value="" class="datepicker">
-                        </div>
-                        <div class="form-group form-horizontal">
-                            <label for="end_time_h">Sluttid</label>
-                            <div class="form-group">
-                                <input type="number" name="end_time_h" id="end_time_h" placeholder="HH" value="" min="0" max="24">
-                            </div>
-                            <div class="form-group">
-                                <i>: </i><input type="number" name="end_time_m" id="end_time_m" placeholder="MM" value="" min="0" max="60">
-                            </div>
+                            <button class="btn btn btn-primary btn-sm add-occurance"><i class="pricon pricon-plus-o"></i> Lägg till</button>
                         </div>
                     </div>
                 </div>
@@ -134,51 +139,55 @@ Here is a code example to display a list of events. Use the attributes listed be
 
             <div id="recurring-event" class="event-occasion form-group">
                 <div class="box box-panel box-panel-secondary">
-                    <h4 class="box-title">Regel för återkommande evenemang</h4>
+                    <h4 class="box-title">Schema för återkommande evenemang</h4>
                     <div class="box-content">
+                        <div class="form-group occurance-group-recurring gutter gutter-bottom" style="border-bottom:1px solid #ddd;">
+                            <div class="form-group">
+                                <label for="weekday">Veckodag <span class="text-danger">*</span></label>
+                                <small>Evenemanget inträffar på vald veckodag.</small>
+                                <select name="weekday">
+                                    <option value="Monday">Måndag</option>
+                                    <option value="Tuesday">Tisdag</option>
+                                    <option value="Wednesday">Onsdag</option>
+                                    <option value="Thursday">Torsdag</option>
+                                    <option value="Friday">Fredag</option>
+                                    <option value="Saturday">Lördag</option>
+                                    <option value="Sunday">Söndag</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-horizontal">
+                                <label for="recurring_start_h">Starttid <span class="text-danger">*</span></label>
+                                <small>Evenemangets starttid</small>
+                                <div class="form-group">
+                                    <input type="number" name="recurring_start_h" placeholder="HH" value="" min="0" max="24">
+                                </div>
+                                <div class="form-group">
+                                    <i>: </i><input type="number" name="recurring_start_m" placeholder="MM" value="" min="0" max="60">
+                                </div>
+                            </div>
+                            <div class="form-group form-horizontal">
+                                <label for="recurring_end_h">Sluttid <span class="text-danger">*</span></label>
+                                <small>Evenemangets sluttid</small>
+                                <div class="form-group">
+                                    <input type="number" name="recurring_end_h" placeholder="HH" value="" min="0" max="24">
+                                </div>
+                                <div class="form-group">
+                                    <i>: </i><input type="number" name="recurring_end_m" placeholder="MM" value="" min="0" max="60">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="recurring_start_d">Startdatum <span class="text-danger">*</span></label>
+                                <small>Evenemanget inträffar löpande fr.o.m. detta datum</small>
+                                <input type="text" name="recurring_start_d" placeholder="Startdatum" value="" class="datepicker">
+                            </div>
+                            <div class="form-group">
+                                <label for="recurring_end_d">Slutdatum <span class="text-danger">*</span></label>
+                                <small>Evenemanget inträffar löpande t.o.m. detta datum</small>
+                                <input type="text" name="recurring_end_d" placeholder="Startdatum" value="" class="datepicker">
+                            </div>
+                        </div>
                         <div class="form-group">
-                            <label for="weekday">Veckodag</label>
-                            <small>Evenemanget inträffar på vald veckodag.</small>
-                            <select name="weekday" id="weekday">
-                                <option value="Monday">Måndag</option>
-                                <option value="Tuesday">Tisdag</option>
-                                <option value="Wednesday">Onsdag</option>
-                                <option value="Thursday">Torsdag</option>
-                                <option value="Friday">Fredag</option>
-                                <option value="Saturday">Lördag</option>
-                                <option value="Sunday">Söndag</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group form-horizontal">
-                            <label for="recurring_start_h">Starttid</label>
-                            <small>Evenemangets starttid</small>
-                            <div class="form-group">
-                                <input type="number" name="recurring_start_h" id="recurring_start_h" placeholder="HH" value="" min="0" max="24">
-                            </div>
-                            <div class="form-group">
-                                <i>: </i><input type="number" name="recurring_start_m" id="recurring_start_m" placeholder="MM" value="" min="0" max="60">
-                            </div>
-                        </div>
-                        <div class="form-group form-horizontal">
-                            <label for="recurring_end_h">Sluttid</label>
-                            <small>Evenemangets sluttid</small>
-                            <div class="form-group">
-                                <input type="number" name="recurring_end_h" id="recurring_end_h" placeholder="HH" value="" min="0" max="24">
-                            </div>
-                            <div class="form-group">
-                                <i>: </i><input type="number" name="recurring_end_m" id="recurring_end_m" placeholder="MM" value="" min="0" max="60">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="recurring_start_d">Startdatum </label>
-                            <small>Evenemanget inträffar löpande fr.o.m. detta datum</small>
-                            <input type="text" name="recurring_start_d" id="recurring_start_d" placeholder="Startdatum" value="" class="datepicker">
-                        </div>
-                        <div class="form-group">
-                            <label for="recurring_end_d">Slutdatum</label>
-                            <small>Evenemanget inträffar löpande t.o.m. detta datum</small>
-                            <input type="text" name="recurring_end_d" id="recurring_end_d" placeholder="Startdatum" value="" class="datepicker">
+                            <button class="btn btn btn-primary btn-sm add-occurance"><i class="pricon pricon-plus-o"></i> Lägg till</button>
                         </div>
                     </div>
                 </div>
@@ -192,18 +201,19 @@ Here is a code example to display a list of events. Use the attributes listed be
 
            <div class="form-group">
                 <label for="booking_link">Länk till bokning</label>
-                <small class="text-dark-gray">Länk till evenemangets bokningssida.</small>
+                <small class="text-dark-gray">Länk till evenemangets bokningssida, exempelvis ticketmaster.</small>
                 <input type="url" name="booking_link" id="booking_link" placeholder="Länk till bokning">
             </div>
 
            <div class="form-group">
                 <label for="price_adult">Pris</label>
+                <small class="text-dark-gray">För vuxen. Finns det flera olika prisklasser? Informera gärna om det i beskrivningen.</small>
                 <input type="number" name="price_adult" id="price_adult" placeholder="Pris">
             </div>
 
             <div class="form-group">
                 <label for="organizer">Arrangör</label>
-                <small class="text-dark-gray">Företaget, organisationen eller privatpersonen som står bakom evenemanget.</small>
+                <small class="text-dark-gray">Välj mellan befintliga arrangörer i listan. Finns inte din verksamhet med går det bra att lägga till arrangör i beskrivningen.</small>
                 <select name="organizer" id="organizer">
                     <option value="">Hämtar...</option>
                 </select>
@@ -211,7 +221,7 @@ Here is a code example to display a list of events. Use the attributes listed be
 
             <div class="form-group">
                 <label for="location">Plats</label>
-                <small class="text-dark-gray">Plats eller adress för evenemanget.</small>
+                <small class="text-dark-gray">Välj mellan befintliga platser i listan. Finns inte platsen med går det bra att lägga till en adress i beskrivningen.</small>
                 <select name="location" id="location">
                     <option value="">Hämtar...</option>
                 </select>
@@ -219,21 +229,16 @@ Here is a code example to display a list of events. Use the attributes listed be
 
             <div class="form-group">
                 <label for="event_categories">Kategorier</label>
-                <small class="text-dark-gray">Välj kategorier som evenemanget tillhör.</small>
+                <small class="text-dark-gray">Välj en eller flera passande kategorier för ditt evenemang eller aktivitet.</small>
                 <select name="event_categories" id="event_categories" multiple>
                     <option value="">Hämtar...</option>
                 </select>
             </div>
 
-            <div class="form-group">
-                <label for="user_groups">Användarorganisation</label>
-                <select name="user_groups" id="user_groups" multiple>
-                    <option value="">Hämtar...</option>
-                </select>
-            </div>
-
             <div class="form-group gutter creamy image-box text-center">
-                <p class="text-center"><i class="pricon pricon-badge pricon-badge-red-1 pricon-3x pricon-picture"></i></p>
+                <p><i class="pricon pricon-badge pricon-badge-red-3 pricon-3x pricon-picture"></i></p>
+                <p><small>Ladda upp en bild. Tänk på att bilden kan bli beskuren, undvik därför text i bilden.<br>
+                Du måste även ha rätt att använda och sprida bilden.</small></p>
                 <p><button class="btn btn-secondary img-button">Ladda upp bild</button></p>
             </div>
 
@@ -259,19 +264,19 @@ Here is a code example to display a list of events. Use the attributes listed be
                 <input name="image-input" id="image-input" type="file" accept="image/gif, image/jpeg, image/png">
             </div>
 
+            <div class="form-group">
+                <p><small>Klar? Klicka här för att skicka in ditt evenemang för granskning.</small></p>
+            </div>
             <div class="form-group submit-error hidden">
                 <li class="notice warning"></li>
             </div>
             <div class="form-group submit-success hidden">
                 <li class="notice success"></li>
             </div>
-
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Skicka">
             </div>
         </form>
     </div>
 </div>
-
-
 ```
