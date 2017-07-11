@@ -164,7 +164,7 @@ EventManagerIntegration.Event.Form = (function ($) {
 
 	    // Occasion
 	    objData['occasions'] = [];
-	    $('.occurance-group', form).each(function(index) {
+	    $('.occurance-group-single', form).each(function(index) {
 			var startDate 	= Form.prototype.formatDate($('[name="start_date"]', this).val(), $('[name="start_time_h"]', this).val(), $('[name="start_time_m"]', this).val());
 		    var endDate 	= Form.prototype.formatDate($('[name="end_date"]', this).val(), $('[name="end_time_h"]', this).val(), $('[name="end_time_m"]', this).val());
 		    if (startDate && endDate) {
@@ -178,24 +178,28 @@ EventManagerIntegration.Event.Form = (function ($) {
 		});
 
 	    // Recurring occasions
-	    var rcrStartH 		= $(form).find("#recurring_start_h").val(),
-	    	rcrStartM 		= $(form).find("#recurring_start_m").val();
-	    var rcrStartTime 	= (rcrStartH && rcrStartM) ? this.addZero(rcrStartH) + ":" + this.addZero(rcrStartM) + ":" + "00" : false;
-	    var rcrEndH 		= $(form).find("#recurring_end_h").val(),
-	    	rcrEndM 		= $(form).find("#recurring_end_m").val();
-	    var rcrEndTime 		= (rcrEndH && rcrEndM) ? this.addZero(rcrEndH) + ":" + this.addZero(rcrEndM)  + ":" + "00": false;
-	    var rcrStartDate 	= (this.isValidDate($(form).find("#recurring_start_d").val())) ? $(form).find("#recurring_start_d").val() : false;
-	    var rcrEndDate 		= (this.isValidDate($(form).find("#recurring_end_d").val())) ? $(form).find("#recurring_end_d").val() : false;
-	    if (rcrStartTime && rcrEndTime && rcrStartDate && rcrEndDate) {
-		  	objData['rcr_rules']	= [{
-		    						"rcr_week_day": $(form).find("#weekday").val(),
-		    						"rcr_start_time": rcrStartTime,
-		    						"rcr_end_time": rcrEndTime,
-		    						"rcr_start_date": rcrStartDate,
-		    						"rcr_end_date": rcrEndDate,
-		    						}]
-	    }
-	    if ($(form).find("#organizer").val()) {
+	    objData['rcr_rules'] = [];
+	    $('.occurance-group-recurring', form).each(function(index) {
+		    var rcrStartH 		= $('[name="recurring_start_h"]', this).val(),
+		    	rcrStartM 		= $('[name="recurring_start_m"]', this).val();
+		    var rcrStartTime 	= (rcrStartH && rcrStartM) ? Form.prototype.addZero(rcrStartH) + ":" + Form.prototype.addZero(rcrStartM) + ":" + "00" : false;
+		    var rcrEndH 		= $('[name="recurring_end_h"]', this).val(),
+		    	rcrEndM 		= $('[name="recurring_end_m"]', this).val();
+		    var rcrEndTime 		= (rcrEndH && rcrEndM) ? Form.prototype.addZero(rcrEndH) + ":" + Form.prototype.addZero(rcrEndM)  + ":" + "00": false;
+		    var rcrStartDate 	= (Form.prototype.isValidDate($('[name="recurring_start_d"]', this).val())) ? $('[name="recurring_start_d"]', this).val() : false;
+		    var rcrEndDate 		= (Form.prototype.isValidDate($('[name="recurring_end_d"]', this).val())) ? $('[name="recurring_end_d"]', this).val() : false;
+		    if (rcrStartTime && rcrEndTime && rcrStartDate && rcrEndDate) {
+			  	objData['rcr_rules'].push({
+			    						"rcr_week_day": $('[name="weekday"]', this).val(),
+			    						"rcr_start_time": rcrStartTime,
+			    						"rcr_end_time": rcrEndTime,
+			    						"rcr_start_date": rcrStartDate,
+			    						"rcr_end_date": rcrEndDate,
+			    						});
+		    }
+	    });
+
+	    if ($('#organizer', form).val()) {
 	    	objData['organizers'] 	= [{
 		    						"organizer": $(form).find("#organizer").val(),
 		    						"main_organizer": true
@@ -204,7 +208,6 @@ EventManagerIntegration.Event.Form = (function ($) {
 		objData['user_groups'] 		= groups;
 		objData['event_categories'] = categories;
 
-	    // console.log(objData);
 	    // console.log(JSON.stringify(objData));
 	    return objData;
 	};
@@ -238,7 +241,7 @@ EventManagerIntegration.Event.Form = (function ($) {
 	            if (response.success) {
 	            	$('.submit-success', eventForm).removeClass('hidden');
 					$('.submit-success .success', eventForm).empty().append('<i class="fa fa-send"></i>Evenemanget har skickats!</li>');
-	            	//Form.prototype.cleanForm(eventForm);
+	            	Form.prototype.cleanForm(eventForm);
 	            } else {
 	            	console.log(response.data);
 	            	$('.submit-success', eventForm).addClass('hidden');
@@ -325,7 +328,7 @@ EventManagerIntegration.Event.Form = (function ($) {
 		// Add new occurance
 		$('.add-occurance', eventForm).click(function(e) {
 			e.preventDefault();
-			var $occuranceGroup = $(this).parent().prev('.occurance-group'),
+			var $occuranceGroup = $(this).parent().prev('[class*=occurance-group]'),
         		$duplicate = $occuranceGroup.clone().find('input').val('')
         					.removeClass('hasDatepicker')
         					.removeAttr('id').end()
@@ -341,7 +344,7 @@ EventManagerIntegration.Event.Form = (function ($) {
 		// Remove occurance
 		$(document).on('click', '.remove-occurance', function(e) {
 			e.preventDefault();
-			$(this).closest('.occurance-group').remove();
+			$(this).closest('[class*=occurance-group]').remove();
 		});
     };
 
