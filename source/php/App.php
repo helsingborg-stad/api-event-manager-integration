@@ -27,13 +27,18 @@ class App
         new Admin\AdminDisplayEvent();
         new Shortcodes\SingleEvent();
 
-        /* Modularity modules v1 */
-        add_action('Modularity', function () {
-            new Module\EventModule();
-        });
+        // /* Modularity modules v1 */
+        // add_action('Modularity', function () {
+        //     new Module\EventModule();
+        // });
 
-        /* v2 modules */
+        /* Register Modularity v2 modules */
         add_action('plugins_loaded', function () {
+            modularity_register_module(
+                EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/Event',
+                'Event'
+            );
+
             modularity_register_module(
                 EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/Location',
                 'Location'
