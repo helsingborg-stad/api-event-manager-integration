@@ -35,14 +35,16 @@ class SingleEvent
 
         $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($id);
 
-        $query_var_date = (! empty (get_query_var('date'))) ? get_query_var('date') : false;
+        $query_var_date = (! empty(get_query_var('date'))) ? get_query_var('date') : false;
 
         $meta = array();
-        foreach ($get_meta as $key => $value) {
-            if (is_array($value) && count($value) == 1) {
-                $meta[$key] = maybe_unserialize($value[0]);
-            } else {
-                $meta[$key] = $value;
+        if (is_array($get_meta) && !empty($get_meta)) {
+            foreach ($get_meta as $key => $value) {
+                if (is_array($value) && count($value) == 1) {
+                    $meta[$key] = maybe_unserialize($value[0]);
+                } else {
+                    $meta[$key] = $value;
+                }
             }
         }
 
@@ -168,7 +170,7 @@ class SingleEvent
 
         $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($id);
 
-        $query_var_date = (! empty (get_query_var('date'))) ? get_query_var('date') : false;
+        $query_var_date = (! empty(get_query_var('date'))) ? get_query_var('date') : false;
 
         $meta = array();
         foreach ($get_meta as $key => $value) {
@@ -355,12 +357,12 @@ class SingleEvent
         $ret = '';
         if (! empty($meta['organizers']) && is_array($meta['organizers'])) {
             foreach ($meta['organizers'] as $organizer) {
-                    $ret .= '<ul>';
-                    $ret .= (! empty($organizer['organizer'])) ? '<li><strong>' . $organizer['organizer'] . '</strong></li>' : '';
-                    $ret .= (! empty($organizer['organizer_phone'])) ? '<li>' . $organizer['organizer_phone'] . '</li>' : '';
-                    $ret .= (! empty($organizer['organizer_email'])) ? '<li>' . $organizer['organizer_email'] . '</li>' : '';
-                    $ret .= (! empty($organizer['organizer_link'])) ? '<li><i class="pricon pricon-external-link"></i> <a href="' . $organizer['organizer_link'] . '" target="_blank">' . preg_replace("(^https?://)", "", $organizer['organizer_link']) . '</a></li>' : '';
-                    $ret .= '</ul>';
+                $ret .= '<ul>';
+                $ret .= (! empty($organizer['organizer'])) ? '<li><strong>' . $organizer['organizer'] . '</strong></li>' : '';
+                $ret .= (! empty($organizer['organizer_phone'])) ? '<li>' . $organizer['organizer_phone'] . '</li>' : '';
+                $ret .= (! empty($organizer['organizer_email'])) ? '<li>' . $organizer['organizer_email'] . '</li>' : '';
+                $ret .= (! empty($organizer['organizer_link'])) ? '<li><i class="pricon pricon-external-link"></i> <a href="' . $organizer['organizer_link'] . '" target="_blank">' . preg_replace("(^https?://)", "", $organizer['organizer_link']) . '</a></li>' : '';
+                $ret .= '</ul>';
             }
 
             // Sponsors
@@ -383,10 +385,10 @@ class SingleEvent
     {
         $ret = '';
         foreach ($occasions as $occasion) {
-                $ret .= '<ul>';
-                $ret .= (! empty($occasion->start_date) && ! empty($occasion->end_date)) ? '<li><i class="pricon pricon-calendar"></i> ' . \EventManagerIntegration\App::formatEventDate($occasion->start_date, $occasion->end_date) . '</li>' : '';
-                $ret .= '</ul>';
-            }
+            $ret .= '<ul>';
+            $ret .= (! empty($occasion->start_date) && ! empty($occasion->end_date)) ? '<li><i class="pricon pricon-calendar"></i> ' . \EventManagerIntegration\App::formatEventDate($occasion->start_date, $occasion->end_date) . '</li>' : '';
+            $ret .= '</ul>';
+        }
 
         return $ret;
     }
@@ -441,5 +443,4 @@ class SingleEvent
 
         return $ret;
     }
-
 }
