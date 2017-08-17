@@ -25,8 +25,8 @@ class SingleEvent
     {
         global $post;
         $id = $post->ID;
-        $post_type = get_post_type($id);
-        if ($post_type != 'event') {
+
+        if (get_post_type($id) != 'event') {
             return;
         }
 
@@ -149,8 +149,8 @@ class SingleEvent
     {
         global $post;
         $id = $post->ID;
-        $post_type = get_post_type($id);
-        if ($post_type != 'event') {
+
+        if (get_post_type($id) != 'event') {
             return;
         }
 
