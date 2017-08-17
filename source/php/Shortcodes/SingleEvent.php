@@ -20,21 +20,6 @@ class SingleEvent
         add_shortcode('single_event_accordion', array($this, 'singleEventAccordion'));
     }
 
-    /**
-     * Unserialize arrays
-     * @param  mixed $data data to be formatted
-     * @return string
-     */
-    public static function unserData($data)
-    {
-        $unserialized = @unserialize($data);
-        if ($unserialized !== false) {
-            return $unserialized;
-        } else {
-            return $data;
-        }
-    }
-
     // Shortcode to display complete event information
     public function singleEventAccordion()
     {
@@ -55,7 +40,7 @@ class SingleEvent
         $meta = array();
         foreach ($get_meta as $key => $value) {
             if (is_array($value) && count($value) == 1) {
-                $meta[$key] = self::unserData($value[0]);
+                $meta[$key] = maybe_unserialize($value[0]);
             } else {
                 $meta[$key] = $value;
             }
@@ -188,7 +173,7 @@ class SingleEvent
         $meta = array();
         foreach ($get_meta as $key => $value) {
             if (is_array($value) && count($value) == 1) {
-                $meta[$key] = self::unserData($value[0]);
+                $meta[$key] = maybe_unserialize($value[0]);
             } else {
                 $meta[$key] = $value;
             }
