@@ -4,16 +4,9 @@ namespace EventManagerIntegration;
 
 class App
 {
-    /*
-     * Set to 'dev' or 'min'
-     */
-    public static $assetSuffix = 'min';
-
     public function __construct()
     {
         add_action('admin_init', array($this, 'checkDatabaseTable'));
-        add_action('admin_enqueue_scripts', array($this, 'enqueueAdmin'), 950);
-        add_action('wp_enqueue_scripts', array($this, 'enqueueFront'), 950);
 
         /* Register cron action */
         add_action('import_events_daily', array($this, 'importEventsCron'));
@@ -27,13 +20,13 @@ class App
         new Admin\AdminDisplayEvent();
         new Shortcodes\SingleEvent();
 
-        /* Modularity modules v1 */
-        add_action('Modularity', function () {
-            new Module\EventModule();
-        });
-
-        /* v2 modules */
+        /* Register Modularity v2 modules */
         add_action('plugins_loaded', function () {
+            modularity_register_module(
+                EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/Event',
+                'Event'
+            );
+
             modularity_register_module(
                 EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/Location',
                 'Location'
@@ -43,6 +36,17 @@ class App
         add_action('widgets_init', function () {
             register_widget('EventManagerIntegration\Widget\DisplayEvents');
         });
+
+        add_filter('Municipio/blade/view_paths', array($this, 'addTemplatePaths'));
+    }
+
+    /**
+     * Add searchable blade template paths
+     * @param array $array Template paths
+     */
+    public function addTemplatePaths($array) {
+        $array[] = EVENTMANAGERINTEGRATION_PATH . 'source/php/Module';
+        return $array;
     }
 
     /**
@@ -92,56 +96,6 @@ class App
         $start = date('Y-m-d H:i:s', strtotime($door_time));
         $date = mysql2date('j F Y', $start, true) . ', ' . mysql2date('H:i', $start, true);
         return $date;
-    }
-
-    /**
-     * Enqueue required styles and scripts on front views
-     * @return void
-     */
-    public function enqueueFront()
-    {
-        // Styles
-        wp_register_style('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/css/event-manager-integration.' . self::$assetSuffix . '.css');
-        wp_enqueue_style('event-integration');
-
-        // Scripts
-        wp_enqueue_script('vendor-pagination', EVENTMANAGERINTEGRATION_URL . '/source/js/vendor/simple-pagination/jquery.simplePagination.min.js', 'jquery', false, true);
-        wp_register_script('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-integration.' . self::$assetSuffix . '.js', 'jquery', false, true);
-        wp_localize_script('event-integration', 'eventintegration', array(
-            'ajaxurl' => admin_url('admin-ajax.php'),
-            'apiurl'  => get_field('event_api_url', 'option'),
-        ));
-        wp_localize_script('event-integration', 'eventIntegrationFront', array(
-            'event_pagination_error'   => __("Something went wrong, please try again later.", 'event-integration'),
-        ));
-        wp_enqueue_script('event-integration');
-    }
-
-    /**
-     * Enqueue required styles and scripts on admin ui
-     * @return void
-     */
-    public function enqueueAdmin()
-    {
-        global $current_screen;
-        $type = $current_screen->post_type;
-        if ($type != 'event') {
-            return;
-        }
-
-        // Styles
-        wp_register_style('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/css/event-manager-integration-admin.' . self::$assetSuffix . '.css');
-        wp_enqueue_style('event-integration');
-
-        // Scripts
-        wp_register_script('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-integration-admin.' . self::$assetSuffix . '.js', true);
-        wp_localize_script('event-integration', 'eventintegration', array(
-            'ajaxurl' => admin_url('admin-ajax.php')
-        ));
-        wp_localize_script('event-integration', 'eventIntegrationAdmin', array(
-            'loading'   => __("Loading", 'event-integration'),
-        ));
-        wp_enqueue_script('event-integration');
     }
 
     /**
