@@ -1,26 +1,23 @@
-<!-- rewrite this -->
-
- <div class="<?php echo implode(' ', apply_filters('Modularity/Module/Classes', array('box', 'box-panel'), $module->post_type, $args)); ?>" data-module-id="<?php echo $module->ID; ?>">
-   <?php if (!$module->hideTitle && !empty($module->post_title)) { ?>
-        <h4 class="box-title"><?php echo apply_filters('the_title', $module->post_title); ?></h4>
-    <?php } ?>
+<div class="{{ $classes }} {{ isset($font_size) ? $font_size : '' }}" data-module-id="{{ $ID }}">
+    @if (!$hideTitle && !empty($post_title))
+        <h4 class="box-title">{!! apply_filters('the_title', $post_title) !!}</h4>
+    @endif
     <ul>
         <div class="event-module-content">
-            <?php echo \EventManagerIntegration\Module\EventModule::displayEvents($module->ID); ?>
+            @include('partials.list')
         </div>
     </ul>
 
     <div class="event-module-footer gutter gutter-sm gutter-horizontal">
-        <?php if (isset($fields->mod_event_pagination) && $fields->mod_event_pagination == true && $pagesCount > 1) : ?>
-            <ul class="module-pagination pagination" data-pages="<?php echo $pagesCount; ?>" data-show-arrows="<?php echo $showArrows; ?>"></ul>
-        <?php endif; ?>
-
-        <?php if (isset($fields->mod_event_archive) && $fields->mod_event_archive == true) : ?>
+        @if ($mod_event_pagination && $pagesCount > 1)
+            <ul class="module-pagination pagination" data-pages="{{ $pagesCount }}" data-show-arrows="{{ $mod_event_nav_arrows }}"></ul>
+        @endif
+        @if ($mod_event_archive)
             <ul class="event-module-archive">
                 <li>
-                    <a href="<?php echo get_post_type_archive_link('event'); ?>"><i class="pricon pricon-plus-o"></i> <?php _e('More events', 'event-integration') ?></a>
+                    <a href="{{ get_post_type_archive_link('event') }}"><i class="pricon pricon-plus-o"></i> <?php _e('More events', 'event-integration'); ?></a>
                 </li>
             </ul>
-        <?php endif; ?>
+        @endif
     </div>
 </div>

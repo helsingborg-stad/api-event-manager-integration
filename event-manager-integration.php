@@ -20,7 +20,6 @@ if (! defined('WPINC')) {
 
 define('EVENTMANAGERINTEGRATION_PATH', plugin_dir_path(__FILE__));
 define('EVENTMANAGERINTEGRATION_URL', plugins_url('', __FILE__));
-define('EVENTMANAGERINTEGRATION_TEMPLATE_PATH', EVENTMANAGERINTEGRATION_PATH . 'templates/');
 
 load_plugin_textdomain('event-integration', false, plugin_basename(dirname(__FILE__)) . '/languages');
 

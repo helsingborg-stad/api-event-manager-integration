@@ -7,6 +7,9 @@ class Event extends \Modularity\Module
     public $slug = 'event';
     public $supports = array();
 
+    /* Set to 'dev' or 'min' */
+    public static $assetSuffix = 'min';
+
     public function init()
     {
         $this->nameSingular = __('Event', 'event-integration');
@@ -19,12 +22,25 @@ class Event extends \Modularity\Module
 
     public function data() : array
     {
-        $fields = get_fields($this->ID);
+        if (get_option('timezone_string')) {
+            date_default_timezone_set(get_option('timezone_string'));
+        }
 
-        $data['pagesCount'] = $this->countPages($this->ID);
-        $data['showArrows'] = (isset($fields->mod_event_nav_arrows) && $fields->mod_event_nav_arrows == true) ? true : false;
+        $id = $this->ID;
+        if (empty($id) && !empty($_POST['id'])) {
+            $id = (int) $_POST['id'];
+        }
+        $page = (!empty($_POST['page'])) ? $_POST['page'] : 1;
 
-        $data['classes'] = implode(' ', apply_filters('Modularity/Module/Classes', array('box', 'box-panel'), $this->post_type, $this->args));
+        $data = get_fields($id);
+
+        $data['pagesCount']         = $this->countPages($id);
+        $data['events']             = $this->getEvents($id, $page);
+        $data['mod_event_fields']   = is_array($data['mod_event_fields']) ? $data['mod_event_fields'] : array();
+        $data['descr_limit']        = !empty($data['mod_event_descr_limit']) ? $data['mod_event_descr_limit'] : null;
+        $data['date_now']           = strtotime('now');
+        $data['classes']            = implode(' ', apply_filters('Modularity/Module/Classes', array('box', 'box-panel'), $this->post_type, $this->args));
+
         return $data;
     }
 
@@ -33,11 +49,14 @@ class Event extends \Modularity\Module
      */
     public function ajaxPagination()
     {
-        $page = $_POST['page'];
-        $module_id = $_POST['id'];
-        $events = self::displayEvents($module_id, $page);
+        $template = new \Municipio\template;
+        $view = \Municipio\Helper\Template::locateTemplate('list.blade.php', array(EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/Event/views/partials'));
+        $view = $template->cleanViewPath($view);
+        $data = $this->data();
 
-        echo $events;
+        ob_start();
+        $template->render($view, $data);
+        echo ob_get_clean();
         wp_die();
     }
 
@@ -68,7 +87,7 @@ class Event extends \Modularity\Module
      * @param  bool   $useLimit  True = limit by setting, false = get all
      * @return array             Array with event objects
      */
-    public static function getEvents($module_id, $page = 1, $useLimit = true)
+    public function getEvents($module_id, $page = 1, $useLimit = true)
     {
         $fields = json_decode(json_encode(get_fields($module_id)));
         $display_limit = ($useLimit == true && isset($fields->mod_event_limit)) ? $fields->mod_event_limit : -1;
@@ -110,81 +129,53 @@ class Event extends \Modularity\Module
         return $events;
     }
 
-    // Rewrite
     /**
-     * Converts array of events into string with markup
-     * @param  int    $module_id Module ID
-     * @param  int    $page      Pagination page number
-     * @return string            String with events and markup
+     * Enqueue your scripts and/or styles with wp_enqueue_script / wp_enqueue_style
+     * @return
      */
-    public static function displayEvents($module_id, $page = 1)
+    public function script()
     {
-        $fields = json_decode(json_encode(get_fields($module_id)));
-        $events = self::getEvents($module_id, $page);
-        $descr_limit = (! empty($fields->mod_event_descr_limit)) ? $fields->mod_event_descr_limit : null;
-        $fields->mod_event_fields = is_array($fields->mod_event_fields) ? $fields->mod_event_fields : array();
+        wp_enqueue_script('vendor-pagination', EVENTMANAGERINTEGRATION_URL . '/source/js/vendor/simple-pagination/jquery.simplePagination.min.js', 'jquery', false, true);
+        wp_register_script('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-integration.' . self::$assetSuffix . '.js', 'jquery', false, true);
+        wp_localize_script('event-integration', 'eventintegration', array(
+            'ajaxurl' => admin_url('admin-ajax.php'),
+            'apiurl'  => get_field('event_api_url', 'option'),
+        ));
+        wp_localize_script('event-integration', 'eventIntegrationFront', array(
+            'event_pagination_error'   => __("Something went wrong, please try again later.", 'event-integration'),
+        ));
+        wp_enqueue_script('event-integration');
+    }
 
-        if (get_option('timezone_string')) {
-            date_default_timezone_set(get_option('timezone_string'));
-        }
-        $date_now = strtotime('now');
+    /**
+     * Enqueue your scripts and/or styles with wp_enqueue_script / wp_enqueue_style
+     * @return
+     */
+    public function style()
+    {
+        wp_register_style('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/css/event-manager-integration.' . self::$assetSuffix . '.css');
+        wp_enqueue_style('event-integration');
+    }
 
-        $ret = '<ul class="event-module-list">';
-        if (! $events) {
-            $ret .= '<li><span class="event-info">' . __('No events found', 'event-integration') . '</span></li>';
-        } else {
-            foreach ($events as $event) {
-                $ret .= (isset($event->end_date) && (strtotime($event->end_date) < $date_now)) ? '<li class="passed-event">' : '<li>';
+    /**
+     * Enqueue required styles and scripts for admin ui
+     * @return void
+     */
+    public function adminEnqueue()
+    {
+        // Styles
+        wp_register_style('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/css/event-manager-integration-admin.' . self::$assetSuffix . '.css');
+        wp_enqueue_style('event-integration');
 
-                if (! empty($event->start_date) && in_array('occasion', $fields->mod_event_fields) && $fields->mod_event_occ_pos == 'left') {
-                    $occasion = \EventManagerIntegration\App::formatShortDate($event->start_date);
-                    $ret .= '<span class="event-date">';
-                    if ($occasion['today'] == true) {
-                        $ret .= '<span><strong>' . __('Today', 'event-integration') . '</strong></span>';
-                        $ret .= '<span>' . $occasion['time'] . '</span>';
-                    } else {
-                        $ret .= '<span>' . $occasion['date'] . '</span>';
-                        $ret .= '<span>' . $occasion['month'] . '</span>';
-                    }
-                    $ret .= '</span>';
-                }
-
-                $ret .= '<span class="event-info">';
-
-                if (in_array('image', $fields->mod_event_fields)) {
-                    if (get_the_post_thumbnail($event->ID)) {
-                        $ret .= get_the_post_thumbnail($event->ID, 'large', array('class' => 'image-responsive'));
-                    } elseif ($fields->mod_event_def_image) {
-                        $ret .= wp_get_attachment_image($fields->mod_event_def_image->ID, array('700', '500'), "", array( "class" => "image-responsive" ));
-                    }
-                }
-
-                if (! empty($event->post_title)) {
-                    $date_url = preg_replace('/\D/', '', $event->start_date);
-                    $ret .= '<a href="' . esc_url(add_query_arg('date', $date_url, get_permalink($event->ID))) .'" class="title"><span class="link-item title">' . $event->post_title . '</span></a>';
-                }
-                if (! empty($event->start_date) && ! empty($event->end_date) && in_array('occasion', $fields->mod_event_fields) && $fields->mod_event_occ_pos == 'below') {
-                    $occasion = \EventManagerIntegration\App::formatEventDate($event->start_date, $event->end_date);
-                    $ret .= '<p class="text-sm"><i class="pricon pricon-calendar"></i> <strong>' . __('Date', 'event-integration') . ':</strong> ' . $occasion . '</p>';
-                }
-                if (in_array('location', $fields->mod_event_fields) && get_post_meta($event->ID, 'location', true)) {
-                    $location = get_post_meta($event->ID, 'location', true);
-                    $ret .= '<p class="text-sm"><i class="pricon pricon-location-pin"></i> <strong>' . __('Location', 'event-integration') . ':</strong> ' . $location['title'] . '</p>';
-                }
-
-                if (in_array('description', $fields->mod_event_fields) && $event->content_mode == 'custom' && ! empty($event->content)) {
-                    $ret .= \EventManagerIntegration\Helper\QueryEvents::stringLimiter($event->content, $descr_limit);
-                } elseif (! empty($event->post_content) && in_array('description', $fields->mod_event_fields)) {
-                    $ret .= \EventManagerIntegration\Helper\QueryEvents::stringLimiter($event->post_content, $descr_limit);
-                }
-
-                $ret .= '</span>';
-                $ret .= '</li>';
-            }
-        }
-        $ret .= '</ul>';
-
-        return $ret;
+        // Scripts
+        wp_register_script('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-integration-admin.' . self::$assetSuffix . '.js', true);
+        wp_localize_script('event-integration', 'eventintegration', array(
+            'ajaxurl' => admin_url('admin-ajax.php')
+        ));
+        wp_localize_script('event-integration', 'eventIntegrationAdmin', array(
+            'loading'   => __("Loading", 'event-integration'),
+        ));
+        wp_enqueue_script('event-integration');
     }
 
     /**
