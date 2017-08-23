@@ -4,9 +4,13 @@ namespace EventManagerIntegration;
 
 class App
 {
+    /* Set to 'dev' or 'min' */
+    public static $assetSuffix = 'min';
+
     public function __construct()
     {
         add_action('admin_init', array($this, 'checkDatabaseTable'));
+        add_action('wp_enqueue_scripts', array($this, 'enqueueFront'), 950);
 
         /* Register cron action */
         add_action('import_events_daily', array($this, 'importEventsCron'));
@@ -38,6 +42,28 @@ class App
         });
 
         add_filter('Municipio/blade/view_paths', array($this, 'addTemplatePaths'));
+    }
+
+    /**
+     * Enqueue required styles and scripts on front views
+     * @return void
+     */
+    public function enqueueFront()
+    {
+        // Styles
+        wp_register_style('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/css/event-manager-integration.' . self::$assetSuffix . '.css');
+        wp_enqueue_style('event-integration');
+
+        // Scripts
+        wp_register_script('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-integration.' . self::$assetSuffix . '.js', 'jquery', false, true);
+        wp_localize_script('event-integration', 'eventintegration', array(
+            'ajaxurl' => admin_url('admin-ajax.php'),
+            'apiurl'  => get_field('event_api_url', 'option'),
+        ));
+        wp_localize_script('event-integration', 'eventIntegrationFront', array(
+            'event_pagination_error'   => __("Something went wrong, please try again later.", 'event-integration'),
+        ));
+        wp_enqueue_script('event-integration');
     }
 
     /**
