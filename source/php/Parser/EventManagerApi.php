@@ -24,7 +24,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         $this->removeExpiredOccasions();
         $this->removeExpiredEvents();
 
-        $events = \EventManagerIntegration\Parser::curlApi($this->url);
+        $events = \EventManagerIntegration\Parser::requestApi($this->url);
 
         // Remove duplicates and save to database
         //$events_unique = $this->uniqueArray($events, 'id');
