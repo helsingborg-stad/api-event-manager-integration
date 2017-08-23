@@ -49,8 +49,14 @@ abstract class Parser
      */
     public static function requestApi($url)
     {
-        $events = file_get_contents($url);
-        $events = json_decode($events, true);
+        $request = wp_remote_get($url);
+
+        if (is_wp_error($request)) {
+            return false;
+        }
+
+        $body = wp_remote_retrieve_body($request);
+        $events = json_decode($body, true);
 
         if (!$events || (is_object($events) && $events->code == 'Error')) {
             return false;
