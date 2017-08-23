@@ -56,9 +56,9 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             <a href="#" class="deny button-primary ' . $second . '" postid="' . $postId . '">' . __('Deny', 'event-integration') . '</a>';
         });
         $this->addTableColumn('date', __('Date', 'event-integration'));
-        add_action('init', array($this, 'registerEventCategories'));
-        add_action('init', array($this, 'registerEventTags'));
-        add_action('init', array($this, 'registerEventGroups'));
+        add_action('init', array($this, 'registerEventCategories'), 1);
+        add_action('init', array($this, 'registerEventTags'), 1);
+        add_action('init', array($this, 'registerEventGroups'), 1);
         add_action('wp_ajax_import_events', array($this, 'importEvents'));
         add_action('wp_ajax_accept_or_deny', array($this, 'acceptOrDeny'));
         add_filter('views_edit-event', array($this, 'addImportButtons'));
