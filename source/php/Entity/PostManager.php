@@ -190,7 +190,7 @@ abstract class PostManager
             $duplicate = self::get(
                 1,
                 array(
-                    'relation' => 'OR',
+                    'relation' => 'AND',
                     array(
                         'key' => '_event_manager_id',
                         'value' => $meta['_event_manager_id'],
