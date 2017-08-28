@@ -39,10 +39,10 @@ class EventManagerGroups extends \EventManagerIntegration\Parser
                     $parent_term = $this->saveTerms($group->name, $group->slug, $taxonomy);
                     if ($group->children) {
                         foreach ($group->children as $child) {
-                            $child_term = $this->saveTerms($child->name, $child->name, $taxonomy, $parent_term);
+                            $child_term = $this->saveTerms($child->name, $child->slug, $taxonomy, $parent_term);
                             if ($child->children) {
                                 foreach ($child->children as $grand_child) {
-                                    $grand_child_term = $this->saveTerms($grand_child->name, $grand_child->name, $taxonomy, $child_term);
+                                    $grand_child_term = $this->saveTerms($grand_child->name, $grand_child->slug, $taxonomy, $child_term);
                                 }
                             }
                         }

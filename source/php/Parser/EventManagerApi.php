@@ -85,22 +85,17 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         $latitude               = is_array($location) && ! empty($location['latitude']) ? $location['latitude'] : null;
         $longitude              = is_array($location) && ! empty($location['longitude']) ? $location['longitude'] : null;
 
-        // Check if category, tag and group filter is set or not
-        $tax_filter = (empty(get_field('event_filter_cat', 'options')) && empty(get_field('event_filter_tag', 'options')) && empty(get_field('event_filter_group', 'options'))) ? true : false;
+        $pass_tax_filter = $this->checkFilters($this->filterTaxonomies($categories, 0), $this->filterTaxonomies($tags, 1));
+        $passes = true;
 
-        // Filter by categories
-        if (! empty(get_field('event_filter_cat', 'options'))) {
-            $tax_filter = ($this->filterTaxonomies($categories, 0)) ? true : false;
-        }
-
-        // Filter by tags
-        if (! $tax_filter && ! empty(get_field('event_filter_tag', 'options'))) {
-            $tax_filter = ($this->filterTaxonomies($tags, 1)) ? true : false;
-        }
-
-        // Filter by groups
-        if (! $tax_filter && ! empty(get_field('event_filter_group', 'options'))) {
-            $tax_filter = $this->filterGroups($groups);
+        // Check if event passes "group" filter and taxonomy filters
+        if (! empty(get_field('event_filter_group', 'options'))) {
+           $passes = $this->filterGroups($groups);
+            if ($passes) {
+                $passes = $pass_tax_filter;
+            }
+        } else {
+            $passes = $pass_tax_filter;
         }
 
         // Check if event already exist and get the post status
@@ -121,7 +116,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         }
 
         // Save event if it passed taxonomy and group filters
-        if ($tax_filter) {
+        if ($passes) {
             $event = new Event(
                 array(
                 'post_title'            => $post_title,
@@ -174,6 +169,28 @@ class EventManagerApi extends \EventManagerIntegration\Parser
                 $event->setFeaturedImageFromUrl($featured_media, true);
             }
         }
+    }
+
+    /**
+     * Check if the event passes one of the taxonomy filters
+     * @param  bool $cat_filter Bool, equals true if event passed category filter
+     * @param  bool $tag_filter Bool, equals true if event passed tag filter
+     * @return bool
+     */
+    public function checkFilters($cat_filter, $tag_filter) : bool
+    {
+        $tax_filter = (empty(get_field('event_filter_cat', 'options')) && empty(get_field('event_filter_tag', 'options'))) ? true : false;
+
+        // Check category filters
+        if (!empty(get_field('event_filter_cat', 'options'))) {
+            $tax_filter = $cat_filter;
+        }
+        // Check tag filters
+        if (!$tax_filter && !empty(get_field('event_filter_tag', 'options'))) {
+            $tax_filter = $tag_filter;
+        }
+
+        return $tax_filter;
     }
 
     /**
