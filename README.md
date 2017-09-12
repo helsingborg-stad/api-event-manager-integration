@@ -69,12 +69,16 @@ Here is a code example to display a list of events. Use the attributes listed be
 ```
 
 ### External event submit form code example
+Here is a code example to display a form to submit events directly to the API.<br>
+It requires that the client is authorized to submit events.<br>
+Insert Group ID as value to the hidden field `user_groups` to set default group for all submited events.
 
 ```html
 <div class="box box-panel box-primary">
     <h4 class="box-title">Registrera evenemang</h4>
     <div class="gutter">
         <form name="submit-event" class="submit-event" enctype="multipart/form-data">
+            <input type="hidden" name="user_groups" value="">
             <div class="form-group">
                 <label for="title">Namn på evenemang <span class="text-danger">*</span></label>
                 <input type="text" name="title" id="title" placeholder="Namn" required>
