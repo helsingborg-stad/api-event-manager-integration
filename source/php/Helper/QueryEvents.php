@@ -50,7 +50,7 @@ class QueryEvents
         ";
         $query .= ($taxonomies) ? "AND ($wpdb->term_relationships.term_taxonomy_id IN ($taxonomies))" : '';
         $query .= ($idString != null) ? "AND ($wpdb->posts.ID IN ($idString)) " : '';
-        $query .= "GROUP BY $db_table.start_date, $db_table.end_date ";
+        $query .= "GROUP BY $wpdb->posts.ID, $db_table.start_date, $db_table.end_date ";
         $query .= "ORDER BY $db_table.start_date ASC";
         $query .= ($limit == -1) ? '' : ' LIMIT'.' '.$offset . ',' . $limit;
 
