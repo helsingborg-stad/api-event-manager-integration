@@ -13,6 +13,9 @@
 .message-success {
   color: #33cc33; }
 
+.accept.hidden, .deny.hidden {
+  display: none; }
+
 .accept.button-primary {
   color: #fff;
   background-color: #5cb85c;
