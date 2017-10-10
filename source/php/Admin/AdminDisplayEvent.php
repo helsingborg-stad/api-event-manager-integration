@@ -22,8 +22,10 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
      */
     public function removeMetaBoxes()
     {
-        if (get_field('event_update_button', 'option') == false) {
-            remove_meta_box('submitdiv', $this->post_type, 'side');
+        if (function_exists('get_field')) {
+            if (get_field('event_update_button', 'option') == false) {
+                remove_meta_box('submitdiv', $this->post_type, 'side');
+            }
         }
         remove_meta_box('acf-group_56c33cf1470dc', $this->post_type, 'side');
         remove_meta_box('pageparentdiv', $this->post_type, 'side');
