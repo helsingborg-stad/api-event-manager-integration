@@ -26,15 +26,17 @@ class App
 
         /* Register Modularity v2 modules */
         add_action('plugins_loaded', function () {
-            modularity_register_module(
-                EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/Event',
-                'Event'
-            );
+            if (function_exists('modularity_register_module')) {
+                modularity_register_module(
+                    EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/Event',
+                    'Event'
+                );
 
-            modularity_register_module(
-                EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/Location',
-                'Location'
-            );
+                modularity_register_module(
+                    EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/Location',
+                    'Location'
+                );
+            }
         });
 
         add_action('widgets_init', function () {
