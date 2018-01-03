@@ -31,6 +31,8 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
                     'create_posts' => 'do_not_allow',
                 ),
                 'map_meta_cap' => true,
+                'show_in_rest' => true,
+                'rest_base'    => 'event'
             )
         );
         $this->addTableColumn('cb', '<input type="checkbox">');
