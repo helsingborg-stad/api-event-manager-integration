@@ -24,7 +24,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
                 ),
                 'hierarchical'          =>  false,
                 'exclude_from_search'   =>  false,
-                'supports'              =>  false,
+                'supports'              =>  is_admin() ? false : array('title'),
                 // Disable create new post
                 'capability_type' => 'post',
                 'capabilities' => array(
