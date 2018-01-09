@@ -54,18 +54,18 @@ class App
     public function enqueueAdmin()
     {
         // Styles
-        wp_register_style('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/css/event-manager-integration-admin.' . self::$assetSuffix . '.css');
-        wp_enqueue_style('event-integration');
+        wp_register_style('event-integration-admin', EVENTMANAGERINTEGRATION_URL . '/dist/css/event-manager-integration-admin.' . self::$assetSuffix . '.css');
+        wp_enqueue_style('event-integration-admin');
 
         // Scripts
-        wp_register_script('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-integration-admin.' . self::$assetSuffix . '.js', true);
-        wp_localize_script('event-integration', 'eventintegration', array(
+        wp_register_script('event-integration-admin', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-integration-admin.' . self::$assetSuffix . '.js', true);
+        wp_localize_script('event-integration-admin', 'eventintegration', array(
             'ajaxurl' => admin_url('admin-ajax.php')
         ));
-        wp_localize_script('event-integration', 'eventIntegrationAdmin', array(
+        wp_localize_script('event-integration-admin', 'eventIntegrationAdmin', array(
             'loading'   => __("Loading", 'event-integration'),
         ));
-        wp_enqueue_script('event-integration');
+        wp_enqueue_script('event-integration-admin');
     }
 
     /**
