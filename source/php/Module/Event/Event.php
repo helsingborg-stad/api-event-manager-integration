@@ -139,27 +139,6 @@ class Event extends \Modularity\Module
     }
 
     /**
-     * Enqueue required styles and scripts for admin ui
-     * @return void
-     */
-    public function adminEnqueue()
-    {
-        // Styles
-        wp_register_style('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/css/event-manager-integration-admin.' . self::$assetSuffix . '.css');
-        wp_enqueue_style('event-integration');
-
-        // Scripts
-        wp_register_script('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-integration-admin.' . self::$assetSuffix . '.js', true);
-        wp_localize_script('event-integration', 'eventintegration', array(
-            'ajaxurl' => admin_url('admin-ajax.php')
-        ));
-        wp_localize_script('event-integration', 'eventIntegrationAdmin', array(
-            'loading'   => __("Loading", 'event-integration'),
-        ));
-        wp_enqueue_script('event-integration');
-    }
-
-    /**
      * Available "magic" methods for modules:
      * init()            What to do on initialization (if you must, use __construct with care, this will probably break stuff!!)
      * data()            Use to send data to view (return array)

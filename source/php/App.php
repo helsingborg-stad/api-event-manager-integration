@@ -11,6 +11,7 @@ class App
     {
         add_action('admin_init', array($this, 'checkDatabaseTable'));
         add_action('wp_enqueue_scripts', array($this, 'enqueueFront'), 950);
+        add_action('admin_enqueue_scripts', array($this, 'enqueueAdmin'));
 
         /* Register cron action */
         add_action('import_events_daily', array($this, 'importEventsCron'));
@@ -44,6 +45,27 @@ class App
         });
 
         add_filter('Municipio/blade/view_paths', array($this, 'addTemplatePaths'));
+    }
+
+    /**
+     * Enqueue required styles and scripts for admin ui
+     * @return void
+     */
+    public function enqueueAdmin()
+    {
+        // Styles
+        wp_register_style('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/css/event-manager-integration-admin.' . self::$assetSuffix . '.css');
+        wp_enqueue_style('event-integration');
+
+        // Scripts
+        wp_register_script('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-integration-admin.' . self::$assetSuffix . '.js', true);
+        wp_localize_script('event-integration', 'eventintegration', array(
+            'ajaxurl' => admin_url('admin-ajax.php')
+        ));
+        wp_localize_script('event-integration', 'eventIntegrationAdmin', array(
+            'loading'   => __("Loading", 'event-integration'),
+        ));
+        wp_enqueue_script('event-integration');
     }
 
     /**
