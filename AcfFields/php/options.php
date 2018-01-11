@@ -1,7 +1,7 @@
 <?php 
 
-if (function_exists('acf_add_local_field_group')) {
-    acf_add_local_field_group(array(
+if (function_exists('acf_add_local_field_group')) {
+    acf_add_local_field_group(array(
     'key' => 'group_583557753bd73',
     'title' => __('Event Manager Integration', 'event-integration'),
     'fields' => array(
@@ -253,6 +253,31 @@
             'max' => '',
             'step' => '',
         ),
+        13 => array(
+            'key' => 'field_5812eee2085a8',
+            'label' => __('Internal events', 'event-manager'),
+            'name' => 'internal_event',
+            'type' => 'true_false',
+            'instructions' => __('Import only internal events?', 'event-manager'),
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'choices' => array(
+                'internal' => __('Internal', 'event-manager'),
+                'public' => __('Public', 'event-manager'),
+            ),
+            'allow_null' => 0,
+            'other_choice' => 0,
+            'save_other_choice' => 0,
+            'default_value' => 0,
+            'layout' => 'vertical',
+            'return_format' => 'value',
+            'ui'          => 1,
+        ),
     ),
     'location' => array(
         0 => array(
@@ -273,4 +298,4 @@
     'description' => '',
     'local' => 'php',
 ));
-}
+}
