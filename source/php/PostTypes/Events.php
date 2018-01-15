@@ -95,7 +95,8 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
      * @param  array  $field   the field object
      * @return string          the new value
      */
-    public function updateGroupValue($value, $post_id, $field) {
+    public function updateGroupValue($value, $post_id, $field)
+    {
         if (! empty($value)) {
             foreach ($value as $v) {
                 $term_children = get_term_children($v, 'event_groups');
@@ -176,7 +177,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
     public function getCustomContent()
     {
         global $post;
-        $get_date = (! empty (get_query_var('date'))) ? get_query_var('date') : false;
+        $get_date = (! empty(get_query_var('date'))) ? get_query_var('date') : false;
 
         if ($get_date != false) {
             $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($post->ID, false);
@@ -321,7 +322,6 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
      */
     public function addImportButtons($views)
     {
-
         if (current_user_can('administrator')) {
             $button  = '<div class="import-buttons actions" style="position: relative;">';
 
@@ -334,12 +334,11 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         return $views;
     }
 
-    /**
+    /**event_api_url
      * Start parsing event importer
      */
     public function importEvents()
     {
-
         global $wpdb;
         $db_table   = $wpdb->prefix . "integrate_occasions";
         $occasion   = $wpdb->get_results(
@@ -363,12 +362,11 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         $api_url = get_field('event_api_url', 'option');
 
         if ($api_url) {
-            
             $api_url  = rtrim($api_url, '/') . '/event/time?start=' . $from_date . '&end=' . $to_date . $latlng . $distance;
 
-            //Adds internal event parameter            
+            //Adds internal event parameter
             if (get_field('internal_event', 'option') == 1) {
-               $api_url .= '&internal=1';
+                $api_url .= '&internal=1';
             }
 
             $importer = new \EventManagerIntegration\Parser\EventManagerApi($api_url);
