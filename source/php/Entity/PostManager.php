@@ -203,9 +203,12 @@ abstract class PostManager
 
         // Update if duplicate
         if (isset($duplicate->ID)) {
-            $post['ID'] = $duplicate->ID;
-            $this->ID = wp_update_post($post);
-            $isDuplicate = true;
+            //Check if event needs to be updated
+            if (get_post_meta($duplicate->ID, 'last_update', true) != $meta['last_update']) {
+                $post['ID'] = $duplicate->ID;
+                $this->ID = wp_update_post($post);
+                $isDuplicate = true;
+            }
         } else {
             // Create if not duplicate
             $this->ID = wp_insert_post($post, true);

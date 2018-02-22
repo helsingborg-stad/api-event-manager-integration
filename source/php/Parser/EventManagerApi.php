@@ -84,6 +84,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         $additional_locations   = ! empty($event['additional_locations']) ? $event['additional_locations'] : null;
         $latitude               = is_array($location) && ! empty($location['latitude']) ? $location['latitude'] : null;
         $longitude              = is_array($location) && ! empty($location['longitude']) ? $location['longitude'] : null;
+        $last_update            = ! empty($event['modified_gmt']) ? $event['modified_gmt'] : null;
 
         $pass_tax_filter = $this->checkFilters($this->filterTaxonomies($categories, 0), $this->filterTaxonomies($tags, 1));
         $passes = true;
@@ -161,6 +162,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
                 'deezer'                => $deezer,
                 'youtube'               => $youtube,
                 'vimeo'                 => $vimeo,
+                'last_update'           => $last_update,
                 )
             );
             $createSuccess = $event->save();
