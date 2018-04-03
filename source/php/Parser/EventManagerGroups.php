@@ -20,12 +20,17 @@ class EventManagerGroups extends \EventManagerIntegration\Parser
         while ($page != false) {
             $ch = curl_init();
             $options = [
-            CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_URL            => $this->url . '?per_page=100&page=' . $page,
             ];
-
             curl_setopt_array($ch, $options);
+
+            // Dont verify ssl cert in dev mode
+            if (defined('DEV_MODE') && DEV_MODE == true) {
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+            }
+
             $groups = json_decode(curl_exec($ch), false);
             curl_close($ch);
 
@@ -75,5 +80,4 @@ class EventManagerGroups extends \EventManagerIntegration\Parser
 
         return $term_id;
     }
-
 }

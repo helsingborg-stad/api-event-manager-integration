@@ -49,8 +49,11 @@ abstract class Parser
      */
     public static function requestApi($url)
     {
-        $request = wp_remote_get($url);
-
+        // Dont verify ssl cert in dev mode
+        $args = array(
+            'sslverify' => defined('DEV_MODE') && DEV_MODE == true ? false : true,
+        );
+        $request = wp_remote_get($url, $args);
         if (is_wp_error($request)) {
             return false;
         }
