@@ -73,11 +73,31 @@ class EventManagerGroups extends \EventManagerIntegration\Parser
         if ($term == false) {
             $new_term = wp_insert_term($name, $taxonomy, array('slug' => $slug, 'parent' => $parent));
             $term_id = $new_term['term_id'];
+
+            $this->activateNewGroup($term_id, $parent);
         } else {
             wp_update_term($term->term_id, $taxonomy, array('name' => $name, 'parent' => $parent));
             $term_id = $term->term_id;
         }
 
         return $term_id;
+    }
+
+    /**
+     * Automatically add new terms to Group filter option if the parent is selected
+     * @param  int $termId Term ID
+     * @param  int $parentId Terms parent ID
+     * @return void
+     */
+    public function activateNewGroup($termId, $parentId)
+    {
+        $selectedGroups = get_option('options_event_filter_group', false);
+        if (is_array($selectedGroups) && !empty($selectedGroups)) {
+            if (in_array($parentId, $selectedGroups)) {
+                // Add children to option array
+                $selectedGroups[] = (int) $termId;
+                update_field('event_filter_group', $selectedGroups, 'option');
+            }
+        }
     }
 }
