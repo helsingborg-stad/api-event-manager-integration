@@ -338,7 +338,12 @@ class EventManagerApi extends \EventManagerIntegration\Parser
     {
         if (!empty(get_object_taxonomies('event'))) {
             foreach (get_object_taxonomies('event') as $taxonomy) {
-                $terms = get_terms( array(
+                // Skip Event Groups
+                if ($taxonomy == 'event_groups') {
+                    continue;
+                }
+
+                $terms = get_terms(array(
                     'taxonomy'      => $taxonomy,
                     'hide_empty'    => false,
                     'childless'     => true,
@@ -352,5 +357,4 @@ class EventManagerApi extends \EventManagerIntegration\Parser
             }
         }
     }
-
 }
