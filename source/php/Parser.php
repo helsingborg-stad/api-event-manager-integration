@@ -51,6 +51,7 @@ abstract class Parser
     {
         // Dont verify ssl cert in dev mode
         $args = array(
+            'timeout' => 120,
             'sslverify' => defined('DEV_MODE') && DEV_MODE == true ? false : true,
         );
         $request = wp_remote_get($url, $args);
