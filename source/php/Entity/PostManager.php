@@ -208,6 +208,8 @@ abstract class PostManager
                 $post['ID'] = $duplicate->ID;
                 $this->ID = wp_update_post($post);
                 $isDuplicate = true;
+            } else {
+                return false;
             }
         } else {
             // Create if not duplicate
