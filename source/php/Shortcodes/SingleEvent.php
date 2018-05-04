@@ -354,7 +354,16 @@ class SingleEvent
             foreach ($meta['additional_ticket_types'] as $index => $ticketType) {
                 $ret .= '<ul>';
                 $ret .= (!empty($ticketType['ticket_name'])) ? '<li><strong>' . $ticketType['ticket_name'] . '</strong></li>' : '';
-                $ret .= (!empty($ticketType['ticket_type'])) ? '<li>' . $ticketType['ticket_type'] . '</li>' : '';
+                if (!empty($ticketType['ticket_type'])) {
+                    switch (strtolower($ticketType['ticket_type'])) {
+                        case('seated'):
+                            $ret .= '<li>' . __('Seated', 'event-integration') . '</li>';
+                            break;
+                        case('standing'):
+                            $ret .= '<li>' . __('Standing', 'event-integration') . '</li>';
+                            break;
+                    }
+                }
                 $ret .= (isset($ticketType['minimum_price']) && $ticketType['minimum_price'] != '') ? '<li>' . $ticketType['minimum_price'] . ' kr</li>' : '';
                 $ret .= (isset($ticketType['maximum_price']) && $ticketType['maximum_price'] != '') ? '<li>' . $ticketType['maximum_price'] . ' kr</li>' : '';
                 $ret .= '</ul>';
