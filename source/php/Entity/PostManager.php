@@ -64,19 +64,19 @@ abstract class PostManager
 
     /**
      * Get  posts
-     * @param  integer        $count       Number of posts to get
-     * @param  array          $metaQuery   Meta query
-     * @param  string         $postType    Post type
-     * @param  array|string   $postStatus  Post status
+     * @param  integer      $count      Number of posts to get
+     * @param  array        $metaQuery  Meta query
+     * @param  string       $postType   Post type
+     * @param  array|string $postStatus Post status
      * @return array                       Found posts
      */
     public static function get($count, $metaQuery, $postType, $postStatus = array('publish', 'draft'))
     {
         $args = array(
             'posts_per_page' => $count,
-            'post_type'      => $postType,
-            'orderby'        => 'date',
-            'order'          => 'DESC'
+            'post_type' => $postType,
+            'orderby' => 'date',
+            'order' => 'DESC'
         );
 
         $args['post_status'] = (array)$postStatus;
@@ -131,8 +131,8 @@ abstract class PostManager
 
     /**
      * Delete meta data from db if it's deleted from API
-     * @param  array $meta     empty meta data fields
-     * @param  int   $post_id  post object id
+     * @param  array $meta    empty meta data fields
+     * @param  int   $post_id post object id
      * @return void
      */
     public function removeEmptyMeta($meta, $post_id)
@@ -222,11 +222,11 @@ abstract class PostManager
         return $this->afterSave();
     }
 
-
     /**
      * Uploads an image from a specified url and sets it as the current post's featured image
-     * @param string $url Image url
-     * @param bool   $featured True if $url is featured image, false if not.
+     * @param $url
+     * @param $featured
+     * @return bool|object
      */
     public function setFeaturedImageFromUrl($url, $featured)
     {
@@ -240,17 +240,16 @@ abstract class PostManager
 
         // Upload paths
         $uploadDir = wp_upload_dir();
-        $uploadDirUrl = $uploadDir['baseurl'];
         $uploadDir = $uploadDir['basedir'];
         $uploadDir = $uploadDir . '/events';
 
         if (!is_dir($uploadDir)) {
             if (!mkdir($uploadDir, 0776)) {
-                return new WP_Error('event', __('Could not create folder', 'event-integration').' "' . $uploadDir . '", '. __('please go ahead and create it manually and rerun the import.', 'event-integration'));
+                return new WP_Error('event', __('Could not create folder', 'event-integration') . ' "' . $uploadDir . '", ' . __('please go ahead and create it manually and rerun the import.', 'event-integration'));
             }
         }
 
-        $filename = basename($url);
+        $filename = sanitize_file_name(basename($url));
         if (stripos(basename($url), '.aspx')) {
             $filename = md5($filename) . '.jpg';
         }
@@ -258,11 +257,17 @@ abstract class PostManager
         // Bail if image already exists in library
         if ($attachmentId = $this->attachmentExists($uploadDir . '/' . basename($filename))) {
             set_post_thumbnail($this->ID, $attachmentId);
-            return;
+            return true;
         }
 
         // Save file to server
-        $contents = file_get_contents($url);
+        $args = array(
+            'ssl' => array(
+                'verify_peer' => defined('DEV_MODE') && DEV_MODE == true ? false : true,
+                'verify_peer_name' => defined('DEV_MODE') && DEV_MODE == true ? false : true,
+            ),
+        );
+        $contents = file_get_contents($url, false, stream_context_create($args));
         $save = fopen($uploadDir . '/' . $filename, 'w');
         fwrite($save, $contents);
         fclose($save);
@@ -297,11 +302,13 @@ abstract class PostManager
                 update_post_meta($this->ID, 'event_gallery', array_unique($gallery_meta));
             }
         }
+
+        return true;
     }
 
     /**
      * Validates url
-     * @param  string  $url Url to validate
+     * @param  string $url Url to validate
      * @return boolean
      */
     private function isUrl($url)
