@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2018-05-04 15:37+0200\n"
-"PO-Revision-Date: 2018-05-04 15:38+0200\n"
+"POT-Creation-Date: 2018-05-04 16:33+0200\n"
+"PO-Revision-Date: 2018-05-04 16:33+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -120,7 +120,7 @@ msgid "Set to -1 to show the whole description."
 msgstr "-1 för att visa hela beskrivningen."
 
 #: AcfFields/php/event-module.php:223 source/php/PostTypes/Events.php:302
-#: source/php/Shortcodes/SingleEvent.php:484
+#: source/php/Shortcodes/SingleEvent.php:495
 msgid "Groups"
 msgstr "Grupper"
 
@@ -137,7 +137,7 @@ msgid "Show events from the selected groups."
 msgstr "Visa evenemang inom angivna grupper."
 
 #: AcfFields/php/event-module.php:269 source/php/PostTypes/Events.php:228
-#: source/php/Shortcodes/SingleEvent.php:490
+#: source/php/Shortcodes/SingleEvent.php:501
 msgid "Categories"
 msgstr "Kategorier"
 
@@ -154,7 +154,7 @@ msgid "Show events from the selected categories."
 msgstr "Visa evenemang inom angivna kategorier."
 
 #: AcfFields/php/event-module.php:315 source/php/PostTypes/Events.php:265
-#: source/php/Shortcodes/SingleEvent.php:496
+#: source/php/Shortcodes/SingleEvent.php:507
 msgid "Tags"
 msgstr "Taggar"
 
@@ -422,7 +422,7 @@ msgstr "Datum"
 msgid "Additional locations"
 msgstr "Fler platser"
 
-#: AcfFields/php/shortcodes.php:60 source/php/Shortcodes/SingleEvent.php:429
+#: AcfFields/php/shortcodes.php:60 source/php/Shortcodes/SingleEvent.php:440
 msgid "Sponsors"
 msgstr "Sponsorer"
 
@@ -987,8 +987,8 @@ msgid "years"
 msgstr "år"
 
 #: source/php/Shortcodes/SingleEvent.php:348
-#: source/php/Shortcodes/SingleEvent.php:383
-#: source/php/Shortcodes/SingleEvent.php:384
+#: source/php/Shortcodes/SingleEvent.php:394
+#: source/php/Shortcodes/SingleEvent.php:395
 msgid "Ticket release date"
 msgstr "Biljettsläpp"
 
@@ -1004,47 +1004,55 @@ msgstr "Återstående biljetter"
 msgid "Ticket types"
 msgstr "Biljettyper"
 
-#: source/php/Shortcodes/SingleEvent.php:367
+#: source/php/Shortcodes/SingleEvent.php:361
+msgid "Seated"
+msgstr "Sittande"
+
+#: source/php/Shortcodes/SingleEvent.php:365
+msgid "Standing"
+msgstr "Stående"
+
+#: source/php/Shortcodes/SingleEvent.php:378
 msgid "Price range"
 msgstr "Prisintervall"
 
-#: source/php/Shortcodes/SingleEvent.php:369
+#: source/php/Shortcodes/SingleEvent.php:380
 msgid "Seated minimum price"
 msgstr "Minimipris för sittande"
 
-#: source/php/Shortcodes/SingleEvent.php:370
+#: source/php/Shortcodes/SingleEvent.php:381
 msgid "Seated maximum price"
 msgstr "Maximipris för sittande"
 
-#: source/php/Shortcodes/SingleEvent.php:371
+#: source/php/Shortcodes/SingleEvent.php:382
 msgid "Standing minimum price"
 msgstr "Minimipris för stående"
 
-#: source/php/Shortcodes/SingleEvent.php:372
+#: source/php/Shortcodes/SingleEvent.php:383
 msgid "Standing maximum price"
 msgstr "Maximipris för stående"
 
-#: source/php/Shortcodes/SingleEvent.php:378
+#: source/php/Shortcodes/SingleEvent.php:389
 msgid "Ticket retailers"
 msgstr "Återförsäljare"
 
-#: source/php/Shortcodes/SingleEvent.php:392
+#: source/php/Shortcodes/SingleEvent.php:403
 msgid "Group prices"
 msgstr "Gruppriser"
 
-#: source/php/Shortcodes/SingleEvent.php:395
+#: source/php/Shortcodes/SingleEvent.php:406
 msgid "persons"
 msgstr "personer"
 
-#: source/php/Shortcodes/SingleEvent.php:401
+#: source/php/Shortcodes/SingleEvent.php:412
 msgid "Included in membership cards"
 msgstr "Ingår i medlemskort"
 
-#: source/php/Shortcodes/SingleEvent.php:408
+#: source/php/Shortcodes/SingleEvent.php:419
 msgid "Price information"
 msgstr "Prisinformation"
 
-#: source/php/Shortcodes/SingleEvent.php:409
+#: source/php/Shortcodes/SingleEvent.php:420
 msgid "Ticket includes"
 msgstr "Ingår i biljett"
 

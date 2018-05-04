@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2018-05-04 15:37+0200\n"
+"POT-Creation-Date: 2018-05-04 16:33+0200\n"
 "PO-Revision-Date: 2016-12-13 15:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -120,7 +120,7 @@ msgid "Set to -1 to show the whole description."
 msgstr ""
 
 #: AcfFields/php/event-module.php:223 source/php/PostTypes/Events.php:302
-#: source/php/Shortcodes/SingleEvent.php:484
+#: source/php/Shortcodes/SingleEvent.php:495
 msgid "Groups"
 msgstr ""
 
@@ -137,7 +137,7 @@ msgid "Show events from the selected groups."
 msgstr ""
 
 #: AcfFields/php/event-module.php:269 source/php/PostTypes/Events.php:228
-#: source/php/Shortcodes/SingleEvent.php:490
+#: source/php/Shortcodes/SingleEvent.php:501
 msgid "Categories"
 msgstr ""
 
@@ -154,7 +154,7 @@ msgid "Show events from the selected categories."
 msgstr ""
 
 #: AcfFields/php/event-module.php:315 source/php/PostTypes/Events.php:265
-#: source/php/Shortcodes/SingleEvent.php:496
+#: source/php/Shortcodes/SingleEvent.php:507
 msgid "Tags"
 msgstr ""
 
@@ -400,7 +400,7 @@ msgstr ""
 msgid "Additional locations"
 msgstr ""
 
-#: AcfFields/php/shortcodes.php:60 source/php/Shortcodes/SingleEvent.php:429
+#: AcfFields/php/shortcodes.php:60 source/php/Shortcodes/SingleEvent.php:440
 msgid "Sponsors"
 msgstr ""
 
@@ -954,8 +954,8 @@ msgid "years"
 msgstr ""
 
 #: source/php/Shortcodes/SingleEvent.php:348
-#: source/php/Shortcodes/SingleEvent.php:383
-#: source/php/Shortcodes/SingleEvent.php:384
+#: source/php/Shortcodes/SingleEvent.php:394
+#: source/php/Shortcodes/SingleEvent.php:395
 msgid "Ticket release date"
 msgstr ""
 
@@ -971,47 +971,55 @@ msgstr ""
 msgid "Ticket types"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:367
-msgid "Price range"
+#: source/php/Shortcodes/SingleEvent.php:361
+msgid "Seated"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:369
-msgid "Seated minimum price"
-msgstr ""
-
-#: source/php/Shortcodes/SingleEvent.php:370
-msgid "Seated maximum price"
-msgstr ""
-
-#: source/php/Shortcodes/SingleEvent.php:371
-msgid "Standing minimum price"
-msgstr ""
-
-#: source/php/Shortcodes/SingleEvent.php:372
-msgid "Standing maximum price"
+#: source/php/Shortcodes/SingleEvent.php:365
+msgid "Standing"
 msgstr ""
 
 #: source/php/Shortcodes/SingleEvent.php:378
+msgid "Price range"
+msgstr ""
+
+#: source/php/Shortcodes/SingleEvent.php:380
+msgid "Seated minimum price"
+msgstr ""
+
+#: source/php/Shortcodes/SingleEvent.php:381
+msgid "Seated maximum price"
+msgstr ""
+
+#: source/php/Shortcodes/SingleEvent.php:382
+msgid "Standing minimum price"
+msgstr ""
+
+#: source/php/Shortcodes/SingleEvent.php:383
+msgid "Standing maximum price"
+msgstr ""
+
+#: source/php/Shortcodes/SingleEvent.php:389
 msgid "Ticket retailers"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:392
+#: source/php/Shortcodes/SingleEvent.php:403
 msgid "Group prices"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:395
+#: source/php/Shortcodes/SingleEvent.php:406
 msgid "persons"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:401
+#: source/php/Shortcodes/SingleEvent.php:412
 msgid "Included in membership cards"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:408
+#: source/php/Shortcodes/SingleEvent.php:419
 msgid "Price information"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:409
+#: source/php/Shortcodes/SingleEvent.php:420
 msgid "Ticket includes"
 msgstr ""
 
