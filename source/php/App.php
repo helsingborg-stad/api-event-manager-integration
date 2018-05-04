@@ -109,9 +109,9 @@ class App
     {
         $start = date('Y-m-d H:i:s', strtotime($start_date));
         $end = date('Y-m-d H:i:s', strtotime($end_date));
-        $date = mysql2date('j F Y', $start, true) . ', ' . mysql2date('H:i', $start, true) . ' ' . __('to', 'event-integration') . ' ' . mysql2date('j F Y', $end, true) . ', ' . mysql2date('H:i', $end, true);
+        $date = mysql2date('j F Y, H:i', $start, true) . ' ' . __('to', 'event-integration') . ' ' . mysql2date('j F Y, H:i', $end, true);
         if (date('Y-m-d', strtotime($start)) == date('Y-m-d', strtotime($end))) {
-            $date = mysql2date('j F Y', $start, true) . ', ' . mysql2date('H:i', $start, true) . ' - ' . mysql2date('H:i', $end, true);
+            $date = mysql2date('j F Y, H:i', $start, true) . ' - ' . mysql2date('H:i', $end, true);
         }
 
         return $date;
@@ -201,7 +201,7 @@ class App
         $api_url = get_field('event_api_url', 'option');
         if ($api_url) {
             $api_url = rtrim($api_url, '/') . '/user_groups';
-            $importer = new \EventManagerIntegration\Parser\EventManagerGroups($api_url);
+            new \EventManagerIntegration\Parser\EventManagerGroups($api_url);
         }
     }
 
@@ -214,7 +214,7 @@ class App
         global $wpdb;
         $table_name = $wpdb->prefix . 'integrate_occasions';
         if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
-            $this->databaseCreation();
+            self::databaseCreation();
         }
 
         return;
