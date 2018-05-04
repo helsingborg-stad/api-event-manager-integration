@@ -91,6 +91,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         $additional_ticket_retailers    = ! empty($event['additional_ticket_retailers']) ? $event['additional_ticket_retailers'] : null;
         $additional_ticket_types        = ! empty($event['additional_ticket_types']) ? $event['additional_ticket_types'] : null;
         $price_range                    = ! empty($event['price_range']) ? $event['price_range'] : null;
+        $ticket_release_date            = ! empty($event['ticket_release_date']) ? $event['ticket_release_date'] : null;
 
         $pass_tax_filter = $this->checkFilters($this->filterTaxonomies($categories, 0), $this->filterTaxonomies($tags, 1));
         $passes = true;
@@ -174,7 +175,8 @@ class EventManagerApi extends \EventManagerIntegration\Parser
                         'tickets_remaining' => $tickets_remaining,
                         'additional_ticket_retailers' => $additional_ticket_retailers,
                         'additional_ticket_types' => $additional_ticket_types,
-                        'price_range' => $price_range
+                        'price_range' => $price_range,
+                        'ticket_release_date' => $ticket_release_date
                     )
                 );
             } catch (\Exception $e) {
