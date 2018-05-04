@@ -222,7 +222,7 @@ class SingleEvent
         $booking_info = $this->eventBooking($meta);
         if (in_array('booking', $fields) && strpos($booking_info, '<li>')) {
             $ret .= '<div class="shortcode-box shortcode-booking ' . $box_class . '">';
-            $ret .= '<ul><li><h3>' . __('lorem', 'event-integration') . '</h3></li></ul>';
+            $ret .= '<ul><li><h3>' . __('Booking and tickets', 'event-integration') . '</h3></li></ul>';
             $ret .= $booking_info;
             $ret .= '</div>';
         }
@@ -380,8 +380,8 @@ class SingleEvent
                 $ret .= '<ul>';
                 $ret .= (!empty($retailer['retailer_name'])) ? '<li><strong>' . $retailer['retailer_name'] . '</strong></li>' : '';
                 $ret .= (!empty($retailer['booking_url'])) ? '<li><i class="pricon pricon-external-link"></i> <a href="' . $retailer['booking_url'] . '" target="_blank">' . preg_replace("(^https?://)", "", $retailer['booking_url']) . '</a></li>' : '';
-                $ret .= (!empty($retailer['ticket_release_date'])) ? '<li>' . __('Ticket release date') . ': ' . mysql2date('j F Y, H:i', $retailer['ticket_release_date'], true) . '</li>' : '';
-                $ret .= (!empty($retailer['ticket_stop_date'])) ? '<li>' . __('Ticket release date') . ': ' . mysql2date('j F Y, H:i', $retailer['ticket_stop_date'], true) . '</li>' : '';
+                $ret .= (!empty($retailer['ticket_release_date'])) ? '<li>' . __('Ticket release date', 'event-integration') . ': ' . mysql2date('j F Y, H:i', $retailer['ticket_release_date'], true) . '</li>' : '';
+                $ret .= (!empty($retailer['ticket_stop_date'])) ? '<li>' . __('Ticket release date', 'event-integration') . ': ' . mysql2date('j F Y, H:i', $retailer['ticket_stop_date'], true) . '</li>' : '';
 
                 $ret .= '</ul>';
             }

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2017-06-20 16:49+0200\n"
-"PO-Revision-Date: 2017-06-20 16:49+0200\n"
+"POT-Creation-Date: 2018-05-04 15:37+0200\n"
+"PO-Revision-Date: 2018-05-04 15:38+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.2\n"
+"X-Generator: Poedit 2.0.7\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: event-manager-integration.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -76,8 +76,8 @@ msgstr "Visa evenemang som inträffar inom angivet antal dagar."
 msgid "Fields"
 msgstr "Fält"
 
-#: AcfFields/php/event-module.php:149 source/php/PostTypes/Events.php:38
-#: source/php/Shortcodes/SingleEvent.php:267
+#: AcfFields/php/event-module.php:149 source/php/PostTypes/Events.php:43
+#: source/php/Shortcodes/SingleEvent.php:272
 msgid "Occasion"
 msgstr "Datum"
 
@@ -87,11 +87,11 @@ msgstr "Bild"
 
 #: AcfFields/php/event-module.php:151 AcfFields/php/event-module.php:385
 #: AcfFields/php/location-module.php:6 AcfFields/php/shortcodes.php:57
-#: source/php/Admin/AdminDisplayEvent.php:145
-#: source/php/Module/EventModule.php:182
+#: source/php/Admin/AdminDisplayEvent.php:147
+#: source/php/Module/Event/views/partials/list.blade.php:37
 #: source/php/Module/Location/Location.php:12
-#: source/php/Shortcodes/SingleEvent.php:88
-#: source/php/Shortcodes/SingleEvent.php:211
+#: source/php/Shortcodes/SingleEvent.php:90
+#: source/php/Shortcodes/SingleEvent.php:216
 msgid "Location"
 msgstr "Plats"
 
@@ -119,8 +119,8 @@ msgstr "Teckenbegränsning av beskrivning"
 msgid "Set to -1 to show the whole description."
 msgstr "-1 för att visa hela beskrivningen."
 
-#: AcfFields/php/event-module.php:223 source/php/PostTypes/Events.php:286
-#: source/php/Shortcodes/SingleEvent.php:438
+#: AcfFields/php/event-module.php:223 source/php/PostTypes/Events.php:302
+#: source/php/Shortcodes/SingleEvent.php:484
 msgid "Groups"
 msgstr "Grupper"
 
@@ -136,8 +136,8 @@ msgstr "Välj grupper"
 msgid "Show events from the selected groups."
 msgstr "Visa evenemang inom angivna grupper."
 
-#: AcfFields/php/event-module.php:269 source/php/PostTypes/Events.php:212
-#: source/php/Shortcodes/SingleEvent.php:444
+#: AcfFields/php/event-module.php:269 source/php/PostTypes/Events.php:228
+#: source/php/Shortcodes/SingleEvent.php:490
 msgid "Categories"
 msgstr "Kategorier"
 
@@ -153,8 +153,8 @@ msgstr "Välj kategorier"
 msgid "Show events from the selected categories."
 msgstr "Visa evenemang inom angivna kategorier."
 
-#: AcfFields/php/event-module.php:315 source/php/PostTypes/Events.php:249
-#: source/php/Shortcodes/SingleEvent.php:450
+#: AcfFields/php/event-module.php:315 source/php/PostTypes/Events.php:265
+#: source/php/Shortcodes/SingleEvent.php:496
 msgid "Tags"
 msgstr "Taggar"
 
@@ -219,9 +219,9 @@ msgid "Prices"
 msgstr "Priser"
 
 #: AcfFields/php/location-module.php:26 AcfFields/php/shortcodes.php:62
-#: source/php/Admin/AdminDisplayEvent.php:168
-#: source/php/Shortcodes/SingleEvent.php:149
-#: source/php/Shortcodes/SingleEvent.php:248
+#: source/php/Admin/AdminDisplayEvent.php:170
+#: source/php/Shortcodes/SingleEvent.php:151
+#: source/php/Shortcodes/SingleEvent.php:253
 msgid "Links"
 msgstr "Länkar"
 
@@ -349,10 +349,8 @@ msgstr ""
 "endast om du vill kunna skicka evenemang till Event Manager API."
 
 #: AcfFields/php/options.php:200
-#, fuzzy
-#| msgid "Google Geocode API key"
 msgid "Google Maps JavaScript API key"
-msgstr "Google Geocode API-nyckel"
+msgstr ""
 
 #: AcfFields/php/options.php:219
 msgid "Import from location"
@@ -371,10 +369,26 @@ msgstr ""
 "maximalt avstånd i km. Lämna tomt för att importera evenemang från den "
 "exakta positionen."
 
+#: AcfFields/php/options.php:258
+msgid "Internal events"
+msgstr "Interna evenemang"
+
+#: AcfFields/php/options.php:261
+msgid "Import only internal events?"
+msgstr "Importera endast interna evenemang?"
+
+#: AcfFields/php/options.php:270
+msgid "Internal"
+msgstr "Intern"
+
+#: AcfFields/php/options.php:271 source/php/PostTypes/Events.php:50
+msgid "Public"
+msgstr "Offentlig"
+
 #: AcfFields/php/shortcodes.php:10 AcfFields/php/shortcodes.php:55
-#: source/php/Admin/AdminDisplayEvent.php:138
-#: source/php/Shortcodes/SingleEvent.php:74
-#: source/php/Shortcodes/SingleEvent.php:203
+#: source/php/Admin/AdminDisplayEvent.php:140
+#: source/php/Shortcodes/SingleEvent.php:76
+#: source/php/Shortcodes/SingleEvent.php:208
 msgid "Information"
 msgstr "Information"
 
@@ -398,9 +412,9 @@ msgstr ""
 msgid "Display fields"
 msgstr "Visa fält"
 
-#: AcfFields/php/shortcodes.php:56 source/php/Admin/AdminDisplayEvent.php:75
-#: source/php/Shortcodes/SingleEvent.php:131
-#: source/php/Shortcodes/SingleEvent.php:236
+#: AcfFields/php/shortcodes.php:56 source/php/Admin/AdminDisplayEvent.php:77
+#: source/php/Shortcodes/SingleEvent.php:133
+#: source/php/Shortcodes/SingleEvent.php:241
 msgid "Occasions"
 msgstr "Datum"
 
@@ -408,7 +422,7 @@ msgstr "Datum"
 msgid "Additional locations"
 msgstr "Fler platser"
 
-#: AcfFields/php/shortcodes.php:60 source/php/Shortcodes/SingleEvent.php:383
+#: AcfFields/php/shortcodes.php:60 source/php/Shortcodes/SingleEvent.php:429
 msgid "Sponsors"
 msgstr "Sponsorer"
 
@@ -444,7 +458,7 @@ msgstr ""
 "shortcoden [single_event_information]. Användbart för att göra responsivt. "
 "Separera med kommatecken."
 
-#: AcfFields/php/shortcodes.php:118 source/php/Admin/AdminDisplayEvent.php:57
+#: AcfFields/php/shortcodes.php:118 source/php/Admin/AdminDisplayEvent.php:59
 msgid "Gallery"
 msgstr "Bildgalleri"
 
@@ -467,35 +481,34 @@ msgid ""
 "pro/\" target=\"_blank\">Advanced Custom Fields Pro</a> plugin."
 msgstr ""
 
-#: source/php/Admin/AdminDisplayEvent.php:39
+#: source/php/Admin/AdminDisplayEvent.php:41
+#: source/php/Module/Event/Event.php:15
 msgid "Event"
 msgstr "Evenemang"
 
-#: source/php/Admin/AdminDisplayEvent.php:48
+#: source/php/Admin/AdminDisplayEvent.php:50
 msgid "Meta data"
 msgstr "Metadata"
 
-#: source/php/Admin/AdminDisplayEvent.php:66
+#: source/php/Admin/AdminDisplayEvent.php:68
 msgid "Featured image"
 msgstr "Bild"
 
-#: source/php/Admin/AdminDisplayEvent.php:152
-#: source/php/Shortcodes/SingleEvent.php:103
-#: source/php/Shortcodes/SingleEvent.php:220
+#: source/php/Admin/AdminDisplayEvent.php:154
 msgid "Booking"
 msgstr "Bokning"
 
-#: source/php/Admin/AdminDisplayEvent.php:159
-#: source/php/Shortcodes/SingleEvent.php:117
-#: source/php/Shortcodes/SingleEvent.php:228
+#: source/php/Admin/AdminDisplayEvent.php:161
+#: source/php/Shortcodes/SingleEvent.php:119
+#: source/php/Shortcodes/SingleEvent.php:233
 msgid "Organizer"
 msgstr "Arrangör"
 
-#: source/php/Admin/AdminDisplayEvent.php:173
+#: source/php/Admin/AdminDisplayEvent.php:175
 msgid "Taxonomies"
 msgstr "Taxonomier"
 
-#: source/php/Admin/AdminDisplayEvent.php:214
+#: source/php/Admin/AdminDisplayEvent.php:216
 msgid "Image missing"
 msgstr "Bild saknas"
 
@@ -509,17 +522,17 @@ msgctxt "Event Manager Integration settings"
 msgid "Options"
 msgstr "Inställningar"
 
-#: source/php/App.php:58
-msgid "to"
-msgstr "till"
+#: source/php/App.php:66
+msgid "Loading"
+msgstr "Hämtar"
 
-#: source/php/App.php:115
+#: source/php/App.php:88
 msgid "Something went wrong, please try again later."
 msgstr "Något gick fel, vänligen försök igen senare."
 
-#: source/php/App.php:142
-msgid "Loading"
-msgstr "Hämtar"
+#: source/php/App.php:112
+msgid "to"
+msgstr "till"
 
 #: source/php/Entity/CustomPostType.php:47
 #: source/php/Entity/CustomPostType.php:48
@@ -562,23 +575,38 @@ msgstr "Inga %s hittades i papperskorgen"
 msgid "Parent %s:"
 msgstr "Förälder %s:"
 
-#: source/php/Entity/PostManager.php:244
+#: source/php/Entity/PostManager.php:248
 msgid "Could not create folder"
 msgstr "Kunde inte skapa mappen"
 
-#: source/php/Entity/PostManager.php:244
+#: source/php/Entity/PostManager.php:248
 msgid "please go ahead and create it manually and rerun the import."
 msgstr "vänligen skapa den manuellt och gör om importen."
 
-#: source/php/Module/EventModule.php:144 source/php/Widget/DisplayEvents.php:56
+#: source/php/Module/Event/Event.php:16 source/php/Widget/DisplayEvents.php:13
+msgid "Events"
+msgstr "Evenemang"
+
+#: source/php/Module/Event/Event.php:17
+msgid "Outputs a list if upcoming events"
+msgstr ""
+
+#: source/php/Module/Event/views/event.blade.php:18
+#: source/php/Templates/module/modularity-mod-event.php:25
+msgid "More events"
+msgstr "Fler evenemang"
+
+#: source/php/Module/Event/views/partials/list.blade.php:3
+#: source/php/Widget/DisplayEvents.php:56
 msgid "No events found"
 msgstr "Inga evenemang hittades"
 
-#: source/php/Module/EventModule.php:153
+#: source/php/Module/Event/views/partials/list.blade.php:11
 msgid "Today"
 msgstr "Idag"
 
-#: source/php/Module/EventModule.php:178 source/php/PostTypes/Events.php:58
+#: source/php/Module/Event/views/partials/list.blade.php:33
+#: source/php/PostTypes/Events.php:63
 msgid "Date"
 msgstr "Datum"
 
@@ -590,15 +618,15 @@ msgstr "Platser"
 msgid "Displays a specific location"
 msgstr "Visar en utvald plats"
 
-#: source/php/Module/Location/Location.php:37
+#: source/php/Module/Location/Location.php:44
 msgid "Choose location"
 msgstr "Välj plats"
 
-#: source/php/Module/Location/Location.php:57
+#: source/php/Module/Location/Location.php:64
 msgid "Something went wrong, pleae check your API url."
 msgstr "Något gick fel, vänligen kontrollera angiven API-url."
 
-#: source/php/Module/Location/Location.php:71
+#: source/php/Module/Location/Location.php:78
 msgid "No locations found"
 msgstr "Inga platser hittades"
 
@@ -717,273 +745,308 @@ msgstr "Bild saknas, vänligen försök igen."
 msgid "Something went wrong uploading your image"
 msgstr "Något gick fel med att ladda upp din bild"
 
-#: source/php/PostTypes/Events.php:10
+#: source/php/PostTypes/Events.php:13
 msgctxt "Post type plural"
 msgid "Events"
 msgstr "Evenemang"
 
-#: source/php/PostTypes/Events.php:11
+#: source/php/PostTypes/Events.php:14
 msgctxt "Post type singular"
 msgid "Event"
 msgstr "Evenemang"
 
-#: source/php/PostTypes/Events.php:37
+#: source/php/PostTypes/Events.php:42
 msgid "Title"
 msgstr "Titel"
 
-#: source/php/PostTypes/Events.php:45
-msgid "Public"
-msgstr "Offentlig"
-
-#: source/php/PostTypes/Events.php:55
+#: source/php/PostTypes/Events.php:60
 msgid "Accept"
 msgstr "Godkänn"
 
-#: source/php/PostTypes/Events.php:56
+#: source/php/PostTypes/Events.php:61
 msgid "Deny"
 msgstr "Neka"
 
-#: source/php/PostTypes/Events.php:199
+#: source/php/PostTypes/Events.php:215
 msgctxt "Taxonomy plural name"
 msgid "Event categories"
 msgstr "Evenemangskategorier"
 
-#: source/php/PostTypes/Events.php:200
+#: source/php/PostTypes/Events.php:216
 msgctxt "Taxonomy singular name"
 msgid "Event category"
 msgstr "Evenemangskategori"
 
-#: source/php/PostTypes/Events.php:201
+#: source/php/PostTypes/Events.php:217
 msgid "Search categories"
 msgstr "Sök kategori"
 
-#: source/php/PostTypes/Events.php:202
+#: source/php/PostTypes/Events.php:218
 msgid "Popular categories"
 msgstr "Populära kategorier"
 
-#: source/php/PostTypes/Events.php:203
+#: source/php/PostTypes/Events.php:219
 msgid "All categories"
 msgstr "Alla kategorier"
 
-#: source/php/PostTypes/Events.php:204 source/php/PostTypes/Events.php:205
+#: source/php/PostTypes/Events.php:220 source/php/PostTypes/Events.php:221
 msgid "Parent category"
 msgstr "Huvudkategori"
 
-#: source/php/PostTypes/Events.php:206
+#: source/php/PostTypes/Events.php:222
 msgid "Edit category"
 msgstr "Redigera kategori"
 
-#: source/php/PostTypes/Events.php:207
+#: source/php/PostTypes/Events.php:223
 msgid "Update category"
 msgstr "Uppdatera kategori"
 
-#: source/php/PostTypes/Events.php:208
+#: source/php/PostTypes/Events.php:224
 msgid "Add new category"
 msgstr "Lägg till ny kategori"
 
-#: source/php/PostTypes/Events.php:209
+#: source/php/PostTypes/Events.php:225
 msgid "New category"
 msgstr "Ny kategori"
 
-#: source/php/PostTypes/Events.php:210
+#: source/php/PostTypes/Events.php:226
 msgid "Add or remove categories"
 msgstr "Lägg till eller ta bort kategorier"
 
-#: source/php/PostTypes/Events.php:211
+#: source/php/PostTypes/Events.php:227
 msgid "Choose from most used categories"
 msgstr "Välj bland de mest använda kategorierna"
 
-#: source/php/PostTypes/Events.php:236
+#: source/php/PostTypes/Events.php:252
 msgctxt "Taxonomy plural name"
 msgid "Event tags"
 msgstr "Taggar"
 
-#: source/php/PostTypes/Events.php:237
+#: source/php/PostTypes/Events.php:253
 msgctxt "Taxonomy singular name"
 msgid "Event tag"
 msgstr "Tagg"
 
-#: source/php/PostTypes/Events.php:238
+#: source/php/PostTypes/Events.php:254
 msgid "Search tags"
 msgstr "Sök tagg"
 
-#: source/php/PostTypes/Events.php:239
+#: source/php/PostTypes/Events.php:255
 msgid "Popular tags"
 msgstr "Populära taggar"
 
-#: source/php/PostTypes/Events.php:240
+#: source/php/PostTypes/Events.php:256
 msgid "All tags"
 msgstr "Alla taggar"
 
-#: source/php/PostTypes/Events.php:241 source/php/PostTypes/Events.php:242
+#: source/php/PostTypes/Events.php:257 source/php/PostTypes/Events.php:258
 msgid "Parent"
 msgstr "Förälder"
 
-#: source/php/PostTypes/Events.php:243
+#: source/php/PostTypes/Events.php:259
 msgid "Edit tag"
 msgstr "Redigera tagg"
 
-#: source/php/PostTypes/Events.php:244
+#: source/php/PostTypes/Events.php:260
 msgid "Update"
 msgstr "Uppdatera"
 
-#: source/php/PostTypes/Events.php:245
+#: source/php/PostTypes/Events.php:261
 msgid "Add new tag"
 msgstr "Lägg till ny tagg"
 
-#: source/php/PostTypes/Events.php:246
+#: source/php/PostTypes/Events.php:262
 msgid "New tag"
 msgstr "Ny tagg"
 
-#: source/php/PostTypes/Events.php:247
+#: source/php/PostTypes/Events.php:263
 msgid "Add or remove tags"
 msgstr "Lägg till eller ta bort taggar"
 
-#: source/php/PostTypes/Events.php:248
+#: source/php/PostTypes/Events.php:264
 msgid "Choose from most used tags"
 msgstr "Välj från de mest använda taggarna"
 
-#: source/php/PostTypes/Events.php:273
+#: source/php/PostTypes/Events.php:289
 msgctxt "Taxonomy plural name"
 msgid "Event groups"
 msgstr "Grupper"
 
-#: source/php/PostTypes/Events.php:274
+#: source/php/PostTypes/Events.php:290
 msgctxt "Taxonomy singular name"
 msgid "Event group"
 msgstr "Grupp"
 
-#: source/php/PostTypes/Events.php:275
+#: source/php/PostTypes/Events.php:291
 msgid "Search groups"
 msgstr "Sök grupper"
 
-#: source/php/PostTypes/Events.php:276
+#: source/php/PostTypes/Events.php:292
 msgid "Popular groups"
 msgstr "Populära grupper"
 
-#: source/php/PostTypes/Events.php:277
+#: source/php/PostTypes/Events.php:293
 msgid "All groups"
 msgstr "Alla grupper"
 
-#: source/php/PostTypes/Events.php:278 source/php/PostTypes/Events.php:279
+#: source/php/PostTypes/Events.php:294 source/php/PostTypes/Events.php:295
 msgid "Parent group"
 msgstr "Föräldergrupp"
 
-#: source/php/PostTypes/Events.php:280
+#: source/php/PostTypes/Events.php:296
 msgid "Edit group"
 msgstr "Ändra grupp"
 
-#: source/php/PostTypes/Events.php:281
+#: source/php/PostTypes/Events.php:297
 msgid "Update group"
 msgstr "Uppdatera grupp"
 
-#: source/php/PostTypes/Events.php:282
+#: source/php/PostTypes/Events.php:298
 msgid "Add new group"
 msgstr "Lägg till ny grupp"
 
-#: source/php/PostTypes/Events.php:283
+#: source/php/PostTypes/Events.php:299
 msgid "New group"
 msgstr "Ny grupp"
 
-#: source/php/PostTypes/Events.php:284
+#: source/php/PostTypes/Events.php:300
 msgid "Add or remove groups"
 msgstr "Lägg till eller ta bort grupper"
 
-#: source/php/PostTypes/Events.php:285
+#: source/php/PostTypes/Events.php:301
 msgid "Choose from most used groups"
 msgstr "Välj från de mest använda grupperna"
 
-#: source/php/PostTypes/Events.php:328
+#: source/php/PostTypes/Events.php:344
 msgid "Import events"
 msgstr "Importera evenemang"
 
-#: source/php/PostTypes/Events.php:379
+#: source/php/PostTypes/Events.php:404
 msgid "Something went wrong!"
 msgstr "Något gick fel!"
 
-#: source/php/PostTypes/Events.php:396
+#: source/php/PostTypes/Events.php:421
 msgid "Error"
 msgstr "Fel"
 
-#: source/php/Shortcodes/SingleEvent.php:269
+#: source/php/Shortcodes/SingleEvent.php:105
+#: source/php/Shortcodes/SingleEvent.php:225
+msgid "Booking and tickets"
+msgstr "Bokning och biljetter"
+
+#: source/php/Shortcodes/SingleEvent.php:274
 msgid "Door time"
 msgstr "Lokalen öppnar"
 
-#: source/php/Shortcodes/SingleEvent.php:282
+#: source/php/Shortcodes/SingleEvent.php:287
 msgid "Other links"
 msgstr "Andra länkar"
 
-#: source/php/Shortcodes/SingleEvent.php:290
+#: source/php/Shortcodes/SingleEvent.php:295
 msgid "Related events"
 msgstr "Relaterade evenemang"
 
-#: source/php/Shortcodes/SingleEvent.php:315
+#: source/php/Shortcodes/SingleEvent.php:320
 msgid "Other locations"
 msgstr "Fler platser"
 
-#: source/php/Shortcodes/SingleEvent.php:334
-msgid "Adult"
-msgstr "Vuxen"
-
-#: source/php/Shortcodes/SingleEvent.php:335
-msgid "below"
-msgstr "under"
-
-#: source/php/Shortcodes/SingleEvent.php:336
-msgid "Children"
-msgstr "Barn"
-
-#: source/php/Shortcodes/SingleEvent.php:337
-msgid "above"
-msgstr "över"
-
-#: source/php/Shortcodes/SingleEvent.php:338
-msgid "Senior"
-msgstr "Pensionär"
-
 #: source/php/Shortcodes/SingleEvent.php:339
-msgid "Student"
-msgstr "Student"
-
-#: source/php/Shortcodes/SingleEvent.php:340
-msgid "Age restriction"
-msgstr "Åldersgräns"
-
-#: source/php/Shortcodes/SingleEvent.php:340
-msgid "years"
-msgstr "år"
-
-#: source/php/Shortcodes/SingleEvent.php:342
 msgid "Book here"
 msgstr "Boka här"
 
+#: source/php/Shortcodes/SingleEvent.php:341
+msgid "Adult"
+msgstr "Vuxen"
+
+#: source/php/Shortcodes/SingleEvent.php:342
+msgid "below"
+msgstr "under"
+
+#: source/php/Shortcodes/SingleEvent.php:343
+msgid "Children"
+msgstr "Barn"
+
+#: source/php/Shortcodes/SingleEvent.php:344
+msgid "above"
+msgstr "över"
+
+#: source/php/Shortcodes/SingleEvent.php:345
+msgid "Senior"
+msgstr "Pensionär"
+
 #: source/php/Shortcodes/SingleEvent.php:346
+msgid "Student"
+msgstr "Student"
+
+#: source/php/Shortcodes/SingleEvent.php:347
+msgid "Age restriction"
+msgstr "Åldersgräns"
+
+#: source/php/Shortcodes/SingleEvent.php:347
+msgid "years"
+msgstr "år"
+
+#: source/php/Shortcodes/SingleEvent.php:348
+#: source/php/Shortcodes/SingleEvent.php:383
+#: source/php/Shortcodes/SingleEvent.php:384
+msgid "Ticket release date"
+msgstr "Biljettsläpp"
+
+#: source/php/Shortcodes/SingleEvent.php:349
+msgid "Ticket stock"
+msgstr "Biljettlager"
+
+#: source/php/Shortcodes/SingleEvent.php:350
+msgid "Tickets remaining"
+msgstr "Återstående biljetter"
+
+#: source/php/Shortcodes/SingleEvent.php:353
+msgid "Ticket types"
+msgstr "Biljettyper"
+
+#: source/php/Shortcodes/SingleEvent.php:367
+msgid "Price range"
+msgstr "Prisintervall"
+
+#: source/php/Shortcodes/SingleEvent.php:369
+msgid "Seated minimum price"
+msgstr "Minimipris för sittande"
+
+#: source/php/Shortcodes/SingleEvent.php:370
+msgid "Seated maximum price"
+msgstr "Maximipris för sittande"
+
+#: source/php/Shortcodes/SingleEvent.php:371
+msgid "Standing minimum price"
+msgstr "Minimipris för stående"
+
+#: source/php/Shortcodes/SingleEvent.php:372
+msgid "Standing maximum price"
+msgstr "Maximipris för stående"
+
+#: source/php/Shortcodes/SingleEvent.php:378
+msgid "Ticket retailers"
+msgstr "Återförsäljare"
+
+#: source/php/Shortcodes/SingleEvent.php:392
 msgid "Group prices"
 msgstr "Gruppriser"
 
-#: source/php/Shortcodes/SingleEvent.php:349
+#: source/php/Shortcodes/SingleEvent.php:395
 msgid "persons"
 msgstr "personer"
 
-#: source/php/Shortcodes/SingleEvent.php:355
+#: source/php/Shortcodes/SingleEvent.php:401
 msgid "Included in membership cards"
 msgstr "Ingår i medlemskort"
 
-#: source/php/Shortcodes/SingleEvent.php:362
+#: source/php/Shortcodes/SingleEvent.php:408
 msgid "Price information"
 msgstr "Prisinformation"
 
-#: source/php/Shortcodes/SingleEvent.php:363
+#: source/php/Shortcodes/SingleEvent.php:409
 msgid "Ticket includes"
 msgstr "Ingår i biljett"
-
-#: source/php/Templates/module/modularity-mod-event.php:25
-msgid "More events"
-msgstr "Fler evenemang"
-
-#: source/php/Widget/DisplayEvents.php:13
-msgid "Events"
-msgstr "Evenemang"
 
 #: source/php/Widget/DisplayEvents.php:15
 msgid "Display upcoming events from Event Manager API."
@@ -1070,9 +1133,6 @@ msgstr ""
 
 #~ msgid "Import groups"
 #~ msgstr "Importera grupper"
-
-#~ msgid "Delete all events"
-#~ msgstr "Ta bort alla evenemang"
 
 #~ msgid "Single event image"
 #~ msgstr "Bild för enskilt evenemang"
