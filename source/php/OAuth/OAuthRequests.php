@@ -31,6 +31,14 @@ class OAuthRequests
             wp_send_json_error(__('Request credentials is missing', 'event-integration'));
         }
 
+        // Skip SSL verification while DEV_MODE is true
+        $options = array(
+            'ssl' => array(
+                'verify_peer' => defined('DEV_MODE') && DEV_MODE === true ? false : true,
+                'verify_peer_name' => defined('DEV_MODE') && DEV_MODE === true ? false : true
+            )
+        );
+
         $consumerKey = $_POST['client'];
         $consumerSecret = $_POST['secret'];
         // Get API base url
@@ -65,7 +73,8 @@ class OAuthRequests
             . "&oauth_version=" . rawurlencode($oauthVersion)
             . "&oauth_signature=" . rawurlencode($oauthSig);
         // Get results from request
-        $response = file_get_contents($requestUrl);
+        $response = file_get_contents($requestUrl, false, stream_context_create($options));
+
         // Return error message if request failed
         if ($response === false) {
             wp_send_json_error(__('The credentials you supplied were not correct', 'event-integration'));
@@ -74,7 +83,6 @@ class OAuthRequests
         parse_str(trim($response), $values);
 
         // Save client keys and temporary tokens to db
-        $user_id = get_current_user_id();
         update_option('_event_client', $consumerKey);
         update_option('_event_secret', $consumerSecret);
         update_option('_temp_request_token', $values["oauth_token"]);
@@ -96,6 +104,15 @@ class OAuthRequests
         if ((!isset($_POST['verifier'])) || (empty($_POST['verifier']))) {
             wp_send_json_error(__('Verifier is missing', 'event-integration'));
         }
+
+        // Skip SSL verification while DEV_MODE is true
+        $options = array(
+            'ssl' => array(
+                'verify_peer' => defined('DEV_MODE') && DEV_MODE === true ? false : true,
+                'verify_peer_name' => defined('DEV_MODE') && DEV_MODE === true ? false : true
+            )
+        );
+
         $oauthVerifier = $_POST['verifier'];
         $consumerKey = get_option('_event_client');
         $consumerSecret = get_option('_event_secret');
@@ -131,7 +148,7 @@ class OAuthRequests
             . "&oauth_version=". rawurlencode($oauthVersion)
             . "&oauth_signature=" . rawurlencode($oauthSig);
 
-        $response = file_get_contents($requestUrl);
+        $response = file_get_contents($requestUrl, false, stream_context_create($options));
         // Return error message if request failed
         if ($response === false) {
             wp_send_json_error(__('The verifier you supplied were not correct', 'event-integration'));
@@ -191,20 +208,34 @@ class OAuthRequests
             . "oauth_token=" . rawurlencode($accessToken) . ","
             . "oauth_version=" . rawurlencode($oauthVersion);
 
-        $context = stream_context_create(array("http" => array(
-            "method" => "POST",
-            "header" => "Content-type: application/json\r\n"
-                        . "Authorization: " . $authHeader . "\r\n",
-            "content" => $postData
-            )));
+        // Make the request
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $apiResourceUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, defined('DEV_MODE') && DEV_MODE === true ? false : 2);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, defined('DEV_MODE') && DEV_MODE === true ? false : 2);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-type: application/json',
+            'Authorization: OAuth ' . $authHeader
+        ));
 
-        $result = file_get_contents($apiResourceUrl, false, $context);
-        if ($result === false) {
+        $output = curl_exec($ch);
+        $output = json_decode($output);
+
+        // Get Http code
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        // Return response
+        if ($httpCode === 201) {
+            // Event was created
+            wp_send_json_success($output);
+        } else {
+            // Something went wrong
             wp_send_json_error(__('Something went wrong posting the event', 'event-integration'));
         }
-
-        // return success results
-        wp_send_json_success($result);
     }
 
     /**
@@ -256,12 +287,17 @@ class OAuthRequests
             . "oauth_token=" . rawurlencode($accessToken) . ","
             . "oauth_version=" . rawurlencode($oauthVersion);
 
-        $context = stream_context_create(array("http" => array(
-            'method' => 'POST',
-            'header' => 'Content-Type: multipart/form-data; boundary=' . MULTIPART_BOUNDARY . $eol
+        $context = stream_context_create(array(
+            "http" => array(
+                'method' => 'POST',
+                'header' => 'Content-Type: multipart/form-data; boundary=' . MULTIPART_BOUNDARY . $eol
                             . "Content-Disposition: attachment filename=\"" . rawurlencode($_FILES['file']['name']) . "\"\r\n"
                             . "Authorization: " . $authHeader . $eol,
                         'content' => $content
+            ),
+            'ssl' => array(
+                'verify_peer' => defined('DEV_MODE') && DEV_MODE === true ? false : true,
+                'verify_peer_name' => defined('DEV_MODE') && DEV_MODE === true ? false : true
             )));
 
         $result = file_get_contents($apiResourceUrl, false, $context);
