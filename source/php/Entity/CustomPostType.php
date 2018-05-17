@@ -20,7 +20,6 @@ abstract class CustomPostType
      * @param string $slug         Post type slug
      * @param array  $args         Post type arguments
      */
-
     public function __construct($namePlural, $nameSingular, $slug, $args = array())
     {
         $this->namePlural = $namePlural;

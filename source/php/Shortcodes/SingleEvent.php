@@ -338,15 +338,14 @@ class SingleEvent
         $ret = '<ul>';
         $ret .= (!empty($meta['booking_link'])) ? '<li><i class="pricon pricon-external-link"></i> <a href="' . $meta['booking_link'] . '" target="_blank"><strong>' . __('Book here', 'event-integration') . '</strong></a></li>' : '';
         $ret .= (!empty($meta['booking_phone'])) ? '<li><i class="pricon pricon-phone"></i> ' . $meta['booking_phone'] . '</li><br>' : '';
-        $ret .= (!empty($meta['price_adult'])) ? '<li>' . __('Adult', 'event-integration') . ': ' . $meta['price_adult'] . ' kr</li>' : '';
+        $ret .= (isset($meta['price_adult']) && $meta['price_adult'] != '') ? '<li>' . __('Adult', 'event-integration') . ': ' . self::priceOutput($meta['price_adult']) . '</li>' : '';
         $children_age = (!empty($meta['children_age'])) ? ' (' . __('below', 'event-integration') . ' ' . $meta['children_age'] . ')' : '';
-        $ret .= (!empty($meta['price_children'])) ? '<li>' . __('Children', 'event-integration') . $children_age . ': ' . $meta['price_children'] . ' kr</li>' : '';
+        $ret .= (isset($meta['price_children']) && $meta['price_children'] != '') ? '<li>' . __('Children', 'event-integration') . $children_age . ': ' .self::priceOutput($meta['price_children']) . '</li>' : '';
         $senior_age = (!empty($meta['senior_age'])) ? ' (' . __('above', 'event-integration') . ' ' . $meta['senior_age'] . ')' : '';
-        $ret .= (!empty($meta['price_senior'])) ? '<li>' . __('Senior', 'event-integration') . $senior_age . ': ' . $meta['price_senior'] . ' kr</li>' : '';
-        $ret .= (!empty($meta['price_student'])) ? '<li>' . __('Student', 'event-integration') . ': ' . $meta['price_student'] . ' kr</li>' : '';
+        $ret .= (isset($meta['price_senior']) && $meta['price_senior'] != '') ? '<li>' . __('Senior', 'event-integration') . $senior_age . ': ' . self::priceOutput($meta['price_senior']) . '</li>' : '';
+        $ret .= (isset($meta['price_student']) && $meta['price_student'] != '') ? '<li>' . __('Student', 'event-integration') . ': ' . self::priceOutput($meta['price_student']) . '</li>' : '';
         $ret .= (!empty($meta['age_restriction'])) ? '<li>' . __('Age restriction', 'event-integration') . ': ' . $meta['age_restriction'] . ' ' . __('years', 'event-integration') . '</li>' : '';
         $ret .= (!empty($meta['ticket_release_date'])) ? '<li>' . __('Ticket release date', 'event-integration') . ': ' . mysql2date('j F Y, H:i', $meta['ticket_release_date'], true) . '</li>' : '';
-        $ret .= (isset($meta['ticket_stock']) && $meta['ticket_stock'] != '') ? '<li>' . __('Ticket stock', 'event-integration') . ': ' . $meta['ticket_stock'] . '</li>' : '';
         $ret .= (isset($meta['tickets_remaining']) && $meta['tickets_remaining'] != '') ? '<li>' . __('Tickets remaining', 'event-integration') . ': ' . $meta['tickets_remaining'] . '</li>' : '';
         $ret .= '</ul>';
         if (!empty($meta['additional_ticket_types']) && is_array($meta['additional_ticket_types'])) {
@@ -364,8 +363,8 @@ class SingleEvent
                             break;
                     }
                 }
-                $ret .= (isset($ticketType['minimum_price']) && $ticketType['minimum_price'] != '') ? '<li>' . $ticketType['minimum_price'] . ' kr</li>' : '';
-                $ret .= (isset($ticketType['maximum_price']) && $ticketType['maximum_price'] != '') ? '<li>' . $ticketType['maximum_price'] . ' kr</li>' : '';
+                $ret .= (isset($ticketType['minimum_price']) && $ticketType['minimum_price'] != '') ? '<li>' . __('Minimum price', 'event-integration') . ': ' . self::priceOutput($ticketType['minimum_price']) . '</li>' : '';
+                $ret .= (isset($ticketType['maximum_price']) && $ticketType['maximum_price'] != '') ? '<li>' . __('Maximum price', 'event-integration') . ': ' . self::priceOutput($ticketType['maximum_price']) . '</li>' : '';
                 $ret .= '</ul>';
             }
         }
@@ -375,10 +374,10 @@ class SingleEvent
         if (!empty($meta['price_range']) && is_array($meta['price_range'])) {
             $ret .= '<ul><li><strong>' . __('Price range', 'event-integration') . '</strong></li></ul>';
             $ret .= '<ul>';
-            $ret .= (isset($meta['price_range']['seated_minimum_price']) && $meta['price_range']['seated_minimum_price'] != '') ? '<li>' . __('Seated minimum price', 'event-integration') . ': ' . $meta['price_range']['seated_minimum_price'] . ' kr</li>' : '';
-            $ret .= (isset($meta['price_range']['seated_maximum_price']) && $meta['price_range']['seated_maximum_price'] != '') ? '<li>' . __('Seated maximum price', 'event-integration') . ': ' . $meta['price_range']['seated_maximum_price'] . ' kr</li>' : '';
-            $ret .= (isset($meta['price_range']['standing_minimum_price']) && $meta['price_range']['standing_minimum_price'] != '') ? '<li>' . __('Standing minimum price', 'event-integration') . ': ' . $meta['price_range']['standing_minimum_price'] . ' kr</li>' : '';
-            $ret .= (isset($meta['price_range']['standing_maximum_price']) && $meta['price_range']['standing_maximum_price'] != '') ? '<li>' . __('Standing maximum price', 'event-integration') . ': ' . $meta['price_range']['standing_maximum_price'] . ' kr</li>' : '';
+            $ret .= (isset($meta['price_range']['seated_minimum_price']) && $meta['price_range']['seated_minimum_price'] != '') ? '<li>' . __('Seated minimum price', 'event-integration') . ': ' . self::priceOutput($meta['price_range']['seated_minimum_price']) . '</li>' : '';
+            $ret .= (isset($meta['price_range']['seated_maximum_price']) && $meta['price_range']['seated_maximum_price'] != '') ? '<li>' . __('Seated maximum price', 'event-integration') . ': ' . self::priceOutput($meta['price_range']['seated_maximum_price']) . '</li>' : '';
+            $ret .= (isset($meta['price_range']['standing_minimum_price']) && $meta['price_range']['standing_minimum_price'] != '') ? '<li>' . __('Standing minimum price', 'event-integration') . ': ' . self::priceOutput($meta['price_range']['standing_minimum_price']) . '</li>' : '';
+            $ret .= (isset($meta['price_range']['standing_maximum_price']) && $meta['price_range']['standing_maximum_price'] != '') ? '<li>' . __('Standing maximum price', 'event-integration') . ': ' . self::priceOutput($meta['price_range']['standing_maximum_price']) . '</li>' : '';
             $ret .= '</ul>';
         }
         $ret .= '</ul>';
@@ -401,7 +400,7 @@ class SingleEvent
             $ret .= '<ul><li><strong>' . __('Group prices', 'event-integration') . '</strong></li></ul>';
             $ret .= '<ul>';
             foreach ($meta['booking_group'] as $group) {
-                $ret .= '<li>' . $group['min_persons'] . ' - ' . $group['max_persons'] . ' ' . __('persons', 'event-integration') . ': ' . $group['price_group'] . ' kr</li>';
+                $ret .= '<li>' . $group['min_persons'] . ' - ' . $group['max_persons'] . ' ' . __('persons', 'event-integration') . ': ' . self::priceOutput($group['price_group']) . '</li>';
             }
             $ret .= '</ul>';
         }
@@ -510,5 +509,21 @@ class SingleEvent
         $ret .= '</ul>';
 
         return $ret;
+    }
+
+    /**
+     * Outputs prices
+     * @param $price
+     * @return string
+     */
+    public static function priceOutput($price)
+    {
+        if ($price == 0) {
+            $price = _x('Free', 'Free event entrance', 'event-integration');
+        } elseif ($price !== '') {
+            $price .= ' kr';
+        }
+
+        return $price;
     }
 }
