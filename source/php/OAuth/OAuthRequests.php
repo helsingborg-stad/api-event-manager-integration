@@ -23,7 +23,7 @@ class OAuthRequests
      * OAuth1 verification step 1: Send a request to API with client keys. Return verification URL if succeeded.
      * OAuth1 verification step 2 (handled on the OAuth1 server): User authorizes the client from the verification URL and will be given a verifier key,
      * that will be used in step 3
-     * @return string
+     * @return void
      */
     public function requestOAuth()
     {
@@ -97,7 +97,7 @@ class OAuthRequests
 
     /**
      * OAuth1 verification step 3: Request access to API and save returned tokens if succeeded.
-     * @return string
+     * @return void
      */
     public function accessOAuth()
     {
