@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2018-05-04 16:33+0200\n"
-"PO-Revision-Date: 2018-05-04 16:33+0200\n"
+"POT-Creation-Date: 2018-05-17 09:54+0200\n"
+"PO-Revision-Date: 2018-05-17 09:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -120,7 +120,7 @@ msgid "Set to -1 to show the whole description."
 msgstr "-1 för att visa hela beskrivningen."
 
 #: AcfFields/php/event-module.php:223 source/php/PostTypes/Events.php:302
-#: source/php/Shortcodes/SingleEvent.php:495
+#: source/php/Shortcodes/SingleEvent.php:492
 msgid "Groups"
 msgstr "Grupper"
 
@@ -137,7 +137,7 @@ msgid "Show events from the selected groups."
 msgstr "Visa evenemang inom angivna grupper."
 
 #: AcfFields/php/event-module.php:269 source/php/PostTypes/Events.php:228
-#: source/php/Shortcodes/SingleEvent.php:501
+#: source/php/Shortcodes/SingleEvent.php:498
 msgid "Categories"
 msgstr "Kategorier"
 
@@ -154,7 +154,7 @@ msgid "Show events from the selected categories."
 msgstr "Visa evenemang inom angivna kategorier."
 
 #: AcfFields/php/event-module.php:315 source/php/PostTypes/Events.php:265
-#: source/php/Shortcodes/SingleEvent.php:507
+#: source/php/Shortcodes/SingleEvent.php:504
 msgid "Tags"
 msgstr "Taggar"
 
@@ -422,7 +422,7 @@ msgstr "Datum"
 msgid "Additional locations"
 msgstr "Fler platser"
 
-#: AcfFields/php/shortcodes.php:60 source/php/Shortcodes/SingleEvent.php:440
+#: AcfFields/php/shortcodes.php:60 source/php/Shortcodes/SingleEvent.php:437
 msgid "Sponsors"
 msgstr "Sponsorer"
 
@@ -534,43 +534,43 @@ msgstr "Något gick fel, vänligen försök igen senare."
 msgid "to"
 msgstr "till"
 
+#: source/php/Entity/CustomPostType.php:46
 #: source/php/Entity/CustomPostType.php:47
-#: source/php/Entity/CustomPostType.php:48
 #, php-format
 msgid "Add new %s"
 msgstr "Lägg till %s"
 
-#: source/php/Entity/CustomPostType.php:49
+#: source/php/Entity/CustomPostType.php:48
 #, php-format
 msgid "Edit %s"
 msgstr "Redigera %s"
 
-#: source/php/Entity/CustomPostType.php:50
+#: source/php/Entity/CustomPostType.php:49
 #, php-format
 msgid "New %s"
 msgstr "Nytt %s"
 
-#: source/php/Entity/CustomPostType.php:51
+#: source/php/Entity/CustomPostType.php:50
 #, php-format
 msgid "View %s"
 msgstr "Visa %s"
 
-#: source/php/Entity/CustomPostType.php:52
+#: source/php/Entity/CustomPostType.php:51
 #, php-format
 msgid "Search %s"
 msgstr "Sök %s"
 
-#: source/php/Entity/CustomPostType.php:53
+#: source/php/Entity/CustomPostType.php:52
 #, php-format
 msgid "No %s found"
 msgstr "Inga %s hittades"
 
-#: source/php/Entity/CustomPostType.php:54
+#: source/php/Entity/CustomPostType.php:53
 #, php-format
 msgid "No %s found in trash"
 msgstr "Inga %s hittades i papperskorgen"
 
-#: source/php/Entity/CustomPostType.php:55
+#: source/php/Entity/CustomPostType.php:54
 #, php-format
 msgid "Parent %s:"
 msgstr "Förälder %s:"
@@ -699,49 +699,49 @@ msgstr "Ta bort klient"
 msgid "Request credentials is missing"
 msgstr "Nycklar saknas"
 
-#: source/php/OAuth/OAuthRequests.php:39
+#: source/php/OAuth/OAuthRequests.php:47
 msgid ""
 "You must enter OAuth1 endpoint url found under Event settings to proceed."
 msgstr ""
 "Du måste ange \"OAuth1 endpoint URL\" under inställningar för att fortsätta."
 
-#: source/php/OAuth/OAuthRequests.php:71
+#: source/php/OAuth/OAuthRequests.php:80
 msgid "The credentials you supplied were not correct"
 msgstr "Du har angivit fel uppgifter"
 
-#: source/php/OAuth/OAuthRequests.php:86
+#: source/php/OAuth/OAuthRequests.php:94
 msgid "Request succeeded!"
 msgstr "Begäran lyckades!"
 
-#: source/php/OAuth/OAuthRequests.php:86
+#: source/php/OAuth/OAuthRequests.php:94
 msgid "Click here to authorize this client and get verification token"
 msgstr "Klicka här för att godkänna klienten och få verifieringskod"
 
-#: source/php/OAuth/OAuthRequests.php:97
+#: source/php/OAuth/OAuthRequests.php:105
 msgid "Verifier is missing"
 msgstr "Verifieringskod saknas"
 
-#: source/php/OAuth/OAuthRequests.php:137
+#: source/php/OAuth/OAuthRequests.php:154
 msgid "The verifier you supplied were not correct"
 msgstr "Du har angivit fel verifieringskod"
 
-#: source/php/OAuth/OAuthRequests.php:149
+#: source/php/OAuth/OAuthRequests.php:166
 msgid "You are authorized!"
 msgstr "Du är nu auktoriserad!"
 
-#: source/php/OAuth/OAuthRequests.php:158
+#: source/php/OAuth/OAuthRequests.php:175
 msgid "Form data is missing, please try again."
 msgstr "Formulärdata saknas, försök igen."
 
-#: source/php/OAuth/OAuthRequests.php:203
+#: source/php/OAuth/OAuthRequests.php:237
 msgid "Something went wrong posting the event"
 msgstr "Något gick fel med att skicka evenemanget"
 
-#: source/php/OAuth/OAuthRequests.php:216
+#: source/php/OAuth/OAuthRequests.php:247
 msgid "Image is not selected, please try again."
 msgstr "Bild saknas, vänligen försök igen."
 
-#: source/php/OAuth/OAuthRequests.php:270
+#: source/php/OAuth/OAuthRequests.php:306
 msgid "Something went wrong uploading your image"
 msgstr "Något gick fel med att ladda upp din bild"
 
@@ -987,74 +987,83 @@ msgid "years"
 msgstr "år"
 
 #: source/php/Shortcodes/SingleEvent.php:348
-#: source/php/Shortcodes/SingleEvent.php:394
-#: source/php/Shortcodes/SingleEvent.php:395
+#: source/php/Shortcodes/SingleEvent.php:391
+#: source/php/Shortcodes/SingleEvent.php:392
 msgid "Ticket release date"
 msgstr "Biljettsläpp"
 
 #: source/php/Shortcodes/SingleEvent.php:349
-msgid "Ticket stock"
-msgstr "Biljettlager"
-
-#: source/php/Shortcodes/SingleEvent.php:350
 msgid "Tickets remaining"
 msgstr "Återstående biljetter"
 
-#: source/php/Shortcodes/SingleEvent.php:353
+#: source/php/Shortcodes/SingleEvent.php:352
 msgid "Ticket types"
 msgstr "Biljettyper"
 
-#: source/php/Shortcodes/SingleEvent.php:361
+#: source/php/Shortcodes/SingleEvent.php:359
 msgid "Seated"
 msgstr "Sittande"
 
-#: source/php/Shortcodes/SingleEvent.php:365
+#: source/php/Shortcodes/SingleEvent.php:362
 msgid "Standing"
 msgstr "Stående"
 
-#: source/php/Shortcodes/SingleEvent.php:378
+#: source/php/Shortcodes/SingleEvent.php:366
+msgid "Minimum price"
+msgstr "Minimipris"
+
+#: source/php/Shortcodes/SingleEvent.php:367
+msgid "Maximum price"
+msgstr "Maximipris"
+
+#: source/php/Shortcodes/SingleEvent.php:375
 msgid "Price range"
 msgstr "Prisintervall"
 
-#: source/php/Shortcodes/SingleEvent.php:380
+#: source/php/Shortcodes/SingleEvent.php:377
 msgid "Seated minimum price"
 msgstr "Minimipris för sittande"
 
-#: source/php/Shortcodes/SingleEvent.php:381
+#: source/php/Shortcodes/SingleEvent.php:378
 msgid "Seated maximum price"
 msgstr "Maximipris för sittande"
 
-#: source/php/Shortcodes/SingleEvent.php:382
+#: source/php/Shortcodes/SingleEvent.php:379
 msgid "Standing minimum price"
 msgstr "Minimipris för stående"
 
-#: source/php/Shortcodes/SingleEvent.php:383
+#: source/php/Shortcodes/SingleEvent.php:380
 msgid "Standing maximum price"
 msgstr "Maximipris för stående"
 
-#: source/php/Shortcodes/SingleEvent.php:389
+#: source/php/Shortcodes/SingleEvent.php:386
 msgid "Ticket retailers"
 msgstr "Återförsäljare"
 
-#: source/php/Shortcodes/SingleEvent.php:403
+#: source/php/Shortcodes/SingleEvent.php:400
 msgid "Group prices"
 msgstr "Gruppriser"
 
-#: source/php/Shortcodes/SingleEvent.php:406
+#: source/php/Shortcodes/SingleEvent.php:403
 msgid "persons"
 msgstr "personer"
 
-#: source/php/Shortcodes/SingleEvent.php:412
+#: source/php/Shortcodes/SingleEvent.php:409
 msgid "Included in membership cards"
 msgstr "Ingår i medlemskort"
 
-#: source/php/Shortcodes/SingleEvent.php:419
+#: source/php/Shortcodes/SingleEvent.php:416
 msgid "Price information"
 msgstr "Prisinformation"
 
-#: source/php/Shortcodes/SingleEvent.php:420
+#: source/php/Shortcodes/SingleEvent.php:417
 msgid "Ticket includes"
 msgstr "Ingår i biljett"
+
+#: source/php/Shortcodes/SingleEvent.php:522
+msgctxt "Free event entrance"
+msgid "Free"
+msgstr "Gratis"
 
 #: source/php/Widget/DisplayEvents.php:15
 msgid "Display upcoming events from Event Manager API."
@@ -1129,6 +1138,9 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "http://www.helsingborg.se"
 msgstr ""
+
+#~ msgid "Ticket stock"
+#~ msgstr "Biljettlager"
 
 #~ msgid "Information shortcode"
 #~ msgstr "Shortcode för information"
