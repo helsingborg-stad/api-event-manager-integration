@@ -153,7 +153,7 @@
     </div>
 
     <div class="form-group">
-        <label for="organizer"><?php _e('Arrangör', 'event-integration'); ?></label>
+        <label for="organizer"><?php _e('Organizer', 'event-integration'); ?></label>
         <small class="text-dark-gray"><?php _e('Choose from existing organizers in the list. If your business is not available, please add an organizer to the description.', 'event-integration'); ?></small>
         <select name="organizer" id="organizer">
             <option value=""><?php _e('Loading', 'event-integration'); ?>...</option>
