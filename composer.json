@@ -16,6 +16,7 @@
         }
     ],
     "require": {
-        "helsingborg-stad/acf-export-manager": ">=1.0.0"
+        "helsingborg-stad/acf-export-manager": ">=1.0.0",
+        "philo/laravel-blade": "^3.1"
     }
 }

@@ -25,7 +25,7 @@ class QueryEvents
         if (! empty($params['location'])) {
             $location = $params['location'];
             $distance = (! empty($params['distance'])) ? $params['distance'] : 0;
-            $locationIds  = \EventManagerIntegration\Helper\QueryEvents::getNearbyLocations($location->lat, $location->lng, floatval($distance));
+            $locationIds  = self::getNearbyLocations($location->lat, $location->lng, floatval($distance));
             $idString = ($locationIds) ? implode(',', array_column($locationIds, 'post_id')) : "0";
         }
 

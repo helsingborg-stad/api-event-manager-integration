@@ -24,6 +24,7 @@ class App
         new Admin\Options();
         new Admin\AdminDisplayEvent();
         new Shortcodes\SingleEvent();
+        new Shortcodes\SubmitForm();
 
         /* Register Modularity v2 modules */
         add_action('plugins_loaded', function () {
