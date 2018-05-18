@@ -239,11 +239,13 @@ EventManagerIntegration.Event.Form = (function ($) {
 	    $.each(arrData, function(index, elem) {
 	    	switch(elem.name) {
 	    		case 'user_groups':
-	    			groups.push(parseInt(elem.value));
+                    groups = $.map(elem.value.split(','), function(value) {
+                        return parseInt(value, 10);
+                    });
 			        break;
 			    case 'event_categories':
 	    			categories.push(parseInt(elem.value));
-			        break;
+                    break;
 			    default:
 			        objData[elem.name] = elem.value;
 			}
