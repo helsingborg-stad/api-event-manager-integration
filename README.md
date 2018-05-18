@@ -1,19 +1,19 @@
 Event Manager Integration
 ==========
 
-Import and display events from Event Manager API.
+Import and display events from [Event Manager API](https://github.com/helsingborg-stad/api-event-manager).
 
 Shortcodes
 ----------------
 
-#### Post events to Event Manager API
+#### event_submit_form
 
-> Displays a form to post events directly to Event Manager API.
-> It requires that the client is authorized to submit events.
+> Displays a form to post events directly to Event Manager API.<br>
+It requires that the client is authorized to submit events.
 
 *Parameters:*
-```php
-user_groups        Comma separated string with group IDs. Sets default user groups for all submited events.
+```
+user_groups     Comma separated string with group IDs. Sets default user groups for all submited events.
 ```
 
 *Example:*
@@ -21,31 +21,31 @@ user_groups        Comma separated string with group IDs. Sets default user grou
 [event_submit_form user_groups="1337"]
 ```
 
-#### Display event data as accordion
+#### single_event_accordion
 
-> Shortcode to display event information as accordion.
-> Add the shortcode to your single event template file.
+> Shortcode to display event information as accordion.<br>
+Add the shortcode to your single event template file.
 
 *Example:*
 ```php
 [single_event_accordion]
 ```
 
-#### Display event data as list element
+#### single_event_information
 
-> Shortcode to display event information as list element.
-> Add the shortcode to your single event template file.
+> Shortcode to display event information as list element.<br>
+Add the shortcode to your single event template file.
 
 *Example:*
 ```php
 [single_event_information]
 ```
 
-#### Gallery
+#### gallery
 
-> Gallery images is stored as attached images.
-> Therefore you can use WordPress built in shortcode to display the images.
-> Add the shortcode to your single event template file.
+> Gallery images is stored as attached images.<br>
+Therefore you can use WordPress built in shortcode to display the images.<br>
+Add the shortcode to your single event template file.
 
 *Example:*
 ```php
@@ -57,9 +57,10 @@ JavaScript widgets
 
 #### Event List code example
 
-> Here is a code example to display a list of events. Use the attributes listed below to set API-url and different filters.
+> Here is a code example to display a list of events.<br>
+Use the attributes listed below to set API-url and different filters.
 
-*Parameters:*
+*Data attributes:*
 ```
 data-apiurl     Url to Event manager API root.
 post-limit      Desired number of events to show.
