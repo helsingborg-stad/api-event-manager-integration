@@ -1,5 +1,7 @@
 <form name="submit-event" class="submit-event" enctype="multipart/form-data">
-    <input type="hidden" name="user_groups" value="312">
+    @if(!empty($user_groups))
+        <input type="hidden" name="user_groups" value="{{ $user_groups }}">
+    @endif
 
     <div class="form-group">
         <label for="title"><?php _e('Event name', 'event-integration'); ?> <span class="text-danger">*</span></label>
