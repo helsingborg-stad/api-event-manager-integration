@@ -101,6 +101,7 @@ EventManagerIntegration.Event.Form = (function ($) {
 			$('#recurring-event', eventForm).children('.box').hide();
 
         	this.handleEvents($(eventForm), apiUrl);
+
         	if (document.getElementById('location') !== null) {
         		this.loadPostType($(eventForm), apiUrl, 'location');
         	}
@@ -256,6 +257,7 @@ EventManagerIntegration.Event.Form = (function ($) {
 	    $('.occurance-group-single', form).each(function(index) {
 			var startDate 	= Form.prototype.formatDate($('[name="start_date"]', this).val(), $('[name="start_time_h"]', this).val(), $('[name="start_time_m"]', this).val());
 		    var endDate 	= Form.prototype.formatDate($('[name="end_date"]', this).val(), $('[name="end_time_h"]', this).val(), $('[name="end_time_m"]', this).val());
+
 		    if (startDate && endDate) {
 		    	objData['occasions'].push({
 		    						"start_date": startDate,
@@ -297,7 +299,6 @@ EventManagerIntegration.Event.Form = (function ($) {
 		objData['user_groups'] 		= groups;
 		objData['event_categories'] = categories;
 
-	    // console.log(JSON.stringify(objData));
 	    return objData;
 	};
 
@@ -330,7 +331,7 @@ EventManagerIntegration.Event.Form = (function ($) {
 	            if (response.success) {
 	            	$('.submit-success', eventForm).removeClass('hidden');
 					$('.submit-success .success', eventForm).empty().append('<i class="fa fa-send"></i>Evenemanget har skickats!</li>');
-	            	Form.prototype.cleanForm(eventForm);
+	                Form.prototype.cleanForm(eventForm);
 	            } else {
 	            	console.log(response.data);
 	            	$('.submit-success', eventForm).addClass('hidden');
@@ -346,8 +347,122 @@ EventManagerIntegration.Event.Form = (function ($) {
 	    });
     };
 
+    Form.prototype.endHourChange = function(event) {
+        var wrapper =  event.target.closest('.occurrence');
+        if (wrapper) {
+            var startDate = wrapper.querySelector('input[name="start_date"]').value,
+                endDate = wrapper.querySelector('input[name="end_date"]').value,
+                startTimeH = wrapper.querySelector('input[name="start_time_h"]').value;
+
+            if (startDate >= endDate) {
+                event.target.setAttribute('min', startTimeH);
+            } else {
+                event.target.setAttribute('min', 0);
+            }
+        }
+    };
+
+    Form.prototype.endMinuteChange = function(event) {
+        var wrapper =  event.target.closest('.occurrence');
+        if (wrapper) {
+            var startDate = wrapper.querySelector('input[name="start_date"]').value,
+                endDate = wrapper.querySelector('input[name="end_date"]').value,
+                startTimeH = wrapper.querySelector('input[name="start_time_h"]').value,
+                endTimeH = wrapper.querySelector('input[name="end_time_h"]').value,
+                startTimeM = wrapper.querySelector('input[name="start_time_m"]').value;
+
+            if ((startDate >= endDate) && (startTimeH >= endTimeH)) {
+                startTimeM = parseInt(startTimeM) + 10;
+                if (startTimeM >= 60) {
+                    wrapper.querySelector('input[name="end_time_h"]').setAttribute('min', parseInt(startTimeH) + 1);
+                } else {
+                    event.target.setAttribute('min', startTimeM);
+                }
+            } else {
+                event.target.setAttribute('min', 0);
+            }
+        }
+    };
+
+    Form.prototype.initPickerEvent = function() {
+        var elements = document.querySelectorAll('input[name="start_date"]');
+        Array.from(elements).forEach(function(element) {
+            element.onchange = function(e) {
+                if (e.target.value) {
+                    var wrapper = e.target.closest('.occurrence');
+                    $(wrapper).find('input[name="end_date"]').datepicker('option', 'minDate', new Date(e.target.value));
+                }
+            }.bind(this);
+        }.bind(this));
+    };
+
+    Form.prototype.initEndHourEvent = function() {
+        var elements = document.querySelectorAll('input[name="end_time_h"]');
+        Array.from(elements).forEach(function(element) {
+            element.onchange = this.endHourChange;
+        }.bind(this));
+    };
+
+    Form.prototype.initEndMinuteEvent = function() {
+        var elements = document.querySelectorAll('input[name="end_time_m"]');
+        Array.from(elements).forEach(function(element) {
+            element.onchange = this.endMinuteChange;
+        }.bind(this));
+    };
+
+    Form.prototype.initRecurringEndHourEvent = function() {
+        var elements = document.querySelectorAll('input[name="recurring_end_h"]');
+        Array.from(elements).forEach(function(element) {
+            element.onchange = function(event) {
+                var wrapper = event.target.closest('.occurrence');
+                if (wrapper) {
+                    var startTimeH = wrapper.querySelector('input[name="recurring_start_h"]').value;
+                    event.target.setAttribute('min', startTimeH);
+                }
+            };
+        }.bind(this));
+    };
+
+    Form.prototype.initRecurringEndMinuteEvent = function() {
+        var elements = document.querySelectorAll('input[name="recurring_end_m"]');
+        Array.from(elements).forEach(function(element) {
+            element.onchange = function(event) {
+                var wrapper = event.target.closest('.occurrence');
+                if (wrapper) {
+                    var startTimeH = wrapper.querySelector('input[name="recurring_start_h"]').value;
+                    var endTimeH = wrapper.querySelector('input[name="recurring_end_h"]').value;
+                    var startTimeM = wrapper.querySelector('input[name="recurring_start_m"]').value;
+
+                    if (startTimeH >= endTimeH) {
+                        startTimeM = parseInt(startTimeM) + 10;
+                        if (startTimeM >= 60) {
+                            wrapper.querySelector('input[name="recurring_end_h"]').setAttribute('min', parseInt(startTimeH) + 1);
+                        } else {
+                            event.target.setAttribute('min', startTimeM);
+                        }
+                    } else {
+                        event.target.setAttribute('min', 0);
+                    }
+                }
+            };
+        }.bind(this));
+    };
+
+    Form.prototype.initDateEvents = function() {
+        // Single occasions events
+        this.initPickerEvent();
+        this.initEndHourEvent();
+        this.initEndMinuteEvent();
+
+        // Recurring date events
+        this.initRecurringEndHourEvent();
+        this.initRecurringEndMinuteEvent();
+    };
+
     Form.prototype.handleEvents = function(eventForm, apiUrl) {
-		$(eventForm).on('submit', function(e) {
+        this.initDateEvents();
+
+        $(eventForm).on('submit', function(e) {
 		    e.preventDefault();
 
 		   	$('.submit-error', eventForm).addClass('hidden');
@@ -406,7 +521,7 @@ EventManagerIntegration.Event.Form = (function ($) {
         });
 
 		// Show/hide occasion and reccuring occasion rules. And add required fields.
-		$('input:radio[name=occurance-type]', eventForm).change(function (event) {
+		$('input:radio[name=occurance-type]', eventForm).change(function(event) {
     		var id = $(this).data('id');
     		$('#' + id).children('.form-group .box').show().
     			find('input').prop('required', true);
@@ -415,20 +530,24 @@ EventManagerIntegration.Event.Form = (function ($) {
 		});
 
 		// Add new occurance
-		$('.add-occurance', eventForm).click(function(e) {
-			e.preventDefault();
-			var $occuranceGroup = $(this).parent().prev('[class*=occurance-group]'),
+		$('.add-occurance', eventForm).click(function(event) {
+            event.preventDefault();
+			var $occuranceGroup = $(event.target).parent().prev('[class*=occurance-group]'),
         		$duplicate = $occuranceGroup.clone().find('input').val('')
         					.removeClass('hasDatepicker')
         					.removeAttr('id').end()
         					.insertAfter($occuranceGroup)
         					.find('.datepicker').datepicker().end();
 
-			if ($('.remove-occurance', $duplicate).length === 0) {
+			// Re init date events
+            this.initDateEvents();
+
+            if ($('.remove-occurance', $duplicate).length === 0) {
 				var $removeButton = $('<div class="form-group"><button class="btn btn btn-sm remove-occurance"><i class="pricon pricon-minus-o"></i> Ta bort</button></div>');
         		$duplicate.append($removeButton);
 			}
-		});
+
+		}.bind(this));
 
 		// Remove occurance
 		$(document).on('click', '.remove-occurance', function(e) {

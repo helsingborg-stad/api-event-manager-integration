@@ -17,7 +17,7 @@
     <div class="form-group">
         <label for="radio"><?php _e('Event occurrence', 'event-integration'); ?> <span class="text-danger">*</span></label>
         <small class="text-dark-gray">
-            <?php _e('Add occasions to this event. Does the event occur each week? Then add a rule for recurring events.', 'event-integration'); ?>
+            <?php _e('Add occasions to this event. Does the event occur each week? Then add a rule for recurring events. Note that end time for the event can\'t be the same as the start time.' , 'event-integration'); ?>
         </small>
         <label class="radio">
             <input data-id="single-event" type="radio" name="occurance-type" checked> <?php _e('Single occurrence', 'event-integration'); ?>
@@ -31,12 +31,11 @@
         <div class="box box-panel box-panel-secondary">
             <div class="box-content">
                 <h4><?php _e('Single occurrence', 'event-integration'); ?></h4>
-                <div class="form-group occurance-group-single gutter gutter-bottom"
+                <div class="form-group occurrence occurance-group-single gutter gutter-bottom"
                      style="border-bottom:1px solid #ddd;">
                     <div class="form-group">
                         <label for="start_date"><?php _e('Start date', 'event-integration'); ?> <span class="text-danger">*</span></label>
-                        <input type="text" name="start_date" placeholder="<?php _e('Date', 'event-integration'); ?>" value="" class="datepicker"
-                               required="required">
+                        <input type="text" name="start_date" placeholder="<?php _e('Date', 'event-integration'); ?>" value="" class="datepicker" required="required">
                     </div>
                     <div class="form-group form-horizontal">
                         <label for="start_time_h"><?php _e('Start time', 'event-integration'); ?> <span class="text-danger">*</span></label>
@@ -45,24 +44,20 @@
                                    required="required">
                         </div>
                         <div class="form-group">
-                            <i>: </i><input type="number" name="start_time_m" placeholder="MM" value="" min="0"
-                                            max="60" required="required">
+                            <i>: </i><input type="number" name="start_time_m" placeholder="MM" value="" min="0" max="59" required="required">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="end_date"><?php _e('End date', 'event-integration'); ?> <span class="text-danger">*</span></label>
-                        <input type="text" name="end_date" placeholder="<?php _e('Date', 'event-integration'); ?>" value="" class="datepicker"
-                               required="required">
+                        <input type="text" name="end_date" placeholder="<?php _e('Date', 'event-integration'); ?>" value="" class="datepicker" required="required">
                     </div>
                     <div class="form-group form-horizontal">
                         <label for="end_time_h"><?php _e('End time', 'event-integration'); ?> <span class="text-danger">*</span></label>
                         <div class="form-group">
-                            <input type="number" name="end_time_h" placeholder="HH" value="" min="0" max="24"
-                                   required="required">
+                            <input type="number" name="end_time_h" placeholder="HH" value="" min="0" max="24" required="required">
                         </div>
                         <div class="form-group">
-                            <i>: </i><input type="number" name="end_time_m" placeholder="MM" value="" min="0"
-                                            max="60" required="required">
+                            <i>: </i><input type="number" name="end_time_m" placeholder="MM" value="" min="0" max="59" required="required">
                         </div>
                     </div>
                 </div>
@@ -79,7 +74,7 @@
         <div class="box box-panel box-panel-secondary">
             <div class="box-content">
                 <h4><?php _e('Recurrence rules for weekly recurring event', 'event-integration'); ?></h4>
-                <div class="form-group occurance-group-recurring gutter gutter-bottom"
+                <div class="form-group occurrence occurance-group-recurring gutter gutter-bottom"
                      style="border-bottom:1px solid #ddd;">
                     <div class="form-group">
                         <label for="weekday"><?php _e('Weekday', 'event-integration'); ?> <span class="text-danger">*</span></label>
@@ -101,7 +96,7 @@
                             <input type="number" name="recurring_start_h" placeholder="HH" value="" min="0" max="24">
                         </div>
                         <div class="form-group">
-                            <i>: </i><input type="number" name="recurring_start_m" placeholder="MM" value="" min="0" max="60">
+                            <i>: </i><input type="number" name="recurring_start_m" placeholder="MM" value="" min="0" max="59">
                         </div>
                     </div>
                     <div class="form-group form-horizontal">
@@ -111,7 +106,7 @@
                             <input type="number" name="recurring_end_h" placeholder="HH" value="" min="0" max="24">
                         </div>
                         <div class="form-group">
-                            <i>: </i><input type="number" name="recurring_end_m" placeholder="MM" value="" min="0" max="60">
+                            <i>: </i><input type="number" name="recurring_end_m" placeholder="MM" value="" min="0" max="59">
                         </div>
                     </div>
                     <div class="form-group">
