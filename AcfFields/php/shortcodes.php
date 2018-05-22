@@ -3,7 +3,7 @@
 if (function_exists('acf_add_local_field_group')) {
     acf_add_local_field_group(array(
     'key' => 'group_58526d565e1f5',
-    'title' => 'Shortcode settings',
+    'title' => __('Shortcode settings', 'event-integration'),
     'fields' => array(
         0 => array(
             'key' => 'field_585278962daaf',
@@ -60,7 +60,10 @@
                 'sponsors' => __('Sponsors', 'event-integration'),
                 'booking' => __('Booking information', 'event-integration'),
                 'links' => __('Links', 'event-integration'),
+                'contact' => __('Contact', 'event-integration'),
             ),
+            'allow_custom' => 0,
+            'save_custom' => 0,
             'default_value' => array(
                 0 => 'information',
                 1 => 'occasion',
@@ -70,6 +73,7 @@
                 5 => 'sponsors',
                 6 => 'booking',
                 7 => 'links',
+                8 => 'contact',
             ),
             'layout' => 'vertical',
             'toggle' => 0,
@@ -164,6 +168,5 @@
     'hide_on_screen' => '',
     'active' => 1,
     'description' => '',
-    'local' => 'php',
 ));
 }

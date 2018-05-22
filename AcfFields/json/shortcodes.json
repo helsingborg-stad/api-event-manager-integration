@@ -56,8 +56,11 @@
                 "organizers": "Organizers",
                 "sponsors": "Sponsors",
                 "booking": "Booking information",
-                "links": "Links"
+                "links": "Links",
+                "contact": "Contact"
             },
+            "allow_custom": 0,
+            "save_custom": 0,
             "default_value": [
                 "information",
                 "occasion",
@@ -66,7 +69,8 @@
                 "organizers",
                 "sponsors",
                 "booking",
-                "links"
+                "links",
+                "contact"
             ],
             "layout": "vertical",
             "toggle": 0,
@@ -160,7 +164,6 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": 1,
-    "description": "",
-    "local": "php"
+    "description": ""
 }]
 
