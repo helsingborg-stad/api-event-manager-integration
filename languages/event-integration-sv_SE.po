@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2018-05-22 13:09+0200\n"
-"PO-Revision-Date: 2018-05-22 13:11+0200\n"
+"POT-Creation-Date: 2018-05-22 14:34+0200\n"
+"PO-Revision-Date: 2018-05-22 14:35+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -77,7 +77,7 @@ msgid "Fields"
 msgstr "Fält"
 
 #: AcfFields/php/event-module.php:149 source/php/PostTypes/Events.php:43
-#: source/php/Shortcodes/SingleEvent.php:287
+#: source/php/Shortcodes/SingleEvent.php:295
 msgid "Occasion"
 msgstr "Datum"
 
@@ -87,16 +87,16 @@ msgstr "Bild"
 
 #: AcfFields/php/event-module.php:151 AcfFields/php/event-module.php:385
 #: AcfFields/php/location-module.php:6 AcfFields/php/shortcodes.php:57
-#: source/php/Admin/AdminDisplayEvent.php:147
+#: source/php/Admin/AdminDisplayEvent.php:146
 #: source/php/Module/Event/views/partials/list.blade.php:37
 #: source/php/Module/Location/Location.php:12
 #: source/php/Shortcodes/SingleEvent.php:90
-#: source/php/Shortcodes/SingleEvent.php:231 views/submit-form.blade.php:161
+#: source/php/Shortcodes/SingleEvent.php:231 views/submit-form.blade.php:167
 msgid "Location"
 msgstr "Plats"
 
 #: AcfFields/php/event-module.php:152 views/submit-form.blade.php:12
-#: views/submit-form.blade.php:14
+#: views/submit-form.blade.php:20
 msgid "Description"
 msgstr "Beskrivning"
 
@@ -121,7 +121,7 @@ msgid "Set to -1 to show the whole description."
 msgstr "-1 för att visa hela beskrivningen."
 
 #: AcfFields/php/event-module.php:223 source/php/PostTypes/Events.php:302
-#: source/php/Shortcodes/SingleEvent.php:518
+#: source/php/Shortcodes/SingleEvent.php:526
 msgid "Groups"
 msgstr "Grupper"
 
@@ -138,7 +138,7 @@ msgid "Show events from the selected groups."
 msgstr "Visa evenemang inom angivna grupper."
 
 #: AcfFields/php/event-module.php:269 source/php/PostTypes/Events.php:228
-#: source/php/Shortcodes/SingleEvent.php:524 views/submit-form.blade.php:169
+#: source/php/Shortcodes/SingleEvent.php:532 views/submit-form.blade.php:175
 msgid "Categories"
 msgstr "Kategorier"
 
@@ -155,7 +155,7 @@ msgid "Show events from the selected categories."
 msgstr "Visa evenemang inom angivna kategorier."
 
 #: AcfFields/php/event-module.php:315 source/php/PostTypes/Events.php:265
-#: source/php/Shortcodes/SingleEvent.php:530
+#: source/php/Shortcodes/SingleEvent.php:538
 msgid "Tags"
 msgstr "Taggar"
 
@@ -220,9 +220,9 @@ msgid "Prices"
 msgstr "Priser"
 
 #: AcfFields/php/location-module.php:26 AcfFields/php/shortcodes.php:62
-#: source/php/Admin/AdminDisplayEvent.php:170
+#: source/php/Admin/AdminDisplayEvent.php:175
 #: source/php/Shortcodes/SingleEvent.php:166
-#: source/php/Shortcodes/SingleEvent.php:268
+#: source/php/Shortcodes/SingleEvent.php:276
 msgid "Links"
 msgstr "Länkar"
 
@@ -391,7 +391,7 @@ msgid "Shortcode settings"
 msgstr "Shortcode inställningar"
 
 #: AcfFields/php/shortcodes.php:10 AcfFields/php/shortcodes.php:55
-#: source/php/Admin/AdminDisplayEvent.php:140
+#: source/php/Admin/AdminDisplayEvent.php:139
 #: source/php/Shortcodes/SingleEvent.php:76
 #: source/php/Shortcodes/SingleEvent.php:223
 msgid "Information"
@@ -419,7 +419,7 @@ msgstr "Visa fält"
 
 #: AcfFields/php/shortcodes.php:56 source/php/Admin/AdminDisplayEvent.php:77
 #: source/php/Shortcodes/SingleEvent.php:148
-#: source/php/Shortcodes/SingleEvent.php:256
+#: source/php/Shortcodes/SingleEvent.php:264
 msgid "Occasions"
 msgstr "Datum"
 
@@ -427,7 +427,7 @@ msgstr "Datum"
 msgid "Additional locations"
 msgstr "Fler platser"
 
-#: AcfFields/php/shortcodes.php:60 source/php/Shortcodes/SingleEvent.php:463
+#: AcfFields/php/shortcodes.php:60 source/php/Shortcodes/SingleEvent.php:471
 msgid "Sponsors"
 msgstr "Sponsorer"
 
@@ -435,7 +435,9 @@ msgstr "Sponsorer"
 msgid "Booking information"
 msgstr "Information om bokning"
 
-#: AcfFields/php/shortcodes.php:63 source/php/Shortcodes/SingleEvent.php:120
+#: AcfFields/php/shortcodes.php:63 source/php/Admin/AdminDisplayEvent.php:159
+#: source/php/Shortcodes/SingleEvent.php:120
+#: source/php/Shortcodes/SingleEvent.php:248
 msgid "Contact"
 msgstr "Kontakt"
 
@@ -503,21 +505,21 @@ msgstr "Metadata"
 msgid "Featured image"
 msgstr "Bild"
 
-#: source/php/Admin/AdminDisplayEvent.php:154
+#: source/php/Admin/AdminDisplayEvent.php:153
 msgid "Booking"
 msgstr "Bokning"
 
-#: source/php/Admin/AdminDisplayEvent.php:161
+#: source/php/Admin/AdminDisplayEvent.php:166
 #: source/php/Shortcodes/SingleEvent.php:134
-#: source/php/Shortcodes/SingleEvent.php:248 views/submit-form.blade.php:153
+#: source/php/Shortcodes/SingleEvent.php:256 views/submit-form.blade.php:159
 msgid "Organizer"
 msgstr "Arrangör"
 
-#: source/php/Admin/AdminDisplayEvent.php:175
+#: source/php/Admin/AdminDisplayEvent.php:180
 msgid "Taxonomies"
 msgstr "Taxonomier"
 
-#: source/php/Admin/AdminDisplayEvent.php:216
+#: source/php/Admin/AdminDisplayEvent.php:221
 msgid "Image missing"
 msgstr "Bild saknas"
 
@@ -531,8 +533,8 @@ msgctxt "Event Manager Integration settings"
 msgid "Options"
 msgstr "Inställningar"
 
-#: source/php/App.php:67 views/submit-form.blade.php:156
-#: views/submit-form.blade.php:164 views/submit-form.blade.php:172
+#: source/php/App.php:67 views/submit-form.blade.php:162
+#: views/submit-form.blade.php:170 views/submit-form.blade.php:178
 msgid "Loading"
 msgstr "Hämtar"
 
@@ -615,8 +617,8 @@ msgid "Today"
 msgstr "Idag"
 
 #: source/php/Module/Event/views/partials/list.blade.php:33
-#: source/php/PostTypes/Events.php:63 views/submit-form.blade.php:38
-#: views/submit-form.blade.php:52
+#: source/php/PostTypes/Events.php:63 views/submit-form.blade.php:44
+#: views/submit-form.blade.php:58
 msgid "Date"
 msgstr "Datum"
 
@@ -649,7 +651,7 @@ msgid "Closed"
 msgstr "Stängt"
 
 #: source/php/Module/Location/views/location.blade.php:65
-#: views/submit-form.blade.php:135 views/submit-form.blade.php:137
+#: views/submit-form.blade.php:141 views/submit-form.blade.php:143
 msgid "Website"
 msgstr "Hemsida"
 
@@ -945,133 +947,133 @@ msgstr "Fel"
 msgid "Booking and tickets"
 msgstr "Bokning och biljetter"
 
-#: source/php/Shortcodes/SingleEvent.php:289
+#: source/php/Shortcodes/SingleEvent.php:297
 msgid "Door time"
 msgstr "Lokalen öppnar"
 
-#: source/php/Shortcodes/SingleEvent.php:302
+#: source/php/Shortcodes/SingleEvent.php:310
 msgid "Other links"
 msgstr "Andra länkar"
 
-#: source/php/Shortcodes/SingleEvent.php:310
+#: source/php/Shortcodes/SingleEvent.php:318
 msgid "Related events"
 msgstr "Relaterade evenemang"
 
-#: source/php/Shortcodes/SingleEvent.php:335
+#: source/php/Shortcodes/SingleEvent.php:343
 msgid "Other locations"
 msgstr "Fler platser"
 
-#: source/php/Shortcodes/SingleEvent.php:354
+#: source/php/Shortcodes/SingleEvent.php:362
 msgid "Book here"
 msgstr "Boka här"
 
-#: source/php/Shortcodes/SingleEvent.php:357
+#: source/php/Shortcodes/SingleEvent.php:365
 msgid "Adult"
 msgstr "Vuxen"
 
-#: source/php/Shortcodes/SingleEvent.php:358
+#: source/php/Shortcodes/SingleEvent.php:366
 msgid "below"
 msgstr "under"
 
-#: source/php/Shortcodes/SingleEvent.php:359
+#: source/php/Shortcodes/SingleEvent.php:367
 msgid "Children"
 msgstr "Barn"
 
-#: source/php/Shortcodes/SingleEvent.php:360
+#: source/php/Shortcodes/SingleEvent.php:368
 msgid "above"
 msgstr "över"
 
-#: source/php/Shortcodes/SingleEvent.php:361
+#: source/php/Shortcodes/SingleEvent.php:369
 msgid "Senior"
 msgstr "Pensionär"
 
-#: source/php/Shortcodes/SingleEvent.php:362
+#: source/php/Shortcodes/SingleEvent.php:370
 msgid "Student"
 msgstr "Student"
 
-#: source/php/Shortcodes/SingleEvent.php:363
+#: source/php/Shortcodes/SingleEvent.php:371
 msgid "Age restriction"
 msgstr "Åldersgräns"
 
-#: source/php/Shortcodes/SingleEvent.php:363
+#: source/php/Shortcodes/SingleEvent.php:371
 msgid "years"
 msgstr "år"
 
-#: source/php/Shortcodes/SingleEvent.php:364
-#: source/php/Shortcodes/SingleEvent.php:407
-#: source/php/Shortcodes/SingleEvent.php:408
+#: source/php/Shortcodes/SingleEvent.php:372
+#: source/php/Shortcodes/SingleEvent.php:415
+#: source/php/Shortcodes/SingleEvent.php:416
 msgid "Ticket release date"
 msgstr "Biljettsläpp"
 
-#: source/php/Shortcodes/SingleEvent.php:365
+#: source/php/Shortcodes/SingleEvent.php:373
 msgid "Tickets remaining"
 msgstr "Återstående biljetter"
 
-#: source/php/Shortcodes/SingleEvent.php:368
+#: source/php/Shortcodes/SingleEvent.php:376
 msgid "Ticket types"
 msgstr "Biljettyper"
 
-#: source/php/Shortcodes/SingleEvent.php:375
+#: source/php/Shortcodes/SingleEvent.php:383
 msgid "Seated"
 msgstr "Sittande"
 
-#: source/php/Shortcodes/SingleEvent.php:378
+#: source/php/Shortcodes/SingleEvent.php:386
 msgid "Standing"
 msgstr "Stående"
 
-#: source/php/Shortcodes/SingleEvent.php:382
+#: source/php/Shortcodes/SingleEvent.php:390
 msgid "Minimum price"
 msgstr "Minimipris"
 
-#: source/php/Shortcodes/SingleEvent.php:383
+#: source/php/Shortcodes/SingleEvent.php:391
 msgid "Maximum price"
 msgstr "Maximipris"
 
-#: source/php/Shortcodes/SingleEvent.php:391
+#: source/php/Shortcodes/SingleEvent.php:399
 msgid "Price range"
 msgstr "Prisintervall"
 
-#: source/php/Shortcodes/SingleEvent.php:393
+#: source/php/Shortcodes/SingleEvent.php:401
 msgid "Seated minimum price"
 msgstr "Minimipris för sittande"
 
-#: source/php/Shortcodes/SingleEvent.php:394
+#: source/php/Shortcodes/SingleEvent.php:402
 msgid "Seated maximum price"
 msgstr "Maximipris för sittande"
 
-#: source/php/Shortcodes/SingleEvent.php:395
+#: source/php/Shortcodes/SingleEvent.php:403
 msgid "Standing minimum price"
 msgstr "Minimipris för stående"
 
-#: source/php/Shortcodes/SingleEvent.php:396
+#: source/php/Shortcodes/SingleEvent.php:404
 msgid "Standing maximum price"
 msgstr "Maximipris för stående"
 
-#: source/php/Shortcodes/SingleEvent.php:402
+#: source/php/Shortcodes/SingleEvent.php:410
 msgid "Ticket retailers"
 msgstr "Återförsäljare"
 
-#: source/php/Shortcodes/SingleEvent.php:416
+#: source/php/Shortcodes/SingleEvent.php:424
 msgid "Group prices"
 msgstr "Gruppriser"
 
-#: source/php/Shortcodes/SingleEvent.php:419
+#: source/php/Shortcodes/SingleEvent.php:427
 msgid "persons"
 msgstr "personer"
 
-#: source/php/Shortcodes/SingleEvent.php:425
+#: source/php/Shortcodes/SingleEvent.php:433
 msgid "Included in membership cards"
 msgstr "Ingår i medlemskort"
 
-#: source/php/Shortcodes/SingleEvent.php:432
+#: source/php/Shortcodes/SingleEvent.php:440
 msgid "Price information"
 msgstr "Prisinformation"
 
-#: source/php/Shortcodes/SingleEvent.php:433
+#: source/php/Shortcodes/SingleEvent.php:441
 msgid "Ticket includes"
 msgstr "Ingår i biljett"
 
-#: source/php/Shortcodes/SingleEvent.php:548
+#: source/php/Shortcodes/SingleEvent.php:556
 msgctxt "Free event entrance"
 msgid "Free"
 msgstr "Gratis"
@@ -1142,11 +1144,27 @@ msgstr "Namn på evenemang"
 msgid "Describe your event. What happens and why should you visit it?"
 msgstr "Beskriv ditt evenemang. Vad händer där och varför ska man besöka det?"
 
+#: views/submit-form.blade.php:14
+msgid "Plain language tips"
+msgstr "Klarspråkstips"
+
+#: views/submit-form.blade.php:16
+msgid "Write the most important first."
+msgstr "Skriv det viktigaste först."
+
+#: views/submit-form.blade.php:17
+msgid "Use words that you think the readers understand."
+msgstr "Använd ord som du tror att läsarna förstår."
+
 #: views/submit-form.blade.php:18
+msgid "Write short and concise."
+msgstr "Skriv kort och koncist."
+
+#: views/submit-form.blade.php:24
 msgid "Event occurrence"
 msgstr "Evenemanget inträffar"
 
-#: views/submit-form.blade.php:20
+#: views/submit-form.blade.php:26
 msgid ""
 "Add occasions to this event. Does the event occur each week? Then add a rule "
 "for recurring events. Note that end time for the event can't be the same as "
@@ -1156,110 +1174,110 @@ msgstr ""
 "Lägg då till ett schema för återkommande evenemang. Observera att sluttiden "
 "för evenemanget inte kan vara samma som starttiden."
 
-#: views/submit-form.blade.php:23 views/submit-form.blade.php:33
+#: views/submit-form.blade.php:29 views/submit-form.blade.php:39
 msgid "Single occurrence"
 msgstr "Enstaka datum"
 
-#: views/submit-form.blade.php:26
+#: views/submit-form.blade.php:32
 msgctxt "Event recurrence rules"
 msgid "Schedule"
 msgstr "Schema"
 
-#: views/submit-form.blade.php:37 views/submit-form.blade.php:113
-#: views/submit-form.blade.php:115
+#: views/submit-form.blade.php:43 views/submit-form.blade.php:119
+#: views/submit-form.blade.php:121
 msgid "Start date"
 msgstr "Startdatum"
 
-#: views/submit-form.blade.php:41 views/submit-form.blade.php:93
+#: views/submit-form.blade.php:47 views/submit-form.blade.php:99
 msgid "Start time"
 msgstr "Starttid"
 
-#: views/submit-form.blade.php:51 views/submit-form.blade.php:119
-#: views/submit-form.blade.php:121
+#: views/submit-form.blade.php:57 views/submit-form.blade.php:125
+#: views/submit-form.blade.php:127
 msgid "End date"
 msgstr "Slutdatum"
 
-#: views/submit-form.blade.php:55 views/submit-form.blade.php:103
+#: views/submit-form.blade.php:61 views/submit-form.blade.php:109
 msgid "End time"
 msgstr "Sluttid"
 
-#: views/submit-form.blade.php:66 views/submit-form.blade.php:127
+#: views/submit-form.blade.php:72 views/submit-form.blade.php:133
 msgid "Add"
 msgstr "Lägg till"
 
-#: views/submit-form.blade.php:76
+#: views/submit-form.blade.php:82
 msgid "Recurrence rules for weekly recurring event"
 msgstr "Schema för återkommande evenemang"
 
-#: views/submit-form.blade.php:80
+#: views/submit-form.blade.php:86
 msgid "Weekday"
 msgstr "Veckodag"
 
-#: views/submit-form.blade.php:81
+#: views/submit-form.blade.php:87
 msgid "The event will occur on this weekday."
 msgstr "Evenemanget inträffar på vald veckodag."
 
-#: views/submit-form.blade.php:83
+#: views/submit-form.blade.php:89
 msgid "Monday"
 msgstr "Måndag"
 
-#: views/submit-form.blade.php:84
+#: views/submit-form.blade.php:90
 msgid "Tuesday"
 msgstr "Tisdag"
 
-#: views/submit-form.blade.php:85
+#: views/submit-form.blade.php:91
 msgid "Wednesday"
 msgstr "Onsdag"
 
-#: views/submit-form.blade.php:86
+#: views/submit-form.blade.php:92
 msgid "Thursday"
 msgstr "Torsdag"
 
-#: views/submit-form.blade.php:87
+#: views/submit-form.blade.php:93
 msgid "Friday"
 msgstr "Fredag"
 
-#: views/submit-form.blade.php:88
+#: views/submit-form.blade.php:94
 msgid "Saturday"
 msgstr "Lördag"
 
-#: views/submit-form.blade.php:89
+#: views/submit-form.blade.php:95
 msgid "Sunday"
 msgstr "Söndag"
 
-#: views/submit-form.blade.php:94
+#: views/submit-form.blade.php:100
 msgid "Start time for the event"
 msgstr "Evenemangets starttid"
 
-#: views/submit-form.blade.php:104
+#: views/submit-form.blade.php:110
 msgid "End time for the event"
 msgstr "Evenemangets sluttid"
 
-#: views/submit-form.blade.php:114
+#: views/submit-form.blade.php:120
 msgid "When the recurring event period starts"
 msgstr "Evenemanget inträffar löpande fr.o.m. detta datum"
 
-#: views/submit-form.blade.php:120
+#: views/submit-form.blade.php:126
 msgid "When the recurring event period ends"
 msgstr "Evenemanget inträffar löpande t.o.m. detta datum"
 
-#: views/submit-form.blade.php:136
+#: views/submit-form.blade.php:142
 msgid "Link to event website."
 msgstr "Länk till evenemangets webbplats."
 
-#: views/submit-form.blade.php:141 views/submit-form.blade.php:143
+#: views/submit-form.blade.php:147 views/submit-form.blade.php:149
 msgid "Link to booking"
 msgstr "Länk till bokning"
 
-#: views/submit-form.blade.php:142
+#: views/submit-form.blade.php:148
 msgid "Link to the event's booking page, e.g. ticketmaster."
 msgstr "Länk till evenemangets bokningssida, exempelvis Ticketmaster."
 
-#: views/submit-form.blade.php:147 views/submit-form.blade.php:149
+#: views/submit-form.blade.php:153 views/submit-form.blade.php:155
 msgid "Price"
 msgstr "Pris"
 
-#: views/submit-form.blade.php:148
+#: views/submit-form.blade.php:154
 msgid ""
 "For adults. Are there multiple price ranges? Please add it in the "
 "description."
@@ -1267,7 +1285,7 @@ msgstr ""
 "För vuxen. Finns det flera olika prisklasser? Informera gärna om det i "
 "beskrivningen."
 
-#: views/submit-form.blade.php:154
+#: views/submit-form.blade.php:160
 msgid ""
 "Choose from existing organizers in the list. If your business is not "
 "available, please add an organizer to the description."
@@ -1275,7 +1293,7 @@ msgstr ""
 "Välj mellan befintliga arrangörer i listan. Finns inte din verksamhet med "
 "går det bra att lägga till arrangör i beskrivningen."
 
-#: views/submit-form.blade.php:162
+#: views/submit-form.blade.php:168
 msgid ""
 "Choose from existing locations in the list. If the location is not "
 "available, please add an address in the description."
@@ -1283,7 +1301,7 @@ msgstr ""
 "Välj mellan befintliga platser i listan. Finns inte platsen med går det bra "
 "att lägga till en adress i beskrivningen."
 
-#: views/submit-form.blade.php:170
+#: views/submit-form.blade.php:176
 msgid ""
 "Select appropriate categories for your event or activity. To select multiple "
 "categories, press Ctrl (Windows) / command (macOS) at the same time as you "
@@ -1293,7 +1311,7 @@ msgstr ""
 "flera kategorier håll in Ctrl (Windows) / command (macOS) samtidigt som du "
 "klickar på respektive kategori."
 
-#: views/submit-form.blade.php:180
+#: views/submit-form.blade.php:186
 msgid ""
 "Upload an image. Keep in mind that the image may be cropped, so avoid text "
 "in the image."
@@ -1301,37 +1319,37 @@ msgstr ""
 "Ladda upp en bild. Tänk på att bilden kan bli beskuren, undvik därför text i "
 "bilden."
 
-#: views/submit-form.blade.php:181
+#: views/submit-form.blade.php:187
 msgid "You must also have the right to use and distribute the image."
 msgstr "Du måste även ha rätt att använda och sprida bilden."
 
-#: views/submit-form.blade.php:185 views/submit-form.blade.php:206
+#: views/submit-form.blade.php:191 views/submit-form.blade.php:212
 msgid "Upload an image"
 msgstr "Ladda upp en bild"
 
-#: views/submit-form.blade.php:189
+#: views/submit-form.blade.php:195
 msgid "Before you can upload an image, you need to confirm the following terms"
 msgstr ""
 "Innan du kan ladda upp en bild behöver du bekräfta nedanstående punkter"
 
-#: views/submit-form.blade.php:191
+#: views/submit-form.blade.php:197
 msgid "I have the right to use this image to promote this event."
 msgstr ""
 "Jag har rätt att använda denna bild för att marknadsföra detta evenemang."
 
-#: views/submit-form.blade.php:193
+#: views/submit-form.blade.php:199
 msgid "Are there identifiable persons on the image/images?"
 msgstr "Finns det identifierbara personer på bilden/bilderna?"
 
-#: views/submit-form.blade.php:195
+#: views/submit-form.blade.php:201
 msgid "Yes"
 msgstr "Ja"
 
-#: views/submit-form.blade.php:198
+#: views/submit-form.blade.php:204
 msgid "No"
 msgstr "Nej"
 
-#: views/submit-form.blade.php:201
+#: views/submit-form.blade.php:207
 msgid ""
 "They have approved that the image is used to promote this event and has been "
 "informed that after the image has been added to the location and event "
@@ -1342,11 +1360,11 @@ msgstr ""
 "evenemangsdatabasen kan komma att synas i olika kanaler för att marknadsföra "
 "evenemanget."
 
-#: views/submit-form.blade.php:212
+#: views/submit-form.blade.php:218
 msgid "Done? Click here to submit your event for review."
 msgstr "Klar? Klicka här för att skicka in ditt evenemang för granskning."
 
-#: views/submit-form.blade.php:222
+#: views/submit-form.blade.php:228
 msgid "Send"
 msgstr "Skicka"
 

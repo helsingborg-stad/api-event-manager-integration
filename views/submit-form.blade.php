@@ -10,8 +10,14 @@
 
     <div class="form-group">
         <label for="content"><?php _e('Description', 'event-integration'); ?> <span class="text-danger">*</span></label>
-        <small class="text-dark-gray"><?php _e('Describe your event. What happens and why should you visit it?', 'event-integration'); ?></small>
-        <textarea name="content" id="content textarea" placeholder="<?php _e('Description', 'event-integration'); ?>" required></textarea>
+        <small class="text-dark-gray"><?php _e('Describe your event. What happens and why should you visit it?', 'event-integration'); ?></small><br>
+        <small class="text-dark-gray"><?php _e('Plain language tips', 'event-integration'); ?>:</small><br>
+        <ul class="small text-dark-gray">
+            <li><?php _e('Write the most important first.', 'event-integration'); ?></li>
+            <li><?php _e('Use words that you think the readers understand.', 'event-integration'); ?></li>
+            <li><?php _e('Write short and concise.', 'event-integration'); ?></li>
+        </ul>
+        <textarea name="content" rows="5" id="content textarea" placeholder="<?php _e('Description', 'event-integration'); ?>" required></textarea>
     </div>
 
     <div class="form-group">

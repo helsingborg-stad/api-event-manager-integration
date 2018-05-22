@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2018-05-22 13:09+0200\n"
+"POT-Creation-Date: 2018-05-22 14:34+0200\n"
 "PO-Revision-Date: 2016-12-13 15:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -77,7 +77,7 @@ msgid "Fields"
 msgstr ""
 
 #: AcfFields/php/event-module.php:149 source/php/PostTypes/Events.php:43
-#: source/php/Shortcodes/SingleEvent.php:287
+#: source/php/Shortcodes/SingleEvent.php:295
 msgid "Occasion"
 msgstr ""
 
@@ -87,16 +87,16 @@ msgstr ""
 
 #: AcfFields/php/event-module.php:151 AcfFields/php/event-module.php:385
 #: AcfFields/php/location-module.php:6 AcfFields/php/shortcodes.php:57
-#: source/php/Admin/AdminDisplayEvent.php:147
+#: source/php/Admin/AdminDisplayEvent.php:146
 #: source/php/Module/Event/views/partials/list.blade.php:37
 #: source/php/Module/Location/Location.php:12
 #: source/php/Shortcodes/SingleEvent.php:90
-#: source/php/Shortcodes/SingleEvent.php:231 views/submit-form.blade.php:161
+#: source/php/Shortcodes/SingleEvent.php:231 views/submit-form.blade.php:167
 msgid "Location"
 msgstr ""
 
 #: AcfFields/php/event-module.php:152 views/submit-form.blade.php:12
-#: views/submit-form.blade.php:14
+#: views/submit-form.blade.php:20
 msgid "Description"
 msgstr ""
 
@@ -121,7 +121,7 @@ msgid "Set to -1 to show the whole description."
 msgstr ""
 
 #: AcfFields/php/event-module.php:223 source/php/PostTypes/Events.php:302
-#: source/php/Shortcodes/SingleEvent.php:518
+#: source/php/Shortcodes/SingleEvent.php:526
 msgid "Groups"
 msgstr ""
 
@@ -138,7 +138,7 @@ msgid "Show events from the selected groups."
 msgstr ""
 
 #: AcfFields/php/event-module.php:269 source/php/PostTypes/Events.php:228
-#: source/php/Shortcodes/SingleEvent.php:524 views/submit-form.blade.php:169
+#: source/php/Shortcodes/SingleEvent.php:532 views/submit-form.blade.php:175
 msgid "Categories"
 msgstr ""
 
@@ -155,7 +155,7 @@ msgid "Show events from the selected categories."
 msgstr ""
 
 #: AcfFields/php/event-module.php:315 source/php/PostTypes/Events.php:265
-#: source/php/Shortcodes/SingleEvent.php:530
+#: source/php/Shortcodes/SingleEvent.php:538
 msgid "Tags"
 msgstr ""
 
@@ -218,9 +218,9 @@ msgid "Prices"
 msgstr ""
 
 #: AcfFields/php/location-module.php:26 AcfFields/php/shortcodes.php:62
-#: source/php/Admin/AdminDisplayEvent.php:170
+#: source/php/Admin/AdminDisplayEvent.php:175
 #: source/php/Shortcodes/SingleEvent.php:166
-#: source/php/Shortcodes/SingleEvent.php:268
+#: source/php/Shortcodes/SingleEvent.php:276
 msgid "Links"
 msgstr ""
 
@@ -373,7 +373,7 @@ msgid "Shortcode settings"
 msgstr ""
 
 #: AcfFields/php/shortcodes.php:10 AcfFields/php/shortcodes.php:55
-#: source/php/Admin/AdminDisplayEvent.php:140
+#: source/php/Admin/AdminDisplayEvent.php:139
 #: source/php/Shortcodes/SingleEvent.php:76
 #: source/php/Shortcodes/SingleEvent.php:223
 msgid "Information"
@@ -397,7 +397,7 @@ msgstr ""
 
 #: AcfFields/php/shortcodes.php:56 source/php/Admin/AdminDisplayEvent.php:77
 #: source/php/Shortcodes/SingleEvent.php:148
-#: source/php/Shortcodes/SingleEvent.php:256
+#: source/php/Shortcodes/SingleEvent.php:264
 msgid "Occasions"
 msgstr ""
 
@@ -405,7 +405,7 @@ msgstr ""
 msgid "Additional locations"
 msgstr ""
 
-#: AcfFields/php/shortcodes.php:60 source/php/Shortcodes/SingleEvent.php:463
+#: AcfFields/php/shortcodes.php:60 source/php/Shortcodes/SingleEvent.php:471
 msgid "Sponsors"
 msgstr ""
 
@@ -413,7 +413,9 @@ msgstr ""
 msgid "Booking information"
 msgstr ""
 
-#: AcfFields/php/shortcodes.php:63 source/php/Shortcodes/SingleEvent.php:120
+#: AcfFields/php/shortcodes.php:63 source/php/Admin/AdminDisplayEvent.php:159
+#: source/php/Shortcodes/SingleEvent.php:120
+#: source/php/Shortcodes/SingleEvent.php:248
 msgid "Contact"
 msgstr ""
 
@@ -473,21 +475,21 @@ msgstr ""
 msgid "Featured image"
 msgstr ""
 
-#: source/php/Admin/AdminDisplayEvent.php:154
+#: source/php/Admin/AdminDisplayEvent.php:153
 msgid "Booking"
 msgstr ""
 
-#: source/php/Admin/AdminDisplayEvent.php:161
+#: source/php/Admin/AdminDisplayEvent.php:166
 #: source/php/Shortcodes/SingleEvent.php:134
-#: source/php/Shortcodes/SingleEvent.php:248 views/submit-form.blade.php:153
+#: source/php/Shortcodes/SingleEvent.php:256 views/submit-form.blade.php:159
 msgid "Organizer"
 msgstr ""
 
-#: source/php/Admin/AdminDisplayEvent.php:175
+#: source/php/Admin/AdminDisplayEvent.php:180
 msgid "Taxonomies"
 msgstr ""
 
-#: source/php/Admin/AdminDisplayEvent.php:216
+#: source/php/Admin/AdminDisplayEvent.php:221
 msgid "Image missing"
 msgstr ""
 
@@ -501,8 +503,8 @@ msgctxt "Event Manager Integration settings"
 msgid "Options"
 msgstr ""
 
-#: source/php/App.php:67 views/submit-form.blade.php:156
-#: views/submit-form.blade.php:164 views/submit-form.blade.php:172
+#: source/php/App.php:67 views/submit-form.blade.php:162
+#: views/submit-form.blade.php:170 views/submit-form.blade.php:178
 msgid "Loading"
 msgstr ""
 
@@ -585,8 +587,8 @@ msgid "Today"
 msgstr ""
 
 #: source/php/Module/Event/views/partials/list.blade.php:33
-#: source/php/PostTypes/Events.php:63 views/submit-form.blade.php:38
-#: views/submit-form.blade.php:52
+#: source/php/PostTypes/Events.php:63 views/submit-form.blade.php:44
+#: views/submit-form.blade.php:58
 msgid "Date"
 msgstr ""
 
@@ -619,7 +621,7 @@ msgid "Closed"
 msgstr ""
 
 #: source/php/Module/Location/views/location.blade.php:65
-#: views/submit-form.blade.php:135 views/submit-form.blade.php:137
+#: views/submit-form.blade.php:141 views/submit-form.blade.php:143
 msgid "Website"
 msgstr ""
 
@@ -912,133 +914,133 @@ msgstr ""
 msgid "Booking and tickets"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:289
+#: source/php/Shortcodes/SingleEvent.php:297
 msgid "Door time"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:302
+#: source/php/Shortcodes/SingleEvent.php:310
 msgid "Other links"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:310
+#: source/php/Shortcodes/SingleEvent.php:318
 msgid "Related events"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:335
+#: source/php/Shortcodes/SingleEvent.php:343
 msgid "Other locations"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:354
+#: source/php/Shortcodes/SingleEvent.php:362
 msgid "Book here"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:357
+#: source/php/Shortcodes/SingleEvent.php:365
 msgid "Adult"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:358
+#: source/php/Shortcodes/SingleEvent.php:366
 msgid "below"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:359
+#: source/php/Shortcodes/SingleEvent.php:367
 msgid "Children"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:360
+#: source/php/Shortcodes/SingleEvent.php:368
 msgid "above"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:361
+#: source/php/Shortcodes/SingleEvent.php:369
 msgid "Senior"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:362
+#: source/php/Shortcodes/SingleEvent.php:370
 msgid "Student"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:363
+#: source/php/Shortcodes/SingleEvent.php:371
 msgid "Age restriction"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:363
+#: source/php/Shortcodes/SingleEvent.php:371
 msgid "years"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:364
-#: source/php/Shortcodes/SingleEvent.php:407
-#: source/php/Shortcodes/SingleEvent.php:408
+#: source/php/Shortcodes/SingleEvent.php:372
+#: source/php/Shortcodes/SingleEvent.php:415
+#: source/php/Shortcodes/SingleEvent.php:416
 msgid "Ticket release date"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:365
+#: source/php/Shortcodes/SingleEvent.php:373
 msgid "Tickets remaining"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:368
+#: source/php/Shortcodes/SingleEvent.php:376
 msgid "Ticket types"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:375
+#: source/php/Shortcodes/SingleEvent.php:383
 msgid "Seated"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:378
+#: source/php/Shortcodes/SingleEvent.php:386
 msgid "Standing"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:382
+#: source/php/Shortcodes/SingleEvent.php:390
 msgid "Minimum price"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:383
+#: source/php/Shortcodes/SingleEvent.php:391
 msgid "Maximum price"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:391
+#: source/php/Shortcodes/SingleEvent.php:399
 msgid "Price range"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:393
+#: source/php/Shortcodes/SingleEvent.php:401
 msgid "Seated minimum price"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:394
+#: source/php/Shortcodes/SingleEvent.php:402
 msgid "Seated maximum price"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:395
+#: source/php/Shortcodes/SingleEvent.php:403
 msgid "Standing minimum price"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:396
+#: source/php/Shortcodes/SingleEvent.php:404
 msgid "Standing maximum price"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:402
+#: source/php/Shortcodes/SingleEvent.php:410
 msgid "Ticket retailers"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:416
+#: source/php/Shortcodes/SingleEvent.php:424
 msgid "Group prices"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:419
+#: source/php/Shortcodes/SingleEvent.php:427
 msgid "persons"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:425
+#: source/php/Shortcodes/SingleEvent.php:433
 msgid "Included in membership cards"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:432
+#: source/php/Shortcodes/SingleEvent.php:440
 msgid "Price information"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:433
+#: source/php/Shortcodes/SingleEvent.php:441
 msgid "Ticket includes"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:548
+#: source/php/Shortcodes/SingleEvent.php:556
 msgctxt "Free event entrance"
 msgid "Free"
 msgstr ""
@@ -1109,191 +1111,207 @@ msgstr ""
 msgid "Describe your event. What happens and why should you visit it?"
 msgstr ""
 
+#: views/submit-form.blade.php:14
+msgid "Plain language tips"
+msgstr ""
+
+#: views/submit-form.blade.php:16
+msgid "Write the most important first."
+msgstr ""
+
+#: views/submit-form.blade.php:17
+msgid "Use words that you think the readers understand."
+msgstr ""
+
 #: views/submit-form.blade.php:18
+msgid "Write short and concise."
+msgstr ""
+
+#: views/submit-form.blade.php:24
 msgid "Event occurrence"
 msgstr ""
 
-#: views/submit-form.blade.php:20
+#: views/submit-form.blade.php:26
 msgid ""
 "Add occasions to this event. Does the event occur each week? Then add a rule "
 "for recurring events. Note that end time for the event can't be the same as "
 "the start time."
 msgstr ""
 
-#: views/submit-form.blade.php:23 views/submit-form.blade.php:33
+#: views/submit-form.blade.php:29 views/submit-form.blade.php:39
 msgid "Single occurrence"
 msgstr ""
 
-#: views/submit-form.blade.php:26
+#: views/submit-form.blade.php:32
 msgctxt "Event recurrence rules"
 msgid "Schedule"
 msgstr ""
 
-#: views/submit-form.blade.php:37 views/submit-form.blade.php:113
-#: views/submit-form.blade.php:115
+#: views/submit-form.blade.php:43 views/submit-form.blade.php:119
+#: views/submit-form.blade.php:121
 msgid "Start date"
 msgstr ""
 
-#: views/submit-form.blade.php:41 views/submit-form.blade.php:93
+#: views/submit-form.blade.php:47 views/submit-form.blade.php:99
 msgid "Start time"
 msgstr ""
 
-#: views/submit-form.blade.php:51 views/submit-form.blade.php:119
-#: views/submit-form.blade.php:121
+#: views/submit-form.blade.php:57 views/submit-form.blade.php:125
+#: views/submit-form.blade.php:127
 msgid "End date"
 msgstr ""
 
-#: views/submit-form.blade.php:55 views/submit-form.blade.php:103
+#: views/submit-form.blade.php:61 views/submit-form.blade.php:109
 msgid "End time"
 msgstr ""
 
-#: views/submit-form.blade.php:66 views/submit-form.blade.php:127
+#: views/submit-form.blade.php:72 views/submit-form.blade.php:133
 msgid "Add"
 msgstr ""
 
-#: views/submit-form.blade.php:76
+#: views/submit-form.blade.php:82
 msgid "Recurrence rules for weekly recurring event"
 msgstr ""
 
-#: views/submit-form.blade.php:80
+#: views/submit-form.blade.php:86
 msgid "Weekday"
 msgstr ""
 
-#: views/submit-form.blade.php:81
+#: views/submit-form.blade.php:87
 msgid "The event will occur on this weekday."
 msgstr ""
 
-#: views/submit-form.blade.php:83
+#: views/submit-form.blade.php:89
 msgid "Monday"
 msgstr ""
 
-#: views/submit-form.blade.php:84
+#: views/submit-form.blade.php:90
 msgid "Tuesday"
 msgstr ""
 
-#: views/submit-form.blade.php:85
+#: views/submit-form.blade.php:91
 msgid "Wednesday"
 msgstr ""
 
-#: views/submit-form.blade.php:86
+#: views/submit-form.blade.php:92
 msgid "Thursday"
 msgstr ""
 
-#: views/submit-form.blade.php:87
+#: views/submit-form.blade.php:93
 msgid "Friday"
 msgstr ""
 
-#: views/submit-form.blade.php:88
+#: views/submit-form.blade.php:94
 msgid "Saturday"
 msgstr ""
 
-#: views/submit-form.blade.php:89
+#: views/submit-form.blade.php:95
 msgid "Sunday"
 msgstr ""
 
-#: views/submit-form.blade.php:94
+#: views/submit-form.blade.php:100
 msgid "Start time for the event"
 msgstr ""
 
-#: views/submit-form.blade.php:104
+#: views/submit-form.blade.php:110
 msgid "End time for the event"
 msgstr ""
 
-#: views/submit-form.blade.php:114
+#: views/submit-form.blade.php:120
 msgid "When the recurring event period starts"
 msgstr ""
 
-#: views/submit-form.blade.php:120
+#: views/submit-form.blade.php:126
 msgid "When the recurring event period ends"
 msgstr ""
 
-#: views/submit-form.blade.php:136
+#: views/submit-form.blade.php:142
 msgid "Link to event website."
 msgstr ""
 
-#: views/submit-form.blade.php:141 views/submit-form.blade.php:143
+#: views/submit-form.blade.php:147 views/submit-form.blade.php:149
 msgid "Link to booking"
 msgstr ""
 
-#: views/submit-form.blade.php:142
+#: views/submit-form.blade.php:148
 msgid "Link to the event's booking page, e.g. ticketmaster."
 msgstr ""
 
-#: views/submit-form.blade.php:147 views/submit-form.blade.php:149
+#: views/submit-form.blade.php:153 views/submit-form.blade.php:155
 msgid "Price"
 msgstr ""
 
-#: views/submit-form.blade.php:148
+#: views/submit-form.blade.php:154
 msgid ""
 "For adults. Are there multiple price ranges? Please add it in the "
 "description."
 msgstr ""
 
-#: views/submit-form.blade.php:154
+#: views/submit-form.blade.php:160
 msgid ""
 "Choose from existing organizers in the list. If your business is not "
 "available, please add an organizer to the description."
 msgstr ""
 
-#: views/submit-form.blade.php:162
+#: views/submit-form.blade.php:168
 msgid ""
 "Choose from existing locations in the list. If the location is not "
 "available, please add an address in the description."
 msgstr ""
 
-#: views/submit-form.blade.php:170
+#: views/submit-form.blade.php:176
 msgid ""
 "Select appropriate categories for your event or activity. To select multiple "
 "categories, press Ctrl (Windows) / command (macOS) at the same time as you "
 "click on the categories."
 msgstr ""
 
-#: views/submit-form.blade.php:180
+#: views/submit-form.blade.php:186
 msgid ""
 "Upload an image. Keep in mind that the image may be cropped, so avoid text "
 "in the image."
 msgstr ""
 
-#: views/submit-form.blade.php:181
+#: views/submit-form.blade.php:187
 msgid "You must also have the right to use and distribute the image."
 msgstr ""
 
-#: views/submit-form.blade.php:185 views/submit-form.blade.php:206
+#: views/submit-form.blade.php:191 views/submit-form.blade.php:212
 msgid "Upload an image"
 msgstr ""
 
-#: views/submit-form.blade.php:189
+#: views/submit-form.blade.php:195
 msgid "Before you can upload an image, you need to confirm the following terms"
 msgstr ""
 
-#: views/submit-form.blade.php:191
+#: views/submit-form.blade.php:197
 msgid "I have the right to use this image to promote this event."
 msgstr ""
 
-#: views/submit-form.blade.php:193
+#: views/submit-form.blade.php:199
 msgid "Are there identifiable persons on the image/images?"
 msgstr ""
 
-#: views/submit-form.blade.php:195
+#: views/submit-form.blade.php:201
 msgid "Yes"
 msgstr ""
 
-#: views/submit-form.blade.php:198
+#: views/submit-form.blade.php:204
 msgid "No"
 msgstr ""
 
-#: views/submit-form.blade.php:201
+#: views/submit-form.blade.php:207
 msgid ""
 "They have approved that the image is used to promote this event and has been "
 "informed that after the image has been added to the location and event "
 "database, it may appear in different channels to promote the event."
 msgstr ""
 
-#: views/submit-form.blade.php:212
+#: views/submit-form.blade.php:218
 msgid "Done? Click here to submit your event for review."
 msgstr ""
 
-#: views/submit-form.blade.php:222
+#: views/submit-form.blade.php:228
 msgid "Send"
 msgstr ""
 
