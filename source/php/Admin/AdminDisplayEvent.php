@@ -122,7 +122,6 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
     {
         $id = $object->ID;
         $get_meta = get_post_meta($id);
-        $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($id);
         $meta = array();
         foreach ($get_meta as $key => $value) {
             if (is_array($value) && count($value) == 1) {
@@ -153,6 +152,12 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
         if (strpos($booking_info, '<li>')) {
             $ret .= '<ul><li><h3>'.__('Booking', 'event-integration').'</h3></li></ul>';
             $ret .= $booking_info;
+        }
+
+        // Contact
+        if (! empty($contact = \EventManagerIntegration\Shortcodes\SingleEvent::eventContact($meta))) {
+            $ret .= '<ul><li><h3>'.__('Contact', 'event-integration').'</h3></li></ul>';
+            $ret .= '<ul>' . $contact . '</ul>';
         }
 
         // Organizers

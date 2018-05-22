@@ -110,6 +110,21 @@ class SingleEvent
             $ret .= '</section>';
         }
 
+        // Contact
+        $contact_info = $this->eventContact($meta);
+        if (in_array('contact', $fields) && !empty($contact_info)) {
+            $i++;
+            $ret .= '<section class="accordion-section">';
+            $ret .= '<input type="radio" name="active-section" id="accordion-section-' . $i . '">';
+            $ret .= '<label class="accordion-toggle" for="accordion-section-' . $i . '">';
+            $ret .= '<h3>' . __('Contact', 'event-integration') . '</h3>';
+            $ret .= '</label>';
+            $ret .= '<div class="accordion-content">';
+            $ret .= '<ul>' . $contact_info . '</ul>';
+            $ret .= '</div>';
+            $ret .= '</section>';
+        }
+
         // Organizers
         if (!empty($meta['organizers']) && in_array('organizers', $fields)) {
             $i++;
@@ -227,6 +242,14 @@ class SingleEvent
             $ret .= '</div>';
         }
 
+        // Contact
+        if (in_array('contact', $fields) && !empty($contact_info = $this->eventContact($meta))) {
+            $ret .= '<div class="shortcode-box shortcode-contact ' . $box_class . '">';
+            $ret .= '<ul><li><h3>' . __('Contact', 'event-integration') . '</h3></li></ul>';
+            $ret .= '<ul>' . $contact_info . '</ul>';
+            $ret .= '</div>';
+        }
+
         // Organizers
         if (!empty($meta['organizers']) && in_array('organizers', $fields)) {
             $ret .= '<div class="shortcode-box shortcode-organizer ' . $box_class . '">';
@@ -336,8 +359,9 @@ class SingleEvent
     public static function eventBooking($meta = array())
     {
         $ret = '<ul>';
-        $ret .= (!empty($meta['booking_link'])) ? '<li><i class="pricon pricon-external-link"></i> <a href="' . $meta['booking_link'] . '" target="_blank"><strong>' . __('Book here', 'event-integration') . '</strong></a></li>' : '';
-        $ret .= (!empty($meta['booking_phone'])) ? '<li><i class="pricon pricon-phone"></i> ' . $meta['booking_phone'] . '</li><br>' : '';
+        $ret .= (!empty($meta['booking_link'])) ? '<li><a href="' . $meta['booking_link'] . '" target="_blank"><strong>' . __('Book here', 'event-integration') . '</strong></a></li>' : '';
+        $ret .= (!empty($meta['booking_phone'])) ? '<li><i class="pricon pricon-phone"></i> <a href="tel:' . $meta['booking_phone'] . '">' . $meta['booking_phone'] . '</a></li>' : '';
+        $ret .= (!empty($meta['booking_email'])) ? '<li><i class="pricon pricon-email"></i> <a href="mailto:' . $meta['booking_email'] . '">' . $meta['booking_email'] . '</a></li><br>' : '';
         $ret .= (isset($meta['price_adult']) && $meta['price_adult'] != '') ? '<li>' . __('Adult', 'event-integration') . ': ' . self::priceOutput($meta['price_adult']) . '</li>' : '';
         $children_age = (!empty($meta['children_age'])) ? ' (' . __('below', 'event-integration') . ' ' . $meta['children_age'] . ')' : '';
         $ret .= (isset($meta['price_children']) && $meta['price_children'] != '') ? '<li>' . __('Children', 'event-integration') . $children_age . ': ' .self::priceOutput($meta['price_children']) . '</li>' : '';
@@ -371,7 +395,7 @@ class SingleEvent
         $ret .= '</ul>';
         $ret .= '</ul>';
         $ret .= '</ul>';
-        if (!empty($meta['price_range']) && is_array($meta['price_range'])) {
+        if (!empty($meta['price_range']) && is_array($meta['price_range']) && !empty(array_filter($meta['price_range']))) {
             $ret .= '<ul><li><strong>' . __('Price range', 'event-integration') . '</strong></li></ul>';
             $ret .= '<ul>';
             $ret .= (isset($meta['price_range']['seated_minimum_price']) && $meta['price_range']['seated_minimum_price'] != '') ? '<li>' . __('Seated minimum price', 'event-integration') . ': ' . self::priceOutput($meta['price_range']['seated_minimum_price']) . '</li>' : '';
@@ -415,6 +439,16 @@ class SingleEvent
         }
         $ret .= (!empty($meta['price_information'])) ? '<ul><li><strong>' . __('Price information', 'event-integration') . '</strong></li></ul><ul><li> ' . $meta['price_information'] . '</li></ul>' : '';
         $ret .= (!empty($meta['ticket_includes'])) ? '<ul><li><strong>' . __('Ticket includes', 'event-integration') . '</strong></li></ul><ul><li> ' . $meta['ticket_includes'] . '</li></ul>' : '';
+
+        return $ret;
+    }
+
+    public static function eventContact($meta = array())
+    {
+        $ret = '';
+        $ret .= (!empty($meta['contact_information'])) ? '<li>'. $meta['contact_information'] .'</li><br>' : '';
+        $ret .= (!empty($meta['contact_phone'])) ? '<li><i class="pricon pricon-phone"></i> <a href="tel:' . $meta['contact_phone'] . '" target="_blank">' . $meta['contact_phone'] . '</a></li>' : '';
+        $ret .= (!empty($meta['contact_email'])) ? '<li><i class="pricon pricon-email"></i> <a href="mailto:' . $meta['contact_email'] . '" target="_blank">' . $meta['contact_email'] . '</a></li>' : '';
 
         return $ret;
     }

@@ -59,6 +59,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         $supporters                     = !empty($event['supporters']) ? $event['supporters'] : null;
         $booking_link                   = !empty($event['booking_link']) ? $event['booking_link'] : null;
         $booking_phone                  = !empty($event['booking_phone']) ? $event['booking_phone'] : null;
+        $booking_email                  = !empty($event['booking_email']) ? $event['booking_email'] : null;
         $age_restriction                = !empty($event['age_restriction']) ? $event['age_restriction'] : null;
         $membership_cards               = !empty($event['membership_cards']) ? $event['membership_cards'] : null;
         $price_information              = !empty($event['price_information']) ? $event['price_information'] : null;
@@ -92,6 +93,9 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         $additional_ticket_types        = !empty($event['additional_ticket_types']) ? $event['additional_ticket_types'] : null;
         $price_range                    = !empty($event['price_range']) ? $event['price_range'] : null;
         $ticket_release_date            = !empty($event['ticket_release_date']) ? $event['ticket_release_date'] : null;
+        $contact_information            = !empty($event['contact_information']) ? $event['contact_information'] : null;
+        $contact_phone                  = !empty($event['contact_phone']) ? $event['contact_phone'] : null;
+        $contact_email                  = !empty($event['contact_email']) ? $event['contact_email'] : null;
 
         $pass_tax_filter = $this->checkFilters($this->filterTaxonomies($categories, 0), $this->filterTaxonomies($tags, 1));
         $passes = true;
@@ -149,6 +153,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
                         'supporters' => $supporters,
                         'booking_link' => $booking_link,
                         'booking_phone' => $booking_phone,
+                        'booking_email' => $booking_email,
                         'age_restriction' => $age_restriction,
                         'membership_cards' => $membership_cards,
                         'price_information' => $price_information,
@@ -176,7 +181,10 @@ class EventManagerApi extends \EventManagerIntegration\Parser
                         'additional_ticket_retailers' => $additional_ticket_retailers,
                         'additional_ticket_types' => $additional_ticket_types,
                         'price_range' => $price_range,
-                        'ticket_release_date' => $ticket_release_date
+                        'ticket_release_date' => $ticket_release_date,
+                        'contact_email' => $contact_email,
+                        'contact_phone' => $contact_phone,
+                        'contact_information' => $contact_information
                     )
                 );
             } catch (\Exception $e) {
