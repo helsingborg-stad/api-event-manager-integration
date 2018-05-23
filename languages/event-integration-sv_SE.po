@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2018-05-22 14:34+0200\n"
-"PO-Revision-Date: 2018-05-22 14:35+0200\n"
+"POT-Creation-Date: 2018-05-23 15:07+0200\n"
+"PO-Revision-Date: 2018-05-23 15:09+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -542,7 +542,11 @@ msgstr "Hämtar"
 msgid "Something went wrong, please try again later."
 msgstr "Något gick fel, vänligen försök igen senare."
 
-#: source/php/App.php:113
+#: source/php/App.php:90
+msgid "The email addresses does not match."
+msgstr "E-postadresserna matchar inte."
+
+#: source/php/App.php:114
 msgid "to"
 msgstr "till"
 
@@ -1360,11 +1364,31 @@ msgstr ""
 "evenemangsdatabasen kan komma att synas i olika kanaler för att marknadsföra "
 "evenemanget."
 
+#: views/submit-form.blade.php:217
+msgid "Contact details"
+msgstr "Kontaktuppgifter"
+
 #: views/submit-form.blade.php:218
+msgid "Enter your contact details below for eventual questions."
+msgstr "Ange dina kontaktuppgifter nedan för eventuella frågor."
+
+#: views/submit-form.blade.php:221 views/submit-form.blade.php:222
+msgid "Email"
+msgstr "E-postadress"
+
+#: views/submit-form.blade.php:225 views/submit-form.blade.php:226
+msgid "Repeat email"
+msgstr "Upprepa e-postadress"
+
+#: views/submit-form.blade.php:229 views/submit-form.blade.php:230
+msgid "Phone number"
+msgstr "Telefonnummer"
+
+#: views/submit-form.blade.php:234
 msgid "Done? Click here to submit your event for review."
 msgstr "Klar? Klicka här för att skicka in ditt evenemang för granskning."
 
-#: views/submit-form.blade.php:228
+#: views/submit-form.blade.php:244
 msgid "Send"
 msgstr "Skicka"
 
