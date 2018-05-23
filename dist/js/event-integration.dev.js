@@ -498,7 +498,7 @@ EventManagerIntegration.Event.Form = (function ($) {
 			    .then(function(response, textStatus) {
 			    	if (response.success) {
 			    		formData['featured_media'] = response.data;
-						this.submitEventAjax(eventForm, formData);
+                        Form.prototype.submitEventAjax(eventForm, formData);
 			    	} else {
 			    		$('.submit-success', eventForm).addClass('hidden');
 						$('.submit-error', eventForm).removeClass('hidden');
