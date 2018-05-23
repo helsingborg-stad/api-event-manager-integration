@@ -86,7 +86,8 @@ class App
             'apiurl'  => get_field('event_api_url', 'option'),
         ));
         wp_localize_script('event-integration', 'eventIntegrationFront', array(
-            'event_pagination_error'   => __("Something went wrong, please try again later.", 'event-integration'),
+            'event_pagination_error' => __("Something went wrong, please try again later.", 'event-integration'),
+            'email_not_matching' => __("The email addresses does not match.", 'event-integration'),
         ));
         wp_enqueue_script('event-integration');
     }

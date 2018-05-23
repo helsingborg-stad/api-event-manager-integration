@@ -214,6 +214,22 @@
     </div>
 
     <div class="form-group">
+        <h4><?php _e('Contact details', 'event-integration'); ?></h4>
+        <p class="text-sm"><?php _e('Enter your contact details below for eventual questions.', 'event-integration'); ?></p>
+    </div>
+    <div class="form-group">
+        <label for="submitter_email"><?php _e('Email', 'event-integration'); ?> <span class="text-danger">*</span></label>
+        <input type="email" name="submitter_email" id="submitter_email" placeholder="<?php _e('Email', 'event-integration'); ?>" required>
+    </div>
+    <div class="form-group">
+        <label for="submitter_repeat_email"><?php _e('Repeat email', 'event-integration'); ?> <span class="text-danger">*</span></label>
+        <input type="email" name="submitter_repeat_email" id="submitter_repeat_email" placeholder="<?php _e('Repeat email', 'event-integration'); ?>" required>
+    </div>
+    <div class="form-group">
+        <label for="submitter_phone"><?php _e('Phone number', 'event-integration'); ?> <span class="text-danger">*</span></label>
+        <input type="text" name="submitter_phone" id="submitter_phone" placeholder="<?php _e('Phone number', 'event-integration'); ?>" required>
+    </div>
+    <div class="form-group">
         <p>
             <small><?php _e('Done? Click here to submit your event for review.', 'event-integration'); ?></small>
         </p>
