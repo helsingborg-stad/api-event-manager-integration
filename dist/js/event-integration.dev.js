@@ -102,6 +102,8 @@ EventManagerIntegration.Event.Form = (function ($) {
 
         	this.handleEvents($(eventForm), apiUrl);
 
+            this.customValidations(eventForm);
+
         	if (document.getElementById('location') !== null) {
         		this.loadPostType($(eventForm), apiUrl, 'location');
         	}
@@ -116,6 +118,22 @@ EventManagerIntegration.Event.Form = (function ($) {
         	}
         }.bind(this));
     }
+
+    /**
+     * Add custom validations with Hyperform
+     */
+    Form.prototype.customValidations = function(eventForm) {
+        // Match email addresses
+        hyperform.addValidator(
+            eventForm.submitter_repeat_email,
+            function(element) {
+                var valid = element.value === eventForm.submitter_email.value;
+                element.setCustomValidity( valid ? '' : eventIntegrationFront.email_not_matching);
+
+                return valid;
+            }
+        );
+    };
 
     // Get taxonomies from API and add to select box
     Form.prototype.loadTaxonomy = function(eventForm, resource, taxonomy) {
@@ -465,33 +483,33 @@ EventManagerIntegration.Event.Form = (function ($) {
         $(eventForm).on('submit', function(e) {
 		    e.preventDefault();
 
-		   	$('.submit-error', eventForm).addClass('hidden');
-        	$('.submit-success', eventForm).removeClass('hidden');
-			$('.submit-success .success', eventForm).empty().append('<i class="fa fa-send"></i>Skickar...</li>');
-
 		    var fileInput  	= eventForm.find('#image-input'),
-    			formData 	= Form.prototype.jsonData(eventForm),
+    			formData 	= this.jsonData(eventForm),
 		    	imageData 	= new FormData();
 
-		    // Upload media first and append it to the post.
+            $('.submit-error', eventForm).addClass('hidden');
+            $('.submit-success', eventForm).removeClass('hidden');
+            $('.submit-success .success', eventForm).empty().append('<i class="fa fa-send"></i>Skickar...</li>');
+
+            // Upload media first and append it to the post.
 		    if (fileInput.val()) {
 		    	imageData.append('file', fileInput[0].files[0]);
-			    $.when(Form.prototype.submitImageAjax(eventForm, imageData))
+			    $.when(this.submitImageAjax(eventForm, imageData))
 			    .then(function(response, textStatus) {
 			    	if (response.success) {
-			    		formData['featured_media'] 	= response.data;
-						Form.prototype.submitEventAjax(eventForm, formData);
+			    		formData['featured_media'] = response.data;
+						this.submitEventAjax(eventForm, formData);
 			    	} else {
 			    		$('.submit-success', eventForm).addClass('hidden');
 						$('.submit-error', eventForm).removeClass('hidden');
-						$('.submit-error .warning', eventForm).empty().append('<i class="fa fa-warning"></i>' + response.data + '</li>');
+						$('.submit-error .warning', eventForm).empty().append('<i class="fa fa-warning"></i>' + eventIntegrationFront.something_went_wrong + '</li>');
 			    	}
 				});
 			// Submit post if media is not set
 		    } else {
-		    	Form.prototype.submitEventAjax(eventForm, formData);
+		    	this.submitEventAjax(eventForm, formData);
 		    }
-		});
+		}.bind(this));
 
 		// Show image approval terms
 		$('.img-button', eventForm).click(function(e) {
