@@ -303,7 +303,7 @@ class SingleEvent
 
         if (!empty($meta['event_link'])) {
             $link = preg_replace("(^https?://)", "", $meta['event_link']);
-            $ret .= '<ul><li><a href="' . $meta['event_link'] . '" class="link-item link-item-outbound" itemprop="telephone" target="_blank">' . $link . '</a></li></ul>';
+            $ret .= '<ul><li><a href="' . $meta['event_link'] . '" class="link-item link-item-outbound" itemprop="telephone">' . $link . '</a></li></ul>';
         }
 
         if (!empty($meta['additional_links']) && is_array($meta['additional_links'])) {
@@ -359,7 +359,7 @@ class SingleEvent
     public static function eventBooking($meta = array())
     {
         $ret = '<ul>';
-        $ret .= (!empty($meta['booking_link'])) ? '<li><a href="' . $meta['booking_link'] . '" target="_blank" class="link-item link-item-outbound">' . __('Book here', 'event-integration') . '</a></li>' : '';
+        $ret .= (!empty($meta['booking_link'])) ? '<li><a href="' . $meta['booking_link'] . '" class="link-item link-item-outbound">' . __('Book here', 'event-integration') . '</a></li>' : '';
         $ret .= (!empty($meta['booking_phone'])) ? '<li><a href="tel:' . $meta['booking_phone'] . '" class="link-item link-item-outbound" itemprop="telephone">' . $meta['booking_phone'] . '</a></li>' : '';
         $ret .= (!empty($meta['booking_email'])) ? '<li><a href="mailto:' . $meta['booking_email'] . '" class="link-item link-item-outbound" itemprop="email">' . $meta['booking_email'] . '</a></li><br>' : '';
         $ret .= (isset($meta['price_adult']) && $meta['price_adult'] != '') ? '<li>' . __('Adult', 'event-integration') . ': ' . self::priceOutput($meta['price_adult']) . '</li>' : '';
@@ -411,7 +411,7 @@ class SingleEvent
             foreach ($meta['additional_ticket_retailers'] as $index => $retailer) {
                 $ret .= '<ul>';
                 $ret .= (!empty($retailer['retailer_name'])) ? '<li><strong>' . $retailer['retailer_name'] . '</strong></li>' : '';
-                $ret .= (!empty($retailer['booking_url'])) ? '<li><i class="pricon pricon-external-link"></i> <a href="' . $retailer['booking_url'] . '" target="_blank">' . preg_replace("(^https?://)", "", $retailer['booking_url']) . '</a></li>' : '';
+                $ret .= (!empty($retailer['booking_url'])) ? '<li><a href="' . $retailer['booking_url'] . '" class="link-item link-item-outbound">' . preg_replace("(^https?://)", "", $retailer['booking_url']) . '</a></li>' : '';
                 $ret .= (!empty($retailer['ticket_release_date'])) ? '<li>' . __('Ticket release date', 'event-integration') . ': ' . mysql2date('j F Y, H:i', $retailer['ticket_release_date'], true) . '</li>' : '';
                 $ret .= (!empty($retailer['ticket_stop_date'])) ? '<li>' . __('Ticket release date', 'event-integration') . ': ' . mysql2date('j F Y, H:i', $retailer['ticket_stop_date'], true) . '</li>' : '';
 
@@ -447,8 +447,8 @@ class SingleEvent
     {
         $ret = '';
         $ret .= (!empty($meta['contact_information'])) ? '<li>'. $meta['contact_information'] .'</li><br>' : '';
-        $ret .= (!empty($meta['contact_phone'])) ? '<li><a href="tel:' . $meta['contact_phone'] . '" class="link-item link-item-outbound" itemprop="telephone" target="_blank">' . $meta['contact_phone'] . '</a></li>' : '';
-        $ret .= (!empty($meta['contact_email'])) ? '<li><a href="mailto:' . $meta['contact_email'] . '" class="link-item link-item-outbound" itemprop="email" target="_blank">' . $meta['contact_email'] . '</a></li>' : '';
+        $ret .= (!empty($meta['contact_phone'])) ? '<li><a href="tel:' . $meta['contact_phone'] . '" class="link-item link-item-outbound" itemprop="telephone">' . $meta['contact_phone'] . '</a></li>' : '';
+        $ret .= (!empty($meta['contact_email'])) ? '<li><a href="mailto:' . $meta['contact_email'] . '" class="link-item link-item-outbound" itemprop="email">' . $meta['contact_email'] . '</a></li>' : '';
 
         return $ret;
     }
@@ -460,9 +460,9 @@ class SingleEvent
             foreach ($meta['organizers'] as $organizer) {
                 $ret .= '<ul>';
                 $ret .= (!empty($organizer['organizer'])) ? '<li><strong>' . $organizer['organizer'] . '</strong></li>' : '';
-                $ret .= (!empty($organizer['organizer_phone'])) ? '<li>' . $organizer['organizer_phone'] . '</li>' : '';
-                $ret .= (!empty($organizer['organizer_email'])) ? '<li>' . $organizer['organizer_email'] . '</li>' : '';
-                $ret .= (!empty($organizer['organizer_link'])) ? '<li><i class="pricon pricon-external-link"></i> <a href="' . $organizer['organizer_link'] . '" target="_blank">' . preg_replace("(^https?://)", "", $organizer['organizer_link']) . '</a></li>' : '';
+                $ret .= (!empty($organizer['organizer_phone'])) ? '<li><a href="tel:' . $organizer['organizer_phone'] . '" class="link-item link-item-outbound" itemprop="telephone">' . $organizer['organizer_phone'] . '</a></li>' : '';
+                $ret .= (!empty($organizer['organizer_email'])) ? '<li><a href="mailto:' . $organizer['organizer_email'] . '" class="link-item link-item-outbound" itemprop="email" itemprop="email">' . $organizer['organizer_email'] . '</a></li>' : '';
+                $ret .= (!empty($organizer['organizer_link'])) ? '<li><a href="' . $organizer['organizer_link'] . '" class="link-item link-item-outbound">' . preg_replace("(^https?://)", "", $organizer['organizer_link']) . '</a></li>' : '';
                 $ret .= '</ul>';
             }
 
@@ -497,21 +497,21 @@ class SingleEvent
     public static function eventLinks($meta = array())
     {
         $ret = '<ul>';
-        $ret .= (!empty($meta['facebook'])) ? '<li><a href="' . $meta['facebook'] . '" class="link-item link-item-outbound" target="_blank">Facebook</a></li>' : '';
-        $ret .= (!empty($meta['twitter'])) ? '<li><a href="' . $meta['twitter'] . '" class="link-item link-item-outbound" target="_blank">Twitter</a></li>' : '';
-        $ret .= (!empty($meta['instagram'])) ? '<li><a href="' . $meta['instagram'] . '" class="link-item link-item-outbound" target="_blank">Instagram</a></li>' : '';
-        $ret .= (!empty($meta['google_music'])) ? '<li><a href="' . $meta['google_music'] . '" class="link-item link-item-outbound" target="_blank">Google Music</a></li>' : '';
-        $ret .= (!empty($meta['spotify'])) ? '<li><a href="' . $meta['spotify'] . '" class="link-item link-item-outbound" target="_blank">Spotify</a></li>' : '';
-        $ret .= (!empty($meta['soundcloud'])) ? '<li><a href="' . $meta['soundcloud'] . '" class="link-item link-item-outbound" target="_blank">Soundcloud</a></li>' : '';
-        $ret .= (!empty($meta['deezer'])) ? '<li><a href="' . $meta['deezer'] . '" class="link-item link-item-outbound" target="_blank">Deezer</a></li>' : '';
+        $ret .= (!empty($meta['facebook'])) ? '<li><a href="' . $meta['facebook'] . '" class="link-item link-item-outbound">Facebook</a></li>' : '';
+        $ret .= (!empty($meta['twitter'])) ? '<li><a href="' . $meta['twitter'] . '" class="link-item link-item-outbound">Twitter</a></li>' : '';
+        $ret .= (!empty($meta['instagram'])) ? '<li><a href="' . $meta['instagram'] . '" class="link-item link-item-outbound">Instagram</a></li>' : '';
+        $ret .= (!empty($meta['google_music'])) ? '<li><a href="' . $meta['google_music'] . '" class="link-item link-item-outbound">Google Music</a></li>' : '';
+        $ret .= (!empty($meta['spotify'])) ? '<li><a href="' . $meta['spotify'] . '" class="link-item link-item-outbound">Spotify</a></li>' : '';
+        $ret .= (!empty($meta['soundcloud'])) ? '<li><a href="' . $meta['soundcloud'] . '" class="link-item link-item-outbound">Soundcloud</a></li>' : '';
+        $ret .= (!empty($meta['deezer'])) ? '<li><a href="' . $meta['deezer'] . '" class="link-item link-item-outbound">Deezer</a></li>' : '';
         if (!empty($meta['youtube']) && is_array($meta['youtube'])) {
             foreach ($meta['youtube'] as $youtube) {
-                $ret .= '<li><a href="' . $youtube['youtube_link'] . '" class="link-item link-item-outbound" target="_blank">YouTube</a></li>';
+                $ret .= '<li><a href="' . $youtube['youtube_link'] . '" class="link-item link-item-outbound">YouTube</a></li>';
             }
         }
         if (!empty($meta['vimeo']) && is_array($meta['vimeo'])) {
             foreach ($meta['vimeo'] as $vimeo) {
-                $ret .= '<li><a href="' . $vimeo['vimeo_link'] . '" class="link-item link-item-outbound" target="_blank">Vimeo</a></li>';
+                $ret .= '<li><a href="' . $vimeo['vimeo_link'] . '" class="link-item link-item-outbound">Vimeo</a></li>';
             }
         }
         $ret .= '</ul>';
