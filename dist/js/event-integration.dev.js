@@ -102,7 +102,7 @@ EventManagerIntegration.Event.Form = (function ($) {
 
         	this.handleEvents($(eventForm), apiUrl);
 
-            this.customValidations(eventForm);
+            this.hyperformExtensions(eventForm);
 
         	if (document.getElementById('location') !== null) {
         		this.loadPostType($(eventForm), apiUrl, 'location');
@@ -122,13 +122,32 @@ EventManagerIntegration.Event.Form = (function ($) {
     /**
      * Add custom validations with Hyperform
      */
-    Form.prototype.customValidations = function(eventForm) {
+    Form.prototype.hyperformExtensions = function(eventForm) {
         // Match email addresses
         hyperform.addValidator(
             eventForm.submitter_repeat_email,
             function(element) {
                 var valid = element.value === eventForm.submitter_email.value;
                 element.setCustomValidity( valid ? '' : eventIntegrationFront.email_not_matching);
+
+                return valid;
+            }
+        );
+
+        hyperform.addValidator(
+            eventForm.image_input,
+            function(element) {
+                var valid = element.files.length > 0,
+					notice = eventForm.querySelector('.image-notice'),
+                    noticeHtml = document.createElement('p');
+
+                if (!valid && !notice) {
+                    noticeHtml.innerHTML = eventIntegrationFront.must_upload_image;
+                    noticeHtml.className = 'text-danger image-notice';
+                    eventForm.querySelector('.image-box').appendChild(noticeHtml);
+                }
+
+                element.setCustomValidity(valid ? '' : eventIntegrationFront.must_upload_image);
 
                 return valid;
             }
@@ -483,14 +502,14 @@ EventManagerIntegration.Event.Form = (function ($) {
         $(eventForm).on('submit', function(e) {
 		    e.preventDefault();
 
-		    var fileInput  	= eventForm.find('#image-input'),
+		    var fileInput  	= eventForm.find('#image_input'),
     			formData 	= this.jsonData(eventForm),
 		    	imageData 	= new FormData();
 
             $('.submit-error', eventForm).addClass('hidden');
             $('.submit-success', eventForm).removeClass('hidden');
             $('.submit-success .success', eventForm).empty().append('<i class="fa fa-send"></i>Skickar...</li>');
-
+            
             // Upload media first and append it to the post.
 		    if (fileInput.val()) {
 		    	imageData.append('file', fileInput[0].files[0]);
@@ -518,21 +537,11 @@ EventManagerIntegration.Event.Form = (function ($) {
 			$('.image-approve', eventForm).fadeIn();
 		});
 
-		// Show additional terms
-        $('input:radio[name=approve]', eventForm).change(function() {
-            if (this.value == 1) {
-                $('#persons-approve', eventForm).removeClass('hidden');
-            } else {
-                $('#persons-approve', eventForm).addClass('hidden');
-            }
-        });
-
         // Show uploader if terms is approved
         $('input[name=approve]', eventForm).change(function() {
             var firstCheck  = $('input:checkbox[id=first-approve]:checked', eventForm).length > 0,
-                radioCheck  = $('input:radio[name=approve]:checked', eventForm).val(),
                 secondCheck = $('input:checkbox[id=second-approve]:checked', eventForm).length > 0;
-            if (firstCheck && radioCheck == 0 || firstCheck && secondCheck) {
+            if (firstCheck && secondCheck) {
                 $('.image-approve', eventForm).hide();
                 $('.image-upload', eventForm).fadeIn();
             }
