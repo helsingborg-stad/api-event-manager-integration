@@ -91,6 +91,11 @@ class App
             'must_upload_image' => __("You must upload an image.", 'event-integration'),
         ));
         wp_enqueue_script('event-integration');
+
+        // Google Maps JS Api
+        if ($googleApiKey = get_field('google_geocode_key', 'option')) {
+            wp_enqueue_script('google-maps-api', '//maps.googleapis.com/maps/api/js?key=' . $googleApiKey . '', array(), '', true);
+        }
     }
 
     /**

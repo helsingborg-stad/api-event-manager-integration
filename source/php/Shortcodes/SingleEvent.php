@@ -330,6 +330,12 @@ class SingleEvent
     {
         $ret = '';
         $location = (isset($meta['location'])) ? $meta['location'] : null;
+
+        // Google Map
+        if (!empty($meta['latitude']) && !empty($meta['latitude'])) {
+            $locationTitle = $location['title'] ?? '';
+            $ret .= '<div id="event_map" data-lat="' . $meta['latitude'] . '" data-lng="' . $meta['longitude'] . '" data-title="' . $locationTitle . '"></div>';
+        }
         if (is_array($location) && !empty($location)) {
             $ret .= '<ul>';
             $ret .= (!empty($location['title'])) ? '<li><strong>' . $location['title'] . '</strong></li>' : '';
