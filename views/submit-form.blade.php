@@ -181,9 +181,11 @@
 
     <div class="form-group gutter creamy image-box text-center">
         <p><i class="pricon pricon-badge pricon-badge-red-3 pricon-3x pricon-picture"></i></p>
+        <p><strong><?php _e('Upload an image', 'event-integration'); ?> <span class="text-danger">*</span></strong></p>
         <p>
             <small>
-                <?php _e('Upload an image. Keep in mind that the image may be cropped, so avoid text in the image.', 'event-integration'); ?><br>
+                <?php _e('Keep in mind that the image may be cropped, so avoid text in the image.', 'event-integration'); ?><br>
+                <?php _e('Images with identifiable persons are not accepted and will be replaced.', 'event-integration'); ?><br>
                 <?php _e('You must also have the right to use and distribute the image.', 'event-integration'); ?>
             </small>
         </p>
@@ -196,21 +198,13 @@
         <label class="checkbox">
             <input type="checkbox" name="approve" id="first-approve"> <?php _e('I have the right to use this image to promote this event.', 'event-integration'); ?>
         </label>
-        <label><?php _e('Are there identifiable persons on the image/images?', 'event-integration'); ?></label>
-        <label class="radio">
-            <input type="radio" name="approve" value="1"> <?php _e('Yes', 'event-integration'); ?>
-        </label>
-        <label class="radio">
-            <input type="radio" name="approve" value="0"> <?php _e('No', 'event-integration'); ?>
-        </label>
-        <label class="checkbox hidden" id="persons-approve">
-            <input type="checkbox" name="approve" id="second-approve"> <?php _e('They have approved that the image is used to promote this event and has been informed that after the image has been added to the location and event database, it may appear in different channels to promote the event.', 'event-integration'); ?>
+        <label class="checkbox">
+            <input type="checkbox" name="approve" id="second-approve"> <?php _e('There are no identifiable persons on the image/images.', 'event-integration'); ?>
         </label>
     </div>
-
     <div class="form-group image-upload" style="display:none;">
-        <label for="image-input"><?php _e('Upload an image', 'event-integration'); ?></label>
-        <input name="image-input" id="image-input" type="file" accept="image/gif, image/jpeg, image/png">
+        <label for="image_input"><?php _e('Upload an image', 'event-integration'); ?> <span class="text-danger">*</span></label>
+        <input name="image_input" id="image_input" type="file" accept="image/gif, image/jpeg, image/png" required>
     </div>
 
     <div class="form-group">

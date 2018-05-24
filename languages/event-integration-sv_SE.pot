@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2018-05-23 15:07+0200\n"
+"POT-Creation-Date: 2018-05-24 13:19+0200\n"
 "PO-Revision-Date: 2016-12-13 15:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -516,7 +516,11 @@ msgstr ""
 msgid "The email addresses does not match."
 msgstr ""
 
-#: source/php/App.php:114
+#: source/php/App.php:91
+msgid "You must upload an image."
+msgstr ""
+
+#: source/php/App.php:115
 msgid "to"
 msgstr ""
 
@@ -1270,72 +1274,60 @@ msgid ""
 "click on the categories."
 msgstr ""
 
-#: views/submit-form.blade.php:186
-msgid ""
-"Upload an image. Keep in mind that the image may be cropped, so avoid text "
-"in the image."
-msgstr ""
-
-#: views/submit-form.blade.php:187
-msgid "You must also have the right to use and distribute the image."
-msgstr ""
-
-#: views/submit-form.blade.php:191 views/submit-form.blade.php:212
+#: views/submit-form.blade.php:184 views/submit-form.blade.php:193
+#: views/submit-form.blade.php:206
 msgid "Upload an image"
 msgstr ""
 
-#: views/submit-form.blade.php:195
-msgid "Before you can upload an image, you need to confirm the following terms"
+#: views/submit-form.blade.php:187
+msgid "Keep in mind that the image may be cropped, so avoid text in the image."
+msgstr ""
+
+#: views/submit-form.blade.php:188
+msgid "Images with identifiable persons are not accepted and will be replaced."
+msgstr ""
+
+#: views/submit-form.blade.php:189
+msgid "You must also have the right to use and distribute the image."
 msgstr ""
 
 #: views/submit-form.blade.php:197
-msgid "I have the right to use this image to promote this event."
+msgid "Before you can upload an image, you need to confirm the following terms"
 msgstr ""
 
 #: views/submit-form.blade.php:199
-msgid "Are there identifiable persons on the image/images?"
+msgid "I have the right to use this image to promote this event."
 msgstr ""
 
-#: views/submit-form.blade.php:201
-msgid "Yes"
+#: views/submit-form.blade.php:202
+msgid "There are no identifiable persons on the image/images."
 msgstr ""
 
-#: views/submit-form.blade.php:204
-msgid "No"
-msgstr ""
-
-#: views/submit-form.blade.php:207
-msgid ""
-"They have approved that the image is used to promote this event and has been "
-"informed that after the image has been added to the location and event "
-"database, it may appear in different channels to promote the event."
-msgstr ""
-
-#: views/submit-form.blade.php:217
+#: views/submit-form.blade.php:211
 msgid "Contact details"
 msgstr ""
 
-#: views/submit-form.blade.php:218
+#: views/submit-form.blade.php:212
 msgid "Enter your contact details below for eventual questions."
 msgstr ""
 
-#: views/submit-form.blade.php:221 views/submit-form.blade.php:222
+#: views/submit-form.blade.php:215 views/submit-form.blade.php:216
 msgid "Email"
 msgstr ""
 
-#: views/submit-form.blade.php:225 views/submit-form.blade.php:226
+#: views/submit-form.blade.php:219 views/submit-form.blade.php:220
 msgid "Repeat email"
 msgstr ""
 
-#: views/submit-form.blade.php:229 views/submit-form.blade.php:230
+#: views/submit-form.blade.php:223 views/submit-form.blade.php:224
 msgid "Phone number"
 msgstr ""
 
-#: views/submit-form.blade.php:234
+#: views/submit-form.blade.php:228
 msgid "Done? Click here to submit your event for review."
 msgstr ""
 
-#: views/submit-form.blade.php:244
+#: views/submit-form.blade.php:238
 msgid "Send"
 msgstr ""
 

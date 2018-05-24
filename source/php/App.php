@@ -88,6 +88,7 @@ class App
         wp_localize_script('event-integration', 'eventIntegrationFront', array(
             'event_pagination_error' => __("Something went wrong, please try again later.", 'event-integration'),
             'email_not_matching' => __("The email addresses does not match.", 'event-integration'),
+            'must_upload_image' => __("You must upload an image.", 'event-integration'),
         ));
         wp_enqueue_script('event-integration');
     }
