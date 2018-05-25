@@ -105,3 +105,10 @@
 
 .event-info-shortcode .shortcode-box {
   margin-top: 20px; }
+
+#event-map {
+  height: 250px;
+  width: 100%;
+  border-radius: 3px;
+  margin: 0 0 15px 0;
+  border: 1px solid #e5e5e5; }
