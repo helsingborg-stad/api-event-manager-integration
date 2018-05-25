@@ -8,8 +8,8 @@ EventManagerIntegration.Event.Form = (function ($) {
 
     function Form() {
     	$(".submit-event").each(function(index, eventForm) {
-    		var apiUrl 		= eventintegration.apiurl,
-    			apiUrl 		= apiUrl.replace(/\/$/, "");
+    		var apiUrl 		= eventintegration.apiurl;
+    			apiUrl 		= apiUrl.replace(/\/$/, '');
 
 			$('#recurring-event', eventForm).children('.box').hide();
 

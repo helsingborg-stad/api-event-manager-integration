@@ -8,6 +8,8 @@ namespace EventManagerIntegration\Shortcodes;
 
 class SingleEvent
 {
+    public static $postTypeSlug = 'event';
+
     public function __construct()
     {
         add_action('init', array($this, 'addShortcodes'));
@@ -35,24 +37,25 @@ class SingleEvent
         }
     }
 
-    // Shortcode to display complete event information
+    /**
+     * Shortcode to display complete event information
+     * @return string
+     */
     public function singleEventAccordion()
     {
         global $post;
-        $id = $post->ID;
 
-        if (get_post_type($id) != 'event') {
+        if(!(isset($post->post_type) && $post->post_type === self::$postTypeSlug)) {
             return;
         }
 
+        $id = $post->ID;
         $fields = is_array(get_field('event_shortc_fields', 'options')) ? get_field('event_shortc_fields', 'options') : array();
         $get_meta = get_post_meta($id);
-
         $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($id);
-
         $query_var_date = (!empty(get_query_var('date'))) ? get_query_var('date') : false;
-
         $meta = array();
+
         if (is_array($get_meta) && !empty($get_meta)) {
             foreach ($get_meta as $key => $value) {
                 if (is_array($value) && count($value) == 1) {
@@ -183,26 +186,22 @@ class SingleEvent
     public function singleEventInformation()
     {
         global $post;
-        $id = $post->ID;
 
-        if (get_post_type($id) != 'event') {
+        if(!(isset($post->post_type) && $post->post_type === self::$postTypeSlug)) {
             return;
         }
 
+        $id = $post->ID;
         // Get custom wrapper and div box classes
         $class = (!empty(get_field('event_shortc_wrapper', 'options'))) ? get_field('event_shortc_wrapper', 'options') : '';
         $class = str_replace(' ', '', $class);
         $wrapper_class = str_replace(',', ' ', $class);
-
         $class = (!empty(get_field('event_shortc_inner', 'options'))) ? get_field('event_shortc_inner', 'options') : '';
         $class = str_replace(' ', '', $class);
         $box_class = str_replace(',', ' ', $class);
-
         $fields = is_array(get_field('event_shortc_fields', 'options')) ? get_field('event_shortc_fields', 'options') : array();
         $get_meta = get_post_meta($id);
-
         $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($id);
-
         $query_var_date = (!empty(get_query_var('date'))) ? get_query_var('date') : false;
 
         $meta = array();
@@ -332,9 +331,9 @@ class SingleEvent
         $location = (isset($meta['location'])) ? $meta['location'] : null;
 
         // Google Map
-        if (!empty($meta['latitude']) && !empty($meta['latitude'])) {
+        if (in_array('map', $fields) && !empty($meta['latitude']) && !empty($meta['latitude'])) {
             $locationTitle = $location['title'] ?? '';
-            $ret .= '<div id="event_map" data-lat="' . $meta['latitude'] . '" data-lng="' . $meta['longitude'] . '" data-title="' . $locationTitle . '"></div>';
+            $ret .= '<div id="event-map" data-lat="' . $meta['latitude'] . '" data-lng="' . $meta['longitude'] . '" data-title="' . $locationTitle . '"></div>';
         }
         if (is_array($location) && !empty($location)) {
             $ret .= '<ul>';

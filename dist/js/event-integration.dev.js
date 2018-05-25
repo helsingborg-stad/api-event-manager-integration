@@ -6,7 +6,9 @@ EventManagerIntegration.Event = EventManagerIntegration.Event || {};
 EventManagerIntegration.Event.Map = (function() {
 
     function Map() {
-        this.init();
+        if (typeof google === 'object' && typeof google.maps === 'object') {
+            this.init();
+        }
     }
 
     Map.prototype.init = function() {
@@ -15,9 +17,10 @@ EventManagerIntegration.Event.Map = (function() {
             mapOptions,
             map,
             marker,
-            infowindow;
+            infowindow,
+            locationTitle;
 
-        mapElement = document.getElementById('event_map');
+        mapElement = document.getElementById('event-map');
 
         if (!mapElement) {
             return;
@@ -35,8 +38,7 @@ EventManagerIntegration.Event.Map = (function() {
         };
 
         map = new google.maps.Map(mapElement, mapOptions);
-
-        var locationTitle = mapElement.getAttribute('data-title') ? mapElement.getAttribute('data-title') : '';
+        locationTitle = mapElement.getAttribute('data-title') ? mapElement.getAttribute('data-title') : '';
 
         infowindow = new google.maps.InfoWindow({
             content: '<b>' + locationTitle + '</b>'
@@ -154,8 +156,8 @@ EventManagerIntegration.Event.Form = (function ($) {
 
     function Form() {
     	$(".submit-event").each(function(index, eventForm) {
-    		var apiUrl 		= eventintegration.apiurl,
-    			apiUrl 		= apiUrl.replace(/\/$/, "");
+    		var apiUrl 		= eventintegration.apiurl;
+    			apiUrl 		= apiUrl.replace(/\/$/, '');
 
 			$('#recurring-event', eventForm).children('.box').hide();
 
