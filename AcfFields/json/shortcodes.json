@@ -57,7 +57,8 @@
                 "sponsors": "Sponsors",
                 "booking": "Booking information",
                 "links": "Links",
-                "contact": "Contact"
+                "contact": "Contact",
+                "map": "Map"
             },
             "allow_custom": 0,
             "save_custom": 0,
@@ -70,7 +71,8 @@
                 "sponsors",
                 "booking",
                 "links",
-                "contact"
+                "contact",
+                "map"
             ],
             "layout": "vertical",
             "toggle": 0,
