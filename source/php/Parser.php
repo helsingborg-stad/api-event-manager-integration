@@ -30,7 +30,7 @@ abstract class Parser
     {
         global $wpdb;
         $results = $wpdb->get_results("SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '_event_manager_id' AND meta_value = $event_manager_id LIMIT 1", ARRAY_A);
-        if (! empty($results[0]['post_id'])) {
+        if (!empty($results[0]['post_id'])) {
             return $results[0]['post_id'];
         } else {
             return false;
@@ -55,14 +55,16 @@ abstract class Parser
             'sslverify' => defined('DEV_MODE') && DEV_MODE == true ? false : true,
         );
         $request = wp_remote_get($url, $args);
-        if (is_wp_error($request)) {
+        $responseCode = wp_remote_retrieve_response_code($request);
+        $body = wp_remote_retrieve_body($request);
+        // Test if response if WP_ERROR or response code is not 200 OK
+        if (is_wp_error($request) || $responseCode != 200) {
             return false;
         }
 
-        $body = wp_remote_retrieve_body($request);
         $events = json_decode($body, true);
 
-        if (!$events || (is_object($events) && $events->code == 'Error')) {
+        if (!is_array($events) || empty($events)) {
             return false;
         }
 
