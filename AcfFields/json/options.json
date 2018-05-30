@@ -53,7 +53,10 @@
                 "id": ""
             },
             "message": "Enable daily automatic import from Event Manager API",
-            "default_value": 0
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         {
             "key": "field_587f86dc8f7b7",
@@ -99,6 +102,77 @@
             "min": -1,
             "max": "",
             "step": ""
+        },
+        {
+            "key": "field_58aaf2615abcb",
+            "label": "Google Maps JavaScript API key",
+            "name": "google_geocode_key",
+            "type": "text",
+            "instructions": "Needed to display Google maps.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_58e380646fa6f",
+            "label": "Show update button on edit event page",
+            "name": "event_update_button",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Show update button",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_58a56eaa0c2ad",
+            "label": "OAuth1 end point root url",
+            "name": "event_api_oauth_url",
+            "type": "url",
+            "instructions": "Url can be found under section \"authentication\" in your API root.<br> E.g. https:\/\/host\/oauth1<br> <br> Authorization is only needed when you want to post data to the API.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_5b0e5b3be7bf7",
+            "label": "Import filters",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "new_lines": "wpautop",
+            "esc_html": 0
         },
         {
             "key": "field_586bc598f2777",
@@ -161,10 +235,10 @@
             "maxlength": ""
         },
         {
-            "key": "field_58e380646fa6f",
-            "label": "Show update button on edit event page",
-            "name": "event_update_button",
-            "type": "true_false",
+            "key": "field_5b0e5a49c8fab",
+            "label": "Import from geographic location",
+            "name": "event_import_from_location",
+            "type": "button_group",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -173,52 +247,32 @@
                 "class": "",
                 "id": ""
             },
-            "message": "Show update button",
-            "default_value": 0
-        },
-        {
-            "key": "field_58a56eaa0c2ad",
-            "label": "OAuth1 end point root url",
-            "name": "event_api_oauth_url",
-            "type": "url",
-            "instructions": "Url can be found under section \"authentication\" in your API root.<br> E.g. https:\/\/host\/oauth1<br> <br> Authorization is only needed when you want to post data to the API.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": ""
-        },
-        {
-            "key": "field_58aaf2615abcb",
-            "label": "Google Maps JavaScript API key",
-            "name": "google_geocode_key",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "choices": [
+                "No",
+                "Single point",
+                "Inside drawn area"
+            ],
+            "allow_null": 0,
+            "default_value": 0,
+            "layout": "horizontal",
+            "return_format": "value"
         },
         {
             "key": "field_58aaeaa46781b",
-            "label": "Import from location",
+            "label": "From a single point",
             "name": "event_import_geographic",
             "type": "google_map",
             "instructions": "Import events that occurs at a specified location.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b0e5a49c8fab",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -236,7 +290,15 @@
             "type": "number",
             "instructions": "To get events occurring nearby the given location, enter maximum distance in km. Leave blank to only get events from the exact position.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b0e5a49c8fab",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -249,6 +311,31 @@
             "min": "",
             "max": "",
             "step": ""
+        },
+        {
+            "key": "field_5b0e6394d6399",
+            "label": "Drawn area",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b0e5a49c8fab",
+                        "operator": "==",
+                        "value": "2"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": "draw-map-container"
+            },
+            "message": "Import events that occurs inside the drawn area.",
+            "new_lines": "wpautop",
+            "esc_html": 0
         }
     ],
     "location": [
@@ -267,7 +354,6 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": 1,
-    "description": "",
-    "local": "php"
+    "description": ""
 }]
 

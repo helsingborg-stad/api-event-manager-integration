@@ -1,6 +1,8 @@
 <?php 
 
+
 if (function_exists('acf_add_local_field_group')) {
+
     acf_add_local_field_group(array(
     'key' => 'group_583557753bd73',
     'title' => __('Event Manager Integration', 'event-integration'),
@@ -37,7 +39,7 @@ if (function_exists('acf_add_local_field_group')) {
             'default_value' => 30,
             'placeholder' => '',
             'prepend' => '',
-            'append' => __(__('days', 'event-integration'), 'event-integration'),
+            'append' => __('days', 'event-integration'),
             'min' => 1,
             'max' => 365,
             'step' => '',
@@ -57,6 +59,9 @@ if (function_exists('acf_add_local_field_group')) {
             ),
             'message' => __('Enable daily automatic import from Event Manager API', 'event-integration'),
             'default_value' => 0,
+            'ui' => 0,
+            'ui_on_text' => '',
+            'ui_off_text' => '',
         ),
         3 => array(
             'key' => 'field_587f86dc8f7b7',
@@ -104,6 +109,77 @@ if (function_exists('acf_add_local_field_group')) {
             'step' => '',
         ),
         5 => array(
+            'key' => 'field_58aaf2615abcb',
+            'label' => __('Google Maps JavaScript API key', 'event-integration'),
+            'name' => 'google_geocode_key',
+            'type' => 'text',
+            'instructions' => __('Needed to display Google maps.', 'event-integration'),
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'default_value' => '',
+            'placeholder' => '',
+            'prepend' => '',
+            'append' => '',
+            'maxlength' => '',
+        ),
+        6 => array(
+            'key' => 'field_58e380646fa6f',
+            'label' => __('Show update button on edit event page', 'event-integration'),
+            'name' => 'event_update_button',
+            'type' => 'true_false',
+            'instructions' => '',
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'message' => __('Show update button', 'event-integration'),
+            'default_value' => 0,
+            'ui' => 0,
+            'ui_on_text' => '',
+            'ui_off_text' => '',
+        ),
+        7 => array(
+            'key' => 'field_58a56eaa0c2ad',
+            'label' => __('OAuth1 end point root url', 'event-integration'),
+            'name' => 'event_api_oauth_url',
+            'type' => 'url',
+            'instructions' => __('Url can be found under section "authentication" in your API root.<br> E.g. https://host/oauth1<br> <br> Authorization is only needed when you want to post data to the API.', 'event-integration'),
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'default_value' => '',
+            'placeholder' => '',
+        ),
+        8 => array(
+            'key' => 'field_5b0e5b3be7bf7',
+            'label' => __('Import filters', 'event-integration'),
+            'name' => '',
+            'type' => 'message',
+            'instructions' => '',
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'message' => '',
+            'new_lines' => 'wpautop',
+            'esc_html' => 0,
+        ),
+        9 => array(
             'key' => 'field_586bc598f2777',
             'label' => __('Import from selected user groups', 'event-integration'),
             'name' => 'event_filter_group',
@@ -125,7 +201,7 @@ if (function_exists('acf_add_local_field_group')) {
             'return_format' => 'object',
             'multiple' => 0,
         ),
-        6 => array(
+        10 => array(
             'key' => 'field_5846ca031ffcb',
             'label' => __('Import from selected categories', 'event-integration'),
             'name' => 'event_filter_cat',
@@ -144,7 +220,7 @@ if (function_exists('acf_add_local_field_group')) {
             'append' => '',
             'maxlength' => '',
         ),
-        7 => array(
+        11 => array(
             'key' => 'field_5846db8b3cf78',
             'label' => __('Import from selected tags', 'event-integration'),
             'name' => 'event_filter_tag',
@@ -163,11 +239,11 @@ if (function_exists('acf_add_local_field_group')) {
             'append' => '',
             'maxlength' => '',
         ),
-        8 => array(
-            'key' => 'field_58e380646fa6f',
-            'label' => __('Show update button on edit event page', 'event-integration'),
-            'name' => 'event_update_button',
-            'type' => 'true_false',
+        12 => array(
+            'key' => 'field_5b0e5a49c8fab',
+            'label' => __('Import from geographic location', 'event-integration'),
+            'name' => 'event_import_from_location',
+            'type' => 'button_group',
             'instructions' => '',
             'required' => 0,
             'conditional_logic' => 0,
@@ -176,52 +252,32 @@ if (function_exists('acf_add_local_field_group')) {
                 'class' => '',
                 'id' => '',
             ),
-            'message' => __('Show update button', 'event-integration'),
+            'choices' => array(
+                0 => __('No', 'event-integration'),
+                1 => __('Single point', 'event-integration'),
+                2 => __('Inside drawn area', 'event-integration'),
+            ),
+            'allow_null' => 0,
             'default_value' => 0,
+            'layout' => 'horizontal',
+            'return_format' => 'value',
         ),
-        9 => array(
-            'key' => 'field_58a56eaa0c2ad',
-            'label' => __('OAuth1 end point root url', 'event-integration'),
-            'name' => 'event_api_oauth_url',
-            'type' => 'url',
-            'instructions' => __('Url can be found under section "authentication" in your API root.<br> E.g. https://host/oauth1<br> <br> Authorization is only needed when you want to post data to the API.', 'event-integration'),
-            'required' => 0,
-            'conditional_logic' => 0,
-            'wrapper' => array(
-                'width' => '',
-                'class' => '',
-                'id' => '',
-            ),
-            'default_value' => '',
-            'placeholder' => '',
-        ),
-        10 => array(
-            'key' => 'field_58aaf2615abcb',
-            'label' => __('Google Maps JavaScript API key', 'event-integration'),
-            'name' => 'google_geocode_key',
-            'type' => 'text',
-            'instructions' => '',
-            'required' => 0,
-            'conditional_logic' => 0,
-            'wrapper' => array(
-                'width' => '',
-                'class' => '',
-                'id' => '',
-            ),
-            'default_value' => '',
-            'placeholder' => '',
-            'prepend' => '',
-            'append' => '',
-            'maxlength' => '',
-        ),
-        11 => array(
+        13 => array(
             'key' => 'field_58aaeaa46781b',
-            'label' => __('Import from location', 'event-integration'),
+            'label' => __('From a single point', 'event-integration'),
             'name' => 'event_import_geographic',
             'type' => 'google_map',
             'instructions' => __('Import events that occurs at a specified location.', 'event-integration'),
             'required' => 0,
-            'conditional_logic' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_5b0e5a49c8fab',
+                        'operator' => '==',
+                        'value' => '1',
+                    ),
+                ),
+            ),
             'wrapper' => array(
                 'width' => '',
                 'class' => '',
@@ -232,14 +288,22 @@ if (function_exists('acf_add_local_field_group')) {
             'zoom' => 16,
             'height' => '',
         ),
-        12 => array(
+        14 => array(
             'key' => 'field_58aaec066781c',
             'label' => __('Distance from location', 'event-integration'),
             'name' => 'event_geographic_distance',
             'type' => 'number',
             'instructions' => __('To get events occurring nearby the given location, enter maximum distance in km. Leave blank to only get events from the exact position.', 'event-integration'),
             'required' => 0,
-            'conditional_logic' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_5b0e5a49c8fab',
+                        'operator' => '==',
+                        'value' => '1',
+                    ),
+                ),
+            ),
             'wrapper' => array(
                 'width' => '',
                 'class' => '',
@@ -253,30 +317,30 @@ if (function_exists('acf_add_local_field_group')) {
             'max' => '',
             'step' => '',
         ),
-        13 => array(
-            'key' => 'field_5812eee2085a8',
-            'label' => __('Internal events', 'event-manager'),
-            'name' => 'internal_event',
-            'type' => 'true_false',
-            'instructions' => __('Import only internal events?', 'event-manager'),
+        15 => array(
+            'key' => 'field_5b0e6394d6399',
+            'label' => __('Drawn area', 'event-integration'),
+            'name' => '',
+            'type' => 'message',
+            'instructions' => '',
             'required' => 0,
-            'conditional_logic' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_5b0e5a49c8fab',
+                        'operator' => '==',
+                        'value' => '2',
+                    ),
+                ),
+            ),
             'wrapper' => array(
                 'width' => '',
                 'class' => '',
-                'id' => '',
+                'id' => 'draw-map-container',
             ),
-            'choices' => array(
-                'internal' => __('Internal', 'event-manager'),
-                'public' => __('Public', 'event-manager'),
-            ),
-            'allow_null' => 0,
-            'other_choice' => 0,
-            'save_other_choice' => 0,
-            'default_value' => 0,
-            'layout' => 'vertical',
-            'return_format' => 'value',
-            'ui'          => 1,
+            'message' => __('Import events that occurs inside the drawn area.', 'event-integration'),
+            'new_lines' => 'wpautop',
+            'esc_html' => 0,
         ),
     ),
     'location' => array(
@@ -296,6 +360,6 @@ if (function_exists('acf_add_local_field_group')) {
     'hide_on_screen' => '',
     'active' => 1,
     'description' => '',
-    'local' => 'php',
 ));
+
 }

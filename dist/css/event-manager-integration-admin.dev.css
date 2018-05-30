@@ -58,3 +58,8 @@
   padding: 4px 8px;
   line-height: normal;
   height: auto; }
+
+#draw-map-area {
+  height: 440px;
+  width: 100%;
+  border: 1px solid #e5e5e5; }
