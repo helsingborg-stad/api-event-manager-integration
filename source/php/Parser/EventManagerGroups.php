@@ -16,30 +16,34 @@ class EventManagerGroups extends \EventManagerIntegration\Parser
     {
         $page = 1;
         $taxonomy = 'event_groups';
-
+        // Get group list from option
+        $optionList = get_option('event_user_groups', array());
+        // Loop through each page with Groups from API
         while ($page != false) {
-            $ch = curl_init();
-            $options = [
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_URL            => $this->url . '?per_page=100&page=' . $page,
-            ];
-            curl_setopt_array($ch, $options);
-
             // Dont verify ssl cert in dev mode
-            if (defined('DEV_MODE') && DEV_MODE == true) {
-                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-            }
-
-            $groups = json_decode(curl_exec($ch), false);
-            curl_close($ch);
-
-            if (! $groups || empty($groups) || (is_object($groups) && $groups->code == 'Error') || (is_object($groups) && $groups->code == 'rest_no_route')) {
+            $args = array(
+                'timeout' => 120,
+                'sslverify' => defined('DEV_MODE') && DEV_MODE == true ? false : true,
+            );
+            $request = wp_remote_get($this->url . '?per_page=100&page=' . $page, $args);
+            $responseCode = wp_remote_retrieve_response_code($request);
+            $body = wp_remote_retrieve_body($request);
+            // Test if response is WP_ERROR or response code is not 200 OK
+            if (is_wp_error($request) || $responseCode != 200 || empty($groups = json_decode($body, false))) {
                 $page = false;
-                return false;
+                break;
             }
 
             foreach ($groups as $group) {
+                // Store groups to option array
+                $optionList[$group->id] = array(
+                    'id' => $group->id,
+                    'name' => $group->name,
+                    'slug' => $group->slug,
+                    'parent' => $group->parent
+                );
+
+                // Save groups as taxonomies
                 if ($group->parent == 0) {
                     $parent_term = $this->saveTerms($group->name, $group->slug, $taxonomy);
                     if ($group->children) {
@@ -57,6 +61,9 @@ class EventManagerGroups extends \EventManagerIntegration\Parser
 
             $page++;
         }
+
+        // Save groups to option
+        update_option('event_user_groups', $optionList, false);
     }
 
     /**
