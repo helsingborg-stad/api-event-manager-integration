@@ -64,7 +64,7 @@ class App
             'ajaxurl' => admin_url('admin-ajax.php')
         ));
         wp_localize_script('event-integration-admin', 'eventIntegrationAdmin', array(
-            'loading'   => __("Loading", 'event-integration'),
+            'loading' => __("Loading", 'event-integration'),
         ));
         wp_enqueue_script('event-integration-admin');
 
@@ -88,7 +88,7 @@ class App
         wp_register_script('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-integration.' . self::$assetSuffix . '.js', 'jquery', false, true);
         wp_localize_script('event-integration', 'eventintegration', array(
             'ajaxurl' => admin_url('admin-ajax.php'),
-            'apiurl'  => get_field('event_api_url', 'option'),
+            'apiurl' => get_field('event_api_url', 'option'),
         ));
         wp_localize_script('event-integration', 'eventIntegrationFront', array(
             'event_pagination_error' => __("Something went wrong, please try again later.", 'event-integration'),
@@ -107,7 +107,8 @@ class App
      * Add searchable blade template paths
      * @param array $array Template paths
      */
-    public function addTemplatePaths($array) {
+    public function addTemplatePaths($array)
+    {
         $array[] = EVENTMANAGERINTEGRATION_PATH . 'source/php/Module';
         return $array;
     }
@@ -140,11 +141,11 @@ class App
         $start = date('Y-m-d H:i:s', strtotime($start_date));
         $today = (date('Ymd') == date('Ymd', strtotime($start_date))) ? true : false;
         $date = array(
-                    'today' => $today,
-                    'date'  => mysql2date('j', $start, true),
-                    'month' => substr(mysql2date('F', $start, true), 0, 3),
-                    'time'  => mysql2date('H:i', $start, true),
-                );
+            'today' => $today,
+            'date' => mysql2date('j', $start, true),
+            'month' => substr(mysql2date('F', $start, true), 0, 3),
+            'time' => mysql2date('H:i', $start, true),
+        );
 
         return $date;
     }
@@ -169,29 +170,41 @@ class App
     {
         if (get_field('event_daily_import', 'option') == true) {
             global $wpdb;
-            $db_table   = $wpdb->prefix . "integrate_occasions";
-            $occasion   = $wpdb->get_results(
-            "SELECT     $db_table.start_date
-            FROM        $db_table
-            LEFT JOIN   $wpdb->posts ON ($wpdb->posts.ID = $db_table.event_id)
+            $dbTable = $wpdb->prefix . "integrate_occasions";
+            $occasion = $wpdb->get_results(
+                "SELECT     $dbTable.start_date
+            FROM        $dbTable
+            LEFT JOIN   $wpdb->posts ON ($wpdb->posts.ID = $dbTable.event_id)
             WHERE       $wpdb->posts.post_type = 'event'
                         AND $wpdb->posts.post_status = 'publish'
-            ORDER BY    $db_table.start_date
+            ORDER BY    $dbTable.start_date
             ASC LIMIT 1", ARRAY_A);
 
-            $from_date  = (is_array($occasion) && isset($occasion[0]['start_date']) && strtotime($occasion[0]['start_date']) < strtotime('now')) ? date('Y-m-d', strtotime($occasion[0]['start_date'])) : date('Y-m-d');
-            $days_ahead = ! empty(get_field('days_ahead', 'options')) ? absint(get_field('days_ahead', 'options')) : 30;
-            $to_date = date('Y-m-d', strtotime("midnight now + {$days_ahead} days"));
+            $fromDate = (is_array($occasion) && isset($occasion[0]['start_date']) && strtotime($occasion[0]['start_date']) < strtotime('now')) ? date('Y-m-d', strtotime($occasion[0]['start_date'])) : date('Y-m-d');
+            $daysAhead = !empty(get_field('days_ahead', 'options')) ? absint(get_field('days_ahead', 'options')) : 30;
+            $toDate = date('Y-m-d', strtotime("midnight now + {$daysAhead} days"));
 
             // Get nearby events from location
-            $location   = get_field('event_import_geographic', 'option');
-            $latlng     = ($location) ? '&latlng=' . $location['lat'] . ',' . $location['lng'] : '';
-            $distance   = (get_field('event_geographic_distance', 'option')) ? '&distance=' . get_field('event_geographic_distance', 'option') : '';
+            $location = get_field('event_import_geographic', 'option');
+            $latlng = ($location) ? '&latlng=' . $location['lat'] . ',' . $location['lng'] : '';
+            $distance = (get_field('event_geographic_distance', 'option')) ? '&distance=' . get_field('event_geographic_distance', 'option') : '';
+            // Filter by selected groups
+            $groups = '';
+            $selectedGroups = json_decode(json_encode(get_field('event_filter_group', 'option')), true);
+            if (is_array($selectedGroups) && !empty($selectedGroups)) {
+                $selectedGroups = array_column($selectedGroups, 'slug');
+                $allGroups = array_column(get_option('event_user_groups', array()), 'id', 'slug');
+                // Create array with selected group IDs
+                $groupIds = array_map(function ($a) use ($allGroups) {
+                    return isset($allGroups[$a]) ? $allGroups[$a] : null;
+                }, $selectedGroups);
+                $groups = '&group-id=' . implode(',', array_filter($groupIds));
+            }
 
-            $api_url    = get_field('event_api_url', 'option');
-            $api_url    = rtrim($api_url, '/') . '/event/time?start=' . $from_date . '&end=' . $to_date . $latlng . $distance;
+            // Build API-url
+            $api_url = rtrim(get_field('event_api_url', 'option'), '/') . '/event/time?start=' . $fromDate . '&end=' . $toDate . $latlng . $distance . $groups;
 
-            $importer   = new \EventManagerIntegration\Parser\EventManagerApi($api_url);
+            new Parser\EventManagerApi($api_url);
         }
     }
 
