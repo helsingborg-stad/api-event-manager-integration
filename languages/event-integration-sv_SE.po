@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2018-05-29 16:46+0200\n"
-"PO-Revision-Date: 2018-05-29 16:48+0200\n"
+"POT-Creation-Date: 2018-06-04 15:24+0200\n"
+"PO-Revision-Date: 2018-06-04 15:28+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.7\n"
+"X-Generator: Poedit 1.8.12\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: event-manager-integration.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -91,7 +91,7 @@ msgstr "Bild"
 #: source/php/Module/Event/views/partials/list.blade.php:37
 #: source/php/Module/Location/Location.php:12
 #: source/php/Shortcodes/SingleEvent.php:93
-#: source/php/Shortcodes/SingleEvent.php:230 views/submit-form.blade.php:172
+#: source/php/Shortcodes/SingleEvent.php:230 views/submit-form.blade.php:171
 msgid "Location"
 msgstr "Plats"
 
@@ -138,7 +138,7 @@ msgid "Show events from the selected groups."
 msgstr "Visa evenemang inom angivna grupper."
 
 #: AcfFields/php/event-module.php:269 source/php/PostTypes/Events.php:228
-#: source/php/Shortcodes/SingleEvent.php:537 views/submit-form.blade.php:180
+#: source/php/Shortcodes/SingleEvent.php:537 views/submit-form.blade.php:179
 msgid "Categories"
 msgstr "Kategorier"
 
@@ -537,24 +537,23 @@ msgctxt "Event Manager Integration settings"
 msgid "Options"
 msgstr "Inställningar"
 
-#: source/php/App.php:67 views/submit-form.blade.php:167
-#: views/submit-form.blade.php:175 views/submit-form.blade.php:183
+#: source/php/App.php:67 views/submit-form.blade.php:182
 msgid "Loading"
 msgstr "Hämtar"
 
-#: source/php/App.php:89
+#: source/php/App.php:92
 msgid "Something went wrong, please try again later."
 msgstr "Något gick fel, vänligen försök igen senare."
 
-#: source/php/App.php:90
+#: source/php/App.php:93
 msgid "The email addresses does not match."
 msgstr "E-postadresserna matchar inte."
 
-#: source/php/App.php:91
+#: source/php/App.php:94
 msgid "You must upload an image."
 msgstr "Du måste ladda upp en bild."
 
-#: source/php/App.php:120
+#: source/php/App.php:123
 msgid "to"
 msgstr "till"
 
@@ -1308,21 +1307,29 @@ msgstr ""
 
 #: views/submit-form.blade.php:165
 msgid ""
-"Choose from existing organizers in the list. If your business is not "
+"Type name of organizer, select from suggestions. If your business is not "
 "available, please add an organizer to the description."
 msgstr ""
-"Välj mellan befintliga arrangörer i listan. Finns inte din verksamhet med "
-"går det bra att lägga till arrangör i beskrivningen."
+"Skriv arrangörens namn och välj från de förslag som vi ger dig. Dyker inte "
+"arrangörens namn upp, kan du nämna det i din beskrivning."
 
-#: views/submit-form.blade.php:173
+#: views/submit-form.blade.php:166
+msgid "Type-organizer"
+msgstr "Arrangör"
+
+#: views/submit-form.blade.php:172
 msgid ""
-"Choose from existing locations in the list. If the location is not "
+"Type location name and select from suggestions. If the location is not "
 "available, please add an address in the description."
 msgstr ""
-"Välj mellan befintliga platser i listan. Finns inte platsen med går det bra "
-"att lägga till en adress i beskrivningen."
+"Skriv platsens namn och välj från de förslag som vi ger dig. Dyker inte "
+"platsens namn upp, kan du nämna det i din beskrivning."
 
-#: views/submit-form.blade.php:181
+#: views/submit-form.blade.php:173
+msgid "Type-location"
+msgstr "Plats"
+
+#: views/submit-form.blade.php:180
 msgid ""
 "Select appropriate categories for your event or activity. To select multiple "
 "categories, press Ctrl (Windows) / command (macOS) at the same time as you "
@@ -1332,62 +1339,62 @@ msgstr ""
 "flera kategorier håll in Ctrl (Windows) / command (macOS) samtidigt som du "
 "klickar på respektive kategori."
 
-#: views/submit-form.blade.php:189 views/submit-form.blade.php:198
-#: views/submit-form.blade.php:211
+#: views/submit-form.blade.php:188 views/submit-form.blade.php:197
+#: views/submit-form.blade.php:210
 msgid "Upload an image"
 msgstr "Ladda upp en bild"
 
-#: views/submit-form.blade.php:192
+#: views/submit-form.blade.php:191
 msgid "Keep in mind that the image may be cropped, so avoid text in the image."
 msgstr "Tänk på att bilden kan bli beskuren, undvik därför text i bilden."
 
-#: views/submit-form.blade.php:193
+#: views/submit-form.blade.php:192
 msgid "Images with identifiable persons are not accepted and will be replaced."
 msgstr "Bilder med igenkännbara personer godkänns inte och kommer ersättas."
 
-#: views/submit-form.blade.php:194
+#: views/submit-form.blade.php:193
 msgid "You must also have the right to use and distribute the image."
 msgstr "Du måste även ha rätt att använda och sprida bilden."
 
-#: views/submit-form.blade.php:202
+#: views/submit-form.blade.php:201
 msgid "Before you can upload an image, you need to confirm the following terms"
 msgstr ""
 "Innan du kan ladda upp en bild behöver du bekräfta nedanstående punkter"
 
-#: views/submit-form.blade.php:204
+#: views/submit-form.blade.php:203
 msgid "I have the right to use this image to promote this event."
 msgstr ""
 "Jag har rätt att använda denna bild för att marknadsföra detta evenemang."
 
-#: views/submit-form.blade.php:207
+#: views/submit-form.blade.php:206
 msgid "There are no identifiable persons on the image/images."
 msgstr "Det finns inga identifierbara personer på bilden/bilderna."
 
-#: views/submit-form.blade.php:216
+#: views/submit-form.blade.php:215
 msgid "Contact details"
 msgstr "Kontaktuppgifter"
 
-#: views/submit-form.blade.php:217
+#: views/submit-form.blade.php:216
 msgid "Enter your contact details below for eventual questions."
 msgstr "Ange dina kontaktuppgifter nedan för eventuella frågor."
 
-#: views/submit-form.blade.php:220 views/submit-form.blade.php:221
+#: views/submit-form.blade.php:219 views/submit-form.blade.php:220
 msgid "Email"
 msgstr "E-postadress"
 
-#: views/submit-form.blade.php:224 views/submit-form.blade.php:225
+#: views/submit-form.blade.php:223 views/submit-form.blade.php:224
 msgid "Repeat email"
 msgstr "Upprepa e-postadress"
 
-#: views/submit-form.blade.php:228 views/submit-form.blade.php:229
+#: views/submit-form.blade.php:227 views/submit-form.blade.php:228
 msgid "Phone number"
 msgstr "Telefonnummer"
 
-#: views/submit-form.blade.php:233
+#: views/submit-form.blade.php:232
 msgid "Done? Click here to submit your event for review."
 msgstr "Klar? Klicka här för att skicka in ditt evenemang för granskning."
 
-#: views/submit-form.blade.php:243
+#: views/submit-form.blade.php:242
 msgid "Send"
 msgstr "Skicka"
 
@@ -1406,6 +1413,20 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "http://www.helsingborg.se"
 msgstr ""
+
+#~ msgid ""
+#~ "Choose from existing organizers in the list. If your business is not "
+#~ "available, please add an organizer to the description."
+#~ msgstr ""
+#~ "Välj mellan befintliga arrangörer i listan. Finns inte din verksamhet med "
+#~ "går det bra att lägga till arrangör i beskrivningen."
+
+#~ msgid ""
+#~ "Choose from existing locations in the list. If the location is not "
+#~ "available, please add an address in the description."
+#~ msgstr ""
+#~ "Välj mellan befintliga platser i listan. Finns inte platsen med går det "
+#~ "bra att lägga till en adress i beskrivningen."
 
 #~ msgid "Yes"
 #~ msgstr "Ja"

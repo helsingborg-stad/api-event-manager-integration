@@ -136,6 +136,7 @@ class Event extends \Modularity\Module
     public function script()
     {
         wp_enqueue_script('vendor-pagination', EVENTMANAGERINTEGRATION_URL . '/source/js/vendor/simple-pagination/jquery.simplePagination.min.js', 'jquery', false, true);
+
     }
 
     /**

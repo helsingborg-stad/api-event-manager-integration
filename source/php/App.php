@@ -80,6 +80,9 @@ class App
         wp_enqueue_style('event-integration');
 
         // Scripts
+        wp_register_script('auto-complete', EVENTMANAGERINTEGRATION_URL . '/dist/js/vendor/auto-complete/auto-complete.min.js', 'jquery', false, true);
+        wp_enqueue_script('auto-complete');
+
         wp_register_script('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-integration.' . self::$assetSuffix . '.js', 'jquery', false, true);
         wp_localize_script('event-integration', 'eventintegration', array(
             'ajaxurl' => admin_url('admin-ajax.php'),

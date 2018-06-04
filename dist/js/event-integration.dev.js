@@ -295,11 +295,90 @@ EventManagerIntegration.Event.Form = (function ($) {
         return nodeById[0].sortRecursive();
     };
 
-    // Get a post type from API and add to select box
+    // Get a post type from API and add to input and autocomplete
     Form.prototype.loadPostType = function (eventForm, resource, postType) {
         resource += '/' + postType + '/complete?_jsonp=get' + postType;
-        var select = document.getElementById(postType);
+        new autoComplete({
+            selector: '#'+postType+'-selector',
+            minChars: 1,
+            source: function(term, suggest){
+                term = term.toLowerCase();
+                $.ajax({
+                    type: "GET",
+                    url: resource,
+                    cache: false,
+                    dataType: "jsonp",
+                    jsonpCallback: 'get' + postType,
+                    crossDomain: true,
+                    success: function (response) {
+                        var suggestions = [];
+                        $(response).each(function (index, item) {
+                            if (~(item.title).toLowerCase().indexOf(term))
+                                suggestions.push([item.title, item.id, postType]);
+                        });
+                        suggest(suggestions);
+                    }
+                });
+            },
+            renderItem: function (item, search) {
+                search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
+                return '<div class="autocomplete-suggestion" data-type="'+item[2]+'" data-langname="'+item[0]+'" data-lang="'+item[1]+'" data-val="'+search+'"> '+item[0].replace(re, "<b>$1</b>")+'</div>';
+            },
+            onSelect: function(e, term, item) {
+                $('#'+item.getAttribute('data-type')+'-selector').val(item.getAttribute('data-langname'));
+                $('#'+item.getAttribute('data-type')).val(item.getAttribute('data-lang'));
+            }
+        });
 
+        /*
+        new autoComplete({
+            selector: '#'+postType,
+            minChars: 1,
+            /*source: function(term, suggest){
+                term = term.toLowerCase();
+                var choices = function(term, response){
+                    //try { xhr.abort(); } catch(e){}
+                    xhr = $.getJSON(resource, { q: term }, function(data){ response(data); });
+                    console.log(data);
+                }
+
+                var suggestions = [];
+                for (var i=0;i<choices.length;i++)
+                    if (~(choices[i][0]+' '+choices[i][1]).toLowerCase().indexOf(term)) suggestions.push(choices[i]);
+                suggest(suggestions);
+            },*/
+
+
+            /*
+            source: function(term, suggest){
+                term = term.toLowerCase();
+                try { xhr.abort(); } catch(e){}
+                xhr = $.getJSON(resource, { q: term }, function(data){ response(data); });
+                console.log(xhr);
+                var suggestions = [];
+                for (var i=0;i<xhr.length;i++) {
+                    if (~(xhr[i][0]+' '+xhr[i][1]).toLowerCase().indexOf(term))  {
+                        suggestions.push(xhr[i]);
+                        console.log(xhr[i]);
+                    }
+                }
+
+                suggest(suggestions);
+            },
+            renderItem: function (item, search){
+
+                search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
+                return '<div class="autocomplete-suggestion" data-langname="'+item[0]+'" data-lang="'+item[1]+'" data-val="'+search+'"><img src="img/'+item[1]+'.png"> '+item[0].replace(re, "<b>$1</b>")+'</div>';
+            },
+            onSelect: function(e, term, item){
+                alert('Item "'+item.getAttribute('data-langname')+' ('+item.getAttribute('data-lang')+')" selected by '+(e.type == 'keydown' ? 'pressing enter' : 'mouse click')+'.');
+            }
+        });
+        */
+
+/*
         $.ajax({
             type: "GET",
             url: resource,
@@ -325,7 +404,7 @@ EventManagerIntegration.Event.Form = (function ($) {
                     select.appendChild(opt);
                 });
             }
-        });
+        }); */
     };
 
     // Save+format input data and return as object
