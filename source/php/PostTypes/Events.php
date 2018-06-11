@@ -354,44 +354,13 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
      */
     public function importEvents()
     {
-        global $wpdb;
-        $db_table   = $wpdb->prefix . "integrate_occasions";
-        $occasion   = $wpdb->get_results(
-        "SELECT     $db_table.start_date
-        FROM        $db_table
-        LEFT JOIN   $wpdb->posts ON ($wpdb->posts.ID = $db_table.event_id)
-        WHERE       $wpdb->posts.post_type = 'event'
-                    AND $wpdb->posts.post_status = 'publish'
-        ORDER BY    $db_table.start_date
-        ASC LIMIT 1", ARRAY_A);
-
-        $from_date  = (is_array($occasion) && isset($occasion[0]['start_date']) && strtotime($occasion[0]['start_date']) < strtotime('now')) ? date('Y-m-d', strtotime($occasion[0]['start_date'])) : date('Y-m-d');
-        $days_ahead = ! empty(get_field('days_ahead', 'options')) ? absint(get_field('days_ahead', 'options')) : 30;
-        $to_date = date('Y-m-d', strtotime("midnight now + {$days_ahead} days"));
-
-        // Get nearby events from location
-        $location   = get_field('event_import_geographic', 'option');
-        $latlng     = ($location) ? '&latlng=' . $location['lat'] . ',' . $location['lng'] : '';
-        $distance   = (get_field('event_geographic_distance', 'option')) ? '&distance=' . get_field('event_geographic_distance', 'option') : '';
-
-        $api_url = get_field('event_api_url', 'option');
-
-        if ($api_url) {
-            $api_url  = rtrim($api_url, '/') . '/event/time?start=' . $from_date . '&end=' . $to_date . $latlng . $distance;
-
-            //Adds internal event parameter
-            if (get_field('internal_event', 'option') == 1) {
-                $api_url .= '&internal=1';
-            }
-
-            $importer = new \EventManagerIntegration\Parser\EventManagerApi($api_url);
-
+        if ($apiUrl = \EventManagerIntegration\Helper\ApiUrl::buildApiUrl()) {
+            $importer = new \EventManagerIntegration\Parser\EventManagerApi($apiUrl);
             $data = $importer->getCreatedData();
-
             wp_send_json($data);
         }
 
-        return;
+        wp_die();
     }
 
     /**
