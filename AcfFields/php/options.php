@@ -1,9 +1,7 @@
 <?php 
 
-
-if (function_exists('acf_add_local_field_group')) {
-
-    acf_add_local_field_group(array(
+if (function_exists('acf_add_local_field_group')) {
+    acf_add_local_field_group(array(
     'key' => 'group_583557753bd73',
     'title' => __('Event Manager Integration', 'event-integration'),
     'fields' => array(
@@ -240,6 +238,25 @@ if (function_exists('acf_add_local_field_group')) {
             'maxlength' => '',
         ),
         12 => array(
+            'key' => 'field_5b1e890a063c4',
+            'label' => __('Import internal events', 'event-integration'),
+            'name' => 'event_internal_events',
+            'type' => 'true_false',
+            'instructions' => __('Select if only internal (organization) events should be imported.', 'event-integration'),
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'message' => '',
+            'default_value' => 0,
+            'ui' => 1,
+            'ui_on_text' => '',
+            'ui_off_text' => '',
+        ),
+        13 => array(
             'key' => 'field_5b0e5a49c8fab',
             'label' => __('Import from geographic location', 'event-integration'),
             'name' => 'event_import_from_location',
@@ -262,7 +279,7 @@ if (function_exists('acf_add_local_field_group')) {
             'layout' => 'horizontal',
             'return_format' => 'value',
         ),
-        13 => array(
+        14 => array(
             'key' => 'field_58aaeaa46781b',
             'label' => __('From a single point', 'event-integration'),
             'name' => 'event_import_geographic',
@@ -288,7 +305,7 @@ if (function_exists('acf_add_local_field_group')) {
             'zoom' => 16,
             'height' => '',
         ),
-        14 => array(
+        15 => array(
             'key' => 'field_58aaec066781c',
             'label' => __('Distance from location', 'event-integration'),
             'name' => 'event_geographic_distance',
@@ -317,7 +334,7 @@ if (function_exists('acf_add_local_field_group')) {
             'max' => '',
             'step' => '',
         ),
-        15 => array(
+        16 => array(
             'key' => 'field_5b0e6394d6399',
             'label' => __('Drawn area', 'event-integration'),
             'name' => '',
@@ -361,5 +378,4 @@ if (function_exists('acf_add_local_field_group')) {
     'active' => 1,
     'description' => '',
 ));
-
-}
+}

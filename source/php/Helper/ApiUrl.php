@@ -42,7 +42,7 @@ class ApiUrl
         }
 
         // Adds internal event parameter
-        $internal = (get_field('internal_event', 'option')) ? '&internal=1' : '';
+        $internal = (get_field('event_internal_events', 'option')) ? '&internal=1' : '';
 
         // Build API-url
         if ($apiUrl = get_field('event_api_url', 'option')) {

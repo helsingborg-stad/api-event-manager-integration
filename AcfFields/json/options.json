@@ -235,6 +235,25 @@
             "maxlength": ""
         },
         {
+            "key": "field_5b1e890a063c4",
+            "label": "Import internal events",
+            "name": "event_internal_events",
+            "type": "true_false",
+            "instructions": "Select if only internal (organization) events should be imported.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_5b0e5a49c8fab",
             "label": "Import from geographic location",
             "name": "event_import_from_location",
