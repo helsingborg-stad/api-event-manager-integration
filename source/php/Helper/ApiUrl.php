@@ -23,11 +23,11 @@ class ApiUrl
         $fromDate = (is_array($occasion) && isset($occasion[0]['start_date']) && strtotime($occasion[0]['start_date']) < strtotime('now')) ? date('Y-m-d', strtotime($occasion[0]['start_date'])) : date('Y-m-d');
         $daysAhead = !empty(get_field('days_ahead', 'options')) ? absint(get_field('days_ahead', 'options')) : 30;
         $toDate = date('Y-m-d', strtotime("midnight now + {$daysAhead} days"));
-
+        $importLocation = get_field('event_import_from_location', 'option');
         // Get nearby events from location
-        $location = get_field('event_import_geographic', 'option');
-        $latlng = ($location) ? '&latlng=' . $location['lat'] . ',' . $location['lng'] : '';
-        $distance = (get_field('event_geographic_distance', 'option')) ? '&distance=' . get_field('event_geographic_distance', 'option') : '';
+        $point = get_field('event_import_geographic', 'option');
+        $latlng = ($point && $importLocation == 'point') ? '&latlng=' . $point['lat'] . ',' . $point['lng'] : '';
+        $distance = (get_field('event_geographic_distance', 'option') && $importLocation == 'point') ? '&distance=' . get_field('event_geographic_distance', 'option') : '';
         // Filter by selected groups
         $groups = '';
         $selectedGroups = json_decode(json_encode(get_field('event_filter_group', 'option')), true);
