@@ -266,13 +266,13 @@
                 "class": "",
                 "id": ""
             },
-            "choices": [
-                "No",
-                "Single point",
-                "Inside drawn area"
-            ],
+            "choices": {
+                "no": "No",
+                "point": "Single point",
+                "area": "Inside drawn area"
+            },
             "allow_null": 0,
-            "default_value": 0,
+            "default_value": "no",
             "layout": "horizontal",
             "return_format": "value"
         },
@@ -288,7 +288,7 @@
                     {
                         "field": "field_5b0e5a49c8fab",
                         "operator": "==",
-                        "value": "1"
+                        "value": "point"
                     }
                 ]
             ],
@@ -314,7 +314,7 @@
                     {
                         "field": "field_5b0e5a49c8fab",
                         "operator": "==",
-                        "value": "1"
+                        "value": "point"
                     }
                 ]
             ],
@@ -343,7 +343,7 @@
                     {
                         "field": "field_5b0e5a49c8fab",
                         "operator": "==",
-                        "value": "2"
+                        "value": "area"
                     }
                 ]
             ],

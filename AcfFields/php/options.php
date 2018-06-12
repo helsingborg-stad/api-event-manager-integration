@@ -270,12 +270,12 @@
                 'id' => '',
             ),
             'choices' => array(
-                0 => __('No', 'event-integration'),
-                1 => __('Single point', 'event-integration'),
-                2 => __('Inside drawn area', 'event-integration'),
+                'no' => __('No', 'event-integration'),
+                'point' => __('Single point', 'event-integration'),
+                'area' => __('Inside drawn area', 'event-integration'),
             ),
             'allow_null' => 0,
-            'default_value' => 0,
+            'default_value' => 'no',
             'layout' => 'horizontal',
             'return_format' => 'value',
         ),
@@ -291,7 +291,7 @@
                     0 => array(
                         'field' => 'field_5b0e5a49c8fab',
                         'operator' => '==',
-                        'value' => '1',
+                        'value' => 'point',
                     ),
                 ),
             ),
@@ -317,7 +317,7 @@
                     0 => array(
                         'field' => 'field_5b0e5a49c8fab',
                         'operator' => '==',
-                        'value' => '1',
+                        'value' => 'point',
                     ),
                 ),
             ),
@@ -346,7 +346,7 @@
                     0 => array(
                         'field' => 'field_5b0e5a49c8fab',
                         'operator' => '==',
-                        'value' => '2',
+                        'value' => 'area',
                     ),
                 ),
             ),
