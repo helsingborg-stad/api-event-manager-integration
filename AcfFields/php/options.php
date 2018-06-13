@@ -355,7 +355,9 @@
                 'class' => '',
                 'id' => 'draw-map-container',
             ),
-            'message' => __('Import events that occurs inside the drawn area.', 'event-integration'),
+            'message' => __('Import events that occurs inside the drawn area. 
+Draw the area by clicking each point on the map. 
+Maximum number of points is 8.', 'event-integration'),
             'new_lines' => 'wpautop',
             'esc_html' => 0,
         ),
