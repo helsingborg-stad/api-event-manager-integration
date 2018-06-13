@@ -5,27 +5,29 @@ EventManagerIntegration.Admin = EventManagerIntegration.Admin || {};
 
 EventManagerIntegration.Admin.DrawMap = (function ($) {
 
-        var drawingManager;
+        var drawingManager,
+            drawnPolygon,
+            drawDiv;
 
         function DrawMap() {
             $(function () {
                 if (typeof google === 'object' && typeof google.maps === 'object' && pagenow === 'event_page_acf-options-options') {
                     this.init();
+                    this.handleEvents();
                 }
             }.bind(this));
         }
 
         DrawMap.prototype.init = function () {
-            var drawDiv = document.getElementById('draw-map-container');
+            drawDiv = document.getElementById('draw-map-container');
             if (!drawDiv) {
                 return;
             }
 
-            var mapElement = document.createElement('div');
-            mapElement.id = 'draw-map-area';
-            drawDiv.appendChild(mapElement);
+            $(drawDiv).append('<button class="button" id="clear-draw-map">Clear map</button>');
+            $(drawDiv).append('<div id="draw-map-area"></div>');
 
-            var map = new google.maps.Map(mapElement, {
+            var map = new google.maps.Map(document.getElementById('draw-map-area'), {
                 zoom: 13,
                 center: {lat: 56.04673, lng: 12.69437},
                 disableDefaultUI: true,
@@ -39,7 +41,6 @@ EventManagerIntegration.Admin.DrawMap = (function ($) {
             };
 
             drawingManager = new google.maps.drawing.DrawingManager({
-                map: map,
                 drawingMode: google.maps.drawing.OverlayType.POLYGON,
                 drawingControl: true,
                 drawingControlOptions: {
@@ -52,20 +53,31 @@ EventManagerIntegration.Admin.DrawMap = (function ($) {
                 polygonOptions: polyOptions
             });
 
+            drawingManager.setMap(map);
+
             // Fire action when polygon shape is completed
-            drawingManager.addListener('overlaycomplete', this.polygonComplete);
+            drawingManager.addListener('overlaycomplete', function(e) {
+                this.polygonComplete(e);
+            }.bind(this));
         };
 
-        DrawMap.prototype.polygonComplete = function (event) {
-            var vertices = event.overlay.getPath();
-            var coords = [];
+        DrawMap.prototype.polygonComplete = function (e) {
+            drawnPolygon = e.overlay;
+            var vertices = e.overlay.getPath(),
+                coords = [];
+
+            // Maximum amount of points is 8
+            if (vertices.length > 3) {
+                this.clearMap();
+                return;
+            }
 
             for (var i = 0; i < vertices.length; i++) {
                 var xy = vertices.getAt(i);
                 coords.push({latitude: xy.lat(), longitude: xy.lng()});
             }
 
-            if (event.type != google.maps.drawing.OverlayType.MARKER) {
+            if (e.type != google.maps.drawing.OverlayType.MARKER) {
                 // Switch back to non-drawing mode after drawing a shape.
                 drawingManager.setDrawingMode(null);
                 // Hide controls
@@ -73,6 +85,27 @@ EventManagerIntegration.Admin.DrawMap = (function ($) {
                     drawingControl: false
                 });
             }
+        };
+
+        /**
+         * Removes the drawn polygon area
+         */
+        DrawMap.prototype.clearMap = function() {
+            if (drawnPolygon) {
+                drawnPolygon.setMap(null);
+                drawingManager.setDrawingMode(google.maps.drawing.OverlayType.POLYGON);
+                drawingManager.setOptions({
+                    drawingControl: true
+                });
+                drawnPolygon = null;
+            }
+        };
+
+        DrawMap.prototype.handleEvents = function() {
+            document.getElementById('clear-draw-map').addEventListener('click', function(e) {
+                e.preventDefault();
+                this.clearMap();
+            }.bind(this));
         };
 
         return new DrawMap();
