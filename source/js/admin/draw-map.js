@@ -67,8 +67,10 @@ EventManagerIntegration.Admin.DrawMap = (function ($) {
                 coords = [];
 
             // Maximum amount of points is 8
-            if (vertices.length > 3) {
+            if (vertices.length > 8) {
                 this.clearMap();
+                $('#clear-draw-map').after('<div class="notice error"><p>Exceeded maximum amount of 8 points. Please try again.</p></div>');
+                $('.notice', drawDiv).delay(3000).fadeOut();
                 return;
             }
 
