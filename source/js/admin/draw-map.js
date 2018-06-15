@@ -76,8 +76,11 @@ EventManagerIntegration.Admin.DrawMap = (function ($) {
 
             for (var i = 0; i < vertices.length; i++) {
                 var xy = vertices.getAt(i);
-                coords.push({latitude: xy.lat(), longitude: xy.lng()});
+                coords.push({lat: xy.lat(), lng: xy.lng()});
             }
+
+            // Save to db
+            this.saveDrawOptions(coords);
 
             if (e.type != google.maps.drawing.OverlayType.MARKER) {
                 // Switch back to non-drawing mode after drawing a shape.
@@ -87,6 +90,28 @@ EventManagerIntegration.Admin.DrawMap = (function ($) {
                     drawingControl: false
                 });
             }
+        };
+
+        DrawMap.prototype.saveDrawOptions = function(coordinates) {
+            $.ajax({
+                url: eventintegration.ajaxurl,
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    action  : 'save_draw_points',
+                    coordinates  : coordinates
+                },
+                success: function(response) {
+                    if (response.success) {
+                        console.log('Success');
+                    } else {
+                        console.log("Error");
+                    }
+                },
+                error: function(error) {
+                    console.log(error);
+                },
+            });
         };
 
         /**
