@@ -15,5 +15,18 @@ class Options
                 'capability'    => 'manage_options'
             ));
         }
+
+        add_action('wp_ajax_save_draw_points', array($this, 'saveDrawPoints'));
+    }
+
+    public function saveDrawPoints()
+    {
+        if (!isset($_POST['coordinates'])) {
+            wp_send_json_error("Missing coordinates");
+        }
+
+        $points = $_POST['coordinates'];
+        update_option('event_import_area', $points);
+        wp_send_json_success($points);
     }
 }
