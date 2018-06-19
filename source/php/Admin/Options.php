@@ -19,13 +19,20 @@ class Options
         add_action('wp_ajax_save_draw_points', array($this, 'saveDrawPoints'));
     }
 
+    /**
+     * Save area coordinates as option
+     */
     public function saveDrawPoints()
     {
-        if (!isset($_POST['coordinates'])) {
+        if (!isset($_POST['coordinates']) && !empty($_POST['coordinates'])) {
             wp_send_json_error("Missing coordinates");
         }
 
         $points = $_POST['coordinates'];
+        // Convert coordinates to float
+        foreach ($points as &$point) {
+            $point = array_map('floatval', $point);
+        }
         update_option('event_import_area', $points);
         wp_send_json_success($points);
     }
