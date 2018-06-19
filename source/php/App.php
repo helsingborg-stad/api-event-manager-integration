@@ -65,6 +65,9 @@ class App
         ));
         wp_localize_script('event-integration-admin', 'eventIntegrationAdmin', array(
             'loading' => __("Loading", 'event-integration'),
+            'options' => array(
+                'areaCoordinates' => get_option('event_import_area') ? get_option('event_import_area') : null
+            )
         ));
         wp_enqueue_script('event-integration-admin');
 
