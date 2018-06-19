@@ -26,8 +26,18 @@ class ApiUrl
         $importLocation = get_field('event_import_from_location', 'option');
         // Get nearby events from location
         $point = get_field('event_import_geographic', 'option');
-        $latlng = ($point && $importLocation == 'point') ? '&latlng=' . $point['lat'] . ',' . $point['lng'] : '';
+        $latLng = ($point && $importLocation == 'point') ? '&latlng=' . $point['lat'] . ',' . $point['lng'] : '';
         $distance = (get_field('event_geographic_distance', 'option') && $importLocation == 'point') ? '&distance=' . get_field('event_geographic_distance', 'option') : '';
+        // Get events within area
+        $areaLatLng = '';
+        $areaPoints = get_option('event_import_area', 'option');
+        if ($importLocation == 'area' && is_array($areaPoints) && !empty($areaPoints)) {
+            foreach ($areaPoints as $areaPoint) {
+                if (isset($areaPoint['lat']) && isset($areaPoint['lng'])) {
+                    $areaLatLng .= '&arealatlng[]=' . $areaPoint['lat'] . ',' . $areaPoint['lng'];
+                }
+            }
+        }
         // Filter by selected groups
         $groups = '';
         $selectedGroups = json_decode(json_encode(get_field('event_filter_group', 'option')), true);
@@ -46,7 +56,7 @@ class ApiUrl
 
         // Build API-url
         if ($apiUrl = get_field('event_api_url', 'option')) {
-            return rtrim($apiUrl, '/') . '/event/time?start=' . $fromDate . '&end=' . $toDate . $latlng . $distance . $groups . $internal;
+            return rtrim($apiUrl, '/') . '/event/time?start=' . $fromDate . '&end=' . $toDate . $latLng . $distance . $areaLatLng . $groups . $internal;
         }
 
         return;
