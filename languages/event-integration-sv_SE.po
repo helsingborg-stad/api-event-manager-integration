@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2018-06-11 16:49+0200\n"
-"PO-Revision-Date: 2018-06-11 16:51+0200\n"
+"POT-Creation-Date: 2018-06-19 16:45+0200\n"
+"PO-Revision-Date: 2018-06-19 16:45+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -370,28 +370,24 @@ msgid "Select if only internal (organization) events should be imported."
 msgstr "Välj om endast interna(organisation) evenemang ska importeras."
 
 #: AcfFields/php/options.php:261
-#, fuzzy
-#| msgid "Import from location"
 msgid "Import from geographic location"
-msgstr "Importera från en plats"
+msgstr "Importera från platser"
 
 #: AcfFields/php/options.php:273
 msgid "No"
 msgstr "Nej"
 
 #: AcfFields/php/options.php:274
-#, fuzzy
-#| msgid "Single occurrence"
 msgid "Single point"
-msgstr "Enstaka datum"
+msgstr "Enskild punkt"
 
-#: AcfFields/php/options.php:275
-msgid "Inside drawn area"
-msgstr ""
+#: AcfFields/php/options.php:275 AcfFields/php/options.php:339
+msgid "Drawn area"
+msgstr "Utritat område"
 
 #: AcfFields/php/options.php:284
 msgid "From a single point"
-msgstr ""
+msgstr "Från en enskild punkt"
 
 #: AcfFields/php/options.php:287
 msgid "Import events that occurs at a specified location."
@@ -406,15 +402,13 @@ msgstr ""
 "maximalt avstånd i km. Lämna tomt för att importera evenemang från den "
 "exakta positionen."
 
-#: AcfFields/php/options.php:339
-msgid "Drawn area"
-msgstr ""
-
 #: AcfFields/php/options.php:358
-#, fuzzy
-#| msgid "Import events that occurs within given number of days."
-msgid "Import events that occurs inside the drawn area."
-msgstr "Importera evenemang som inträffar inom angivet antal dagar."
+msgid ""
+"Import events that occurs inside the drawn area. Draw the area by clicking "
+"each point on the map. Maximum number of points is 8."
+msgstr ""
+"Importera händelser som sker inuti det utritade området. Rita området genom "
+"att klicka på punkter i kartan. Maximalt antal punkter är 8."
 
 #: AcfFields/php/shortcodes.php:6
 msgid "Shortcode settings"
@@ -572,19 +566,23 @@ msgstr "Inställningar"
 msgid "Loading"
 msgstr "Hämtar"
 
-#: source/php/App.php:94
+#: source/php/App.php:68
+msgid "Clear map"
+msgstr "Återställ kartan"
+
+#: source/php/App.php:98
 msgid "Something went wrong, please try again later."
 msgstr "Något gick fel, vänligen försök igen senare."
 
-#: source/php/App.php:95
+#: source/php/App.php:99
 msgid "The email addresses does not match."
 msgstr "E-postadresserna matchar inte."
 
-#: source/php/App.php:96
+#: source/php/App.php:100
 msgid "You must upload an image."
 msgstr "Du måste ladda upp en bild."
 
-#: source/php/App.php:126
+#: source/php/App.php:130
 msgid "to"
 msgstr "till"
 
@@ -980,11 +978,11 @@ msgstr "Välj från de mest använda grupperna"
 msgid "Import events"
 msgstr "Importera evenemang"
 
-#: source/php/PostTypes/Events.php:374
+#: source/php/PostTypes/Events.php:375
 msgid "Something went wrong!"
 msgstr "Något gick fel!"
 
-#: source/php/PostTypes/Events.php:391
+#: source/php/PostTypes/Events.php:392
 msgid "Error"
 msgstr "Fel"
 
@@ -1440,6 +1438,12 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "http://www.helsingborg.se"
 msgstr ""
+
+#~ msgid "Inside drawn area"
+#~ msgstr "I utritad area"
+
+#~ msgid "Import events that occurs inside the drawn area."
+#~ msgstr "Importera evenemang som inträffar inom det utritade området."
 
 #~ msgid "Internal events"
 #~ msgstr "Interna evenemang"

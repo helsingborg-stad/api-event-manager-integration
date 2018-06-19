@@ -272,7 +272,7 @@
             'choices' => array(
                 'no' => __('No', 'event-integration'),
                 'point' => __('Single point', 'event-integration'),
-                'area' => __('Inside drawn area', 'event-integration'),
+                'area' => __('Drawn area', 'event-integration'),
             ),
             'allow_null' => 0,
             'default_value' => 'no',
@@ -355,9 +355,7 @@
                 'class' => '',
                 'id' => 'draw-map-container',
             ),
-            'message' => __('Import events that occurs inside the drawn area. 
-Draw the area by clicking each point on the map. 
-Maximum number of points is 8.', 'event-integration'),
+            'message' => __('Import events that occurs inside the drawn area. Draw the area by clicking each point on the map. Maximum number of points is 8.', 'event-integration'),
             'new_lines' => 'wpautop',
             'esc_html' => 0,
         ),

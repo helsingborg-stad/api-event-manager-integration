@@ -269,7 +269,7 @@
             "choices": {
                 "no": "No",
                 "point": "Single point",
-                "area": "Inside drawn area"
+                "area": "Drawn area"
             },
             "allow_null": 0,
             "default_value": "no",
@@ -352,7 +352,7 @@
                 "class": "",
                 "id": "draw-map-container"
             },
-            "message": "Import events that occurs inside the drawn area. \r\nDraw the area by clicking each point on the map. \r\nMaximum number of points is 8.",
+            "message": "Import events that occurs inside the drawn area. Draw the area by clicking each point on the map. Maximum number of points is 8.",
             "new_lines": "wpautop",
             "esc_html": 0
         }

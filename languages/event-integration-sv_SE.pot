@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2018-06-11 16:49+0200\n"
+"POT-Creation-Date: 2018-06-19 16:45+0200\n"
 "PO-Revision-Date: 2016-12-13 15:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -366,8 +366,8 @@ msgstr ""
 msgid "Single point"
 msgstr ""
 
-#: AcfFields/php/options.php:275
-msgid "Inside drawn area"
+#: AcfFields/php/options.php:275 AcfFields/php/options.php:339
+msgid "Drawn area"
 msgstr ""
 
 #: AcfFields/php/options.php:284
@@ -384,12 +384,10 @@ msgid ""
 "km. Leave blank to only get events from the exact position."
 msgstr ""
 
-#: AcfFields/php/options.php:339
-msgid "Drawn area"
-msgstr ""
-
 #: AcfFields/php/options.php:358
-msgid "Import events that occurs inside the drawn area."
+msgid ""
+"Import events that occurs inside the drawn area. Draw the area by clicking "
+"each point on the map. Maximum number of points is 8."
 msgstr ""
 
 #: AcfFields/php/shortcodes.php:6
@@ -536,19 +534,23 @@ msgstr ""
 msgid "Loading"
 msgstr ""
 
-#: source/php/App.php:94
+#: source/php/App.php:68
+msgid "Clear map"
+msgstr ""
+
+#: source/php/App.php:98
 msgid "Something went wrong, please try again later."
 msgstr ""
 
-#: source/php/App.php:95
+#: source/php/App.php:99
 msgid "The email addresses does not match."
 msgstr ""
 
-#: source/php/App.php:96
+#: source/php/App.php:100
 msgid "You must upload an image."
 msgstr ""
 
-#: source/php/App.php:126
+#: source/php/App.php:130
 msgid "to"
 msgstr ""
 
@@ -941,11 +943,11 @@ msgstr ""
 msgid "Import events"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:374
+#: source/php/PostTypes/Events.php:375
 msgid "Something went wrong!"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:391
+#: source/php/PostTypes/Events.php:392
 msgid "Error"
 msgstr ""
 
