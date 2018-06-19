@@ -68,10 +68,19 @@ EventManagerIntegration.Admin.DrawMap = (function ($) {
 
         var drawingManager,
             drawnPolygon,
-            drawDiv;
+            drawDiv,
+            savedPoints = eventIntegrationAdmin.options.areaCoordinates;
 
         function DrawMap() {
             $(function () {
+                drawDiv = document.getElementById('draw-map-container');
+                if (!drawDiv) {
+                    return;
+                }
+
+                $(drawDiv).append('<button class="button" id="clear-draw-map">Clear map</button>');
+                $(drawDiv).append('<div id="draw-map-area"></div>');
+
                 if (typeof google === 'object' && typeof google.maps === 'object' && pagenow === 'event_page_acf-options-options') {
                     this.init();
                     this.handleEvents();
@@ -80,14 +89,6 @@ EventManagerIntegration.Admin.DrawMap = (function ($) {
         }
 
         DrawMap.prototype.init = function () {
-            drawDiv = document.getElementById('draw-map-container');
-            if (!drawDiv) {
-                return;
-            }
-
-            $(drawDiv).append('<button class="button" id="clear-draw-map">Clear map</button>');
-            $(drawDiv).append('<div id="draw-map-area"></div>');
-
             var map = new google.maps.Map(document.getElementById('draw-map-area'), {
                 zoom: 13,
                 center: {lat: 56.04673, lng: 12.69437},
@@ -96,28 +97,37 @@ EventManagerIntegration.Admin.DrawMap = (function ($) {
             });
 
             var polyOptions = {
-                strokeWeight: 0,
+                strokeWeight: 2,
                 fillOpacity: 0.45,
-                fillColor: '#1e90ff'
+                fillColor: '#1e90ff',
+                strokeColor: '#0480FF'
             };
 
-            drawingManager = new google.maps.drawing.DrawingManager({
-                drawingMode: google.maps.drawing.OverlayType.POLYGON,
-                drawingControl: true,
-                drawingControlOptions: {
-                    position: google.maps.ControlPosition.TOP_CENTER,
-                    drawingModes: ['polygon']
-                },
-                markerOptions: {
-                    draggable: true
-                },
-                polygonOptions: polyOptions
-            });
+            if (savedPoints) {
+                polyOptions.paths = savedPoints;
+                drawingManager = new google.maps.Polygon(polyOptions);
+                // Set center of the map
+                var bounds = new google.maps.LatLngBounds();
+                for (var i = 0; i < savedPoints.length; i++) {
+                    bounds.extend(savedPoints[i]);
+                }
+                map.fitBounds(bounds);
+            } else {
+                drawingManager = new google.maps.drawing.DrawingManager({
+                    drawingMode: google.maps.drawing.OverlayType.POLYGON,
+                    drawingControl: true,
+                    drawingControlOptions: {
+                        position: google.maps.ControlPosition.TOP_CENTER,
+                        drawingModes: ['polygon']
+                    },
+                    polygonOptions: polyOptions
+                });
+            }
 
             drawingManager.setMap(map);
 
             // Fire action when polygon shape is completed
-            drawingManager.addListener('overlaycomplete', function(e) {
+            drawingManager.addListener('overlaycomplete', function (e) {
                 this.polygonComplete(e);
             }.bind(this));
         };
@@ -153,23 +163,16 @@ EventManagerIntegration.Admin.DrawMap = (function ($) {
             }
         };
 
-        DrawMap.prototype.saveDrawOptions = function(coordinates) {
+        DrawMap.prototype.saveDrawOptions = function (coordinates) {
             $.ajax({
                 url: eventintegration.ajaxurl,
                 type: 'post',
                 dataType: 'json',
                 data: {
-                    action  : 'save_draw_points',
-                    coordinates  : coordinates
+                    action: 'save_draw_points',
+                    coordinates: coordinates
                 },
-                success: function(response) {
-                    if (response.success) {
-                        console.log('Success');
-                    } else {
-                        console.log("Error");
-                    }
-                },
-                error: function(error) {
+                error: function (error) {
                     console.log(error);
                 },
             });
@@ -178,19 +181,13 @@ EventManagerIntegration.Admin.DrawMap = (function ($) {
         /**
          * Removes the drawn polygon area
          */
-        DrawMap.prototype.clearMap = function() {
-            if (drawnPolygon) {
-                drawnPolygon.setMap(null);
-                drawingManager.setDrawingMode(google.maps.drawing.OverlayType.POLYGON);
-                drawingManager.setOptions({
-                    drawingControl: true
-                });
-                drawnPolygon = null;
-            }
+        DrawMap.prototype.clearMap = function () {
+            savedPoints = null;
+            this.init();
         };
 
-        DrawMap.prototype.handleEvents = function() {
-            document.getElementById('clear-draw-map').addEventListener('click', function(e) {
+        DrawMap.prototype.handleEvents = function () {
+            document.getElementById('clear-draw-map').addEventListener('click', function (e) {
                 e.preventDefault();
                 this.clearMap();
             }.bind(this));
