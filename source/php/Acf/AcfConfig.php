@@ -32,7 +32,9 @@ class AcfConfig
     public function acfSettings()
     {
         acf_update_setting('google_api_key', get_field('google_geocode_key', 'option'));
-        // Disable loading Google Maps JS API with ACFs since we include it manually
-        acf_update_setting('enqueue_google_maps', false);
+        // Disable loading Google Maps JS API with ACFs since we include it manually with additional libraries
+        if (is_admin() && isset($_GET['page']) && $_GET['page'] === 'event-options') {
+            acf_update_setting('enqueue_google_maps', false);
+        }
     }
 }

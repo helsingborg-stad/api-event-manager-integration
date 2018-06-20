@@ -72,8 +72,8 @@ class App
         ));
         wp_enqueue_script('event-integration-admin');
 
-        // Google Maps JS Api
-        if ($googleApiKey = get_field('google_geocode_key', 'option')) {
+        // Re-enqueue Google Maps JS Api with additional libraries: Places, Drawing
+        if (isset($_GET['page']) && $_GET['page'] === 'event-options' && $googleApiKey = get_field('google_geocode_key', 'option')) {
             wp_enqueue_script('google-maps-api', '//maps.googleapis.com/maps/api/js?key=' . $googleApiKey . '&libraries=places,drawing', array(), '', true);
         }
     }
