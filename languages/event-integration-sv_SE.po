@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
 "POT-Creation-Date: 2018-06-20 12:49+0200\n"
-"PO-Revision-Date: 2018-06-20 12:51+0200\n"
+"PO-Revision-Date: 2018-06-20 13:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -1338,16 +1338,12 @@ msgstr ""
 "beskrivningen."
 
 #: views/submit-form.blade.php:165
-#, fuzzy
-#| msgid ""
-#| "Choose from existing organizers in the list. If your business is not "
-#| "available, please add an organizer to the description."
 msgid ""
 "Type name of organizer, select from suggestions. If your business is not "
 "available, please add an organizer to the description."
 msgstr ""
-"Välj mellan befintliga arrangörer i listan. Finns inte din verksamhet med "
-"går det bra att lägga till arrangör i beskrivningen."
+"Skriv arrangörens namn och välj från de förslag som vi ger dig. Dyker inte "
+"arrangörens namn upp, kan du nämna det i din beskrivning."
 
 #: views/submit-form.blade.php:166
 #, fuzzy
@@ -1356,16 +1352,12 @@ msgid "Type-organizer"
 msgstr "Arrangör"
 
 #: views/submit-form.blade.php:172
-#, fuzzy
-#| msgid ""
-#| "Choose from existing locations in the list. If the location is not "
-#| "available, please add an address in the description."
 msgid ""
 "Type location name and select from suggestions. If the location is not "
 "available, please add an address in the description."
 msgstr ""
-"Välj mellan befintliga platser i listan. Finns inte platsen med går det bra "
-"att lägga till en adress i beskrivningen."
+"Skriv platsens namn och välj från de förslag som vi ger dig. Dyker inte "
+"platsens namn upp, kan du nämna det i din beskrivning."
 
 #: views/submit-form.blade.php:173
 #, fuzzy

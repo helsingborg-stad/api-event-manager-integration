@@ -163,14 +163,14 @@
     <div class="form-group">
         <label for="organizer"><?php _e('Organizer', 'event-integration'); ?></label>
         <small class="text-dark-gray"><?php _e('Type name of organizer, select from suggestions. If your business is not available, please add an organizer to the description.', 'event-integration'); ?></small>
-        <input id="organizer-selector" autofocus="" type="text" name="q" placeholder="<?php _e('Type-organizer', 'event-integration'); ?>" style="width:100%;max-width:600px;outline:0" autocomplete="off">
+        <input id="organizer-selector" autofocus="" type="text" name="q" placeholder="<?php _e('Organizer', 'event-integration'); ?>" style="width:100%;max-width:600px;outline:0" autocomplete="off">
         <input name="organizer" id="organizer" type="hidden">
     </div>
 
     <div class="form-group">
         <label for="location"><?php _e('Location', 'event-integration'); ?></label>
         <small class="text-dark-gray"><?php _e('Type location name and select from suggestions. If the location is not available, please add an address in the description.', 'event-integration'); ?></small>
-        <input id="location-selector" autofocus="" type="text" name="q" placeholder="<?php _e('Type-location', 'event-integration'); ?>" style="width:100%;max-width:600px;outline:0" autocomplete="off">
+        <input id="location-selector" autofocus="" type="text" name="q" placeholder="<?php _e('Location', 'event-integration'); ?>" style="width:100%;max-width:600px;outline:0" autocomplete="off">
         <input name="location" id="location" type="hidden">
 
     </div>
