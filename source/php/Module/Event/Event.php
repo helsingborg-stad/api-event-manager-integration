@@ -6,7 +6,7 @@ class Event extends \Modularity\Module
 {
     public $slug = 'event';
     public $supports = array();
-
+    public $templateDir = EVENTMANAGERINTEGRATION_VIEW_PATH;
     /* Set to 'dev' or 'min' */
     public static $assetSuffix = 'min';
 
@@ -20,26 +20,21 @@ class Event extends \Modularity\Module
         add_action('wp_ajax_ajax_pagination', array($this, 'ajaxPagination'));
     }
 
-    public function data() : array
+    public function data(): array
     {
         if (get_option('timezone_string')) {
             date_default_timezone_set(get_option('timezone_string'));
         }
 
-        $id = $this->ID;
-        if (empty($id) && !empty($_POST['id'])) {
-            $id = (int) $_POST['id'];
-        }
+        $id = $this->ID ?? $_POST['id'] ?? null;
         $page = (!empty($_POST['page'])) ? $_POST['page'] : 1;
-
         $data = get_fields($id);
-
-        $data['pagesCount']         = $this->countPages($id);
-        $data['events']             = $this->getEvents($id, $page);
-        $data['mod_event_fields']   = is_array($data['mod_event_fields']) ? $data['mod_event_fields'] : array();
-        $data['descr_limit']        = !empty($data['mod_event_descr_limit']) ? $data['mod_event_descr_limit'] : null;
-        $data['date_now']           = strtotime('now');
-        $data['classes']            = implode(' ', apply_filters('Modularity/Module/Classes', array('box', 'box-panel'), $this->post_type, $this->args));
+        $data['pagesCount'] = $this->countPages($id);
+        $data['events'] = $this->getEvents($id, $page);
+        $data['mod_event_fields'] = isset($data['mod_event_fields']) && is_array($data['mod_event_fields']) ? $data['mod_event_fields'] : array();
+        $data['descr_limit'] = !empty($data['mod_event_descr_limit']) ? $data['mod_event_descr_limit'] : null;
+        $data['date_now'] = strtotime('now');
+        $data['classes'] = !empty($this->args) ? implode(' ', apply_filters('Modularity/Module/Classes', array('box', 'box-panel'), 'mod-event', $this->args)) : array();
 
         return $data;
     }
@@ -49,14 +44,7 @@ class Event extends \Modularity\Module
      */
     public function ajaxPagination()
     {
-        $template = new \Municipio\template;
-        $view = \Municipio\Helper\Template::locateTemplate('list.blade.php', array(EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/Event/views/partials'));
-        $view = $template->cleanViewPath($view);
-        $data = $this->data();
-
-        ob_start();
-        $template->render($view, $data);
-        echo ob_get_clean();
+        echo \EventManagerIntegration\Helper\RenderBlade::blade('partials/list', $this->data());
         wp_die();
     }
 
@@ -82,16 +70,16 @@ class Event extends \Modularity\Module
 
     /**
      * Get included Events
-     * @param  int    $module_id Module ID
-     * @param  int    $page      Pagination page number
-     * @param  bool   $useLimit  True = limit by setting, false = get all
+     * @param  int  $module_id Module ID
+     * @param  int  $page      Pagination page number
+     * @param  bool $useLimit  True = limit by setting, false = get all
      * @return array             Array with event objects
      */
     public function getEvents($module_id, $page = 1, $useLimit = true)
     {
         $fields = json_decode(json_encode(get_fields($module_id)));
         $display_limit = ($useLimit == true && isset($fields->mod_event_limit)) ? $fields->mod_event_limit : -1;
-        $days_ahead = isset($fields->mod_event_interval) ? $fields->mod_event_interval: 0;
+        $days_ahead = isset($fields->mod_event_interval) ? $fields->mod_event_interval : 0;
 
         // Set start and end date
         $start_date = date('Y-m-d H:i:s', strtotime("today midnight"));
@@ -99,30 +87,30 @@ class Event extends \Modularity\Module
 
         // Save categories, groups and tags IDs to array
         $taxonomies = array();
-        if (isset($fields->mod_event_categories_show) && $fields->mod_event_categories_show == false && isset($fields->mod_event_categories_list) && ! empty($fields->mod_event_categories_list)) {
+        if (isset($fields->mod_event_categories_show) && $fields->mod_event_categories_show == false && isset($fields->mod_event_categories_list) && !empty($fields->mod_event_categories_list)) {
             foreach ($fields->mod_event_categories_list as $v) {
                 $taxonomies[] = $v;
             }
         }
-        if (isset($fields->mod_event_groups_show) && $fields->mod_event_groups_show == false && isset($fields->mod_event_groups_list) && ! empty($fields->mod_event_groups_list)) {
+        if (isset($fields->mod_event_groups_show) && $fields->mod_event_groups_show == false && isset($fields->mod_event_groups_list) && !empty($fields->mod_event_groups_list)) {
             foreach ($fields->mod_event_groups_list as $v) {
                 $taxonomies[] = $v;
             }
         }
-        if (isset($fields->mod_event_tags_show) && $fields->mod_event_tags_show == false && isset($fields->mod_event_tags_list) && ! empty($fields->mod_event_tags_list)) {
+        if (isset($fields->mod_event_tags_show) && $fields->mod_event_tags_show == false && isset($fields->mod_event_tags_list) && !empty($fields->mod_event_tags_list)) {
             foreach ($fields->mod_event_tags_list as $v) {
                 $taxonomies[] = $v;
             }
         }
 
-        $taxonomies = (! empty($taxonomies)) ? $taxonomies : null;
-        $params = array('start_date'    => $start_date,
-                        'end_date'      => $end_date,
-                        'display_limit' => $display_limit,
-                        'taxonomies'    => $taxonomies,
-                        'location'      => (isset($fields->mod_event_geographic)) ? $fields->mod_event_geographic : null,
-                        'distance'      => (isset($fields->mod_event_distance)) ? $fields->mod_event_distance : null,
-                        );
+        $taxonomies = (!empty($taxonomies)) ? $taxonomies : null;
+        $params = array('start_date' => $start_date,
+            'end_date' => $end_date,
+            'display_limit' => $display_limit,
+            'taxonomies' => $taxonomies,
+            'location' => (isset($fields->mod_event_geographic)) ? $fields->mod_event_geographic : null,
+            'distance' => (isset($fields->mod_event_distance)) ? $fields->mod_event_distance : null,
+        );
 
         $events = \EventManagerIntegration\Helper\QueryEvents::getEventsByInterval($params, $page);
 
@@ -141,11 +129,10 @@ class Event extends \Modularity\Module
 
     /**
      * Available "magic" methods for modules:
-     * init()            What to do on initialization (if you must, use __construct with care, this will probably break stuff!!)
-     * data()            Use to send data to view (return array)
-     * style()           Enqueue style only when module is used on page
-     * script            Enqueue script only when module is used on page
-     * adminEnqueue()    Enqueue scripts for the module edit/add page in admin
-     * template()        Return the view template (blade) the module should use when displayed
+     * init()            What to do on initialization (if you must, use __construct with care, this will probably break
+     * stuff!!) data()            Use to send data to view (return array) style()           Enqueue style only when
+     * module is used on page script            Enqueue script only when module is used on page adminEnqueue()
+     * Enqueue scripts for the module edit/add page in admin template()        Return the view template (blade) the
+     * module should use when displayed
      */
 }

@@ -44,8 +44,6 @@ class App
         add_action('widgets_init', function () {
             register_widget('EventManagerIntegration\Widget\DisplayEvents');
         });
-
-        add_filter('Municipio/blade/view_paths', array($this, 'addTemplatePaths'));
     }
 
     /**
@@ -107,16 +105,6 @@ class App
         if ($googleApiKey = get_field('google_geocode_key', 'option')) {
             wp_enqueue_script('google-maps-api', '//maps.googleapis.com/maps/api/js?key=' . $googleApiKey . '', array(), '', true);
         }
-    }
-
-    /**
-     * Add searchable blade template paths
-     * @param array $array Template paths
-     */
-    public function addTemplatePaths($array)
-    {
-        $array[] = EVENTMANAGERINTEGRATION_PATH . 'source/php/Module';
-        return $array;
     }
 
     /**
