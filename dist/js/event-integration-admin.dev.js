@@ -81,7 +81,7 @@ EventManagerIntegration.Admin.DrawMap = (function ($) {
                 $(drawDiv).append('<button class="button" id="clear-draw-map">' + eventIntegrationAdmin.clearMap + '</button>');
                 $(drawDiv).append('<div id="draw-map-area"></div>');
 
-                if (typeof google === 'object' && typeof google.maps === 'object' && pagenow === 'event_page_acf-options-options') {
+                if (typeof google === 'object' && typeof google.maps === 'object' && pagenow === 'event_page_event-options') {
                     this.init();
                     this.handleEvents();
                 }

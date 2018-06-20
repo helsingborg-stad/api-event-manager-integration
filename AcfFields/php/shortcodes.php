@@ -158,7 +158,7 @@
             0 => array(
                 'param' => 'options_page',
                 'operator' => '==',
-                'value' => 'acf-options-options',
+                'value' => 'event-options',
             ),
         ),
     ),
