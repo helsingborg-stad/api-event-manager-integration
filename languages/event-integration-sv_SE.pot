@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2018-06-19 16:45+0200\n"
+"POT-Creation-Date: 2018-06-20 12:49+0200\n"
 "PO-Revision-Date: 2016-12-13 15:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -91,7 +91,7 @@ msgstr ""
 #: source/php/Module/Event/views/partials/list.blade.php:37
 #: source/php/Module/Location/Location.php:12
 #: source/php/Shortcodes/SingleEvent.php:93
-#: source/php/Shortcodes/SingleEvent.php:230 views/submit-form.blade.php:172
+#: source/php/Shortcodes/SingleEvent.php:230 views/submit-form.blade.php:171
 msgid "Location"
 msgstr ""
 
@@ -138,7 +138,7 @@ msgid "Show events from the selected groups."
 msgstr ""
 
 #: AcfFields/php/event-module.php:269 source/php/PostTypes/Events.php:228
-#: source/php/Shortcodes/SingleEvent.php:537 views/submit-form.blade.php:180
+#: source/php/Shortcodes/SingleEvent.php:537 views/submit-form.blade.php:179
 msgid "Categories"
 msgstr ""
 
@@ -529,28 +529,27 @@ msgctxt "Event Manager Integration settings"
 msgid "Options"
 msgstr ""
 
-#: source/php/App.php:67 views/submit-form.blade.php:167
-#: views/submit-form.blade.php:175 views/submit-form.blade.php:183
-msgid "Loading"
-msgstr ""
-
-#: source/php/App.php:68
+#: source/php/Admin/Options.php:33
 msgid "Clear map"
 msgstr ""
 
-#: source/php/App.php:98
-msgid "Something went wrong, please try again later."
-msgstr ""
-
-#: source/php/App.php:99
-msgid "The email addresses does not match."
+#: source/php/App.php:67 views/submit-form.blade.php:182
+msgid "Loading"
 msgstr ""
 
 #: source/php/App.php:100
+msgid "Something went wrong, please try again later."
+msgstr ""
+
+#: source/php/App.php:101
+msgid "The email addresses does not match."
+msgstr ""
+
+#: source/php/App.php:102
 msgid "You must upload an image."
 msgstr ""
 
-#: source/php/App.php:130
+#: source/php/App.php:132
 msgid "to"
 msgstr ""
 
@@ -943,11 +942,11 @@ msgstr ""
 msgid "Import events"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:375
+#: source/php/PostTypes/Events.php:373
 msgid "Something went wrong!"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:392
+#: source/php/PostTypes/Events.php:390
 msgid "Error"
 msgstr ""
 
@@ -1299,77 +1298,85 @@ msgstr ""
 
 #: views/submit-form.blade.php:165
 msgid ""
-"Choose from existing organizers in the list. If your business is not "
+"Type name of organizer, select from suggestions. If your business is not "
 "available, please add an organizer to the description."
 msgstr ""
 
-#: views/submit-form.blade.php:173
+#: views/submit-form.blade.php:166
+msgid "Type-organizer"
+msgstr ""
+
+#: views/submit-form.blade.php:172
 msgid ""
-"Choose from existing locations in the list. If the location is not "
+"Type location name and select from suggestions. If the location is not "
 "available, please add an address in the description."
 msgstr ""
 
-#: views/submit-form.blade.php:181
+#: views/submit-form.blade.php:173
+msgid "Type-location"
+msgstr ""
+
+#: views/submit-form.blade.php:180
 msgid ""
 "Select appropriate categories for your event or activity. To select multiple "
 "categories, press Ctrl (Windows) / command (macOS) at the same time as you "
 "click on the categories."
 msgstr ""
 
-#: views/submit-form.blade.php:189 views/submit-form.blade.php:198
-#: views/submit-form.blade.php:211
+#: views/submit-form.blade.php:188 views/submit-form.blade.php:197
+#: views/submit-form.blade.php:210
 msgid "Upload an image"
 msgstr ""
 
-#: views/submit-form.blade.php:192
+#: views/submit-form.blade.php:191
 msgid "Keep in mind that the image may be cropped, so avoid text in the image."
 msgstr ""
 
-#: views/submit-form.blade.php:193
+#: views/submit-form.blade.php:192
 msgid "Images with identifiable persons are not accepted and will be replaced."
 msgstr ""
 
-#: views/submit-form.blade.php:194
+#: views/submit-form.blade.php:193
 msgid "You must also have the right to use and distribute the image."
 msgstr ""
 
-#: views/submit-form.blade.php:202
+#: views/submit-form.blade.php:201
 msgid "Before you can upload an image, you need to confirm the following terms"
 msgstr ""
 
-#: views/submit-form.blade.php:204
+#: views/submit-form.blade.php:203
 msgid "I have the right to use this image to promote this event."
 msgstr ""
 
-#: views/submit-form.blade.php:207
+#: views/submit-form.blade.php:206
 msgid "There are no identifiable persons on the image/images."
 msgstr ""
 
-#: views/submit-form.blade.php:216
+#: views/submit-form.blade.php:215
 msgid "Contact details"
 msgstr ""
 
-#: views/submit-form.blade.php:217
+#: views/submit-form.blade.php:216
 msgid "Enter your contact details below for eventual questions."
 msgstr ""
 
-#: views/submit-form.blade.php:220 views/submit-form.blade.php:221
+#: views/submit-form.blade.php:219 views/submit-form.blade.php:220
 msgid "Email"
 msgstr ""
 
-#: views/submit-form.blade.php:224 views/submit-form.blade.php:225
+#: views/submit-form.blade.php:223 views/submit-form.blade.php:224
 msgid "Repeat email"
 msgstr ""
 
-#: views/submit-form.blade.php:228 views/submit-form.blade.php:229
+#: views/submit-form.blade.php:227 views/submit-form.blade.php:228
 msgid "Phone number"
 msgstr ""
 
-#: views/submit-form.blade.php:233
+#: views/submit-form.blade.php:232
 msgid "Done? Click here to submit your event for review."
 msgstr ""
 
-#: views/submit-form.blade.php:243
+#: views/submit-form.blade.php:242
 msgid "Send"
 msgstr ""
 
