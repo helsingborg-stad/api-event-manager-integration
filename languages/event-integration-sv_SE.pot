@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2018-05-29 16:46+0200\n"
+"POT-Creation-Date: 2018-06-19 16:45+0200\n"
 "PO-Revision-Date: 2016-12-13 15:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.7\n"
+"X-Generator: Poedit 2.0.8\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: event-manager-integration.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -183,7 +183,7 @@ msgstr ""
 msgid "Show events that occurs at a specified location."
 msgstr ""
 
-#: AcfFields/php/event-module.php:403 AcfFields/php/options.php:237
+#: AcfFields/php/event-module.php:403 AcfFields/php/options.php:310
 msgid "Distance from location"
 msgstr ""
 
@@ -259,113 +259,135 @@ msgstr ""
 msgid "Enable daily automatic import from Event Manager API"
 msgstr ""
 
-#: AcfFields/php/options.php:63
+#: AcfFields/php/options.php:66
 msgid "Post status"
 msgstr ""
 
-#: AcfFields/php/options.php:66
+#: AcfFields/php/options.php:69
 msgid "Select status of imported events."
 msgstr ""
 
-#: AcfFields/php/options.php:75
+#: AcfFields/php/options.php:78
 msgid "Draft"
 msgstr ""
 
-#: AcfFields/php/options.php:76
+#: AcfFields/php/options.php:79
 msgid "Published"
 msgstr ""
 
-#: AcfFields/php/options.php:87
+#: AcfFields/php/options.php:90
 msgid "Unpublish long lasting events"
 msgstr ""
 
-#: AcfFields/php/options.php:90
+#: AcfFields/php/options.php:93
 msgid ""
 "Automatically unpublish events lasting longer than given limit. Set to -1 to "
 "set no limit."
 msgstr ""
 
-#: AcfFields/php/options.php:108
-msgid "Import from selected user groups"
+#: AcfFields/php/options.php:111
+msgid "Google Maps JavaScript API key"
 msgstr ""
 
-#: AcfFields/php/options.php:111
-msgid ""
-"Select the user groups that you want to import events from. Leave empty to "
-"import from all groups."
+#: AcfFields/php/options.php:114
+msgid "Needed to display Google maps."
 msgstr ""
 
 #: AcfFields/php/options.php:130
-msgid "Import from selected categories"
-msgstr ""
-
-#: AcfFields/php/options.php:133
-msgid ""
-"Enter the name of the categories that you want to import events from. "
-"Separate with commas. Leave blank to import from all categories."
-msgstr ""
-
-#: AcfFields/php/options.php:149
-msgid "Import from selected tags"
-msgstr ""
-
-#: AcfFields/php/options.php:152
-msgid ""
-"Enter the name of the tags that you want to import events from. Separate "
-"with commas. Leave blank to import from all tags."
-msgstr ""
-
-#: AcfFields/php/options.php:168
 msgid "Show update button on edit event page"
 msgstr ""
 
-#: AcfFields/php/options.php:179
+#: AcfFields/php/options.php:141
 msgid "Show update button"
 msgstr ""
 
-#: AcfFields/php/options.php:184
+#: AcfFields/php/options.php:149
 msgid "OAuth1 end point root url"
 msgstr ""
 
-#: AcfFields/php/options.php:187
+#: AcfFields/php/options.php:152
 msgid ""
 "Url can be found under section \"authentication\" in your API root.<br> E.g. "
 "https://host/oauth1<br> <br> Authorization is only needed when you want to "
 "post data to the API."
 msgstr ""
 
-#: AcfFields/php/options.php:200
-msgid "Google Maps JavaScript API key"
+#: AcfFields/php/options.php:165
+msgid "Import filters"
 msgstr ""
 
-#: AcfFields/php/options.php:219
-msgid "Import from location"
+#: AcfFields/php/options.php:182
+msgid "Import from selected user groups"
 msgstr ""
 
-#: AcfFields/php/options.php:222
+#: AcfFields/php/options.php:185
+msgid ""
+"Select the user groups that you want to import events from. Leave empty to "
+"import from all groups."
+msgstr ""
+
+#: AcfFields/php/options.php:204
+msgid "Import from selected categories"
+msgstr ""
+
+#: AcfFields/php/options.php:207
+msgid ""
+"Enter the name of the categories that you want to import events from. "
+"Separate with commas. Leave blank to import from all categories."
+msgstr ""
+
+#: AcfFields/php/options.php:223
+msgid "Import from selected tags"
+msgstr ""
+
+#: AcfFields/php/options.php:226
+msgid ""
+"Enter the name of the tags that you want to import events from. Separate "
+"with commas. Leave blank to import from all tags."
+msgstr ""
+
+#: AcfFields/php/options.php:242
+msgid "Import internal events"
+msgstr ""
+
+#: AcfFields/php/options.php:245
+msgid "Select if only internal (organization) events should be imported."
+msgstr ""
+
+#: AcfFields/php/options.php:261
+msgid "Import from geographic location"
+msgstr ""
+
+#: AcfFields/php/options.php:273
+msgid "No"
+msgstr ""
+
+#: AcfFields/php/options.php:274
+msgid "Single point"
+msgstr ""
+
+#: AcfFields/php/options.php:275 AcfFields/php/options.php:339
+msgid "Drawn area"
+msgstr ""
+
+#: AcfFields/php/options.php:284
+msgid "From a single point"
+msgstr ""
+
+#: AcfFields/php/options.php:287
 msgid "Import events that occurs at a specified location."
 msgstr ""
 
-#: AcfFields/php/options.php:240
+#: AcfFields/php/options.php:313
 msgid ""
 "To get events occurring nearby the given location, enter maximum distance in "
 "km. Leave blank to only get events from the exact position."
 msgstr ""
 
-#: AcfFields/php/options.php:258
-msgid "Internal events"
-msgstr ""
-
-#: AcfFields/php/options.php:261
-msgid "Import only internal events?"
-msgstr ""
-
-#: AcfFields/php/options.php:270
-msgid "Internal"
-msgstr ""
-
-#: AcfFields/php/options.php:271 source/php/PostTypes/Events.php:50
-msgid "Public"
+#: AcfFields/php/options.php:358
+msgid ""
+"Import events that occurs inside the drawn area. Draw the area by clicking "
+"each point on the map. Maximum number of points is 8."
 msgstr ""
 
 #: AcfFields/php/shortcodes.php:6
@@ -459,7 +481,7 @@ msgid ""
 "shortcode [gallery] to display the images."
 msgstr ""
 
-#: source/php/Acf/AcfConfig.php:25
+#: source/php/Acf/AcfConfig.php:22
 msgid ""
 "To get the full expirience of the <strong>Event Manager Integration</strong> "
 "plugin, please activate the <a href=\"http://www.advancedcustomfields.com/"
@@ -512,19 +534,23 @@ msgstr ""
 msgid "Loading"
 msgstr ""
 
-#: source/php/App.php:89
+#: source/php/App.php:68
+msgid "Clear map"
+msgstr ""
+
+#: source/php/App.php:98
 msgid "Something went wrong, please try again later."
 msgstr ""
 
-#: source/php/App.php:90
+#: source/php/App.php:99
 msgid "The email addresses does not match."
 msgstr ""
 
-#: source/php/App.php:91
+#: source/php/App.php:100
 msgid "You must upload an image."
 msgstr ""
 
-#: source/php/App.php:120
+#: source/php/App.php:130
 msgid "to"
 msgstr ""
 
@@ -751,6 +777,10 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
+#: source/php/PostTypes/Events.php:50
+msgid "Public"
+msgstr ""
+
 #: source/php/PostTypes/Events.php:60
 msgid "Accept"
 msgstr ""
@@ -913,11 +943,11 @@ msgstr ""
 msgid "Import events"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:404
+#: source/php/PostTypes/Events.php:375
 msgid "Something went wrong!"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:421
+#: source/php/PostTypes/Events.php:392
 msgid "Error"
 msgstr ""
 

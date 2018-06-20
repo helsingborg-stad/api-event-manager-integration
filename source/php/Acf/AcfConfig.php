@@ -8,9 +8,6 @@ class AcfConfig
     {
         add_action('init', array($this, 'includeAcf'), 11);
         add_action('acf/init', array($this, 'acfSettings'));
-        //Remove jsonLoadPath when loading acf with php
-        //add_filter('acf/settings/load_json', array($this, 'jsonLoadPath'), 1);
-        //add_filter('acf/translate_field', array($this, 'acfTranslationFilter'));
     }
 
     /**
@@ -28,12 +25,6 @@ class AcfConfig
         }
     }
 
-    public function jsonLoadPath($paths)
-    {
-        $paths[] = EVENTMANAGERINTEGRATION_PATH . 'AcfFields/json';
-        return $paths;
-    }
-
     /**
      * ACF settings action
      * @return void
@@ -41,27 +32,9 @@ class AcfConfig
     public function acfSettings()
     {
         acf_update_setting('google_api_key', get_field('google_geocode_key', 'option'));
-    }
-
-    /**
-     * ACF filter to translate specific fields when exporting to PHP
-     * @param  array fields to be translated
-     * @return array updated fields list
-     */
-    public function acfTranslationFilter($field)
-    {
-        if ($field['type'] == 'text' || $field['type'] == 'number') {
-            $field['append'] = acf_translate($field['append']);
-            $field['placeholder'] = acf_translate($field['placeholder']);
+        // Disable loading Google Maps JS API with ACFs since we include it manually with additional libraries
+        if (is_admin() && isset($_GET['page']) && $_GET['page'] === 'event-options') {
+            acf_update_setting('enqueue_google_maps', false);
         }
-
-        if ($field['type'] == 'textarea') {
-            $field['placeholder'] = acf_translate($field['placeholder']);
-        }
-
-        if ($field['type'] == 'repeater') {
-            $field['button_label'] = acf_translate($field['button_label']);
-        }
-        return $field;
     }
 }

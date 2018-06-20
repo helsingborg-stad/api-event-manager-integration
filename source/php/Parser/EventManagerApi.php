@@ -27,7 +27,6 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         $events = \EventManagerIntegration\Parser::requestApi($this->url);
 
         // Remove duplicates and save to database
-        //$events_unique = $this->uniqueArray($events, 'id');
         if ($events) {
             foreach ($events as $event) {
                 $this->saveEvent($event);
@@ -97,18 +96,8 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         $contact_phone                  = !empty($event['contact_phone']) ? $event['contact_phone'] : null;
         $contact_email                  = !empty($event['contact_email']) ? $event['contact_email'] : null;
 
+        // Check if event passes taxonomy filters
         $pass_tax_filter = $this->checkFilters($this->filterTaxonomies($categories, 0), $this->filterTaxonomies($tags, 1));
-        $passes = true;
-
-        // Check if event passes "group" filter and taxonomy filters
-        if (! empty(get_field('event_filter_group', 'options'))) {
-           $passes = $this->filterGroups($groups);
-            if ($passes) {
-                $passes = $pass_tax_filter;
-            }
-        } else {
-            $passes = $pass_tax_filter;
-        }
 
         // Check if event already exist and get the post status
         $event_id = $this->checkIfEventExists($event['id']);
@@ -128,7 +117,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         }
 
         // Save event if it passed taxonomy and group filters
-        if ($passes) {
+        if ($pass_tax_filter) {
             try {
                 $event = new Event(
                     array(
@@ -222,28 +211,6 @@ class EventManagerApi extends \EventManagerIntegration\Parser
     }
 
     /**
-     * Sort out duplicate events.
-     * @param  array $array array to be unique
-     * @param  string $key  unique key
-     * @return array
-     */
-    public function uniqueArray($array, $key)
-    {
-        $temp_array = array();
-        $i = 0;
-        $key_array = array();
-
-        foreach ($array as $val) {
-            if (!in_array($val[$key], $key_array)) {
-                $key_array[$i] = $val[$key];
-                $temp_array[$i] = $val;
-            }
-            $i++;
-        }
-        return $temp_array;
-    }
-
-    /**
      * Remove expired occasions from databse
      * @return void
      */
@@ -320,34 +287,6 @@ class EventManagerApi extends \EventManagerIntegration\Parser
 
             foreach ($filters as $filter) {
                 if (in_array(strtolower($filter), $taxLower)) {
-                    $passes = true;
-                }
-            }
-        }
-
-        return $passes;
-    }
-
-    /**
-     * Filter by groups, if add or not to add
-     * @param  array $groups Event groups
-     * @return bool
-     */
-    public function filterGroups($groups)
-    {
-        $passes = true;
-        $filter_array = get_field('event_filter_group', 'options');
-
-        if (! empty($filter_array)) {
-            $passes = false;
-
-            // Save group slug as new array
-            foreach ($groups as &$group) {
-                $group = $group['slug'];
-            }
-
-            foreach ($filter_array as $filter) {
-                if (in_array($filter->slug, $groups)) {
                     $passes = true;
                 }
             }
