@@ -7,19 +7,10 @@ EventManagerIntegration.Admin.DrawMap = (function ($) {
 
         var drawingManager,
             drawnPolygon,
-            drawDiv,
             savedPoints = eventIntegrationAdmin.options.areaCoordinates;
 
         function DrawMap() {
             $(function () {
-                drawDiv = document.getElementById('draw-map-container');
-                if (!drawDiv) {
-                    return;
-                }
-
-                $(drawDiv).append('<button class="button" id="clear-draw-map">' + eventIntegrationAdmin.clearMap + '</button>');
-                $(drawDiv).append('<div id="draw-map-area"></div>');
-
                 if (typeof google === 'object' && typeof google.maps === 'object' && pagenow === 'event_page_event-options') {
                     this.init();
                     this.handleEvents();
