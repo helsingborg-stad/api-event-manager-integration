@@ -22,9 +22,9 @@ class Event extends \Modularity\Module
 
     public function template()
     {
-        $template = (isset($this->data['mod_event_display'])) ? $this->data['mod_event_display'] : 'list';
+        $template = $this->data['mod_event_display'] ?? 'list';
         $this->getTemplateData($template);
-        return apply_filters('EventManagerIntegration/Module/Template', 'event-' . $this->data['mod_event_display'] . '.blade.php', $this,
+        return apply_filters('EventManagerIntegration/Module/Template', 'event-' . $template . '.blade.php', $this,
             $this->data);
     }
 
