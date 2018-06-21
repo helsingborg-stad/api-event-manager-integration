@@ -20,6 +20,28 @@ class Event extends \Modularity\Module
         add_action('wp_ajax_ajax_pagination', array($this, 'ajaxPagination'));
     }
 
+    public function template()
+    {
+        $template = (isset($this->data['mod_event_display'])) ? $this->data['mod_event_display'] : 'list';
+        $this->getTemplateData($template);
+        return apply_filters('EventManagerIntegration/Module/Template', 'event-' . $this->data['mod_event_display'] . '.blade.php', $this,
+            $this->data);
+    }
+
+    public function getTemplateData($template)
+    {
+        $template = explode('-', $template);
+        $template = array_map('ucwords', $template);
+        $template = implode('', $template);
+        $class = '\EventManagerIntegration\Module\Event\TemplateController\\' . $template . 'Template';
+
+        if (class_exists($class)) {
+            $controller = new $class($this, $this->args, $this->data);
+            $this->data = array_merge($this->data, $controller->data);
+        }
+
+    }
+
     public function data(): array
     {
         if (get_option('timezone_string')) {

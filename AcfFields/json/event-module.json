@@ -3,6 +3,67 @@
     "title": "Display events",
     "fields": [
         {
+            "key": "field_5b2ace4dc65a8",
+            "label": "Show as",
+            "name": "mod_event_display",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "list": "Lista",
+                "index": "Index"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "save_other_choice": 0,
+            "default_value": "list",
+            "layout": "horizontal",
+            "return_format": "value"
+        },
+        {
+            "key": "field_5b2ad8bc7cf90",
+            "label": "Columns",
+            "name": "mod_event_columns",
+            "type": "select",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b2ace4dc65a8",
+                        "operator": "==",
+                        "value": "index"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "1": "One Column",
+                "2": "Two column",
+                "3": "Three column",
+                "4": "Four column"
+            },
+            "default_value": [
+                3
+            ],
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "ajax": 0,
+            "return_format": "value",
+            "placeholder": ""
+        },
+        {
             "key": "field_583fe58262287",
             "label": "Number of events to show",
             "name": "mod_event_limit",
@@ -30,14 +91,25 @@
             "type": "true_false",
             "instructions": "Display pagination buttons below the event list.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b2ace4dc65a8",
+                        "operator": "==",
+                        "value": "list"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "33",
                 "class": "",
                 "id": ""
             },
             "message": "Show pagination",
-            "default_value": 1
+            "default_value": 1,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         {
             "key": "field_58e6370d4f34c",
@@ -53,7 +125,10 @@
                 "id": ""
             },
             "message": "Show link",
-            "default_value": 0
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         {
             "key": "field_591af4eeb1561",
@@ -68,6 +143,11 @@
                         "field": "field_584ec8318df1d",
                         "operator": "==",
                         "value": "1"
+                    },
+                    {
+                        "field": "field_5b2ace4dc65a8",
+                        "operator": "==",
+                        "value": "list"
                     }
                 ]
             ],
@@ -97,6 +177,11 @@
                         "field": "field_584ec8318df1d",
                         "operator": "==",
                         "value": "1"
+                    },
+                    {
+                        "field": "field_5b2ace4dc65a8",
+                        "operator": "==",
+                        "value": "list"
                     }
                 ]
             ],
@@ -106,7 +191,10 @@
                 "id": ""
             },
             "message": "Show previous and next page arrows on pagination",
-            "default_value": 1
+            "default_value": 1,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         {
             "key": "field_583ffd8d10925",
@@ -151,7 +239,50 @@
             "default_value": [],
             "layout": "vertical",
             "toggle": 1,
-            "return_format": "value"
+            "return_format": "value",
+            "allow_custom": 0,
+            "save_custom": 0
+        },
+        {
+            "key": "field_5b2ae170ae36f",
+            "label": "Image ratio",
+            "name": "mod_event_image_ratio",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b2ace4dc65a8",
+                        "operator": "==",
+                        "value": "index"
+                    },
+                    {
+                        "field": "field_583fefb6634a1",
+                        "operator": "==",
+                        "value": "image"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "1-1": "Square (1:1)",
+                "16-9": "Standard Video (16:9)",
+                "4-3": "Standard TV (4:3)"
+            },
+            "default_value": [
+                "1-1"
+            ],
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "ajax": 0,
+            "return_format": "value",
+            "placeholder": ""
         },
         {
             "key": "field_58de5b2d62d45",
@@ -166,6 +297,11 @@
                         "field": "field_583fefb6634a1",
                         "operator": "==",
                         "value": "occasion"
+                    },
+                    {
+                        "field": "field_5b2ace4dc65a8",
+                        "operator": "==",
+                        "value": "list"
                     }
                 ]
             ],
@@ -228,7 +364,10 @@
                 "id": ""
             },
             "message": "Show events from all groups",
-            "default_value": 1
+            "default_value": 1,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         {
             "key": "field_586cf5d0d3687",
@@ -274,7 +413,10 @@
                 "id": ""
             },
             "message": "Show events from all categories",
-            "default_value": 1
+            "default_value": 1,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         {
             "key": "field_5845578c5f0a0",
@@ -320,7 +462,10 @@
                 "id": ""
             },
             "message": "Show events from all tags",
-            "default_value": 1
+            "default_value": 1,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
         },
         {
             "key": "field_58458b57dde04",
@@ -432,7 +577,6 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": 1,
-    "description": "",
-    "local": "php"
+    "description": ""
 }]
 
