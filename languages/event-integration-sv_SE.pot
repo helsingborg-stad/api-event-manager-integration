@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2018-06-20 12:49+0200\n"
+"POT-Creation-Date: 2018-06-27 16:54+0200\n"
 "PO-Revision-Date: 2016-12-13 15:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -20,174 +20,226 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
+#: AcfFields/php/event-module.php:6
+msgid "Display events"
+msgstr ""
+
 #: AcfFields/php/event-module.php:10
-msgid "Number of events to show"
+msgid "Show as"
 msgstr ""
 
-#: AcfFields/php/event-module.php:13
-msgid "Set to -1 to show all."
+#: AcfFields/php/event-module.php:22
+msgid "Lista"
 msgstr ""
 
-#: AcfFields/php/event-module.php:31 AcfFields/php/event-module.php:42
-msgid "Show pagination"
+#: AcfFields/php/event-module.php:23
+msgid "Index"
 msgstr ""
 
 #: AcfFields/php/event-module.php:34
+msgid "Columns"
+msgstr ""
+
+#: AcfFields/php/event-module.php:54
+msgid "One Column"
+msgstr ""
+
+#: AcfFields/php/event-module.php:55
+msgid "Two column"
+msgstr ""
+
+#: AcfFields/php/event-module.php:56
+msgid "Three column"
+msgstr ""
+
+#: AcfFields/php/event-module.php:57
+msgid "Four column"
+msgstr ""
+
+#: AcfFields/php/event-module.php:71
+msgid "Number of events to show"
+msgstr ""
+
+#: AcfFields/php/event-module.php:74
+msgid "Set to -1 to show all."
+msgstr ""
+
+#: AcfFields/php/event-module.php:92 AcfFields/php/event-module.php:111
+msgid "Show pagination"
+msgstr ""
+
+#: AcfFields/php/event-module.php:95
 msgid "Display pagination buttons below the event list."
 msgstr ""
 
-#: AcfFields/php/event-module.php:47
+#: AcfFields/php/event-module.php:119
 msgid "Archive link"
 msgstr ""
 
-#: AcfFields/php/event-module.php:50
+#: AcfFields/php/event-module.php:122
 msgid "Show link to event archive page."
 msgstr ""
 
-#: AcfFields/php/event-module.php:58
+#: AcfFields/php/event-module.php:130
 msgid "Show link"
 msgstr ""
 
-#: AcfFields/php/event-module.php:63
+#: AcfFields/php/event-module.php:138
 msgid "Pagination button limit"
 msgstr ""
 
-#: AcfFields/php/event-module.php:66
+#: AcfFields/php/event-module.php:141
 msgid "Limit number of pagination buttons. -1 to show all."
 msgstr ""
 
-#: AcfFields/php/event-module.php:92
+#: AcfFields/php/event-module.php:172
 msgid "Show pagination arrows"
 msgstr ""
 
-#: AcfFields/php/event-module.php:111
+#: AcfFields/php/event-module.php:196
 msgid "Show previous and next page arrows on pagination"
 msgstr ""
 
-#: AcfFields/php/event-module.php:116
+#: AcfFields/php/event-module.php:204
 msgid "Days interval"
 msgstr ""
 
-#: AcfFields/php/event-module.php:119
+#: AcfFields/php/event-module.php:207
 msgid "Include events from today to the given number of days."
 msgstr ""
 
-#: AcfFields/php/event-module.php:137
+#: AcfFields/php/event-module.php:225
 msgid "Fields"
 msgstr ""
 
-#: AcfFields/php/event-module.php:149 source/php/PostTypes/Events.php:43
-#: source/php/Shortcodes/SingleEvent.php:294
+#: AcfFields/php/event-module.php:237 source/php/PostTypes/Events.php:43
+#: source/php/Shortcodes/SingleEvent.php:301
 msgid "Occasion"
 msgstr ""
 
-#: AcfFields/php/event-module.php:150
+#: AcfFields/php/event-module.php:238
 msgid "Image"
 msgstr ""
 
-#: AcfFields/php/event-module.php:151 AcfFields/php/event-module.php:385
+#: AcfFields/php/event-module.php:239 AcfFields/php/event-module.php:530
 #: AcfFields/php/location-module.php:6 AcfFields/php/shortcodes.php:57
 #: source/php/Admin/AdminDisplayEvent.php:146
-#: source/php/Module/Event/views/partials/list.blade.php:37
 #: source/php/Module/Location/Location.php:12
 #: source/php/Shortcodes/SingleEvent.php:93
-#: source/php/Shortcodes/SingleEvent.php:230 views/submit-form.blade.php:171
+#: source/php/Shortcodes/SingleEvent.php:230 views/partials/list.blade.php:37
+#: views/submit-form.blade.php:171 views/submit-form.blade.php:173
 msgid "Location"
 msgstr ""
 
-#: AcfFields/php/event-module.php:152 views/submit-form.blade.php:12
+#: AcfFields/php/event-module.php:240 views/submit-form.blade.php:12
 #: views/submit-form.blade.php:20
 msgid "Description"
 msgstr ""
 
-#: AcfFields/php/event-module.php:162
+#: AcfFields/php/event-module.php:252
+msgid "Image ratio"
+msgstr ""
+
+#: AcfFields/php/event-module.php:277
+msgid "Square (1:1)"
+msgstr ""
+
+#: AcfFields/php/event-module.php:278
+msgid "Standard Video (16:9)"
+msgstr ""
+
+#: AcfFields/php/event-module.php:279
+msgid "Standard TV (4:3)"
+msgstr ""
+
+#: AcfFields/php/event-module.php:293
 msgid "Occasion position"
 msgstr ""
 
-#: AcfFields/php/event-module.php:182
+#: AcfFields/php/event-module.php:318
 msgid "Below title"
 msgstr ""
 
-#: AcfFields/php/event-module.php:183
+#: AcfFields/php/event-module.php:319
 msgid "Left column"
 msgstr ""
 
-#: AcfFields/php/event-module.php:194
+#: AcfFields/php/event-module.php:330
 msgid "Description letter limit"
 msgstr ""
 
-#: AcfFields/php/event-module.php:197
+#: AcfFields/php/event-module.php:333
 msgid "Set to -1 to show the whole description."
 msgstr ""
 
-#: AcfFields/php/event-module.php:223 source/php/PostTypes/Events.php:302
-#: source/php/Shortcodes/SingleEvent.php:531
+#: AcfFields/php/event-module.php:359 source/php/PostTypes/Events.php:302
+#: source/php/Shortcodes/SingleEvent.php:541
 msgid "Groups"
 msgstr ""
 
-#: AcfFields/php/event-module.php:234
+#: AcfFields/php/event-module.php:370
 msgid "Show events from all groups"
 msgstr ""
 
-#: AcfFields/php/event-module.php:239
+#: AcfFields/php/event-module.php:378
 msgid "Select groups"
 msgstr ""
 
-#: AcfFields/php/event-module.php:242
+#: AcfFields/php/event-module.php:381
 msgid "Show events from the selected groups."
 msgstr ""
 
-#: AcfFields/php/event-module.php:269 source/php/PostTypes/Events.php:228
-#: source/php/Shortcodes/SingleEvent.php:537 views/submit-form.blade.php:179
+#: AcfFields/php/event-module.php:408 source/php/PostTypes/Events.php:228
+#: source/php/Shortcodes/SingleEvent.php:547 views/submit-form.blade.php:179
 msgid "Categories"
 msgstr ""
 
-#: AcfFields/php/event-module.php:280
+#: AcfFields/php/event-module.php:419
 msgid "Show events from all categories"
 msgstr ""
 
-#: AcfFields/php/event-module.php:285
+#: AcfFields/php/event-module.php:427
 msgid "Select categories"
 msgstr ""
 
-#: AcfFields/php/event-module.php:288
+#: AcfFields/php/event-module.php:430
 msgid "Show events from the selected categories."
 msgstr ""
 
-#: AcfFields/php/event-module.php:315 source/php/PostTypes/Events.php:265
-#: source/php/Shortcodes/SingleEvent.php:543
+#: AcfFields/php/event-module.php:457 source/php/PostTypes/Events.php:265
+#: source/php/Shortcodes/SingleEvent.php:553
 msgid "Tags"
 msgstr ""
 
-#: AcfFields/php/event-module.php:326
+#: AcfFields/php/event-module.php:468
 msgid "Show events from all tags"
 msgstr ""
 
-#: AcfFields/php/event-module.php:331
+#: AcfFields/php/event-module.php:476
 msgid "Select tags"
 msgstr ""
 
-#: AcfFields/php/event-module.php:334
+#: AcfFields/php/event-module.php:479
 msgid "Show events from the selected tags."
 msgstr ""
 
-#: AcfFields/php/event-module.php:361
+#: AcfFields/php/event-module.php:506
 msgid "Default image"
 msgstr ""
 
-#: AcfFields/php/event-module.php:364
+#: AcfFields/php/event-module.php:509
 msgid "Will display if event image is missing."
 msgstr ""
 
-#: AcfFields/php/event-module.php:388
+#: AcfFields/php/event-module.php:533
 msgid "Show events that occurs at a specified location."
 msgstr ""
 
-#: AcfFields/php/event-module.php:403 AcfFields/php/options.php:310
+#: AcfFields/php/event-module.php:548 AcfFields/php/options.php:310
 msgid "Distance from location"
 msgstr ""
 
-#: AcfFields/php/event-module.php:406
+#: AcfFields/php/event-module.php:551
 msgid ""
 "To show events occurring nearby the given location, enter maximum distance "
 "in km. Leave blank to only show events from the exact position."
@@ -427,7 +479,7 @@ msgstr ""
 msgid "Additional locations"
 msgstr ""
 
-#: AcfFields/php/shortcodes.php:60 source/php/Shortcodes/SingleEvent.php:476
+#: AcfFields/php/shortcodes.php:60 source/php/Shortcodes/SingleEvent.php:483
 msgid "Sponsors"
 msgstr ""
 
@@ -508,6 +560,7 @@ msgstr ""
 #: source/php/Admin/AdminDisplayEvent.php:166
 #: source/php/Shortcodes/SingleEvent.php:137
 #: source/php/Shortcodes/SingleEvent.php:255 views/submit-form.blade.php:164
+#: views/submit-form.blade.php:166
 msgid "Organizer"
 msgstr ""
 
@@ -533,23 +586,23 @@ msgstr ""
 msgid "Clear map"
 msgstr ""
 
-#: source/php/App.php:67 views/submit-form.blade.php:182
+#: source/php/App.php:65 views/submit-form.blade.php:182
 msgid "Loading"
 msgstr ""
 
-#: source/php/App.php:100
+#: source/php/App.php:98
 msgid "Something went wrong, please try again later."
 msgstr ""
 
-#: source/php/App.php:101
+#: source/php/App.php:99
 msgid "The email addresses does not match."
 msgstr ""
 
-#: source/php/App.php:102
+#: source/php/App.php:100
 msgid "You must upload an image."
 msgstr ""
 
-#: source/php/App.php:132
+#: source/php/App.php:120
 msgid "to"
 msgstr ""
 
@@ -608,25 +661,6 @@ msgstr ""
 
 #: source/php/Module/Event/Event.php:17
 msgid "Outputs a list if upcoming events"
-msgstr ""
-
-#: source/php/Module/Event/views/event.blade.php:18
-msgid "More events"
-msgstr ""
-
-#: source/php/Module/Event/views/partials/list.blade.php:3
-#: source/php/Widget/DisplayEvents.php:56
-msgid "No events found"
-msgstr ""
-
-#: source/php/Module/Event/views/partials/list.blade.php:11
-msgid "Today"
-msgstr ""
-
-#: source/php/Module/Event/views/partials/list.blade.php:33
-#: source/php/PostTypes/Events.php:63 views/submit-form.blade.php:44
-#: views/submit-form.blade.php:58
-msgid "Date"
 msgstr ""
 
 #: source/php/Module/Location/Location.php:13
@@ -786,6 +820,11 @@ msgstr ""
 
 #: source/php/PostTypes/Events.php:61
 msgid "Deny"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:63 views/partials/list.blade.php:33
+#: views/submit-form.blade.php:44 views/submit-form.blade.php:58
+msgid "Date"
 msgstr ""
 
 #: source/php/PostTypes/Events.php:215
@@ -955,133 +994,143 @@ msgstr ""
 msgid "Booking and tickets"
 msgstr ""
 
+#: source/php/Shortcodes/SingleEvent.php:295
+#: source/php/Shortcodes/SingleEvent.php:502
+msgid "Cancelled"
+msgstr ""
+
 #: source/php/Shortcodes/SingleEvent.php:296
+#: source/php/Shortcodes/SingleEvent.php:503
+msgid "Rescheduled"
+msgstr ""
+
+#: source/php/Shortcodes/SingleEvent.php:303
 msgid "Door time"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:309
+#: source/php/Shortcodes/SingleEvent.php:316
 msgid "Other links"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:317
+#: source/php/Shortcodes/SingleEvent.php:324
 msgid "Related events"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:348
+#: source/php/Shortcodes/SingleEvent.php:355
 msgid "Other locations"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:367
+#: source/php/Shortcodes/SingleEvent.php:374
 msgid "Book here"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:370
+#: source/php/Shortcodes/SingleEvent.php:377
 msgid "Adult"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:371
+#: source/php/Shortcodes/SingleEvent.php:378
 msgid "below"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:372
+#: source/php/Shortcodes/SingleEvent.php:379
 msgid "Children"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:373
+#: source/php/Shortcodes/SingleEvent.php:380
 msgid "above"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:374
+#: source/php/Shortcodes/SingleEvent.php:381
 msgid "Senior"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:375
+#: source/php/Shortcodes/SingleEvent.php:382
 msgid "Student"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:376
+#: source/php/Shortcodes/SingleEvent.php:383
 msgid "Age restriction"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:376
+#: source/php/Shortcodes/SingleEvent.php:383
 msgid "years"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:377
-#: source/php/Shortcodes/SingleEvent.php:420
-#: source/php/Shortcodes/SingleEvent.php:421
+#: source/php/Shortcodes/SingleEvent.php:384
+#: source/php/Shortcodes/SingleEvent.php:427
+#: source/php/Shortcodes/SingleEvent.php:428
 msgid "Ticket release date"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:378
+#: source/php/Shortcodes/SingleEvent.php:385
 msgid "Tickets remaining"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:381
+#: source/php/Shortcodes/SingleEvent.php:388
 msgid "Ticket types"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:388
+#: source/php/Shortcodes/SingleEvent.php:395
 msgid "Seated"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:391
+#: source/php/Shortcodes/SingleEvent.php:398
 msgid "Standing"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:395
+#: source/php/Shortcodes/SingleEvent.php:402
 msgid "Minimum price"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:396
+#: source/php/Shortcodes/SingleEvent.php:403
 msgid "Maximum price"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:404
+#: source/php/Shortcodes/SingleEvent.php:411
 msgid "Price range"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:406
+#: source/php/Shortcodes/SingleEvent.php:413
 msgid "Seated minimum price"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:407
+#: source/php/Shortcodes/SingleEvent.php:414
 msgid "Seated maximum price"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:408
+#: source/php/Shortcodes/SingleEvent.php:415
 msgid "Standing minimum price"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:409
+#: source/php/Shortcodes/SingleEvent.php:416
 msgid "Standing maximum price"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:415
+#: source/php/Shortcodes/SingleEvent.php:422
 msgid "Ticket retailers"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:429
+#: source/php/Shortcodes/SingleEvent.php:436
 msgid "Group prices"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:432
+#: source/php/Shortcodes/SingleEvent.php:439
 msgid "persons"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:438
+#: source/php/Shortcodes/SingleEvent.php:445
 msgid "Included in membership cards"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:445
+#: source/php/Shortcodes/SingleEvent.php:452
 msgid "Price information"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:446
+#: source/php/Shortcodes/SingleEvent.php:453
 msgid "Ticket includes"
 msgstr ""
 
-#: source/php/Shortcodes/SingleEvent.php:561
+#: source/php/Shortcodes/SingleEvent.php:571
 msgctxt "Free event entrance"
 msgid "Free"
 msgstr ""
@@ -1092,6 +1141,10 @@ msgstr ""
 
 #: source/php/Widget/DisplayEvents.php:31
 msgid "Recent Posts"
+msgstr ""
+
+#: source/php/Widget/DisplayEvents.php:56 views/partials/list.blade.php:3
+msgid "No events found"
 msgstr ""
 
 #: source/php/Widget/DisplayEvents.php:75
@@ -1142,6 +1195,14 @@ msgstr ""
 #: vendor/helsingborg-stad/acf-export-manager/src/AcfExportManager.php:406
 #, php-format
 msgid "Exported %d fieldgroup(s)."
+msgstr ""
+
+#: views/event-index.blade.php:20 views/event.blade.php:18
+msgid "More events"
+msgstr ""
+
+#: views/partials/list.blade.php:11
+msgid "Today"
 msgstr ""
 
 #: views/submit-form.blade.php:7 views/submit-form.blade.php:8
@@ -1302,18 +1363,10 @@ msgid ""
 "available, please add an organizer to the description."
 msgstr ""
 
-#: views/submit-form.blade.php:166
-msgid "Type-organizer"
-msgstr ""
-
 #: views/submit-form.blade.php:172
 msgid ""
 "Type location name and select from suggestions. If the location is not "
 "available, please add an address in the description."
-msgstr ""
-
-#: views/submit-form.blade.php:173
-msgid "Type-location"
 msgstr ""
 
 #: views/submit-form.blade.php:180

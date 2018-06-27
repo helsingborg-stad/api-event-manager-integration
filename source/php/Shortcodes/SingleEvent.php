@@ -290,6 +290,13 @@ class SingleEvent
             foreach ($occasions as $occasion) {
                 $event_date = preg_replace('/\D/', '', $occasion->start_date);
                 if ($query_var_date == $event_date) {
+                    if(isset($occasion->status) && ($occasion->status != 'scheduled' || !$occasion->status)) {
+                        $ret .= '<ul>';
+                        $ret .= ($occasion->status == 'cancelled') ? '<li><strong>' . __('Cancelled', 'event-integration') . '</strong></li>' : '';
+                        $ret .= ($occasion->status == 'rescheduled') ? '<li><strong>' . __('Rescheduled', 'event-integration') . '</strong></li>' : '';
+                        $ret .= (!empty($occasion->exception_information)) ? '<li>' . $occasion->exception_information . '</li>' : '';
+                        $ret .= '</ul>';
+                    }
                     $ret .= '<ul>';
                     $ret .= '<li><strong>' . __('Occasion', 'event-integration') . '</strong></li>';
                     $ret .= (!empty($occasion->start_date) && !empty($occasion->end_date)) ? '<li>' . \EventManagerIntegration\App::formatEventDate($occasion->start_date, $occasion->end_date) . '</li>' : '';
@@ -491,9 +498,12 @@ class SingleEvent
     {
         $ret = '';
         foreach ($occasions as $occasion) {
-            $ret .= '<ul>';
-            $ret .= (!empty($occasion->start_date) && !empty($occasion->end_date)) ? '<li>' . \EventManagerIntegration\App::formatEventDate($occasion->start_date, $occasion->end_date) . '</li>' : '';
-            $ret .= '</ul>';
+            $date = (!empty($occasion->start_date) && !empty($occasion->end_date)) ? \EventManagerIntegration\App::formatEventDate($occasion->start_date, $occasion->end_date) : '';
+            $date .= (isset($occasion->status) && $occasion->status == 'cancelled') ? ' - <strong>' . __('Cancelled', 'event-integration') . '</strong>' : '';
+            $date .= (isset($occasion->status) && $occasion->status == 'rescheduled') ? ' - <strong>' . __('Rescheduled', 'event-integration') . '</strong>' : '';
+            $ret .= '<ul><li>';
+            $ret .= $date;
+            $ret .= '</li></ul>';
         }
 
         return $ret;
