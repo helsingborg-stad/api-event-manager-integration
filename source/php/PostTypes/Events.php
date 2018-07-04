@@ -337,7 +337,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
      */
     public function addImportButtons($views)
     {
-        if (current_user_can('administrator')) {
+        if (current_user_can('administrator') || current_user_can('editor')) {
             $button  = '<div class="import-buttons actions" style="position: relative;">';
 
             if (get_field('event_api_url', 'option')) {
