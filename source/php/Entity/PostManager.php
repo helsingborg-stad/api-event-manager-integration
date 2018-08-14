@@ -254,25 +254,35 @@ abstract class PostManager
             $filename = md5($filename) . '.jpg';
         }
 
-        // Bail if image already exists in library
+        // Get the file content
+        $options = array(
+            'ssl' => array(
+                'verify_peer' => defined('DEV_MODE') && DEV_MODE === true ? false : true,
+                'verify_peer_name' => defined('DEV_MODE') && DEV_MODE === true ? false : true
+            )
+        );
+        $imgContent = file_get_contents($url, false, stream_context_create($options));
+
+        // Check if image already exists in library
         if ($attachmentId = $this->attachmentExists($uploadDir . '/' . basename($filename))) {
-            set_post_thumbnail($this->ID, $attachmentId);
-            return true;
+            $newImageHash = md5($imgContent);
+            $localImageHash = md5_file($uploadDir . '/' . basename($filename));
+            // Test if the new image and the local is identical
+            if ($newImageHash === $localImageHash) {
+                set_post_thumbnail($this->ID, $attachmentId);
+                return true;
+            } else {
+                // Rename filename if the images did not match
+                $filename = uniqid() . $filename;
+            }
         }
 
         // Save file to server
-        $args = array(
-            'ssl' => array(
-                'verify_peer' => defined('DEV_MODE') && DEV_MODE == true ? false : true,
-                'verify_peer_name' => defined('DEV_MODE') && DEV_MODE == true ? false : true,
-            ),
-        );
-        $contents = file_get_contents($url, false, stream_context_create($args));
         $save = fopen($uploadDir . '/' . $filename, 'w');
-        fwrite($save, $contents);
+        fwrite($save, $imgContent);
         fclose($save);
 
-        // Detect filetype
+        // Detect file type
         $filetype = wp_check_filetype($filename, null);
 
         // Insert the file to media library
