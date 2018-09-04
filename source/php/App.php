@@ -19,6 +19,7 @@ class App
         new OAuth\OAuthAdmin();
         new OAuth\OAuthRequests();
         new PostTypes\Events();
+        new EventArchive();
         new Acf\AcfConfig();
         new Widget\DisplayEvents();
         new Admin\Options();
