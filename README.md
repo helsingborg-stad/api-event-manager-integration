@@ -63,7 +63,6 @@ Use the attributes listed below to set API-url and different filters.
 *Data attributes:*
 ```
 data-apiurl     Url to Event manager API root.
-post-limit      Desired number of events to show.
 group-id        Add one or many(separated with comma) group ID to get events from specific groups.
 category-id     Add one or many(separated with comma) category ID to get events from specific categories.
 latlng          Enter latitude and longotide(separated with comma) to get events occurring at a certain location.
@@ -74,7 +73,7 @@ distance        Used with `latlng` attribute to get events within a given radius
 ```html
 <div class="box box-panel box-primary">
 <h4 class="box-title">Evenemang</h4>
-    <ul class="event-api" data-apiurl="http://api.helsingborg.se/event/json/wp/v2" post-limit="10" group-id="" category-id="" latlng="56.0464674,12.694512099999997" distance="1">
+    <ul class="event-api" data-apiurl="http://api.helsingborg.se/event/json/wp/v2" group-id="" category-id="" latlng="56.0464674,12.694512099999997" distance="1">
 
         <li class="event-loading-template"><i class="loading-dots" style="margin: 10px auto;"></i></li>
         <div class="template hidden">
