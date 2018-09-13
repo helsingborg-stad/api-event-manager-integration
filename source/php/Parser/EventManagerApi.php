@@ -24,13 +24,24 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         $this->removeExpiredOccasions();
         $this->removeExpiredEvents();
 
-        $events = \EventManagerIntegration\Parser::requestApi($this->url);
-
-        // Remove duplicates and save to database
-        if ($events) {
-            foreach ($events as $event) {
-                $this->saveEvent($event);
+        // Loop through paginated API request
+        $page = 1;
+        while ($page) {
+            $url = add_query_arg(array(
+                'page' => $page,
+                'per_page' => 25,
+            ), $this->url);
+            $events = \EventManagerIntegration\Parser::requestApi($url);
+            if ($events) {
+                // Save events to database
+                foreach ($events as $event) {
+                    $this->saveEvent($event);
+                }
+            } else {
+                $page = false;
+                break;
             }
+            $page++;
         }
 
         $this->deleteEmptyTaxonomies();
