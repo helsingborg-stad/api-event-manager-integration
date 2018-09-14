@@ -160,9 +160,7 @@ EventManagerIntegration.Event.Form = (function ($) {
             apiUrl = apiUrl.replace(/\/$/, '');
 
             $('#recurring-event', eventForm).children('.box').hide();
-
             this.handleEvents($(eventForm), apiUrl);
-
             this.hyperformExtensions(eventForm);
 
             if (document.getElementById('location') !== null) {
@@ -280,9 +278,9 @@ EventManagerIntegration.Event.Form = (function ($) {
     Form.prototype.loadPostType = function (eventForm, resource, postType) {
         resource += '/' + postType + '/complete?_jsonp=get' + postType;
         new autoComplete({
-            selector: '#'+postType+'-selector',
+            selector: '#' + postType + '-selector',
             minChars: 1,
-            source: function(term, suggest){
+            source: function (term, suggest) {
                 term = term.toLowerCase();
                 $.ajax({
                     type: "GET",
@@ -304,11 +302,11 @@ EventManagerIntegration.Event.Form = (function ($) {
             renderItem: function (item, search) {
                 search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
                 var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
-                return '<div class="autocomplete-suggestion" data-type="'+item[2]+'" data-langname="'+item[0]+'" data-lang="'+item[1]+'" data-val="'+search+'"> '+item[0].replace(re, "<b>$1</b>")+'</div>';
+                return '<div class="autocomplete-suggestion" data-type="' + item[2] + '" data-langname="' + item[0] + '" data-lang="' + item[1] + '" data-val="' + search + '"> ' + item[0].replace(re, "<b>$1</b>") + '</div>';
             },
-            onSelect: function(e, term, item) {
-                $('#'+item.getAttribute('data-type')+'-selector').val(item.getAttribute('data-langname'));
-                $('#'+item.getAttribute('data-type')).val(item.getAttribute('data-lang'));
+            onSelect: function (e, term, item) {
+                $('#' + item.getAttribute('data-type') + '-selector').val(item.getAttribute('data-langname'));
+                $('#' + item.getAttribute('data-type')).val(item.getAttribute('data-lang'));
             }
         });
     };
@@ -468,6 +466,13 @@ EventManagerIntegration.Event.Form = (function ($) {
         }
     };
 
+    Form.prototype.datePickerSettings = function () {
+        $('.hasDatepicker', '.submit-event').datepicker('option', {
+            minDate: 'now',
+            maxDate: new Date().getDate() + 365
+        });
+    };
+
     Form.prototype.initPickerEvent = function () {
         var elements = document.querySelectorAll('input[name="start_date"]');
         Array.from(elements).forEach(function (element) {
@@ -533,6 +538,8 @@ EventManagerIntegration.Event.Form = (function ($) {
     };
 
     Form.prototype.initDateEvents = function () {
+        this.datePickerSettings();
+
         // Single occasions events
         this.initPickerEvent();
         this.initEndHourEvent();
