@@ -14,6 +14,7 @@ EventManagerIntegration.Event.Form = (function ($) {
             $('#recurring-event', eventForm).children('.box').hide();
             this.handleEvents($(eventForm), apiUrl);
             this.hyperformExtensions(eventForm);
+            this.datePickerSettings();
 
             if (document.getElementById('location') !== null) {
                 this.loadPostType($(eventForm), apiUrl, 'location');
@@ -337,13 +338,6 @@ EventManagerIntegration.Event.Form = (function ($) {
         }
     };
 
-    Form.prototype.datePickerSettings = function () {
-        $('.hasDatepicker', '.submit-event').datepicker('option', {
-            minDate: 'now',
-            maxDate: new Date().getDate() + 365
-        });
-    };
-
     Form.prototype.initPickerEvent = function () {
         var elements = document.querySelectorAll('input[name="start_date"]');
         Array.from(elements).forEach(function (element) {
@@ -409,8 +403,6 @@ EventManagerIntegration.Event.Form = (function ($) {
     };
 
     Form.prototype.initDateEvents = function () {
-        this.datePickerSettings();
-
         // Single occasions events
         this.initPickerEvent();
         this.initEndHourEvent();
@@ -419,6 +411,13 @@ EventManagerIntegration.Event.Form = (function ($) {
         // Recurring date events
         this.initRecurringEndHourEvent();
         this.initRecurringEndMinuteEvent();
+    };
+
+    Form.prototype.datePickerSettings = function () {
+        $.datepicker.setDefaults({
+            minDate: 'now',
+            maxDate: new Date().getDate() + 365
+        });
     };
 
     Form.prototype.handleEvents = function (eventForm, apiUrl) {
@@ -496,7 +495,6 @@ EventManagerIntegration.Event.Form = (function ($) {
                 var $removeButton = $('<div class="form-group"><button class="btn btn btn-sm remove-occurance"><i class="pricon pricon-minus-o"></i> Ta bort</button></div>');
                 $duplicate.append($removeButton);
             }
-
         }.bind(this));
 
         // Remove occurance
