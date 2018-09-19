@@ -178,7 +178,7 @@
     <div class="form-group">
         <label for="event_categories"><?php _e('Categories', 'event-integration'); ?></label>
         <small class="text-dark-gray"><?php _e('Select appropriate categories for your event or activity. To select multiple categories, press Ctrl (Windows) / command (macOS) at the same time as you click on the categories.', 'event-integration'); ?></small>
-        <select name="event_categories" id="event_categories" multiple>
+        <select name="event_categories" id="event_categories" multiple required>
             <option value=""><?php _e('Loading', 'event-integration'); ?>...</option>
         </select>
     </div>
