@@ -192,6 +192,25 @@ EventManagerIntegration.Event.Form = (function ($) {
                 return valid;
             }
         );
+
+        hyperform.addValidator(
+            eventForm.image_input,
+            function (element) {
+                var valid = element.files.length > 0,
+                    notice = eventForm.querySelector('.image-notice'),
+                    noticeHtml = document.createElement('p');
+
+                if (!valid && !notice) {
+                    noticeHtml.innerHTML = eventIntegrationFront.must_upload_image;
+                    noticeHtml.className = 'text-danger image-notice';
+                    eventForm.querySelector('.image-box').appendChild(noticeHtml);
+                }
+
+                element.setCustomValidity(valid ? '' : eventIntegrationFront.must_upload_image);
+
+                return valid;
+            }
+        );
     };
 
     // Get taxonomies from API and add to select box

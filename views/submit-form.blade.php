@@ -183,10 +183,11 @@
         </select>
     </div>
 
-    <div class="form-group gutter creamy image-box text-center">
+        <div class="form-group gutter creamy image-box text-center">
         <p><i class="pricon pricon-badge pricon-badge-red-3 pricon-3x pricon-picture"></i></p>
-        <p><strong><?php _e('Upload an image', 'event-integration'); ?></strong></p>
-        <p>
+        <p><strong><?php _e('Upload an image', 'event-integration'); ?> <span class="text-danger">*</span></strong></p>
+
+            <p>
             <small>
                 <?php _e('Keep in mind that the image may be cropped, so avoid text in the image.', 'event-integration'); ?><br>
                 <?php _e('Images with identifiable persons are not accepted and will be replaced.', 'event-integration'); ?><br>
@@ -207,8 +208,8 @@
         </label>
     </div>
     <div class="form-group image-upload" style="display:none;">
-        <label for="image_input"><?php _e('Upload an image', 'event-integration'); ?></label>
-        <input name="image_input" id="image_input" type="file" accept="image/gif, image/jpeg, image/png">
+        <label for="image_input"><?php _e('Upload an image', 'event-integration'); ?> <span class="text-danger">*</span></label>
+        <input name="image_input" id="image_input" type="file" accept="image/gif, image/jpeg, image/png" required>
     </div>
 
     <div class="form-group">
