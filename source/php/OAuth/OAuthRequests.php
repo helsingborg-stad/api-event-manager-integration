@@ -334,9 +334,13 @@ class OAuthRequests
      * @return array         Sanitized array
      */
     public function sanitizeInput(&$array) {
-        foreach ($array as &$value) {
+        foreach ($array as $key => &$value) {
             if(!is_array($value)) {
-                $value = sanitize_text_field($value);
+                if ($key == 'content') {
+                    $value = sanitize_textarea_field($value);
+                } else {
+                    $value = sanitize_text_field($value);
+                }
             } else {
                 $this->sanitizeInput($value);
             }
