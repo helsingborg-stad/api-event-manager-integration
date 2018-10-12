@@ -53,10 +53,16 @@ abstract class Parser
         $args = array(
             'timeout' => 120,
             'sslverify' => defined('DEV_MODE') && DEV_MODE == true ? false : true,
+            'headers' => array(
+                'ClientSolution' => 'WordPress Integration ' . EVENTMANAGERINTEGRATION_ID
+                'PhpVersion' => phpversion(),
+                'referrer' => get_home_url()
+            )
         );
-        $request = wp_remote_get($url, $args);
-        $responseCode = wp_remote_retrieve_response_code($request);
-        $body = wp_remote_retrieve_body($request);
+        $request        = wp_remote_get($url, $args);
+        $responseCode   = wp_remote_retrieve_response_code($request);
+        $body           = wp_remote_retrieve_body($request);
+
         // Test if response if WP_ERROR or response code is not 200 OK
         if (is_wp_error($request) || $responseCode != 200) {
             return false;

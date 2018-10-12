@@ -18,6 +18,7 @@ if (! defined('WPINC')) {
     die;
 }
 
+define('EVENTMANAGERINTEGRATION_ID', '0.6.6');
 define('EVENTMANAGERINTEGRATION_PATH', plugin_dir_path(__FILE__));
 define('EVENTMANAGERINTEGRATION_URL', plugins_url('', __FILE__));
 define('EVENTMANAGERINTEGRATION_VIEW_PATH', EVENTMANAGERINTEGRATION_PATH . 'views/');
