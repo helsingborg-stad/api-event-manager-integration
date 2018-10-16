@@ -54,7 +54,7 @@ abstract class Parser
             'timeout' => 120,
             'sslverify' => defined('DEV_MODE') && DEV_MODE == true ? false : true,
             'headers' => array(
-                'ClientSolution' => 'WordPress Integration ' . EVENTMANAGERINTEGRATION_ID
+                'ClientSolution' => 'WordPress Integration ' . EVENTMANAGERINTEGRATION_ID,
                 'PhpVersion' => phpversion(),
                 'referrer' => get_home_url()
             )
