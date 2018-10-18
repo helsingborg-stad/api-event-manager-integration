@@ -20,12 +20,9 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         // Import publishing groups from API
         \EventManagerIntegration\App::importPublishingGroups();
 
-        // Remove expired occasions meta and event posts.
-        $this->removeExpiredOccasions();
-        $this->removeExpiredEvents();
-
         // Loop through paginated API request
         $page = 1;
+        $eventIds = array();
         while ($page) {
             $url = add_query_arg(array(
                 'page' => $page,
@@ -36,6 +33,9 @@ class EventManagerApi extends \EventManagerIntegration\Parser
                 // Save events to database
                 foreach ($events as $event) {
                     $this->saveEvent($event);
+                    if (isset($event['id'])) {
+                        $eventIds[] = $event['id'];
+                    }
                 }
             } else {
                 $page = false;
@@ -44,6 +44,10 @@ class EventManagerApi extends \EventManagerIntegration\Parser
             $page++;
         }
 
+        // Clean up
+        $this->removeDeletedEvents($eventIds);
+        $this->removeExpiredOccasions();
+        $this->removeExpiredEvents();
         $this->deleteEmptyTaxonomies();
     }
 
@@ -114,13 +118,13 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         $event_id = $this->checkIfEventExists($event['id']);
         if ($event_id) {
             $post_status = get_post_status($event_id);
-        } elseif (is_array($occasions) && ! empty($occasions)) {
+        } elseif (is_array($occasions) && !empty($occasions)) {
             // Unpublish the event if occasion is longer than limit option
             $unpublish_limit = get_field('event_unpublish_limit', 'option');
             foreach ($occasions as $occasion) {
-                $start           = new \DateTime($occasion['start_date']);
-                $end             = new \Datetime($occasion['end_date']);
-                $difference      = $end->diff($start)->format("%a");
+                $start = new \DateTime($occasion['start_date']);
+                $end = new \Datetime($occasion['end_date']);
+                $difference = $end->diff($start)->format("%a");
                 if ($unpublish_limit != null && $unpublish_limit >= 0 && ($difference > $unpublish_limit)) {
                     $post_status = 'draft';
                 }
@@ -193,7 +197,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
             }
             $createSuccess = $event->save();
 
-            if ($createSuccess && ! empty($featured_media)) {
+            if ($createSuccess && !empty($featured_media)) {
                 $event->setFeaturedImageFromUrl($featured_media, true);
             }
         }
@@ -205,7 +209,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
      * @param  bool $tag_filter Bool, equals true if event passed tag filter
      * @return bool
      */
-    public function checkFilters($cat_filter, $tag_filter) : bool
+    public function checkFilters($cat_filter, $tag_filter): bool
     {
         $tax_filter = (empty(get_field('event_filter_cat', 'options')) && empty(get_field('event_filter_tag', 'options'))) ? true : false;
 
@@ -229,7 +233,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
     {
         global $wpdb;
         $date_limit = strtotime("midnight now") - 1;
-        // Get all occasions from databse
+        // Get all occasions from database
         $db_table = $wpdb->prefix . "integrate_occasions";
         $occasions = $wpdb->get_results("SELECT * FROM $db_table ORDER BY start_date DESC", ARRAY_A);
 
@@ -241,11 +245,46 @@ class EventManagerApi extends \EventManagerIntegration\Parser
             // Delete the occasion if expired
             if (strtotime($o['end_date']) < $date_limit) {
                 $id = $o['ID'];
-                $wpdb->delete($db_table, array( 'ID' => $id));
+                $wpdb->delete($db_table, array('ID' => $id));
             }
         }
 
         return;
+    }
+
+    /**
+     * Remove events that has been deleted from API
+     * @param $ids
+     */
+    public function removeDeletedEvents($ids)
+    {
+        global $wpdb;
+        $table = $wpdb->prefix . "integrate_occasions";
+        // Get all locally stored events
+        $localEvents = $wpdb->get_results("SELECT event_id FROM {$table} GROUP BY event_id", ARRAY_N);
+        $localEvents = array_map(function($id) {
+            return $id[0];
+        }, $localEvents);
+        // Collect local IDs of the API events
+        $apiEvents = array_map(function($id) {
+            $post = get_posts(array(
+                'post_type' => 'event',
+                'post_status' => array('publish', 'draft'),
+                'meta_key' => '_event_manager_id',
+                'meta_value' => $id,
+                'posts_per_page' => 1
+            ));
+            return $post[0]->ID ?? null;
+        }, array_unique($ids));
+        $apiEvents = array_filter($apiEvents);
+        // Collect events that is stored locally but is missing in the API
+        $diffEvents = array_diff($localEvents, $apiEvents);
+        // Loop through the diff and delete its occasions
+        if (!empty($diffEvents)) {
+            foreach ($diffEvents as $event) {
+                $wpdb->delete($table, array('event_id' => $event));
+            }
+        }
     }
 
     /**
@@ -291,7 +330,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         $passes = true;
         $tax_array = ($type == 0) ? get_field('event_filter_cat', 'options') : get_field('event_filter_tag', 'options');
 
-        if (! empty($tax_array)) {
+        if (!empty($tax_array)) {
             $filters = array_map('trim', explode(',', $tax_array));
             $taxLower = array_map('strtolower', $taxonomies);
             $passes = false;
