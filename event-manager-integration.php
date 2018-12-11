@@ -18,6 +18,16 @@ if (! defined('WPINC')) {
     die;
 }
 
+// Require composer dependencies (autoloader)
+if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+    require_once __DIR__ . '/vendor/autoload.php';
+}
+
+// Include vendor files
+if (file_exists(dirname(ABSPATH) . '/vendor/autoload.php')) {
+    require_once dirname(ABSPATH) . '/vendor/autoload.php';
+}
+
 define('EVENTMANAGERINTEGRATION_ID', '0.6.6');
 define('EVENTMANAGERINTEGRATION_PATH', plugin_dir_path(__FILE__));
 define('EVENTMANAGERINTEGRATION_URL', plugins_url('', __FILE__));
@@ -28,9 +38,6 @@ load_plugin_textdomain('event-integration', false, plugin_basename(dirname(__FIL
 
 require_once EVENTMANAGERINTEGRATION_PATH . 'source/php/Vendor/Psr4ClassLoader.php';
 require_once EVENTMANAGERINTEGRATION_PATH . 'Public.php';
-if (! class_exists('\\AcfExportManager\\AcfExportManager')) {
-	require_once EVENTMANAGERINTEGRATION_PATH . 'vendor/helsingborg-stad/acf-export-manager/src/AcfExportManager.php';
-}
 
 // Instantiate and register the autoloader
 $loader = new EventManagerIntegration\Vendor\Psr4ClassLoader();
