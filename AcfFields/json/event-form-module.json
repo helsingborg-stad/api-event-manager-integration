@@ -1,0 +1,43 @@
+[{
+    "key": "group_5c599a27e446a",
+    "title": "Event form",
+    "fields": [
+        {
+            "key": "field_5c599a30583d3",
+            "label": "User groups",
+            "name": "user_groups",
+            "type": "text",
+            "instructions": "Comma separated list of user group IDs.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "mod-event-submit"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": ""
+}]
+

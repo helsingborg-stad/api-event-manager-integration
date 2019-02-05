@@ -54,6 +54,7 @@ $acfExportManager->autoExport(array(
     'location-module'	=> 'group_5948e8bc3bf75',
     'options' 			=> 'group_583557753bd73',
     'shortcodes' 		=> 'group_58526d565e1f5',
+    'event-form-module'	=> 'group_5c599a27e446a',
 ));
 $acfExportManager->import();
 
