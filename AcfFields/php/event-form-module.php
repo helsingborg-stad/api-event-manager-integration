@@ -24,6 +24,25 @@
             'append' => '',
             'maxlength' => '',
         ),
+        1 => array(
+            'key' => 'field_5c59a5630d99b',
+            'label' => __('Form name', 'event-integration'),
+            'name' => 'client_name',
+            'type' => 'text',
+            'instructions' => __('Name the form for easier grouping of events.', 'event-integration'),
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'default_value' => '',
+            'placeholder' => '',
+            'prepend' => '',
+            'append' => '',
+            'maxlength' => '',
+        ),
     ),
     'location' => array(
         0 => array(

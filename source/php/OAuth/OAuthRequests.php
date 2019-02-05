@@ -178,7 +178,7 @@ class OAuthRequests
         $postData                    = $this->sanitizeInput($_POST['data']);
         // Add consumer name to postData
         $clientUrl                   = parse_url(get_site_url());
-        $postData['consumer_client'] = $clientUrl['host'];
+        $postData['consumer_client'] = !empty($postData['client_name']) ? $clientUrl['host'] . ' - ' . $postData['client_name'] : $clientUrl['host'];
         $postData                    = json_encode($postData);
         $consumerKey                 = get_option('_event_client');
         $consumerSecret              = get_option('_event_secret');
