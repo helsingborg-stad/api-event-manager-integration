@@ -39,6 +39,11 @@ class App
                     EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/Location',
                     'Location'
                 );
+
+                modularity_register_module(
+                    EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/SubmitForm',
+                    'SubmitForm'
+                );
             }
         });
 
@@ -114,7 +119,7 @@ class App
      * @param  string $end_date   occasion end date
      * @return string             formatted date
      */
-    public static function formatEventDate($start_date, $end_date)
+    public static function formatEventDate(int $start_date, $end_date)
     {
         $start = date('Y-m-d H:i:s', strtotime($start_date));
         $end = date('Y-m-d H:i:s', strtotime($end_date));
