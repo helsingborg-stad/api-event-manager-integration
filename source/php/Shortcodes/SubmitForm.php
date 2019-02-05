@@ -23,9 +23,9 @@ class SubmitForm
 
     /**
      * Return form markup
-     * @param array $atts Attributes
+     * @param array  $atts    Attributes
      * @param string $content Content
-     * @param string $tag Shortcode name
+     * @param string $tag     Shortcode name
      * @return string Form markup
      */
     public function submitFormCallback($atts = [], $content = null, $tag = '')
@@ -38,6 +38,10 @@ class SubmitForm
             'user_groups' => '',
         ], $atts, $tag);
 
-        return \EventManagerIntegration\Helper\RenderBlade::blade('submit-form', $data);
+        return \EventManagerIntegration\Helper\RenderBlade::blade(
+            'formfields',
+             $data,
+            EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/SubmitForm/views/'
+        );
     }
 }
