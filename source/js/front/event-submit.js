@@ -296,6 +296,13 @@ EventManagerIntegration.Event.Form = (function($) {
                 },
             ];
         }
+
+        // Add accessibility items
+        objData['accessibility'] = [];
+        $.each($("input[name='accessibility']:checked"), function() {
+            objData['accessibility'].push($(this).val());
+        });
+
         objData['user_groups'] = groups;
         objData['event_categories'] = categories;
 
