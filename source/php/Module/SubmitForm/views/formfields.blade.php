@@ -185,10 +185,59 @@
     </div>
 
     <div class="form-group">
-        <label for="price_adult"><?php _e('Price', 'event-integration'); ?></label>
-        <small class="text-dark-gray"><?php _e('For adults. Are there multiple price ranges? Please add it in the description.', 'event-integration'); ?></small>
+        <label for="price_adult"><?php _e('Price adult', 'event-integration'); ?></label>
+        <small class="text-dark-gray"><?php _e('Price for adults. Are there multiple price ranges? Please add it in the description.', 'event-integration'); ?></small>
         <input type="number" name="price_adult" id="price_adult"
-               placeholder="<?php _e('Price', 'event-integration'); ?>">
+               placeholder="<?php _e('Price adult', 'event-integration'); ?>">
+    </div>
+
+    <div class="form-group">
+        <label for="price_student"><?php _e('Price student', 'event-integration'); ?></label>
+        <small class="text-dark-gray"><?php _e('Price for students.', 'event-integration'); ?></small>
+        <input type="number" name="price_student" id="price_student"
+               placeholder="<?php _e('Price student', 'event-integration'); ?>">
+    </div>
+
+    <div class="form-group">
+        <label for="price_children"><?php _e('Price children', 'event-integration'); ?></label>
+        <small class="text-dark-gray"><?php _e('Price for children.', 'event-integration'); ?></small>
+        <input type="number" name="price_children" id="price_children"
+               placeholder="<?php _e('Price children', 'event-integration'); ?>">
+    </div>
+
+    <div class="form-group">
+        <label for="children_age"><?php _e('Age restriction for children price', 'event-integration'); ?></label>
+        <small class="text-dark-gray"><?php _e('Children price is valid up to this age.', 'event-integration'); ?></small>
+        <input type="number" name="children_age" id="children_age"
+               placeholder="<?php _e('Age restriction', 'event-integration'); ?>">
+    </div>
+
+    <div class="form-group">
+        <label for="price_senior"><?php _e('Price senior', 'event-integration'); ?></label>
+        <small class="text-dark-gray"><?php _e('Price for seniors.', 'event-integration'); ?></small>
+        <input type="number" name="price_senior" id="price_senior"
+               placeholder="<?php _e('Price senior', 'event-integration'); ?>">
+    </div>
+
+    <div class="form-group">
+        <label for="senior_age"><?php _e('Age restriction for senior price', 'event-integration'); ?></label>
+        <small class="text-dark-gray"><?php _e('Senior price is valid from this age.', 'event-integration'); ?></small>
+        <input type="number" name="senior_age" id="senior_age"
+               placeholder="<?php _e('Age restriction', 'event-integration'); ?>">
+    </div>
+
+    <div class="form-group form-horizontal">
+        <label><?php _e('Age group', 'event-integration'); ?></label>
+        <small><?php _e('Age group that the activity is addressed to.', 'event-integration'); ?></small>
+        <br>
+        <div class="form-group">
+            <label for="age_group_from"><?php _e('From', 'event-integration'); ?></label>
+            <input type="number" name="age_group_from" placeholder="<?php _e('From', 'event-integration'); ?>" value="">
+        </div>
+        <div class="form-group">
+            <label for="age_group_to"><?php _e('To', 'event-integration'); ?></label>
+            <input type="number" name="age_group_to" placeholder="<?php _e('To', 'event-integration'); ?>" value="">
+        </div>
     </div>
 
     <div class="form-group">
@@ -207,7 +256,17 @@
                placeholder="<?php _e('Location', 'event-integration'); ?>" style="width:100%;max-width:600px;outline:0"
                autocomplete="off">
         <input name="location" id="location" type="hidden">
+    </div>
 
+    <div class="form-group">
+        <label><?php _e('Accessibility', 'event-integration'); ?></label>
+        <small><?php _e('Select which accessibility actions that exist for the event.', 'event-integration'); ?></small>
+        <label class="checkbox">
+            <input type="checkbox" name="accessibility" value="elevator"> <?php _e('Elevator/ramp', 'event-integration'); ?>
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" name="accessibility" value="accessible_toilet"> <?php _e('Accessible toilet', 'event-integration'); ?>
+        </label>
     </div>
 
     <div class="form-group">
