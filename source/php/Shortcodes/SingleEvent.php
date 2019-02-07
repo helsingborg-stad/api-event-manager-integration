@@ -338,6 +338,15 @@ class SingleEvent
             $ret .= '<ul><li><strong>' . __('Age', 'event-integration') . '</strong></li><li>' . __('Up to', 'event-integration') . ' ' . $meta['age_group_to'] . ' ' . __('years', 'event-integration') . '</li></ul>';
         }
 
+        if (!empty($meta['accessibility']) && is_array($meta['accessibility'])) {
+            $ret .= '<ul><li><strong>' . __('Accessibility', 'event-integration') . '</strong></li></ul>';
+            $ret .= '<ul>';
+            foreach ($meta['accessibility'] as $accessibility) {
+                $ret .= '<li>' . $accessibility . '</li>';
+            }
+            $ret .= '</ul>';
+        }
+
         return $ret;
     }
 
