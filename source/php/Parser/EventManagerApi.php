@@ -110,6 +110,9 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         $contact_information            = !empty($event['contact_information']) ? $event['contact_information'] : null;
         $contact_phone                  = !empty($event['contact_phone']) ? $event['contact_phone'] : null;
         $contact_email                  = !empty($event['contact_email']) ? $event['contact_email'] : null;
+        $age_group_from                 = !empty($event['age_group_from']) ? $event['age_group_from'] : null;
+        $age_group_to                   = !empty($event['age_group_to']) ? $event['age_group_to'] : null;
+        $accessibility                  = !empty($event['accessibility']) ? $event['accessibility'] : null;
 
         // Check if event passes taxonomy filters
         $pass_tax_filter = $this->checkFilters($this->filterTaxonomies($categories, 0), $this->filterTaxonomies($tags, 1));
@@ -188,7 +191,10 @@ class EventManagerApi extends \EventManagerIntegration\Parser
                         'ticket_release_date' => $ticket_release_date,
                         'contact_email' => $contact_email,
                         'contact_phone' => $contact_phone,
-                        'contact_information' => $contact_information
+                        'contact_information' => $contact_information,
+                        'age_group_from' => $age_group_from,
+                        'age_group_to' => $age_group_to,
+                        'accessibility' => $accessibility,
                     )
                 );
             } catch (\Exception $e) {

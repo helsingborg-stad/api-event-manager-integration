@@ -45,7 +45,7 @@ class SingleEvent
     {
         global $post;
 
-        if(!(isset($post->post_type) && $post->post_type === self::$postTypeSlug)) {
+        if (!(isset($post->post_type) && $post->post_type === self::$postTypeSlug)) {
             return;
         }
 
@@ -187,7 +187,7 @@ class SingleEvent
     {
         global $post;
 
-        if(!(isset($post->post_type) && $post->post_type === self::$postTypeSlug)) {
+        if (!(isset($post->post_type) && $post->post_type === self::$postTypeSlug)) {
             return;
         }
 
@@ -290,7 +290,7 @@ class SingleEvent
             foreach ($occasions as $occasion) {
                 $event_date = preg_replace('/\D/', '', $occasion->start_date);
                 if ($query_var_date == $event_date) {
-                    if(isset($occasion->status) && ($occasion->status != 'scheduled' || !$occasion->status)) {
+                    if (isset($occasion->status) && ($occasion->status != 'scheduled' || !$occasion->status)) {
                         $ret .= '<ul>';
                         $ret .= ($occasion->status == 'cancelled') ? '<li><strong>' . __('Cancelled', 'event-integration') . '</strong></li>' : '';
                         $ret .= ($occasion->status == 'rescheduled') ? '<li><strong>' . __('Rescheduled', 'event-integration') . '</strong></li>' : '';
@@ -320,6 +320,7 @@ class SingleEvent
             }
             $ret .= '</ul>';
         }
+
         if (!empty($meta['related_events']) && is_array($meta['related_events'])) {
             $ret .= '<ul><li><strong>' . __('Related events', 'event-integration') . '</strong></li></ul>';
             $ret .= '<ul>';
@@ -327,6 +328,14 @@ class SingleEvent
                 $ret .= '<li>' . $event['post_title'] . '</li>';
             }
             $ret .= '</ul>';
+        }
+
+        if (!empty($meta['age_group_from']) && !empty($meta['age_group_to'])) {
+            $ret .= '<ul><li><strong>' . __('Age', 'event-integration') . '</strong></li><li>' . $meta['age_group_from'] . '-' . $meta['age_group_to'] . ' ' . __('years', 'event-integration') . '</li></ul>';
+        } elseif(!empty($meta['age_group_from'])) {
+            $ret .= '<ul><li><strong>' . __('Age', 'event-integration') . '</strong></li><li>' . __('From', 'event-integration') . ' ' . $meta['age_group_from'] . ' ' . __('years', 'event-integration') . '</li></ul>';
+        } elseif(!empty($meta['age_group_to'])) {
+            $ret .= '<ul><li><strong>' . __('Age', 'event-integration') . '</strong></li><li>' . __('Up to', 'event-integration') . ' ' . $meta['age_group_to'] . ' ' . __('years', 'event-integration') . '</li></ul>';
         }
 
         return $ret;
@@ -376,7 +385,7 @@ class SingleEvent
         $ret .= (!empty($meta['booking_email'])) ? '<li><a href="mailto:' . $meta['booking_email'] . '" class="link-item link-item-outbound" itemprop="email">' . $meta['booking_email'] . '</a></li><br>' : '';
         $ret .= (isset($meta['price_adult']) && $meta['price_adult'] != '') ? '<li>' . __('Adult', 'event-integration') . ': ' . self::priceOutput($meta['price_adult']) . '</li>' : '';
         $children_age = (!empty($meta['children_age'])) ? ' (' . __('below', 'event-integration') . ' ' . $meta['children_age'] . ')' : '';
-        $ret .= (isset($meta['price_children']) && $meta['price_children'] != '') ? '<li>' . __('Children', 'event-integration') . $children_age . ': ' .self::priceOutput($meta['price_children']) . '</li>' : '';
+        $ret .= (isset($meta['price_children']) && $meta['price_children'] != '') ? '<li>' . __('Children', 'event-integration') . $children_age . ': ' . self::priceOutput($meta['price_children']) . '</li>' : '';
         $senior_age = (!empty($meta['senior_age'])) ? ' (' . __('above', 'event-integration') . ' ' . $meta['senior_age'] . ')' : '';
         $ret .= (isset($meta['price_senior']) && $meta['price_senior'] != '') ? '<li>' . __('Senior', 'event-integration') . $senior_age . ': ' . self::priceOutput($meta['price_senior']) . '</li>' : '';
         $ret .= (isset($meta['price_student']) && $meta['price_student'] != '') ? '<li>' . __('Student', 'event-integration') . ': ' . self::priceOutput($meta['price_student']) . '</li>' : '';
@@ -458,7 +467,7 @@ class SingleEvent
     public static function eventContact($meta = array())
     {
         $ret = '';
-        $ret .= (!empty($meta['contact_information'])) ? '<li>'. $meta['contact_information'] .'</li><br>' : '';
+        $ret .= (!empty($meta['contact_information'])) ? '<li>' . $meta['contact_information'] . '</li><br>' : '';
         $ret .= (!empty($meta['contact_phone'])) ? '<li><a href="tel:' . $meta['contact_phone'] . '" class="link-item link-item-outbound" itemprop="telephone">' . $meta['contact_phone'] . '</a></li>' : '';
         $ret .= (!empty($meta['contact_email'])) ? '<li><a href="mailto:' . $meta['contact_email'] . '" class="link-item link-item-outbound" itemprop="email">' . $meta['contact_email'] . '</a></li>' : '';
 
