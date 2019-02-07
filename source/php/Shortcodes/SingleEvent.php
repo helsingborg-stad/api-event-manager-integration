@@ -339,7 +339,7 @@ class SingleEvent
         }
 
         if (!empty($meta['accessibility']) && is_array($meta['accessibility'])) {
-            $ret .= '<ul><li><strong>' . __('Accessibility', 'event-integration') . '</strong></li></ul>';
+            $ret .= '<ul><li><strong>' . __('Accessibility on the location', 'event-integration') . '</strong></li></ul>';
             $ret .= '<ul>';
             foreach ($meta['accessibility'] as $accessibility) {
                 $ret .= '<li>' . $accessibility . '</li>';
