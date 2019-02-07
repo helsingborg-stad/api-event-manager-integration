@@ -16,7 +16,9 @@ class SubmitForm extends \Modularity\Module
 
     public function data() : array
     {
-        $data = get_fields($this->ID);
+        $data = \EventManagerIntegration\Helper\SubmitEvent::geFields($this->ID);
+        $data['user_groups'] = get_field($this->ID, 'user_groups');
+        $data['client_name'] = get_field($this->ID, 'client_name');
         $data['classes'] = implode(' ', apply_filters('Modularity/Module/Classes', array('box', 'box-panel'), $this->post_type, $this->args));
         return $data;
     }

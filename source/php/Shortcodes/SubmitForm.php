@@ -38,6 +38,8 @@ class SubmitForm
             'user_groups' => '',
         ], $atts, $tag);
 
+        $data = array_merge($data, \EventManagerIntegration\Helper\SubmitEvent::geFields());
+
         return \EventManagerIntegration\Helper\RenderBlade::blade(
             'formfields',
              $data,
