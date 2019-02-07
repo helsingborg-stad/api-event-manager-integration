@@ -195,6 +195,10 @@ EventManagerIntegration.Event.Form = (function($) {
         });
 
         hyperform.addValidator(eventForm.image_input, function(element) {
+            if (!$('#image_input').prop('required')) {
+                return true;
+            }
+
             var valid = element.files.length > 0,
                 notice = eventForm.querySelector('.image-notice'),
                 noticeHtml = document.createElement('p');
