@@ -19,25 +19,6 @@
             "endpoint": 0
         },
         {
-            "key": "field_5c5b016dd0b8e",
-            "label": "Label",
-            "name": "label",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "40",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
             "key": "field_5c599a30583d3",
             "label": "User groups",
             "name": "user_groups",
@@ -47,25 +28,6 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
-            "key": "field_5c5b016dd0b8f",
-            "label": "Description",
-            "name": "description",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "40",
                 "class": "",
                 "id": ""
             },
@@ -93,25 +55,6 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
-        },
-        {
-            "key": "field_5c5b016dd0b90",
-            "label": "Hide description",
-            "name": "hidden_description",
-            "type": "true_false",
-            "instructions": "Hide field description.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "20",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
         },
         {
             "key": "field_5c5acb1f60b22",

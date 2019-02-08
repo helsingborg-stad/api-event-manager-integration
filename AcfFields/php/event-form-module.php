@@ -22,25 +22,6 @@
             'endpoint' => 0,
         ),
         1 => array(
-            'key' => 'field_5c5b016dd0b8e',
-            'label' => __('Label', 'event-integration'),
-            'name' => 'label',
-            'type' => 'text',
-            'instructions' => '',
-            'required' => 0,
-            'conditional_logic' => 0,
-            'wrapper' => array(
-                'width' => '40',
-                'class' => '',
-                'id' => '',
-            ),
-            'default_value' => '',
-            'placeholder' => '',
-            'prepend' => '',
-            'append' => '',
-            'maxlength' => '',
-        ),
-        2 => array(
             'key' => 'field_5c599a30583d3',
             'label' => __('User groups', 'event-integration'),
             'name' => 'user_groups',
@@ -59,26 +40,7 @@
             'append' => '',
             'maxlength' => '',
         ),
-        3 => array(
-            'key' => 'field_5c5b016dd0b8f',
-            'label' => __('Description', 'event-integration'),
-            'name' => 'description',
-            'type' => 'text',
-            'instructions' => '',
-            'required' => 0,
-            'conditional_logic' => 0,
-            'wrapper' => array(
-                'width' => '40',
-                'class' => '',
-                'id' => '',
-            ),
-            'default_value' => '',
-            'placeholder' => '',
-            'prepend' => '',
-            'append' => '',
-            'maxlength' => '',
-        ),
-        4 => array(
+        2 => array(
             'key' => 'field_5c59a5630d99b',
             'label' => __('Form name', 'event-integration'),
             'name' => 'client_name',
@@ -97,26 +59,7 @@
             'append' => '',
             'maxlength' => '',
         ),
-        5 => array(
-            'key' => 'field_5c5b016dd0b90',
-            'label' => __('Hide description', 'event-integration'),
-            'name' => 'hidden_description',
-            'type' => 'true_false',
-            'instructions' => __('Hide field description.', 'event-integration'),
-            'required' => 0,
-            'conditional_logic' => 0,
-            'wrapper' => array(
-                'width' => '20',
-                'class' => '',
-                'id' => '',
-            ),
-            'message' => '',
-            'default_value' => 0,
-            'ui' => 1,
-            'ui_on_text' => '',
-            'ui_off_text' => '',
-        ),
-        6 => array(
+        3 => array(
             'key' => 'field_5c5acb1f60b22',
             'label' => __('Fields', 'event-integration'),
             'name' => '',
@@ -132,7 +75,7 @@
             'placement' => 'top',
             'endpoint' => 0,
         ),
-        7 => array(
+        4 => array(
             'key' => 'field_5c5acd9eda6e4',
             'label' => __('Field settings', 'event-integration'),
             'name' => '',
@@ -150,7 +93,7 @@ You can hide whole fields that are not required.', 'event-integration'),
             'new_lines' => 'wpautop',
             'esc_html' => 0,
         ),
-        8 => array(
+        5 => array(
             'key' => 'field_5c5acb3160b23',
             'label' => __('Title', 'event-integration'),
             'name' => 'title',
@@ -224,7 +167,7 @@ You can hide whole fields that are not required.', 'event-integration'),
                 ),
             ),
         ),
-        9 => array(
+        6 => array(
             'key' => 'field_5c5ae353d04bf',
             'label' => __('Content', 'event-integration'),
             'name' => 'content',
@@ -298,7 +241,7 @@ You can hide whole fields that are not required.', 'event-integration'),
                 ),
             ),
         ),
-        10 => array(
+        7 => array(
             'key' => 'field_5c5aec63065fa',
             'label' => __('Occasion', 'event-integration'),
             'name' => 'occasion',
@@ -372,7 +315,7 @@ You can hide whole fields that are not required.', 'event-integration'),
                 ),
             ),
         ),
-        11 => array(
+        8 => array(
             'key' => 'field_5c5af02c4c2be',
             'label' => __('Event link', 'event-integration'),
             'name' => 'event_link',
@@ -484,7 +427,7 @@ You can hide whole fields that are not required.', 'event-integration'),
                 ),
             ),
         ),
-        12 => array(
+        9 => array(
             'key' => 'field_5c5af554d6769',
             'label' => __('Link to booking', 'event-integration'),
             'name' => 'booking_link',
@@ -596,7 +539,7 @@ You can hide whole fields that are not required.', 'event-integration'),
                 ),
             ),
         ),
-        13 => array(
+        10 => array(
             'key' => 'field_5c5afc69fcc25',
             'label' => __('Price adult', 'event-integration'),
             'name' => 'price_adult',
@@ -708,7 +651,7 @@ You can hide whole fields that are not required.', 'event-integration'),
                 ),
             ),
         ),
-        14 => array(
+        11 => array(
             'key' => 'field_5c5afc8e55866',
             'label' => __('Price student', 'event-integration'),
             'name' => 'price_student',
@@ -820,7 +763,7 @@ You can hide whole fields that are not required.', 'event-integration'),
                 ),
             ),
         ),
-        15 => array(
+        12 => array(
             'key' => 'field_5c5afe5d43c32',
             'label' => __('Price children', 'event-integration'),
             'name' => 'price_children',
@@ -932,7 +875,7 @@ You can hide whole fields that are not required.', 'event-integration'),
                 ),
             ),
         ),
-        16 => array(
+        13 => array(
             'key' => 'field_5c5b00e9a0100',
             'label' => __('Children age', 'event-integration'),
             'name' => 'children_age',
@@ -1044,7 +987,7 @@ You can hide whole fields that are not required.', 'event-integration'),
                 ),
             ),
         ),
-        17 => array(
+        14 => array(
             'key' => 'field_5c5b0163d0b88',
             'label' => __('Price senior', 'event-integration'),
             'name' => 'price_senior',
@@ -1156,7 +1099,7 @@ You can hide whole fields that are not required.', 'event-integration'),
                 ),
             ),
         ),
-        18 => array(
+        15 => array(
             'key' => 'field_5c5b03a60aeaa',
             'label' => __('Senior age', 'event-integration'),
             'name' => 'senior_age',
@@ -1268,7 +1211,7 @@ You can hide whole fields that are not required.', 'event-integration'),
                 ),
             ),
         ),
-        19 => array(
+        16 => array(
             'key' => 'field_5c5b03fa174d0',
             'label' => __('Age group', 'event-integration'),
             'name' => 'age_group',
@@ -1380,7 +1323,7 @@ You can hide whole fields that are not required.', 'event-integration'),
                 ),
             ),
         ),
-        20 => array(
+        17 => array(
             'key' => 'field_5c5bdf7177d9a',
             'label' => __('Organizer', 'event-integration'),
             'name' => 'organizer',
@@ -1473,7 +1416,7 @@ You can hide whole fields that are not required.', 'event-integration'),
                 ),
             ),
         ),
-        21 => array(
+        18 => array(
             'key' => 'field_5c5bdfceca4a3',
             'label' => __('Location', 'event-integration'),
             'name' => 'location',
@@ -1566,7 +1509,7 @@ You can hide whole fields that are not required.', 'event-integration'),
                 ),
             ),
         ),
-        22 => array(
+        19 => array(
             'key' => 'field_5c5be0a53c130',
             'label' => __('Accessibility', 'event-integration'),
             'name' => 'accessibility',
@@ -1659,7 +1602,7 @@ You can hide whole fields that are not required.', 'event-integration'),
                 ),
             ),
         ),
-        23 => array(
+        20 => array(
             'key' => 'field_5c5be779e22fa',
             'label' => __('Event categories', 'event-integration'),
             'name' => 'event_categories',
@@ -1771,7 +1714,7 @@ You can hide whole fields that are not required.', 'event-integration'),
                 ),
             ),
         ),
-        24 => array(
+        21 => array(
             'key' => 'field_5c5bef647b52f',
             'label' => __('Image', 'event-integration'),
             'name' => 'image_input',
@@ -1883,7 +1826,7 @@ You can hide whole fields that are not required.', 'event-integration'),
                 ),
             ),
         ),
-        25 => array(
+        22 => array(
             'key' => 'field_5c5bff444a675',
             'label' => __('Email', 'event-integration'),
             'name' => 'submitter_email',
@@ -1995,7 +1938,7 @@ You can hide whole fields that are not required.', 'event-integration'),
                 ),
             ),
         ),
-        26 => array(
+        23 => array(
             'key' => 'field_5c5c005d26639',
             'label' => __('Phone number', 'event-integration'),
             'name' => 'submitter_phone',
