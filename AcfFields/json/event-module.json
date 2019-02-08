@@ -70,7 +70,15 @@
             "type": "number",
             "instructions": "Set to -1 to show all.",
             "required": 1,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b2ace4dc65a8",
+                        "operator": "==",
+                        "value": "list"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "33",
                 "class": "",
@@ -89,17 +97,9 @@
             "label": "Show pagination",
             "name": "mod_event_pagination",
             "type": "true_false",
-            "instructions": "Display pagination buttons below the event list.",
+            "instructions": "Display pagination below the event list.",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_5b2ace4dc65a8",
-                        "operator": "==",
-                        "value": "list"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "33",
                 "class": "",
@@ -110,6 +110,40 @@
             "ui": 0,
             "ui_on_text": "",
             "ui_off_text": ""
+        },
+        {
+            "key": "field_5c5d4a3f27386",
+            "label": "Per page",
+            "name": "mod_event_per_page",
+            "type": "number",
+            "instructions": "Number of events to display per page.",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b2ace4dc65a8",
+                        "operator": "==",
+                        "value": "index"
+                    },
+                    {
+                        "field": "field_584ec8318df1d",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": "",
+            "max": "",
+            "step": ""
         },
         {
             "key": "field_58e6370d4f34c",
@@ -236,12 +270,12 @@
                 "location": "Location",
                 "description": "Description"
             },
+            "allow_custom": 0,
+            "save_custom": 0,
             "default_value": [],
             "layout": "vertical",
             "toggle": 1,
-            "return_format": "value",
-            "allow_custom": 0,
-            "save_custom": 0
+            "return_format": "value"
         },
         {
             "key": "field_5b2ae170ae36f",
@@ -559,6 +593,88 @@
             "min": "",
             "max": "",
             "step": ""
+        },
+        {
+            "key": "field_5c5d4d9407267",
+            "label": "Filters",
+            "name": "mod_event_filters_group",
+            "type": "group",
+            "instructions": "Activate search and filters.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b2ace4dc65a8",
+                        "operator": "==",
+                        "value": "index"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_5c5d4dbd07268",
+                    "label": "Text search",
+                    "name": "mod_event_filter_search",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_5c5d501e9acbb",
+                    "label": "Categories",
+                    "name": "mod_event_filter_categories",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_5c5d50499acbc",
+                    "label": "Date search",
+                    "name": "mod_event_filter_dates",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                }
+            ]
         }
     ],
     "location": [

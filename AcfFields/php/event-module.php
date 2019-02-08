@@ -73,7 +73,15 @@
             'type' => 'number',
             'instructions' => __('Set to -1 to show all.', 'event-integration'),
             'required' => 1,
-            'conditional_logic' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_5b2ace4dc65a8',
+                        'operator' => '==',
+                        'value' => 'list',
+                    ),
+                ),
+            ),
             'wrapper' => array(
                 'width' => '33',
                 'class' => '',
@@ -92,17 +100,9 @@
             'label' => __('Show pagination', 'event-integration'),
             'name' => 'mod_event_pagination',
             'type' => 'true_false',
-            'instructions' => __('Display pagination buttons below the event list.', 'event-integration'),
+            'instructions' => __('Display pagination below the event list.', 'event-integration'),
             'required' => 0,
-            'conditional_logic' => array(
-                0 => array(
-                    0 => array(
-                        'field' => 'field_5b2ace4dc65a8',
-                        'operator' => '==',
-                        'value' => 'list',
-                    ),
-                ),
-            ),
+            'conditional_logic' => 0,
             'wrapper' => array(
                 'width' => '33',
                 'class' => '',
@@ -115,6 +115,40 @@
             'ui_off_text' => '',
         ),
         4 => array(
+            'key' => 'field_5c5d4a3f27386',
+            'label' => __('Per page', 'event-integration'),
+            'name' => 'mod_event_per_page',
+            'type' => 'number',
+            'instructions' => __('Number of events to display per page.', 'event-integration'),
+            'required' => 1,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_5b2ace4dc65a8',
+                        'operator' => '==',
+                        'value' => 'index',
+                    ),
+                    1 => array(
+                        'field' => 'field_584ec8318df1d',
+                        'operator' => '==',
+                        'value' => '1',
+                    ),
+                ),
+            ),
+            'wrapper' => array(
+                'width' => '33',
+                'class' => '',
+                'id' => '',
+            ),
+            'default_value' => '',
+            'placeholder' => '',
+            'prepend' => '',
+            'append' => '',
+            'min' => '',
+            'max' => '',
+            'step' => '',
+        ),
+        5 => array(
             'key' => 'field_58e6370d4f34c',
             'label' => __('Archive link', 'event-integration'),
             'name' => 'mod_event_archive',
@@ -133,7 +167,7 @@
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        5 => array(
+        6 => array(
             'key' => 'field_591af4eeb1561',
             'label' => __('Pagination button limit', 'event-integration'),
             'name' => 'mod_event_pagination_limit',
@@ -167,7 +201,7 @@
             'max' => '',
             'step' => '',
         ),
-        6 => array(
+        7 => array(
             'key' => 'field_591b06d53284e',
             'label' => __('Show pagination arrows', 'event-integration'),
             'name' => 'mod_event_nav_arrows',
@@ -199,7 +233,7 @@
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        7 => array(
+        8 => array(
             'key' => 'field_583ffd8d10925',
             'label' => __('Days interval', 'event-integration'),
             'name' => 'mod_event_interval',
@@ -220,7 +254,7 @@
             'max' => '',
             'step' => '',
         ),
-        8 => array(
+        9 => array(
             'key' => 'field_583fefb6634a1',
             'label' => __('Fields', 'event-integration'),
             'name' => 'mod_event_fields',
@@ -239,15 +273,15 @@
                 'location' => __('Location', 'event-integration'),
                 'description' => __('Description', 'event-integration'),
             ),
+            'allow_custom' => 0,
+            'save_custom' => 0,
             'default_value' => array(
             ),
             'layout' => 'vertical',
             'toggle' => 1,
             'return_format' => 'value',
-            'allow_custom' => 0,
-            'save_custom' => 0,
         ),
-        9 => array(
+        10 => array(
             'key' => 'field_5b2ae170ae36f',
             'label' => __('Image ratio', 'event-integration'),
             'name' => 'mod_event_image_ratio',
@@ -288,7 +322,7 @@
             'return_format' => 'value',
             'placeholder' => '',
         ),
-        10 => array(
+        11 => array(
             'key' => 'field_58de5b2d62d45',
             'label' => __('Occasion position', 'event-integration'),
             'name' => 'mod_event_occ_pos',
@@ -325,7 +359,7 @@
             'layout' => 'vertical',
             'return_format' => 'value',
         ),
-        11 => array(
+        12 => array(
             'key' => 'field_583fee36634a0',
             'label' => __('Description letter limit', 'event-integration'),
             'name' => 'mod_event_descr_limit',
@@ -354,7 +388,7 @@
             'max' => '',
             'step' => '',
         ),
-        12 => array(
+        13 => array(
             'key' => 'field_586cf5c8d3686',
             'label' => __('Groups', 'event-integration'),
             'name' => 'mod_event_groups_show',
@@ -373,7 +407,7 @@
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        13 => array(
+        14 => array(
             'key' => 'field_586cf5d0d3687',
             'label' => __('Select groups', 'event-integration'),
             'name' => 'mod_event_groups_list',
@@ -403,7 +437,7 @@
             'return_format' => 'id',
             'multiple' => 0,
         ),
-        14 => array(
+        15 => array(
             'key' => 'field_58455b0e93178',
             'label' => __('Categories', 'event-integration'),
             'name' => 'mod_event_categories_show',
@@ -422,7 +456,7 @@
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        15 => array(
+        16 => array(
             'key' => 'field_5845578c5f0a0',
             'label' => __('Select categories', 'event-integration'),
             'name' => 'mod_event_categories_list',
@@ -452,7 +486,7 @@
             'return_format' => 'id',
             'multiple' => 0,
         ),
-        16 => array(
+        17 => array(
             'key' => 'field_58458b20dde03',
             'label' => __('Tags', 'event-integration'),
             'name' => 'mod_event_tags_show',
@@ -471,7 +505,7 @@
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        17 => array(
+        18 => array(
             'key' => 'field_58458b57dde04',
             'label' => __('Select tags', 'event-integration'),
             'name' => 'mod_event_tags_list',
@@ -501,7 +535,7 @@
             'return_format' => 'id',
             'multiple' => 0,
         ),
-        18 => array(
+        19 => array(
             'key' => 'field_584f9e68aa31a',
             'label' => __('Default image', 'event-integration'),
             'name' => 'mod_event_def_image',
@@ -525,7 +559,7 @@
             'max_size' => '',
             'mime_types' => 'jpg, jpeg, png, gif',
         ),
-        19 => array(
+        20 => array(
             'key' => 'field_58abf724d46f6',
             'label' => __('Location', 'event-integration'),
             'name' => 'mod_event_geographic',
@@ -543,7 +577,7 @@
             'zoom' => 16,
             'height' => '',
         ),
-        20 => array(
+        21 => array(
             'key' => 'field_58abf72bd46f7',
             'label' => __('Distance from location', 'event-integration'),
             'name' => 'mod_event_distance',
@@ -563,6 +597,88 @@
             'min' => '',
             'max' => '',
             'step' => '',
+        ),
+        22 => array(
+            'key' => 'field_5c5d4d9407267',
+            'label' => __('Filters', 'event-integration'),
+            'name' => 'mod_event_filters_group',
+            'type' => 'group',
+            'instructions' => __('Activate search and filters.', 'event-integration'),
+            'required' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_5b2ace4dc65a8',
+                        'operator' => '==',
+                        'value' => 'index',
+                    ),
+                ),
+            ),
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'layout' => 'block',
+            'sub_fields' => array(
+                0 => array(
+                    'key' => 'field_5c5d4dbd07268',
+                    'label' => __('Text search', 'event-integration'),
+                    'name' => 'mod_event_filter_search',
+                    'type' => 'true_false',
+                    'instructions' => '',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '33',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'message' => '',
+                    'default_value' => 0,
+                    'ui' => 1,
+                    'ui_on_text' => '',
+                    'ui_off_text' => '',
+                ),
+                1 => array(
+                    'key' => 'field_5c5d501e9acbb',
+                    'label' => __('Categories', 'event-integration'),
+                    'name' => 'mod_event_filter_categories',
+                    'type' => 'true_false',
+                    'instructions' => '',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '33',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'message' => '',
+                    'default_value' => 0,
+                    'ui' => 1,
+                    'ui_on_text' => '',
+                    'ui_off_text' => '',
+                ),
+                2 => array(
+                    'key' => 'field_5c5d50499acbc',
+                    'label' => __('Date search', 'event-integration'),
+                    'name' => 'mod_event_filter_dates',
+                    'type' => 'true_false',
+                    'instructions' => '',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '33',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'message' => '',
+                    'default_value' => 0,
+                    'ui' => 1,
+                    'ui_on_text' => '',
+                    'ui_off_text' => '',
+                ),
+            ),
         ),
     ),
     'location' => array(
