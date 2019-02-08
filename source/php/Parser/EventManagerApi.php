@@ -359,8 +359,8 @@ class EventManagerApi extends \EventManagerIntegration\Parser
     {
         if (!empty(get_object_taxonomies('event'))) {
             foreach (get_object_taxonomies('event') as $taxonomy) {
-                // Skip Event Groups
-                if ($taxonomy == 'event_groups') {
+                // Skip Event Groups and categories
+                if ($taxonomy == 'event_groups' || $taxonomy == 'event_categories') {
                     continue;
                 }
 
