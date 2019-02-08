@@ -6,7 +6,8 @@ class Event extends \Modularity\Module
 {
     public $slug = 'event';
     public $supports = array();
-    public $templateDir = EVENTMANAGERINTEGRATION_VIEW_PATH;
+    public $templateDir = EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/Event/views/';
+
     /* Set to 'dev' or 'min' */
     public static $assetSuffix = 'min';
 
@@ -24,8 +25,8 @@ class Event extends \Modularity\Module
     {
         $template = $this->data['mod_event_display'] ?? 'list';
         $this->getTemplateData($template);
-        return apply_filters('EventManagerIntegration/Module/Template', 'event-' . $template . '.blade.php', $this,
-            $this->data);
+
+        return 'event-'.$template.'.blade.php';
     }
 
     public function getTemplateData($template)
@@ -33,7 +34,7 @@ class Event extends \Modularity\Module
         $template = explode('-', $template);
         $template = array_map('ucwords', $template);
         $template = implode('', $template);
-        $class = '\EventManagerIntegration\Module\Event\TemplateController\\' . $template . 'Template';
+        $class = '\EventManagerIntegration\Module\Event\TemplateController\\'.$template.'Template';
 
         if (class_exists($class)) {
             $controller = new $class($this, $this->args, $this->data);
@@ -53,10 +54,14 @@ class Event extends \Modularity\Module
         $data = get_fields($id);
         $data['pagesCount'] = $this->countPages($id);
         $data['events'] = $this->getEvents($id, $page);
-        $data['mod_event_fields'] = isset($data['mod_event_fields']) && is_array($data['mod_event_fields']) ? $data['mod_event_fields'] : array();
+        $data['mod_event_fields'] = isset($data['mod_event_fields']) && is_array($data['mod_event_fields'])
+            ? $data['mod_event_fields'] : array();
         $data['descr_limit'] = !empty($data['mod_event_descr_limit']) ? $data['mod_event_descr_limit'] : null;
         $data['date_now'] = strtotime('now');
-        $data['classes'] = !empty($this->args) ? implode(' ', apply_filters('Modularity/Module/Classes', array('box', 'box-panel'), 'mod-event', $this->args)) : array();
+        $data['classes'] = !empty($this->args) ? implode(
+            ' ',
+            apply_filters('Modularity/Module/Classes', array('box', 'box-panel'), 'mod-event', $this->args)
+        ) : array();
 
         return $data;
     }
@@ -66,7 +71,12 @@ class Event extends \Modularity\Module
      */
     public function ajaxPagination()
     {
-        echo \EventManagerIntegration\Helper\RenderBlade::blade('partials/list', $this->data());
+        echo \EventManagerIntegration\Helper\RenderBlade::blade(
+            'partials/list',
+            $this->data(),
+            $this->templateDir
+        );
+
         wp_die();
     }
 
@@ -83,7 +93,8 @@ class Event extends \Modularity\Module
         $total_posts = count($events);  //Total number of posts returned
         $pages = ceil($total_posts / $max_per_page);
 
-        if (isset($fields->mod_event_pagination_limit) && $fields->mod_event_pagination_limit >= 0 && $fields->mod_event_pagination_limit <= $pages) {
+        if (isset($fields->mod_event_pagination_limit) && $fields->mod_event_pagination_limit >= 0
+            && $fields->mod_event_pagination_limit <= $pages) {
             $pages = $fields->mod_event_pagination_limit;
         }
 
@@ -126,7 +137,8 @@ class Event extends \Modularity\Module
         }
 
         $taxonomies = (!empty($taxonomies)) ? $taxonomies : null;
-        $params = array('start_date' => $start_date,
+        $params = array(
+            'start_date' => $start_date,
             'end_date' => $end_date,
             'display_limit' => $display_limit,
             'taxonomies' => $taxonomies,
@@ -145,7 +157,13 @@ class Event extends \Modularity\Module
      */
     public function script()
     {
-        wp_enqueue_script('vendor-pagination', EVENTMANAGERINTEGRATION_URL . '/source/js/vendor/simple-pagination/jquery.simplePagination.min.js', 'jquery', false, true);
+        wp_enqueue_script(
+            'vendor-pagination',
+            EVENTMANAGERINTEGRATION_URL.'/source/js/vendor/simple-pagination/jquery.simplePagination.min.js',
+            'jquery',
+            false,
+            true
+        );
 
     }
 
