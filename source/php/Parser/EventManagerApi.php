@@ -48,7 +48,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         $this->removeDeletedEvents($eventIds);
         $this->removeExpiredOccasions();
         $this->removeExpiredEvents();
-        $this->deleteEmptyTaxonomies();
+        //$this->deleteEmptyTaxonomies();
     }
 
     /**
