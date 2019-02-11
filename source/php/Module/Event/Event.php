@@ -6,7 +6,8 @@ class Event extends \Modularity\Module
 {
     public $slug = 'event';
     public $supports = array();
-    public $templateDir = EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/Event/views/';
+    public $templateDir = EVENTMANAGERINTEGRATION_PATH.'source/php/Module/Event/views/';
+    public $template;
 
     /* Set to 'dev' or 'min' */
     public static $assetSuffix = 'min';
@@ -23,10 +24,10 @@ class Event extends \Modularity\Module
 
     public function template()
     {
-        $template = $this->data['mod_event_display'] ?? 'list';
-        $this->getTemplateData($template);
+        $this->template = $this->data['mod_event_display'] ?? 'list';
+        $this->getTemplateData($this->template);
 
-        return 'event-'.$template.'.blade.php';
+        return 'event-'.$this->template.'.blade.php';
     }
 
     public function getTemplateData($template)
@@ -153,7 +154,6 @@ class Event extends \Modularity\Module
 
     /**
      * Enqueue your scripts and/or styles with wp_enqueue_script / wp_enqueue_style
-     * @return
      */
     public function script()
     {
@@ -165,6 +165,20 @@ class Event extends \Modularity\Module
             true
         );
 
+        if ($this->template === 'index') {
+            // Enqueue React
+            class_exists('\Modularity\Helper\React') ?
+                \Modularity\Helper\React::enqueue() :
+                \EventManagerIntegration\Helper\React::enqueue();
+
+            wp_enqueue_script(
+                'modularity-'.$this->slug,
+                EVENTMANAGERINTEGRATION_URL.'/dist/'.\EventManagerIntegration\Helper\CacheBust::name(
+                    'js/Module/Event/Index.js'
+                ),
+                array('jquery', 'react', 'react-dom')
+            );
+        }
     }
 
     /**
