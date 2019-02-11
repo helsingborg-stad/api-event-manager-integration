@@ -152,7 +152,7 @@ gulp.task('scripts', function() {
         .pipe(gulp.dest('dist/.tmp/js'));
 
     var filePath = 'source/js/';
-    var files = ['ModuleEvent/Index.js'];
+    var files = ['Module/Event/Index.js'];
 
     var tasks = files.map(function(entry) {
         return (
