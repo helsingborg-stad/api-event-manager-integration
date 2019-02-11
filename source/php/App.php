@@ -59,11 +59,12 @@ class App
     public function enqueueAdmin()
     {
         // Styles
-        wp_register_style('event-integration-admin', EVENTMANAGERINTEGRATION_URL . '/dist/css/event-manager-integration-admin.' . self::$assetSuffix . '.css');
+        wp_register_style('event-integration',
+            EVENTMANAGERINTEGRATION_URL . '/dist/' . Helper\CacheBust::name('css/event-manager-integration-admin.css'));
         wp_enqueue_style('event-integration-admin');
 
         // Scripts
-        wp_register_script('event-integration-admin', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-integration-admin.' . self::$assetSuffix . '.js', true);
+        wp_register_script('event-integration-admin', EVENTMANAGERINTEGRATION_URL . '/dist/' . Helper\CacheBust::name('js/event-integration-admin.js'), true);
         wp_localize_script('event-integration-admin', 'eventintegration', array(
             'ajaxurl' => admin_url('admin-ajax.php')
         ));
@@ -88,14 +89,15 @@ class App
     public function enqueueFront()
     {
         // Styles
-        wp_register_style('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/css/event-manager-integration.' . self::$assetSuffix . '.css');
+        wp_register_style('event-integration',
+            EVENTMANAGERINTEGRATION_URL . '/dist/' . Helper\CacheBust::name('css/event-manager-integration.css'));
         wp_enqueue_style('event-integration');
 
         // Scripts
-        wp_register_script('auto-complete', EVENTMANAGERINTEGRATION_URL . '/dist/js/vendor/auto-complete/auto-complete.min.js', 'jquery', false, true);
+        wp_register_script('auto-complete', EVENTMANAGERINTEGRATION_URL . '/source/js/vendor/auto-complete/auto-complete.min.js', 'jquery', false, true);
         wp_enqueue_script('auto-complete');
 
-        wp_register_script('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/js/event-integration.' . self::$assetSuffix . '.js', 'jquery', false, true);
+        wp_register_script('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/' . Helper\CacheBust::name('js/event-integration-front.js'), 'jquery', false, true);
         wp_localize_script('event-integration', 'eventintegration', array(
             'ajaxurl' => admin_url('admin-ajax.php'),
             'apiurl' => get_field('event_api_url', 'option'),
@@ -192,7 +194,7 @@ class App
         $api_url = get_field('event_api_url', 'option');
         if ($api_url) {
             $api_url = rtrim($api_url, '/') . '/user_groups';
-            new \EventManagerIntegration\Parser\EventManagerGroups($api_url);
+            new Parser\EventManagerGroups($api_url);
         }
     }
 
