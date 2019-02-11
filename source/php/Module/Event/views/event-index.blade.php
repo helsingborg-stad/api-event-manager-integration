@@ -1,4 +1,4 @@
-<div class="grid {{ $classes }} {{ isset($font_size) ? $font_size : '' }}" data-module-id="{{ $ID }}">
+<div class="{{ $classes }}">
     @if (!$hideTitle && !empty($post_title))
         <div class="grid-xs-12 u-mb-4">
             <h4 class="box-title">{!! apply_filters('the_title', $post_title) !!}</h4>
@@ -7,18 +7,18 @@
 
     <div class="grid-xs-12">
         <div class="grid grid--columns">
-            @foreach ($events as $event)
-                <div class="{{$gridColumn}} u-flex">
-                    @include('partials.card')
+            <div class="modularity-event-{{ $template }}"
+                 data-archive-url="{{ $archive_url }}"
+            >
+                <div class="gutter gutter-xl">
+                    <div class="loading">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
                 </div>
-            @endforeach
+            </div>
         </div>
     </div>
-
-    @if ($mod_event_archive)
-        <div class="grid-xs-12 u-text-center">
-            <a class="btn btn-primary" href="{{ get_post_type_archive_link('event') }}"><?php _e('More events', 'event-integration'); ?></a>
-        </div>
-    @endif
 </div>
-
