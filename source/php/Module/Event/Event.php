@@ -9,9 +9,6 @@ class Event extends \Modularity\Module
     public $templateDir = EVENTMANAGERINTEGRATION_PATH.'source/php/Module/Event/views/';
     public $template;
 
-    /* Set to 'dev' or 'min' */
-    public static $assetSuffix = 'min';
-
     public function init()
     {
         $this->nameSingular = __('Event', 'event-integration');
@@ -24,7 +21,6 @@ class Event extends \Modularity\Module
 
     public function template()
     {
-        $this->template = $this->data['mod_event_display'] ?? 'list';
         $this->getTemplateData($this->template);
 
         return 'event-'.$this->template.'.blade.php';
@@ -53,6 +49,9 @@ class Event extends \Modularity\Module
         $id = $this->ID ?? $_POST['id'] ?? null;
         $page = (!empty($_POST['page'])) ? $_POST['page'] : 1;
         $data = get_fields($id);
+        $this->template = !empty($data['mod_event_display']) ? $data['mod_event_display'] : 'list';
+        $data['template'] = $this->template;
+        $data['archive_url'] =  get_post_type_archive_link('event');
         $data['pagesCount'] = $this->countPages($id);
         $data['events'] = $this->getEvents($id, $page);
         $data['mod_event_fields'] = isset($data['mod_event_fields']) && is_array($data['mod_event_fields'])
@@ -178,6 +177,14 @@ class Event extends \Modularity\Module
                 ),
                 array('jquery', 'react', 'react-dom')
             );
+
+            wp_localize_script(
+                'modularity-'.$this->slug,
+                'modEvent',
+                array(
+                )
+            );
+
         }
     }
 
