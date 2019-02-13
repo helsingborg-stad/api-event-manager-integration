@@ -296,8 +296,8 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         global $wpdb;
         $post_type = 'event';
         // Get all events from databse
-        $query = "SELECT ID FROM $wpdb->posts WHERE post_type = %s AND post_status = %s";
-        $completeQuery = $wpdb->prepare($query, $post_type, 'publish');
+        $query = "SELECT ID FROM $wpdb->posts WHERE post_type = %s AND (post_status = %s or post_status = %s)";
+        $completeQuery = $wpdb->prepare($query, $post_type, 'publish', 'draft');
         $events = $wpdb->get_results($completeQuery);
 
         if (count($events) == 0) {
