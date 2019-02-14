@@ -84,6 +84,12 @@ class Events
                 'type' => 'float',
                 'default' => null,
             ),
+            'module_id' => array(
+                'description' => 'The module ID',
+                'type' => 'integer',
+                'default' => 0,
+                'sanitize_callback' => 'absint',
+            ),
         );
     }
 
@@ -128,9 +134,7 @@ class Events
      */
     public function sanitizePerPage($data)
     {
-        $data = absint($data);
-
-        return ($data >= 1 && $data <= 100) ? $data : 10;
+        return intval($data);
     }
 
     /**
