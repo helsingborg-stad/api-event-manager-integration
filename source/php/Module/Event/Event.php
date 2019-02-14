@@ -49,15 +49,24 @@ class Event extends \Modularity\Module
         $id = $this->ID ?? $_POST['id'] ?? null;
         $page = (!empty($_POST['page'])) ? $_POST['page'] : 1;
         $data = get_fields($id);
+
+        // Cards module data
+        $data['settings'] = $data;
         $this->template = !empty($data['mod_event_display']) ? $data['mod_event_display'] : 'list';
         $data['template'] = $this->template;
-        $data['archive_url'] =  get_post_type_archive_link('event');
+        $data['archive_url'] = get_post_type_archive_link('event');
+        $data['rest_url'] = get_rest_url();
+        $days_ahead = isset($data['mod_event_interval']) ? $data['mod_event_interval'] : 0;
+        $data['end_date'] = date('Y-m-d', strtotime("today midnight +$days_ahead days"));
+
+        // List module data
         $data['pagesCount'] = $this->countPages($id);
         $data['events'] = $this->getEvents($id, $page);
         $data['mod_event_fields'] = isset($data['mod_event_fields']) && is_array($data['mod_event_fields'])
             ? $data['mod_event_fields'] : array();
         $data['descr_limit'] = !empty($data['mod_event_descr_limit']) ? $data['mod_event_descr_limit'] : null;
         $data['date_now'] = strtotime('now');
+
         $data['classes'] = !empty($this->args) ? implode(
             ' ',
             apply_filters('Modularity/Module/Classes', array('box', 'box-panel'), 'mod-event', $this->args)
@@ -182,6 +191,7 @@ class Event extends \Modularity\Module
                 'modularity-'.$this->slug,
                 'modEvent',
                 array(
+                    'moreEvents' => __('More events', 'event-integration'),
                 )
             );
 
