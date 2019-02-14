@@ -14,7 +14,7 @@ class QueryEvents
      *                                  object      'location'      object with location data
      *                                  string      'distance'      max distance from location
      * @param  int          $page       selected pagination page number
-     * @return object                   post object with events
+     * @return array                    Events list
      */
     public static function getEventsByInterval($params, $page = 1)
     {
@@ -22,10 +22,10 @@ class QueryEvents
 
         $idString = null;
         // Get event near a location
-        if (! empty($params['location'])) {
-            $location = $params['location'];
+        $location = !empty($params['location']) ? (array)$params['location'] : null;
+        if (!empty($location['lat']) && !empty($location['lng'])) {
             $distance = (! empty($params['distance'])) ? $params['distance'] : 0;
-            $locationIds  = self::getNearbyLocations($location->lat, $location->lng, floatval($distance));
+            $locationIds  = self::getNearbyLocations($location['lat'], $location['lng'], floatval($distance));
             $idString = ($locationIds) ? implode(',', array_column($locationIds, 'post_id')) : "0";
         }
 
