@@ -16,6 +16,7 @@ class App
         /* Register cron action */
         add_action('import_events_daily', array($this, 'importEventsCron'));
 
+        new Api\Events();
         new OAuth\OAuthAdmin();
         new OAuth\OAuthRequests();
         new PostTypes\Events();
