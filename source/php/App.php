@@ -59,7 +59,7 @@ class App
     public function enqueueAdmin()
     {
         // Styles
-        wp_register_style('event-integration',
+        wp_register_style('event-integration-admin',
             EVENTMANAGERINTEGRATION_URL . '/dist/' . Helper\CacheBust::name('css/event-manager-integration-admin.css'));
         wp_enqueue_style('event-integration-admin');
 
