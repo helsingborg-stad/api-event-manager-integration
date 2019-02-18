@@ -62,7 +62,7 @@ class Event extends React.Component {
                 <div className="grid grid--columns">
                     {items.map(event => (
                         <div className={`u-flex ${gridColumn}`} key={uuidv1()}>
-                            <Card event={event} />
+                            <Card event={event} settings={settings} />
                         </div>
                     ))}
                 </div>
