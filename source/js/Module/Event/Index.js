@@ -5,7 +5,17 @@ const translation = modEvent;
 
 for (let i = 0; i < domElements.length; i++) {
     const element = domElements[i];
-    const { moduleId, settings, restUrl, gridColumn, archiveUrl, endDate } = element.dataset;
+    const {
+        moduleId,
+        settings,
+        restUrl,
+        gridColumn,
+        archiveUrl,
+        endDate,
+        lat,
+        lng,
+        distance,
+    } = element.dataset;
 
     ReactDOM.render(
         <Event
@@ -16,6 +26,9 @@ for (let i = 0; i < domElements.length; i++) {
             restUrl={restUrl}
             archiveUrl={archiveUrl}
             endDate={endDate}
+            lat={lat}
+            lng={lng}
+            distance={distance}
         />,
         element
     );
