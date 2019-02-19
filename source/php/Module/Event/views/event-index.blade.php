@@ -16,6 +16,9 @@
              data-lat="{{ $lat }}"
              data-lng="{{ $lng }}"
              data-distance="{{ $distance }}"
+             data-categories="{{ json_encode($categories) }}"
+             data-groups="{{ json_encode($groups) }}"
+             data-tags="{{ json_encode($tags) }}"
         >
         </div>
     </div>

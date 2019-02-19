@@ -15,6 +15,9 @@ for (let i = 0; i < domElements.length; i++) {
         lat,
         lng,
         distance,
+        categories,
+        tags,
+        groups,
     } = element.dataset;
 
     ReactDOM.render(
@@ -29,6 +32,9 @@ for (let i = 0; i < domElements.length; i++) {
             lat={lat}
             lng={lng}
             distance={distance}
+            categories={JSON.parse(categories)}
+            tags={JSON.parse(tags)}
+            groups={JSON.parse(groups)}
         />,
         element
     );

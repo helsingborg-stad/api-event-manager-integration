@@ -30,8 +30,15 @@ class Event extends React.Component {
             lat,
             lng,
             distance,
+            categories,
+            tags,
+            groups,
         } = this.props;
         const perPage = settings.mod_event_pagination ? settings.mod_event_per_page : -1;
+
+        const taxonomies = categories.concat(tags, groups);
+        console.log('Taxonomies');
+        console.log(taxonomies);
 
         const url = `${restUrl}wp/v2/event/module`;
         const params = {
@@ -42,7 +49,10 @@ class Event extends React.Component {
             lat: lat,
             lng: lng,
             distance: distance,
+            taxonomies: taxonomies,
         };
+
+        console.log(params);
 
         getEvents(url, params)
             .then(response => {
@@ -62,12 +72,8 @@ class Event extends React.Component {
         const { error, isLoaded, items } = this.state;
         const { settings, translation, gridColumn, archiveUrl } = this.props;
 
-        if (error) {
-            return (
-                <Notice type="warning" icon>
-                    TODO error message here
-                </Notice>
-            );
+        if (error || (isLoaded && items.count === 0)) {
+            return <Notice type="info">{translation.noEventsFound}</Notice>;
         }
 
         if (!isLoaded) {
@@ -76,10 +82,6 @@ class Event extends React.Component {
                     <PreLoader />
                 </div>
             );
-        }
-
-        if (items.count === 0) {
-            return <div className="gutter">{translation.noEventsFound}</div>;
         }
 
         return (
