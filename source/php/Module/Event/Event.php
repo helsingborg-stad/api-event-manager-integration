@@ -61,6 +61,10 @@ class Event extends \Modularity\Module
         $data['lat'] = (isset($data['mod_event_geographic']['lat'])) ? $data['mod_event_geographic']['lat'] : null;
         $data['lng'] = (isset($data['mod_event_geographic']['lng'])) ? $data['mod_event_geographic']['lng'] : null;
         $data['distance'] = (isset($data['mod_event_distance'])) ? $data['mod_event_distance'] : null;
+        // Taxonomies filter
+        $data['categories'] = $this->getModuleCategories($id);
+        $data['groups'] = $this->getModuleGroups($id);
+        $data['tags'] = $this->getModuleTags($id);
 
         // List module data
         $data['pagesCount'] = $this->countPages($id);
@@ -131,22 +135,11 @@ class Event extends \Modularity\Module
         $end_date = date('Y-m-d H:i:s', strtotime("tomorrow midnight +$days_ahead days") - 1);
 
         // Save categories, groups and tags IDs to array
-        $taxonomies = array();
-        if (isset($fields->mod_event_categories_show) && $fields->mod_event_categories_show == false && isset($fields->mod_event_categories_list) && !empty($fields->mod_event_categories_list)) {
-            foreach ($fields->mod_event_categories_list as $v) {
-                $taxonomies[] = $v;
-            }
-        }
-        if (isset($fields->mod_event_groups_show) && $fields->mod_event_groups_show == false && isset($fields->mod_event_groups_list) && !empty($fields->mod_event_groups_list)) {
-            foreach ($fields->mod_event_groups_list as $v) {
-                $taxonomies[] = $v;
-            }
-        }
-        if (isset($fields->mod_event_tags_show) && $fields->mod_event_tags_show == false && isset($fields->mod_event_tags_list) && !empty($fields->mod_event_tags_list)) {
-            foreach ($fields->mod_event_tags_list as $v) {
-                $taxonomies[] = $v;
-            }
-        }
+        $taxonomies = array_merge(
+            $this->getModuleCategories($module_id),
+            $this->getModuleGroups($module_id),
+            $this->getModuleTags($module_id)
+        );
 
         $taxonomies = (!empty($taxonomies)) ? $taxonomies : null;
         $params = array(
@@ -161,6 +154,60 @@ class Event extends \Modularity\Module
         $events = \EventManagerIntegration\Helper\QueryEvents::getEventsByInterval($params, $page);
 
         return $events;
+    }
+
+    /**
+     * Return categories filter
+     * @param int $moduleId The module ID
+     * @return array|null
+     */
+    public function getModuleCategories($moduleId): array
+    {
+        $categories = array();
+        $showAllCategories = get_field('mod_event_categories_show', $moduleId);
+
+        $moduleCategories = get_field('mod_event_categories_list', $moduleId);
+        if ($showAllCategories === false && !empty($moduleCategories) && is_array($moduleCategories)) {
+            $categories = $moduleCategories;
+        }
+
+        return $categories;
+    }
+
+    /**
+     * Return groups filter
+     * @param int $moduleId The module ID
+     * @return array|null
+     */
+    public function getModuleGroups($moduleId): array
+    {
+        $groups = array();
+        $showAllGroups = get_field('mod_event_groups_show', $moduleId);
+
+        $moduleGroups = get_field('mod_event_groups_list', $moduleId);
+        if ($showAllGroups === false && !empty($moduleGroups) && is_array($moduleGroups)) {
+            $groups = $moduleGroups;
+        }
+
+        return $groups;
+    }
+
+    /**
+     * Return tags filter
+     * @param int $moduleId The module ID
+     * @return array|null
+     */
+    public function getModuleTags($moduleId): array
+    {
+        $tags = array();
+        $showAllTags = get_field('mod_event_tags_show', $moduleId);
+
+        $moduleTags = get_field('mod_event_tags_list', $moduleId);
+        if ($showAllTags === false && !empty($moduleTags) && is_array($moduleTags)) {
+            $tags = $moduleTags;
+        }
+
+        return $tags;
     }
 
     /**
