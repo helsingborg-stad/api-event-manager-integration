@@ -58,6 +58,9 @@ class Event extends \Modularity\Module
         $data['rest_url'] = get_rest_url();
         $days_ahead = isset($data['mod_event_interval']) ? $data['mod_event_interval'] : 0;
         $data['end_date'] = date('Y-m-d', strtotime("today midnight +$days_ahead days"));
+        $data['lat'] = (isset($data['mod_event_geographic']['lat'])) ? $data['mod_event_geographic']['lat'] : null;
+        $data['lng'] = (isset($data['mod_event_geographic']['lng'])) ? $data['mod_event_geographic']['lng'] : null;
+        $data['distance'] = (isset($data['mod_event_distance'])) ? $data['mod_event_distance'] : null;
 
         // List module data
         $data['pagesCount'] = $this->countPages($id);
@@ -192,6 +195,7 @@ class Event extends \Modularity\Module
                 'modEvent',
                 array(
                     'moreEvents' => __('More events', 'event-integration'),
+                    'noEventsFound' => __('No events found', 'event-integration'),
                 )
             );
 

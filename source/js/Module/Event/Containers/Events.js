@@ -8,6 +8,7 @@ class Event extends React.Component {
     constructor() {
         super();
         this.state = {
+            page: 1,
             error: null,
             isLoaded: false,
             items: [],
@@ -19,11 +20,31 @@ class Event extends React.Component {
     }
 
     getEvents = () => {
-        const { translation, restUrl, moduleId, settings, endDate } = this.props;
+        const { page } = this.state;
+        const {
+            translation,
+            restUrl,
+            moduleId,
+            settings,
+            endDate,
+            lat,
+            lng,
+            distance,
+        } = this.props;
         const perPage = settings.mod_event_pagination ? settings.mod_event_per_page : -1;
-        const url = `${restUrl}wp/v2/event/module?end_date=${endDate}&per_page=${perPage}&page=1&module_id=${moduleId}`;
 
-        getEvents(url)
+        const url = `${restUrl}wp/v2/event/module`;
+        const params = {
+            end_date: endDate,
+            per_page: perPage,
+            page: page,
+            module_id: moduleId,
+            lat: lat,
+            lng: lng,
+            distance: distance,
+        };
+
+        getEvents(url, params)
             .then(response => {
                 console.log(response);
                 this.setState({
@@ -55,6 +76,10 @@ class Event extends React.Component {
                     <PreLoader />
                 </div>
             );
+        }
+
+        if (items.count === 0) {
+            return <div className="gutter">{translation.noEventsFound}</div>;
         }
 
         return (

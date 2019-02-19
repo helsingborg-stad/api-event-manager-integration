@@ -13,6 +13,9 @@
              data-archive-url="{{ $archive_url }}"
              data-rest-url="{{ $rest_url }}"
              data-end-date="{{ $end_date }}"
+             data-lat="{{ $lat }}"
+             data-lng="{{ $lng }}"
+             data-distance="{{ $distance }}"
         >
         </div>
     </div>
