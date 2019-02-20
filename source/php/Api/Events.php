@@ -90,6 +90,12 @@ class Events
                 'default' => 0,
                 'sanitize_callback' => 'absint',
             ),
+            'search_string' => array(
+                'description' => 'Filter by search string',
+                'type' => 'string',
+                'default' => '',
+                'sanitize_callback' => 'sanitize_text_field',
+            ),
         );
     }
 
