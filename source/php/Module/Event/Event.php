@@ -245,9 +245,9 @@ class Event extends \Modularity\Module
                     'noEventsFound' => __('No events found', 'event-integration'),
                     'next' => __('Next', 'event-integration'),
                     'prev' => __('Previous', 'event-integration'),
+                    'search' => __('Search', 'event-integration'),
                 )
             );
-
         }
     }
 
