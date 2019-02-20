@@ -13,6 +13,11 @@ const getQueryString = params =>
 
 const getEvents = (url, params) => {
     const queryString = getQueryString(params);
+    const data = {
+        items: [],
+        totalCount: 0,
+        totalPages: 0,
+    };
 
     return fetch(`${url}?${queryString}`, {
         credentials: 'include',
@@ -23,11 +28,18 @@ const getEvents = (url, params) => {
     })
         .then(response => {
             if (response.ok) {
+                data.totalCount = parseInt(response.headers.get('x-wp-total'));
+                data.totalPages = parseInt(response.headers.get('x-wp-totalpages'));
+
                 return response.json();
             }
             throw Error(response.statusText);
         })
-        .then(response => response);
+        .then(response => {
+            data.items = response;
+
+            return data;
+        });
 };
 
 export { getEvents };
