@@ -243,6 +243,8 @@ class Event extends \Modularity\Module
                 array(
                     'moreEvents' => __('More events', 'event-integration'),
                     'noEventsFound' => __('No events found', 'event-integration'),
+                    'next' => __('Next', 'event-integration'),
+                    'prev' => __('Previous', 'event-integration'),
                 )
             );
 

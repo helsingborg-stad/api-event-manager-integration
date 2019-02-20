@@ -147,8 +147,9 @@ class Events
         // Get params
         $params = $request->get_params();
 
-        // Replace per_page with display_limit for backward compatibility
-        $params['display_limit'] = $params['per_page'];
+        // Set display limit to -1 to get all events
+        $params['display_limit'] = -1;
+
         // Save coordinates to location array
         if (!empty($params['lat']) && !empty($params['lng'])) {
             $params['location'] = array(
@@ -158,7 +159,7 @@ class Events
         }
 
         // Get events
-        $events = \EventManagerIntegration\Helper\QueryEvents::getEventsByInterval($params, $params['page']);
+        $events = \EventManagerIntegration\Helper\QueryEvents::getEventsByInterval($params,1);
         // Return error if result is empty
         if (empty($events)) {
             return new \WP_REST_Response(
@@ -170,15 +171,34 @@ class Events
             );
         }
 
+        // Set total items & pages count
+        $total = count($events);
+        $totalPages = 1;
+
+        // If per page param is not unlimited, get chunk of paged items
+        if ($params['per_page'] !== -1) {
+            // Calculate total pages
+            $totalPages = ceil($total / $params['per_page']);
+            $offset = ($params['page'] - 1) * $params['per_page'];
+            $offset = $offset > 0 ? $offset : 0;
+            $events = array_slice($events, $offset, $params['per_page']);
+        }
+
+        // Sanitize and add meta data to items list
         $events = $this->mapEventModuleData($params['module_id'], $events);
 
-        return $events;
+        $response = rest_ensure_response($events);
+        // Set headers with total counts
+        $response->header('X-WP-Total', $total);
+        $response->header('X-WP-TotalPages', $totalPages);
+
+        return $response;
     }
 
     /**
      * Sanitize and adds data to event list
-     * @param int $moduleId The module ID
-     * @param array $events List of events
+     * @param int   $moduleId The module ID
+     * @param array $events   List of events
      * @return array
      */
     public function mapEventModuleData($moduleId, $events)
