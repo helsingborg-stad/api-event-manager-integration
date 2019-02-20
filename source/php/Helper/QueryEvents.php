@@ -24,20 +24,26 @@ class QueryEvents
         // Get event near a location
         $location = !empty($params['location']) ? (array)$params['location'] : null;
         if (!empty($location['lat']) && !empty($location['lng'])) {
-            $distance = (! empty($params['distance'])) ? $params['distance'] : 0;
-            $locationIds  = self::getNearbyLocations($location['lat'], $location['lng'], floatval($distance));
+            $distance = (!empty($params['distance'])) ? $params['distance'] : 0;
+            $locationIds = self::getNearbyLocations($location['lat'], $location['lng'], floatval($distance));
             $idString = ($locationIds) ? implode(',', array_column($locationIds, 'post_id')) : "0";
         }
 
         // Get taxonomy id string
-        $taxonomies = (! empty($params['taxonomies']) && is_array($params['taxonomies'])) ? implode(",", $params['taxonomies']) : null;
+        $taxonomies = (!empty($params['taxonomies']) && is_array($params['taxonomies'])) ? implode(
+            ",",
+            $params['taxonomies']
+        ) : null;
+
+        // Search by text string
+        $searchString = !empty($params['search_string']) ? $params['search_string'] : null;
 
         // Calculate offset
-        $page = (! is_numeric($page)) ? 1 : $page;
+        $page = (!is_numeric($page)) ? 1 : $page;
         $limit = intval($params['display_limit']);
         $offset = ($page - 1) * $limit;
 
-        $db_table = $wpdb->prefix . "integrate_occasions";
+        $db_table = $wpdb->prefix."integrate_occasions";
         $query = "
         SELECT      *, $wpdb->posts.ID AS ID
         FROM        $wpdb->posts
@@ -48,15 +54,30 @@ class QueryEvents
                     AND $wpdb->posts.post_status = %s
                     AND ($db_table.start_date BETWEEN %s AND %s OR $db_table.end_date BETWEEN %s AND %s)
         ";
+        $query .= ($searchString) ? "AND (($wpdb->posts.post_title LIKE %s) OR ($wpdb->posts.post_content LIKE %s))" : '';
         $query .= ($taxonomies) ? "AND ($wpdb->term_relationships.term_taxonomy_id IN ($taxonomies))" : '';
         $query .= ($idString != null) ? "AND ($wpdb->posts.ID IN ($idString)) " : '';
         $query .= "GROUP BY $wpdb->posts.ID, $db_table.start_date, $db_table.end_date ";
         $query .= "ORDER BY $db_table.start_date ASC";
-        $query .= ($limit == -1) ? '' : ' LIMIT'.' '.$offset . ',' . $limit;
+        $query .= ($limit == -1) ? '' : ' LIMIT'.' '.$offset.','.$limit;
 
-        $postType = 'event';
-        $postStatus = 'publish';
-        $completeQuery = $wpdb->prepare($query, $postType, $postStatus, $params['start_date'], $params['end_date'], $params['start_date'], $params['end_date']);
+        $placeholders = array(
+            'event',
+            'publish',
+            $params['start_date'],
+            $params['end_date'],
+            $params['start_date'],
+            $params['end_date'],
+        );
+        if ($searchString) {
+            $placeholders[] = '%'.$wpdb->esc_like($searchString).'%';
+            $placeholders[] = '%'.$wpdb->esc_like($searchString).'%';
+        }
+
+        $completeQuery = $wpdb->prepare(
+            $query,
+            $placeholders
+        );
         $events = $wpdb->get_results($completeQuery);
 
         return $events;
