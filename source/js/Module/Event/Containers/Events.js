@@ -1,6 +1,7 @@
 import uuidv1 from 'uuid/v1';
 import { Pagination, PreLoader, Notice } from 'hbg-react';
 import Card from '../Components/Card';
+import SearchForm from '../Components/SearchForm';
 import { getEvents } from '../../../Api/events';
 
 class Event extends React.Component {
@@ -12,6 +13,7 @@ class Event extends React.Component {
             items: [],
             currentPage: 1,
             totalPages: 1,
+            searchString: '',
         };
     }
 
@@ -20,9 +22,9 @@ class Event extends React.Component {
     }
 
     getEvents = () => {
-        this.setState({ isLoaded: false });
+        this.setState({ isLoaded: false, error: null });
 
-        const { currentPage } = this.state;
+        const { currentPage, searchString } = this.state;
         const {
             translation,
             restUrl,
@@ -37,9 +39,7 @@ class Event extends React.Component {
             groups,
         } = this.props;
         const perPage = settings.mod_event_pagination ? settings.mod_event_per_page : -1;
-
         const taxonomies = categories.concat(tags, groups);
-
         const url = `${restUrl}wp/v2/event/module`;
         const params = {
             end_date: endDate,
@@ -50,11 +50,13 @@ class Event extends React.Component {
             lng: lng,
             distance: distance,
             taxonomies: taxonomies,
+            search_string: searchString,
         };
 
         getEvents(url, params)
             .then(response => {
                 this.setState({
+                    error: null,
                     isLoaded: true,
                     items: response.items,
                     totalPages: response.totalPages,
@@ -62,7 +64,11 @@ class Event extends React.Component {
             })
             .catch(error => {
                 console.error('Request failed:', error.message);
-                this.setState({ isLoaded: true, error: Error(translation.somethingWentWrong) });
+                this.setState({
+                    items: [],
+                    isLoaded: true,
+                    error: Error(translation.somethingWentWrong),
+                });
             });
     };
 
@@ -96,21 +102,46 @@ class Event extends React.Component {
         });
     };
 
+    updateSearchString = e => {
+        this.setState({
+            searchString: e.target.value,
+        });
+    };
+
+    onSearchSubmit = e => {
+        e.preventDefault();
+        this.setState({ currentPage: 1 }, () => this.getEvents());
+    };
+
     render() {
         const { error, isLoaded, items, currentPage, totalPages } = this.state;
         const { settings, translation, gridColumn, archiveUrl } = this.props;
 
-        if (error || (isLoaded && items.count === 0)) {
-            return <Notice type="info">{translation.noEventsFound}</Notice>;
-        }
-
         return (
             <div>
-                {!isLoaded ? (
-                    <div className="u-p-8">
+                <div className="grid u-mb-3">
+                    <div className="grid-xs-12 grid-md-auto u-mb-2 u-mb-0@md u-mb-0@lg u-mb-0@xl">
+                        <SearchForm
+                            translation={translation}
+                            searchString={this.updateSearchString}
+                            searchSubmit={this.onSearchSubmit}
+                        />
+                    </div>
+                </div>
+
+                {!isLoaded && (
+                    <div className="u-pt-5 u-pb-8">
                         <PreLoader />
                     </div>
-                ) : (
+                )}
+
+                {(error || (isLoaded && items.length === 0)) && (
+                    <div className="u-mb-3">
+                        <Notice type="info">{translation.noEventsFound}</Notice>
+                    </div>
+                )}
+
+                {isLoaded && items.length > 0 && (
                     <div className="grid grid--columns">
                         {items.map(event => (
                             <div className={`u-flex ${gridColumn}`} key={uuidv1()}>
