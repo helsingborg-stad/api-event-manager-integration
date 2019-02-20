@@ -1,6 +1,5 @@
 import uuidv1 from 'uuid/v1';
 import { Pagination, PreLoader, Notice } from 'hbg-react';
-import update from 'immutability-helper';
 import Card from '../Components/Card';
 import { getEvents } from '../../../Api/events';
 
@@ -8,10 +7,11 @@ class Event extends React.Component {
     constructor() {
         super();
         this.state = {
-            page: 1,
             error: null,
             isLoaded: false,
             items: [],
+            currentPage: 1,
+            totalPages: 1,
         };
     }
 
@@ -20,7 +20,9 @@ class Event extends React.Component {
     }
 
     getEvents = () => {
-        const { page } = this.state;
+        this.setState({ isLoaded: false });
+
+        const { currentPage } = this.state;
         const {
             translation,
             restUrl,
@@ -37,14 +39,12 @@ class Event extends React.Component {
         const perPage = settings.mod_event_pagination ? settings.mod_event_per_page : -1;
 
         const taxonomies = categories.concat(tags, groups);
-        console.log('Taxonomies');
-        console.log(taxonomies);
 
         const url = `${restUrl}wp/v2/event/module`;
         const params = {
             end_date: endDate,
             per_page: perPage,
-            page: page,
+            page: currentPage,
             module_id: moduleId,
             lat: lat,
             lng: lng,
@@ -52,14 +52,12 @@ class Event extends React.Component {
             taxonomies: taxonomies,
         };
 
-        console.log(params);
-
         getEvents(url, params)
             .then(response => {
-                console.log(response);
                 this.setState({
                     isLoaded: true,
-                    items: response,
+                    items: response.items,
+                    totalPages: response.totalPages,
                 });
             })
             .catch(error => {
@@ -68,38 +66,82 @@ class Event extends React.Component {
             });
     };
 
+    nextPage = () => {
+        let { currentPage, totalPages } = this.state;
+        if (currentPage === totalPages) {
+            return;
+        }
+        currentPage += 1;
+        this.setState({ currentPage }, () => this.getEvents());
+    };
+
+    prevPage = () => {
+        let { currentPage } = this.state;
+        if (currentPage <= 1) {
+            return;
+        }
+        currentPage -= 1;
+        this.setState({ currentPage }, () => this.getEvents());
+    };
+
+    paginationInput = e => {
+        const { totalPages } = this.state;
+        let currentPage = e.target.value ? parseInt(e.target.value) : '';
+        currentPage = currentPage > totalPages ? totalPages : currentPage;
+
+        this.setState({ currentPage }, () => {
+            if (currentPage) {
+                this.getEvents();
+            }
+        });
+    };
+
     render() {
-        const { error, isLoaded, items } = this.state;
+        const { error, isLoaded, items, currentPage, totalPages } = this.state;
         const { settings, translation, gridColumn, archiveUrl } = this.props;
 
         if (error || (isLoaded && items.count === 0)) {
             return <Notice type="info">{translation.noEventsFound}</Notice>;
         }
 
-        if (!isLoaded) {
-            return (
-                <div className="gutter">
-                    <PreLoader />
-                </div>
-            );
-        }
-
         return (
             <div>
-                <div className="grid grid--columns">
-                    {items.map(event => (
-                        <div className={`u-flex ${gridColumn}`} key={uuidv1()}>
-                            <Card event={event} settings={settings} />
-                        </div>
-                    ))}
-                </div>
-                {settings.mod_event_archive && (
-                    <div className="grid-xs-12 u-text-center">
-                        <a className="btn btn-primary" href={archiveUrl}>
-                            {translation.moreEvents}
-                        </a>
+                {!isLoaded ? (
+                    <div className="u-p-8">
+                        <PreLoader />
+                    </div>
+                ) : (
+                    <div className="grid grid--columns">
+                        {items.map(event => (
+                            <div className={`u-flex ${gridColumn}`} key={uuidv1()}>
+                                <Card event={event} settings={settings} />
+                            </div>
+                        ))}
                     </div>
                 )}
+
+                <div className="grid">
+                    {settings.mod_event_archive && (
+                        <div className="grid-xs-12 grid-md-auto">
+                            <a className="btn btn-primary" href={archiveUrl}>
+                                {translation.moreEvents}
+                            </a>
+                        </div>
+                    )}
+                    {settings.mod_event_pagination && (
+                        <div className="grid-xs-12 grid-md-fit-content u-ml-auto modularity-mod-event__pagination">
+                            <Pagination
+                                current={currentPage}
+                                total={totalPages}
+                                next={this.nextPage}
+                                prev={this.prevPage}
+                                input={this.paginationInput}
+                                langPrev={translation.prev}
+                                langNext={translation.next}
+                            />
+                        </div>
+                    )}
+                </div>
             </div>
         );
     }
