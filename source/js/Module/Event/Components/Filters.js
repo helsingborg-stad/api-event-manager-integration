@@ -1,5 +1,6 @@
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { Button } from 'hbg-react';
+import { months, weekdaysLong, weekdaysShort } from '../../../Config/dateLocalization.js';
 
 const Filters = ({
     translation,
@@ -34,17 +35,22 @@ const Filters = ({
                 <label htmlFor="filter-date-from" className="text-sm sr-only">
                     <strong>{translation.datePublished}</strong>
                 </label>
+                {console.log(months)}
                 <div className="input-group">
                     <span className="input-group-addon">{translation.from}:</span>
                     <DayPickerInput
                         onDayChange={day => fromDateChange(day)}
                         placeholder={translation.fromDate}
                         formatDate={formatDate}
-                        dayPickerProps={{
-                            locale: 'se',
-                        }}
                         inputProps={{
+                            readOnly: true,
                             type: 'text',
+                        }}
+                        dayPickerProps={{
+                            months: months.se,
+                            weekdaysLong: weekdaysLong.se,
+                            weekdaysShort: weekdaysShort.se,
+                            firstDayOfWeek: 1,
                         }}
                     />
 
@@ -53,11 +59,15 @@ const Filters = ({
                         onDayChange={day => toDateChange(day)}
                         placeholder={translation.toDate}
                         formatDate={formatDate}
-                        dayPickerProps={{
-                            locale: 'se',
-                        }}
                         inputProps={{
+                            readOnly: true,
                             type: 'text',
+                        }}
+                        dayPickerProps={{
+                            months: months.se,
+                            weekdaysLong: weekdaysLong.se,
+                            weekdaysShort: weekdaysShort.se,
+                            firstDayOfWeek: 1,
                         }}
                     />
                 </div>
