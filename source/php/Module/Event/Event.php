@@ -57,6 +57,7 @@ class Event extends \Modularity\Module
         $data['archive_url'] = get_post_type_archive_link('event');
         $data['rest_url'] = get_rest_url();
         $days_ahead = isset($data['mod_event_interval']) ? $data['mod_event_interval'] : 0;
+        $data['start_date'] = date('Y-m-d', strtotime("now"));
         $data['end_date'] = date('Y-m-d', strtotime("today midnight +$days_ahead days"));
         $data['lat'] = (isset($data['mod_event_geographic']['lat'])) ? $data['mod_event_geographic']['lat'] : null;
         $data['lng'] = (isset($data['mod_event_geographic']['lng'])) ? $data['mod_event_geographic']['lng'] : null;
@@ -234,7 +235,9 @@ class Event extends \Modularity\Module
                 EVENTMANAGERINTEGRATION_URL.'/dist/'.\EventManagerIntegration\Helper\CacheBust::name(
                     'js/Module/Event/Index.js'
                 ),
-                array('jquery', 'react', 'react-dom')
+                array('jquery', 'react', 'react-dom'),
+                false,
+                true
             );
 
             wp_localize_script(
@@ -246,6 +249,10 @@ class Event extends \Modularity\Module
                     'next' => __('Next', 'event-integration'),
                     'prev' => __('Previous', 'event-integration'),
                     'search' => __('Search', 'event-integration'),
+                    'from' => __('From', 'event-integration'),
+                    'to' => __('To', 'event-integration'),
+                    'fromDate' => __('From date', 'event-integration'),
+                    'toDate' => __('To date', 'event-integration'),
                 )
             );
         }
@@ -264,10 +271,11 @@ class Event extends \Modularity\Module
 
     /**
      * Available "magic" methods for modules:
-     * init()            What to do on initialization (if you must, use __construct with care, this will probably break
-     * stuff!!) data()            Use to send data to view (return array) style()           Enqueue style only when
-     * module is used on page script            Enqueue script only when module is used on page adminEnqueue()
-     * Enqueue scripts for the module edit/add page in admin template()        Return the view template (blade) the
-     * module should use when displayed
+     * init()            What to do on initialization (if you must, use __construct with care, this will probably break stuff!!)
+     * data()            Use to send data to view (return array)
+     * style()           Enqueue style only when module is used on page
+     * script()          Enqueue script only when module is used on page
+     * adminEnqueue()    Enqueue scripts for the module edit/add page in admin
+     * template()        Return the view template (blade) the module should use when displayed
      */
 }
