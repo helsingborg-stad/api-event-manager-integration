@@ -5,33 +5,13 @@ const translation = modEvent;
 
 for (let i = 0; i < domElements.length; i++) {
     const element = domElements[i];
-    const {
-        moduleId,
-        settings,
-        restUrl,
-        gridColumn,
-        archiveUrl,
-        endDate,
-        lat,
-        lng,
-        distance,
-        categories,
-        tags,
-        groups,
-    } = element.dataset;
+    const { settings, categories, tags, groups } = element.dataset;
 
     ReactDOM.render(
         <Event
-            moduleId={moduleId}
-            settings={JSON.parse(settings)}
+            {...element.dataset}
             translation={translation}
-            gridColumn={gridColumn}
-            restUrl={restUrl}
-            archiveUrl={archiveUrl}
-            endDate={endDate}
-            lat={lat}
-            lng={lng}
-            distance={distance}
+            settings={JSON.parse(settings)}
             categories={JSON.parse(categories)}
             tags={JSON.parse(tags)}
             groups={JSON.parse(groups)}
