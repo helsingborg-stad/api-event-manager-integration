@@ -90,9 +90,9 @@ class App
     public function enqueueFront()
     {
         // Styles
-        wp_register_style('event-integration',
+        wp_enqueue_style(
+            'event-integration',
             EVENTMANAGERINTEGRATION_URL . '/dist/' . Helper\CacheBust::name('css/event-manager-integration.css'));
-        wp_enqueue_style('event-integration');
 
         // Scripts
         wp_register_script('auto-complete', EVENTMANAGERINTEGRATION_URL . '/source/js/vendor/auto-complete/auto-complete.min.js', 'jquery', false, true);
