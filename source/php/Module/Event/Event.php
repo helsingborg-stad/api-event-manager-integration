@@ -251,6 +251,17 @@ class Event extends \Modularity\Module
         }
     }
 
+    public function style()
+    {
+        if ($this->template === 'index') {
+            // Datepicker
+            wp_enqueue_style(
+                'react-datepicker',
+                EVENTMANAGERINTEGRATION_URL . '/dist/' . \EventManagerIntegration\Helper\CacheBust::name('css/react-datepicker.css')
+            );
+        }
+    }
+
     /**
      * Available "magic" methods for modules:
      * init()            What to do on initialization (if you must, use __construct with care, this will probably break
