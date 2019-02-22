@@ -1,0 +1,13 @@
+/** Include default datepicker styles **/
+@import "../../node_modules/react-day-picker/lib/style";
+
+/** Override styles **/
+.DayPickerInput {
+    .DayPicker-Day, .DayPicker-WeekNumber {
+        line-height: normal;
+    }
+
+    .DayPicker-Day {
+        border-radius: 2px;
+    }
+}
