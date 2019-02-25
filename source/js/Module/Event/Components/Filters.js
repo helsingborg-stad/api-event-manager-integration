@@ -47,6 +47,7 @@ const Filters = ({
                             type: 'text',
                         }}
                         dayPickerProps={{
+                            fromMonth: new Date(),
                             months: months.se,
                             weekdaysLong: weekdaysLong.se,
                             weekdaysShort: weekdaysShort.se,
@@ -64,6 +65,7 @@ const Filters = ({
                             type: 'text',
                         }}
                         dayPickerProps={{
+                            fromMonth: new Date(),
                             months: months.se,
                             weekdaysLong: weekdaysLong.se,
                             weekdaysShort: weekdaysShort.se,
