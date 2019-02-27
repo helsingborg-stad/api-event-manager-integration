@@ -3,6 +3,7 @@ import { Pagination, PreLoader, Notice } from 'hbg-react';
 import Card from '../Components/Card';
 import Filters from '../Components/Filters';
 import { getEvents } from '../../../Api/events';
+import update from 'immutability-helper';
 
 class Event extends React.Component {
     constructor(props) {
@@ -16,6 +17,7 @@ class Event extends React.Component {
             searchString: '',
             startDate: props.startDate,
             endDate: props.endDate,
+            categories: props.categories,
         };
     }
 
@@ -30,6 +32,7 @@ class Event extends React.Component {
         this.setState({ isLoaded: false, error: null });
         // Declare states and props
         const { currentPage, searchString, startDate, endDate } = this.state;
+        let { categories } = this.state;
         const {
             translation,
             restUrl,
@@ -38,11 +41,12 @@ class Event extends React.Component {
             lat,
             lng,
             distance,
-            categories,
             tags,
             groups,
         } = this.props;
         const perPage = settings.mod_event_pagination ? settings.mod_event_per_page : -1;
+        // Filter checked categories and return ths IDs
+        categories = categories.filter(category => category.checked).map(category => category.id);
         // Concatenate all taxonomies together
         const taxonomies = categories.concat(tags, groups);
         // The API base url
@@ -54,17 +58,12 @@ class Event extends React.Component {
             per_page: perPage,
             page: currentPage,
             module_id: moduleId,
-            lat: lat,
-            lng: lng,
-            distance: distance,
-            taxonomies: taxonomies,
+            lat,
+            lng,
+            distance,
+            taxonomies,
             search_string: searchString,
         };
-
-        console.log('Start');
-        console.log(startDate);
-        console.log('End');
-        console.log(endDate);
 
         // Fetch events
         getEvents(url, params)
@@ -150,7 +149,6 @@ class Event extends React.Component {
      * @param date
      */
     fromDateChange = date => {
-        console.log('Change from date');
         this.setState({ startDate: this.formatDate(date) });
     };
 
@@ -159,7 +157,6 @@ class Event extends React.Component {
      * @param date
      */
     toDateChange = date => {
-        console.log('Change To date');
         this.setState({ endDate: this.formatDate(date) });
     };
 
@@ -173,8 +170,28 @@ class Event extends React.Component {
         return date.toLocaleDateString('sv-SE', options);
     };
 
+    /**
+     * Handle categories checkbox changes
+     * @param id
+     */
+    onCategoryChange = (e, id) => {
+        const { categories } = this.state;
+        // Get the index
+        const index = categories.findIndex(obj => obj.id === id);
+        // Update state
+        this.setState(
+            update(this.state, {
+                categories: {
+                    [index]: {
+                        checked: { $set: !categories[index].checked },
+                    },
+                },
+            })
+        );
+    };
+
     render() {
-        const { error, isLoaded, items, currentPage, totalPages } = this.state;
+        const { error, isLoaded, items, currentPage, totalPages, categories } = this.state;
         const { settings, translation, gridColumn, archiveUrl } = this.props;
 
         return (
@@ -187,6 +204,8 @@ class Event extends React.Component {
                         fromDateChange={this.fromDateChange}
                         toDateChange={this.toDateChange}
                         formatDate={this.formatDate}
+                        categories={categories}
+                        onCategoryChange={this.onCategoryChange}
                     />
                 </div>
 

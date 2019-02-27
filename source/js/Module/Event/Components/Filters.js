@@ -1,5 +1,5 @@
 import DayPickerInput from 'react-day-picker/DayPickerInput';
-import { Button } from 'hbg-react';
+import { Button, Dropdown } from 'hbg-react';
 import { months, weekdaysLong, weekdaysShort } from '../../../Config/dateLocalization.js';
 
 const Filters = ({
@@ -9,6 +9,8 @@ const Filters = ({
     fromDateChange,
     toDateChange,
     formatDate,
+    categories,
+    onCategoryChange,
 }) => (
     <form onSubmit={onSubmit}>
         <div className="grid">
@@ -35,7 +37,6 @@ const Filters = ({
                 <label htmlFor="filter-date-from" className="text-sm sr-only">
                     <strong>{translation.datePublished}</strong>
                 </label>
-                {console.log(months)}
                 <div className="input-group">
                     <span className="input-group-addon">{translation.from}:</span>
                     <DayPickerInput
@@ -73,6 +74,27 @@ const Filters = ({
                         }}
                     />
                 </div>
+            </div>
+
+            <div className="grid-sm-12 grid-md-fit-content">
+                <label htmlFor="filter-period" className="text-sm sr-only">
+                    {translation.categories}
+                </label>
+
+                <Dropdown title={translation.categories} toggleClass="btn">
+                    {categories.map(item => (
+                        <label key={item.id} className="checkbox u-px-1">
+                            <input
+                                type="checkbox"
+                                name="filter[categories][]"
+                                value={item.id}
+                                onChange={e => onCategoryChange(e, item.id)}
+                                checked={item.checked}
+                            />{' '}
+                            {item.title}
+                        </label>
+                    ))}
+                </Dropdown>
             </div>
 
             <div className="grid-sm-12 grid-md-fit-content">
