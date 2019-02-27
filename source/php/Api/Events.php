@@ -96,6 +96,12 @@ class Events
                 'default' => '',
                 'sanitize_callback' => 'sanitize_text_field',
             ),
+            'age' => array(
+                'description' => 'Age that the event is targeted for.',
+                'type' => 'integer',
+                'default' => null,
+                'sanitize_callback' => 'absint',
+            ),
         );
     }
 

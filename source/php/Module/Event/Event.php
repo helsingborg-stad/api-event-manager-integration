@@ -290,6 +290,8 @@ class Event extends \Modularity\Module
                     'fromDate' => __('From date', 'event-integration'),
                     'toDate' => __('To date', 'event-integration'),
                     'categories' => __('Categories', 'event-integration'),
+                    'age' => __('Age', 'event-integration'),
+                    'yourAge' => __('Your age', 'event-integration'),
                 )
             );
         }
