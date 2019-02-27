@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2019-02-27 13:21+0100\n"
-"PO-Revision-Date: 2019-02-27 13:29+0100\n"
+"POT-Creation-Date: 2019-02-27 15:03+0100\n"
+"PO-Revision-Date: 2019-02-27 15:05+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -1160,7 +1160,6 @@ msgid "Outputs a list if upcoming events"
 msgstr ""
 
 #: source/php/Module/Event/Event.php:283
-#: source/php/Module/Event/views/event-index-OLD.blade.php:20
 #: source/php/Module/Event/views/event.blade.php:18
 msgid "More events"
 msgstr "Fler evenemang"
@@ -1203,6 +1202,10 @@ msgstr "Från datum"
 #: source/php/Module/Event/Event.php:291
 msgid "To date"
 msgstr "Till datum"
+
+#: source/php/Module/Event/Event.php:294
+msgid "Filter on events that is targeted for given the age"
+msgstr "Filtrera på evenemang som är riktade till en angiven ålder"
 
 #: source/php/Module/Event/views/partials/list.blade.php:11
 msgid "Today"

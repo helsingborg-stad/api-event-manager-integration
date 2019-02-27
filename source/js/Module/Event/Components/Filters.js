@@ -43,7 +43,7 @@ const Filters = ({
                         <strong>{translation.fromDate}</strong>
                     </label>
                     <div className="input-group">
-                        <span className="input-group-addon">{translation.from}:</span>
+                        <span className="input-group-addon">{translation.from}</span>
                         <DayPickerInput
                             id="filter-date-from"
                             onDayChange={day => fromDateChange(day)}
@@ -72,7 +72,7 @@ const Filters = ({
                     </label>
 
                     <div className="input-group">
-                        <span className="input-group-addon">{translation.to}:</span>
+                        <span className="input-group-addon">{translation.to}</span>
                         <DayPickerInput
                             id="filter-date-to"
                             onDayChange={day => toDateChange(day)}
@@ -95,21 +95,32 @@ const Filters = ({
             )}
 
             {settings.mod_event_filter_age_group && (
-                <div className="grid-md-12 grid-lg-auto u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
-                    <label htmlFor="filter-age" className="text-sm sr-only">
-                        <strong>{translation.age}</strong>
-                    </label>
-
-                    <div className="input-group">
-                        <span className="input-group-addon">{translation.age}:</span>
-                        <input
-                            type="number"
-                            min="1"
-                            id="filter-age"
-                            className="form-control"
-                            onChange={updateAge}
-                            placeholder={translation.age}
-                        />
+                <div className="grid-fit-content u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
+                    <div className="grid sm-gutter grid-va-middle">
+                        <div className="grid-xs-fit-content">
+                            <label htmlFor="filter-age" className="text-sm sr-only">
+                                <strong>{translation.age}</strong>
+                            </label>
+                            <div className="input-group">
+                                <span className="input-group-addon">{translation.age}</span>
+                                <input
+                                    type="number"
+                                    min="1"
+                                    id="filter-age"
+                                    className="form-control"
+                                    onChange={updateAge}
+                                />
+                            </div>
+                        </div>
+                        <div className="grid-fit-content">
+                            <a
+                                href="#"
+                                data-tooltip={translation.ageGroupDescription}
+                                data-tooltip-top
+                            >
+                                <i className="pricon pricon-question-o" />
+                            </a>
+                        </div>
                     </div>
                 </div>
             )}
