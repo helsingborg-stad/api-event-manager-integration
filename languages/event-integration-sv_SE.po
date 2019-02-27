@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
 "POT-Creation-Date: 2019-02-27 15:03+0100\n"
-"PO-Revision-Date: 2019-02-27 15:05+0100\n"
+"PO-Revision-Date: 2019-02-27 15:08+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -1205,7 +1205,7 @@ msgstr "Till datum"
 
 #: source/php/Module/Event/Event.php:294
 msgid "Filter on events that is targeted for given the age"
-msgstr "Filtrera på evenemang som är riktade till en angiven ålder"
+msgstr "Filtrera på evenemang som är riktade till angiven ålder"
 
 #: source/php/Module/Event/views/partials/list.blade.php:11
 msgid "Today"
