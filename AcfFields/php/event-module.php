@@ -640,7 +640,7 @@
                 ),
             ),
             'wrapper' => array(
-                'width' => '33',
+                'width' => '25',
                 'class' => '',
                 'id' => '',
             ),
@@ -667,7 +667,7 @@
                 ),
             ),
             'wrapper' => array(
-                'width' => '33',
+                'width' => '25',
                 'class' => '',
                 'id' => '',
             ),
@@ -694,7 +694,34 @@
                 ),
             ),
             'wrapper' => array(
-                'width' => '33',
+                'width' => '25',
+                'class' => '',
+                'id' => '',
+            ),
+            'message' => '',
+            'default_value' => 0,
+            'ui' => 1,
+            'ui_on_text' => '',
+            'ui_off_text' => '',
+        ),
+        26 => array(
+            'key' => 'field_5c765ee693303',
+            'label' => __('Age', 'event-integration'),
+            'name' => 'mod_event_filter_age_group',
+            'type' => 'true_false',
+            'instructions' => '',
+            'required' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_5b2ace4dc65a8',
+                        'operator' => '==',
+                        'value' => 'index',
+                    ),
+                ),
+            ),
+            'wrapper' => array(
+                'width' => '25',
                 'class' => '',
                 'id' => '',
             ),

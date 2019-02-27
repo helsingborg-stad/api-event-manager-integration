@@ -636,7 +636,7 @@
                 ]
             ],
             "wrapper": {
-                "width": "33",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -663,7 +663,7 @@
                 ]
             ],
             "wrapper": {
-                "width": "33",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -690,7 +690,34 @@
                 ]
             ],
             "wrapper": {
-                "width": "33",
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5c765ee693303",
+            "label": "Age",
+            "name": "mod_event_filter_age_group",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b2ace4dc65a8",
+                        "operator": "==",
+                        "value": "index"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "25",
                 "class": "",
                 "id": ""
             },
