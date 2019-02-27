@@ -3,6 +3,12 @@
 
 /** Override styles **/
 .DayPickerInput {
+    width: 100%;
+
+    &-OverlayWrapper {
+        z-index: 100;
+    }
+
     .DayPicker-Day, .DayPicker-WeekNumber {
         line-height: normal;
     }

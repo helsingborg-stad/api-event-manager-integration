@@ -237,7 +237,7 @@ class Event extends React.Component {
 
                 <div className="grid">
                     {settings.mod_event_archive && (
-                        <div className="grid-xs-12 grid-md-auto">
+                        <div className="grid-xs-12 grid-md-auto u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
                             <a className="btn btn-primary" href={archiveUrl}>
                                 {translation.moreEvents}
                             </a>

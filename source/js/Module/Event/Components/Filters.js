@@ -16,7 +16,7 @@ const Filters = ({
     <form onSubmit={onSubmit}>
         <div className="grid">
             {settings.mod_event_filter_search && (
-                <div className="grid-sm-12 grid-md-auto">
+                <div className="grid-md-12 grid-lg-auto u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
                     <label htmlFor="filter-keyword" className="text-sm sr-only">
                         <strong>{translation.search}</strong>
                     </label>
@@ -37,9 +37,9 @@ const Filters = ({
             )}
 
             {settings.mod_event_filter_dates && (
-                <div className="grid-sm-12 grid-md-auto">
+                <div className="grid-sm-12 grid-md-6 grid-lg-auto u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
                     <label htmlFor="filter-date-from" className="text-sm sr-only">
-                        <strong>{translation.datePublished}</strong>
+                        <strong>{translation.fromDate}</strong>
                     </label>
                     <div className="input-group">
                         <span className="input-group-addon">{translation.from}:</span>
@@ -60,9 +60,20 @@ const Filters = ({
                                 firstDayOfWeek: 1,
                             }}
                         />
+                    </div>
+                </div>
+            )}
 
+            {settings.mod_event_filter_dates && (
+                <div className="grid-sm-12 grid-md-6 grid-lg-auto u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
+                    <label htmlFor="filter-date-to" className="text-sm sr-only">
+                        <strong>{translation.toDate}</strong>
+                    </label>
+
+                    <div className="input-group">
                         <span className="input-group-addon">{translation.to}:</span>
                         <DayPickerInput
+                            id="filter-date-to"
                             onDayChange={day => toDateChange(day)}
                             placeholder={translation.toDate}
                             formatDate={formatDate}
@@ -83,7 +94,7 @@ const Filters = ({
             )}
 
             {settings.mod_event_filter_categories && (
-                <div className="grid-sm-12 grid-md-fit-content">
+                <div className="grid-fit-content u-mr-auto u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
                     <label htmlFor="filter-categories" className="text-sm sr-only">
                         {translation.categories}
                     </label>
@@ -106,7 +117,7 @@ const Filters = ({
                 </div>
             )}
 
-            <div className="grid-sm-12 grid-md-fit-content">
+            <div className="grid-fit-content">
                 <Button title={translation.search} color="primary" submit />
             </div>
         </div>
