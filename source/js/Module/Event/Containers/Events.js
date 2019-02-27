@@ -15,6 +15,7 @@ class Event extends React.Component {
             currentPage: 1,
             totalPages: 1,
             searchString: '',
+            age: null,
             startDate: props.startDate,
             endDate: props.endDate,
             categories: props.categories,
@@ -31,7 +32,7 @@ class Event extends React.Component {
     getEvents = () => {
         this.setState({ isLoaded: false, error: null });
         // Declare states and props
-        const { currentPage, searchString, startDate, endDate } = this.state;
+        const { currentPage, searchString, startDate, endDate, age } = this.state;
         let { categories } = this.state;
         const {
             translation,
@@ -63,6 +64,7 @@ class Event extends React.Component {
             distance,
             taxonomies,
             search_string: searchString,
+            age,
         };
 
         // Fetch events
@@ -136,6 +138,16 @@ class Event extends React.Component {
     };
 
     /**
+     * Age input change handler
+     * @param e
+     */
+    updateAge = e => {
+        this.setState({
+            age: e.target.value,
+        });
+    };
+
+    /**
      * Submit form handler
      * @param e
      */
@@ -197,12 +209,14 @@ class Event extends React.Component {
             <div>
                 {(settings.mod_event_filter_search ||
                     settings.mod_event_filter_dates ||
+                    settings.mod_event_filter_age_group ||
                     settings.mod_event_filter_categories) && (
                     <div className="u-mb-3">
                         <Filters
                             settings={settings}
                             translation={translation}
                             updateSearchString={this.updateSearchString}
+                            updateAge={this.updateAge}
                             onSubmit={this.onSubmit}
                             fromDateChange={this.fromDateChange}
                             toDateChange={this.toDateChange}

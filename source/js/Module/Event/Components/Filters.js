@@ -6,6 +6,7 @@ const Filters = ({
     settings,
     translation,
     updateSearchString,
+    updateAge,
     onSubmit,
     fromDateChange,
     toDateChange,
@@ -88,6 +89,26 @@ const Filters = ({
                                 weekdaysShort: weekdaysShort.se,
                                 firstDayOfWeek: 1,
                             }}
+                        />
+                    </div>
+                </div>
+            )}
+
+            {settings.mod_event_filter_age_group && (
+                <div className="grid-md-12 grid-lg-auto u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
+                    <label htmlFor="filter-age" className="text-sm sr-only">
+                        <strong>{translation.age}</strong>
+                    </label>
+
+                    <div className="input-group">
+                        <span className="input-group-addon">{translation.age}:</span>
+                        <input
+                            type="number"
+                            min="1"
+                            id="filter-age"
+                            className="form-control"
+                            onChange={updateAge}
+                            placeholder={translation.age}
                         />
                     </div>
                 </div>
