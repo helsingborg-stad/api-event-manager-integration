@@ -8,12 +8,22 @@
     &-OverlayWrapper {
         z-index: 100;
     }
+}
 
-    .DayPicker-Day, .DayPicker-WeekNumber {
-        line-height: normal;
-    }
+.DayPicker-Day {
+    line-height: normal;
+    border-radius: 2px;
+}
 
-    .DayPicker-Day {
-        border-radius: 2px;
-    }
+.DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
+    background-color: #999;
+}
+
+.DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside):hover {
+    background-color: #777;
+}
+
+.DayPicker:not(.DayPicker--interactionDisabled)
+.DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside):hover {
+    background-color: #f6f6f6;
 }
