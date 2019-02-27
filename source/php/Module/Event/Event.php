@@ -52,6 +52,7 @@ class Event extends \Modularity\Module
 
         // Cards module data
         $data['settings'] = $data;
+        $data['nonce'] = wp_create_nonce('wp_rest');
         $this->template = !empty($data['mod_event_display']) ? $data['mod_event_display'] : 'list';
         $data['template'] = $this->template;
         $data['archive_url'] = get_post_type_archive_link('event');

@@ -44,6 +44,7 @@ class Event extends React.Component {
             distance,
             tags,
             groups,
+            nonce,
         } = this.props;
         const perPage = settings.mod_event_pagination ? settings.mod_event_per_page : -1;
         // Filter checked categories and return ths IDs
@@ -65,6 +66,7 @@ class Event extends React.Component {
             taxonomies,
             search_string: searchString,
             age,
+            _wpnonce: nonce,
         };
 
         // Fetch events

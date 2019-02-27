@@ -28,9 +28,20 @@ class Events
                 'methods' => \WP_REST_Server::READABLE,
                 'callback' => array($this, 'getEvents'),
                 'args' => $this->getCollectionParams(),
-                //'permission_callback' => array($this, 'CheckUserAuthentication'), TODO Fix permissions
+                'permission_callback' => array($this, 'validateNonce'),
             )
         );
+    }
+
+    /**
+     * Validates nonce
+     * @param $request
+     * @return bool
+     */
+    public function validateNonce($request)
+    {
+        $nonce = $request->get_param('_wpnonce');
+        return wp_verify_nonce($nonce, 'wp_rest');
     }
 
     /**
@@ -171,7 +182,7 @@ class Events
         }
 
         // Get events
-        $events = \EventManagerIntegration\Helper\QueryEvents::getEventsByInterval($params,1);
+        $events = \EventManagerIntegration\Helper\QueryEvents::getEventsByInterval($params, 1);
         // Return error if result is empty
         if (empty($events)) {
             return new \WP_REST_Response(
