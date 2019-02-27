@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2019-02-07 17:38+0100\n"
+"POT-Creation-Date: 2019-02-27 13:21+0100\n"
 "PO-Revision-Date: 2016-12-13 15:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -30,9 +30,89 @@ msgid "Settings"
 msgstr ""
 
 #: AcfFields/php/event-form-module.php:26
-#: AcfFields/php/event-form-module.php:170
-#: AcfFields/php/event-form-module.php:244
-#: AcfFields/php/event-form-module.php:318
+msgid "User groups"
+msgstr ""
+
+#: AcfFields/php/event-form-module.php:29
+msgid "Comma separated list of user group IDs."
+msgstr ""
+
+#: AcfFields/php/event-form-module.php:45
+msgid "Form name"
+msgstr ""
+
+#: AcfFields/php/event-form-module.php:48
+msgid "Name the form for easier grouping of events."
+msgstr ""
+
+#: AcfFields/php/event-form-module.php:64 AcfFields/php/event-module.php:259
+msgid "Fields"
+msgstr ""
+
+#: AcfFields/php/event-form-module.php:80
+msgid "Field settings"
+msgstr ""
+
+#: AcfFields/php/event-form-module.php:91
+msgid ""
+"Add custom field labels and descriptions. Leave empty to use default texts."
+"\r\n"
+"You can hide whole fields that are not required."
+msgstr ""
+
+#: AcfFields/php/event-form-module.php:98 source/php/PostTypes/Events.php:42
+msgid "Title"
+msgstr ""
+
+#: AcfFields/php/event-form-module.php:113
+#: AcfFields/php/event-form-module.php:187
+#: AcfFields/php/event-form-module.php:261
+#: AcfFields/php/event-form-module.php:335
+#: AcfFields/php/event-form-module.php:447
+#: AcfFields/php/event-form-module.php:559
+#: AcfFields/php/event-form-module.php:671
+#: AcfFields/php/event-form-module.php:783
+#: AcfFields/php/event-form-module.php:895
+#: AcfFields/php/event-form-module.php:1007
+#: AcfFields/php/event-form-module.php:1119
+#: AcfFields/php/event-form-module.php:1231
+#: AcfFields/php/event-form-module.php:1343
+#: AcfFields/php/event-form-module.php:1436
+#: AcfFields/php/event-form-module.php:1529
+#: AcfFields/php/event-form-module.php:1622
+#: AcfFields/php/event-form-module.php:1734
+#: AcfFields/php/event-form-module.php:1846
+#: AcfFields/php/event-form-module.php:1958
+msgid "Label"
+msgstr ""
+
+#: AcfFields/php/event-form-module.php:132
+#: AcfFields/php/event-form-module.php:206
+#: AcfFields/php/event-form-module.php:280
+#: AcfFields/php/event-form-module.php:354
+#: AcfFields/php/event-form-module.php:466
+#: AcfFields/php/event-form-module.php:578
+#: AcfFields/php/event-form-module.php:690
+#: AcfFields/php/event-form-module.php:802
+#: AcfFields/php/event-form-module.php:914
+#: AcfFields/php/event-form-module.php:1026
+#: AcfFields/php/event-form-module.php:1138
+#: AcfFields/php/event-form-module.php:1250
+#: AcfFields/php/event-form-module.php:1362
+#: AcfFields/php/event-form-module.php:1455
+#: AcfFields/php/event-form-module.php:1548
+#: AcfFields/php/event-form-module.php:1641
+#: AcfFields/php/event-form-module.php:1753
+#: AcfFields/php/event-form-module.php:1865
+#: AcfFields/php/event-form-module.php:1977 AcfFields/php/event-module.php:274
+#: source/php/Helper/SubmitEvent.php:25 views/submit-form.blade.php:12
+#: views/submit-form.blade.php:20
+msgid "Description"
+msgstr ""
+
+#: AcfFields/php/event-form-module.php:151
+#: AcfFields/php/event-form-module.php:225
+#: AcfFields/php/event-form-module.php:299
 #: AcfFields/php/event-form-module.php:392
 #: AcfFields/php/event-form-module.php:504
 #: AcfFields/php/event-form-module.php:616
@@ -49,21 +129,79 @@ msgstr ""
 #: AcfFields/php/event-form-module.php:1791
 #: AcfFields/php/event-form-module.php:1903
 #: AcfFields/php/event-form-module.php:2015
-msgid "Label"
+msgid "Hide description"
 msgstr ""
 
-#: AcfFields/php/event-form-module.php:45
-msgid "User groups"
+#: AcfFields/php/event-form-module.php:172
+msgid "Content"
 msgstr ""
 
-#: AcfFields/php/event-form-module.php:48
-msgid "Comma separated list of user group IDs."
+#: AcfFields/php/event-form-module.php:246 AcfFields/php/event-module.php:271
+#: source/php/PostTypes/Events.php:43 source/php/Shortcodes/SingleEvent.php:301
+msgid "Occasion"
 msgstr ""
 
-#: AcfFields/php/event-form-module.php:64
-#: AcfFields/php/event-form-module.php:189
-#: AcfFields/php/event-form-module.php:263
-#: AcfFields/php/event-form-module.php:337
+#: AcfFields/php/event-form-module.php:320
+msgid "Event link"
+msgstr ""
+
+#: AcfFields/php/event-form-module.php:373
+#: AcfFields/php/event-form-module.php:485
+#: AcfFields/php/event-form-module.php:597
+#: AcfFields/php/event-form-module.php:709
+#: AcfFields/php/event-form-module.php:821
+#: AcfFields/php/event-form-module.php:933
+#: AcfFields/php/event-form-module.php:1045
+#: AcfFields/php/event-form-module.php:1157
+#: AcfFields/php/event-form-module.php:1269
+#: AcfFields/php/event-form-module.php:1381
+#: AcfFields/php/event-form-module.php:1474
+#: AcfFields/php/event-form-module.php:1567
+#: AcfFields/php/event-form-module.php:1660
+#: AcfFields/php/event-form-module.php:1772
+#: AcfFields/php/event-form-module.php:1884
+#: AcfFields/php/event-form-module.php:1996
+msgid "Hide field"
+msgstr ""
+
+#: AcfFields/php/event-form-module.php:376
+#: AcfFields/php/event-form-module.php:488
+#: AcfFields/php/event-form-module.php:600
+#: AcfFields/php/event-form-module.php:712
+#: AcfFields/php/event-form-module.php:824
+#: AcfFields/php/event-form-module.php:936
+#: AcfFields/php/event-form-module.php:1048
+#: AcfFields/php/event-form-module.php:1160
+#: AcfFields/php/event-form-module.php:1272
+#: AcfFields/php/event-form-module.php:1384
+#: AcfFields/php/event-form-module.php:1477
+#: AcfFields/php/event-form-module.php:1570
+#: AcfFields/php/event-form-module.php:1663
+#: AcfFields/php/event-form-module.php:1775
+#: AcfFields/php/event-form-module.php:1887
+#: AcfFields/php/event-form-module.php:1999
+msgid "Hide the whole field."
+msgstr ""
+
+#: AcfFields/php/event-form-module.php:395
+#: AcfFields/php/event-form-module.php:507
+#: AcfFields/php/event-form-module.php:619
+#: AcfFields/php/event-form-module.php:731
+#: AcfFields/php/event-form-module.php:843
+#: AcfFields/php/event-form-module.php:955
+#: AcfFields/php/event-form-module.php:1067
+#: AcfFields/php/event-form-module.php:1179
+#: AcfFields/php/event-form-module.php:1291
+#: AcfFields/php/event-form-module.php:1403
+#: AcfFields/php/event-form-module.php:1496
+#: AcfFields/php/event-form-module.php:1589
+#: AcfFields/php/event-form-module.php:1682
+#: AcfFields/php/event-form-module.php:1794
+#: AcfFields/php/event-form-module.php:1906
+#: AcfFields/php/event-form-module.php:2018
+msgid "Hide field description."
+msgstr ""
+
 #: AcfFields/php/event-form-module.php:411
 #: AcfFields/php/event-form-module.php:523
 #: AcfFields/php/event-form-module.php:635
@@ -73,207 +211,64 @@ msgstr ""
 #: AcfFields/php/event-form-module.php:1083
 #: AcfFields/php/event-form-module.php:1195
 #: AcfFields/php/event-form-module.php:1307
-#: AcfFields/php/event-form-module.php:1419
-#: AcfFields/php/event-form-module.php:1512
-#: AcfFields/php/event-form-module.php:1605
 #: AcfFields/php/event-form-module.php:1698
 #: AcfFields/php/event-form-module.php:1810
 #: AcfFields/php/event-form-module.php:1922
-#: AcfFields/php/event-form-module.php:2034 AcfFields/php/event-module.php:240
-#: source/php/Helper/SubmitEvent.php:25 views/submit-form.blade.php:12
-#: views/submit-form.blade.php:20
-msgid "Description"
-msgstr ""
-
-#: AcfFields/php/event-form-module.php:83
-msgid "Form name"
-msgstr ""
-
-#: AcfFields/php/event-form-module.php:86
-msgid "Name the form for easier grouping of events."
-msgstr ""
-
-#: AcfFields/php/event-form-module.php:102
-#: AcfFields/php/event-form-module.php:208
-#: AcfFields/php/event-form-module.php:282
-#: AcfFields/php/event-form-module.php:356
-#: AcfFields/php/event-form-module.php:449
-#: AcfFields/php/event-form-module.php:561
-#: AcfFields/php/event-form-module.php:673
-#: AcfFields/php/event-form-module.php:785
-#: AcfFields/php/event-form-module.php:897
-#: AcfFields/php/event-form-module.php:1009
-#: AcfFields/php/event-form-module.php:1121
-#: AcfFields/php/event-form-module.php:1233
-#: AcfFields/php/event-form-module.php:1345
-#: AcfFields/php/event-form-module.php:1457
-#: AcfFields/php/event-form-module.php:1550
-#: AcfFields/php/event-form-module.php:1643
-#: AcfFields/php/event-form-module.php:1736
-#: AcfFields/php/event-form-module.php:1848
-#: AcfFields/php/event-form-module.php:1960
-#: AcfFields/php/event-form-module.php:2072
-msgid "Hide description"
-msgstr ""
-
-#: AcfFields/php/event-form-module.php:105
-#: AcfFields/php/event-form-module.php:452
-#: AcfFields/php/event-form-module.php:564
-#: AcfFields/php/event-form-module.php:676
-#: AcfFields/php/event-form-module.php:788
-#: AcfFields/php/event-form-module.php:900
-#: AcfFields/php/event-form-module.php:1012
-#: AcfFields/php/event-form-module.php:1124
-#: AcfFields/php/event-form-module.php:1236
-#: AcfFields/php/event-form-module.php:1348
-#: AcfFields/php/event-form-module.php:1460
-#: AcfFields/php/event-form-module.php:1553
-#: AcfFields/php/event-form-module.php:1646
-#: AcfFields/php/event-form-module.php:1739
-#: AcfFields/php/event-form-module.php:1851
-#: AcfFields/php/event-form-module.php:1963
-#: AcfFields/php/event-form-module.php:2075
-msgid "Hide field description."
-msgstr ""
-
-#: AcfFields/php/event-form-module.php:121 AcfFields/php/event-module.php:225
-msgid "Fields"
-msgstr ""
-
-#: AcfFields/php/event-form-module.php:137
-msgid "Field settings"
-msgstr ""
-
-#: AcfFields/php/event-form-module.php:148
-msgid ""
-"Add custom field labels and descriptions. Leave empty to use default texts."
-"\r\n"
-"You can hide whole fields that are not required."
-msgstr ""
-
-#: AcfFields/php/event-form-module.php:155 source/php/PostTypes/Events.php:42
-msgid "Title"
-msgstr ""
-
-#: AcfFields/php/event-form-module.php:229
-msgid "Content"
-msgstr ""
-
-#: AcfFields/php/event-form-module.php:303 AcfFields/php/event-module.php:237
-#: source/php/PostTypes/Events.php:43 source/php/Shortcodes/SingleEvent.php:301
-msgid "Occasion"
-msgstr ""
-
-#: AcfFields/php/event-form-module.php:377
-msgid "Event link"
-msgstr ""
-
-#: AcfFields/php/event-form-module.php:430
-#: AcfFields/php/event-form-module.php:542
-#: AcfFields/php/event-form-module.php:654
-#: AcfFields/php/event-form-module.php:766
-#: AcfFields/php/event-form-module.php:878
-#: AcfFields/php/event-form-module.php:990
-#: AcfFields/php/event-form-module.php:1102
-#: AcfFields/php/event-form-module.php:1214
-#: AcfFields/php/event-form-module.php:1326
-#: AcfFields/php/event-form-module.php:1438
-#: AcfFields/php/event-form-module.php:1531
-#: AcfFields/php/event-form-module.php:1624
-#: AcfFields/php/event-form-module.php:1717
-#: AcfFields/php/event-form-module.php:1829
-#: AcfFields/php/event-form-module.php:1941
-#: AcfFields/php/event-form-module.php:2053
-msgid "Hide field"
-msgstr ""
-
-#: AcfFields/php/event-form-module.php:433
-#: AcfFields/php/event-form-module.php:545
-#: AcfFields/php/event-form-module.php:657
-#: AcfFields/php/event-form-module.php:769
-#: AcfFields/php/event-form-module.php:881
-#: AcfFields/php/event-form-module.php:993
-#: AcfFields/php/event-form-module.php:1105
-#: AcfFields/php/event-form-module.php:1217
-#: AcfFields/php/event-form-module.php:1329
-#: AcfFields/php/event-form-module.php:1441
-#: AcfFields/php/event-form-module.php:1534
-#: AcfFields/php/event-form-module.php:1627
-#: AcfFields/php/event-form-module.php:1720
-#: AcfFields/php/event-form-module.php:1832
-#: AcfFields/php/event-form-module.php:1944
-#: AcfFields/php/event-form-module.php:2056
-msgid "Hide the whole field."
-msgstr ""
-
-#: AcfFields/php/event-form-module.php:468
-#: AcfFields/php/event-form-module.php:580
-#: AcfFields/php/event-form-module.php:692
-#: AcfFields/php/event-form-module.php:804
-#: AcfFields/php/event-form-module.php:916
-#: AcfFields/php/event-form-module.php:1028
-#: AcfFields/php/event-form-module.php:1140
-#: AcfFields/php/event-form-module.php:1252
-#: AcfFields/php/event-form-module.php:1364
-#: AcfFields/php/event-form-module.php:1755
-#: AcfFields/php/event-form-module.php:1867
-#: AcfFields/php/event-form-module.php:1979
-#: AcfFields/php/event-form-module.php:2091
+#: AcfFields/php/event-form-module.php:2034
 msgid "Required"
 msgstr ""
 
-#: AcfFields/php/event-form-module.php:471
-#: AcfFields/php/event-form-module.php:583
-#: AcfFields/php/event-form-module.php:695
-#: AcfFields/php/event-form-module.php:807
-#: AcfFields/php/event-form-module.php:919
-#: AcfFields/php/event-form-module.php:1031
-#: AcfFields/php/event-form-module.php:1143
-#: AcfFields/php/event-form-module.php:1255
-#: AcfFields/php/event-form-module.php:1367
-#: AcfFields/php/event-form-module.php:1758
-#: AcfFields/php/event-form-module.php:1870
-#: AcfFields/php/event-form-module.php:1982
-#: AcfFields/php/event-form-module.php:2094
+#: AcfFields/php/event-form-module.php:414
+#: AcfFields/php/event-form-module.php:526
+#: AcfFields/php/event-form-module.php:638
+#: AcfFields/php/event-form-module.php:750
+#: AcfFields/php/event-form-module.php:862
+#: AcfFields/php/event-form-module.php:974
+#: AcfFields/php/event-form-module.php:1086
+#: AcfFields/php/event-form-module.php:1198
+#: AcfFields/php/event-form-module.php:1310
+#: AcfFields/php/event-form-module.php:1701
+#: AcfFields/php/event-form-module.php:1813
+#: AcfFields/php/event-form-module.php:1925
+#: AcfFields/php/event-form-module.php:2037
 msgid "Select if the field is required."
 msgstr ""
 
-#: AcfFields/php/event-form-module.php:489 source/php/Helper/SubmitEvent.php:54
+#: AcfFields/php/event-form-module.php:432 source/php/Helper/SubmitEvent.php:54
 #: views/submit-form.blade.php:152 views/submit-form.blade.php:154
 msgid "Link to booking"
 msgstr ""
 
-#: AcfFields/php/event-form-module.php:601 source/php/Helper/SubmitEvent.php:62
+#: AcfFields/php/event-form-module.php:544 source/php/Helper/SubmitEvent.php:62
 msgid "Price adult"
 msgstr ""
 
-#: AcfFields/php/event-form-module.php:713 source/php/Helper/SubmitEvent.php:70
+#: AcfFields/php/event-form-module.php:656 source/php/Helper/SubmitEvent.php:70
 msgid "Price student"
 msgstr ""
 
-#: AcfFields/php/event-form-module.php:825 source/php/Helper/SubmitEvent.php:78
+#: AcfFields/php/event-form-module.php:768 source/php/Helper/SubmitEvent.php:78
 msgid "Price children"
 msgstr ""
 
-#: AcfFields/php/event-form-module.php:937
+#: AcfFields/php/event-form-module.php:880
 msgid "Children age"
 msgstr ""
 
-#: AcfFields/php/event-form-module.php:1049
-#: source/php/Helper/SubmitEvent.php:94
+#: AcfFields/php/event-form-module.php:992 source/php/Helper/SubmitEvent.php:94
 msgid "Price senior"
 msgstr ""
 
-#: AcfFields/php/event-form-module.php:1161
+#: AcfFields/php/event-form-module.php:1104
 msgid "Senior age"
 msgstr ""
 
-#: AcfFields/php/event-form-module.php:1273
+#: AcfFields/php/event-form-module.php:1216
 #: source/php/Helper/SubmitEvent.php:110
 msgid "Age group"
 msgstr ""
 
-#: AcfFields/php/event-form-module.php:1385
+#: AcfFields/php/event-form-module.php:1328
 #: source/php/Admin/AdminDisplayEvent.php:166
 #: source/php/Helper/SubmitEvent.php:118
 #: source/php/Shortcodes/SingleEvent.php:137
@@ -282,47 +277,48 @@ msgstr ""
 msgid "Organizer"
 msgstr ""
 
-#: AcfFields/php/event-form-module.php:1478 AcfFields/php/event-module.php:239
-#: AcfFields/php/event-module.php:530 AcfFields/php/location-module.php:6
+#: AcfFields/php/event-form-module.php:1421 AcfFields/php/event-module.php:273
+#: AcfFields/php/event-module.php:564 AcfFields/php/location-module.php:6
 #: AcfFields/php/shortcodes.php:57 source/php/Admin/AdminDisplayEvent.php:146
 #: source/php/Helper/SubmitEvent.php:126
+#: source/php/Module/Event/views/partials/list.blade.php:37
 #: source/php/Module/Location/Location.php:12
 #: source/php/Shortcodes/SingleEvent.php:93
-#: source/php/Shortcodes/SingleEvent.php:230 views/partials/list.blade.php:37
-#: views/submit-form.blade.php:171 views/submit-form.blade.php:173
+#: source/php/Shortcodes/SingleEvent.php:230 views/submit-form.blade.php:171
+#: views/submit-form.blade.php:173
 msgid "Location"
 msgstr ""
 
-#: AcfFields/php/event-form-module.php:1571
+#: AcfFields/php/event-form-module.php:1514
 #: source/php/Helper/SubmitEvent.php:134
 msgid "Accessibility"
 msgstr ""
 
-#: AcfFields/php/event-form-module.php:1664
+#: AcfFields/php/event-form-module.php:1607
 msgid "Event categories"
 msgstr ""
 
-#: AcfFields/php/event-form-module.php:1776 AcfFields/php/event-module.php:238
+#: AcfFields/php/event-form-module.php:1719 AcfFields/php/event-module.php:272
 msgid "Image"
 msgstr ""
 
-#: AcfFields/php/event-form-module.php:1888
+#: AcfFields/php/event-form-module.php:1831
 #: source/php/Helper/SubmitEvent.php:161 views/submit-form.blade.php:220
 #: views/submit-form.blade.php:221
 msgid "Email"
 msgstr ""
 
-#: AcfFields/php/event-form-module.php:1891
+#: AcfFields/php/event-form-module.php:1834
 msgid "Email address to the person who submitted the event."
 msgstr ""
 
-#: AcfFields/php/event-form-module.php:2000
+#: AcfFields/php/event-form-module.php:1943
 #: source/php/Helper/SubmitEvent.php:169 views/submit-form.blade.php:228
 #: views/submit-form.blade.php:229
 msgid "Phone number"
 msgstr ""
 
-#: AcfFields/php/event-form-module.php:2003
+#: AcfFields/php/event-form-module.php:1946
 msgid "Phone numer to the person who submitted the event."
 msgstr ""
 
@@ -370,158 +366,190 @@ msgstr ""
 msgid "Set to -1 to show all."
 msgstr ""
 
-#: AcfFields/php/event-module.php:92 AcfFields/php/event-module.php:111
+#: AcfFields/php/event-module.php:100 AcfFields/php/event-module.php:111
 msgid "Show pagination"
 msgstr ""
 
-#: AcfFields/php/event-module.php:95
-msgid "Display pagination buttons below the event list."
+#: AcfFields/php/event-module.php:103
+msgid "Display pagination below the event list."
 msgstr ""
 
 #: AcfFields/php/event-module.php:119
-msgid "Archive link"
+msgid "Per page"
 msgstr ""
 
 #: AcfFields/php/event-module.php:122
+msgid "Number of events to display per page."
+msgstr ""
+
+#: AcfFields/php/event-module.php:153
+msgid "Archive link"
+msgstr ""
+
+#: AcfFields/php/event-module.php:156
 msgid "Show link to event archive page."
 msgstr ""
 
-#: AcfFields/php/event-module.php:130
+#: AcfFields/php/event-module.php:164
 msgid "Show link"
 msgstr ""
 
-#: AcfFields/php/event-module.php:138
+#: AcfFields/php/event-module.php:172
 msgid "Pagination button limit"
 msgstr ""
 
-#: AcfFields/php/event-module.php:141
+#: AcfFields/php/event-module.php:175
 msgid "Limit number of pagination buttons. -1 to show all."
 msgstr ""
 
-#: AcfFields/php/event-module.php:172
+#: AcfFields/php/event-module.php:206
 msgid "Show pagination arrows"
 msgstr ""
 
-#: AcfFields/php/event-module.php:196
+#: AcfFields/php/event-module.php:230
 msgid "Show previous and next page arrows on pagination"
 msgstr ""
 
-#: AcfFields/php/event-module.php:204
+#: AcfFields/php/event-module.php:238
 msgid "Days interval"
 msgstr ""
 
-#: AcfFields/php/event-module.php:207
+#: AcfFields/php/event-module.php:241
 msgid "Include events from today to the given number of days."
 msgstr ""
 
-#: AcfFields/php/event-module.php:252
+#: AcfFields/php/event-module.php:286
 msgid "Image ratio"
 msgstr ""
 
-#: AcfFields/php/event-module.php:277
+#: AcfFields/php/event-module.php:311
 msgid "Square (1:1)"
 msgstr ""
 
-#: AcfFields/php/event-module.php:278
+#: AcfFields/php/event-module.php:312
 msgid "Standard Video (16:9)"
 msgstr ""
 
-#: AcfFields/php/event-module.php:279
+#: AcfFields/php/event-module.php:313
 msgid "Standard TV (4:3)"
 msgstr ""
 
-#: AcfFields/php/event-module.php:293
+#: AcfFields/php/event-module.php:327
 msgid "Occasion position"
 msgstr ""
 
-#: AcfFields/php/event-module.php:318
+#: AcfFields/php/event-module.php:352
 msgid "Below title"
 msgstr ""
 
-#: AcfFields/php/event-module.php:319
+#: AcfFields/php/event-module.php:353
 msgid "Left column"
 msgstr ""
 
-#: AcfFields/php/event-module.php:330
+#: AcfFields/php/event-module.php:364
 msgid "Description letter limit"
 msgstr ""
 
-#: AcfFields/php/event-module.php:333
+#: AcfFields/php/event-module.php:367
 msgid "Set to -1 to show the whole description."
 msgstr ""
 
-#: AcfFields/php/event-module.php:359 source/php/PostTypes/Events.php:302
+#: AcfFields/php/event-module.php:393 source/php/PostTypes/Events.php:302
 #: source/php/Shortcodes/SingleEvent.php:559
 msgid "Groups"
 msgstr ""
 
-#: AcfFields/php/event-module.php:370
+#: AcfFields/php/event-module.php:404
 msgid "Show events from all groups"
 msgstr ""
 
-#: AcfFields/php/event-module.php:378
+#: AcfFields/php/event-module.php:412
 msgid "Select groups"
 msgstr ""
 
-#: AcfFields/php/event-module.php:381
+#: AcfFields/php/event-module.php:415
 msgid "Show events from the selected groups."
 msgstr ""
 
-#: AcfFields/php/event-module.php:408 source/php/Helper/SubmitEvent.php:142
+#: AcfFields/php/event-module.php:442 AcfFields/php/event-module.php:655
+#: source/php/Helper/SubmitEvent.php:142 source/php/Module/Event/Event.php:292
 #: source/php/PostTypes/Events.php:228
 #: source/php/Shortcodes/SingleEvent.php:565 views/submit-form.blade.php:179
 msgid "Categories"
 msgstr ""
 
-#: AcfFields/php/event-module.php:419
+#: AcfFields/php/event-module.php:453
 msgid "Show events from all categories"
 msgstr ""
 
-#: AcfFields/php/event-module.php:427
+#: AcfFields/php/event-module.php:461
 msgid "Select categories"
 msgstr ""
 
-#: AcfFields/php/event-module.php:430
+#: AcfFields/php/event-module.php:464
 msgid "Show events from the selected categories."
 msgstr ""
 
-#: AcfFields/php/event-module.php:457 source/php/PostTypes/Events.php:265
+#: AcfFields/php/event-module.php:491 source/php/PostTypes/Events.php:265
 #: source/php/Shortcodes/SingleEvent.php:571
 msgid "Tags"
 msgstr ""
 
-#: AcfFields/php/event-module.php:468
+#: AcfFields/php/event-module.php:502
 msgid "Show events from all tags"
 msgstr ""
 
-#: AcfFields/php/event-module.php:476
+#: AcfFields/php/event-module.php:510
 msgid "Select tags"
 msgstr ""
 
-#: AcfFields/php/event-module.php:479
+#: AcfFields/php/event-module.php:513
 msgid "Show events from the selected tags."
 msgstr ""
 
-#: AcfFields/php/event-module.php:506
+#: AcfFields/php/event-module.php:540
 msgid "Default image"
 msgstr ""
 
-#: AcfFields/php/event-module.php:509
+#: AcfFields/php/event-module.php:543
 msgid "Will display if event image is missing."
 msgstr ""
 
-#: AcfFields/php/event-module.php:533
+#: AcfFields/php/event-module.php:567
 msgid "Show events that occurs at a specified location."
 msgstr ""
 
-#: AcfFields/php/event-module.php:548 AcfFields/php/options.php:310
+#: AcfFields/php/event-module.php:582 AcfFields/php/options.php:310
 msgid "Distance from location"
 msgstr ""
 
-#: AcfFields/php/event-module.php:551
+#: AcfFields/php/event-module.php:585
 msgid ""
 "To show events occurring nearby the given location, enter maximum distance "
 "in km. Leave blank to only show events from the exact position."
+msgstr ""
+
+#: AcfFields/php/event-module.php:603
+msgid "Filters"
+msgstr ""
+
+#: AcfFields/php/event-module.php:622
+msgid "Activate search and filters."
+msgstr ""
+
+#: AcfFields/php/event-module.php:628
+msgid "Text search"
+msgstr ""
+
+#: AcfFields/php/event-module.php:682
+msgid "Date search"
+msgstr ""
+
+#: AcfFields/php/event-module.php:709 source/php/Module/Event/Event.php:293
+#: source/php/Shortcodes/SingleEvent.php:334
+#: source/php/Shortcodes/SingleEvent.php:336
+#: source/php/Shortcodes/SingleEvent.php:338
+msgid "Age"
 msgstr ""
 
 #: AcfFields/php/location-module.php:10
@@ -820,7 +848,7 @@ msgid ""
 msgstr ""
 
 #: source/php/Admin/AdminDisplayEvent.php:41
-#: source/php/Module/Event/Event.php:15
+#: source/php/Module/Event/Event.php:14
 msgid "Event"
 msgstr ""
 
@@ -858,25 +886,29 @@ msgstr ""
 msgid "Clear map"
 msgstr ""
 
-#: source/php/App.php:71
+#: source/php/Api/Events.php:179
+msgid "No events could be found."
+msgstr ""
+
+#: source/php/App.php:73
 #: source/php/Module/SubmitForm/views/formfields.blade.php:395
 #: views/submit-form.blade.php:182
 msgid "Loading"
 msgstr ""
 
-#: source/php/App.php:104
+#: source/php/App.php:107
 msgid "Something went wrong, please try again later."
 msgstr ""
 
-#: source/php/App.php:105
+#: source/php/App.php:108
 msgid "The email addresses does not match."
 msgstr ""
 
-#: source/php/App.php:106
+#: source/php/App.php:109
 msgid "You must upload an image."
 msgstr ""
 
-#: source/php/App.php:126
+#: source/php/App.php:129
 msgid "to"
 msgstr ""
 
@@ -1055,9 +1087,8 @@ msgstr ""
 msgid "Keep in mind that the image may be cropped, so avoid text in the image."
 msgstr ""
 
-#: source/php/Helper/SubmitEvent.php:153
-msgid ""
-"Images with identifiable persons are not accepted and will be replaced.."
+#: source/php/Helper/SubmitEvent.php:153 views/submit-form.blade.php:193
+msgid "Images with identifiable persons are not accepted and will be replaced."
 msgstr ""
 
 #: source/php/Helper/SubmitEvent.php:154 views/submit-form.blade.php:194
@@ -1072,12 +1103,69 @@ msgstr ""
 msgid "Your phone number."
 msgstr ""
 
-#: source/php/Module/Event/Event.php:16 source/php/Widget/DisplayEvents.php:13
+#: source/php/Module/Event/Event.php:15 source/php/Widget/DisplayEvents.php:13
 msgid "Events"
 msgstr ""
 
-#: source/php/Module/Event/Event.php:17
+#: source/php/Module/Event/Event.php:16
 msgid "Outputs a list if upcoming events"
+msgstr ""
+
+#: source/php/Module/Event/Event.php:283
+#: source/php/Module/Event/views/event-index-OLD.blade.php:20
+#: source/php/Module/Event/views/event.blade.php:18
+msgid "More events"
+msgstr ""
+
+#: source/php/Module/Event/Event.php:284
+#: source/php/Module/Event/views/partials/list.blade.php:3
+#: source/php/Widget/DisplayEvents.php:56
+msgid "No events found"
+msgstr ""
+
+#: source/php/Module/Event/Event.php:285
+msgid "Next"
+msgstr ""
+
+#: source/php/Module/Event/Event.php:286
+msgid "Previous"
+msgstr ""
+
+#: source/php/Module/Event/Event.php:287
+msgid "Search"
+msgstr ""
+
+#: source/php/Module/Event/Event.php:288
+#: source/php/Module/SubmitForm/views/formfields.blade.php:322
+#: source/php/Module/SubmitForm/views/formfields.blade.php:325
+#: source/php/Shortcodes/SingleEvent.php:336
+msgid "From"
+msgstr ""
+
+#: source/php/Module/Event/Event.php:289
+#: source/php/Module/SubmitForm/views/formfields.blade.php:329
+#: source/php/Module/SubmitForm/views/formfields.blade.php:332
+msgid "To"
+msgstr ""
+
+#: source/php/Module/Event/Event.php:290
+msgid "From date"
+msgstr ""
+
+#: source/php/Module/Event/Event.php:291
+msgid "To date"
+msgstr ""
+
+#: source/php/Module/Event/views/partials/list.blade.php:11
+msgid "Today"
+msgstr ""
+
+#: source/php/Module/Event/views/partials/list.blade.php:33
+#: source/php/Module/SubmitForm/views/formfields.blade.php:69
+#: source/php/Module/SubmitForm/views/formfields.blade.php:88
+#: source/php/PostTypes/Events.php:63 views/submit-form.blade.php:44
+#: views/submit-form.blade.php:58
+msgid "Date"
 msgstr ""
 
 #: source/php/Module/Location/Location.php:13
@@ -1134,13 +1222,6 @@ msgstr ""
 #: views/submit-form.blade.php:43 views/submit-form.blade.php:124
 #: views/submit-form.blade.php:126
 msgid "Start date"
-msgstr ""
-
-#: source/php/Module/SubmitForm/views/formfields.blade.php:69
-#: source/php/Module/SubmitForm/views/formfields.blade.php:88
-#: source/php/PostTypes/Events.php:63 views/partials/list.blade.php:33
-#: views/submit-form.blade.php:44 views/submit-form.blade.php:58
-msgid "Date"
 msgstr ""
 
 #: source/php/Module/SubmitForm/views/formfields.blade.php:73
@@ -1248,17 +1329,6 @@ msgstr ""
 #: source/php/Module/SubmitForm/views/formfields.blade.php:177
 #: views/submit-form.blade.php:131
 msgid "When the recurring event period ends"
-msgstr ""
-
-#: source/php/Module/SubmitForm/views/formfields.blade.php:322
-#: source/php/Module/SubmitForm/views/formfields.blade.php:325
-#: source/php/Shortcodes/SingleEvent.php:336
-msgid "From"
-msgstr ""
-
-#: source/php/Module/SubmitForm/views/formfields.blade.php:329
-#: source/php/Module/SubmitForm/views/formfields.blade.php:332
-msgid "To"
 msgstr ""
 
 #: source/php/Module/SubmitForm/views/formfields.blade.php:375
@@ -1624,12 +1694,6 @@ msgstr ""
 #: source/php/Shortcodes/SingleEvent.php:334
 #: source/php/Shortcodes/SingleEvent.php:336
 #: source/php/Shortcodes/SingleEvent.php:338
-msgid "Age"
-msgstr ""
-
-#: source/php/Shortcodes/SingleEvent.php:334
-#: source/php/Shortcodes/SingleEvent.php:336
-#: source/php/Shortcodes/SingleEvent.php:338
 #: source/php/Shortcodes/SingleEvent.php:401
 msgid "years"
 msgstr ""
@@ -1765,10 +1829,6 @@ msgstr ""
 msgid "Recent Posts"
 msgstr ""
 
-#: source/php/Widget/DisplayEvents.php:56 views/partials/list.blade.php:3
-msgid "No events found"
-msgstr ""
-
 #: source/php/Widget/DisplayEvents.php:75
 #, php-format
 msgid "Location: %s"
@@ -1819,14 +1879,6 @@ msgstr ""
 msgid "Exported %d fieldgroup(s)."
 msgstr ""
 
-#: views/event-index.blade.php:20 views/event.blade.php:18
-msgid "More events"
-msgstr ""
-
-#: views/partials/list.blade.php:11
-msgid "Today"
-msgstr ""
-
 #: views/submit-form.blade.php:153
 msgid "Link to the event's booking page, e.g. ticketmaster."
 msgstr ""
@@ -1839,10 +1891,6 @@ msgstr ""
 msgid ""
 "For adults. Are there multiple price ranges? Please add it in the "
 "description."
-msgstr ""
-
-#: views/submit-form.blade.php:193
-msgid "Images with identifiable persons are not accepted and will be replaced."
 msgstr ""
 
 #. Plugin URI of the plugin/theme
