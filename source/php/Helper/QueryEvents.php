@@ -38,6 +38,9 @@ class QueryEvents
         // Search by text string
         $searchString = !empty($params['search_string']) ? $params['search_string'] : null;
 
+        // Filter by age
+        $ageGroup = !empty($params['age']) ? $params['age'] : null;
+
         // Calculate offset
         $page = (!is_numeric($page)) ? 1 : $page;
         $limit = intval($params['display_limit']);
@@ -47,13 +50,14 @@ class QueryEvents
         $query = "
         SELECT      *, $wpdb->posts.ID AS ID
         FROM        $wpdb->posts
-        LEFT JOIN   $db_table ON ($wpdb->posts.ID = $db_table.event_id)
-        LEFT JOIN   $wpdb->postmeta postmeta ON $wpdb->posts.ID = postmeta.post_id
-        LEFT JOIN   $wpdb->term_relationships ON ($wpdb->posts.ID = $wpdb->term_relationships.object_id)
-        WHERE       $wpdb->posts.post_type = %s
-                    AND $wpdb->posts.post_status = %s
-                    AND ($db_table.start_date BETWEEN %s AND %s OR $db_table.end_date BETWEEN %s AND %s)
-        ";
+        LEFT JOIN   $db_table ON ($wpdb->posts.ID = $db_table.event_id) ";
+        $query .= ($ageGroup) ? "LEFT JOIN $wpdb->postmeta age_from ON $wpdb->posts.ID = age_from.post_id " : '';
+        $query .= ($ageGroup) ? "LEFT JOIN $wpdb->postmeta age_to ON $wpdb->posts.ID = age_to.post_id " : '';
+        $query .= "LEFT JOIN   $wpdb->term_relationships ON ($wpdb->posts.ID = $wpdb->term_relationships.object_id)
+        WHERE $wpdb->posts.post_type = %s 
+        AND $wpdb->posts.post_status = %s 
+        AND ($db_table.start_date BETWEEN %s AND %s OR $db_table.end_date BETWEEN %s AND %s) ";
+        $query .= ($ageGroup) ? "AND (age_from.meta_key = 'age_group_from' AND age_to.meta_key = 'age_group_to' AND $ageGroup BETWEEN age_from.meta_value AND age_to.meta_value) " : '';
         $query .= ($searchString) ? "AND (($wpdb->posts.post_title LIKE %s) OR ($wpdb->posts.post_content LIKE %s))" : '';
         $query .= ($taxonomies) ? "AND ($wpdb->term_relationships.term_taxonomy_id IN ($taxonomies))" : '';
         $query .= ($idString != null) ? "AND ($wpdb->posts.ID IN ($idString)) " : '';
@@ -92,7 +96,7 @@ class QueryEvents
     public static function getEventOccasions($post_id, $custom = false)
     {
         global $wpdb;
-        $db_table = $wpdb->prefix . "integrate_occasions";
+        $db_table = $wpdb->prefix."integrate_occasions";
 
         $query = "
         SELECT      *
@@ -108,7 +112,7 @@ class QueryEvents
         return $occasions;
     }
 
-   /**
+    /**
      * Get event meta data
      * @param  int $post_id post id
      * @return array        array with occasions
@@ -137,10 +141,11 @@ class QueryEvents
      */
     public static function stringLimiter($string, $limit)
     {
-        if(strlen($string) <= $limit || $limit == -1) {
+        if (strlen($string) <= $limit || $limit == -1) {
             return $string;
         } else {
-            $y = mb_substr($string, 0, $limit, "utf-8") . '...';
+            $y = mb_substr($string, 0, $limit, "utf-8").'...';
+
             return $y;
         }
     }
@@ -158,7 +163,8 @@ class QueryEvents
 
         // Radius of the earth in kilometers.
         $earth_radius = 6371;
-        $sql = $wpdb->prepare( "
+        $sql = $wpdb->prepare(
+            "
                 SELECT DISTINCT
                     latitude.post_id,
                     post.post_title,
@@ -178,8 +184,12 @@ class QueryEvents
                     AND longitude.meta_key = 'longitude'
                     HAVING distance <= %s
                     ORDER BY distance ASC",
-                    $earth_radius, $lat, $lng, $lat, $distance
-                );
+            $earth_radius,
+            $lat,
+            $lng,
+            $lat,
+            $distance
+        );
 
         $nearby_locations = $wpdb->get_results($sql, ARRAY_A);
 
