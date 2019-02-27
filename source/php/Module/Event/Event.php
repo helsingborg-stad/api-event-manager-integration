@@ -63,7 +63,7 @@ class Event extends \Modularity\Module
         $data['lng'] = (isset($data['mod_event_geographic']['lng'])) ? $data['mod_event_geographic']['lng'] : null;
         $data['distance'] = (isset($data['mod_event_distance'])) ? $data['mod_event_distance'] : null;
         // Taxonomies filter
-        $data['categories'] = $this->getModuleCategories($id);
+        $data['categories'] = $this->getFilterableCategories($id);
         $data['groups'] = $this->getModuleGroups($id);
         $data['tags'] = $this->getModuleTags($id);
 
@@ -120,9 +120,9 @@ class Event extends \Modularity\Module
 
     /**
      * Get included Events
-     * @param  int  $module_id Module ID
-     * @param  int  $page      Pagination page number
-     * @param  bool $useLimit  True = limit by setting, false = get all
+     * @param  int $module_id Module ID
+     * @param  int $page      Pagination page number
+     * @param  bool $useLimit True = limit by setting, false = get all
      * @return array             Array with event objects
      */
     public function getEvents($module_id, $page = 1, $useLimit = true)
@@ -170,6 +170,42 @@ class Event extends \Modularity\Module
         $moduleCategories = get_field('mod_event_categories_list', $moduleId);
         if ($showAllCategories === false && !empty($moduleCategories) && is_array($moduleCategories)) {
             $categories = $moduleCategories;
+        }
+
+        return $categories;
+    }
+
+    /**
+     * Return categories available for filtering
+     * @param int $moduleId The module ID
+     * @return array|null
+     */
+    public function getFilterableCategories($moduleId): array
+    {
+        $categories = array();
+        $showAllCategories = get_field('mod_event_categories_show', $moduleId);
+
+        $moduleCategories = get_field('mod_event_categories_list', $moduleId);
+        if ($showAllCategories === false && !empty($moduleCategories) && is_array($moduleCategories)) {
+            $categories = $moduleCategories;
+            foreach ($categories as &$category) {
+                $category = get_term($category, 'event_categories');
+            }
+        } else {
+            $categories = get_terms(
+                'event_categories',
+                array(
+                    'hide_empty' => false,
+                )
+            );
+        }
+
+        foreach ($categories as &$category) {
+            $category = array(
+                'id' => $category->term_id,
+                'title' => $category->name,
+                'checked' => true
+            );
         }
 
         return $categories;
@@ -253,6 +289,7 @@ class Event extends \Modularity\Module
                     'to' => __('To', 'event-integration'),
                     'fromDate' => __('From date', 'event-integration'),
                     'toDate' => __('To date', 'event-integration'),
+                    'categories' => __('Categories', 'event-integration'),
                 )
             );
         }
@@ -264,18 +301,10 @@ class Event extends \Modularity\Module
             // Datepicker
             wp_enqueue_style(
                 'react-datepicker',
-                EVENTMANAGERINTEGRATION_URL . '/dist/' . \EventManagerIntegration\Helper\CacheBust::name('css/react-datepicker.css')
+                EVENTMANAGERINTEGRATION_URL.'/dist/'.\EventManagerIntegration\Helper\CacheBust::name(
+                    'css/react-datepicker.css'
+                )
             );
         }
     }
-
-    /**
-     * Available "magic" methods for modules:
-     * init()            What to do on initialization (if you must, use __construct with care, this will probably break stuff!!)
-     * data()            Use to send data to view (return array)
-     * style()           Enqueue style only when module is used on page
-     * script()          Enqueue script only when module is used on page
-     * adminEnqueue()    Enqueue scripts for the module edit/add page in admin
-     * template()        Return the view template (blade) the module should use when displayed
-     */
 }
