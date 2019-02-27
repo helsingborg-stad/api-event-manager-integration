@@ -75,7 +75,11 @@ gulp.task('watch', function() {
 // ==========================================================================
 gulp.task('sass', function() {
     var filePath = 'source/sass/';
-    var files = ['event-manager-integration.scss', 'event-manager-integration-admin.scss'];
+    var files = [
+        'event-manager-integration.scss',
+        'event-manager-integration-admin.scss',
+        'react-datepicker.scss',
+    ];
 
     var tasks = files.map(function(entry) {
         return gulp
