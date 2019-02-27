@@ -132,9 +132,7 @@
         }
     }
 
-    &__pagination {
-        input {
-            max-width: 48px;
-        }
+    &__pagination input, #filter-age {
+        max-width: 50px;
     }
 }
