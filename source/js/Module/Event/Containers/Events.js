@@ -193,21 +193,25 @@ class Event extends React.Component {
     render() {
         const { error, isLoaded, items, currentPage, totalPages, categories } = this.state;
         const { settings, translation, gridColumn, archiveUrl } = this.props;
-
         return (
             <div>
-                <div className="u-mb-3">
-                    <Filters
-                        translation={translation}
-                        updateSearchString={this.updateSearchString}
-                        onSubmit={this.onSubmit}
-                        fromDateChange={this.fromDateChange}
-                        toDateChange={this.toDateChange}
-                        formatDate={this.formatDate}
-                        categories={categories}
-                        onCategoryChange={this.onCategoryChange}
-                    />
-                </div>
+                {(settings.mod_event_filter_search ||
+                    settings.mod_event_filter_dates ||
+                    settings.mod_event_filter_categories) && (
+                    <div className="u-mb-3">
+                        <Filters
+                            settings={settings}
+                            translation={translation}
+                            updateSearchString={this.updateSearchString}
+                            onSubmit={this.onSubmit}
+                            fromDateChange={this.fromDateChange}
+                            toDateChange={this.toDateChange}
+                            formatDate={this.formatDate}
+                            categories={categories}
+                            onCategoryChange={this.onCategoryChange}
+                        />
+                    </div>
+                )}
 
                 {!isLoaded && (
                     <div className="u-pt-5 u-pb-8">
