@@ -46,12 +46,18 @@ const Filters = ({
                         <span className="input-group-addon">{translation.from}</span>
                         <DayPickerInput
                             id="filter-date-from"
+                            classNames={{
+                                container: 'DayPickerInput form-control',
+                                overlayWrapper: 'DayPickerInput-OverlayWrapper',
+                                overlay: 'DayPickerInput-Overlay',
+                            }}
                             onDayChange={day => fromDateChange(day)}
                             placeholder={translation.fromDate}
                             formatDate={formatDate}
                             inputProps={{
                                 readOnly: true,
                                 type: 'text',
+                                className: 'form-control',
                             }}
                             dayPickerProps={{
                                 fromMonth: new Date(),
@@ -75,12 +81,18 @@ const Filters = ({
                         <span className="input-group-addon">{translation.to}</span>
                         <DayPickerInput
                             id="filter-date-to"
+                            classNames={{
+                                container: 'DayPickerInput form-control',
+                                overlayWrapper: 'DayPickerInput-OverlayWrapper',
+                                overlay: 'DayPickerInput-Overlay',
+                            }}
                             onDayChange={day => toDateChange(day)}
                             placeholder={translation.toDate}
                             formatDate={formatDate}
                             inputProps={{
                                 readOnly: true,
                                 type: 'text',
+                                className: 'form-control',
                             }}
                             dayPickerProps={{
                                 fromMonth: new Date(),
@@ -95,32 +107,19 @@ const Filters = ({
             )}
 
             {settings.mod_event_filter_age_group && (
-                <div className="grid-fit-content u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
-                    <div className="grid sm-gutter grid-va-middle">
-                        <div className="grid-xs-fit-content">
-                            <label htmlFor="filter-age" className="text-sm sr-only">
-                                <strong>{translation.age}</strong>
-                            </label>
-                            <div className="input-group">
-                                <span className="input-group-addon">{translation.age}</span>
-                                <input
-                                    type="number"
-                                    min="1"
-                                    id="filter-age"
-                                    className="form-control"
-                                    onChange={updateAge}
-                                />
-                            </div>
-                        </div>
-                        <div className="grid-fit-content">
-                            <a
-                                href="#"
-                                data-tooltip={translation.ageGroupDescription}
-                                data-tooltip-top
-                            >
-                                <i className="pricon pricon-question-o" />
-                            </a>
-                        </div>
+                <div className="grid-md-12 grid-lg-auto u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
+                    <label htmlFor="filter-age" className="text-sm sr-only">
+                        <strong>{translation.age}</strong>
+                    </label>
+                    <div className="input-group">
+                        <span className="input-group-addon">{translation.age}</span>
+                        <input
+                            type="number"
+                            min="1"
+                            id="filter-age"
+                            className="form-control"
+                            onChange={updateAge}
+                        />
                     </div>
                 </div>
             )}
