@@ -1,3 +1,7 @@
+// Polyfills
+import 'es6-promise';
+import 'isomorphic-fetch';
+// Components
 import Event from './Containers/Events';
 
 const domElements = document.getElementsByClassName('modularity-event-index');
