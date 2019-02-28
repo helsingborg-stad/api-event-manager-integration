@@ -23,13 +23,24 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         // Loop through paginated API request
         $page = 1;
         $eventIds = array();
+        $checkApiDiff = true;
         while ($page) {
-            $url = add_query_arg(array(
-                'page' => $page,
-                'per_page' => 25,
-            ), $this->url);
+            $url = add_query_arg(
+                array(
+                    'page' => $page,
+                    'per_page' => 25,
+                ),
+                $this->url
+            );
+
             $events = \EventManagerIntegration\Parser::requestApi($url);
-            if ($events) {
+
+            if (is_wp_error($events)) {
+                // Skip check of events diff on error
+                $checkApiDiff = false;
+                $page = false;
+                break;
+            } elseif ($events) {
                 // Save events to database
                 foreach ($events as $event) {
                     $this->saveEvent($event);
@@ -44,11 +55,13 @@ class EventManagerApi extends \EventManagerIntegration\Parser
             $page++;
         }
 
+        // Delete events that has been deleted from the API
+        if ($checkApiDiff === true && !empty($eventIds)) {
+            $this->removeDeletedEvents($eventIds);
+        }
         // Clean up
-        $this->removeDeletedEvents($eventIds);
         $this->removeExpiredOccasions();
         $this->removeExpiredEvents();
-        $this->deleteEmptyTaxonomies();
     }
 
     /**
@@ -115,7 +128,10 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         $accessibility                  = !empty($event['accessibility']) ? $event['accessibility'] : null;
 
         // Check if event passes taxonomy filters
-        $pass_tax_filter = $this->checkFilters($this->filterTaxonomies($categories, 0), $this->filterTaxonomies($tags, 1));
+        $pass_tax_filter = $this->checkFilters(
+            $this->filterTaxonomies($categories, 0),
+            $this->filterTaxonomies($tags, 1)
+        );
 
         // Check if event already exist and get the post status
         $event_id = $this->checkIfEventExists($event['id']);
@@ -217,7 +233,12 @@ class EventManagerApi extends \EventManagerIntegration\Parser
      */
     public function checkFilters($cat_filter, $tag_filter): bool
     {
-        $tax_filter = (empty(get_field('event_filter_cat', 'options')) && empty(get_field('event_filter_tag', 'options'))) ? true : false;
+        $tax_filter = (empty(get_field('event_filter_cat', 'options')) && empty(
+            get_field(
+                'event_filter_tag',
+                'options'
+            )
+            )) ? true : false;
 
         // Check category filters
         if (!empty(get_field('event_filter_cat', 'options'))) {
@@ -240,7 +261,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         global $wpdb;
         $date_limit = strtotime("midnight now") - 1;
         // Get all occasions from database
-        $db_table = $wpdb->prefix . "integrate_occasions";
+        $db_table = $wpdb->prefix."integrate_occasions";
         $occasions = $wpdb->get_results("SELECT * FROM $db_table ORDER BY start_date DESC", ARRAY_A);
 
         if (count($occasions) == 0) {
@@ -302,15 +323,15 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         global $wpdb;
         $post_type = 'event';
         // Get all events from databse
-        $query = "SELECT ID FROM $wpdb->posts WHERE post_type = %s AND post_status = %s";
-        $completeQuery = $wpdb->prepare($query, $post_type, 'publish');
+        $query = "SELECT ID FROM $wpdb->posts WHERE post_type = %s AND (post_status = %s or post_status = %s)";
+        $completeQuery = $wpdb->prepare($query, $post_type, 'publish', 'draft');
         $events = $wpdb->get_results($completeQuery);
 
         if (count($events) == 0) {
             return;
         }
 
-        $db_table = $wpdb->prefix . "integrate_occasions";
+        $db_table = $wpdb->prefix."integrate_occasions";
         $query = "SELECT ID, event_id FROM $db_table WHERE event_id = %s";
         // Loop through events and check if occasions exist
         foreach ($events as $e) {
@@ -364,11 +385,13 @@ class EventManagerApi extends \EventManagerIntegration\Parser
                     continue;
                 }
 
-                $terms = get_terms(array(
-                    'taxonomy'      => $taxonomy,
-                    'hide_empty'    => false,
-                    'childless'     => true,
-                ));
+                $terms = get_terms(
+                    array(
+                        'taxonomy' => $taxonomy,
+                        'hide_empty' => false,
+                        'childless' => true,
+                    )
+                );
 
                 foreach ($terms as $term) {
                     if ($term->count == 0) {

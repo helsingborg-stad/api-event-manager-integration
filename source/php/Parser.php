@@ -29,7 +29,10 @@ abstract class Parser
     public function checkIfEventExists($event_manager_id)
     {
         global $wpdb;
-        $results = $wpdb->get_results("SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '_event_manager_id' AND meta_value = $event_manager_id LIMIT 1", ARRAY_A);
+        $results = $wpdb->get_results(
+            "SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '_event_manager_id' AND meta_value = $event_manager_id LIMIT 1",
+            ARRAY_A
+        );
         if (!empty($results[0]['post_id'])) {
             return $results[0]['post_id'];
         } else {
@@ -43,9 +46,9 @@ abstract class Parser
     abstract public function start();
 
     /**
-     * Reuqest to Api
+     * Request to Api
      * @param  string $url Request Url
-     * @return array|bool
+     * @return array|bool|\WP_Error
      */
     public static function requestApi($url)
     {
@@ -54,27 +57,29 @@ abstract class Parser
             'timeout' => 120,
             'sslverify' => defined('DEV_MODE') && DEV_MODE == true ? false : true,
             'headers' => array(
-                'ClientSolution' => 'WordPress Integration ' . EVENTMANAGERINTEGRATION_ID,
+                'ClientSolution' => 'WordPress Integration '.EVENTMANAGERINTEGRATION_ID,
                 'PhpVersion' => phpversion(),
-                'referrer' => get_home_url()
-            )
+                'referrer' => get_home_url(),
+            ),
         );
-        $request        = wp_remote_get($url, $args);
-        $responseCode   = wp_remote_retrieve_response_code($request);
-        $body           = wp_remote_retrieve_body($request);
+        $request = wp_remote_get($url, $args);
+        $responseCode = wp_remote_retrieve_response_code($request);
+        $body = wp_remote_retrieve_body($request);
 
-        // Test if response if WP_ERROR or response code is not 200 OK
-        if (is_wp_error($request) || $responseCode != 200) {
-            return false;
+        // Decode JSON
+        $body = json_decode($body, true);
+
+        // Return null if the request was successful but result is empty
+        if (isset($body['code']) && $body['code'] === 'empty_result') {
+            return null;
         }
 
-        $events = json_decode($body, true);
-
-        if (!is_array($events) || empty($events)) {
-            return false;
+        // Return WP_Error if response code is not 200 OK or result is empty
+        if ($responseCode !== 200 || !is_array($body) || empty($body)) {
+            return new \WP_Error('error', __('API request failed.', 'event-integration'));
         }
 
-        return $events;
+        return $body;
     }
 
 }
