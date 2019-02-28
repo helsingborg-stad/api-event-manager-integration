@@ -205,7 +205,7 @@ class Event extends \Modularity\Module
             $category = array(
                 'id' => $category->term_id,
                 'title' => $category->name,
-                'checked' => true
+                'checked' => true,
             );
         }
 
@@ -292,20 +292,10 @@ class Event extends \Modularity\Module
                     'toDate' => __('To date', 'event-integration'),
                     'categories' => __('Categories', 'event-integration'),
                     'age' => __('Age', 'event-integration'),
-                    'ageGroupDescription' => __('Filter on events that is targeted for given the age', 'event-integration'),
-                )
-            );
-        }
-    }
-
-    public function style()
-    {
-        if ($this->template === 'index') {
-            // Datepicker
-            wp_enqueue_style(
-                'react-datepicker',
-                EVENTMANAGERINTEGRATION_URL.'/dist/'.\EventManagerIntegration\Helper\CacheBust::name(
-                    'css/react-datepicker.css'
+                    'ageGroupDescription' => __(
+                        'Filter on events that is targeted for given the age',
+                        'event-integration'
+                    ),
                 )
             );
         }
