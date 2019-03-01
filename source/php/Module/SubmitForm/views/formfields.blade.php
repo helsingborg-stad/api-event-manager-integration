@@ -427,8 +427,7 @@
             </label>
         </div>
         <div class="form-group image-upload" style="display:none;">
-            <label for="{{ $image_input->name }}"><?php _e('Upload an image', 'event-integration'); ?> <span
-                        class="text-danger">*</span></label>
+            <label for="{{ $image_input->name }}"><?php _e('Upload an image', 'event-integration'); ?> {!! $image_input->required ? '<span class="text-danger">*</span></label>' : '' !!}</label>
             <input name="{{ $image_input->name }}"
                    id="{{ $image_input->name }}"
                    type="file"
