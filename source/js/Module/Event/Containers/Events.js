@@ -27,6 +27,26 @@ class Event extends React.Component {
     }
 
     /**
+     * Prevent component from re-render when user edits the filters
+     * @param nextProps
+     * @param nextState
+     * @returns {boolean}
+     */
+    shouldComponentUpdate(nextProps, nextState) {
+        const { searchString, startDate, endDate, categories, age } = this.state;
+        if (
+            searchString !== nextState.searchString ||
+            startDate !== nextState.startDate ||
+            endDate !== nextState.endDate ||
+            age !== nextState.age
+        ) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Fetch events from API endpoint
      */
     getEvents = () => {
