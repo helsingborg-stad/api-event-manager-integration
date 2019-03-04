@@ -731,6 +731,64 @@
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
+        27 => array(
+            'key' => 'field_5c7d24413bf80',
+            'label' => __('Age range from', 'event-integration'),
+            'name' => 'mod_event_filter_age_range_from',
+            'type' => 'number',
+            'instructions' => '',
+            'required' => 1,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_5c765ee693303',
+                        'operator' => '==',
+                        'value' => '1',
+                    ),
+                ),
+            ),
+            'wrapper' => array(
+                'width' => '25',
+                'class' => '',
+                'id' => '',
+            ),
+            'default_value' => '',
+            'placeholder' => '',
+            'prepend' => '',
+            'append' => __('year', 'event-integration'),
+            'min' => '',
+            'max' => '',
+            'step' => '',
+        ),
+        28 => array(
+            'key' => 'field_5c7d25be3d7fd',
+            'label' => __('Age range to', 'event-integration'),
+            'name' => 'mod_event_filter_age_range_to',
+            'type' => 'number',
+            'instructions' => '',
+            'required' => 1,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_5c765ee693303',
+                        'operator' => '==',
+                        'value' => '1',
+                    ),
+                ),
+            ),
+            'wrapper' => array(
+                'width' => '25',
+                'class' => '',
+                'id' => '',
+            ),
+            'default_value' => '',
+            'placeholder' => '',
+            'prepend' => '',
+            'append' => __('year', 'event-integration'),
+            'min' => '',
+            'max' => '',
+            'step' => '',
+        ),
     ),
     'location' => array(
         0 => array(
