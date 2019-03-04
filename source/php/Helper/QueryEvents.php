@@ -39,7 +39,7 @@ class QueryEvents
         $searchString = !empty($params['search_string']) ? $params['search_string'] : null;
 
         // Filter by age
-        $ageGroup = !empty($params['age']) ? $params['age'] : null;
+        $ageGroup = (!empty($params['age_group']) && is_array($params['age_group'])) ? $params['age_group'] : null;
 
         // Calculate offset
         $page = (!is_numeric($page)) ? 1 : $page;
@@ -57,7 +57,22 @@ class QueryEvents
         WHERE $wpdb->posts.post_type = %s 
         AND $wpdb->posts.post_status = %s 
         AND ($db_table.start_date BETWEEN %s AND %s OR $db_table.end_date BETWEEN %s AND %s) ";
-        $query .= ($ageGroup) ? "AND (age_from.meta_key = 'age_group_from' AND age_to.meta_key = 'age_group_to' AND $ageGroup BETWEEN age_from.meta_value AND age_to.meta_value) " : '';
+
+        if ($ageGroup) {
+            $query .= "AND (age_from.meta_key = 'age_group_from' AND age_to.meta_key = 'age_group_to' AND (";
+
+            $numItems = count($ageGroup);
+            $i = 0;
+            foreach ($ageGroup as $key => $age) {
+                if (++$i === $numItems) {
+                    $query .= "{$age} BETWEEN age_from.meta_value AND age_to.meta_value";
+                } else {
+                    $query .= "{$age} BETWEEN age_from.meta_value AND age_to.meta_value OR ";
+                }
+            }
+            $query .= ")) ";
+        }
+
         $query .= ($searchString) ? "AND (($wpdb->posts.post_title LIKE %s) OR ($wpdb->posts.post_content LIKE %s))" : '';
         $query .= ($taxonomies) ? "AND ($wpdb->term_relationships.term_taxonomy_id IN ($taxonomies))" : '';
         $query .= ($idString != null) ? "AND ($wpdb->posts.ID IN ($idString)) " : '';
