@@ -63,6 +63,7 @@ class Event extends \Modularity\Module
         $data['lat'] = (isset($data['mod_event_geographic']['lat'])) ? $data['mod_event_geographic']['lat'] : null;
         $data['lng'] = (isset($data['mod_event_geographic']['lng'])) ? $data['mod_event_geographic']['lng'] : null;
         $data['distance'] = (isset($data['mod_event_distance'])) ? $data['mod_event_distance'] : null;
+        $data['age_range'] = $this->getAgeFilterRange($id);
         // Taxonomies filter
         $data['categories'] = $this->getFilterableCategories($id);
         $data['groups'] = $this->getModuleGroups($id);
@@ -249,6 +250,29 @@ class Event extends \Modularity\Module
     }
 
     /**
+     * Return list with filterable ages
+     * @param int $moduleId The module ID
+     * @return array
+     */
+    public function getAgeFilterRange($moduleId): array
+    {
+        $years = array();
+        $from = (int) get_field('mod_event_filter_age_range_from', $moduleId);
+        $to = (int) get_field('mod_event_filter_age_range_to', $moduleId);
+
+        if ($from < $to) {
+            foreach(range($from, $to) as $value) {
+                $years[] = array(
+                    'value' => $value,
+                    'checked' => false
+                );
+            }
+        }
+
+        return $years;
+    }
+
+    /**
      * Enqueue your scripts and/or styles with wp_enqueue_script / wp_enqueue_style
      */
     public function script()
@@ -296,6 +320,8 @@ class Event extends \Modularity\Module
                         'Filter on events that is targeted for given the age',
                         'event-integration'
                     ),
+                    'year' => __('Year', 'event-integration'),
+                    'selectAge' => __('Select age', 'event-integration'),
                 )
             );
         }

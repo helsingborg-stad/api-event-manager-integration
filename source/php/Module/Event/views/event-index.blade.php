@@ -21,6 +21,7 @@
              data-categories="{{ json_encode($categories) }}"
              data-groups="{{ json_encode($groups) }}"
              data-tags="{{ json_encode($tags) }}"
+             data-age-range="{{ json_encode($age_range) }}"
         >
         </div>
     </div>
