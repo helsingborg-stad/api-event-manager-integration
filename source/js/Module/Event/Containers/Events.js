@@ -19,6 +19,7 @@ class Event extends React.Component {
             startDate: props.startDate,
             endDate: props.endDate,
             categories: props.categories,
+            ageRange: props.ageRange,
         };
     }
 
@@ -52,8 +53,8 @@ class Event extends React.Component {
     getEvents = () => {
         this.setState({ isLoaded: false, error: null });
         // Declare states and props
-        const { currentPage, searchString, startDate, endDate, age } = this.state;
-        let { categories } = this.state;
+        const { currentPage, searchString, startDate, endDate } = this.state;
+        let { categories, ageRange } = this.state;
         const {
             translation,
             restUrl,
@@ -67,8 +68,10 @@ class Event extends React.Component {
             nonce,
         } = this.props;
         const perPage = settings.mod_event_pagination ? settings.mod_event_per_page : -1;
-        // Filter checked categories and return ths IDs
+        // Filter checked categories and return the IDs
         categories = categories.filter(category => category.checked).map(category => category.id);
+        // Filter checked ages and return the values
+        const ageGroup = ageRange.filter(age => age.checked).map(age => age.value);
         // Concatenate all taxonomies together
         const taxonomies = categories.concat(tags, groups);
         // The API base url
@@ -84,8 +87,8 @@ class Event extends React.Component {
             lng,
             distance,
             taxonomies,
+            age_group: ageGroup,
             search_string: searchString,
-            age,
             _wpnonce: nonce,
         };
 
@@ -160,16 +163,6 @@ class Event extends React.Component {
     };
 
     /**
-     * Age input change handler
-     * @param e
-     */
-    updateAge = e => {
-        this.setState({
-            age: e.target.value,
-        });
-    };
-
-    /**
      * Submit form handler
      * @param e
      */
@@ -224,8 +217,36 @@ class Event extends React.Component {
         );
     };
 
+    /**
+     * Handle age range checkbox changes
+     * @param id
+     */
+    onAgeChange = (e, id) => {
+        const { ageRange } = this.state;
+        // Get the index
+        const index = ageRange.findIndex(obj => obj.value === id);
+        // Update state
+        this.setState(
+            update(this.state, {
+                ageRange: {
+                    [index]: {
+                        checked: { $set: !ageRange[index].checked },
+                    },
+                },
+            })
+        );
+    };
+
     render() {
-        const { error, isLoaded, items, currentPage, totalPages, categories } = this.state;
+        const {
+            error,
+            isLoaded,
+            items,
+            currentPage,
+            totalPages,
+            categories,
+            ageRange,
+        } = this.state;
         const { settings, translation, gridColumn, archiveUrl } = this.props;
         return (
             <div>
@@ -238,13 +259,14 @@ class Event extends React.Component {
                             settings={settings}
                             translation={translation}
                             updateSearchString={this.updateSearchString}
-                            updateAge={this.updateAge}
                             onSubmit={this.onSubmit}
                             fromDateChange={this.fromDateChange}
                             toDateChange={this.toDateChange}
                             formatDate={this.formatDate}
                             categories={categories}
                             onCategoryChange={this.onCategoryChange}
+                            ageRange={ageRange}
+                            onAgeChange={this.onAgeChange}
                         />
                     </div>
                 )}

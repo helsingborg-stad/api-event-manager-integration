@@ -6,13 +6,14 @@ const Filters = ({
     settings,
     translation,
     updateSearchString,
-    updateAge,
     onSubmit,
     fromDateChange,
     toDateChange,
     formatDate,
     categories,
     onCategoryChange,
+    ageRange,
+    onAgeChange,
 }) => (
     <form onSubmit={onSubmit}>
         <div className="grid">
@@ -106,21 +107,24 @@ const Filters = ({
                 </div>
             )}
 
-            {settings.mod_event_filter_age_group && (
-                <div className="grid-md-12 grid-lg-auto u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
-                    <label htmlFor="filter-age" className="text-sm sr-only">
-                        <strong>{translation.age}</strong>
+            {settings.mod_event_filter_age_group && ageRange.length > 0 && (
+                <div className="grid-fit-content u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
+                    <label htmlFor="filter-categories" className="text-sm sr-only">
+                        {translation.selectAge}
                     </label>
-                    <div className="input-group">
-                        <span className="input-group-addon">{translation.age}</span>
-                        <input
-                            type="number"
-                            min="1"
-                            id="filter-age"
-                            className="form-control"
-                            onChange={updateAge}
-                        />
-                    </div>
+                    <Dropdown title={translation.selectAge} toggleClass="btn">
+                        {ageRange.map(item => (
+                            <label key={item.value} className="checkbox u-px-1">
+                                <input
+                                    type="checkbox"
+                                    value={item.value}
+                                    onChange={e => onAgeChange(e, item.value)}
+                                    checked={item.checked}
+                                />{' '}
+                                {item.value} {translation.year}
+                            </label>
+                        ))}
+                    </Dropdown>
                 </div>
             )}
 
@@ -130,13 +134,15 @@ const Filters = ({
                         {translation.categories}
                     </label>
 
-                    <Dropdown title={translation.categories} toggleClass="btn">
+                    <Dropdown
+                        title={translation.categories}
+                        toggleClass="btn"
+                        id="filter-categories"
+                    >
                         {categories.map(item => (
                             <label key={item.id} className="checkbox u-px-1">
                                 <input
-                                    id="filter-categories"
                                     type="checkbox"
-                                    name="filter[categories][]"
                                     value={item.id}
                                     onChange={e => onCategoryChange(e, item.id)}
                                     checked={item.checked}
