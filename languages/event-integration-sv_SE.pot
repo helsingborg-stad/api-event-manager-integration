@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2019-02-27 15:03+0100\n"
+"POT-Creation-Date: 2019-03-05 08:52+0100\n"
 "PO-Revision-Date: 2016-12-13 15:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -472,7 +472,7 @@ msgid "Show events from the selected groups."
 msgstr ""
 
 #: AcfFields/php/event-module.php:442 AcfFields/php/event-module.php:655
-#: source/php/Helper/SubmitEvent.php:142 source/php/Module/Event/Event.php:292
+#: source/php/Helper/SubmitEvent.php:142 source/php/Module/Event/Event.php:317
 #: source/php/PostTypes/Events.php:228
 #: source/php/Shortcodes/SingleEvent.php:565 views/submit-form.blade.php:179
 msgid "Categories"
@@ -545,11 +545,23 @@ msgstr ""
 msgid "Date search"
 msgstr ""
 
-#: AcfFields/php/event-module.php:709 source/php/Module/Event/Event.php:293
+#: AcfFields/php/event-module.php:709 source/php/Module/Event/Event.php:318
 #: source/php/Shortcodes/SingleEvent.php:334
 #: source/php/Shortcodes/SingleEvent.php:336
 #: source/php/Shortcodes/SingleEvent.php:338
 msgid "Age"
+msgstr ""
+
+#: AcfFields/php/event-module.php:736
+msgid "Age range from"
+msgstr ""
+
+#: AcfFields/php/event-module.php:758 AcfFields/php/event-module.php:787
+msgid "year"
+msgstr ""
+
+#: AcfFields/php/event-module.php:765
+msgid "Age range to"
 msgstr ""
 
 #: AcfFields/php/location-module.php:10
@@ -886,7 +898,7 @@ msgstr ""
 msgid "Clear map"
 msgstr ""
 
-#: source/php/Api/Events.php:179
+#: source/php/Api/Events.php:189
 msgid "No events could be found."
 msgstr ""
 
@@ -1111,52 +1123,64 @@ msgstr ""
 msgid "Outputs a list if upcoming events"
 msgstr ""
 
-#: source/php/Module/Event/Event.php:283
+#: source/php/Module/Event/Event.php:308
 #: source/php/Module/Event/views/event.blade.php:18
 msgid "More events"
 msgstr ""
 
-#: source/php/Module/Event/Event.php:284
+#: source/php/Module/Event/Event.php:309
 #: source/php/Module/Event/views/partials/list.blade.php:3
 #: source/php/Widget/DisplayEvents.php:56
 msgid "No events found"
 msgstr ""
 
-#: source/php/Module/Event/Event.php:285
+#: source/php/Module/Event/Event.php:310
 msgid "Next"
 msgstr ""
 
-#: source/php/Module/Event/Event.php:286
+#: source/php/Module/Event/Event.php:311
 msgid "Previous"
 msgstr ""
 
-#: source/php/Module/Event/Event.php:287
+#: source/php/Module/Event/Event.php:312
 msgid "Search"
 msgstr ""
 
-#: source/php/Module/Event/Event.php:288
+#: source/php/Module/Event/Event.php:313
 #: source/php/Module/SubmitForm/views/formfields.blade.php:322
 #: source/php/Module/SubmitForm/views/formfields.blade.php:325
 #: source/php/Shortcodes/SingleEvent.php:336
 msgid "From"
 msgstr ""
 
-#: source/php/Module/Event/Event.php:289
+#: source/php/Module/Event/Event.php:314
 #: source/php/Module/SubmitForm/views/formfields.blade.php:329
 #: source/php/Module/SubmitForm/views/formfields.blade.php:332
 msgid "To"
 msgstr ""
 
-#: source/php/Module/Event/Event.php:290
+#: source/php/Module/Event/Event.php:315
 msgid "From date"
 msgstr ""
 
-#: source/php/Module/Event/Event.php:291
+#: source/php/Module/Event/Event.php:316
 msgid "To date"
 msgstr ""
 
-#: source/php/Module/Event/Event.php:294
+#: source/php/Module/Event/Event.php:320
 msgid "Filter on events that is targeted for given the age"
+msgstr ""
+
+#: source/php/Module/Event/Event.php:323
+#: source/php/Shortcodes/SingleEvent.php:334
+#: source/php/Shortcodes/SingleEvent.php:336
+#: source/php/Shortcodes/SingleEvent.php:338
+#: source/php/Shortcodes/SingleEvent.php:401
+msgid "years"
+msgstr ""
+
+#: source/php/Module/Event/Event.php:324
+msgid "Select age"
 msgstr ""
 
 #: source/php/Module/Event/views/partials/list.blade.php:11
@@ -1357,28 +1381,28 @@ msgstr ""
 msgid "There are no identifiable persons on the image/images."
 msgstr ""
 
-#: source/php/Module/SubmitForm/views/formfields.blade.php:442
+#: source/php/Module/SubmitForm/views/formfields.blade.php:441
 #: views/submit-form.blade.php:216
 msgid "Contact details"
 msgstr ""
 
-#: source/php/Module/SubmitForm/views/formfields.blade.php:443
+#: source/php/Module/SubmitForm/views/formfields.blade.php:442
 #: views/submit-form.blade.php:217
 msgid "Enter your contact details below for eventual questions."
 msgstr ""
 
-#: source/php/Module/SubmitForm/views/formfields.blade.php:462
-#: source/php/Module/SubmitForm/views/formfields.blade.php:466
+#: source/php/Module/SubmitForm/views/formfields.blade.php:461
+#: source/php/Module/SubmitForm/views/formfields.blade.php:465
 #: views/submit-form.blade.php:224 views/submit-form.blade.php:225
 msgid "Repeat email"
 msgstr ""
 
-#: source/php/Module/SubmitForm/views/formfields.blade.php:488
+#: source/php/Module/SubmitForm/views/formfields.blade.php:487
 #: views/submit-form.blade.php:233
 msgid "Done? Click here to submit your event for review."
 msgstr ""
 
-#: source/php/Module/SubmitForm/views/formfields.blade.php:498
+#: source/php/Module/SubmitForm/views/formfields.blade.php:497
 #: views/submit-form.blade.php:243
 msgid "Send"
 msgstr ""
@@ -1481,6 +1505,10 @@ msgstr ""
 
 #: source/php/OAuth/OAuthRequests.php:306
 msgid "Something went wrong uploading your image"
+msgstr ""
+
+#: source/php/Parser.php:79
+msgid "API request failed."
 msgstr ""
 
 #: source/php/PostTypes/Events.php:13
@@ -1692,13 +1720,6 @@ msgstr ""
 
 #: source/php/Shortcodes/SingleEvent.php:325
 msgid "Related events"
-msgstr ""
-
-#: source/php/Shortcodes/SingleEvent.php:334
-#: source/php/Shortcodes/SingleEvent.php:336
-#: source/php/Shortcodes/SingleEvent.php:338
-#: source/php/Shortcodes/SingleEvent.php:401
-msgid "years"
 msgstr ""
 
 #: source/php/Shortcodes/SingleEvent.php:338
