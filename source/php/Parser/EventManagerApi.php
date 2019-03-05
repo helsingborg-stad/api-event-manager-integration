@@ -75,7 +75,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         $post_title                     = !empty($event['title']['rendered']) ? $event['title']['rendered'] : null;
         $post_content                   = !empty($event['content']['rendered']) ? $event['content']['rendered'] : null;
         $featured_media                 = !empty($event['featured_media']['source_url']) ? $event['featured_media']['source_url'] : null;
-        $categories                     = !empty($event['event_categories']) ? array_map('ucwords', array_map('trim', $event['event_categories'])) : array();
+        $categories                     = !empty($event['event_categories']) ? $this->sanitizeCategories($event['event_categories']) : array();
         $tags                           = !empty($event['event_tags']) ? array_map('strtolower', array_map('trim', $event['event_tags'])) : array();
         $groups                         = !empty($event['user_groups']) ? $event['user_groups'] : array();
         $occasions                      = !empty($event['occasions']) ? $event['occasions'] : null;
@@ -223,6 +223,25 @@ class EventManagerApi extends \EventManagerIntegration\Parser
                 $event->setFeaturedImageFromUrl($featured_media, true);
             }
         }
+    }
+
+    /**
+     * Sanitizes categories (capitalize, trim spaces, decode special chars)
+     * @param array $categories List of categories
+     * @return array
+     */
+    public function sanitizeCategories($categories): array
+    {
+        // Bail if not array
+        if (!is_array($categories)) {
+            return $categories;
+        }
+
+        return array_map(
+            function($category) {
+                return ucfirst(trim(htmlspecialchars_decode($category)));
+            }, $categories
+        );
     }
 
     /**
