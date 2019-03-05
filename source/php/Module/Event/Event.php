@@ -320,7 +320,7 @@ class Event extends \Modularity\Module
                         'Filter on events that is targeted for given the age',
                         'event-integration'
                     ),
-                    'year' => __('Year', 'event-integration'),
+                    'years' => __('years', 'event-integration'),
                     'selectAge' => __('Select age', 'event-integration'),
                 )
             );

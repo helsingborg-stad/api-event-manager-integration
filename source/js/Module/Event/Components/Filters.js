@@ -121,7 +121,7 @@ const Filters = ({
                                     onChange={e => onAgeChange(e, item.value)}
                                     checked={item.checked}
                                 />{' '}
-                                {item.value} {translation.year}
+                                {item.value} {translation.years}
                             </label>
                         ))}
                     </Dropdown>
