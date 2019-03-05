@@ -312,8 +312,7 @@ class Event extends \Modularity\Module
                     'search' => __('Search', 'event-integration'),
                     'from' => __('From', 'event-integration'),
                     'to' => __('To', 'event-integration'),
-                    'fromDate' => __('From date', 'event-integration'),
-                    'toDate' => __('To date', 'event-integration'),
+                    'date' => __('date', 'event-integration'),
                     'categories' => __('Categories', 'event-integration'),
                     'age' => __('Age', 'event-integration'),
                     'ageGroupDescription' => __(
