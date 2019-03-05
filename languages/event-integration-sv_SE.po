@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2019-03-05 08:52+0100\n"
-"PO-Revision-Date: 2019-03-05 08:54+0100\n"
+"POT-Creation-Date: 2019-03-05 11:22+0100\n"
+"PO-Revision-Date: 2019-03-05 11:24+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -474,7 +474,7 @@ msgid "Show events from the selected groups."
 msgstr "Visa evenemang inom angivna grupper."
 
 #: AcfFields/php/event-module.php:442 AcfFields/php/event-module.php:655
-#: source/php/Helper/SubmitEvent.php:142 source/php/Module/Event/Event.php:317
+#: source/php/Helper/SubmitEvent.php:142 source/php/Module/Event/Event.php:316
 #: source/php/PostTypes/Events.php:228
 #: source/php/Shortcodes/SingleEvent.php:565 views/submit-form.blade.php:179
 msgid "Categories"
@@ -549,7 +549,7 @@ msgstr "Textsök"
 msgid "Date search"
 msgstr "Datumfiltrering"
 
-#: AcfFields/php/event-module.php:709 source/php/Module/Event/Event.php:318
+#: AcfFields/php/event-module.php:709 source/php/Module/Event/Event.php:317
 #: source/php/Shortcodes/SingleEvent.php:334
 #: source/php/Shortcodes/SingleEvent.php:336
 #: source/php/Shortcodes/SingleEvent.php:338
@@ -557,22 +557,16 @@ msgid "Age"
 msgstr "Ålder"
 
 #: AcfFields/php/event-module.php:736
-#, fuzzy
-#| msgid "Age group"
 msgid "Age range from"
-msgstr "Åldersgrupp"
+msgstr "Från ålder"
 
 #: AcfFields/php/event-module.php:758 AcfFields/php/event-module.php:787
-#, fuzzy
-#| msgid "years"
 msgid "year"
 msgstr "år"
 
 #: AcfFields/php/event-module.php:765
-#, fuzzy
-#| msgid "Price range"
 msgid "Age range to"
-msgstr "Prisintervall"
+msgstr "Till ålder"
 
 #: AcfFields/php/location-module.php:10
 msgid "Display information"
@@ -939,10 +933,8 @@ msgid "Clear map"
 msgstr "Återställ kartan"
 
 #: source/php/Api/Events.php:189
-#, fuzzy
-#| msgid "No events found"
 msgid "No events could be found."
-msgstr "Inga evenemang hittades"
+msgstr "Inga evenemang hittades."
 
 #: source/php/App.php:73
 #: source/php/Module/SubmitForm/views/formfields.blade.php:395
@@ -1198,7 +1190,7 @@ msgstr "Föregående"
 
 #: source/php/Module/Event/Event.php:312
 msgid "Search"
-msgstr "Sök "
+msgstr "Sök"
 
 #: source/php/Module/Event/Event.php:313
 #: source/php/Module/SubmitForm/views/formfields.blade.php:322
@@ -1214,18 +1206,14 @@ msgid "To"
 msgstr "Till"
 
 #: source/php/Module/Event/Event.php:315
-msgid "From date"
-msgstr "Från datum"
+msgid "date"
+msgstr "datum"
 
-#: source/php/Module/Event/Event.php:316
-msgid "To date"
-msgstr "Till datum"
-
-#: source/php/Module/Event/Event.php:320
+#: source/php/Module/Event/Event.php:319
 msgid "Filter on events that is targeted for given the age"
 msgstr "Filtrera på evenemang som är riktade till en ålder"
 
-#: source/php/Module/Event/Event.php:323
+#: source/php/Module/Event/Event.php:322
 #: source/php/Shortcodes/SingleEvent.php:334
 #: source/php/Shortcodes/SingleEvent.php:336
 #: source/php/Shortcodes/SingleEvent.php:338
@@ -1233,7 +1221,7 @@ msgstr "Filtrera på evenemang som är riktade till en ålder"
 msgid "years"
 msgstr "år"
 
-#: source/php/Module/Event/Event.php:324
+#: source/php/Module/Event/Event.php:323
 msgid "Select age"
 msgstr "Välj ålder"
 
@@ -1998,6 +1986,12 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "http://www.helsingborg.se"
 msgstr ""
+
+#~ msgid "From date"
+#~ msgstr "Från datum"
+
+#~ msgid "To date"
+#~ msgstr "Till datum"
 
 #~ msgid "Year"
 #~ msgstr "År"

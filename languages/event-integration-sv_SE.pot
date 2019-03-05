@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2019-03-05 08:52+0100\n"
+"POT-Creation-Date: 2019-03-05 11:22+0100\n"
 "PO-Revision-Date: 2016-12-13 15:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -472,7 +472,7 @@ msgid "Show events from the selected groups."
 msgstr ""
 
 #: AcfFields/php/event-module.php:442 AcfFields/php/event-module.php:655
-#: source/php/Helper/SubmitEvent.php:142 source/php/Module/Event/Event.php:317
+#: source/php/Helper/SubmitEvent.php:142 source/php/Module/Event/Event.php:316
 #: source/php/PostTypes/Events.php:228
 #: source/php/Shortcodes/SingleEvent.php:565 views/submit-form.blade.php:179
 msgid "Categories"
@@ -545,7 +545,7 @@ msgstr ""
 msgid "Date search"
 msgstr ""
 
-#: AcfFields/php/event-module.php:709 source/php/Module/Event/Event.php:318
+#: AcfFields/php/event-module.php:709 source/php/Module/Event/Event.php:317
 #: source/php/Shortcodes/SingleEvent.php:334
 #: source/php/Shortcodes/SingleEvent.php:336
 #: source/php/Shortcodes/SingleEvent.php:338
@@ -1160,18 +1160,14 @@ msgid "To"
 msgstr ""
 
 #: source/php/Module/Event/Event.php:315
-msgid "From date"
+msgid "date"
 msgstr ""
 
-#: source/php/Module/Event/Event.php:316
-msgid "To date"
-msgstr ""
-
-#: source/php/Module/Event/Event.php:320
+#: source/php/Module/Event/Event.php:319
 msgid "Filter on events that is targeted for given the age"
 msgstr ""
 
-#: source/php/Module/Event/Event.php:323
+#: source/php/Module/Event/Event.php:322
 #: source/php/Shortcodes/SingleEvent.php:334
 #: source/php/Shortcodes/SingleEvent.php:336
 #: source/php/Shortcodes/SingleEvent.php:338
@@ -1179,7 +1175,7 @@ msgstr ""
 msgid "years"
 msgstr ""
 
-#: source/php/Module/Event/Event.php:324
+#: source/php/Module/Event/Event.php:323
 msgid "Select age"
 msgstr ""
 
