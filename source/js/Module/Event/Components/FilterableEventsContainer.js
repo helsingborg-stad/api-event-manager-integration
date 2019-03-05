@@ -1,8 +1,8 @@
 import { Pagination, PreLoader, Notice, Button } from 'hbg-react';
+import update from 'immutability-helper';
 import EventList from './EventList';
 import FilterContainer from './FilterContainer';
 import { getEvents } from '../../../Api/events';
-import update from 'immutability-helper';
 
 class FilterableEventsContainer extends React.Component {
     constructor(props) {
@@ -24,26 +24,6 @@ class FilterableEventsContainer extends React.Component {
 
     componentDidMount() {
         this.getEvents();
-    }
-
-    /**
-     * Prevent component from re-render when user edits filters
-     * @param nextProps
-     * @param nextState
-     * @returns {boolean}
-     */
-    shouldComponentUpdate(nextProps, nextState) {
-        const { searchString, startDate, endDate, categories, age } = this.state;
-        if (
-            searchString !== nextState.searchString ||
-            startDate !== nextState.startDate ||
-            endDate !== nextState.endDate ||
-            age !== nextState.age
-        ) {
-            return false;
-        }
-
-        return true;
     }
 
     /**
