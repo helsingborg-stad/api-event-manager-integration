@@ -1,11 +1,10 @@
-import uuidv1 from 'uuid/v1';
-import { Pagination, PreLoader, Notice } from 'hbg-react';
-import Card from '../Components/Card';
-import Filters from '../Components/Filters';
+import { Pagination, PreLoader, Notice, Button } from 'hbg-react';
+import EventList from './EventList';
+import FilterContainer from './FilterContainer';
 import { getEvents } from '../../../Api/events';
 import update from 'immutability-helper';
 
-class Event extends React.Component {
+class FilterableEventsContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -28,7 +27,7 @@ class Event extends React.Component {
     }
 
     /**
-     * Prevent component from re-render when user edits the filters
+     * Prevent component from re-render when user edits filters
      * @param nextProps
      * @param nextState
      * @returns {boolean}
@@ -76,7 +75,7 @@ class Event extends React.Component {
         const taxonomies = categories.concat(tags, groups);
         // The API base url
         const url = `${restUrl}wp/v2/event/module`;
-        // Create list of filterable parameters
+        // Create list of query parameters
         const params = {
             start_date: startDate,
             end_date: endDate,
@@ -255,7 +254,7 @@ class Event extends React.Component {
                     settings.mod_event_filter_age_group ||
                     settings.mod_event_filter_categories) && (
                     <div className="u-mb-3">
-                        <Filters
+                        <FilterContainer
                             settings={settings}
                             translation={translation}
                             updateSearchString={this.updateSearchString}
@@ -285,20 +284,22 @@ class Event extends React.Component {
 
                 {isLoaded && items.length > 0 && (
                     <div className="grid grid--columns">
-                        {items.map(event => (
-                            <div className={`u-flex ${gridColumn}`} key={uuidv1()}>
-                                <Card event={event} settings={settings} />
-                            </div>
-                        ))}
+                        <EventList
+                            items={items}
+                            gridColumn={gridColumn}
+                            displayFields={settings.mod_event_fields}
+                        />
                     </div>
                 )}
 
                 <div className="grid">
                     {settings.mod_event_archive && (
                         <div className="grid-xs-12 grid-md-auto u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
-                            <a className="btn btn-primary" href={archiveUrl}>
-                                {translation.moreEvents}
-                            </a>
+                            <Button
+                                href={archiveUrl}
+                                color="primary"
+                                title={translation.moreEvents}
+                            />
                         </div>
                     )}
                     {settings.mod_event_pagination && (
@@ -320,4 +321,4 @@ class Event extends React.Component {
     }
 }
 
-export default Event;
+export default FilterableEventsContainer;
