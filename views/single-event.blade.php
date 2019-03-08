@@ -17,8 +17,8 @@
                         <div class="grid-fit-content u-pt-1">
                             <div class="date-box box-filled box-filled-1 ratio-1-1 u-p-4 u-p-5@lg u-p-5@xl">
                                 <div class="content text-center u-flex u-flex-column u-justify-content-center">
-                                    <h1 class="date-box__day">{{ $event['occasion']['date_parts']['date'] }}</h1>
-                                    <span class="date-box__month">{{ $event['occasion']['date_parts']['month_short'] }}</span>
+                                    <span class="h1 u-lh-1">{{ $event['occasion']['date_parts']['date'] }}</span>
+                                    <span class="u-lh-1">{{ $event['occasion']['date_parts']['month_short'] }}</span>
                                 </div>
                             </div>
                         </div>
@@ -41,16 +41,15 @@
                         <div class="grid">
                             <div class="grid-md-12 u-mb-4 u-mb-3@xs">
                                 <div class="creamy"></div>
-                                <div class="grid u-py-1">
+                                <div class="grid u-py-2">
                                     @if (!empty($event['occasion']['formatted']))
                                         <div class="grid-md-fit-content u-mr-auto u-mb-1@xs u-mb-1@sm">
                                             <div class="grid sm-gutter grid-va-middle">
                                                 <div class="grid-fit-content">
                                                     <i class="pricon pricon-clock"></i>
                                                 </div>
-                                                <div class="grid-fit-content">
-                                                    <small><?php _e('Occasion', 'event-integration'); ?>
-                                                    </small>
+                                                <div class="grid-fit-content u-lh-1">
+                                                    <small><?php _e('Occasion', 'event-integration'); ?></small>
                                                     <br>
                                                     <small><b>{{ $event['occasion']['formatted'] }}</b></small>
                                                 </div>
@@ -64,7 +63,7 @@
                                                 <div class="grid-fit-content">
                                                     <i class="pricon pricon-location-pin"></i>
                                                 </div>
-                                                <div class="grid-fit-content">
+                                                <div class="grid-fit-content u-lh-1">
                                                     <small><?php _e('Location', 'event-integration'); ?></small>
                                                     <br>
                                                     <small><b>{{ $event['location']['title'] }}</b></small>
@@ -79,7 +78,7 @@
                                                 <div class="grid-fit-content">
                                                     <i class="pricon pricon-ticket"></i>
                                                 </div>
-                                                <div class="grid-fit-content">
+                                                <div class="grid-fit-content u-lh-1">
                                                     <small><?php _e('Tickets', 'event-integration') ?></small>
                                                     <br>
                                                     <a href="{{ $event['booking_link'] }}">
