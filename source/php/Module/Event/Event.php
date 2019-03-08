@@ -206,7 +206,7 @@ class Event extends \Modularity\Module
             $category = array(
                 'id' => $category->term_id,
                 'title' => $category->name,
-                'checked' => true,
+                'checked' => false,
             );
         }
 
