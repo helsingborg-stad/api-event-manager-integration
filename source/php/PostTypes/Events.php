@@ -70,13 +70,12 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         add_filter('the_lead', array($this, 'eventContentLead'));
         add_filter('query_vars', array($this, 'addDateQueryVar'));
         add_filter('Modularity/Module/Posts/Date', array($this, 'formatPostDate'), 10, 3);
+        add_filter('Municipio/viewData', array($this, 'singleViewData'));
 
         add_filter('acf/fields/taxonomy/wp_list_categories/name=mod_event_groups_list', array($this, 'filterGroupTaxonomy'), 10, 3);
         add_filter('acf/update_value/name=event_filter_group', array($this, 'updateGroupValue'), 10, 3);
         add_filter('acf/update_value/name=mod_event_groups_list', array($this, 'updateGroupValue'), 10, 3);
         add_filter('acf/update_value/name=event_api_url', array($this, 'getUserGroups'), 10, 3);
-
-        add_filter('Municipio/viewData', array($this, 'singleViewData'));
     }
 
     /**
@@ -93,11 +92,44 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
 
         global $post;
 
-        $data['post'] = $post;
+        // Gather event data
         $eventData = array();
         $eventData['occasion'] = \EventManagerIntegration\Helper\SingleEventData::singleEventDate();
-        $eventData['image'] =
+        $eventData['cancelled'] = !empty($eventData['occasion']['status']) && $eventData['occasion']['status'] === 'cancelled' ? __('Cancelled', 'event-integration') : null;
+        $eventData['rescheduled'] = !empty($eventData['occasion']['status']) && $eventData['occasion']['status'] === 'rescheduled' ? __('Rescheduled', 'event-integration') : null;
+        $eventData['exception_information'] = !empty($eventData['occasion']['exception_information']) ? $eventData['occasion']['exception_information'] : null;
 
+        if (function_exists('municipio_get_thumbnail_source')) {
+            $eventData['image_src'] = municipio_get_thumbnail_source(
+                null,
+                array(750, 750),
+                '16:9'
+            );
+        } else {
+            $thumbnailId = get_post_thumbnail_id($post->ID);
+            $image = wp_get_attachment_image_src($thumbnailId, 'medium');
+            $eventData['image_src'] = $image[0] ?? null;
+        }
+
+        $location = get_post_meta($post->ID, 'location', true);
+        $eventData['location'] = !empty($location['title']) ? $location : null;
+
+        $bookingLink = get_post_meta($post->ID, 'booking_link', true);
+        $eventData['booking_link'] = !empty($bookingLink) ? $bookingLink : null;
+
+        $ageGroupFrom = get_post_meta($post->ID, 'age_group_from', true);
+        $ageGroupTo = get_post_meta($post->ID, 'age_group_to', true);
+
+        $eventData['age_group'] = null;
+        if (!empty($ageGroupFrom) && !empty($ageGroupTo)) {
+            $eventData['age_group'] = sprintf('%s-%s %s', $ageGroupFrom, $ageGroupTo, __('years', 'event-integration'));
+        } elseif(!empty($ageGroupFrom)) {
+            $eventData['age_group'] = sprintf('%s %s %s', __('From', 'event-integration'), $ageGroupFrom, __('years', 'event-integration'));
+        } elseif(!empty($ageGroupTo)) {
+            $eventData['age_group'] = sprintf('%s %s %s', __('Up to', 'event-integration'), $ageGroupTo, __('years', 'event-integration'));
+        }
+
+        $data['post'] = $post;
         $data['event'] = $eventData;
 
         return $data;
