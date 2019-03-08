@@ -23,6 +23,7 @@ class SingleEventData
 
         if (is_array($occasions) && count($occasions) == 1) {
             $singleOccasion = (array)$occasions[0];
+            $singleOccasion['formatted'] = \EventManagerIntegration\App::formatEventDate($singleOccasion['start_date'], $singleOccasion['end_date']);
             $singleOccasion['date_parts'] = self::dateParts($singleOccasion['start_date']);
         } elseif (is_array($occasions) && $get_date != false) {
             foreach ($occasions as $occasion) {
@@ -30,6 +31,7 @@ class SingleEventData
                 $event_date = preg_replace('/\D/', '', $occasion['start_date']);
                 if ($get_date == $event_date) {
                     $singleOccasion = $occasion;
+                    $singleOccasion['formatted'] = \EventManagerIntegration\App::formatEventDate($occasion['start_date'], $occasion['end_date']);
                     $singleOccasion['date_parts'] = self::dateParts($occasion['start_date']);
                 }
             }
