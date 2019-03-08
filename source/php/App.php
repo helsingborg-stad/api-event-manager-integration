@@ -51,6 +51,27 @@ class App
         add_action('widgets_init', function () {
             register_widget('EventManagerIntegration\Widget\DisplayEvents');
         });
+
+        // Add view paths
+        add_filter('Municipio/blade/view_paths', array($this, 'addViewPaths'), 2, 1);
+    }
+
+    /**
+     * Add searchable blade template paths
+     * @param array  $array Template paths
+     * @return array        Modified template paths
+     */
+    public function addViewPaths($array)
+    {
+        // If child theme is active, insert plugin view path after child views path.
+        if (is_child_theme()) {
+            array_splice( $array, 2, 0, array(EVENTMANAGERINTEGRATION_VIEW_PATH) );
+        } else {
+            // Add view path first in the list if child theme is not active.
+            array_unshift($array, EVENTMANAGERINTEGRATION_VIEW_PATH);
+        }
+
+        return $array;
     }
 
     /**
