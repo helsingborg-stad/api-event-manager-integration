@@ -5,7 +5,7 @@
         @include('partials.breadcrumbs')
 
         <div class="grid single-event" id="readspeaker-read">
-            <div class="grid-md-7 u-mb-3">
+            <div class="grid-md-7 u-mb-4">
                 <div class="grid sm-gutter">
                     @if(!empty($event['image_src']))
                         <div class="grid-md-12 u-mb-2">
@@ -39,7 +39,7 @@
                 <div class="grid">
                     <div class="grid-md-7 u-mr-auto">
                         <div class="grid">
-                            <div class="grid-md-12 u-mb-3">
+                            <div class="grid-md-12 u-mb-4 u-mb-3@xs">
                                 <div class="creamy"></div>
                                 <div class="grid u-py-1">
                                     @if (!empty($event['occasion']['formatted']))
