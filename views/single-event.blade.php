@@ -41,9 +41,9 @@
                         <div class="grid">
                             <div class="grid-md-12 u-mb-4 u-mb-3@xs">
                                 <div class="creamy"></div>
-                                <div class="grid u-py-2">
+                                <div class="grid u-pt-2">
                                     @if (!empty($event['occasion']['formatted']))
-                                        <div class="grid-md-fit-content u-mr-auto u-mb-1@xs u-mb-1@sm">
+                                        <div class="grid-md-fit-content u-mr-auto u-mb-2">
                                             <div class="grid sm-gutter grid-va-middle">
                                                 <div class="grid-fit-content">
                                                     <i class="pricon pricon-clock"></i>
@@ -58,7 +58,7 @@
                                     @endif
 
                                     @if ($event['location'])
-                                        <div class="grid-md-fit-content u-mr-auto u-mb-1@xs u-mb-1@sm">
+                                        <div class="grid-md-fit-content u-mr-auto u-mb-2">
                                             <div class="grid sm-gutter grid-va-middle">
                                                 <div class="grid-fit-content">
                                                     <i class="pricon pricon-location-pin"></i>
@@ -73,7 +73,7 @@
                                     @endif
 
                                     @if ($event['booking_link'])
-                                        <div class="grid-md-fit-content u-mr-auto u-mb-1@xs u-mb-1@sm">
+                                        <div class="grid-md-fit-content u-mr-auto u-mb-2">
                                             <div class="grid sm-gutter grid-va-middle">
                                                 <div class="grid-fit-content">
                                                     <i class="pricon pricon-ticket"></i>
@@ -93,12 +93,12 @@
                                     @endif
 
                                     @if ($event['age_group'])
-                                        <div class="grid-md-fit-content u-mr-auto u-mb-1@xs u-mb-1@sm">
+                                        <div class="grid-md-fit-content u-mr-auto u-mb-2">
                                             <div class="grid sm-gutter grid-va-middle">
                                                 <div class="grid-fit-content">
                                                     <i class="pricon pricon-info-o"></i>
                                                 </div>
-                                                <div class="grid-fit-content">
+                                                <div class="grid-fit-content u-lh-1">
                                                     <small><?php _e('Age', 'event-integration') ?></small>
                                                     <br>
                                                     <small><b>{{ $event['age_group'] }}</b></small>
