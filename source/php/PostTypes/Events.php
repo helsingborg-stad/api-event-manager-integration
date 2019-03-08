@@ -4,7 +4,6 @@ namespace EventManagerIntegration\PostTypes;
 
 class Events extends \EventManagerIntegration\Entity\CustomPostType
 {
-
     public static $postTypeSlug = 'event';
 
     public function __construct()
@@ -76,6 +75,32 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         add_filter('acf/update_value/name=event_filter_group', array($this, 'updateGroupValue'), 10, 3);
         add_filter('acf/update_value/name=mod_event_groups_list', array($this, 'updateGroupValue'), 10, 3);
         add_filter('acf/update_value/name=event_api_url', array($this, 'getUserGroups'), 10, 3);
+
+        add_filter('Municipio/viewData', array($this, 'singleViewData'));
+    }
+
+    /**
+     * Add event data to single view
+     * @param array $data Default view data
+     * @return array Modified view data
+     */
+    public function singleViewData($data)
+    {
+        // Bail if not event
+        if (get_post_type() !== self::$postTypeSlug || is_archive()) {
+            return $data;
+        }
+
+        global $post;
+
+        $data['post'] = $post;
+        $eventData = array();
+        $eventData['occasion'] = \EventManagerIntegration\Helper\SingleEventData::singleEventDate();
+        $eventData['image'] =
+
+        $data['event'] = $eventData;
+
+        return $data;
     }
 
     public function formatPostDate($date, $postId, $postType)
