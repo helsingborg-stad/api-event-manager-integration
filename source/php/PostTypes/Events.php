@@ -39,26 +39,42 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         );
         $this->addTableColumn('cb', '<input type="checkbox">');
         $this->addTableColumn('title', __('Title', 'event-integration'));
-        $this->addTableColumn('occasion', __('Occasion', 'event-integration'), false, function ($columnKey, $postId) {
-            $occasions = $this->getPostOccasions($postId);
-            if (!$occasions) {
-                return;
+        $this->addTableColumn(
+            'occasion',
+            __('Occasion', 'event-integration'),
+            false,
+            function ($columnKey, $postId) {
+                $occasions = $this->getPostOccasions($postId);
+                if (!$occasions) {
+                    return;
+                }
+                echo($occasions);
             }
-            echo($occasions);
-        });
-        $this->addTableColumn('acceptAndDeny', __('Public', 'event-integration'), false, function ($column, $postId) {
-            $post_status = get_post_status($postId);
+        );
+        $this->addTableColumn(
+            'acceptAndDeny',
+            __('Public', 'event-integration'),
+            false,
+            function ($column, $postId) {
+                $post_status = get_post_status($postId);
 
-            $first = '';
-            $second = '';
-            if ($post_status == 'publish') {
-                $first = 'hidden';
-            } elseif ($post_status == 'draft' || $post_status == 'trash') {
-                $second = 'hidden';
+                $first = '';
+                $second = '';
+                if ($post_status == 'publish') {
+                    $first = 'hidden';
+                } elseif ($post_status == 'draft' || $post_status == 'trash') {
+                    $second = 'hidden';
+                }
+                echo '<a href="#" class="accept button-primary '.$first.'" postid="'.$postId.'">'.__(
+                        'Accept',
+                        'event-integration'
+                    ).'</a>
+            <a href="#" class="deny button-primary '.$second.'" postid="'.$postId.'">'.__(
+                        'Deny',
+                        'event-integration'
+                    ).'</a>';
             }
-            echo '<a href="#" class="accept button-primary ' . $first . '" postid="' . $postId . '">' . __('Accept', 'event-integration') . '</a>
-            <a href="#" class="deny button-primary ' . $second . '" postid="' . $postId . '">' . __('Deny', 'event-integration') . '</a>';
-        });
+        );
         $this->addTableColumn('date', __('Date', 'event-integration'));
         add_action('init', array($this, 'registerEventCategories'), 1);
         add_action('init', array($this, 'registerEventTags'), 1);
@@ -141,6 +157,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             return $date;
         }
         $occasions = get_post_meta($postId, 'occasions_complete', true);
+
         return $occasions[0]['start_date'] ?? '';
     }
 
@@ -153,7 +170,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
      */
     public function getUserGroups($value, $post_id, $field)
     {
-        if (! empty($value)) {
+        if (!empty($value)) {
             \EventManagerIntegration\App::importPublishingGroups();
         }
 
@@ -169,7 +186,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
      */
     public function updateGroupValue($value, $post_id, $field)
     {
-        if (! empty($value)) {
+        if (!empty($value)) {
             foreach ($value as $v) {
                 $term_children = get_term_children($v, 'event_groups');
                 if ($term_children) {
@@ -184,13 +201,14 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
 
     /**
      * Filter to hide empty groups on module settings
-     * @param  array  $args   An array of arguments passed to the wp_list_categories function
-     * @param  array  $field  An array containing all the field settings
+     * @param  array $args  An array of arguments passed to the wp_list_categories function
+     * @param  array $field An array containing all the field settings
      * @return array  $args
      */
     public function filterGroupTaxonomy($args, $field)
     {
         $args['hide_empty'] = 1;
+
         return $args;
     }
 
@@ -201,6 +219,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
     public function addDateQueryVar($vars)
     {
         $vars[] = "date";
+
         return $vars;
     }
 
@@ -211,7 +230,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
      */
     public function eventContent($content)
     {
-        if (! is_singular($this->slug)) {
+        if (!is_singular($this->slug)) {
             return $content;
         }
 
@@ -230,7 +249,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
      */
     public function eventContentLead($lead)
     {
-        if (! is_singular($this->slug)) {
+        if (!is_singular($this->slug)) {
             return $lead;
         }
 
@@ -249,14 +268,14 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
     public function getCustomContent()
     {
         global $post;
-        $get_date = (! empty(get_query_var('date'))) ? get_query_var('date') : false;
+        $get_date = (!empty(get_query_var('date'))) ? get_query_var('date') : false;
 
         if ($get_date != false) {
             $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($post->ID, false);
             foreach ($occasions as $o) {
                 $event_date = preg_replace('/\D/', '', $o->start_date);
                 // Replace content with occasion custom content
-                if ($get_date == $event_date && ! empty($o->content) && $o->content_mode == 'custom') {
+                if ($get_date == $event_date && !empty($o->content) && $o->content_mode == 'custom') {
                     return $o->content;
                 }
             }
@@ -403,6 +422,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             $button .= '</div>';
             $views['import-buttons'] = $button;
         }
+
         return $views;
     }
 
@@ -426,12 +446,12 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
      */
     public function acceptOrDeny()
     {
-        if (! isset($_POST['postId']) || ! isset($_POST['value'])) {
+        if (!isset($_POST['postId']) || !isset($_POST['value'])) {
             echo _e('Something went wrong!', 'event-integration');
             die();
         }
 
-        $postId =  $_POST['postId'];
+        $postId = $_POST['postId'];
         $value = $_POST['value'];
 
         $post = get_post($postId);
