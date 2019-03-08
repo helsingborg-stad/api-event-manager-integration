@@ -91,6 +91,7 @@ class SingleEventData
         $date = array(
             'date' => mysql2date('j', $start, true),
             'month' => mysql2date('F', $start, true),
+            'month_short' => substr(mysql2date('F', $start, true), 0, 3),
             'year' => mysql2date('Y', $start, true),
             'time' => mysql2date('H:i', $start, true),
         );
