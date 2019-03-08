@@ -1,0 +1,8 @@
+.single-event {
+    .date-box {
+        &__day, &__month {
+            line-height: 1;
+            color: #fff;
+        }
+    }
+}
