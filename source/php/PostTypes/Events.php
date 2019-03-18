@@ -186,6 +186,17 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
      */
     public function updateGroupValue($value, $post_id, $field)
     {
+        // Get old value
+        if ($post_id === 'options') {
+            $selectedGroups = get_field('event_filter_group', 'options');
+        } else {
+            $selectedGroups = get_field('mod_event_groups_list', $post_id);
+        }
+        // Return if settings value is empty to only auto-activate children on first save
+        if (!empty($selectedGroups)) {
+            return $value;
+        }
+
         if (!empty($value)) {
             foreach ($value as $v) {
                 $term_children = get_term_children($v, 'event_groups');
