@@ -20,40 +20,61 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         // Import publishing groups from API
         \EventManagerIntegration\App::importPublishingGroups();
 
-        // Loop through paginated API request
-        $page = 1;
+        $languages = is_plugin_active('polylang-pro/polylang.php') ? (array)pll_languages_list() : array();
+        error_log("COUNT LANGS: " . count($languages));
+
         $eventIds = array();
         $checkApiDiff = true;
-        while ($page) {
-            $url = add_query_arg(
-                array(
-                    'page' => $page,
-                    'per_page' => 25,
-                ),
-                $this->url
-            );
+        $i = 0;
+        do {
+            error_log("DO LOOP RUN " . $i);
 
-            $events = \EventManagerIntegration\Parser::requestApi($url);
+            $language = $languages[$i] ?? '';
 
-            if (is_wp_error($events)) {
-                // Skip check of events diff on error
-                $checkApiDiff = false;
-                $page = false;
-                break;
-            } elseif ($events) {
-                // Save events to database
-                foreach ($events as $event) {
-                    $this->saveEvent($event);
-                    if (isset($event['id'])) {
-                        $eventIds[] = $event['id'];
+            error_log("LANG: " . $language);
+
+            // Loop through paginated API request
+            $page = 1;
+            while ($page) {
+                $url = add_query_arg(
+                    array(
+                        'page' => $page,
+                        'per_page' => 25,
+                        'lang' => $language,
+                    ),
+                    $this->url
+                );
+
+                error_log($url);
+                $events = \EventManagerIntegration\Parser::requestApi($url);
+                error_log("EVENTs::");
+                error_log(print_r($events, true));
+
+                if (is_wp_error($events)) {
+                    // Skip check of events diff on error
+                    $checkApiDiff = false;
+                    $page = false;
+                    break;
+                } elseif ($events) {
+                    // Save events to database
+                    foreach ($events as $event) {
+                        $this->saveEvent($event);
+                        if (isset($event['id'])) {
+                            $eventIds[] = $event['id'];
+                        }
                     }
+                } else {
+                    $page = false;
+                    break;
                 }
-            } else {
-                $page = false;
-                break;
+                $page++;
             }
-            $page++;
-        }
+
+            $i++;
+
+        } while (count($languages) > $i);
+
+        error_log(print_r($eventIds, true));
 
         // Delete events that has been deleted from the API
         if ($checkApiDiff === true && !empty($eventIds)) {
@@ -238,9 +259,10 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         }
 
         return array_map(
-            function($category) {
+            function ($category) {
                 return ucfirst(trim(htmlspecialchars_decode($category)));
-            }, $categories
+            },
+            $categories
         );
     }
 
