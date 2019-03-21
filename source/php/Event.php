@@ -30,7 +30,7 @@ class Event extends Entity\PostManager
         $this->saveAddLocations();
         $this->saveLanguage();
 
-        if (! empty($this->gallery)) {
+        if (!empty($this->gallery)) {
             foreach ($this->gallery as $key => $image) {
                 $this->setFeaturedImageFromUrl($image['url'], false);
             }
@@ -46,11 +46,11 @@ class Event extends Entity\PostManager
     public function saveLocation()
     {
         if ($this->location != null) {
-            if (! empty($this->location['parent']) && $this->location['parent']['id'] > 0) {
-                $this->location['title'] = $this->location['parent']['title'] . ', ' . $this->location['title'];
+            if (!empty($this->location['parent']) && $this->location['parent']['id'] > 0) {
+                $this->location['title'] = $this->location['parent']['title'].', '.$this->location['title'];
             }
 
-            if (! empty($location['latitude']) && ! empty($location['longitude'])) {
+            if (!empty($location['latitude']) && !empty($location['longitude'])) {
                 update_post_meta($this->ID, 'latitude', $location['latitude']);
                 update_post_meta($this->ID, 'longitude', $location['longitude']);
             }
@@ -64,10 +64,10 @@ class Event extends Entity\PostManager
      */
     public function saveAddLocations()
     {
-        if (is_array($this->additional_locations) && ! empty($this->additional_locations)) {
+        if (is_array($this->additional_locations) && !empty($this->additional_locations)) {
             foreach ($this->additional_locations as &$location) {
-                if (! empty($location['parent']) && $location['parent']['id'] > 0) {
-                    $location['title'] = $location['parent']['title'] . ', ' . $location['title'];
+                if (!empty($location['parent']) && $location['parent']['id'] > 0) {
+                    $location['title'] = $location['parent']['title'].', '.$location['title'];
                 }
             }
             update_post_meta($this->ID, 'additional_locations', $this->additional_locations);
@@ -86,7 +86,7 @@ class Event extends Entity\PostManager
                 foreach ($terms as $term) {
                     wp_remove_object_terms($this->ID, $term->term_id, 'event_categories');
                 }
-            delete_post_meta($this->ID, 'categories');
+                delete_post_meta($this->ID, 'categories');
             }
         } else {
             wp_set_object_terms($this->ID, $this->categories, 'event_categories', false);
@@ -101,7 +101,7 @@ class Event extends Entity\PostManager
     {
         // Save group names as new array
         $event_groups = array();
-        if (! empty($this->groups) && is_array($this->groups)) {
+        if (!empty($this->groups) && is_array($this->groups)) {
             foreach ($this->groups as $group) {
                 $event_groups[] .= $group['name'];
             }
@@ -121,7 +121,7 @@ class Event extends Entity\PostManager
                 foreach ($terms as $term) {
                     wp_remove_object_terms($this->ID, $term->term_id, 'event_tags');
                 }
-            delete_post_meta($this->ID, 'tags');
+                delete_post_meta($this->ID, 'tags');
             }
         } else {
             wp_set_object_terms($this->ID, $this->tags, 'event_tags', false);
@@ -137,39 +137,111 @@ class Event extends Entity\PostManager
         global $wpdb;
 
         // Delete all occasions related to the event
-        $db_table = $wpdb->prefix . "integrate_occasions";
+        $db_table = $wpdb->prefix."integrate_occasions";
         $wpdb->delete($db_table, array('event_id' => $this->ID), array('%d'));
 
         // Remove post if occasions is missing
         if ($this->occasions_complete == null || empty($this->occasions_complete)) {
             wp_delete_post($this->ID, true);
+
             return false;
         }
 
         // Loop through occasions for the event
         foreach ($this->occasions_complete as $o) {
-            $start_date               = ! empty($o['start_date']) ? $o['start_date'] : null;
-            $end_date                 = ! empty($o['end_date']) ? $o['end_date'] : null;
-            $door_time                = ! empty($o['door_time']) ? $o['door_time'] : null;
-            $status                   = ! empty($o['status']) ? $o['status'] : null;
-            $occ_exeption_information = ! empty($o['occ_exeption_information']) ? $o['occ_exeption_information'] : null;
-            $content_mode             = ! empty($o['content_mode']) ? $o['content_mode'] : null;
-            $content                  = ! empty($o['content']) ? $o['content'] : null;
+            $start_date = !empty($o['start_date']) ? $o['start_date'] : null;
+            $end_date = !empty($o['end_date']) ? $o['end_date'] : null;
+            $door_time = !empty($o['door_time']) ? $o['door_time'] : null;
+            $status = !empty($o['status']) ? $o['status'] : null;
+            $occ_exeption_information = !empty($o['occ_exeption_information']) ? $o['occ_exeption_information'] : null;
+            $content_mode = !empty($o['content_mode']) ? $o['content_mode'] : null;
+            $content = !empty($o['content']) ? $o['content'] : null;
 
-            $wpdb->insert($db_table, array('event_id' => $this->ID, 'start_date' => $start_date, 'end_date' => $end_date, 'door_time' => $door_time, 'status' => $status, 'exception_information' => $occ_exeption_information, 'content_mode' => $content_mode, 'content' => ($content)));
+            $wpdb->insert(
+                $db_table,
+                array(
+                    'event_id' => $this->ID,
+                    'start_date' => $start_date,
+                    'end_date' => $end_date,
+                    'door_time' => $door_time,
+                    'status' => $status,
+                    'exception_information' => $occ_exeption_information,
+                    'content_mode' => $content_mode,
+                    'content' => ($content),
+                )
+            );
         }
 
         return true;
     }
 
     /**
-     * Apply a language to the event with the translation plugin 'Polylang'
+     * Apply language and translations to the event.
+     * Compatible with the plugin 'Polylang'
      */
     public function saveLanguage()
     {
-        if (is_plugin_active('polylang-pro/polylang.php') && !empty($this->language)) {
-            error_log("translate " . $this->ID . ' Lang: ' . $this->language);
-            pll_set_post_language($this->ID, $this->language);
+        // Bail if Polylang is not active
+        if (!is_plugin_active('polylang-pro/polylang.php')) {
+            return;
         }
+
+        // Apply language to the event
+        if (!empty($this->lang)) {
+            pll_set_post_language($this->ID, $this->lang);
+        }
+
+        // Define which events are translations of each other
+        if (!empty($this->translations)) {
+            $translations = $this->translations;
+            // Get locally installed languages
+            $localLangs = pll_languages_list();
+            // Remove all languages that don't exist locally
+            $translations = array_filter(
+                $translations,
+                function ($translation) use ($localLangs) {
+                    return in_array($translation, $localLangs);
+                },
+                ARRAY_FILTER_USE_KEY
+            );
+
+            // Replace the old IDs with new events IDs
+            foreach ($translations as $key => &$id) {
+                $id = $this->getEventByOriginalId($id);
+                if (!$id) {
+                    // Remove if event cant't be found
+                    unset($translations[$key]);
+                }
+            }
+            // Define event translations
+            pll_save_post_translations($translations);
+        }
+    }
+
+    /**
+     * Find an event by it's original id
+     * @param int $id Event ID
+     * @return Int|bool
+     */
+    public function getEventByOriginalId($id)
+    {
+        $args = array(
+            'meta_query' => array(
+                array(
+                    'key' => '_event_manager_id',
+                    'value' => $id,
+                ),
+            ),
+            'post_type' => $this->post_type,
+            'posts_per_page' => '1',
+        );
+
+        $events = get_posts($args);
+
+        if (is_wp_error($events) || !isset($events[0]->ID)) {
+            return false;
+        }
+
+        return $events[0]->ID;
     }
 }
