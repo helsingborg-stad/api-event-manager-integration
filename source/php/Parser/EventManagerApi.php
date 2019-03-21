@@ -19,20 +19,13 @@ class EventManagerApi extends \EventManagerIntegration\Parser
 
         // Import publishing groups from API
         \EventManagerIntegration\App::importPublishingGroups();
-
+        // Get site languages
         $languages = is_plugin_active('polylang-pro/polylang.php') ? (array)pll_languages_list() : array();
-        error_log("COUNT LANGS: " . count($languages));
-
         $eventIds = array();
         $checkApiDiff = true;
         $i = 0;
         do {
-            error_log("DO LOOP RUN " . $i);
-
             $language = $languages[$i] ?? '';
-
-            error_log("LANG: " . $language);
-
             // Loop through paginated API request
             $page = 1;
             while ($page) {
@@ -45,10 +38,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
                     $this->url
                 );
 
-                error_log($url);
                 $events = \EventManagerIntegration\Parser::requestApi($url);
-                error_log("EVENTs::");
-                //error_log(print_r($events, true));
 
                 if (is_wp_error($events)) {
                     // Skip check of events diff on error
@@ -74,8 +64,6 @@ class EventManagerApi extends \EventManagerIntegration\Parser
             $i++;
 
         } while (count($languages) > $i);
-
-        error_log(print_r($eventIds, true));
 
         // Delete events that has been deleted from the API
         if ($checkApiDiff === true && !empty($eventIds)) {
@@ -355,7 +343,6 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         // Loop through the diff and delete its occasions
         if (!empty($diffEvents)) {
             foreach ($diffEvents as $event) {
-                error_log("Delete diff " . $event);
                 $wpdb->delete($table, array('event_id' => $event));
             }
         }
