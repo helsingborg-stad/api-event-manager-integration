@@ -48,7 +48,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
                 error_log($url);
                 $events = \EventManagerIntegration\Parser::requestApi($url);
                 error_log("EVENTs::");
-                error_log(print_r($events, true));
+                //error_log(print_r($events, true));
 
                 if (is_wp_error($events)) {
                     // Skip check of events diff on error
@@ -58,6 +58,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
                 } elseif ($events) {
                     // Save events to database
                     foreach ($events as $event) {
+                        $event['language'] = $language;
                         $this->saveEvent($event);
                         if (isset($event['id'])) {
                             $eventIds[] = $event['id'];
@@ -147,6 +148,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         $age_group_from                 = !empty($event['age_group_from']) ? $event['age_group_from'] : null;
         $age_group_to                   = !empty($event['age_group_to']) ? $event['age_group_to'] : null;
         $accessibility                  = !empty($event['accessibility']) ? $event['accessibility'] : null;
+        $language                       = !empty($event['language']) ? $event['language'] : null;
 
         // Check if event passes taxonomy filters
         $pass_tax_filter = $this->checkFilters(
@@ -232,6 +234,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
                         'age_group_from' => $age_group_from,
                         'age_group_to' => $age_group_to,
                         'accessibility' => $accessibility,
+                        'language' => $language
                     )
                 );
             } catch (\Exception $e) {
@@ -350,6 +353,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         // Loop through the diff and delete its occasions
         if (!empty($diffEvents)) {
             foreach ($diffEvents as $event) {
+                error_log("Delete diff " . $event);
                 $wpdb->delete($table, array('event_id' => $event));
             }
         }

@@ -2,7 +2,7 @@
 
 namespace EventManagerIntegration;
 
-class Event extends \EventManagerIntegration\Entity\PostManager
+class Event extends Entity\PostManager
 {
     public $post_type = 'event';
 
@@ -28,6 +28,7 @@ class Event extends \EventManagerIntegration\Entity\PostManager
         $this->saveTags();
         $this->saveLocation();
         $this->saveAddLocations();
+        $this->saveLanguage();
 
         if (! empty($this->gallery)) {
             foreach ($this->gallery as $key => $image) {
@@ -159,5 +160,16 @@ class Event extends \EventManagerIntegration\Entity\PostManager
         }
 
         return true;
+    }
+
+    /**
+     * Apply a language to the event with the translation plugin 'Polylang'
+     */
+    public function saveLanguage()
+    {
+        if (is_plugin_active('polylang-pro/polylang.php') && !empty($this->language)) {
+            error_log("translate " . $this->ID . ' Lang: ' . $this->language);
+            pll_set_post_language($this->ID, $this->language);
+        }
     }
 }
