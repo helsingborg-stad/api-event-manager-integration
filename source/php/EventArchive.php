@@ -89,7 +89,7 @@ class EventArchive
      */
     public function eventFilterJoin($join)
     {
-        return $join . "LEFT JOIN {$this->dbTable} ON ({$this->db->posts}.ID = {$this->dbTable}.event_id) ";
+        return $join . " LEFT JOIN {$this->dbTable} ON ({$this->db->posts}.ID = {$this->dbTable}.event_id) ";
     }
 
     /**
