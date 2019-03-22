@@ -8,12 +8,14 @@ class Event extends \Modularity\Module
     public $supports = array();
     public $templateDir = EVENTMANAGERINTEGRATION_PATH.'source/php/Module/Event/views/';
     public $template;
+    public $lang;
 
     public function init()
     {
         $this->nameSingular = __('Event', 'event-integration');
         $this->namePlural = __('Events', 'event-integration');
         $this->description = __('Outputs a list if upcoming events', 'event-integration');
+        $this->lang = function_exists('pll_current_language') ? pll_current_language('slug') : null;
 
         add_action('wp_ajax_nopriv_ajax_pagination', array($this, 'ajaxPagination'));
         add_action('wp_ajax_ajax_pagination', array($this, 'ajaxPagination'));
@@ -76,6 +78,9 @@ class Event extends \Modularity\Module
             ? $data['mod_event_fields'] : array();
         $data['descr_limit'] = !empty($data['mod_event_descr_limit']) ? $data['mod_event_descr_limit'] : null;
         $data['date_now'] = strtotime('now');
+
+        // Language
+        $data['lang'] = $this->lang;
 
         $data['classes'] = !empty($this->args) ? implode(
             ' ',
@@ -152,6 +157,7 @@ class Event extends \Modularity\Module
             'taxonomies' => $taxonomies,
             'location' => (isset($fields->mod_event_geographic)) ? $fields->mod_event_geographic : null,
             'distance' => (isset($fields->mod_event_distance)) ? $fields->mod_event_distance : null,
+            'lang' => $this->lang,
         );
 
         $events = \EventManagerIntegration\Helper\QueryEvents::getEventsByInterval($params, $page);

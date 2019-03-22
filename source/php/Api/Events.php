@@ -41,6 +41,7 @@ class Events
     public function validateNonce($request)
     {
         $nonce = $request->get_param('_wpnonce');
+
         return wp_verify_nonce($nonce, 'wp_rest');
     }
 
@@ -110,6 +111,11 @@ class Events
             'age_group' => array(
                 'description' => 'Filter by age group.',
                 'type' => 'object',
+                'default' => null,
+            ),
+            'lang' => array(
+                'description' => 'Filter by language.',
+                'type' => 'string',
                 'default' => null,
             ),
         );

@@ -29,6 +29,13 @@ class QueryEvents
             $idString = ($locationIds) ? implode(',', array_column($locationIds, 'post_id')) : "0";
         }
 
+        // Get events in given language
+        $languageId = null;
+        if (function_exists('pll_the_languages') && !empty($params['lang'])) {
+            $languages = pll_the_languages(array('raw' => 1, 'hide_if_empty' => 0));
+            $languageId = $languages[$params['lang']]['id'] ?? null;
+        }
+
         // Get taxonomy id string
         $taxonomies = (!empty($params['taxonomies']) && is_array($params['taxonomies'])) ? implode(
             ",",
@@ -53,7 +60,9 @@ class QueryEvents
         LEFT JOIN   $db_table ON ($wpdb->posts.ID = $db_table.event_id) ";
         $query .= ($ageGroup) ? "LEFT JOIN $wpdb->postmeta age_from ON $wpdb->posts.ID = age_from.post_id " : '';
         $query .= ($ageGroup) ? "LEFT JOIN $wpdb->postmeta age_to ON $wpdb->posts.ID = age_to.post_id " : '';
-        $query .= "LEFT JOIN   $wpdb->term_relationships ON ($wpdb->posts.ID = $wpdb->term_relationships.object_id)
+        $query .= ($taxonomies) ? "LEFT JOIN $wpdb->term_relationships term1 ON ($wpdb->posts.ID = term1.object_id)" : '';
+        $query .= ($languageId) ? "LEFT JOIN $wpdb->term_relationships term2 ON ($wpdb->posts.ID = term2.object_id) " : '';
+        $query .= "
         WHERE $wpdb->posts.post_type = %s 
         AND $wpdb->posts.post_status = %s 
         AND ($db_table.start_date BETWEEN %s AND %s OR $db_table.end_date BETWEEN %s AND %s) ";
@@ -74,7 +83,8 @@ class QueryEvents
         }
 
         $query .= ($searchString) ? "AND (($wpdb->posts.post_title LIKE %s) OR ($wpdb->posts.post_content LIKE %s))" : '';
-        $query .= ($taxonomies) ? "AND ($wpdb->term_relationships.term_taxonomy_id IN ($taxonomies))" : '';
+        $query .= ($taxonomies) ? "AND (term1.term_taxonomy_id IN ($taxonomies)) " : '';
+        $query .= ($languageId) ? "AND (term2.term_taxonomy_id IN ($languageId)) " : '';
         $query .= ($idString != null) ? "AND ($wpdb->posts.ID IN ($idString)) " : '';
         $query .= "GROUP BY $wpdb->posts.ID, $db_table.start_date, $db_table.end_date ";
         $query .= "ORDER BY $db_table.start_date ASC";

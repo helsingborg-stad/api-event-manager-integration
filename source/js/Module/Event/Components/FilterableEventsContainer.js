@@ -45,10 +45,20 @@ class FilterableEventsContainer extends React.Component {
             tags,
             groups,
             nonce,
+            lang,
         } = this.props;
         const perPage = settings.mod_event_pagination ? settings.mod_event_per_page : -1;
-        // Filter checked categories and return the IDs
-        categories = categories.filter(category => category.checked).map(category => category.id);
+        // Filter checked categories
+        const checkedCategories = categories.filter(category => category.checked);
+        if (
+            checkedCategories.length > 0 ||
+            (checkedCategories.length === 0 && settings.mod_event_categories_show === true)
+        ) {
+            categories = checkedCategories;
+        }
+        // Collect IDS
+        categories = categories.map(category => category.id);
+
         // Filter checked ages and return the values
         const ageGroup = ageRange.filter(age => age.checked).map(age => age.value);
         // Concatenate all taxonomies together
@@ -68,6 +78,7 @@ class FilterableEventsContainer extends React.Component {
             taxonomies,
             age_group: ageGroup,
             search_string: searchString,
+            lang,
             _wpnonce: nonce,
         };
 
