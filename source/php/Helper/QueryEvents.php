@@ -60,7 +60,7 @@ class QueryEvents
         LEFT JOIN   $db_table ON ($wpdb->posts.ID = $db_table.event_id) ";
         $query .= ($ageGroup) ? "LEFT JOIN $wpdb->postmeta age_from ON $wpdb->posts.ID = age_from.post_id " : '';
         $query .= ($ageGroup) ? "LEFT JOIN $wpdb->postmeta age_to ON $wpdb->posts.ID = age_to.post_id " : '';
-        $query .= ($taxonomies) ? "LEFT JOIN $wpdb->term_relationships term1 ON ($wpdb->posts.ID = term1.object_id)" : '';
+        $query .= ($taxonomies) ? "LEFT JOIN $wpdb->term_relationships term1 ON ($wpdb->posts.ID = term1.object_id) " : '';
         $query .= ($languageId) ? "LEFT JOIN $wpdb->term_relationships term2 ON ($wpdb->posts.ID = term2.object_id) " : '';
         $query .= "
         WHERE $wpdb->posts.post_type = %s 
