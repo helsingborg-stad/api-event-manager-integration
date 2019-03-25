@@ -196,8 +196,12 @@ class Event extends \Modularity\Module
         $moduleCategories = get_field('mod_event_categories_list', $moduleId);
         if ($showAllCategories === false && !empty($moduleCategories) && is_array($moduleCategories)) {
             $categories = $moduleCategories;
-            foreach ($categories as &$category) {
+            foreach ($categories as $key => &$category) {
                 $category = get_term($category, 'event_categories');
+                // If category is missing, remove it from the list
+                if (!$category) {
+                    unset($categories[$key]);
+                }
             }
         } else {
             $categories = get_terms(
