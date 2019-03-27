@@ -72,6 +72,9 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         // Clean up
         $this->removeExpiredOccasions();
         $this->removeExpiredEvents();
+
+        // Sync category translations
+        \EventManagerIntegration\Helper\Translations::defineCategoryTranslations();
     }
 
     /**
