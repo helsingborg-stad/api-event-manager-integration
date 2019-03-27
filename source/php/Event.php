@@ -89,18 +89,6 @@ class Event extends Entity\PostManager
                 delete_post_meta($this->ID, 'categories');
             }
         } else {
-            if (is_plugin_active('polylang-pro/polylang.php') && !empty($this->lang)) {
-                foreach ($this->categories as $category) {
-                    $term = get_term_by('name', $category, 'event_categories');
-                    if (!$term) {
-                        $term = wp_insert_term($category, 'event_categories', $args = array());
-
-                        if (!is_wp_error($term) && isset($term['term_id'])) {
-                            pll_set_term_language($term['term_id'], $this->lang);
-                        }
-                    }
-                }
-            }
             wp_set_object_terms($this->ID, $this->categories, 'event_categories', false);
         }
     }
