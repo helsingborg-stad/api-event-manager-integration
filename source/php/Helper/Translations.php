@@ -87,4 +87,34 @@ class Translations
 
         return;
     }
+
+    /**
+     * Return terms for the selected language
+     * @param        $categories
+     * @param string $lang
+     * @return mixed
+     */
+    public static function filterTermsByLanguage($terms, $lang = '')
+    {
+        if (!function_exists('pll_current_language') || !is_array($terms)) {
+            return $terms;
+        }
+
+        $lang = !empty($lang) ? $lang : pll_current_language();
+        var_dump($lang);
+
+        foreach ($terms as $key => $category) {
+            if (isset($category->term_id)) {
+                $termLang = pll_get_term_language($category->term_id);
+                if ($termLang !== $lang) {
+                    // Todo add the translated term if it exists
+                    unset($terms[$key]);
+                }
+                var_dump($termLang);
+            }
+            var_dump($category);
+        }
+
+        return $terms;
+    }
 }

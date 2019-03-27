@@ -212,6 +212,8 @@ class Event extends \Modularity\Module
             );
         }
 
+        $categories = \EventManagerIntegration\Helper\Translations::filterTermsByLanguage($categories);
+
         foreach ($categories as &$category) {
             $category = array(
                 'id' => $category->term_id,
