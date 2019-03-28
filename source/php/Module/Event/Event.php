@@ -22,8 +22,7 @@ class Event extends \Modularity\Module
 
         add_filter(
             'acf/fields/taxonomy/wp_list_categories/name=mod_event_categories_list',
-            array($this, 'filterEventCategories'),
-            10
+            array($this, 'filterEventCategories'), 10, 2
         );
     }
 
@@ -358,5 +357,4 @@ class Event extends \Modularity\Module
 
         return $args;
     }
-
 }
