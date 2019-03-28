@@ -19,6 +19,12 @@ class Event extends \Modularity\Module
 
         add_action('wp_ajax_nopriv_ajax_pagination', array($this, 'ajaxPagination'));
         add_action('wp_ajax_ajax_pagination', array($this, 'ajaxPagination'));
+
+        add_filter(
+            'acf/fields/taxonomy/wp_list_categories/name=mod_event_categories_list',
+            array($this, 'filterEventCategories'),
+            10
+        );
     }
 
     public function template()
@@ -127,10 +133,10 @@ class Event extends \Modularity\Module
 
     /**
      * Get included Events
-     * @param  int $module_id Module ID
-     * @param  int $page      Pagination page number
-     * @param  bool $useLimit True = limit by setting, false = get all
-     * @return array             Array with event objects
+     * @param  int  $module_id Module ID
+     * @param  int  $page      Pagination page number
+     * @param  bool $useLimit  True = limit by setting, false = get all
+     * @return array           Array with event objects
      */
     public function getEvents($module_id, $page = 1, $useLimit = true)
     {
@@ -269,14 +275,14 @@ class Event extends \Modularity\Module
     public function getAgeFilterRange($moduleId): array
     {
         $years = array();
-        $from = (int) get_field('mod_event_filter_age_range_from', $moduleId);
-        $to = (int) get_field('mod_event_filter_age_range_to', $moduleId);
+        $from = (int)get_field('mod_event_filter_age_range_from', $moduleId);
+        $to = (int)get_field('mod_event_filter_age_range_to', $moduleId);
 
         if ($from < $to) {
-            foreach(range($from, $to) as $value) {
+            foreach (range($from, $to) as $value) {
                 $years[] = array(
                     'value' => $value,
-                    'checked' => false
+                    'checked' => false,
                 );
             }
         }
@@ -337,4 +343,20 @@ class Event extends \Modularity\Module
             );
         }
     }
+
+    /**
+     * Filter to show categories in default language
+     * @param  array $args  An array of arguments passed to the wp_list_categories function
+     * @param  array $field An array containing all the field settings
+     * @return array $args
+     */
+    public function filterEventCategories($args, $field)
+    {
+        if (function_exists('pll_default_language')) {
+            $args['lang'] = pll_default_language();
+        }
+
+        return $args;
+    }
+
 }
