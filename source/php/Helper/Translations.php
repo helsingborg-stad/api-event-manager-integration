@@ -89,32 +89,53 @@ class Translations
     }
 
     /**
-     * Return terms for the selected language
-     * @param        $categories
-     * @param string $lang
-     * @return mixed
+     * Return terms for the selected language. Removes/replaces terms if wrong language.
+     * @param array  $terms List of term objects
+     * @param string $lang  Lang slug
+     * @return array Modified list of term objects
      */
     public static function filterTermsByLanguage($terms, $lang = '')
     {
-        if (!function_exists('pll_current_language') || !is_array($terms)) {
+        // Bail if Polylang is not active or terms if empty
+        if (!function_exists('pll_current_language') || empty($terms) || !is_array($terms)) {
             return $terms;
         }
 
+        // Get current lang if param if empty
         $lang = !empty($lang) ? $lang : pll_current_language();
-        var_dump($lang);
 
-        foreach ($terms as $key => $category) {
-            if (isset($category->term_id)) {
-                $termLang = pll_get_term_language($category->term_id);
-                if ($termLang !== $lang) {
-                    // Todo add the translated term if it exists
-                    unset($terms[$key]);
-                }
-                var_dump($termLang);
+        // Loop through terms and remove/replace terms in wrong language
+        foreach ($terms as $key => $term) {
+            if (!isset($term->term_id)) {
+                continue;
             }
-            var_dump($category);
+            // Get the term lang
+            $termLang = pll_get_term_language($term->term_id);
+
+            // If the term is in wrong language try to replace with translated term
+            if ($termLang !== $lang) {
+                // Remove term from list
+                unset($terms[$key]);
+
+                // Get term translations
+                $termTranslations = pll_get_term_translations($term->term_id);
+
+                // Replace with translated term if it exists and does not return errors
+                if (isset($termTranslations[$lang])) {
+                    // Get the translated term object
+                    $translatedTerm = get_term($termTranslations[$lang]);
+
+                    if ($translatedTerm != false && !is_wp_error($translatedTerm)) {
+                        // Add to the terms list if not already exists
+                        if (!in_array($translatedTerm->term_id, array_column((array)$terms, 'term_id'))) {
+                            $terms[] = $translatedTerm;
+                        }
+                    }
+                }
+            }
         }
 
-        return $terms;
+        // Rebuild indexes and return terms
+        return array_values($terms);
     }
 }
