@@ -76,8 +76,18 @@ class Events
                 'default' => date('Y-m-d H:i:s', strtotime("today midnight")),
                 'sanitize_callback' => array($this, 'sanitizeEndDate'),
             ),
-            'taxonomies' => array(
-                'description' => 'Filter by taxonomies',
+            'categories' => array(
+                'description' => 'Filter by categories',
+                'type' => 'object',
+                'default' => null,
+            ),
+            'tags' => array(
+                'description' => 'Filter by tags',
+                'type' => 'object',
+                'default' => null,
+            ),
+            'groups' => array(
+                'description' => 'Filter by groups',
                 'type' => 'object',
                 'default' => null,
             ),

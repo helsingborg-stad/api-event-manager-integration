@@ -36,10 +36,22 @@ class QueryEvents
             $languageId = $languages[$params['lang']]['id'] ?? null;
         }
 
-        // Get taxonomy id string
-        $taxonomies = (!empty($params['taxonomies']) && is_array($params['taxonomies'])) ? implode(
+        // Build categories string
+        $categories = (!empty($params['categories']) && is_array($params['categories'])) ? implode(
             ",",
-            $params['taxonomies']
+            $params['categories']
+        ) : null;
+
+        // Build tags string
+        $tags = (!empty($params['tags']) && is_array($params['tags'])) ? implode(
+            ",",
+            $params['tags']
+        ) : null;
+
+        // Build groups string
+        $groups = (!empty($params['groups']) && is_array($params['groups'])) ? implode(
+            ",",
+            $params['groups']
         ) : null;
 
         // Search by text string
@@ -60,8 +72,10 @@ class QueryEvents
         LEFT JOIN   $db_table ON ($wpdb->posts.ID = $db_table.event_id) ";
         $query .= ($ageGroup) ? "LEFT JOIN $wpdb->postmeta age_from ON $wpdb->posts.ID = age_from.post_id " : '';
         $query .= ($ageGroup) ? "LEFT JOIN $wpdb->postmeta age_to ON $wpdb->posts.ID = age_to.post_id " : '';
-        $query .= ($taxonomies) ? "LEFT JOIN $wpdb->term_relationships term1 ON ($wpdb->posts.ID = term1.object_id) " : '';
-        $query .= ($languageId) ? "LEFT JOIN $wpdb->term_relationships term2 ON ($wpdb->posts.ID = term2.object_id) " : '';
+        $query .= ($categories) ? "LEFT JOIN $wpdb->term_relationships term1 ON ($wpdb->posts.ID = term1.object_id) " : '';
+        $query .= ($tags) ? "LEFT JOIN $wpdb->term_relationships term2 ON ($wpdb->posts.ID = term2.object_id) " : '';
+        $query .= ($groups) ? "LEFT JOIN $wpdb->term_relationships term3 ON ($wpdb->posts.ID = term3.object_id) " : '';
+        $query .= ($languageId) ? "LEFT JOIN $wpdb->term_relationships term4 ON ($wpdb->posts.ID = term4.object_id) " : '';
         $query .= "
         WHERE $wpdb->posts.post_type = %s 
         AND $wpdb->posts.post_status = %s 
@@ -83,8 +97,10 @@ class QueryEvents
         }
 
         $query .= ($searchString) ? "AND (($wpdb->posts.post_title LIKE %s) OR ($wpdb->posts.post_content LIKE %s))" : '';
-        $query .= ($taxonomies) ? "AND (term1.term_taxonomy_id IN ($taxonomies)) " : '';
-        $query .= ($languageId) ? "AND (term2.term_taxonomy_id IN ($languageId)) " : '';
+        $query .= ($categories) ? "AND (term1.term_taxonomy_id IN ($categories)) " : '';
+        $query .= ($tags) ? "AND (term2.term_taxonomy_id IN ($tags)) " : '';
+        $query .= ($groups) ? "AND (term3.term_taxonomy_id IN ($groups)) " : '';
+        $query .= ($languageId) ? "AND (term4.term_taxonomy_id IN ($languageId)) " : '';
         $query .= ($idString != null) ? "AND ($wpdb->posts.ID IN ($idString)) " : '';
         $query .= "GROUP BY $wpdb->posts.ID, $db_table.start_date, $db_table.end_date ";
         $query .= "ORDER BY $db_table.start_date ASC";

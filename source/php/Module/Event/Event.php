@@ -147,19 +147,19 @@ class Event extends \Modularity\Module
         $start_date = date('Y-m-d H:i:s', strtotime("today midnight"));
         $end_date = date('Y-m-d H:i:s', strtotime("tomorrow midnight +$days_ahead days") - 1);
 
-        // Save categories, groups and tags IDs to array
-        $taxonomies = array_merge(
-            $this->getModuleCategories($module_id),
-            $this->getModuleGroups($module_id),
-            $this->getModuleTags($module_id)
-        );
+        // Save categories, groups and tags IDs as arrays
+        $categories = $this->getModuleCategories($module_id);
+        $tags = $this->getModuleTags($module_id);
+        $groups = $this->getModuleGroups($module_id);
 
         $taxonomies = (!empty($taxonomies)) ? $taxonomies : null;
         $params = array(
             'start_date' => $start_date,
             'end_date' => $end_date,
             'display_limit' => $display_limit,
-            'taxonomies' => $taxonomies,
+            'categories' => $categories,
+            'tags' => $tags,
+            'groups' => $groups,
             'location' => (isset($fields->mod_event_geographic)) ? $fields->mod_event_geographic : null,
             'distance' => (isset($fields->mod_event_distance)) ? $fields->mod_event_distance : null,
             'lang' => $this->lang,
