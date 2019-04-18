@@ -39,32 +39,37 @@ EventManagerIntegration.Event.Form = (function($) {
      */
     Form.prototype.hyperformExtensions = function(eventForm) {
         // Match email addresses
-        hyperform.addValidator(eventForm.submitter_repeat_email, function(element) {
-            var valid = element.value === eventForm.submitter_email.value;
-            element.setCustomValidity(valid ? '' : eventIntegrationFront.email_not_matching);
 
-            return valid;
-        });
+        if ('submitter_repeat_email' in eventForm) {
+            hyperform.addValidator(eventForm.submitter_repeat_email, function(element) {
+                var valid = element.value === eventForm.submitter_email.value;
+                element.setCustomValidity(valid ? '' : eventIntegrationFront.email_not_matching);
 
-        hyperform.addValidator(eventForm.image_input, function(element) {
-            if (!$('#image_input').prop('required')) {
-                return true;
-            }
+                return valid;
+            });
+        }
 
-            var valid = element.files.length > 0,
-                notice = eventForm.querySelector('.image-notice'),
-                noticeHtml = document.createElement('p');
+        if ('image_input' in eventForm) {
+            hyperform.addValidator(eventForm.image_input, function(element) {
+                if (!$('#image_input').prop('required')) {
+                    return true;
+                }
 
-            if (!valid && !notice) {
-                noticeHtml.innerHTML = eventIntegrationFront.must_upload_image;
-                noticeHtml.className = 'text-danger image-notice';
-                eventForm.querySelector('.image-box').appendChild(noticeHtml);
-            }
+                var valid = element.files.length > 0,
+                    notice = eventForm.querySelector('.image-notice'),
+                    noticeHtml = document.createElement('p');
 
-            element.setCustomValidity(valid ? '' : eventIntegrationFront.must_upload_image);
+                if (!valid && !notice) {
+                    noticeHtml.innerHTML = eventIntegrationFront.must_upload_image;
+                    noticeHtml.className = 'text-danger image-notice';
+                    eventForm.querySelector('.image-box').appendChild(noticeHtml);
+                }
 
-            return valid;
-        });
+                element.setCustomValidity(valid ? '' : eventIntegrationFront.must_upload_image);
+
+                return valid;
+            });
+        }
     };
 
     // Get taxonomies from API and add to select box
