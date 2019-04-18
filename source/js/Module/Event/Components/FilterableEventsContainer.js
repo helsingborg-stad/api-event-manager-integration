@@ -61,8 +61,6 @@ class FilterableEventsContainer extends React.Component {
 
         // Filter checked ages and return the values
         const ageGroup = ageRange.filter(age => age.checked).map(age => age.value);
-        // Concatenate all taxonomies together
-        const taxonomies = categories.concat(tags, groups);
         // The API base url
         const url = `${restUrl}wp/v2/event/module`;
         // Create list of query parameters
@@ -75,7 +73,9 @@ class FilterableEventsContainer extends React.Component {
             lat,
             lng,
             distance,
-            taxonomies,
+            categories,
+            tags,
+            groups,
             age_group: ageGroup,
             search_string: searchString,
             lang,
