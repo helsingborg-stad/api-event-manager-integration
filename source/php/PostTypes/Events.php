@@ -88,7 +88,6 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         add_filter('Modularity/Module/Posts/Date', array($this, 'formatPostDate'), 10, 3);
         add_filter('Municipio/viewData', array($this, 'singleViewData'));
 
-        add_filter('acf/fields/taxonomy/wp_list_categories/name=mod_event_groups_list', array($this, 'filterGroupTaxonomy'), 10, 3);
         add_filter('acf/update_value/name=event_filter_group', array($this, 'updateGroupValue'), 10, 3);
         add_filter('acf/update_value/name=mod_event_groups_list', array($this, 'updateGroupValue'), 10, 3);
         add_filter('acf/update_value/name=event_api_url', array($this, 'getUserGroups'), 10, 3);
@@ -208,19 +207,6 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         }
 
         return $value;
-    }
-
-    /**
-     * Filter to hide empty groups on module settings
-     * @param  array $args  An array of arguments passed to the wp_list_categories function
-     * @param  array $field An array containing all the field settings
-     * @return array  $args
-     */
-    public function filterGroupTaxonomy($args, $field)
-    {
-        $args['hide_empty'] = 1;
-
-        return $args;
     }
 
     /**
