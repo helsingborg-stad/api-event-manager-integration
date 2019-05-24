@@ -156,6 +156,8 @@ class Event extends Entity\PostManager
             $occ_exeption_information = !empty($o['occ_exeption_information']) ? $o['occ_exeption_information'] : null;
             $content_mode = !empty($o['content_mode']) ? $o['content_mode'] : null;
             $content = !empty($o['content']) ? $o['content'] : null;
+            $location_mode = !empty($o['location_mode']) ? $o['location_mode'] : null;
+            $location = !empty($o['location']) ? maybe_serialize($o['location']) : null;
 
             $wpdb->insert(
                 $db_table,
@@ -168,6 +170,8 @@ class Event extends Entity\PostManager
                     'exception_information' => $occ_exeption_information,
                     'content_mode' => $content_mode,
                     'content' => ($content),
+                    'location_mode' => ($location_mode),
+                    'location' => ($location),
                 )
             );
         }
