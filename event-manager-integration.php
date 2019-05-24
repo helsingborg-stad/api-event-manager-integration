@@ -63,7 +63,7 @@ register_activation_hook(plugin_basename(__FILE__), '\EventManagerIntegration\Ap
 register_deactivation_hook(plugin_basename(__FILE__), '\EventManagerIntegration\App::removeCronJob');
 
 // Create database table when plugin is activated
-register_activation_hook(plugin_basename(__FILE__), '\EventManagerIntegration\App::databaseCreation');
+register_activation_hook(plugin_basename(__FILE__), '\EventManagerIntegration\Install::createTables');
 
 // Start application
 new EventManagerIntegration\App();

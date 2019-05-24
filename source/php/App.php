@@ -9,13 +9,13 @@ class App
 
     public function __construct()
     {
-        add_action('admin_init', array($this, 'checkDatabaseTable'));
         add_action('wp_enqueue_scripts', array($this, 'enqueueFront'), 950);
         add_action('admin_enqueue_scripts', array($this, 'enqueueAdmin'));
 
         /* Register cron action */
         add_action('import_events_daily', array($this, 'importEventsCron'));
 
+        new Install();
         new Api\Events();
         new OAuth\OAuthAdmin();
         new OAuth\OAuthRequests();
@@ -219,46 +219,5 @@ class App
             $api_url = rtrim($api_url, '/') . '/user_groups';
             new Parser\EventManagerGroups($api_url);
         }
-    }
-
-    /**
-     * Create database table if not exist
-     * @return void
-     */
-    public static function checkDatabaseTable()
-    {
-        global $wpdb;
-        $table_name = $wpdb->prefix . 'integrate_occasions';
-        if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
-            self::databaseCreation();
-        }
-
-        return;
-    }
-
-    /**
-     * Creates event occasion database table on plugin activation
-     */
-    public static function databaseCreation()
-    {
-        global $wpdb;
-        global $event_db_version;
-        $table_name = $wpdb->prefix . 'integrate_occasions';
-        $charset_collate = $wpdb->get_charset_collate();
-        $sql = "CREATE TABLE $table_name (
-        ID BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-        event_id BIGINT(20) UNSIGNED NOT NULL,
-        start_date DATETIME NOT NULL,
-        end_date DATETIME NOT NULL,
-        door_time DATETIME DEFAULT NULL,
-        status VARCHAR(50) DEFAULT NULL,
-        exception_information VARCHAR(400) DEFAULT NULL,
-        content_mode VARCHAR(50) DEFAULT NULL,
-        content LONGTEXT DEFAULT NULL,
-        PRIMARY KEY  (ID)
-        ) $charset_collate;";
-        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-        dbDelta($sql);
-        add_option('event_db_version', $event_db_version);
     }
 }
