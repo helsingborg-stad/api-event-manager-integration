@@ -66,8 +66,8 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
                     $second = 'hidden';
                 }
                 echo '<a href="#" class="accept button-primary '.$first.'" postid="'.$postId.'">'.__(
-                        'Accept',
-                        'event-integration'
+                    'Accept',
+                    'event-integration'
                     ).'</a>
             <a href="#" class="deny button-primary '.$second.'" postid="'.$postId.'">'.__(
                         'Deny',
@@ -126,8 +126,16 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             $eventData['image_src'] = $image[0] ?? null;
         }
 
+        // Get "master" location for event
         $location = get_post_meta($post->ID, 'location', true);
         $eventData['location'] = !empty($location['title']) ? $location : null;
+        // Set custom location for occasion if set
+        if (isset($eventData['occasion']['location_mode'])
+            && $eventData['occasion']['location_mode'] === 'custom'
+            && !empty($eventData['occasion']['location'])) {
+
+            $eventData['location'] = $eventData['occasion']['location'];
+        }
 
         $bookingLink = get_post_meta($post->ID, 'booking_link', true);
         $eventData['booking_link'] = !empty($bookingLink) ? $bookingLink : null;
@@ -138,9 +146,9 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         $eventData['age_group'] = null;
         if (!empty($ageGroupFrom) && !empty($ageGroupTo)) {
             $eventData['age_group'] = sprintf('%s-%s %s', $ageGroupFrom, $ageGroupTo, __('years', 'event-integration'));
-        } elseif(!empty($ageGroupFrom)) {
+        } elseif (!empty($ageGroupFrom)) {
             $eventData['age_group'] = sprintf('%s %s %s', __('From', 'event-integration'), $ageGroupFrom, __('years', 'event-integration'));
-        } elseif(!empty($ageGroupTo)) {
+        } elseif (!empty($ageGroupTo)) {
             $eventData['age_group'] = sprintf('%s %s %s', __('Up to', 'event-integration'), $ageGroupTo, __('years', 'event-integration'));
         }
 

@@ -54,6 +54,8 @@ class SingleEvent
         $get_meta = get_post_meta($id);
         $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($id);
         $query_var_date = (!empty(get_query_var('date'))) ? get_query_var('date') : false;
+        $currentOccasion = \EventManagerIntegration\Helper\SingleEventData::singleEventDate();
+
         $meta = array();
 
         if (is_array($get_meta) && !empty($get_meta)) {
@@ -93,7 +95,7 @@ class SingleEvent
             $ret .= '<h3>' . __('Location', 'event-integration') . '</h3>';
             $ret .= '</label>';
             $ret .= '<div class="accordion-content">';
-            $ret .= $this->eventLocation($meta, $fields);
+            $ret .= $this->eventLocation($meta, $fields, $currentOccasion);
             $ret .= '</div>';
             $ret .= '</section>';
         }
@@ -203,6 +205,7 @@ class SingleEvent
         $get_meta = get_post_meta($id);
         $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($id);
         $query_var_date = (!empty(get_query_var('date'))) ? get_query_var('date') : false;
+        $currentOccasion = \EventManagerIntegration\Helper\SingleEventData::singleEventDate();
 
         $meta = array();
         foreach ($get_meta as $key => $value) {
@@ -228,7 +231,7 @@ class SingleEvent
         if (in_array('location', $fields) && !empty($meta['location']['title'])) {
             $ret .= '<div class="shortcode-box shortcode-location ' . $box_class . '">';
             $ret .= '<ul><li><h3>' . __('Location', 'event-integration') . '</h3></li></ul>';
-            $ret .= $this->eventLocation($meta, $fields);
+            $ret .= $this->eventLocation($meta, $fields, $currentOccasion);
             $ret .= '</div>';
         }
 
@@ -332,9 +335,9 @@ class SingleEvent
 
         if (!empty($meta['age_group_from']) && !empty($meta['age_group_to'])) {
             $ret .= '<ul><li><strong>' . __('Age', 'event-integration') . '</strong></li><li>' . $meta['age_group_from'] . '-' . $meta['age_group_to'] . ' ' . __('years', 'event-integration') . '</li></ul>';
-        } elseif(!empty($meta['age_group_from'])) {
+        } elseif (!empty($meta['age_group_from'])) {
             $ret .= '<ul><li><strong>' . __('Age', 'event-integration') . '</strong></li><li>' . __('From', 'event-integration') . ' ' . $meta['age_group_from'] . ' ' . __('years', 'event-integration') . '</li></ul>';
-        } elseif(!empty($meta['age_group_to'])) {
+        } elseif (!empty($meta['age_group_to'])) {
             $ret .= '<ul><li><strong>' . __('Age', 'event-integration') . '</strong></li><li>' . __('Up to', 'event-integration') . ' ' . $meta['age_group_to'] . ' ' . __('years', 'event-integration') . '</li></ul>';
         }
 
@@ -350,17 +353,29 @@ class SingleEvent
         return $ret;
     }
 
-    public static function eventLocation($meta = array(), $fields = array('additional_locations'))
+    public static function eventLocation($meta = array(), $fields = array('additional_locations'), $occasion = null)
     {
         $ret = '';
         $location = (isset($meta['location'])) ? $meta['location'] : null;
+        $latitude = !empty($meta['latitude']) ? $meta['latitude'] : null;
+        $longitude = !empty($meta['longitude']) ? $meta['longitude'] : null;
+
+        // Override location with current occasion lovation if set
+        if (is_array($occasion) && isset($occasion['location_mode']) && isset($occasion['location'])) {
+            if ($occasion['location_mode'] === 'custom' && !empty($occasion['location'])) {
+                $location = $occasion['location'];
+                $latitude = !empty($occasion['location']['latitude']) ? $occasion['location']['latitude'] : null;
+                $longitude = !empty($occasion['location']['longitude']) ? $occasion['location']['longitude'] : null;
+            }
+        }
 
         // Google Map
-        if (in_array('map', $fields) && !empty($meta['latitude']) && !empty($meta['latitude'])) {
-            $locationTitle = $location['title'] ?? '';
-            $ret .= '<div id="event-map" data-lat="' . $meta['latitude'] . '" data-lng="' . $meta['longitude'] . '" data-title="' . $locationTitle . '"></div>';
+        if (in_array('map', $fields) && $latitude && $longitude) {
+            $locationTitle = !empty($location['title']) ? $location['title'] : '';
+            $ret .= '<div id="event-map" data-lat="' . $latitude . '" data-lng="' . $longitude . '" data-title="' . $locationTitle . '"></div>';
         }
-        if (is_array($location) && !empty($location)) {
+
+        if (!empty($location)) {
             $ret .= '<ul>';
             $ret .= (!empty($location['title'])) ? '<li><strong>' . $location['title'] . '</strong></li>' : '';
             $ret .= (!empty($location['street_address'])) ? '<li>' . $location['street_address'] . '</li>' : '';
@@ -368,6 +383,7 @@ class SingleEvent
             $ret .= (!empty($location['city'])) ? '<li>' . $location['city'] . '</li>' : '';
             $ret .= '</ul>';
         }
+
         // Additional locations
         if (in_array('additional_locations', $fields) && !empty($meta['additional_locations'])) {
             $ret .= '<ul><li><h4>' . __('Other locations', 'event-integration') . '</li></ul></h4>';
