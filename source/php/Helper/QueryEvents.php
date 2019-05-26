@@ -77,8 +77,8 @@ class QueryEvents
         $query .= ($groups) ? "LEFT JOIN $wpdb->term_relationships term3 ON ($wpdb->posts.ID = term3.object_id) " : '';
         $query .= ($languageId) ? "LEFT JOIN $wpdb->term_relationships term4 ON ($wpdb->posts.ID = term4.object_id) " : '';
         $query .= "
-        WHERE $wpdb->posts.post_type = %s 
-        AND $wpdb->posts.post_status = %s 
+        WHERE $wpdb->posts.post_type = %s
+        AND $wpdb->posts.post_status = %s
         AND ($db_table.start_date BETWEEN %s AND %s OR $db_table.end_date BETWEEN %s AND %s) ";
 
         if ($ageGroup) {
@@ -149,6 +149,13 @@ class QueryEvents
 
         $completeQuery = $wpdb->prepare($query, $post_id);
         $occasions = $wpdb->get_results($completeQuery);
+
+        // Unserialize array strings
+        foreach ($occasions as $occasion) {
+            foreach ($occasion as &$field) {
+                $field = maybe_unserialize($field);
+            }
+        }
 
         return $occasions;
     }
