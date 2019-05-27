@@ -23,11 +23,8 @@ class Install
      */
     public function updateDbCheck()
     {
-        error_log("Do db checkup");
         global $eventDatabaseVersion;
         if (version_compare(get_site_option('event_manager_integration_version'), $eventDatabaseVersion) < 0) {
-            error_log("Not latest version, DO update/install");
-
             $this->createTables();
         }
     }
@@ -38,8 +35,6 @@ class Install
      */
     public static function createTables()
     {
-        error_log("do update/install");
-
         global $wpdb;
         global $eventDatabaseVersion;
 
