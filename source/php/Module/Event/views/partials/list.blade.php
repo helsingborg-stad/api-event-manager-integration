@@ -32,9 +32,13 @@
 	            @if (! empty($event->start_date) && ! empty($event->end_date) && in_array('occasion', $mod_event_fields) && $mod_event_occ_pos == 'below')
 	                <p class="text-sm"><i class="pricon pricon-calendar"></i> <strong><?php _e('Date', 'event-integration'); ?>: </strong>{{ \EventManagerIntegration\App::formatEventDate($event->start_date, $event->end_date) }}</p>
 	            @endif
-	            @if (in_array('location', $mod_event_fields) && get_post_meta($event->ID, 'location', true))
-	                <?php $location = get_post_meta($event->ID, 'location', true); ?>
-	                <p class="text-sm"><i class="pricon pricon-location-pin"></i> <strong><?php _e('Location', 'event-integration'); ?>:</strong> {{ $location['title'] }}</p>
+	            @if (in_array('location', $mod_event_fields))
+                    @php
+                        $location = \EventManagerIntegration\Helper\SingleEventData::getEventLocation($event->ID, $event->start_date);
+                    @endphp
+                    @if(!empty($location['title']))
+                        <p class="text-sm"><i class="pricon pricon-location-pin"></i> <strong><?php _e('Location', 'event-integration'); ?>:</strong> {{ $location['title'] }}</p>
+                    @endif
 	            @endif
 	            @if (in_array('description', $mod_event_fields) && $event->content_mode == 'custom' && ! empty($event->content))
 	                {!! \EventManagerIntegration\Helper\QueryEvents::stringLimiter($event->content, $descr_limit) !!}
