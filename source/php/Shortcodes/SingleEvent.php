@@ -54,8 +54,6 @@ class SingleEvent
         $get_meta = get_post_meta($id);
         $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($id);
         $query_var_date = (!empty(get_query_var('date'))) ? get_query_var('date') : false;
-        $currentOccasion = \EventManagerIntegration\Helper\SingleEventData::singleEventDate();
-
         $meta = array();
 
         if (is_array($get_meta) && !empty($get_meta)) {
@@ -67,6 +65,8 @@ class SingleEvent
                 }
             }
         }
+
+        $meta['location'] = \EventManagerIntegration\Helper\SingleEventData::getEventLocation($id);
 
         $i = 0;
         $ret = '<div class="accordion accordion-icon accordion-list event-info-shortcode">';
@@ -95,7 +95,7 @@ class SingleEvent
             $ret .= '<h3>' . __('Location', 'event-integration') . '</h3>';
             $ret .= '</label>';
             $ret .= '<div class="accordion-content">';
-            $ret .= $this->eventLocation($meta, $fields, $currentOccasion);
+            $ret .= $this->eventLocation($meta, $fields);
             $ret .= '</div>';
             $ret .= '</section>';
         }
@@ -205,7 +205,6 @@ class SingleEvent
         $get_meta = get_post_meta($id);
         $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($id);
         $query_var_date = (!empty(get_query_var('date'))) ? get_query_var('date') : false;
-        $currentOccasion = \EventManagerIntegration\Helper\SingleEventData::singleEventDate();
 
         $meta = array();
         foreach ($get_meta as $key => $value) {
@@ -215,6 +214,8 @@ class SingleEvent
                 $meta[$key] = $value;
             }
         }
+
+        $meta['location'] = \EventManagerIntegration\Helper\SingleEventData::getEventLocation($id);
 
         $ret = '<div class="event-info-shortcode ' . $wrapper_class . '">';
 
@@ -228,10 +229,10 @@ class SingleEvent
         }
 
         // Location
-        if (in_array('location', $fields) && !empty($meta['location']['title'])) {
+        if (in_array('location', $fields) && !empty($meta['location'])) {
             $ret .= '<div class="shortcode-box shortcode-location ' . $box_class . '">';
             $ret .= '<ul><li><h3>' . __('Location', 'event-integration') . '</h3></li></ul>';
-            $ret .= $this->eventLocation($meta, $fields, $currentOccasion);
+            $ret .= $this->eventLocation($meta, $fields);
             $ret .= '</div>';
         }
 
@@ -353,26 +354,14 @@ class SingleEvent
         return $ret;
     }
 
-    public static function eventLocation($meta = array(), $fields = array('additional_locations'), $occasion = null)
+    public static function eventLocation($meta = array(), $fields = array('additional_locations'))
     {
         $ret = '';
-        $location = (isset($meta['location'])) ? $meta['location'] : null;
-        $latitude = !empty($meta['latitude']) ? $meta['latitude'] : null;
-        $longitude = !empty($meta['longitude']) ? $meta['longitude'] : null;
-
-        // Override location with current occasion lovation if set
-        if (is_array($occasion) && isset($occasion['location_mode']) && isset($occasion['location'])) {
-            if ($occasion['location_mode'] === 'custom' && !empty($occasion['location'])) {
-                $location = $occasion['location'];
-                $latitude = !empty($occasion['location']['latitude']) ? $occasion['location']['latitude'] : null;
-                $longitude = !empty($occasion['location']['longitude']) ? $occasion['location']['longitude'] : null;
-            }
-        }
+        $location = (!empty($meta['location']) && is_array($meta['location'])) ? $meta['location'] : null;
 
         // Google Map
-        if (in_array('map', $fields) && $latitude && $longitude) {
-            $locationTitle = !empty($location['title']) ? $location['title'] : '';
-            $ret .= '<div id="event-map" data-lat="' . $latitude . '" data-lng="' . $longitude . '" data-title="' . $locationTitle . '"></div>';
+        if (in_array('map', $fields) && !empty($location) && !empty($location['title'])  && !empty($location['latitude']) && !empty($location['longitude']) ) {
+            $ret .= '<div id="event-map" data-lat="' . $location['latitude'] . '" data-lng="' . $location['longitude'] . '" data-title="' . $location['title'] . '"></div>';
         }
 
         if (!empty($location)) {

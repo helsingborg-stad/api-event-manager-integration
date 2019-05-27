@@ -126,16 +126,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             $eventData['image_src'] = $image[0] ?? null;
         }
 
-        // Get "master" location for event
-        $location = get_post_meta($post->ID, 'location', true);
-        $eventData['location'] = !empty($location['title']) ? $location : null;
-        // Set custom location for occasion if set
-        if (isset($eventData['occasion']['location_mode'])
-            && $eventData['occasion']['location_mode'] === 'custom'
-            && !empty($eventData['occasion']['location'])) {
-
-            $eventData['location'] = $eventData['occasion']['location'];
-        }
+        $eventData['location'] = \EventManagerIntegration\Helper\SingleEventData::getEventLocation($post->ID);
 
         $bookingLink = get_post_meta($post->ID, 'booking_link', true);
         $eventData['booking_link'] = !empty($bookingLink) ? $bookingLink : null;
