@@ -5,6 +5,41 @@ namespace EventManagerIntegration\Helper;
 class SingleEventData
 {
     /**
+     * Get single event location
+     *
+     * @param [int] $postId The post ID
+     * @return void|array
+     */
+    public static function getEventLocation($postId = null)
+    {
+        // Get post ID global object if param is empty
+        if (!$postId) {
+            global $post;
+            if (!$postId = $post->ID ?? null) {
+                return;
+            }
+        }
+
+        // Get "master" location
+        $location = get_field('location', $postId);
+
+        // Get single event opccasion
+        $occasion = self::singleEventDate($postId);
+
+        // Override location with current occasion lovation if set
+        if (is_array($occasion)
+            && isset($occasion['location_mode'])
+            && isset($occasion['location'])
+            && $occasion['location_mode'] === 'custom'
+            && !empty($occasion['location'])) {
+
+            $location = $occasion['location'];
+        }
+
+        return $location;
+    }
+
+    /**
      * Get single event date
      * @return array
      */
