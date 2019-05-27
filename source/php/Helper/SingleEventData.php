@@ -8,13 +8,19 @@ class SingleEventData
      * Get single event date
      * @return array
      */
-    public static function singleEventDate()
+    public static function singleEventDate($postId = null)
     {
-        global $post;
+        // Get post ID global object if param is empty
+        if (!$postId) {
+            global $post;
+            if (!$postId = $post->ID ?? null) {
+                return;
+            }
+        }
 
         $singleOccasion = array();
         $get_date = (!empty(get_query_var('date'))) ? get_query_var('date') : false;
-        $occasions = QueryEvents::getEventOccasions($post->ID);
+        $occasions = QueryEvents::getEventOccasions($postId);
 
         //Get nearest occasions from time if no date arg
         if (!$get_date) {
