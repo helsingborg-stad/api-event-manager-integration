@@ -79,7 +79,7 @@ class EventArchive
      */
     public function eventFilterSelect($select)
     {
-        return $select . ",{$this->dbTable}.start_date,{$this->dbTable}.end_date,{$this->dbTable}.door_time,{$this->dbTable}.status,{$this->dbTable}.exception_information,{$this->dbTable}.content_mode,{$this->dbTable}.content ";
+        return $select . ",{$this->dbTable}.start_date,{$this->dbTable}.end_date,{$this->dbTable}.door_time,{$this->dbTable}.status,{$this->dbTable}.exception_information,{$this->dbTable}.content_mode,{$this->dbTable}.content,{$this->dbTable}.location_mode,{$this->dbTable}.location ";
     }
 
     /**
