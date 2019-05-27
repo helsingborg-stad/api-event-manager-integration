@@ -7,10 +7,11 @@ class SingleEventData
     /**
      * Get single event location
      *
-     * @param [int] $postId The post ID
+     * @param [int]    $postId   The post ID
+     * @param [string] $dateTime Date time string
      * @return void|array
      */
-    public static function getEventLocation($postId = null)
+    public static function getEventLocation($postId = null, $dateTime = null)
     {
         // Get post ID global object if param is empty
         if (!$postId) {
@@ -24,7 +25,7 @@ class SingleEventData
         $location = get_field('location', $postId);
 
         // Get single event opccasion
-        $occasion = self::singleEventDate($postId);
+        $occasion = self::singleEventDate($postId, $dateTime);
 
         // Override location with current occasion lovation if set
         if (is_array($occasion)
@@ -41,9 +42,12 @@ class SingleEventData
 
     /**
      * Get single event date
-     * @return array
+     *
+     * @param [type] $postId     The post ID
+     * @param [string] $dateTime Date time string
+     * @return void
      */
-    public static function singleEventDate($postId = null)
+    public static function singleEventDate($postId = null, $dateTime = null)
     {
         // Get post ID global object if param is empty
         if (!$postId) {
@@ -54,23 +58,32 @@ class SingleEventData
         }
 
         $singleOccasion = array();
-        $get_date = (!empty(get_query_var('date'))) ? get_query_var('date') : false;
         $occasions = QueryEvents::getEventOccasions($postId);
 
+        // Fromat date string
+        if ($dateTime) {
+            $dateTime = date('YmdHis', strtotime($dateTime));
+        }
+
+        // Try to get date from query string
+        if (!$dateTime) {
+            $dateTime = (!empty(get_query_var('date'))) ? get_query_var('date') : null;
+        }
+
         //Get nearest occasions from time if no date arg
-        if (!$get_date) {
-            $get_date = self::getNextOccasionDate($occasions);
+        if (!$dateTime) {
+            $dateTime = self::getNextOccasionDate($occasions);
         }
 
         if (is_array($occasions) && count($occasions) == 1) {
             $singleOccasion = (array)$occasions[0];
             $singleOccasion['formatted'] = \EventManagerIntegration\App::formatEventDate($singleOccasion['start_date'], $singleOccasion['end_date']);
             $singleOccasion['date_parts'] = self::dateParts($singleOccasion['start_date']);
-        } elseif (is_array($occasions) && $get_date != false) {
+        } elseif (is_array($occasions) && $dateTime != false) {
             foreach ($occasions as $occasion) {
                 $occasion = (array)$occasion;
                 $event_date = preg_replace('/\D/', '', $occasion['start_date']);
-                if ($get_date == $event_date) {
+                if ($dateTime === $event_date) {
                     $singleOccasion = $occasion;
                     $singleOccasion['formatted'] = \EventManagerIntegration\App::formatEventDate($occasion['start_date'], $occasion['end_date']);
                     $singleOccasion['date_parts'] = self::dateParts($occasion['start_date']);
