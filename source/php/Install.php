@@ -24,7 +24,7 @@ class Install
     public function updateDbCheck()
     {
         global $eventDatabaseVersion;
-        if (version_compare(get_site_option('event_manager_integration_version'), $eventDatabaseVersion) < 0) {
+        if (version_compare(get_option('event_manager_integration_version'), $eventDatabaseVersion) < 0) {
             $this->createTables();
         }
     }
@@ -39,9 +39,8 @@ class Install
         global $eventDatabaseVersion;
 
         $charsetCollate = $wpdb->get_charset_collate();
-        $basePrefix = $wpdb->base_prefix;
 
-        $tableName = $basePrefix . 'integrate_occasions';
+        $tableName = $wpdb->prefix . 'integrate_occasions';
         $sql = "CREATE TABLE $tableName (
         ID BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
         event_id BIGINT(20) UNSIGNED NOT NULL,
@@ -60,6 +59,6 @@ class Install
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         dbDelta($sql);
 
-        update_site_option('event_manager_integration_version', $eventDatabaseVersion);
+        update_option('event_manager_integration_version', $eventDatabaseVersion);
     }
 }
