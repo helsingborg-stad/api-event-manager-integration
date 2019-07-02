@@ -640,7 +640,7 @@
                 ),
             ),
             'wrapper' => array(
-                'width' => '25',
+                'width' => '20',
                 'class' => '',
                 'id' => '',
             ),
@@ -667,7 +667,7 @@
                 ),
             ),
             'wrapper' => array(
-                'width' => '25',
+                'width' => '20',
                 'class' => '',
                 'id' => '',
             ),
@@ -678,6 +678,33 @@
             'ui_off_text' => '',
         ),
         25 => array(
+            'key' => 'field_5d1b26a7f03ff',
+            'label' => __('Tags', 'event-integration'),
+            'name' => 'mod_event_filter_tags',
+            'type' => 'true_false',
+            'instructions' => '',
+            'required' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_5b2ace4dc65a8',
+                        'operator' => '==',
+                        'value' => 'index',
+                    ),
+                ),
+            ),
+            'wrapper' => array(
+                'width' => '20',
+                'class' => '',
+                'id' => '',
+            ),
+            'message' => '',
+            'default_value' => 0,
+            'ui' => 1,
+            'ui_on_text' => '',
+            'ui_off_text' => '',
+        ),
+        26 => array(
             'key' => 'field_5c5d50499acbc',
             'label' => __('Date search', 'event-integration'),
             'name' => 'mod_event_filter_dates',
@@ -694,7 +721,7 @@
                 ),
             ),
             'wrapper' => array(
-                'width' => '25',
+                'width' => '20',
                 'class' => '',
                 'id' => '',
             ),
@@ -704,7 +731,7 @@
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        26 => array(
+        27 => array(
             'key' => 'field_5c765ee693303',
             'label' => __('Age', 'event-integration'),
             'name' => 'mod_event_filter_age_group',
@@ -721,7 +748,7 @@
                 ),
             ),
             'wrapper' => array(
-                'width' => '25',
+                'width' => '20',
                 'class' => '',
                 'id' => '',
             ),
@@ -731,7 +758,7 @@
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        27 => array(
+        28 => array(
             'key' => 'field_5c7d24413bf80',
             'label' => __('Age range from', 'event-integration'),
             'name' => 'mod_event_filter_age_range_from',
@@ -760,7 +787,7 @@
             'max' => '',
             'step' => '',
         ),
-        28 => array(
+        29 => array(
             'key' => 'field_5c7d25be3d7fd',
             'label' => __('Age range to', 'event-integration'),
             'name' => 'mod_event_filter_age_range_to',

@@ -3,7 +3,7 @@
 if (function_exists('acf_add_local_field_group')) {
     acf_add_local_field_group(array(
     'key' => 'group_583557753bd73',
-    'title' => __('Event Manager Integration', 'event-integration'),
+    'title' => 'Event Manager Integration',
     'fields' => array(
         0 => array(
             'key' => 'field_588f3ef76094c',
@@ -127,7 +127,7 @@
         ),
         6 => array(
             'key' => 'field_58e380646fa6f',
-            'label' => __('Show update button on edit event page', 'event-integration'),
+            'label' => __('Visa knapp för att uppdatera importerade evenemang', 'event-integration'),
             'name' => 'event_update_button',
             'type' => 'true_false',
             'instructions' => '',
@@ -138,7 +138,7 @@
                 'class' => '',
                 'id' => '',
             ),
-            'message' => __('Show update button', 'event-integration'),
+            'message' => __('Visa uppdatera-knapp', 'event-integration'),
             'default_value' => 0,
             'ui' => 0,
             'ui_on_text' => '',
