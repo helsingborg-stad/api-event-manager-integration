@@ -3,7 +3,7 @@
 if (function_exists('acf_add_local_field_group')) {
     acf_add_local_field_group(array(
     'key' => 'group_583fe4ee88439',
-    'title' => __('Display events', 'event-integration'),
+    'title' => 'Display events',
     'fields' => array(
         0 => array(
             'key' => 'field_5b2ace4dc65a8',

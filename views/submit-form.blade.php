@@ -183,6 +183,15 @@
         </select>
     </div>
 
+
+        <div class="form-group">
+            <label for="event_tags"><?php _e('Tags', 'event-integration'); ?></label>
+            <small class="text-dark-gray"><?php _e('Select appropriate categories for your event or activity. To select multiple tags, press Ctrl (Windows) / command (macOS) at the same time as you click on the categories.', 'event-integration'); ?></small>
+            <select name="event_tags" id="event_tags" multiple required>
+                <option value=""><?php _e('Loading', 'event-integration'); ?>...</option>
+            </select>
+        </div>
+
         <div class="form-group gutter creamy image-box text-center">
         <p><i class="pricon pricon-badge pricon-badge-red-3 pricon-3x pricon-picture"></i></p>
         <p><strong><?php _e('Upload an image', 'event-integration'); ?> <span class="text-danger">*</span></strong></p>

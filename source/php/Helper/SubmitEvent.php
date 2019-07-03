@@ -145,6 +145,14 @@ class SubmitEvent
                 'hidden' => !empty($data['event_categories']['hidden']),
                 'hidden_description' => !empty($data['event_categories']['hidden_description']),
             ),
+            'event_tags' => (object)array(
+                'name' => 'event_tags',
+                'label' => !empty($data['event_tags']['label']) ? $data['event_tags']['label'] : __('Tags', 'event-integration'),
+                'description' => !empty($data['event_tags']['description']) ? $data['event_tags']['description'] : __('Select appropriate tags for your event or activity. To select multiple tags, press Ctrl (Windows) / command (macOS) at the same time as you click on the tags.', 'event-integration'),
+                'required' => !empty($data['event_tags']['required']),
+                'hidden' => !empty($data['event_tags']['hidden']),
+                'hidden_description' => !empty($data['event_tags']['hidden_description']),
+            ),
             'image_input' => (object)array(
                 'name' => 'image_input',
                 'label' => !empty($data['image_input']['label']) ? $data['image_input']['label'] : __('Upload an image', 'event-integration'),
