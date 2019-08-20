@@ -83,7 +83,7 @@ class QueryEvents
         AND ($db_table.start_date BETWEEN %s AND %s OR $db_table.end_date BETWEEN %s AND %s) ";
 
         if ($hidePastEvents){
-            $query .= " AND $db_table.start_date > '".date('Y-m-d H:i:s')."' ";
+            $query .= " AND $db_table.end_date > '". date('Y-m-d H:i:s')."' ";
         }
 
         if($onlyTodaysDate) {
