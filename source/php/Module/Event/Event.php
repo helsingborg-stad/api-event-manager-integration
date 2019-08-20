@@ -57,6 +57,8 @@ class Event extends \Modularity\Module
         $page = (!empty($_POST['page'])) ? $_POST['page'] : 1;
         $data = get_fields($id);
 
+
+
         // Cards module data
         $data['settings'] = $data;
         $data['nonce'] = wp_create_nonce('wp_rest');
@@ -67,6 +69,7 @@ class Event extends \Modularity\Module
         $days_ahead = isset($data['mod_event_interval']) ? $data['mod_event_interval'] : 0;
         $data['start_date'] = date('Y-m-d', strtotime("now"));
         $data['end_date'] = date('Y-m-d', strtotime("today midnight +$days_ahead days"));
+        $data['only_todays_date'] = $data['mod_events_hide_past_events'];
         $data['lat'] = (isset($data['mod_event_geographic']['lat'])) ? $data['mod_event_geographic']['lat'] : null;
         $data['lng'] = (isset($data['mod_event_geographic']['lng'])) ? $data['mod_event_geographic']['lng'] : null;
         $data['distance'] = (isset($data['mod_event_distance'])) ? $data['mod_event_distance'] : null;
@@ -148,6 +151,8 @@ class Event extends \Modularity\Module
         $start_date = date('Y-m-d H:i:s', strtotime("today midnight"));
         $end_date = date('Y-m-d H:i:s', strtotime("tomorrow midnight +$days_ahead days") - 1);
 
+        $mod_events_hide_past_events = $fields->mod_events_hide_past_events;
+        $mod_event_only_todays_date = $fields->mod_event_only_todays_date;
         // Save categories, groups and tags IDs as arrays
         $categories = $this->getModuleCategories($module_id);
         $tags = $this->getModuleTags($module_id);
@@ -164,6 +169,8 @@ class Event extends \Modularity\Module
             'location' => (isset($fields->mod_event_geographic)) ? $fields->mod_event_geographic : null,
             'distance' => (isset($fields->mod_event_distance)) ? $fields->mod_event_distance : null,
             'lang' => $this->lang,
+            'hide_past_events' => $mod_events_hide_past_events,
+            'only_todays_date' => $mod_event_only_todays_date
         );
 
         $events = \EventManagerIntegration\Helper\QueryEvents::getEventsByInterval($params, $page);

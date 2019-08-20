@@ -252,6 +252,44 @@
             "step": ""
         },
         {
+            "key": "field_5d5bda9c80adf",
+            "label": "Only show events starting on todays date",
+            "name": "mod_event_only_todays_date",
+            "type": "true_false",
+            "instructions": "Only show events starting on todays date",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5d5bdb7f80ae0",
+            "label": "Hide past events",
+            "name": "mod_events_hide_past_events",
+            "type": "true_false",
+            "instructions": "Hide past events",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_583fefb6634a1",
             "label": "Fields",
             "name": "mod_event_fields",
