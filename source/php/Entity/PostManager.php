@@ -254,6 +254,8 @@ abstract class PostManager
             $filename = md5($filename) . '.jpg';
         }
 
+        $filename = $this->ID . "-" . $filename; 
+
         // Get the file content
         $options = array(
             'ssl' => array(
@@ -271,9 +273,6 @@ abstract class PostManager
             if ($newImageHash === $localImageHash) {
                 set_post_thumbnail($this->ID, $attachmentId);
                 return true;
-            } else {
-                // Rename filename if the images did not match
-                $filename = uniqid() . $filename;
             }
         }
 
