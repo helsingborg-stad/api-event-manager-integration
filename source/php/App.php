@@ -25,6 +25,7 @@ class App
         new Widget\DisplayEvents();
         new Admin\Options();
         new Admin\AdminDisplayEvent();
+        new Admin\MediaLibrary();
         new Shortcodes\SingleEvent();
         new Shortcodes\SubmitForm();
 

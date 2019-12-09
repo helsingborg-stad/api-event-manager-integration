@@ -26,6 +26,10 @@ class ComposerStaticInit95678c5c3786d6308daa758282e6c210
             'Psr\\Container\\' => 14,
             'Philo\\Blade\\' => 12,
         ),
+        'M' => 
+        array (
+            'Mimey\\' => 6,
+        ),
         'I' => 
         array (
             'Illuminate\\View\\' => 16,
@@ -77,6 +81,10 @@ class ComposerStaticInit95678c5c3786d6308daa758282e6c210
         'Philo\\Blade\\' => 
         array (
             0 => __DIR__ . '/..' . '/philo/laravel-blade/src',
+        ),
+        'Mimey\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ralouphie/mimey/src',
         ),
         'Illuminate\\View\\' => 
         array (
