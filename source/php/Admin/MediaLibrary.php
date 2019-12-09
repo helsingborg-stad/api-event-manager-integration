@@ -13,7 +13,7 @@ class MediaLibrary
     public function __construct()
     {
         add_action('pre_get_posts', array($this, 'hideEventAttachmentsList'), 10, 1);
-        add_filter('attachment_fields_to_edit', array($this, 'hideEventAttachmentsModal'), 10, 2 );
+        add_filter('ajax_query_attachments_args', array($this, 'hideEventAttachmentsModal'), 10, 2 );
     }
 
     /**
