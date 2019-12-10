@@ -14,7 +14,7 @@ class MediaLibrary
     {
         add_action('pre_get_posts', array($this, 'hideEventAttachmentsList'), 10, 1);
         add_filter('ajax_query_attachments_args', array($this, 'hideEventAttachmentsModal'), 10, 2 );
-        add_action('before_delete_post', array($this, 'beforeDeleteAttachmentParent'), 5, 1);
+        add_action('before_delete_post', array($this, 'deleteConnectedFeaturedImage'), 5, 1);
     }
 
     /**
@@ -82,7 +82,7 @@ class MediaLibrary
      * @param  integer      $postId     The post id
      * @return void                     
      */
-    public function beforeDeleteAttachmentParent($postId)
+    public function deleteConnectedFeaturedImage($postId)
     {
         if((get_post_type($postId) == "event") && has_post_thumbnail($postId)){
             $attachmentId = get_post_thumbnail_id($postId);
