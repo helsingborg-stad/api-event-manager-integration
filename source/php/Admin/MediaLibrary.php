@@ -82,13 +82,28 @@ class MediaLibrary
      * @param  integer      $postId     The post id
      * @return void                     
      */
-    public function deleteConnectedFeaturedImage($postId)
+    public function deleteConnectedFeaturedImage($postId) : bool
     {
-        if((get_post_type($postId) == "event") && has_post_thumbnail($postId)){
-            $attachmentId = get_post_thumbnail_id($postId);
-            if($attachmentId) {
-                return wp_delete_attachment($attachmentId, true);
+        if(get_post_type($postId) == "event"){
+
+            //Get all attachments with parent post being deleted
+            $postAttachments = get_posts(
+                array(
+                    'post_type'      => 'attachment',
+                    'posts_per_page' => -1,
+                    'post_status'    => 'any',
+                    'post_parent'    => $postId
+                )
+            ); 
+
+            //Loop and delete 
+            if(is_array($postAttachments) && !empty($postAttachments)) {
+                foreach($postAttachments as $attachment) {
+                    wp_delete_attachment($attachment->ID, true);
+                }
             }
+
+            return true; 
         }
         return false; 
     }
