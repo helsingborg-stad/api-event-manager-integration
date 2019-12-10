@@ -241,11 +241,11 @@ abstract class PostManager
         }
 
         // Upload path
-        $uploadDir = wp_upload_dir()['basedir'].'/events/' . date("Y-m");
+        $uploadDir = wp_upload_dir()['basedir'].'/events/' . date("Y"). "/" . date("m");
 
         //Create dir
         if (!is_dir($uploadDir)) {
-            if (!mkdir($uploadDir, 0776)) {
+            if (!mkdir($uploadDir, 0776, true)) {
                 return new WP_Error('event', __('Could not create folder', 'event-integration') . ' "' . $uploadDir . '", ' . __('please go ahead and create it manually and rerun the import.', 'event-integration'));
             }
         }
