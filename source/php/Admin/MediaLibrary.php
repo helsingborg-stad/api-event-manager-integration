@@ -80,11 +80,11 @@ class MediaLibrary
     /**
      * Deletes the featured image attachment when the event is about to be removed
      * @param  integer      $postId     The post id
-     * @return void                     
+     * @return bool                     True if there was deletions made, otherwise false                     
      */
     public function deleteConnectedFeaturedImage($postId) : bool
     {
-        if(get_post_type($postId) == "event"){
+        if(get_post_type($postId) == "event") {
 
             //Get all attachments with parent post being deleted
             $postAttachments = get_posts(
@@ -105,6 +105,7 @@ class MediaLibrary
 
             return true; 
         }
+
         return false; 
     }
 }
