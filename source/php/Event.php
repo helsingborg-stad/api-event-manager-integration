@@ -5,7 +5,7 @@ namespace EventManagerIntegration;
 class Event extends Entity\PostManager
 {
     public $post_type = 'event';
-
+    
     /**
      * Stuff to do before save
      * @return void

@@ -9,6 +9,7 @@ abstract class PostManager
      */
     public $post_type = null;
     public $post_status = 'publish';
+    public $ID; 
 
     /**
      * Keys that counts as post object properties
@@ -230,6 +231,7 @@ abstract class PostManager
      */
     public function setFeaturedImageFromUrl($url, $featured)
     {
+
         if (!isset($this->ID)) {
             return false;
         }
@@ -238,67 +240,83 @@ abstract class PostManager
             return false;
         }
 
-        // Upload paths
-        $uploadDir = wp_upload_dir();
-        $uploadDir = $uploadDir['basedir'];
-        $uploadDir = $uploadDir . '/events';
+        // Upload path
+        $uploadDir = wp_upload_dir()['basedir'].'/events/' . date("Y"). "/" . date("m");
 
+        //Create dir
         if (!is_dir($uploadDir)) {
-            if (!mkdir($uploadDir, 0776)) {
+            if (!mkdir($uploadDir, 0776, true)) {
                 return new WP_Error('event', __('Could not create folder', 'event-integration') . ' "' . $uploadDir . '", ' . __('please go ahead and create it manually and rerun the import.', 'event-integration'));
             }
         }
 
-        $filename = sanitize_file_name(basename($url));
-        if (stripos(basename($url), '.aspx')) {
-            $filename = md5($filename) . '.jpg';
-        }
+        //Get slug & validate that post exists
+        if(is_string(get_post_status($this->ID)) && $filename = get_post($this->ID)->post_name) {
 
-        $filename = $this->ID . "-" . $filename; 
+            $mimes = new \Mimey\MimeTypes;
 
-        // Get the file content
-        $options = array(
-            'ssl' => array(
-                'verify_peer' => defined('DEV_MODE') && DEV_MODE === true ? false : true,
-                'verify_peer_name' => defined('DEV_MODE') && DEV_MODE === true ? false : true
-            )
-        );
-        $imgContent = file_get_contents($url, false, stream_context_create($options));
+            //Temp name
+            $filenameTemp = $filename . ".tmp"; 
+            
+            // Get the file content
+            $options = array(
+                'ssl' => array(
+                    'verify_peer' => defined('DEV_MODE') && DEV_MODE === true ? false : true,
+                    'verify_peer_name' => defined('DEV_MODE') && DEV_MODE === true ? false : true
+                )
+            );
+            $imgContent = file_get_contents($url, false, stream_context_create($options));
 
-        // Check if image already exists in library
-        if ($attachmentId = $this->attachmentExists($uploadDir . '/' . basename($filename))) {
-            $newImageHash = md5($imgContent);
-            $localImageHash = md5_file($uploadDir . '/' . basename($filename));
-            // Test if the new image and the local is identical
-            if ($newImageHash === $localImageHash) {
-                set_post_thumbnail($this->ID, $attachmentId);
-                return true;
+            //File is empty abort
+            if(!$imgContent) {
+                return; 
             }
-        }
 
-        // Save file to server
-        $save = fopen($uploadDir . '/' . $filename, 'w');
-        fwrite($save, $imgContent);
-        fclose($save);
+            // Save file to temp
+            $tempStoreFile = fopen($uploadDir . '/' . $filenameTemp, 'w');
+            fwrite($tempStoreFile, $imgContent);
+            fclose($tempStoreFile);
 
-        // Detect file type
-        $filetype = wp_check_filetype($filename, null);
+            // Detect file type
+            $filetype = $mimes->getExtension(
+                $mimeFileType = mime_content_type($uploadDir . '/' . $filenameTemp)
+            );
 
-        // Insert the file to media library
-        $attachmentId = wp_insert_attachment(array(
-            'guid' => $uploadDir . '/' . basename($filename),
-            'post_mime_type' => $filetype['type'],
-            'post_title' => $filename,
-            'post_content' => '',
-            'post_status' => 'inherit',
-            'post_parent' => $this->ID
-        ), $uploadDir . '/' . $filename, $this->ID);
+            // Move to real extension
+            rename($uploadDir . '/' . $filenameTemp, $uploadDir . '/' . $filename . '.' . $filetype);
 
-        // Generate attachment meta
-        require_once(ABSPATH . 'wp-admin/includes/image.php');
-        $attachData = wp_generate_attachment_metadata($attachmentId, $uploadDir . '/' . $filename);
-        wp_update_attachment_metadata($attachmentId, $attachData);
+            // Insert the file to media library
+            $attachmentId = wp_insert_attachment(
+                array(
+                    'guid' => $uploadDir . '/' . $filename . '.' . $filetype,
+                    'post_mime_type' => $mimeFileType,
+                    'post_title' => $filename,
+                    'post_content' => '',
+                    'post_status' => 'inherit',
+                    'post_parent' => $this->ID
+                ), 
+                $uploadDir . '/' . $filename . "." . $filetype, 
+                $this->ID
+            );
 
+            if($attachmentId) {
+                update_post_meta($attachmentId, 'event-manager-media', 1); //Filter in [/Admin/MediaLibrary.php]
+            }
+
+            //Bind the image to the event
+            $this->bindImageToEvent($attachmentId, $featured); 
+        } 
+
+        return true;
+    }
+
+    /**
+     * Adds the image to the database as a galleryitem or featured image
+     * @param $attachmentId
+     * @param $featured
+     * @return bool|object
+     */
+    public function bindImageToEvent($attachmentId, $featured = true) {
         // Set image as featured image or add to gallery
         if ($featured) {
             set_post_thumbnail($this->ID, $attachmentId);
@@ -311,8 +329,6 @@ abstract class PostManager
                 update_post_meta($this->ID, 'event_gallery', array_unique($gallery_meta));
             }
         }
-
-        return true;
     }
 
     /**
@@ -324,24 +340,6 @@ abstract class PostManager
     {
         if (is_string($url) && preg_match('/^(?:[;\/?:@&=+$,]|(?:[^\W_]|[-_.!~*\()\[\] ])|(?:%[\da-fA-F]{2}))*$/', $url)) {
             return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Checks if a attachment src already exists in media library
-     * @param  string $src Media url
-     * @return mixed
-     */
-    private function attachmentExists($src)
-    {
-        global $wpdb;
-        $query = "SELECT ID FROM {$wpdb->posts} WHERE guid = '$src'";
-        $id = $wpdb->get_var($query);
-
-        if (!empty($id) && $id > 0) {
-            return $id;
         }
 
         return false;
