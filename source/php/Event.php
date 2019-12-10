@@ -5,22 +5,6 @@ namespace EventManagerIntegration;
 class Event extends Entity\PostManager
 {
     public $post_type = 'event';
-
-    /**
-     * Deletes the attachment when the event is about to be removed
-     * @param  integer      $postId     The post id
-     * @return void                     
-     */
-    public function beforeDelete($postId)
-    {
-        if((get_post_type($postId) == $this->post_type) && has_post_thumbnail($postId)){
-            $attachmentId = get_post_thumbnail_id($postId);
-            if($attachmentId) {
-                return wp_delete_attachment($attachment_id, true);
-            }
-        }
-        return false; 
-    }
     
     /**
      * Stuff to do before save

@@ -61,17 +61,7 @@ abstract class PostManager
         foreach ($metaData as $key => $value) {
             $this->{$key} = $value;
         }
-
-        // On Delete hook
-        add_action('before_delete_post', array($this, 'beforeDelete'), 10 );
     }
-
-    /**
-     * Before delete abstraction requirement
-     * @param  integer      $postId     The post id
-     * @return void                     
-     */
-    abstract public function beforeDelete($postId);
 
     /**
      * Get  posts
@@ -312,9 +302,33 @@ abstract class PostManager
             if($attachmentId) {
                 update_post_meta($attachmentId, 'event-manager-media', 1); //Filter in [/Admin/MediaLibrary.php]
             }
+
+            //Bind the image to the event
+            $this->bindImageToEvent($attachmentId, $featured); 
         } 
 
         return true;
+    }
+
+    /**
+     * Adds the image to the database as a galleryitem or featured image
+     * @param $attachmentId
+     * @param $featured
+     * @return bool|object
+     */
+    public function bindImageToEvent($attachmentId, $featured = true) {
+        // Set image as featured image or add to gallery
+        if ($featured) {
+            set_post_thumbnail($this->ID, $attachmentId);
+        } else {
+            $gallery_meta = get_post_meta($this->ID, 'event_gallery', true);
+            if (empty($gallery_meta)) {
+                add_post_meta($this->ID, 'event_gallery', array($attachmentId));
+            } else {
+                $gallery_meta[] .= $attachmentId;
+                update_post_meta($this->ID, 'event_gallery', array_unique($gallery_meta));
+            }
+        }
     }
 
     /**
@@ -330,17 +344,4 @@ abstract class PostManager
 
         return false;
     }
-
-
-   
-function wps_remove_attachment_with_post($post_id)
-{
- 
-    if(has_post_thumbnail( $post_id ))
-        {
-      $attachment_id = get_post_thumbnail_id( $post_id );
-      wp_delete_attachment($attachment_id, true);
-    }
- 
-
 }
