@@ -14,7 +14,7 @@ class MediaLibrary
     {
         add_action('pre_get_posts', array($this, 'hideEventAttachmentsList'), 10, 1);
         add_filter('ajax_query_attachments_args', array($this, 'hideEventAttachmentsModal'), 10, 2 );
-        add_action('delete_post', array($this, 'beforeDeleteAttachmentParent'), 10, 1);
+        add_action('before_delete_post', array($this, 'beforeDeleteAttachmentParent'), 5, 1);
     }
 
     /**
@@ -78,7 +78,7 @@ class MediaLibrary
     }
 
     /**
-     * Deletes the attachment when the event is about to be removed
+     * Deletes the featured image attachment when the event is about to be removed
      * @param  integer      $postId     The post id
      * @return void                     
      */
@@ -87,7 +87,7 @@ class MediaLibrary
         if((get_post_type($postId) == "event") && has_post_thumbnail($postId)){
             $attachmentId = get_post_thumbnail_id($postId);
             if($attachmentId) {
-                return wp_delete_attachment($attachment_id, true);
+                return wp_delete_attachment($attachmentId, true);
             }
         }
         return false; 
