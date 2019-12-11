@@ -1,7 +1,7 @@
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { months, weekdaysLong, weekdaysShort } from '../../../Config/dateLocalization';
 
-const DateFilter = ({ id, label, onDayChange, formatDate }) => (
+const DateFilter = ({ id, label, onDayChange, formatDate, value }) => (
     <div>
         <label htmlFor={id} className="text-sm sr-only">
             <strong>{label}</strong>
@@ -11,6 +11,7 @@ const DateFilter = ({ id, label, onDayChange, formatDate }) => (
             <span className="input-group-addon">{label}</span>
             <DayPickerInput
                 id={id}
+                value={value}
                 classNames={{
                     container: 'DayPickerInput form-control',
                     overlayWrapper: 'DayPickerInput-OverlayWrapper',
