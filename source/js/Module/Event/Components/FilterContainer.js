@@ -3,7 +3,6 @@ import SearchBar from './SearchBar';
 import DateFilter from './DateFilter';
 import AgeFilter from './AgeFilter';
 import CategoriesFilter from './CategoriesFilter';
-import TagsFilter from './TagsFilter';
 
 const FilterContainer = ({
   settings,
