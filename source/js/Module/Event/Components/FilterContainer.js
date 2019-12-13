@@ -50,6 +50,7 @@ const FilterContainer = ({
         <div className="grid-sm-12 grid-md-6 grid-lg-auto u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
           <DateFilter
             id="filter-date-to"
+            id="filter-date-to"
             label={`${translation.to} ${translation.date}`}
             onDayChange={toDateChange}
             formatDate={formatDate}
@@ -76,11 +77,11 @@ const FilterContainer = ({
 
       {settings.mod_event_filter_tags && tags.length > 0 && (
         <div className="grid-fit-content u-mr-auto u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
-            <CategoriesFilter
-              title={translation.tags}
-              categories={tags}
-              onCategoryChange={onTagChange}
-            />
+          <CategoriesFilter
+            title={translation.tags}
+            categories={tags}
+            onCategoryChange={onTagChange}
+          />
         </div>
       )}
 
