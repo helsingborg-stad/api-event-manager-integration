@@ -458,8 +458,6 @@ class FilterableEventsContainer extends React.Component {
   }
 }
 
-// TODO: Add default props and specify Required props
-
 FilterableEventsContainer.propTypes = {
   ageRange: PropTypes.array,
   archiveUrl: PropTypes.string,
