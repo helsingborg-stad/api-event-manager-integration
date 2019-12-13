@@ -1,17 +1,9 @@
 import { Pagination, PreLoader, Notice, Button } from 'hbg-react';
+import setQuery from 'set-query-string';
 import update from 'immutability-helper';
 import EventList from './EventList';
 import FilterContainer from './FilterContainer';
 import { getEvents } from '../../../Api/events';
-
-const availableQueryStringParams = [
-  { param: 'currentPage', type: 'int' },
-  { param: 'searchString', type: 'string' },
-  { param: 'age', type: 'array' },
-  { param: 'startDate', type: 'string' },
-  { param: 'endDate', type: 'string' },
-  { param: 'categories', type: 'array' },
-];
 
 class FilterableEventsContainer extends React.Component {
   constructor(props) {
@@ -40,26 +32,99 @@ class FilterableEventsContainer extends React.Component {
    * Collect query string parameters and set to state
    */
   collectUrlParams = () => {
+    const { categories, tags, ageRange } = this.state;
+    const taxonomies = { categories, tags, ageRange };
+
     // Collect query string params
     const urlParams = new URLSearchParams(window.location.search);
 
-    // Map param keys with values and filter empty values
-    const params = availableQueryStringParams
+    // Remove empty values and map param keys with values
+    const parameterValues = availableQueryStringParams
       .filter(({ param }) => urlParams.get(param))
       .map(({ param, type }) => {
-        const val = urlParams.get(param);
-        return {
-          param,
-          value: type === 'int' ? parseInt(val) : val,
-        };
+        let value;
+        switch (type) {
+          case 'int':
+            value = parseInt(urlParams.get(param));
+            break;
+          case 'array':
+            // Get all parameter values
+            const queryStringArrayParameters = urlParams.getAll(param);
+            // Type cast values to integers
+            const checkedValues = queryStringArrayParameters.map(val => parseInt(val));
+            // Set taxonomy to checked if it exist in query string
+            value = taxonomies[param].map(taxonomy => {
+              taxonomy.checked = checkedValues.includes(parseInt(taxonomy.id));
+              return taxonomy;
+            });
+            break;
+          default:
+          value = urlParams.get(param);
+        }
+
+        return { param, type, value };
       });
-    console.log(params);
-    // Create an object from the param array
-    const stateObj = params.reduce((sum, elem) => ({ ...sum, [elem.param]: elem.value }), {});
-    console.log(stateObj);
+
+    // Create an object holding state values
+    const stateObj = parameterValues.reduce(
+      (acc, curr) => ({ ...acc, [curr.param]: curr.value }),
+      {}
+    );
 
     // Set state and fetch events
     this.setState({ ...stateObj }, () => this.getEvents());
+  };
+
+  /**
+   * Push state values to query string
+   */
+  setQueryString = () => {
+    const {
+      currentPage,
+      searchString,
+      startDate,
+      endDate,
+      categories,
+      tags,
+      ageRange,
+    } = this.state;
+
+    const categoryIds = this.getTaxonomyIds(categories);
+    const tagIds = this.getTaxonomyIds(tags);
+    const ageRangeIds = this.getTaxonomyIds(ageRange);
+
+    // Set query parameters
+    setQuery(
+      {
+        currentPage,
+        searchString,
+        startDate,
+        endDate,
+        categories: categoryIds,
+        tags: tagIds,
+        ageRange: ageRangeIds,
+      },
+      { pushState: true }
+    );
+  };
+
+  /**
+   * Return list of taxonomy IDs
+   */
+  getTaxonomyIds = taxonomies => {
+    let taxonomyIds = [];
+
+    if (!Array.isArray(taxonomies) && taxonomies.length) {
+      return taxonomyIds;
+    }
+
+    const checkedValues = taxonomies.filter(tax => tax.checked);
+
+    if (checkedValues.length) {
+      taxonomyIds = checkedValues.reduce((acc, curr) => [...acc, curr.id], []);
+    }
+
+    return taxonomyIds;
   };
 
   /**
@@ -67,6 +132,10 @@ class FilterableEventsContainer extends React.Component {
    */
   getEvents = () => {
     this.setState({ isLoaded: false, error: null });
+
+    // Set query parameters from state
+    this.setQueryString();
+
     // Declare states and props
     const { currentPage, searchString, startDate, endDate } = this.state;
     let { categories, tags, ageRange } = this.state;
@@ -307,11 +376,9 @@ class FilterableEventsContainer extends React.Component {
       ageRange,
       searchString,
       startDate,
-      endDate
+      endDate,
     } = this.state;
     const { settings, translation, gridColumn, archiveUrl } = this.props;
-
-    console.table(categories);
 
     return (
       <div>
@@ -390,3 +457,34 @@ class FilterableEventsContainer extends React.Component {
 }
 
 export default FilterableEventsContainer;
+
+const availableQueryStringParams = [
+  {
+    param: 'currentPage',
+    type: 'int',
+  },
+  {
+    param: 'searchString',
+    type: 'string',
+  },
+  {
+    param: 'ageRange',
+    type: 'array',
+  },
+  {
+    param: 'startDate',
+    type: 'string',
+  },
+  {
+    param: 'endDate',
+    type: 'string',
+  },
+  {
+    param: 'categories',
+    type: 'array',
+  },
+  {
+    param: 'tags',
+    type: 'array',
+  },
+];
