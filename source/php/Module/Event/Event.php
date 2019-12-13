@@ -57,8 +57,6 @@ class Event extends \Modularity\Module
         $page = (!empty($_POST['page'])) ? $_POST['page'] : 1;
         $data = get_fields($id);
 
-
-
         // Cards module data
         $data['settings'] = $data;
         $data['nonce'] = wp_create_nonce('wp_rest');
@@ -335,6 +333,7 @@ class Event extends \Modularity\Module
             foreach (range($from, $to) as $value) {
                 $years[] = array(
                     'value' => $value,
+                    'id' => $value,
                     'checked' => false,
                 );
             }
