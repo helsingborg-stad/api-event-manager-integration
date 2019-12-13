@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Pagination, PreLoader, Notice, Button } from 'hbg-react';
 import setQuery from 'set-query-string';
 import update from 'immutability-helper';
@@ -8,6 +9,7 @@ import { getEvents } from '../../../Api/events';
 class FilterableEventsContainer extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       error: null,
       isLoaded: false,
@@ -455,6 +457,30 @@ class FilterableEventsContainer extends React.Component {
     );
   }
 }
+
+// TODO: Add default props and specify Required props
+
+FilterableEventsContainer.propTypes = {
+  ageRange: PropTypes.array,
+  archiveUrl: PropTypes.string,
+  categories: PropTypes.array,
+  distance: PropTypes.string,
+  endDate: PropTypes.string,
+  gridColumn: PropTypes.string,
+  groups: PropTypes.array,
+  lang: PropTypes.string,
+  lat: PropTypes.string,
+  lng: PropTypes.string,
+  moduleId: PropTypes.string,
+  nonce: PropTypes.string,
+  restUrl: PropTypes.string,
+  settings: PropTypes.object,
+  startDate: PropTypes.string,
+  tags: PropTypes.array,
+  translation: PropTypes.object,
+};
+
+FilterableEventsContainer.defaultProps = {};
 
 export default FilterableEventsContainer;
 
