@@ -8,8 +8,8 @@ const CategoriesFilter = ({ categories, onCategoryChange, title }) => (
 
         <Dropdown title={title} toggleClass="btn" id="filter-categories">
             {categories.map(item => (
-              <div style={{ maxWidth: '250px', width: 'max-content' }}>
-                <label key={item.id} className="checkbox u-px-1">
+              <div key={item.id} style={{ maxWidth: '250px', width: 'max-content' }}>
+                <label className="checkbox u-px-1">
                     <input
                         type="checkbox"
                         value={item.id}
