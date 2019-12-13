@@ -465,22 +465,27 @@ FilterableEventsContainer.propTypes = {
   archiveUrl: PropTypes.string,
   categories: PropTypes.array,
   distance: PropTypes.string,
-  endDate: PropTypes.string,
+  endDate: PropTypes.string.isRequired,
   gridColumn: PropTypes.string,
   groups: PropTypes.array,
   lang: PropTypes.string,
   lat: PropTypes.string,
   lng: PropTypes.string,
-  moduleId: PropTypes.string,
-  nonce: PropTypes.string,
-  restUrl: PropTypes.string,
-  settings: PropTypes.object,
-  startDate: PropTypes.string,
+  moduleId: PropTypes.string.isRequired,
+  nonce: PropTypes.string.isRequired,
+  restUrl: PropTypes.string.isRequired,
+  settings: PropTypes.object.isRequired,
+  startDate: PropTypes.string.isRequired,
   tags: PropTypes.array,
   translation: PropTypes.object,
 };
 
-FilterableEventsContainer.defaultProps = {};
+FilterableEventsContainer.defaultProps = {
+  ageRange: [],
+  categories: [],
+  tags: [],
+  groups: [],
+};
 
 export default FilterableEventsContainer;
 
