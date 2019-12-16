@@ -3,6 +3,7 @@ import SearchBar from './SearchBar';
 import DateFilter from './DateFilter';
 import AgeFilter from './AgeFilter';
 import CategoriesFilter from './CategoriesFilter';
+import TagsFilter from './TagsFilter';
 
 const FilterContainer = ({
     settings,
@@ -13,7 +14,9 @@ const FilterContainer = ({
     toDateChange,
     formatDate,
     categories,
+    tags,
     onCategoryChange,
+    onTagChange,
     ageRange,
     onAgeChange,
 }) => (
@@ -64,6 +67,12 @@ const FilterContainer = ({
                         categories={categories}
                         onCategoryChange={onCategoryChange}
                     />
+                </div>
+            )}
+
+            {settings.mod_event_filter_tags && tags.length > 0 && (
+                <div className="grid-fit-content u-mr-auto u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
+                    <TagsFilter translation={translation} tags={tags} onTagChange={onTagChange} />
                 </div>
             )}
 

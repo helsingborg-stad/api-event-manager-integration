@@ -252,6 +252,44 @@
             "step": ""
         },
         {
+            "key": "field_5d5bda9c80adf",
+            "label": "Only show events starting on todays date",
+            "name": "mod_event_only_todays_date",
+            "type": "true_false",
+            "instructions": "Only show events starting on todays date",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5d5bdb7f80ae0",
+            "label": "Hide past events",
+            "name": "mod_events_hide_past_events",
+            "type": "true_false",
+            "instructions": "Hide past events",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_583fefb6634a1",
             "label": "Fields",
             "name": "mod_event_fields",
@@ -636,7 +674,7 @@
                 ]
             ],
             "wrapper": {
-                "width": "25",
+                "width": "20",
                 "class": "",
                 "id": ""
             },
@@ -663,7 +701,34 @@
                 ]
             ],
             "wrapper": {
-                "width": "25",
+                "width": "20",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5d1b26a7f03ff",
+            "label": "Tags",
+            "name": "mod_event_filter_tags",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b2ace4dc65a8",
+                        "operator": "==",
+                        "value": "index"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "20",
                 "class": "",
                 "id": ""
             },
@@ -690,7 +755,7 @@
                 ]
             ],
             "wrapper": {
-                "width": "25",
+                "width": "20",
                 "class": "",
                 "id": ""
             },
@@ -717,7 +782,7 @@
                 ]
             ],
             "wrapper": {
-                "width": "25",
+                "width": "20",
                 "class": "",
                 "id": ""
             },

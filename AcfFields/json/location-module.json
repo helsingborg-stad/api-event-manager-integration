@@ -27,7 +27,9 @@
             ],
             "layout": "vertical",
             "toggle": 0,
-            "return_format": "value"
+            "return_format": "value",
+            "allow_custom": 0,
+            "save_custom": 0
         }
     ],
     "location": [

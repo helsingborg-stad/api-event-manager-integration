@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2019-03-08 11:12+0100\n"
-"PO-Revision-Date: 2019-03-08 11:12+0100\n"
+"POT-Creation-Date: 2019-08-20 13:44+0200\n"
+"PO-Revision-Date: 2019-08-20 13:46+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 1.8.12\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: event-manager-integration.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -45,7 +45,7 @@ msgstr "Formulärnamn"
 msgid "Name the form for easier grouping of events."
 msgstr "Namnge formuläret för bättre gruppering av evenemang."
 
-#: AcfFields/php/event-form-module.php:64 AcfFields/php/event-module.php:259
+#: AcfFields/php/event-form-module.php:64 AcfFields/php/event-module.php:297
 msgid "Fields"
 msgstr "Fält"
 
@@ -106,7 +106,7 @@ msgstr "Etikett"
 #: AcfFields/php/event-form-module.php:1641
 #: AcfFields/php/event-form-module.php:1753
 #: AcfFields/php/event-form-module.php:1865
-#: AcfFields/php/event-form-module.php:1977 AcfFields/php/event-module.php:274
+#: AcfFields/php/event-form-module.php:1977 AcfFields/php/event-module.php:312
 #: source/php/Helper/SubmitEvent.php:25 views/submit-form.blade.php:12
 #: views/submit-form.blade.php:20
 msgid "Description"
@@ -138,9 +138,9 @@ msgstr "Dölj beskrivning"
 msgid "Content"
 msgstr "Innehåll"
 
-#: AcfFields/php/event-form-module.php:246 AcfFields/php/event-module.php:271
-#: source/php/PostTypes/Events.php:44 source/php/Shortcodes/SingleEvent.php:301
-#: views/single-event.blade.php:54
+#: AcfFields/php/event-form-module.php:246 AcfFields/php/event-module.php:309
+#: source/php/PostTypes/Events.php:44 source/php/Shortcodes/SingleEvent.php:305
+#: views/single-event.blade.php:52
 msgid "Occasion"
 msgstr "Tidpunkt"
 
@@ -274,20 +274,20 @@ msgstr "Åldersgrupp"
 #: AcfFields/php/event-form-module.php:1328
 #: source/php/Admin/AdminDisplayEvent.php:166
 #: source/php/Helper/SubmitEvent.php:118
-#: source/php/Shortcodes/SingleEvent.php:137
-#: source/php/Shortcodes/SingleEvent.php:255 views/submit-form.blade.php:164
+#: source/php/Shortcodes/SingleEvent.php:139
+#: source/php/Shortcodes/SingleEvent.php:259 views/submit-form.blade.php:164
 #: views/submit-form.blade.php:166
 msgid "Organizer"
 msgstr "Arrangör"
 
-#: AcfFields/php/event-form-module.php:1421 AcfFields/php/event-module.php:273
-#: AcfFields/php/event-module.php:564 AcfFields/php/location-module.php:6
-#: AcfFields/php/shortcodes.php:57 source/php/Admin/AdminDisplayEvent.php:146
+#: AcfFields/php/event-form-module.php:1421 AcfFields/php/event-module.php:311
+#: AcfFields/php/event-module.php:602 AcfFields/php/shortcodes.php:57
+#: source/php/Admin/AdminDisplayEvent.php:146
 #: source/php/Helper/SubmitEvent.php:126
-#: source/php/Module/Event/views/partials/list.blade.php:37
+#: source/php/Module/Event/views/partials/list.blade.php:65
 #: source/php/Module/Location/Location.php:12
-#: source/php/Shortcodes/SingleEvent.php:93
-#: source/php/Shortcodes/SingleEvent.php:230 views/single-event.blade.php:70
+#: source/php/Shortcodes/SingleEvent.php:95
+#: source/php/Shortcodes/SingleEvent.php:234 views/single-event.blade.php:67
 #: views/submit-form.blade.php:171 views/submit-form.blade.php:173
 msgid "Location"
 msgstr "Plats"
@@ -301,13 +301,13 @@ msgstr "Tillgänglighet"
 msgid "Event categories"
 msgstr "Evenemangskategorier"
 
-#: AcfFields/php/event-form-module.php:1719 AcfFields/php/event-module.php:272
+#: AcfFields/php/event-form-module.php:1719 AcfFields/php/event-module.php:310
 msgid "Image"
 msgstr "Bild"
 
 #: AcfFields/php/event-form-module.php:1831
-#: source/php/Helper/SubmitEvent.php:161 views/submit-form.blade.php:220
-#: views/submit-form.blade.php:221
+#: source/php/Helper/SubmitEvent.php:169 views/submit-form.blade.php:229
+#: views/submit-form.blade.php:230
 msgid "Email"
 msgstr "E-postadress"
 
@@ -316,8 +316,8 @@ msgid "Email address to the person who submitted the event."
 msgstr "E-postadress till personen som skickat in evenemanget."
 
 #: AcfFields/php/event-form-module.php:1943
-#: source/php/Helper/SubmitEvent.php:169 views/submit-form.blade.php:228
-#: views/submit-form.blade.php:229
+#: source/php/Helper/SubmitEvent.php:177 views/submit-form.blade.php:237
+#: views/submit-form.blade.php:238
 msgid "Phone number"
 msgstr "Telefonnummer"
 
@@ -421,112 +421,122 @@ msgstr "Tidsperiod"
 msgid "Include events from today to the given number of days."
 msgstr "Visa evenemang som inträffar inom angivet antal dagar."
 
-#: AcfFields/php/event-module.php:286
+#: AcfFields/php/event-module.php:259 AcfFields/php/event-module.php:262
+msgid "Only show events starting on todays date"
+msgstr "Visa bara event som startar på dagens datum"
+
+#: AcfFields/php/event-module.php:278 AcfFields/php/event-module.php:281
+msgid "Hide past events"
+msgstr "Dölj tidigare event"
+
+#: AcfFields/php/event-module.php:324
 msgid "Image ratio"
 msgstr "Bildförhållande"
 
-#: AcfFields/php/event-module.php:311
+#: AcfFields/php/event-module.php:349
 msgid "Square (1:1)"
 msgstr ""
 
-#: AcfFields/php/event-module.php:312
+#: AcfFields/php/event-module.php:350
 msgid "Standard Video (16:9)"
 msgstr ""
 
-#: AcfFields/php/event-module.php:313
+#: AcfFields/php/event-module.php:351
 msgid "Standard TV (4:3)"
 msgstr ""
 
-#: AcfFields/php/event-module.php:327
+#: AcfFields/php/event-module.php:365
 msgid "Occasion position"
 msgstr "Position för datum"
 
-#: AcfFields/php/event-module.php:352
+#: AcfFields/php/event-module.php:390
 msgid "Below title"
 msgstr "Under titel"
 
-#: AcfFields/php/event-module.php:353
+#: AcfFields/php/event-module.php:391
 msgid "Left column"
 msgstr "Vänsterkolumn"
 
-#: AcfFields/php/event-module.php:364
+#: AcfFields/php/event-module.php:402
 msgid "Description letter limit"
 msgstr "Teckenbegränsning av beskrivning"
 
-#: AcfFields/php/event-module.php:367
+#: AcfFields/php/event-module.php:405
 msgid "Set to -1 to show the whole description."
 msgstr "-1 för att visa hela beskrivningen."
 
-#: AcfFields/php/event-module.php:393 source/php/PostTypes/Events.php:382
-#: source/php/Shortcodes/SingleEvent.php:559
+#: AcfFields/php/event-module.php:431 source/php/PostTypes/Events.php:374
+#: source/php/Shortcodes/SingleEvent.php:564
 msgid "Groups"
 msgstr "Grupper"
 
-#: AcfFields/php/event-module.php:404
+#: AcfFields/php/event-module.php:442
 msgid "Show events from all groups"
 msgstr "Visa evenemang inom samtliga grupper"
 
-#: AcfFields/php/event-module.php:412
+#: AcfFields/php/event-module.php:450
 msgid "Select groups"
 msgstr "Välj grupper"
 
-#: AcfFields/php/event-module.php:415
+#: AcfFields/php/event-module.php:453
 msgid "Show events from the selected groups."
 msgstr "Visa evenemang inom angivna grupper."
 
-#: AcfFields/php/event-module.php:442 AcfFields/php/event-module.php:655
-#: source/php/Helper/SubmitEvent.php:142 source/php/Module/Event/Event.php:316
-#: source/php/PostTypes/Events.php:308
-#: source/php/Shortcodes/SingleEvent.php:565 views/submit-form.blade.php:179
+#: AcfFields/php/event-module.php:480 AcfFields/php/event-module.php:693
+#: source/php/Helper/SubmitEvent.php:142 source/php/Module/Event/Event.php:381
+#: source/php/PostTypes/Events.php:300
+#: source/php/Shortcodes/SingleEvent.php:570 views/submit-form.blade.php:179
 msgid "Categories"
 msgstr "Kategorier"
 
-#: AcfFields/php/event-module.php:453
+#: AcfFields/php/event-module.php:491
 msgid "Show events from all categories"
 msgstr "Visa evenemang inom samtliga kategorier"
 
-#: AcfFields/php/event-module.php:461
+#: AcfFields/php/event-module.php:499
 msgid "Select categories"
 msgstr "Välj kategorier"
 
-#: AcfFields/php/event-module.php:464
+#: AcfFields/php/event-module.php:502
 msgid "Show events from the selected categories."
 msgstr "Visa evenemang inom angivna kategorier."
 
-#: AcfFields/php/event-module.php:491 source/php/PostTypes/Events.php:345
-#: source/php/Shortcodes/SingleEvent.php:571
+#: AcfFields/php/event-module.php:529 AcfFields/php/event-module.php:720
+#: source/php/Helper/SubmitEvent.php:150 source/php/Module/Event/Event.php:382
+#: source/php/PostTypes/Events.php:337
+#: source/php/Shortcodes/SingleEvent.php:576 views/submit-form.blade.php:188
 msgid "Tags"
 msgstr "Taggar"
 
-#: AcfFields/php/event-module.php:502
+#: AcfFields/php/event-module.php:540
 msgid "Show events from all tags"
 msgstr "Visa evenemang inom samtliga taggar"
 
-#: AcfFields/php/event-module.php:510
+#: AcfFields/php/event-module.php:548
 msgid "Select tags"
 msgstr "Välj taggar"
 
-#: AcfFields/php/event-module.php:513
+#: AcfFields/php/event-module.php:551
 msgid "Show events from the selected tags."
 msgstr "Visa evenemang inom angivna taggar."
 
-#: AcfFields/php/event-module.php:540
+#: AcfFields/php/event-module.php:578
 msgid "Default image"
 msgstr "Standardbild"
 
-#: AcfFields/php/event-module.php:543
+#: AcfFields/php/event-module.php:581
 msgid "Will display if event image is missing."
 msgstr "Visas om bild saknas."
 
-#: AcfFields/php/event-module.php:567
+#: AcfFields/php/event-module.php:605
 msgid "Show events that occurs at a specified location."
 msgstr "Visa evenemang som inträffar vid en angiven plats."
 
-#: AcfFields/php/event-module.php:582 AcfFields/php/options.php:310
+#: AcfFields/php/event-module.php:620 AcfFields/php/options.php:310
 msgid "Distance from location"
 msgstr "Avstånd från plats"
 
-#: AcfFields/php/event-module.php:585
+#: AcfFields/php/event-module.php:623
 msgid ""
 "To show events occurring nearby the given location, enter maximum distance "
 "in km. Leave blank to only show events from the exact position."
@@ -534,38 +544,38 @@ msgstr ""
 "För att visa evenemang i närheten av den angivna platsen, fyll i maximalt "
 "avstånd i km. Lämna tomt för att visa evenemang från den exakta positionen."
 
-#: AcfFields/php/event-module.php:603
+#: AcfFields/php/event-module.php:641
 msgid "Filters"
 msgstr "Filter"
 
-#: AcfFields/php/event-module.php:622
+#: AcfFields/php/event-module.php:660
 msgid "Activate search and filters."
 msgstr "Aktivera sök och olika filter."
 
-#: AcfFields/php/event-module.php:628
+#: AcfFields/php/event-module.php:666
 msgid "Text search"
 msgstr "Textsök"
 
-#: AcfFields/php/event-module.php:682
+#: AcfFields/php/event-module.php:747
 msgid "Date search"
 msgstr "Datumfiltrering"
 
-#: AcfFields/php/event-module.php:709 source/php/Module/Event/Event.php:317
-#: source/php/Shortcodes/SingleEvent.php:334
-#: source/php/Shortcodes/SingleEvent.php:336
-#: source/php/Shortcodes/SingleEvent.php:338 views/single-event.blade.php:105
+#: AcfFields/php/event-module.php:774 source/php/Module/Event/Event.php:383
+#: source/php/Shortcodes/SingleEvent.php:338
+#: source/php/Shortcodes/SingleEvent.php:340
+#: source/php/Shortcodes/SingleEvent.php:342 views/single-event.blade.php:102
 msgid "Age"
 msgstr "Ålder"
 
-#: AcfFields/php/event-module.php:736
+#: AcfFields/php/event-module.php:801
 msgid "Age range from"
 msgstr "Från ålder"
 
-#: AcfFields/php/event-module.php:758 AcfFields/php/event-module.php:787
+#: AcfFields/php/event-module.php:823 AcfFields/php/event-module.php:852
 msgid "year"
 msgstr "år"
 
-#: AcfFields/php/event-module.php:765
+#: AcfFields/php/event-module.php:830
 msgid "Age range to"
 msgstr "Till ålder"
 
@@ -595,15 +605,10 @@ msgstr "Priser"
 
 #: AcfFields/php/location-module.php:26 AcfFields/php/shortcodes.php:62
 #: source/php/Admin/AdminDisplayEvent.php:175
-#: source/php/Shortcodes/SingleEvent.php:169
-#: source/php/Shortcodes/SingleEvent.php:275
+#: source/php/Shortcodes/SingleEvent.php:171
+#: source/php/Shortcodes/SingleEvent.php:279
 msgid "Links"
 msgstr "Länkar"
-
-#. Plugin Name of the plugin/theme
-#: AcfFields/php/options.php:6
-msgid "Event Manager Integration"
-msgstr ""
 
 #: AcfFields/php/options.php:10
 msgid "API url"
@@ -674,12 +679,12 @@ msgid "Needed to display Google maps."
 msgstr ""
 
 #: AcfFields/php/options.php:130
-msgid "Show update button on edit event page"
-msgstr "Visa knapp för att uppdatera importerade evenemang"
+msgid "Visa knapp för att uppdatera importerade evenemang"
+msgstr ""
 
 #: AcfFields/php/options.php:141
-msgid "Show update button"
-msgstr "Visa uppdatera-knapp"
+msgid "Visa uppdatera-knapp"
+msgstr ""
 
 #: AcfFields/php/options.php:149
 msgid "OAuth1 end point root url"
@@ -790,8 +795,8 @@ msgstr "Shortcode inställningar"
 
 #: AcfFields/php/shortcodes.php:10 AcfFields/php/shortcodes.php:55
 #: source/php/Admin/AdminDisplayEvent.php:139
-#: source/php/Shortcodes/SingleEvent.php:79
-#: source/php/Shortcodes/SingleEvent.php:222
+#: source/php/Shortcodes/SingleEvent.php:81
+#: source/php/Shortcodes/SingleEvent.php:226
 msgid "Information"
 msgstr "Information"
 
@@ -816,8 +821,8 @@ msgid "Display fields"
 msgstr "Visa fält"
 
 #: AcfFields/php/shortcodes.php:56 source/php/Admin/AdminDisplayEvent.php:77
-#: source/php/Shortcodes/SingleEvent.php:151
-#: source/php/Shortcodes/SingleEvent.php:263
+#: source/php/Shortcodes/SingleEvent.php:153
+#: source/php/Shortcodes/SingleEvent.php:267
 msgid "Occasions"
 msgstr "Datum"
 
@@ -825,7 +830,7 @@ msgstr "Datum"
 msgid "Additional locations"
 msgstr "Fler platser"
 
-#: AcfFields/php/shortcodes.php:60 source/php/Shortcodes/SingleEvent.php:501
+#: AcfFields/php/shortcodes.php:60 source/php/Shortcodes/SingleEvent.php:506
 msgid "Sponsors"
 msgstr "Sponsorer"
 
@@ -834,8 +839,8 @@ msgid "Booking information"
 msgstr "Information om bokning"
 
 #: AcfFields/php/shortcodes.php:63 source/php/Admin/AdminDisplayEvent.php:159
-#: source/php/Shortcodes/SingleEvent.php:123
-#: source/php/Shortcodes/SingleEvent.php:247
+#: source/php/Shortcodes/SingleEvent.php:125
+#: source/php/Shortcodes/SingleEvent.php:251
 msgid "Contact"
 msgstr "Kontakt"
 
@@ -895,7 +900,7 @@ msgid ""
 msgstr ""
 
 #: source/php/Admin/AdminDisplayEvent.php:41
-#: source/php/Module/Event/Event.php:14
+#: source/php/Module/Event/Event.php:15
 msgid "Event"
 msgstr "Evenemang"
 
@@ -933,29 +938,30 @@ msgstr "Inställningar"
 msgid "Clear map"
 msgstr "Återställ kartan"
 
-#: source/php/Api/Events.php:189
+#: source/php/Api/Events.php:205
 msgid "No events could be found."
 msgstr "Inga evenemang hittades."
 
 #: source/php/App.php:94
 #: source/php/Module/SubmitForm/views/formfields.blade.php:395
-#: views/submit-form.blade.php:182
+#: source/php/Module/SubmitForm/views/formfields.blade.php:411
+#: views/submit-form.blade.php:182 views/submit-form.blade.php:191
 msgid "Loading"
 msgstr "Hämtar"
 
-#: source/php/App.php:128
+#: source/php/App.php:134
 msgid "Something went wrong, please try again later."
 msgstr "Något gick fel, vänligen försök igen senare."
 
-#: source/php/App.php:129
+#: source/php/App.php:135
 msgid "The email addresses does not match."
 msgstr "E-postadresserna matchar inte."
 
-#: source/php/App.php:130
+#: source/php/App.php:136
 msgid "You must upload an image."
 msgstr "Du måste ladda upp en bild."
 
-#: source/php/App.php:150
+#: source/php/App.php:151
 msgid "to"
 msgstr "till"
 
@@ -1135,104 +1141,111 @@ msgstr ""
 "flera kategorier håll in Ctrl (Windows) / command (macOS) samtidigt som du "
 "klickar på respektive kategori."
 
-#: source/php/Helper/SubmitEvent.php:150
-#: source/php/Module/SubmitForm/views/formfields.blade.php:430
-#: views/submit-form.blade.php:188 views/submit-form.blade.php:198
-#: views/submit-form.blade.php:211
+#: source/php/Helper/SubmitEvent.php:151
+msgid ""
+"Select appropriate tags for your event or activity. To select multiple tags, "
+"press Ctrl (Windows) / command (macOS) at the same time as you click on the "
+"tags."
+msgstr ""
+
+#: source/php/Helper/SubmitEvent.php:158
+#: source/php/Module/SubmitForm/views/formfields.blade.php:446
+#: views/submit-form.blade.php:197 views/submit-form.blade.php:207
+#: views/submit-form.blade.php:220
 msgid "Upload an image"
 msgstr "Ladda upp en bild"
 
-#: source/php/Helper/SubmitEvent.php:152 views/submit-form.blade.php:192
+#: source/php/Helper/SubmitEvent.php:160 views/submit-form.blade.php:201
 msgid "Keep in mind that the image may be cropped, so avoid text in the image."
 msgstr "Tänk på att bilden kan bli beskuren, undvik därför text i bilden."
 
-#: source/php/Helper/SubmitEvent.php:153 views/submit-form.blade.php:193
+#: source/php/Helper/SubmitEvent.php:161 views/submit-form.blade.php:202
 msgid "Images with identifiable persons are not accepted and will be replaced."
 msgstr "Bilder med igenkännbara personer godkänns inte och kommer ersättas."
 
-#: source/php/Helper/SubmitEvent.php:154 views/submit-form.blade.php:194
+#: source/php/Helper/SubmitEvent.php:162 views/submit-form.blade.php:203
 msgid "You must also have the right to use and distribute the image."
 msgstr "Du måste även ha rätt att använda och sprida bilden."
 
-#: source/php/Helper/SubmitEvent.php:162
+#: source/php/Helper/SubmitEvent.php:170
 msgid "Your email address."
 msgstr "Din e-postadress."
 
-#: source/php/Helper/SubmitEvent.php:170
+#: source/php/Helper/SubmitEvent.php:178
 msgid "Your phone number."
 msgstr "Ditt telefonnummer."
 
-#: source/php/Module/Event/Event.php:15 source/php/Widget/DisplayEvents.php:13
+#: source/php/Module/Event/Event.php:16 source/php/Widget/DisplayEvents.php:13
 msgid "Events"
 msgstr "Evenemang"
 
-#: source/php/Module/Event/Event.php:16
+#: source/php/Module/Event/Event.php:17
 msgid "Outputs a list if upcoming events"
 msgstr ""
 
-#: source/php/Module/Event/Event.php:308
+#: source/php/Module/Event/Event.php:373
 #: source/php/Module/Event/views/event.blade.php:18
 msgid "More events"
 msgstr "Fler evenemang"
 
-#: source/php/Module/Event/Event.php:309
-#: source/php/Module/Event/views/partials/list.blade.php:3
+#: source/php/Module/Event/Event.php:374
+#: source/php/Module/Event/views/partials/list.blade.php:4
 #: source/php/Widget/DisplayEvents.php:56
 msgid "No events found"
 msgstr "Inga evenemang hittades"
 
-#: source/php/Module/Event/Event.php:310
+#: source/php/Module/Event/Event.php:375
 msgid "Next"
 msgstr "Nästa"
 
-#: source/php/Module/Event/Event.php:311
+#: source/php/Module/Event/Event.php:376
 msgid "Previous"
 msgstr "Föregående"
 
-#: source/php/Module/Event/Event.php:312
+#: source/php/Module/Event/Event.php:377
 msgid "Search"
 msgstr "Sök"
 
-#: source/php/Module/Event/Event.php:313
+#: source/php/Module/Event/Event.php:378
 #: source/php/Module/SubmitForm/views/formfields.blade.php:322
 #: source/php/Module/SubmitForm/views/formfields.blade.php:325
-#: source/php/PostTypes/Events.php:145
-#: source/php/Shortcodes/SingleEvent.php:336
+#: source/php/PostTypes/Events.php:141
+#: source/php/Shortcodes/SingleEvent.php:340
 msgid "From"
 msgstr "Från"
 
-#: source/php/Module/Event/Event.php:314
+#: source/php/Module/Event/Event.php:379
 #: source/php/Module/SubmitForm/views/formfields.blade.php:329
 #: source/php/Module/SubmitForm/views/formfields.blade.php:332
 msgid "To"
 msgstr "Till"
 
-#: source/php/Module/Event/Event.php:315
+#: source/php/Module/Event/Event.php:380
 msgid "date"
 msgstr "datum"
 
-#: source/php/Module/Event/Event.php:319
+#: source/php/Module/Event/Event.php:385
 msgid "Filter on events that is targeted for given the age"
 msgstr "Filtrera på evenemang som är riktade till en ålder"
 
-#: source/php/Module/Event/Event.php:322 source/php/PostTypes/Events.php:143
-#: source/php/PostTypes/Events.php:145 source/php/PostTypes/Events.php:147
-#: source/php/Shortcodes/SingleEvent.php:334
-#: source/php/Shortcodes/SingleEvent.php:336
+#: source/php/Module/Event/Event.php:388 source/php/PostTypes/Events.php:139
+#: source/php/PostTypes/Events.php:141 source/php/PostTypes/Events.php:143
 #: source/php/Shortcodes/SingleEvent.php:338
-#: source/php/Shortcodes/SingleEvent.php:401
+#: source/php/Shortcodes/SingleEvent.php:340
+#: source/php/Shortcodes/SingleEvent.php:342
+#: source/php/Shortcodes/SingleEvent.php:406
 msgid "years"
 msgstr "år"
 
-#: source/php/Module/Event/Event.php:323
+#: source/php/Module/Event/Event.php:389
 msgid "Select age"
 msgstr "Välj ålder"
 
-#: source/php/Module/Event/views/partials/list.blade.php:11
+#: source/php/Module/Event/views/partials/list.blade.php:15
 msgid "Today"
 msgstr "Idag"
 
-#: source/php/Module/Event/views/partials/list.blade.php:33
+#: source/php/Module/Event/views/partials/list.blade.php:58
 #: source/php/Module/SubmitForm/views/formfields.blade.php:69
 #: source/php/Module/SubmitForm/views/formfields.blade.php:88
 #: source/php/PostTypes/Events.php:78 views/submit-form.blade.php:44
@@ -1416,46 +1429,46 @@ msgstr "Hiss/ramp"
 msgid "Accessible toilet"
 msgstr "Handikapptoalett"
 
-#: source/php/Module/SubmitForm/views/formfields.blade.php:418
-#: views/submit-form.blade.php:202
+#: source/php/Module/SubmitForm/views/formfields.blade.php:434
+#: views/submit-form.blade.php:211
 msgid "Before you can upload an image, you need to confirm the following terms"
 msgstr ""
 "Innan du kan ladda upp en bild behöver du bekräfta nedanstående punkter"
 
-#: source/php/Module/SubmitForm/views/formfields.blade.php:422
-#: views/submit-form.blade.php:204
+#: source/php/Module/SubmitForm/views/formfields.blade.php:438
+#: views/submit-form.blade.php:213
 msgid "I have the right to use this image to promote this event."
 msgstr ""
 "Jag har rätt att använda denna bild för att marknadsföra detta evenemang."
 
-#: source/php/Module/SubmitForm/views/formfields.blade.php:426
-#: views/submit-form.blade.php:207
+#: source/php/Module/SubmitForm/views/formfields.blade.php:442
+#: views/submit-form.blade.php:216
 msgid "There are no identifiable persons on the image/images."
 msgstr "Det finns inga identifierbara personer på bilden/bilderna."
 
-#: source/php/Module/SubmitForm/views/formfields.blade.php:441
-#: views/submit-form.blade.php:216
+#: source/php/Module/SubmitForm/views/formfields.blade.php:457
+#: views/submit-form.blade.php:225
 msgid "Contact details"
 msgstr "Kontaktuppgifter"
 
-#: source/php/Module/SubmitForm/views/formfields.blade.php:442
-#: views/submit-form.blade.php:217
+#: source/php/Module/SubmitForm/views/formfields.blade.php:458
+#: views/submit-form.blade.php:226
 msgid "Enter your contact details below for eventual questions."
 msgstr "Ange dina kontaktuppgifter nedan för eventuella frågor."
 
-#: source/php/Module/SubmitForm/views/formfields.blade.php:461
-#: source/php/Module/SubmitForm/views/formfields.blade.php:465
-#: views/submit-form.blade.php:224 views/submit-form.blade.php:225
+#: source/php/Module/SubmitForm/views/formfields.blade.php:477
+#: source/php/Module/SubmitForm/views/formfields.blade.php:481
+#: views/submit-form.blade.php:233 views/submit-form.blade.php:234
 msgid "Repeat email"
 msgstr "Upprepa e-postadress"
 
-#: source/php/Module/SubmitForm/views/formfields.blade.php:487
-#: views/submit-form.blade.php:233
+#: source/php/Module/SubmitForm/views/formfields.blade.php:503
+#: views/submit-form.blade.php:242
 msgid "Done? Click here to submit your event for review."
 msgstr "Klar? Klicka här för att skicka in ditt evenemang för granskning."
 
-#: source/php/Module/SubmitForm/views/formfields.blade.php:497
-#: views/submit-form.blade.php:243
+#: source/php/Module/SubmitForm/views/formfields.blade.php:513
+#: views/submit-form.blade.php:252
 msgid "Send"
 msgstr "Skicka"
 
@@ -1588,315 +1601,317 @@ msgstr "Godkänn"
 msgid "Deny"
 msgstr "Neka"
 
-#: source/php/PostTypes/Events.php:147
-#: source/php/Shortcodes/SingleEvent.php:338
+#: source/php/PostTypes/Events.php:113
+#: source/php/Shortcodes/SingleEvent.php:299
+#: source/php/Shortcodes/SingleEvent.php:525
+msgid "Cancelled"
+msgstr "Inställt"
+
+#: source/php/PostTypes/Events.php:114
+#: source/php/Shortcodes/SingleEvent.php:300
+#: source/php/Shortcodes/SingleEvent.php:526
+msgid "Rescheduled"
+msgstr "Omplanerat"
+
+#: source/php/PostTypes/Events.php:143
+#: source/php/Shortcodes/SingleEvent.php:342
 msgid "Up to"
 msgstr "Upp till"
 
-#: source/php/PostTypes/Events.php:295
+#: source/php/PostTypes/Events.php:287
 msgctxt "Taxonomy plural name"
 msgid "Event categories"
 msgstr "Evenemangskategorier"
 
-#: source/php/PostTypes/Events.php:296
+#: source/php/PostTypes/Events.php:288
 msgctxt "Taxonomy singular name"
 msgid "Event category"
 msgstr "Evenemangskategori"
 
-#: source/php/PostTypes/Events.php:297
+#: source/php/PostTypes/Events.php:289
 msgid "Search categories"
 msgstr "Sök kategori"
 
-#: source/php/PostTypes/Events.php:298
+#: source/php/PostTypes/Events.php:290
 msgid "Popular categories"
 msgstr "Populära kategorier"
 
-#: source/php/PostTypes/Events.php:299
+#: source/php/PostTypes/Events.php:291
 msgid "All categories"
 msgstr "Alla kategorier"
 
-#: source/php/PostTypes/Events.php:300 source/php/PostTypes/Events.php:301
+#: source/php/PostTypes/Events.php:292 source/php/PostTypes/Events.php:293
 msgid "Parent category"
 msgstr "Huvudkategori"
 
-#: source/php/PostTypes/Events.php:302
+#: source/php/PostTypes/Events.php:294
 msgid "Edit category"
 msgstr "Redigera kategori"
 
-#: source/php/PostTypes/Events.php:303
+#: source/php/PostTypes/Events.php:295
 msgid "Update category"
 msgstr "Uppdatera kategori"
 
-#: source/php/PostTypes/Events.php:304
+#: source/php/PostTypes/Events.php:296
 msgid "Add new category"
 msgstr "Lägg till ny kategori"
 
-#: source/php/PostTypes/Events.php:305
+#: source/php/PostTypes/Events.php:297
 msgid "New category"
 msgstr "Ny kategori"
 
-#: source/php/PostTypes/Events.php:306
+#: source/php/PostTypes/Events.php:298
 msgid "Add or remove categories"
 msgstr "Lägg till eller ta bort kategorier"
 
-#: source/php/PostTypes/Events.php:307
+#: source/php/PostTypes/Events.php:299
 msgid "Choose from most used categories"
 msgstr "Välj bland de mest använda kategorierna"
 
-#: source/php/PostTypes/Events.php:332
+#: source/php/PostTypes/Events.php:324
 msgctxt "Taxonomy plural name"
 msgid "Event tags"
 msgstr "Taggar"
 
-#: source/php/PostTypes/Events.php:333
+#: source/php/PostTypes/Events.php:325
 msgctxt "Taxonomy singular name"
 msgid "Event tag"
 msgstr "Tagg"
 
-#: source/php/PostTypes/Events.php:334
+#: source/php/PostTypes/Events.php:326
 msgid "Search tags"
 msgstr "Sök tagg"
 
-#: source/php/PostTypes/Events.php:335
+#: source/php/PostTypes/Events.php:327
 msgid "Popular tags"
 msgstr "Populära taggar"
 
-#: source/php/PostTypes/Events.php:336
+#: source/php/PostTypes/Events.php:328
 msgid "All tags"
 msgstr "Alla taggar"
 
-#: source/php/PostTypes/Events.php:337 source/php/PostTypes/Events.php:338
+#: source/php/PostTypes/Events.php:329 source/php/PostTypes/Events.php:330
 msgid "Parent"
 msgstr "Förälder"
 
-#: source/php/PostTypes/Events.php:339
+#: source/php/PostTypes/Events.php:331
 msgid "Edit tag"
 msgstr "Redigera tagg"
 
-#: source/php/PostTypes/Events.php:340
+#: source/php/PostTypes/Events.php:332
 msgid "Update"
 msgstr "Uppdatera"
 
-#: source/php/PostTypes/Events.php:341
+#: source/php/PostTypes/Events.php:333
 msgid "Add new tag"
 msgstr "Lägg till ny tagg"
 
-#: source/php/PostTypes/Events.php:342
+#: source/php/PostTypes/Events.php:334
 msgid "New tag"
 msgstr "Ny tagg"
 
-#: source/php/PostTypes/Events.php:343
+#: source/php/PostTypes/Events.php:335
 msgid "Add or remove tags"
 msgstr "Lägg till eller ta bort taggar"
 
-#: source/php/PostTypes/Events.php:344
+#: source/php/PostTypes/Events.php:336
 msgid "Choose from most used tags"
 msgstr "Välj från de mest använda taggarna"
 
-#: source/php/PostTypes/Events.php:369
+#: source/php/PostTypes/Events.php:361
 msgctxt "Taxonomy plural name"
 msgid "Event groups"
 msgstr "Grupper"
 
-#: source/php/PostTypes/Events.php:370
+#: source/php/PostTypes/Events.php:362
 msgctxt "Taxonomy singular name"
 msgid "Event group"
 msgstr "Grupp"
 
-#: source/php/PostTypes/Events.php:371
+#: source/php/PostTypes/Events.php:363
 msgid "Search groups"
 msgstr "Sök grupper"
 
-#: source/php/PostTypes/Events.php:372
+#: source/php/PostTypes/Events.php:364
 msgid "Popular groups"
 msgstr "Populära grupper"
 
-#: source/php/PostTypes/Events.php:373
+#: source/php/PostTypes/Events.php:365
 msgid "All groups"
 msgstr "Alla grupper"
 
-#: source/php/PostTypes/Events.php:374 source/php/PostTypes/Events.php:375
+#: source/php/PostTypes/Events.php:366 source/php/PostTypes/Events.php:367
 msgid "Parent group"
 msgstr "Föräldergrupp"
 
-#: source/php/PostTypes/Events.php:376
+#: source/php/PostTypes/Events.php:368
 msgid "Edit group"
 msgstr "Ändra grupp"
 
-#: source/php/PostTypes/Events.php:377
+#: source/php/PostTypes/Events.php:369
 msgid "Update group"
 msgstr "Uppdatera grupp"
 
-#: source/php/PostTypes/Events.php:378
+#: source/php/PostTypes/Events.php:370
 msgid "Add new group"
 msgstr "Lägg till ny grupp"
 
-#: source/php/PostTypes/Events.php:379
+#: source/php/PostTypes/Events.php:371
 msgid "New group"
 msgstr "Ny grupp"
 
-#: source/php/PostTypes/Events.php:380
+#: source/php/PostTypes/Events.php:372
 msgid "Add or remove groups"
 msgstr "Lägg till eller ta bort grupper"
 
-#: source/php/PostTypes/Events.php:381
+#: source/php/PostTypes/Events.php:373
 msgid "Choose from most used groups"
 msgstr "Välj från de mest använda grupperna"
 
-#: source/php/PostTypes/Events.php:428
+#: source/php/PostTypes/Events.php:416
 msgid "Import events"
 msgstr "Importera evenemang"
 
-#: source/php/PostTypes/Events.php:460
+#: source/php/PostTypes/Events.php:446
 msgid "Something went wrong!"
 msgstr "Något gick fel!"
 
-#: source/php/PostTypes/Events.php:477
+#: source/php/PostTypes/Events.php:463
 msgid "Error"
 msgstr "Fel"
 
-#: source/php/Shortcodes/SingleEvent.php:108
-#: source/php/Shortcodes/SingleEvent.php:239
+#: source/php/Shortcodes/SingleEvent.php:110
+#: source/php/Shortcodes/SingleEvent.php:243
 msgid "Booking and tickets"
 msgstr "Bokning och biljetter"
 
-#: source/php/Shortcodes/SingleEvent.php:295
-#: source/php/Shortcodes/SingleEvent.php:520 views/single-event.blade.php:120
-msgid "Cancelled"
-msgstr "Inställt"
-
-#: source/php/Shortcodes/SingleEvent.php:296
-#: source/php/Shortcodes/SingleEvent.php:521 views/single-event.blade.php:124
-msgid "Rescheduled"
-msgstr "Omplanerat"
-
-#: source/php/Shortcodes/SingleEvent.php:303
+#: source/php/Shortcodes/SingleEvent.php:307
 msgid "Door time"
 msgstr "Lokalen öppnar"
 
-#: source/php/Shortcodes/SingleEvent.php:316
+#: source/php/Shortcodes/SingleEvent.php:320
 msgid "Other links"
 msgstr "Andra länkar"
 
-#: source/php/Shortcodes/SingleEvent.php:325
+#: source/php/Shortcodes/SingleEvent.php:329
 msgid "Related events"
 msgstr "Relaterade evenemang"
 
-#: source/php/Shortcodes/SingleEvent.php:342
+#: source/php/Shortcodes/SingleEvent.php:346
 msgid "Accessibility on the location"
 msgstr "Tillgänglighet på platsen"
 
-#: source/php/Shortcodes/SingleEvent.php:373
+#: source/php/Shortcodes/SingleEvent.php:378
 msgid "Other locations"
 msgstr "Fler platser"
 
-#: source/php/Shortcodes/SingleEvent.php:392
+#: source/php/Shortcodes/SingleEvent.php:397
 msgid "Book here"
 msgstr "Boka här"
 
-#: source/php/Shortcodes/SingleEvent.php:395
+#: source/php/Shortcodes/SingleEvent.php:400
 msgid "Adult"
 msgstr "Vuxen"
 
-#: source/php/Shortcodes/SingleEvent.php:396
+#: source/php/Shortcodes/SingleEvent.php:401
 msgid "below"
 msgstr "under"
 
-#: source/php/Shortcodes/SingleEvent.php:397
+#: source/php/Shortcodes/SingleEvent.php:402
 msgid "Children"
 msgstr "Barn"
 
-#: source/php/Shortcodes/SingleEvent.php:398
+#: source/php/Shortcodes/SingleEvent.php:403
 msgid "above"
 msgstr "över"
 
-#: source/php/Shortcodes/SingleEvent.php:399
+#: source/php/Shortcodes/SingleEvent.php:404
 msgid "Senior"
 msgstr "Pensionär"
 
-#: source/php/Shortcodes/SingleEvent.php:400
+#: source/php/Shortcodes/SingleEvent.php:405
 msgid "Student"
 msgstr "Student"
 
-#: source/php/Shortcodes/SingleEvent.php:401
+#: source/php/Shortcodes/SingleEvent.php:406
 msgid "Age restriction"
 msgstr "Åldersgräns"
 
-#: source/php/Shortcodes/SingleEvent.php:402
-#: source/php/Shortcodes/SingleEvent.php:445
-#: source/php/Shortcodes/SingleEvent.php:446
+#: source/php/Shortcodes/SingleEvent.php:407
+#: source/php/Shortcodes/SingleEvent.php:450
+#: source/php/Shortcodes/SingleEvent.php:451
 msgid "Ticket release date"
 msgstr "Biljettsläpp"
 
-#: source/php/Shortcodes/SingleEvent.php:403
+#: source/php/Shortcodes/SingleEvent.php:408
 msgid "Tickets remaining"
 msgstr "Återstående biljetter"
 
-#: source/php/Shortcodes/SingleEvent.php:406
+#: source/php/Shortcodes/SingleEvent.php:411
 msgid "Ticket types"
 msgstr "Biljettyper"
 
-#: source/php/Shortcodes/SingleEvent.php:413
+#: source/php/Shortcodes/SingleEvent.php:418
 msgid "Seated"
 msgstr "Sittande"
 
-#: source/php/Shortcodes/SingleEvent.php:416
+#: source/php/Shortcodes/SingleEvent.php:421
 msgid "Standing"
 msgstr "Stående"
 
-#: source/php/Shortcodes/SingleEvent.php:420
+#: source/php/Shortcodes/SingleEvent.php:425
 msgid "Minimum price"
 msgstr "Minimipris"
 
-#: source/php/Shortcodes/SingleEvent.php:421
+#: source/php/Shortcodes/SingleEvent.php:426
 msgid "Maximum price"
 msgstr "Maximipris"
 
-#: source/php/Shortcodes/SingleEvent.php:429
+#: source/php/Shortcodes/SingleEvent.php:434
 msgid "Price range"
 msgstr "Prisintervall"
 
-#: source/php/Shortcodes/SingleEvent.php:431
+#: source/php/Shortcodes/SingleEvent.php:436
 msgid "Seated minimum price"
 msgstr "Minimipris för sittande"
 
-#: source/php/Shortcodes/SingleEvent.php:432
+#: source/php/Shortcodes/SingleEvent.php:437
 msgid "Seated maximum price"
 msgstr "Maximipris för sittande"
 
-#: source/php/Shortcodes/SingleEvent.php:433
+#: source/php/Shortcodes/SingleEvent.php:438
 msgid "Standing minimum price"
 msgstr "Minimipris för stående"
 
-#: source/php/Shortcodes/SingleEvent.php:434
+#: source/php/Shortcodes/SingleEvent.php:439
 msgid "Standing maximum price"
 msgstr "Maximipris för stående"
 
-#: source/php/Shortcodes/SingleEvent.php:440
+#: source/php/Shortcodes/SingleEvent.php:445
 msgid "Ticket retailers"
 msgstr "Återförsäljare"
 
-#: source/php/Shortcodes/SingleEvent.php:454
+#: source/php/Shortcodes/SingleEvent.php:459
 msgid "Group prices"
 msgstr "Gruppriser"
 
-#: source/php/Shortcodes/SingleEvent.php:457
+#: source/php/Shortcodes/SingleEvent.php:462
 msgid "persons"
 msgstr "personer"
 
-#: source/php/Shortcodes/SingleEvent.php:463
+#: source/php/Shortcodes/SingleEvent.php:468
 msgid "Included in membership cards"
 msgstr "Ingår i medlemskort"
 
-#: source/php/Shortcodes/SingleEvent.php:470
+#: source/php/Shortcodes/SingleEvent.php:475
 msgid "Price information"
 msgstr "Prisinformation"
 
-#: source/php/Shortcodes/SingleEvent.php:471
+#: source/php/Shortcodes/SingleEvent.php:476
 msgid "Ticket includes"
 msgstr "Ingår i biljett"
 
-#: source/php/Shortcodes/SingleEvent.php:589
+#: source/php/Shortcodes/SingleEvent.php:594
 msgctxt "Free event entrance"
 msgid "Free"
 msgstr "Gratis"
@@ -1959,11 +1974,11 @@ msgstr ""
 msgid "Exported %d fieldgroup(s)."
 msgstr ""
 
-#: views/single-event.blade.php:85
+#: views/single-event.blade.php:82
 msgid "Tickets"
 msgstr "Biljetter"
 
-#: views/single-event.blade.php:89
+#: views/single-event.blade.php:86
 msgid "Book tickets now"
 msgstr "Boka biljetter nu"
 
@@ -1983,6 +1998,17 @@ msgstr ""
 "För vuxen. Finns det flera olika prisklasser? Informera gärna om det i "
 "beskrivningen."
 
+#: views/submit-form.blade.php:189
+msgid ""
+"Select appropriate categories for your event or activity. To select multiple "
+"tags, press Ctrl (Windows) / command (macOS) at the same time as you click "
+"on the categories."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Event Manager Integration"
+msgstr ""
+
 #. Plugin URI of the plugin/theme
 msgid "https://github.com/helsingborg-stad/api-event-manager-integration"
 msgstr ""
@@ -1998,6 +2024,12 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "http://www.helsingborg.se"
 msgstr ""
+
+#~ msgid "Show update button on edit event page"
+#~ msgstr "Visa knapp för att uppdatera importerade evenemang"
+
+#~ msgid "Show update button"
+#~ msgstr "Visa uppdatera-knapp"
 
 #~ msgid "From date"
 #~ msgstr "Från datum"

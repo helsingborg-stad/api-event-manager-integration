@@ -1,18 +1,44 @@
 <ul class="event-module-list">
+   <?php //var_dump($events); ?>
     @if (!$events)
         <li><span class="event-info"><?php _e('No events found', 'event-integration'); ?></span></li>
     @else
         @foreach ($events as $event)
-        	{!! (isset($event->end_date) && (strtotime($event->end_date) < $date_now)) ? '<li class="passed-event">' : '<li>' !!}
+
+			   {!! (isset($event->end_date) && (strtotime($event->end_date) < $date_now)) ? '<li class="passed-event ">' : '<li>' !!}
 	            @if (!empty($event->start_date) && in_array('occasion', $mod_event_fields) && $mod_event_occ_pos == 'left')
-	                <?php $occasion = \EventManagerIntegration\App::formatShortDate($event->start_date); ?>
+	                <?php
+				   		$occasionStart = \EventManagerIntegration\App::formatShortDate($event->start_date);
+				   		$occasionEnd = \EventManagerIntegration\App::formatShortDate($event->end_date);
+	                ?>
 	                <span class="event-date">
-	                @if ($occasion['today'] == true)
-	                    <span><strong><?php _e('Today', 'event-integration'); ?></strong></span>
-	                    <span>{{ $occasion['time'] }}</span>
+	                @if ($occasionStart['today'] == true)
+	                    <span><strong><?php _e('Today', 'event-integration'); ?>
+								@if (date('Y-m-d', strtotime($event->end_date)) !== date('Y-m-d', strtotime($event->start_date)))
+									-
+									<strong><span class="">{{ $occasionEnd['date'] }} {{ $occasionEnd['month'] }}</span></strong>
+
+								@endif
+							</strong></span>
+	                    <span>{{ $occasionStart['time'] }}</span>
 	                @else
-	                    <span>{{ $occasion['date'] }}</span>
-	                    <span>{{ $occasion['month'] }}</span>
+						@if (date('Y-m-d', strtotime($event->end_date)) !== date('Y-m-d', strtotime($event->start_date)))
+							@if($occasionStart['month'] !== $occasionEnd['month'])
+								<strong><span>{{ $occasionStart['date'] }}</span></strong>
+								<span>{{ $occasionStart['month'] }}</span>
+									-
+									<strong><span class="">{{ $occasionEnd['date'] }}</span></strong>
+								<span>{{ $occasionEnd['month'] }}</span>
+							@else
+									<strong><span>{{ $occasionStart['date'] }} - {{ $occasionEnd['date'] }} </span></strong>
+									<span>{{ $occasionStart['month'] }}</span>
+
+							@endif
+						@else
+							<strong><span>{{ $occasionStart['date'] }}</span></strong>
+							<span>{{ $occasionStart['month'] }}</span>
+						@endif
+
 	                @endif
 	                </span>
 	            @endif

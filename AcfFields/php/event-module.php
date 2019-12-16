@@ -255,6 +255,44 @@
             'step' => '',
         ),
         9 => array(
+            'key' => 'field_5d5bda9c80adf',
+            'label' => __('Only show events starting on todays date', 'event-integration'),
+            'name' => 'mod_event_only_todays_date',
+            'type' => 'true_false',
+            'instructions' => __('Only show events starting on todays date', 'event-integration'),
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'message' => '',
+            'default_value' => 0,
+            'ui' => 0,
+            'ui_on_text' => '',
+            'ui_off_text' => '',
+        ),
+        10 => array(
+            'key' => 'field_5d5bdb7f80ae0',
+            'label' => __('Hide past events', 'event-integration'),
+            'name' => 'mod_events_hide_past_events',
+            'type' => 'true_false',
+            'instructions' => __('Hide past events', 'event-integration'),
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'message' => '',
+            'default_value' => 0,
+            'ui' => 0,
+            'ui_on_text' => '',
+            'ui_off_text' => '',
+        ),
+        11 => array(
             'key' => 'field_583fefb6634a1',
             'label' => __('Fields', 'event-integration'),
             'name' => 'mod_event_fields',
@@ -281,7 +319,7 @@
             'toggle' => 1,
             'return_format' => 'value',
         ),
-        10 => array(
+        12 => array(
             'key' => 'field_5b2ae170ae36f',
             'label' => __('Image ratio', 'event-integration'),
             'name' => 'mod_event_image_ratio',
@@ -322,7 +360,7 @@
             'return_format' => 'value',
             'placeholder' => '',
         ),
-        11 => array(
+        13 => array(
             'key' => 'field_58de5b2d62d45',
             'label' => __('Occasion position', 'event-integration'),
             'name' => 'mod_event_occ_pos',
@@ -359,7 +397,7 @@
             'layout' => 'vertical',
             'return_format' => 'value',
         ),
-        12 => array(
+        14 => array(
             'key' => 'field_583fee36634a0',
             'label' => __('Description letter limit', 'event-integration'),
             'name' => 'mod_event_descr_limit',
@@ -388,7 +426,7 @@
             'max' => '',
             'step' => '',
         ),
-        13 => array(
+        15 => array(
             'key' => 'field_586cf5c8d3686',
             'label' => __('Groups', 'event-integration'),
             'name' => 'mod_event_groups_show',
@@ -407,7 +445,7 @@
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        14 => array(
+        16 => array(
             'key' => 'field_586cf5d0d3687',
             'label' => __('Select groups', 'event-integration'),
             'name' => 'mod_event_groups_list',
@@ -437,7 +475,7 @@
             'return_format' => 'id',
             'multiple' => 0,
         ),
-        15 => array(
+        17 => array(
             'key' => 'field_58455b0e93178',
             'label' => __('Categories', 'event-integration'),
             'name' => 'mod_event_categories_show',
@@ -456,7 +494,7 @@
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        16 => array(
+        18 => array(
             'key' => 'field_5845578c5f0a0',
             'label' => __('Select categories', 'event-integration'),
             'name' => 'mod_event_categories_list',
@@ -486,7 +524,7 @@
             'return_format' => 'id',
             'multiple' => 0,
         ),
-        17 => array(
+        19 => array(
             'key' => 'field_58458b20dde03',
             'label' => __('Tags', 'event-integration'),
             'name' => 'mod_event_tags_show',
@@ -505,7 +543,7 @@
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        18 => array(
+        20 => array(
             'key' => 'field_58458b57dde04',
             'label' => __('Select tags', 'event-integration'),
             'name' => 'mod_event_tags_list',
@@ -535,7 +573,7 @@
             'return_format' => 'id',
             'multiple' => 0,
         ),
-        19 => array(
+        21 => array(
             'key' => 'field_584f9e68aa31a',
             'label' => __('Default image', 'event-integration'),
             'name' => 'mod_event_def_image',
@@ -559,7 +597,7 @@
             'max_size' => '',
             'mime_types' => 'jpg, jpeg, png, gif',
         ),
-        20 => array(
+        22 => array(
             'key' => 'field_58abf724d46f6',
             'label' => __('Location', 'event-integration'),
             'name' => 'mod_event_geographic',
@@ -577,7 +615,7 @@
             'zoom' => 16,
             'height' => '',
         ),
-        21 => array(
+        23 => array(
             'key' => 'field_58abf72bd46f7',
             'label' => __('Distance from location', 'event-integration'),
             'name' => 'mod_event_distance',
@@ -598,7 +636,7 @@
             'max' => '',
             'step' => '',
         ),
-        22 => array(
+        24 => array(
             'key' => 'field_5c6e698e8d331',
             'label' => __('Filters', 'event-integration'),
             'name' => '',
@@ -623,7 +661,7 @@
             'new_lines' => 'wpautop',
             'esc_html' => 0,
         ),
-        23 => array(
+        25 => array(
             'key' => 'field_5c5d4dbd07268',
             'label' => __('Text search', 'event-integration'),
             'name' => 'mod_event_filter_search',
@@ -640,7 +678,7 @@
                 ),
             ),
             'wrapper' => array(
-                'width' => '25',
+                'width' => '20',
                 'class' => '',
                 'id' => '',
             ),
@@ -650,7 +688,7 @@
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        24 => array(
+        26 => array(
             'key' => 'field_5c5d501e9acbb',
             'label' => __('Categories', 'event-integration'),
             'name' => 'mod_event_filter_categories',
@@ -667,7 +705,7 @@
                 ),
             ),
             'wrapper' => array(
-                'width' => '25',
+                'width' => '20',
                 'class' => '',
                 'id' => '',
             ),
@@ -677,7 +715,34 @@
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        25 => array(
+        27 => array(
+            'key' => 'field_5d1b26a7f03ff',
+            'label' => __('Tags', 'event-integration'),
+            'name' => 'mod_event_filter_tags',
+            'type' => 'true_false',
+            'instructions' => '',
+            'required' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_5b2ace4dc65a8',
+                        'operator' => '==',
+                        'value' => 'index',
+                    ),
+                ),
+            ),
+            'wrapper' => array(
+                'width' => '20',
+                'class' => '',
+                'id' => '',
+            ),
+            'message' => '',
+            'default_value' => 0,
+            'ui' => 1,
+            'ui_on_text' => '',
+            'ui_off_text' => '',
+        ),
+        28 => array(
             'key' => 'field_5c5d50499acbc',
             'label' => __('Date search', 'event-integration'),
             'name' => 'mod_event_filter_dates',
@@ -694,7 +759,7 @@
                 ),
             ),
             'wrapper' => array(
-                'width' => '25',
+                'width' => '20',
                 'class' => '',
                 'id' => '',
             ),
@@ -704,7 +769,7 @@
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        26 => array(
+        29 => array(
             'key' => 'field_5c765ee693303',
             'label' => __('Age', 'event-integration'),
             'name' => 'mod_event_filter_age_group',
@@ -721,7 +786,7 @@
                 ),
             ),
             'wrapper' => array(
-                'width' => '25',
+                'width' => '20',
                 'class' => '',
                 'id' => '',
             ),
@@ -731,7 +796,7 @@
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        27 => array(
+        30 => array(
             'key' => 'field_5c7d24413bf80',
             'label' => __('Age range from', 'event-integration'),
             'name' => 'mod_event_filter_age_range_from',
@@ -760,7 +825,7 @@
             'max' => '',
             'step' => '',
         ),
-        28 => array(
+        31 => array(
             'key' => 'field_5c7d25be3d7fd',
             'label' => __('Age range to', 'event-integration'),
             'name' => 'mod_event_filter_age_range_to',

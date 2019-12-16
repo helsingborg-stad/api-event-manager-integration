@@ -397,6 +397,22 @@
         </div>
     @endif
 
+    {{-- Categories --}}
+    @if(!$event_tags->hidden)
+        <div class="form-group">
+            <label for="{{ $event_tags->name }}">{{ $event_tags->label }}</label>
+            @if(!$event_tags->hidden_description)
+                <small class="text-dark-gray">{{ $event_tags->description }}</small>
+            @endif
+            <select name="{{ $event_tags->name }}"
+                    id="{{ $event_tags->name }}"
+                    multiple
+                    {{ $event_tags->required ? 'required' : '' }}>
+                <option value=""><?php _e('Loading', 'event-integration'); ?>...</option>
+            </select>
+        </div>
+    @endif
+
     {{-- Image --}}
     @if(!$image_input->hidden)
         <div class="form-group gutter creamy image-box text-center">

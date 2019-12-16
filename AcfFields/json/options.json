@@ -124,7 +124,7 @@
         },
         {
             "key": "field_58e380646fa6f",
-            "label": "Show update button on edit event page",
+            "label": "Visa knapp f\u00f6r att uppdatera importerade evenemang",
             "name": "event_update_button",
             "type": "true_false",
             "instructions": "",
@@ -135,7 +135,7 @@
                 "class": "",
                 "id": ""
             },
-            "message": "Show update button",
+            "message": "Visa uppdatera-knapp",
             "default_value": 0,
             "ui": 0,
             "ui_on_text": "",

@@ -57,6 +57,8 @@ class Event extends \Modularity\Module
         $page = (!empty($_POST['page'])) ? $_POST['page'] : 1;
         $data = get_fields($id);
 
+
+
         // Cards module data
         $data['settings'] = $data;
         $data['nonce'] = wp_create_nonce('wp_rest');
@@ -67,6 +69,7 @@ class Event extends \Modularity\Module
         $days_ahead = isset($data['mod_event_interval']) ? $data['mod_event_interval'] : 0;
         $data['start_date'] = date('Y-m-d', strtotime("now"));
         $data['end_date'] = date('Y-m-d', strtotime("today midnight +$days_ahead days"));
+        $data['only_todays_date'] = $data['mod_events_hide_past_events'];
         $data['lat'] = (isset($data['mod_event_geographic']['lat'])) ? $data['mod_event_geographic']['lat'] : null;
         $data['lng'] = (isset($data['mod_event_geographic']['lng'])) ? $data['mod_event_geographic']['lng'] : null;
         $data['distance'] = (isset($data['mod_event_distance'])) ? $data['mod_event_distance'] : null;
@@ -74,7 +77,8 @@ class Event extends \Modularity\Module
         // Taxonomies filter
         $data['categories'] = $this->getFilterableCategories($id);
         $data['groups'] = $this->getModuleGroups($id);
-        $data['tags'] = $this->getModuleTags($id);
+        //$data['tags'] = $this->getFilterableTags($id);
+        $data['tags'] = $this->getFilterableTags($id);
 
         // List module data
         $data['pagesCount'] = $this->countPages($id);
@@ -147,6 +151,8 @@ class Event extends \Modularity\Module
         $start_date = date('Y-m-d H:i:s', strtotime("today midnight"));
         $end_date = date('Y-m-d H:i:s', strtotime("tomorrow midnight +$days_ahead days") - 1);
 
+        $mod_events_hide_past_events = $fields->mod_events_hide_past_events;
+        $mod_event_only_todays_date = $fields->mod_event_only_todays_date;
         // Save categories, groups and tags IDs as arrays
         $categories = $this->getModuleCategories($module_id);
         $tags = $this->getModuleTags($module_id);
@@ -163,6 +169,8 @@ class Event extends \Modularity\Module
             'location' => (isset($fields->mod_event_geographic)) ? $fields->mod_event_geographic : null,
             'distance' => (isset($fields->mod_event_distance)) ? $fields->mod_event_distance : null,
             'lang' => $this->lang,
+            'hide_past_events' => $mod_events_hide_past_events,
+            'only_todays_date' => $mod_event_only_todays_date
         );
 
         $events = \EventManagerIntegration\Helper\QueryEvents::getEventsByInterval($params, $page);
@@ -230,23 +238,49 @@ class Event extends \Modularity\Module
         return $categories;
     }
 
+
     /**
-     * Return groups filter
+     * Return tags available for filtering
      * @param int $moduleId The module ID
      * @return array|null
      */
-    public function getModuleGroups($moduleId): array
+    public function getFilterableTags($moduleId): array
     {
-        $groups = array();
-        $showAllGroups = get_field('mod_event_groups_show', $moduleId);
+        $tags = array();
+        $showAllTags = get_field('mod_event_tags_show', $moduleId);
 
-        $moduleGroups = get_field('mod_event_groups_list', $moduleId);
-        if ($showAllGroups === false && !empty($moduleGroups) && is_array($moduleGroups)) {
-            $groups = $moduleGroups;
+        $moduleTags = get_field('mod_event_tags_list', $moduleId);
+        if ($showAllTags === false && !empty($moduleTags) && is_array($moduleTags)) {
+            $tags = $moduleTags;
+            foreach ($tags as $key => &$tag) {
+                $tag = get_term($tag, 'event_tags');
+                // If category is missing, remove it from the list
+                if (!$tag) {
+                    unset($tags[$key]);
+                }
+            }
+        } else {
+            $tags = get_terms(
+                'event_tags',
+                array(
+                    'hide_empty' => false,
+                )
+            );
         }
 
-        return $groups;
+        $tags = \EventManagerIntegration\Helper\Translations::filterTermsByLanguage($tags);
+
+        foreach ($tags as &$tag) {
+            $tag = array(
+                'id' => $tag->term_id,
+                'title' => $tag->name,
+                'checked' => false,
+            );
+        }
+
+        return $tags;
     }
+
 
     /**
      * Return tags filter
@@ -265,6 +299,25 @@ class Event extends \Modularity\Module
 
         return $tags;
     }
+
+    /**
+     * Return groups filter
+     * @param int $moduleId The module ID
+     * @return array|null
+     */
+    public function getModuleGroups($moduleId): array
+    {
+        $groups = array();
+        $showAllGroups = get_field('mod_event_groups_show', $moduleId);
+
+        $moduleGroups = get_field('mod_event_groups_list', $moduleId);
+        if ($showAllGroups === false && !empty($moduleGroups) && is_array($moduleGroups)) {
+            $groups = $moduleGroups;
+        }
+
+        return $groups;
+    }
+
 
     /**
      * Return list with filterable ages
@@ -331,6 +384,7 @@ class Event extends \Modularity\Module
                     'to' => __('To', 'event-integration'),
                     'date' => __('date', 'event-integration'),
                     'categories' => __('Categories', 'event-integration'),
+                    'tags' => __('Tags', 'event-integration'),
                     'age' => __('Age', 'event-integration'),
                     'ageGroupDescription' => __(
                         'Filter on events that is targeted for given the age',

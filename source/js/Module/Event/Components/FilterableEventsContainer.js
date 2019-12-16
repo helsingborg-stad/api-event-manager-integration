@@ -18,6 +18,7 @@ class FilterableEventsContainer extends React.Component {
             startDate: props.startDate,
             endDate: props.endDate,
             categories: props.categories,
+            tags: props.tags,
             ageRange: props.ageRange,
         };
     }
@@ -33,7 +34,7 @@ class FilterableEventsContainer extends React.Component {
         this.setState({ isLoaded: false, error: null });
         // Declare states and props
         const { currentPage, searchString, startDate, endDate } = this.state;
-        let { categories, ageRange } = this.state;
+        let { categories, tags, ageRange } = this.state;
         const {
             translation,
             restUrl,
@@ -42,7 +43,6 @@ class FilterableEventsContainer extends React.Component {
             lat,
             lng,
             distance,
-            tags,
             groups,
             nonce,
             lang,
@@ -58,6 +58,18 @@ class FilterableEventsContainer extends React.Component {
         }
         // Collect IDS
         categories = categories.map(category => category.id);
+
+        // Filter checked tags
+        const checkedTags = tags.filter(tag => tag.checked);
+
+        if (
+            checkedTags.length > 0 ||
+            (checkedTags.length === 0 && settings.mod_event_tags_show === true)
+        ) {
+            tags = checkedTags;
+        }
+        // Collect IDS
+        tags = tags.map(tag => tag.id);
 
         // Filter checked ages and return the values
         const ageGroup = ageRange.filter(age => age.checked).map(age => age.value);
@@ -208,6 +220,26 @@ class FilterableEventsContainer extends React.Component {
     };
 
     /**
+     * Handle categories checkbox changes
+     * @param id
+     */
+    onTagChange = (e, id) => {
+        const { tags } = this.state;
+        // Get the index
+        const index = tags.findIndex(obj => obj.id === id);
+        // Update state
+        this.setState(
+            update(this.state, {
+                tags: {
+                    [index]: {
+                        checked: { $set: !tags[index].checked },
+                    },
+                },
+            })
+        );
+    };
+
+    /**
      * Handle age range checkbox changes
      * @param id
      */
@@ -235,6 +267,7 @@ class FilterableEventsContainer extends React.Component {
             currentPage,
             totalPages,
             categories,
+            tags,
             ageRange,
         } = this.state;
         const { settings, translation, gridColumn, archiveUrl } = this.props;
@@ -243,6 +276,7 @@ class FilterableEventsContainer extends React.Component {
                 {(settings.mod_event_filter_search ||
                     settings.mod_event_filter_dates ||
                     settings.mod_event_filter_age_group ||
+                    settings.mod_event_filter_tags ||
                     settings.mod_event_filter_categories) && (
                     <div className="u-mb-3">
                         <FilterContainer
@@ -254,7 +288,9 @@ class FilterableEventsContainer extends React.Component {
                             toDateChange={this.toDateChange}
                             formatDate={this.formatDate}
                             categories={categories}
+                            tags={tags}
                             onCategoryChange={this.onCategoryChange}
+                            onTagChange={this.onTagChange}
                             ageRange={ageRange}
                             onAgeChange={this.onAgeChange}
                         />

@@ -56,7 +56,8 @@ class QueryEvents
 
         // Search by text string
         $searchString = !empty($params['search_string']) ? $params['search_string'] : null;
-
+        $hidePastEvents = !empty($params['hide_past_events']) ? $params['hide_past_events'] : false;
+        $onlyTodaysDate = !empty($params['only_todays_date']) ? $params['only_todays_date'] : false;
         // Filter by age
         $ageGroup = (!empty($params['age_group']) && is_array($params['age_group'])) ? $params['age_group'] : null;
 
@@ -80,6 +81,14 @@ class QueryEvents
         WHERE $wpdb->posts.post_type = %s
         AND $wpdb->posts.post_status = %s
         AND ($db_table.start_date BETWEEN %s AND %s OR $db_table.end_date BETWEEN %s AND %s) ";
+
+        if ($hidePastEvents){
+            $query .= " AND $db_table.end_date > '". date('Y-m-d H:i:s')."' ";
+        }
+
+        if($onlyTodaysDate) {
+            $query .= " AND $db_table.end_date <= '". date('Y-m-d H:i:s', strtotime('tomorrow - 1 second'))."' ";
+        }
 
         if ($ageGroup) {
             $query .= "AND (age_from.meta_key = 'age_group_from' AND age_to.meta_key = 'age_group_to' AND (";
