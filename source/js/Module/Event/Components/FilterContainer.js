@@ -104,7 +104,7 @@ FilterContainer.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onTagChange: PropTypes.func,
   searchString: PropTypes.string,
-  settings: PropTypes.array.isRequired,
+  settings: PropTypes.object.isRequired,
   startDate: PropTypes.string,
   tags: PropTypes.array,
   toDateChange: PropTypes.func,
