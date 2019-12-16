@@ -51,7 +51,6 @@ const FilterContainer = ({
         <div className="grid-sm-12 grid-md-6 grid-lg-auto u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
           <DateFilter
             id="filter-date-to"
-            id="filter-date-to"
             label={`${translation.to} ${translation.date}`}
             onDayChange={toDateChange}
             formatDate={formatDate}
