@@ -1,26 +1,27 @@
 import { Button } from 'hbg-react';
 import PropTypes from 'prop-types';
-import DateFilter from './DateFilter';
 import AgeFilter from './AgeFilter';
 import CategoriesFilter from './CategoriesFilter';
+import DateFilter from './DateFilter';
+import SearchBar from './SearchBar';
 
 const FilterContainer = ({
-  settings,
-  translation,
-  searchString,
-  updateSearchString,
-  onSubmit,
-  fromDateChange,
-  toDateChange,
-  formatDate,
-  categories,
-  tags,
-  onCategoryChange,
-  onTagChange,
   ageRange,
-  onAgeChange,
-  startDate,
+  categories,
   endDate,
+  formatDate,
+  fromDateChange,
+  onAgeChange,
+  onCategoryChange,
+  onSubmit,
+  onTagChange,
+  searchString,
+  settings,
+  startDate,
+  tags,
+  toDateChange,
+  translation,
+  updateSearchString,
 }) => (
   <form onSubmit={onSubmit}>
     <div className="grid">

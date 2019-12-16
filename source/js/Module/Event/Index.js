@@ -14,12 +14,12 @@ for (let i = 0; i < domElements.length; i++) {
   ReactDOM.render(
     <FilterableEventsContainer
       {...element.dataset}
-      translation={translation}
-      settings={JSON.parse(settings)}
-      categories={JSON.parse(categories)}
-      tags={JSON.parse(tags)}
-      groups={JSON.parse(groups)}
       ageRange={JSON.parse(ageRange)}
+      categories={JSON.parse(categories)}
+      groups={JSON.parse(groups)}
+      settings={JSON.parse(settings)}
+      tags={JSON.parse(tags)}
+      translation={translation}
     />,
     element
   );

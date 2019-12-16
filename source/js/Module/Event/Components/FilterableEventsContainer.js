@@ -1,28 +1,28 @@
-import PropTypes from 'prop-types';
-import { Pagination, PreLoader, Notice, Button } from 'hbg-react';
-import setQuery from 'set-query-string';
+import { Button, Notice, Pagination, PreLoader } from 'hbg-react';
 import update from 'immutability-helper';
+import PropTypes from 'prop-types';
+import setQuery from 'set-query-string';
+import { getEvents } from '../../../Api/events';
 import EventList from './EventList';
 import FilterContainer from './FilterContainer';
-import { getEvents } from '../../../Api/events';
 
 class FilterableEventsContainer extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      age: null,
+      ageRange: props.ageRange,
+      categories: props.categories,
+      currentPage: 1,
+      endDate: props.endDate,
       error: null,
       isLoaded: false,
       items: [],
-      currentPage: 1,
-      totalPages: 1,
       searchString: '',
-      age: null,
       startDate: props.startDate,
-      endDate: props.endDate,
-      categories: props.categories,
       tags: props.tags,
-      ageRange: props.ageRange,
+      totalPages: 1,
     };
   }
 
@@ -142,16 +142,16 @@ class FilterableEventsContainer extends React.Component {
     const { currentPage, searchString, startDate, endDate } = this.state;
     let { categories, tags, ageRange } = this.state;
     const {
-      translation,
-      restUrl,
-      moduleId,
-      settings,
-      lat,
-      lng,
       distance,
       groups,
-      nonce,
       lang,
+      lat,
+      lng,
+      moduleId,
+      nonce,
+      restUrl,
+      settings,
+      translation,
     } = this.props;
     const perPage = settings.mod_event_pagination ? settings.mod_event_per_page : -1;
     // Filter checked categories
@@ -183,21 +183,21 @@ class FilterableEventsContainer extends React.Component {
     const url = `${restUrl}wp/v2/event/module`;
     // Create list of query parameters
     const params = {
-      start_date: startDate,
+      _wpnonce: nonce,
+      age_group: ageGroup,
+      categories,
+      distance,
       end_date: endDate,
-      per_page: perPage,
-      page: currentPage,
-      module_id: moduleId,
+      groups,
+      lang,
       lat,
       lng,
-      distance,
-      categories,
-      tags,
-      groups,
-      age_group: ageGroup,
+      module_id: moduleId,
+      page: currentPage,
+      per_page: perPage,
       search_string: searchString,
-      lang,
-      _wpnonce: nonce,
+      start_date: startDate,
+      tags,
     };
 
     // Fetch events
@@ -368,17 +368,17 @@ class FilterableEventsContainer extends React.Component {
 
   render() {
     const {
+      ageRange,
+      categories,
+      currentPage,
+      endDate,
       error,
       isLoaded,
       items,
-      currentPage,
-      totalPages,
-      categories,
-      tags,
-      ageRange,
       searchString,
       startDate,
-      endDate,
+      tags,
+      totalPages,
     } = this.state;
     const { settings, translation, gridColumn, archiveUrl } = this.props;
 
@@ -391,22 +391,22 @@ class FilterableEventsContainer extends React.Component {
           settings.mod_event_filter_categories) && (
           <div className="u-mb-3">
             <FilterContainer
-              settings={settings}
-              translation={translation}
-              searchString={searchString}
-              updateSearchString={this.updateSearchString}
-              onSubmit={this.onSubmit}
-              fromDateChange={this.fromDateChange}
-              toDateChange={this.toDateChange}
-              startDate={startDate}
+              ageRange={ageRange}
+              categories={categories}
               endDate={endDate}
               formatDate={this.formatDate}
-              categories={categories}
-              tags={tags}
-              onCategoryChange={this.onCategoryChange}
-              onTagChange={this.onTagChange}
-              ageRange={ageRange}
+              fromDateChange={this.fromDateChange}
               onAgeChange={this.onAgeChange}
+              onCategoryChange={this.onCategoryChange}
+              onSubmit={this.onSubmit}
+              onTagChange={this.onTagChange}
+              searchString={searchString}
+              settings={settings}
+              startDate={startDate}
+              tags={tags}
+              toDateChange={this.toDateChange}
+              translation={translation}
+              updateSearchString={this.updateSearchString}
             />
           </div>
         )}
@@ -443,12 +443,12 @@ class FilterableEventsContainer extends React.Component {
             <div className="grid-xs-12 grid-md-fit-content u-ml-auto modularity-mod-event__pagination">
               <Pagination
                 current={currentPage}
-                total={totalPages}
+                input={this.paginationInput}
+                langNext={translation.next}
+                langPrev={translation.prev}
                 next={this.nextPage}
                 prev={this.prevPage}
-                input={this.paginationInput}
-                langPrev={translation.prev}
-                langNext={translation.next}
+                total={totalPages}
               />
             </div>
           )}
@@ -481,8 +481,8 @@ FilterableEventsContainer.propTypes = {
 FilterableEventsContainer.defaultProps = {
   ageRange: [],
   categories: [],
-  tags: [],
   groups: [],
+  tags: [],
 };
 
 export default FilterableEventsContainer;
