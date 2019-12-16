@@ -67,7 +67,9 @@
     "hbg-react": "^0.11.7",
     "immutability-helper": "^2.9.0",
     "isomorphic-fetch": "^2.2.1",
+    "prop-types": "^15.7.2",
     "react-day-picker": "^7.3.0",
+    "set-query-string": "^2.2.0",
     "uuid": "^3.3.2"
   },
   "babel": {
