@@ -1,5 +1,5 @@
 import { Button } from 'hbg-react';
-import SearchBar from './SearchBar';
+import PropTypes from 'prop-types';
 import DateFilter from './DateFilter';
 import AgeFilter from './AgeFilter';
 import CategoriesFilter from './CategoriesFilter';
@@ -91,5 +91,30 @@ const FilterContainer = ({
     </div>
   </form>
 );
+
+FilterContainer.propTypes = {
+  ageRange: PropTypes.array,
+  categories: PropTypes.array,
+  endDate: PropTypes.string,
+  formatDate: PropTypes.func,
+  fromDateChange: PropTypes.func,
+  onAgeChange: PropTypes.func,
+  onCategoryChange: PropTypes.func,
+  onSubmit: PropTypes.func.isRequired,
+  onTagChange: PropTypes.func,
+  searchString: PropTypes.string,
+  settings: PropTypes.array.isRequired,
+  startDate: PropTypes.string,
+  tags: PropTypes.array,
+  toDateChange: PropTypes.func,
+  translation: PropTypes.object.isRequired,
+  updateSearchString: PropTypes.func,
+};
+
+FilterContainer.defaultProps = {
+  ageRange: [],
+  categories: [],
+  tags: [],
+};
 
 export default FilterContainer;

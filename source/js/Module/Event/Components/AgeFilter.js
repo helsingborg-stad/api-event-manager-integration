@@ -1,4 +1,5 @@
 import { Dropdown } from 'hbg-react';
+import PropTypes from 'prop-types';
 
 const AgeFilter = ({ translation, ageRange, onAgeChange }) => (
   <div>
@@ -20,4 +21,15 @@ const AgeFilter = ({ translation, ageRange, onAgeChange }) => (
     </Dropdown>
   </div>
 );
+
+AgeFilter.propTypes = {
+  ageRange: PropTypes.array.isRequired,
+  onAgeChange: PropTypes.func.isRequired,
+  translation: PropTypes.object,
+};
+
+AgeFilter.defaultProps = {
+  translation: {},
+};
+
 export default AgeFilter;
