@@ -7,7 +7,7 @@ Import and display events from [Event Manager API](https://github.com/helsingbor
 ## Getting started
 1. Download & activate plugin
 2. Navigate to Events -> Options (from Wordpress Dashboard)
-3. Fill in 'API url' with your Wordpress API rest URL eg. 'https://your-wordpress-url.com/json/wp/v2/' to the field (API url)
+3. Fill in 'API url' with your Wordpress API rest URL eg. 'https://your-wordpress-url.com/json/wp/v2/'
 4. Add additional configuration (optional) and save options
 5. Navigate to Events & start import
 
