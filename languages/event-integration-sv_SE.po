@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2019-08-20 13:44+0200\n"
-"PO-Revision-Date: 2019-08-20 13:46+0200\n"
+"POT-Creation-Date: 2020-03-30 15:03+0200\n"
+"PO-Revision-Date: 2020-03-30 15:03+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -85,6 +85,7 @@ msgstr "Titel"
 #: AcfFields/php/event-form-module.php:1734
 #: AcfFields/php/event-form-module.php:1846
 #: AcfFields/php/event-form-module.php:1958
+#: AcfFields/php/event-form-module.php:2070
 msgid "Label"
 msgstr "Etikett"
 
@@ -106,7 +107,8 @@ msgstr "Etikett"
 #: AcfFields/php/event-form-module.php:1641
 #: AcfFields/php/event-form-module.php:1753
 #: AcfFields/php/event-form-module.php:1865
-#: AcfFields/php/event-form-module.php:1977 AcfFields/php/event-module.php:312
+#: AcfFields/php/event-form-module.php:1977
+#: AcfFields/php/event-form-module.php:2089 AcfFields/php/event-module.php:312
 #: source/php/Helper/SubmitEvent.php:25 views/submit-form.blade.php:12
 #: views/submit-form.blade.php:20
 msgid "Description"
@@ -131,6 +133,7 @@ msgstr "Beskrivning"
 #: AcfFields/php/event-form-module.php:1791
 #: AcfFields/php/event-form-module.php:1903
 #: AcfFields/php/event-form-module.php:2015
+#: AcfFields/php/event-form-module.php:2127
 msgid "Hide description"
 msgstr "Dölj beskrivning"
 
@@ -164,6 +167,7 @@ msgstr "Hemsida"
 #: AcfFields/php/event-form-module.php:1772
 #: AcfFields/php/event-form-module.php:1884
 #: AcfFields/php/event-form-module.php:1996
+#: AcfFields/php/event-form-module.php:2108
 msgid "Hide field"
 msgstr "Dölj fält"
 
@@ -183,6 +187,7 @@ msgstr "Dölj fält"
 #: AcfFields/php/event-form-module.php:1775
 #: AcfFields/php/event-form-module.php:1887
 #: AcfFields/php/event-form-module.php:1999
+#: AcfFields/php/event-form-module.php:2111
 msgid "Hide the whole field."
 msgstr "Dölj fältet."
 
@@ -202,6 +207,7 @@ msgstr "Dölj fältet."
 #: AcfFields/php/event-form-module.php:1794
 #: AcfFields/php/event-form-module.php:1906
 #: AcfFields/php/event-form-module.php:2018
+#: AcfFields/php/event-form-module.php:2130
 msgid "Hide field description."
 msgstr "Dölj fältbeskrivning."
 
@@ -218,6 +224,7 @@ msgstr "Dölj fältbeskrivning."
 #: AcfFields/php/event-form-module.php:1810
 #: AcfFields/php/event-form-module.php:1922
 #: AcfFields/php/event-form-module.php:2034
+#: AcfFields/php/event-form-module.php:2146
 msgid "Required"
 msgstr "Obligatoriskt"
 
@@ -234,6 +241,7 @@ msgstr "Obligatoriskt"
 #: AcfFields/php/event-form-module.php:1813
 #: AcfFields/php/event-form-module.php:1925
 #: AcfFields/php/event-form-module.php:2037
+#: AcfFields/php/event-form-module.php:2149
 msgid "Select if the field is required."
 msgstr "Välj om fältet är obligatoriskt."
 
@@ -284,7 +292,7 @@ msgstr "Arrangör"
 #: AcfFields/php/event-module.php:602 AcfFields/php/shortcodes.php:57
 #: source/php/Admin/AdminDisplayEvent.php:146
 #: source/php/Helper/SubmitEvent.php:126
-#: source/php/Module/Event/views/partials/list.blade.php:65
+#: source/php/Module/Event/views/partials/list.blade.php:66
 #: source/php/Module/Location/Location.php:12
 #: source/php/Shortcodes/SingleEvent.php:95
 #: source/php/Shortcodes/SingleEvent.php:234 views/single-event.blade.php:67
@@ -301,27 +309,34 @@ msgstr "Tillgänglighet"
 msgid "Event categories"
 msgstr "Evenemangskategorier"
 
-#: AcfFields/php/event-form-module.php:1719 AcfFields/php/event-module.php:310
+#: AcfFields/php/event-form-module.php:1719 AcfFields/php/event-module.php:529
+#: AcfFields/php/event-module.php:720 source/php/Helper/SubmitEvent.php:150
+#: source/php/Module/Event/Event.php:387 source/php/PostTypes/Events.php:337
+#: source/php/Shortcodes/SingleEvent.php:576 views/submit-form.blade.php:188
+msgid "Tags"
+msgstr "Taggar"
+
+#: AcfFields/php/event-form-module.php:1831 AcfFields/php/event-module.php:310
 msgid "Image"
 msgstr "Bild"
 
-#: AcfFields/php/event-form-module.php:1831
+#: AcfFields/php/event-form-module.php:1943
 #: source/php/Helper/SubmitEvent.php:169 views/submit-form.blade.php:229
 #: views/submit-form.blade.php:230
 msgid "Email"
 msgstr "E-postadress"
 
-#: AcfFields/php/event-form-module.php:1834
+#: AcfFields/php/event-form-module.php:1946
 msgid "Email address to the person who submitted the event."
 msgstr "E-postadress till personen som skickat in evenemanget."
 
-#: AcfFields/php/event-form-module.php:1943
+#: AcfFields/php/event-form-module.php:2055
 #: source/php/Helper/SubmitEvent.php:177 views/submit-form.blade.php:237
 #: views/submit-form.blade.php:238
 msgid "Phone number"
 msgstr "Telefonnummer"
 
-#: AcfFields/php/event-form-module.php:1946
+#: AcfFields/php/event-form-module.php:2058
 msgid "Phone numer to the person who submitted the event."
 msgstr "Telefonnummer till personen som skickat in evenemanget."
 
@@ -483,7 +498,7 @@ msgid "Show events from the selected groups."
 msgstr "Visa evenemang inom angivna grupper."
 
 #: AcfFields/php/event-module.php:480 AcfFields/php/event-module.php:693
-#: source/php/Helper/SubmitEvent.php:142 source/php/Module/Event/Event.php:381
+#: source/php/Helper/SubmitEvent.php:142 source/php/Module/Event/Event.php:386
 #: source/php/PostTypes/Events.php:300
 #: source/php/Shortcodes/SingleEvent.php:570 views/submit-form.blade.php:179
 msgid "Categories"
@@ -500,13 +515,6 @@ msgstr "Välj kategorier"
 #: AcfFields/php/event-module.php:502
 msgid "Show events from the selected categories."
 msgstr "Visa evenemang inom angivna kategorier."
-
-#: AcfFields/php/event-module.php:529 AcfFields/php/event-module.php:720
-#: source/php/Helper/SubmitEvent.php:150 source/php/Module/Event/Event.php:382
-#: source/php/PostTypes/Events.php:337
-#: source/php/Shortcodes/SingleEvent.php:576 views/submit-form.blade.php:188
-msgid "Tags"
-msgstr "Taggar"
 
 #: AcfFields/php/event-module.php:540
 msgid "Show events from all tags"
@@ -560,7 +568,7 @@ msgstr "Textsök"
 msgid "Date search"
 msgstr "Datumfiltrering"
 
-#: AcfFields/php/event-module.php:774 source/php/Module/Event/Event.php:383
+#: AcfFields/php/event-module.php:774 source/php/Module/Event/Event.php:388
 #: source/php/Shortcodes/SingleEvent.php:338
 #: source/php/Shortcodes/SingleEvent.php:340
 #: source/php/Shortcodes/SingleEvent.php:342 views/single-event.blade.php:102
@@ -942,26 +950,26 @@ msgstr "Återställ kartan"
 msgid "No events could be found."
 msgstr "Inga evenemang hittades."
 
-#: source/php/App.php:94
+#: source/php/App.php:95
 #: source/php/Module/SubmitForm/views/formfields.blade.php:395
 #: source/php/Module/SubmitForm/views/formfields.blade.php:411
 #: views/submit-form.blade.php:182 views/submit-form.blade.php:191
 msgid "Loading"
 msgstr "Hämtar"
 
-#: source/php/App.php:134
+#: source/php/App.php:135
 msgid "Something went wrong, please try again later."
 msgstr "Något gick fel, vänligen försök igen senare."
 
-#: source/php/App.php:135
+#: source/php/App.php:136
 msgid "The email addresses does not match."
 msgstr "E-postadresserna matchar inte."
 
-#: source/php/App.php:136
+#: source/php/App.php:137
 msgid "You must upload an image."
 msgstr "Du måste ladda upp en bild."
 
-#: source/php/App.php:151
+#: source/php/App.php:152
 msgid "to"
 msgstr "till"
 
@@ -1006,11 +1014,11 @@ msgstr "Inga %s hittades i papperskorgen"
 msgid "Parent %s:"
 msgstr "Förälder %s:"
 
-#: source/php/Entity/PostManager.php:248
+#: source/php/Entity/PostManager.php:249
 msgid "Could not create folder"
 msgstr "Kunde inte skapa mappen"
 
-#: source/php/Entity/PostManager.php:248
+#: source/php/Entity/PostManager.php:249
 msgid "please go ahead and create it manually and rerun the import."
 msgstr "vänligen skapa den manuellt och gör om importen."
 
@@ -1147,6 +1155,9 @@ msgid ""
 "press Ctrl (Windows) / command (macOS) at the same time as you click on the "
 "tags."
 msgstr ""
+"Välj passande taggar för ditt evenemang eller aktivitet. För att välja flera "
+"taggar håll in Ctrl (Windows) / command (macOS) samtidigt som du klickar på "
+"respektive tagg."
 
 #: source/php/Helper/SubmitEvent.php:158
 #: source/php/Module/SubmitForm/views/formfields.blade.php:446
@@ -1183,30 +1194,30 @@ msgstr "Evenemang"
 msgid "Outputs a list if upcoming events"
 msgstr ""
 
-#: source/php/Module/Event/Event.php:373
+#: source/php/Module/Event/Event.php:378
 #: source/php/Module/Event/views/event.blade.php:18
 msgid "More events"
 msgstr "Fler evenemang"
 
-#: source/php/Module/Event/Event.php:374
+#: source/php/Module/Event/Event.php:379
 #: source/php/Module/Event/views/partials/list.blade.php:4
 #: source/php/Widget/DisplayEvents.php:56
 msgid "No events found"
 msgstr "Inga evenemang hittades"
 
-#: source/php/Module/Event/Event.php:375
+#: source/php/Module/Event/Event.php:380
 msgid "Next"
 msgstr "Nästa"
 
-#: source/php/Module/Event/Event.php:376
+#: source/php/Module/Event/Event.php:381
 msgid "Previous"
 msgstr "Föregående"
 
-#: source/php/Module/Event/Event.php:377
+#: source/php/Module/Event/Event.php:382
 msgid "Search"
 msgstr "Sök"
 
-#: source/php/Module/Event/Event.php:378
+#: source/php/Module/Event/Event.php:383
 #: source/php/Module/SubmitForm/views/formfields.blade.php:322
 #: source/php/Module/SubmitForm/views/formfields.blade.php:325
 #: source/php/PostTypes/Events.php:141
@@ -1214,21 +1225,21 @@ msgstr "Sök"
 msgid "From"
 msgstr "Från"
 
-#: source/php/Module/Event/Event.php:379
+#: source/php/Module/Event/Event.php:384
 #: source/php/Module/SubmitForm/views/formfields.blade.php:329
 #: source/php/Module/SubmitForm/views/formfields.blade.php:332
 msgid "To"
 msgstr "Till"
 
-#: source/php/Module/Event/Event.php:380
+#: source/php/Module/Event/Event.php:385
 msgid "date"
 msgstr "datum"
 
-#: source/php/Module/Event/Event.php:385
+#: source/php/Module/Event/Event.php:390
 msgid "Filter on events that is targeted for given the age"
 msgstr "Filtrera på evenemang som är riktade till en ålder"
 
-#: source/php/Module/Event/Event.php:388 source/php/PostTypes/Events.php:139
+#: source/php/Module/Event/Event.php:393 source/php/PostTypes/Events.php:139
 #: source/php/PostTypes/Events.php:141 source/php/PostTypes/Events.php:143
 #: source/php/Shortcodes/SingleEvent.php:338
 #: source/php/Shortcodes/SingleEvent.php:340
@@ -1237,15 +1248,15 @@ msgstr "Filtrera på evenemang som är riktade till en ålder"
 msgid "years"
 msgstr "år"
 
-#: source/php/Module/Event/Event.php:389
+#: source/php/Module/Event/Event.php:394
 msgid "Select age"
 msgstr "Välj ålder"
 
-#: source/php/Module/Event/views/partials/list.blade.php:15
+#: source/php/Module/Event/views/partials/list.blade.php:16
 msgid "Today"
 msgstr "Idag"
 
-#: source/php/Module/Event/views/partials/list.blade.php:58
+#: source/php/Module/Event/views/partials/list.blade.php:59
 #: source/php/Module/SubmitForm/views/formfields.blade.php:69
 #: source/php/Module/SubmitForm/views/formfields.blade.php:88
 #: source/php/PostTypes/Events.php:78 views/submit-form.blade.php:44
@@ -2024,6 +2035,9 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "http://www.helsingborg.se"
 msgstr ""
+
+#~ msgid "Event tags"
+#~ msgstr "Taggar"
 
 #~ msgid "Show update button on edit event page"
 #~ msgstr "Visa knapp för att uppdatera importerade evenemang"
