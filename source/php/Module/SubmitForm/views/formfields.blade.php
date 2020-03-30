@@ -397,7 +397,7 @@
         </div>
     @endif
 
-    {{-- Categories --}}
+    {{-- Tags --}}
     @if(!$event_tags->hidden)
         <div class="form-group">
             <label for="{{ $event_tags->name }}">{{ $event_tags->label }}</label>
