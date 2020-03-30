@@ -30,6 +30,9 @@ EventManagerIntegration.Event.Form = (function($) {
                 if (document.getElementById('event_categories') !== null) {
                     this.loadTaxonomy($(eventForm), apiUrl, 'event_categories');
                 }
+                if (document.getElementById('event_tags') !== null) {
+                    this.loadTaxonomy($(eventForm), apiUrl, 'event_tags');
+                }
             }.bind(this)
         );
     }
@@ -87,20 +90,34 @@ EventManagerIntegration.Event.Form = (function($) {
             success: function(response) {
                 // Clear select
                 $(select).html('');
-                var taxonomies = Form.prototype.hierarchicalTax(response);
-                // Add select option and it's children taxonomies
-                $(taxonomies.children).each(function(index, tax) {
+
+                // Map up and populate hierarchical taxonomies
+                if (taxonomy === 'user_groups' || taxonomy === 'event_categories') {
+                  var taxonomies = Form.prototype.hierarchicalTax(response);
+
+                  // Add select option and it's children taxonomies
+                  $(taxonomies.children).each(function (index, tax) {
                     // Parent option
                     Form.prototype.addOption(tax, select, '');
-                    $(tax.children).each(function(index, tax) {
-                        // Children option
-                        Form.prototype.addOption(tax, select, ' – ');
-                        $(tax.children).each(function(index, tax) {
-                            // Grand children options
-                            Form.prototype.addOption(tax, select, ' – – ');
-                        });
+                    $(tax.children).each(function (index, tax) {
+                      // Children option
+                      Form.prototype.addOption(tax, select, ' – ');
+                      $(tax.children).each(function (index, tax) {
+                        // Grand children options
+                        Form.prototype.addOption(tax, select, ' – – ');
+                      });
                     });
-                });
+                  });
+                } else {
+                  // Populate non hierarchical taxonomy lists
+                  var taxonomies = response;
+                  $(taxonomies).each(function (index, term) {
+                    var opt = document.createElement('option');
+                    opt.value = term.id;
+                    opt.innerHTML += term.name;
+                    select.appendChild(opt);
+                  });
+                }
             },
         });
     };
@@ -211,7 +228,8 @@ EventManagerIntegration.Event.Form = (function($) {
         var arrData = form.serializeArray(),
             objData = {},
             groups = [],
-            categories = [];
+            categories = [],
+            tags = [];
 
         $.each(arrData, function(index, elem) {
             switch (elem.name) {
@@ -222,6 +240,9 @@ EventManagerIntegration.Event.Form = (function($) {
                     break;
                 case 'event_categories':
                     categories.push(parseInt(elem.value));
+                    break;
+                case 'event_tags':
+                    tags.push(parseInt(elem.value));
                     break;
                 default:
                     objData[elem.name] = elem.value;
@@ -314,6 +335,7 @@ EventManagerIntegration.Event.Form = (function($) {
 
         objData['user_groups'] = groups;
         objData['event_categories'] = categories;
+        objData['event_tags'] = tags;
 
         return objData;
     };
