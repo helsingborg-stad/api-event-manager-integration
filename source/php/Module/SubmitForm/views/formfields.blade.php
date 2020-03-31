@@ -431,16 +431,36 @@
             </p>
         </div>
         <div class="form-group gutter creamy image-approve" style="display:none;">
-            <label><?php _e('Before you can upload an image, you need to confirm the following terms', 'event-integration'); ?>
-                :</label>
-            <label class="checkbox">
-                <input type="checkbox" name="approve"
-                       id="first-approve"> <?php _e('I have the right to use this image to promote this event.', 'event-integration'); ?>
-            </label>
-            <label class="checkbox">
-                <input type="checkbox" name="approve"
-                       id="second-approve"> <?php _e('There are no identifiable persons on the image/images.', 'event-integration'); ?>
-            </label>
+            <label><?php _e('Before you can upload an image, you need to confirm the following terms', 'event-integration'); ?></label>
+
+            <p>
+              <label class="checkbox">
+                  <input type="checkbox" name="approve"
+                        id="first-approve"> <?php _e('I have the right to use this image to promote this event.', 'event-integration'); ?>
+              </label>
+            </p>
+            <p>
+              <?php _e('Are there identifiable persons on the image/images?', 'event-integration'); ?>
+            </p>
+
+            <p>
+              <label class="radio">
+                  <input type="radio" name="approve" value="1"> <?php _e('Yes'); ?>
+              </label>
+              <label class="radio">
+                  <input type="radio" name="approve" value="0"> <?php _e('No'); ?>
+              </label>
+            </p>
+
+            <p>
+              <div id="persons-approve" class="hidden">
+                  <label class="checkbox">
+                      <input type="checkbox" name="approve"
+                            id="second-approve"> <?php _e('They have accepted that the image is used to promote this event and have been informed that after the image has been added to the database, it may appear in different channels to promote the event.', 'event-integration'); ?>
+                  </label>
+              </div>
+            </p>
+
         </div>
         <div class="form-group image-upload" style="display:none;">
             <label for="{{ $image_input->name }}"><?php _e('Upload an image', 'event-integration'); ?> {!! $image_input->required ? '<span class="text-danger">*</span></label>' : '' !!}</label>

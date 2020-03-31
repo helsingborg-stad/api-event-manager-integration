@@ -585,12 +585,21 @@ EventManagerIntegration.Event.Form = (function($) {
 
         // Show uploader if terms is approved
         $('input[name=approve]', eventForm).change(function() {
-            var firstCheck = $('input:checkbox[id=first-approve]:checked', eventForm).length > 0,
-                secondCheck = $('input:checkbox[id=second-approve]:checked', eventForm).length > 0;
-            if (firstCheck && secondCheck) {
+            var firstCheck = $('input:checkbox[id=first-approve]:checked', eventForm).length > 0;
+            var radioCheck = $('input:radio[name=approve]:checked').val();
+            var secondCheck = $('input:checkbox[id=second-approve]:checked', eventForm).length > 0;
+          if ((firstCheck && radioCheck == 0) || (firstCheck && secondCheck)) {
                 $('.image-approve', eventForm).hide();
                 $('.image-upload', eventForm).fadeIn();
             }
+        });
+
+        $('input:radio[name=approve]').change(function () {
+          if (this.value == 1) {
+            $('#persons-approve').removeClass('hidden');
+          } else {
+            $('#persons-approve').addClass('hidden');
+          }
         });
 
         // Show/hide occasion and reccuring occasion rules. And add required fields.
