@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2020-03-30 15:03+0200\n"
+"POT-Creation-Date: 2020-03-31 10:20+0200\n"
 "PO-Revision-Date: 2016-12-13 15:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1111,7 +1111,7 @@ msgid ""
 msgstr ""
 
 #: source/php/Helper/SubmitEvent.php:158
-#: source/php/Module/SubmitForm/views/formfields.blade.php:446
+#: source/php/Module/SubmitForm/views/formfields.blade.php:466
 #: views/submit-form.blade.php:197 views/submit-form.blade.php:207
 #: views/submit-form.blade.php:220
 msgid "Upload an image"
@@ -1391,38 +1391,44 @@ msgstr ""
 msgid "Before you can upload an image, you need to confirm the following terms"
 msgstr ""
 
-#: source/php/Module/SubmitForm/views/formfields.blade.php:438
+#: source/php/Module/SubmitForm/views/formfields.blade.php:439
 #: views/submit-form.blade.php:213
 msgid "I have the right to use this image to promote this event."
 msgstr ""
 
-#: source/php/Module/SubmitForm/views/formfields.blade.php:442
-#: views/submit-form.blade.php:216
-msgid "There are no identifiable persons on the image/images."
+#: source/php/Module/SubmitForm/views/formfields.blade.php:443
+msgid "Are there identifiable persons on the image/images?"
 msgstr ""
 
-#: source/php/Module/SubmitForm/views/formfields.blade.php:457
+#: source/php/Module/SubmitForm/views/formfields.blade.php:459
+msgid ""
+"They have accepted that the image is used to promote this event and have "
+"been informed that after the image has been added to the database, it may "
+"appear in different channels to promote the event."
+msgstr ""
+
+#: source/php/Module/SubmitForm/views/formfields.blade.php:477
 #: views/submit-form.blade.php:225
 msgid "Contact details"
 msgstr ""
 
-#: source/php/Module/SubmitForm/views/formfields.blade.php:458
+#: source/php/Module/SubmitForm/views/formfields.blade.php:478
 #: views/submit-form.blade.php:226
 msgid "Enter your contact details below for eventual questions."
 msgstr ""
 
-#: source/php/Module/SubmitForm/views/formfields.blade.php:477
-#: source/php/Module/SubmitForm/views/formfields.blade.php:481
+#: source/php/Module/SubmitForm/views/formfields.blade.php:497
+#: source/php/Module/SubmitForm/views/formfields.blade.php:501
 #: views/submit-form.blade.php:233 views/submit-form.blade.php:234
 msgid "Repeat email"
 msgstr ""
 
-#: source/php/Module/SubmitForm/views/formfields.blade.php:503
+#: source/php/Module/SubmitForm/views/formfields.blade.php:523
 #: views/submit-form.blade.php:242
 msgid "Done? Click here to submit your event for review."
 msgstr ""
 
-#: source/php/Module/SubmitForm/views/formfields.blade.php:513
+#: source/php/Module/SubmitForm/views/formfields.blade.php:533
 #: views/submit-form.blade.php:252
 msgid "Send"
 msgstr ""
@@ -1953,6 +1959,10 @@ msgid ""
 "Select appropriate categories for your event or activity. To select multiple "
 "tags, press Ctrl (Windows) / command (macOS) at the same time as you click "
 "on the categories."
+msgstr ""
+
+#: views/submit-form.blade.php:216
+msgid "There are no identifiable persons on the image/images."
 msgstr ""
 
 #. Plugin Name of the plugin/theme
