@@ -283,24 +283,33 @@ abstract class PostManager
             );
 
             // Move to real extension
-            rename($uploadDir . '/' . $filenameTemp, $uploadDir . '/' . $filename . '.' . $filetype);
+            $filePath = $uploadDir . '/' . $filename . '.' . $filetype;
+            rename($uploadDir . '/' . $filenameTemp, $filePath);
 
             // Insert the file to media library
             $attachmentId = wp_insert_attachment(
                 array(
-                    'guid' => $uploadDir . '/' . $filename . '.' . $filetype,
+                    'guid' => $filePath,
                     'post_mime_type' => $mimeFileType,
                     'post_title' => $filename,
                     'post_content' => '',
                     'post_status' => 'inherit',
                     'post_parent' => $this->ID
                 ), 
-                $uploadDir . '/' . $filename . "." . $filetype, 
+                $filePath, 
                 $this->ID
             );
 
             if($attachmentId) {
                 update_post_meta($attachmentId, 'event-manager-media', 1); //Filter in [/Admin/MediaLibrary.php]
+                $attachmentMetadata = wp_generate_attachment_metadata(
+                    $attachmentId,
+                    $filePath
+                );
+                wp_update_attachment_metadata(
+                    $attachmentId,
+                    $attachmentMetadata
+                );
             }
 
             //Bind the image to the event
