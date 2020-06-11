@@ -1,6 +1,6 @@
 'use strict';
-
-EventManagerIntegration = EventManagerIntegration || {};
+if(!EventManagerIntegration){ var EventManagerIntegration = {}; }
+// EventManagerIntegration = EventManagerIntegration || {};
 EventManagerIntegration.Event = EventManagerIntegration.Event || {};
 
 EventManagerIntegration.Event.Map = (function() {
