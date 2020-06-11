@@ -1,8 +1,7 @@
 "use strict";
 
 //Init event widget
-if(!EventManagerIntegration){ var EventManagerIntegration = {}; }
-
+EventManagerIntegration = EventManagerIntegration || {};
 EventManagerIntegration.Widget = EventManagerIntegration.Widget || {};
 
 //Component

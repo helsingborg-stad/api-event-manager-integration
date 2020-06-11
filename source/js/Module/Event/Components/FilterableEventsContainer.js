@@ -39,6 +39,7 @@ class FilterableEventsContainer extends React.Component {
 
     // Collect query string params
     const urlParams = new URLSearchParams(window.location.search);
+
     // Remove empty values and map param keys with values
     const parameterValues = availableQueryStringParams
       .filter(({ param }) => urlParams.get(param))
@@ -46,7 +47,7 @@ class FilterableEventsContainer extends React.Component {
         let value;
         switch (type) {
           case 'int':
-            value = parseInt(urlParams.get(param));           
+            value = parseInt(urlParams.get(param));
             break;
           case 'array':
             // Get all parameter values
@@ -63,7 +64,6 @@ class FilterableEventsContainer extends React.Component {
           value = urlParams.get(param);
         }
 
-
         return { param, type, value };
       });
 
@@ -77,19 +77,6 @@ class FilterableEventsContainer extends React.Component {
     this.setState({ ...stateObj }, () => this.getEvents());
   };
 
-   loadQueryString = () => { 
-    let parameters = {}; 
-    let searchString = location.search.substr(1); 
-    let pairs = searchString.split("&"); 
-    let parts;
-    for(let i = 0; i < pairs.length; i++){
-        parts = pairs[i].split("=");
-        let name = parts[0];
-        let data = decodeURI(parts[1]);
-        parameters[name] = data;
-    }    
-    return parameters;
-  }
   /**
    * Push state values to query string
    */
@@ -107,7 +94,7 @@ class FilterableEventsContainer extends React.Component {
     const categoryIds = this.getTaxonomyIds(categories);
     const tagIds = this.getTaxonomyIds(tags);
     const ageRangeIds = this.getTaxonomyIds(ageRange);
-    const params = this.loadQueryString();
+
     // Set query parameters
     setQuery(
       {
@@ -121,10 +108,6 @@ class FilterableEventsContainer extends React.Component {
       },
       { pushState: true }
     );
-      if(params.translate){
-        location.hash = "#translate"; 
-      }
-
   };
 
   /**
@@ -217,7 +200,7 @@ class FilterableEventsContainer extends React.Component {
       tags,
     };
 
-    // Fetch events 
+    // Fetch events
     getEvents(url, params)
       .then(response => {
         this.setState({

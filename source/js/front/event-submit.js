@@ -1,8 +1,7 @@
 'use strict';
 
 // Init submit event form
-if(!EventManagerIntegration){ var EventManagerIntegration = {}; }
-
+EventManagerIntegration = EventManagerIntegration || {};
 EventManagerIntegration.Event = EventManagerIntegration.Event || {};
 
 EventManagerIntegration.Event.Form = (function($) {
