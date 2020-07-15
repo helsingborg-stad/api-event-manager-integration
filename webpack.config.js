@@ -27,7 +27,7 @@ module.exports = {
                                     './source/js/front/event-submit.js',
                                     './source/js/front/event-widget.js',
                                     './source/js/Module/Event/Index.js'],
-    'js/event-integration-admin': ['./source/js/admin/accept-deny.js','./source/js/admin/draw-map.js','./source/js/admin/importer.js','./source/js/admin/oauth.js'],
+    'js/event-integration-admin': './source/js/admin/index.js',
     'css/event-manager-integration': './source/sass/event-manager-integration.scss',
     'css/event-manager-integration-admin': './source/sass/event-manager-integration-admin.scss'
   },
