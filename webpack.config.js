@@ -23,10 +23,7 @@ module.exports = {
    * Add your entry files here
    */
   entry: {
-    'js/event-integration-front': ['./source/js/front/event-pagination.js', './source/js/front/event-map.js',
-                                    './source/js/front/event-submit.js',
-                                    './source/js/front/event-widget.js',
-                                    './source/js/Module/Event/Index.js'],
+    'js/event-integration-front': ['./source/js/front/index.js'],
     'js/event-integration-admin': './source/js/admin/index.js',
     'css/event-manager-integration': './source/sass/event-manager-integration.scss',
     'css/event-manager-integration-admin': './source/sass/event-manager-integration-admin.scss'
