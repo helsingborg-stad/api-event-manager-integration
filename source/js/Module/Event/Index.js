@@ -4,7 +4,11 @@ import 'isomorphic-fetch';
 // Components
 import FilterableEventsContainer from './Components/FilterableEventsContainer';
 
-export default (() => {
+document.addEventListener('DOMContentLoaded', e => {
+  if (!modEvent) {
+    return;
+  }
+
   const domElements = document.getElementsByClassName('modularity-event-index');
   const translation = modEvent;
   
@@ -27,4 +31,4 @@ export default (() => {
       );
     }
   }
-})();
+});

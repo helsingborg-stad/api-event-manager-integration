@@ -1,6 +1,7 @@
 {
   "css/event-manager-integration.css": "css/event-manager-integration.be57c3ce.css",
   "css/event-manager-integration-admin.css": "css/event-manager-integration-admin.92d58e2e.css",
-  "js/event-integration-admin.js": "js/event-integration-admin.d2bf40c912ac2ceb2991.js",
-  "js/event-integration-front.js": "js/event-integration-front.64beeb4d86d355033640.js"
+  "js/event-integration-admin.js": "js/event-integration-admin.d6f80ca5614f391d4f5d.js",
+  "js/event-integration-front.js": "js/event-integration-front.cfe7b350c0ea53ed8d5a.js",
+  "js/event-integration-module-event.js": "js/event-integration-module-event.0385015296b8254da7bf.js"
 }
