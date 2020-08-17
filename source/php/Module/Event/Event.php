@@ -16,7 +16,7 @@ class Event extends \Modularity\Module
         $this->namePlural = __('Events', 'event-integration');
         $this->description = __('Outputs a list if upcoming events', 'event-integration');
         $this->lang = function_exists('pll_current_language') ? pll_current_language('slug') : null;
-
+        
         add_action('wp_ajax_nopriv_ajax_pagination', array($this, 'ajaxPagination'));
         add_action('wp_ajax_ajax_pagination', array($this, 'ajaxPagination'));
 
@@ -24,6 +24,7 @@ class Event extends \Modularity\Module
             'acf/fields/taxonomy/wp_list_categories/name=mod_event_categories_list',
             array($this, 'filterEventCategories'), 10, 2
         );
+        
     }
 
     public function template()
@@ -95,7 +96,8 @@ class Event extends \Modularity\Module
             ' ',
             apply_filters('Modularity/Module/Classes', array('box', 'box-panel'), 'mod-event', $this->args)
         ) : array();
-
+        $data['tableData'] = $this->setTableData($data['events']);
+        var_dump($data['tableData']);
         return $data;
     }
 
@@ -174,8 +176,40 @@ class Event extends \Modularity\Module
         );
 
         $events = \EventManagerIntegration\Helper\QueryEvents::getEventsByInterval($params, $page);
-
+        
         return $events;
+    }
+
+    private function setTableData($events) {
+
+        
+        $data = [
+            'list' => [],
+            'headings' => [
+                translate('Date', 'event-integration'),
+                translate('Events', 'event-integration')
+            ],
+            'showFooter' => false,
+            'filterable' => false,
+            'sortable' => false
+        ];
+
+        foreach($events as $event) {
+            $occasionStart = \EventManagerIntegration\App::formatShortDate($event->start_date);
+            $occasionEnd = \EventManagerIntegration\App::formatShortDate($event->end_date);
+            $date = $occasionStart['date'] . ' ' .$occasionStart['month'];
+
+            if($occasionStart['today']) {
+                $date = translate('Today', 'event-integration');
+            } elseif($occasionStart['month'] !== $occasionEnd['month']) {
+                $date = $occasionStart['date'] . ' '. $occasionStart['month']. ' - ' . $occasionEnd['date'] . ' ' . $occasionEnd['month'];
+            }
+            
+            $data['list'][] = ['href' => get_permalink($event->ID), 'columns' => [$date, $event->post_title]];
+            
+        }
+
+        return $data;
     }
 
     /**

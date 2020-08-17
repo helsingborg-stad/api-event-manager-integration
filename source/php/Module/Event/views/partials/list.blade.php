@@ -1,8 +1,12 @@
+@table($tableData)
+@endtable
+
 <ul class="event-module-list">
    <?php //var_dump($events); ?>
     @if (!$events)
         <li><span class="event-info"><?php _e('No events found', 'event-integration'); ?></span></li>
-    @else
+	@else
+		
         @foreach ($events as $event)
 
 			   {!! (isset($event->end_date) && (strtotime($event->end_date) < $date_now)) ? '<li class="passed-event ">' : '<li>' !!}
@@ -51,10 +55,12 @@
 	                @elseif ($mod_event_def_image)
 	                	{!! wp_get_attachment_image($mod_event_def_image->ID, array('700', '500'), "", array( "class" => "image-responsive" )) !!}
 	                @endif
-	            @endif
+				@endif
+				
 	            @if (!empty($event->post_title))
 	               	<a href="{{ esc_url(add_query_arg('date', preg_replace('/\D/', '', $event->start_date), get_permalink($event->ID))) }}" class="title"><span class="link-item title">{{ $event->post_title }}</span></a>
-	            @endif
+				@endif
+				
 	            @if (! empty($event->start_date) && ! empty($event->end_date) && in_array('occasion', $mod_event_fields) && $mod_event_occ_pos == 'below')
 	                <p class="text-sm"><i class="pricon pricon-calendar"></i> <strong><?php _e('Date', 'event-integration'); ?>: </strong>{{ \EventManagerIntegration\App::formatEventDate($event->start_date, $event->end_date) }}</p>
 	            @endif
