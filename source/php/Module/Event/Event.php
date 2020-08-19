@@ -55,8 +55,10 @@ class Event extends \Modularity\Module
         }
 
         $id = $this->ID ?? $_POST['id'] ?? null;
-        $page = (!empty($_POST['page'])) ? $_POST['page'] : 1;
         $data = get_fields($id);
+
+        parse_str($_SERVER['QUERY_STRING'], $queryArgList);
+        $page = $queryArgList['paged'];
 
 
 
@@ -96,8 +98,12 @@ class Event extends \Modularity\Module
             ' ',
             apply_filters('Modularity/Module/Classes', array('box', 'box-panel'), 'mod-event', $this->args)
         ) : array();
-        $data['tableData'] = $this->setTableData($data['events']);
-        var_dump($data['tableData']);
+    
+        $data['events'] = $this->setOccassion($data['events']);
+        $data['events'] = $this->setLocation($data['events']);
+        $data['paginationList'] = $this->getPagination($data['pagesCount']);
+        $data['no_events'] = translate('No events found', 'event-integration');
+
         return $data;
     }
 
@@ -180,36 +186,61 @@ class Event extends \Modularity\Module
         return $events;
     }
 
-    private function setTableData($events) {
-
+    private function setOccassion($events) {
         
-        $data = [
-            'list' => [],
-            'headings' => [
-                translate('Date', 'event-integration'),
-                translate('Events', 'event-integration')
-            ],
-            'showFooter' => false,
-            'filterable' => false,
-            'sortable' => false
-        ];
-
         foreach($events as $event) {
+            
             $occasionStart = \EventManagerIntegration\App::formatShortDate($event->start_date);
             $occasionEnd = \EventManagerIntegration\App::formatShortDate($event->end_date);
-            $date = $occasionStart['date'] . ' ' .$occasionStart['month'];
-
-            if($occasionStart['today']) {
-                $date = translate('Today', 'event-integration');
-            } elseif($occasionStart['month'] !== $occasionEnd['month']) {
-                $date = $occasionStart['date'] . ' '. $occasionStart['month']. ' - ' . $occasionEnd['date'] . ' ' . $occasionEnd['month'];
-            }
+            $date = $occasionStart['date'] . ' ' . $occasionStart['month'] . ' - ' .  $occasionEnd['date'] . ' ' .$occasionEnd['month'];
             
-            $data['list'][] = ['href' => get_permalink($event->ID), 'columns' => [$date, $event->post_title]];
+            
+            $event->occasionStart = $occasionStart;
+            $event->occasionEnd = $occasionEnd;
             
         }
 
-        return $data;
+        return $events;
+    }
+
+    private function setLocation($events) {
+
+        foreach($events as $event) {
+            $event->location_name = \EventManagerIntegration\Helper\SingleEventData::getEventLocation($event->ID, $event->start_date)['title'];
+        }
+
+        return $events;
+    }
+
+    protected function getPagination($numberOfPages)
+    {
+        global $wp_query;
+        $pagination = [];
+        $archiveUrl = get_post_type_archive_link('mod-event');
+        $href = '';
+        $currentPage = (get_query_var('paged')) ? get_query_var('paged') : 1;
+
+        if ($numberOfPages > 1) {
+            for ($i = 1; $i < $numberOfPages; $i++) {
+                $href = $archiveUrl . '?' . $this->setQueryString($i);
+    
+                $pagination[] = array(
+                    'href' => $href,
+                    'label' => (string) $i
+                );
+            }
+        }
+        
+        return \apply_filters('Municipio/Controller/Archive/prepareSearchResultObject', $pagination);
+    }
+
+    protected function setQueryString($number)
+    {
+        parse_str($_SERVER['QUERY_STRING'], $queryArgList);
+        $queryArgList['paged'] = $number;
+        $queryString = http_build_query($queryArgList) . "\n";
+
+        return \apply_filters('Municipio/Controller/Archive/setQueryString', $queryString);
     }
 
     /**
