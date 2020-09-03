@@ -1,60 +1,62 @@
-'use strict';
+export default (() => {
+    if(!EventManagerIntegration){ var EventManagerIntegration = {}; }
+    // EventManagerIntegration = EventManagerIntegration || {};
+    EventManagerIntegration.Event = EventManagerIntegration.Event || {};
 
-EventManagerIntegration = EventManagerIntegration || {};
-EventManagerIntegration.Event = EventManagerIntegration.Event || {};
+    EventManagerIntegration.Event.Map = (function() {
 
-EventManagerIntegration.Event.Map = (function() {
-
-    function Map() {
-        if (typeof google === 'object' && typeof google.maps === 'object') {
-            this.init();
-        }
-    }
-
-    Map.prototype.init = function() {
-        var mapElement,
-            position,
-            mapOptions,
-            map,
-            marker,
-            infowindow,
-            locationTitle;
-
-        mapElement = document.getElementById('event-map');
-
-        if (!mapElement) {
-            return;
+        function Map() {
+            if (typeof google === 'object' && typeof google.maps === 'object') {
+                this.init();
+            }
         }
 
-        position = {
-            lat: parseFloat(mapElement.getAttribute('data-lat')),
-            lng: parseFloat(mapElement.getAttribute('data-lng'))
-        };
+        Map.prototype.init = function() {
+            var mapElement,
+                position,
+                mapOptions,
+                map,
+                marker,
+                infowindow,
+                locationTitle;
 
-        mapOptions = {
-            zoom: 15,
-            center: position,
-            disableDefaultUI: false
-        };
+            mapElement = document.getElementById('event-map');
 
-        map = new google.maps.Map(mapElement, mapOptions);
-        locationTitle = mapElement.getAttribute('data-title') ? mapElement.getAttribute('data-title') : '';
+            if (!mapElement) {
+                return;
+            }
 
-        infowindow = new google.maps.InfoWindow({
-            content: '<b>' + locationTitle + '</b>'
-        });
+            position = {
+                lat: parseFloat(mapElement.getAttribute('data-lat')),
+                lng: parseFloat(mapElement.getAttribute('data-lng'))
+            };
 
-        marker = new google.maps.Marker({
-            position: position,
-            map: map
-        });
+            mapOptions = {
+                zoom: 15,
+                center: position,
+                disableDefaultUI: false
+            };
 
-        if (locationTitle) {
-            marker.addListener('click', function() {
-                infowindow.open(map, marker);
+            map = new google.maps.Map(mapElement, mapOptions);
+            locationTitle = mapElement.getAttribute('data-title') ? mapElement.getAttribute('data-title') : '';
+
+            infowindow = new google.maps.InfoWindow({
+                content: '<b>' + locationTitle + '</b>'
             });
-        }
-    };
 
-    return new Map();
+            marker = new google.maps.Marker({
+                position: position,
+                map: map
+            });
+
+            if (locationTitle) {
+                marker.addListener('click', function() {
+                    infowindow.open(map, marker);
+                });
+            }
+        };
+
+        return new Map();
+    })();
+
 })();

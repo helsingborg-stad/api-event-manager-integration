@@ -32,6 +32,7 @@ define('EVENTMANAGERINTEGRATION_ID', '0.6.6');
 define('EVENTMANAGERINTEGRATION_PATH', plugin_dir_path(__FILE__));
 define('EVENTMANAGERINTEGRATION_URL', plugins_url('', __FILE__));
 define('EVENTMANAGERINTEGRATION_VIEW_PATH', EVENTMANAGERINTEGRATION_PATH . 'views/');
+define('EVENTMANAGERINTEGRATION_MODULE_VIEW_PATH', EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/Event/views');
 define('EVENTMANAGERINTEGRATION_CACHE_DIR', trailingslashit(wp_upload_dir()['basedir']) . 'cache/blade-cache/');
 
 load_plugin_textdomain('event-integration', false, plugin_basename(dirname(__FILE__)) . '/languages');
@@ -57,6 +58,13 @@ $acfExportManager->autoExport(array(
     'event-form-module'	=> 'group_5c599a27e446a',
 ));
 $acfExportManager->import();
+
+add_filter( '/Modularity/externalViewPath', function($arr) 
+    {
+        $arr['mod-event'] = EVENTMANAGERINTEGRATION_MODULE_VIEW_PATH;
+        return $arr;
+    }, 10, 3
+);
 
 // Activation & deactivation hooks
 register_activation_hook(plugin_basename(__FILE__), '\EventManagerIntegration\App::addCronJob');
