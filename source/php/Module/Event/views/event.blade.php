@@ -1,7 +1,4 @@
 <div class="{{ $classes }} {{ isset($font_size) ? $font_size : '' }}" data-module-id="{{ $ID }}">
-    @if (!$hideTitle && !empty($post_title))
-        <h4 class="box-title">{!! apply_filters('the_title', $post_title) !!}</h4>
-    @endif
     <ul>
         <div class="event-module-content">
             @include('partials.list')
@@ -10,7 +7,13 @@
 
     <div class="event-module-footer gutter gutter-sm gutter-horizontal">
         @if ($mod_event_pagination && $pagesCount > 1)
-            <ul class="module-pagination pagination" data-pages="{{ $pagesCount }}" data-show-arrows="{{ $mod_event_nav_arrows }}"></ul>
+            @pagination([
+                'list' => $paginationList, 
+                'classList' => ['u-margin__top--4'], 
+                'current' => isset($_GET['paged']) ? $_GET['paged'] : 1,
+                'linkPrefix' => '?paged='
+            ])
+            @endpagination
         @endif
         @if ($mod_event_archive)
             <ul class="event-module-archive">

@@ -16,7 +16,7 @@ class Event extends \Modularity\Module
         $this->namePlural = __('Events', 'event-integration');
         $this->description = __('Outputs a list if upcoming events', 'event-integration');
         $this->lang = function_exists('pll_current_language') ? pll_current_language('slug') : null;
-
+        
         add_action('wp_ajax_nopriv_ajax_pagination', array($this, 'ajaxPagination'));
         add_action('wp_ajax_ajax_pagination', array($this, 'ajaxPagination'));
 
@@ -26,6 +26,7 @@ class Event extends \Modularity\Module
             10,
             2
         );
+        
     }
 
     public function template()
@@ -55,8 +56,10 @@ class Event extends \Modularity\Module
         }
 
         $id = $this->ID ?? $_POST['id'] ?? null;
-        $page = (!empty($_POST['page'])) ? $_POST['page'] : 1;
         $data = get_fields($id);
+
+        parse_str($_SERVER['QUERY_STRING'], $queryArgList);
+        $page = $queryArgList['paged'];
 
         // Cards module data
         $data['settings'] = $data;
@@ -94,6 +97,11 @@ class Event extends \Modularity\Module
             ' ',
             apply_filters('Modularity/Module/Classes', array('box', 'box-panel'), 'mod-event', $this->args)
         ) : array();
+    
+        $data['events'] = $this->setOccassion($data['events']);
+        $data['events'] = $this->setLocation($data['events']);
+        $data['paginationList'] = $this->getPagination($data['pagesCount']);
+        $data['no_events'] = translate('No events found', 'event-integration');
 
         return $data;
     }
@@ -174,8 +182,65 @@ class Event extends \Modularity\Module
         );
 
         $events = \EventManagerIntegration\Helper\QueryEvents::getEventsByInterval($params, $page);
+        
+        return $events;
+    }
+
+    private function setOccassion($events) {
+        
+        foreach($events as $event) {
+            
+            $occasionStart = \EventManagerIntegration\App::formatShortDate($event->start_date);
+            $occasionEnd = \EventManagerIntegration\App::formatShortDate($event->end_date);
+            $date = $occasionStart['date'] . ' ' . $occasionStart['month'] . ' - ' .  $occasionEnd['date'] . ' ' .$occasionEnd['month'];
+            
+            
+            $event->occasionStart = $occasionStart;
+            $event->occasionEnd = $occasionEnd;
+            
+        }
 
         return $events;
+    }
+
+    private function setLocation($events) {
+
+        foreach($events as $event) {
+            $event->location_name = \EventManagerIntegration\Helper\SingleEventData::getEventLocation($event->ID, $event->start_date)['title'];
+        }
+
+        return $events;
+    }
+
+    protected function getPagination($numberOfPages)
+    {
+        global $wp_query;
+        $pagination = [];
+        $archiveUrl = get_post_type_archive_link('mod-event');
+        $href = '';
+        $currentPage = (get_query_var('paged')) ? get_query_var('paged') : 1;
+
+        if ($numberOfPages > 1) {
+            for ($i = 1; $i < $numberOfPages; $i++) {
+                $href = $archiveUrl . '?' . $this->setQueryString($i);
+    
+                $pagination[] = array(
+                    'href' => $href,
+                    'label' => (string) $i
+                );
+            }
+        }
+        
+        return \apply_filters('Municipio/Controller/Archive/prepareSearchResultObject', $pagination);
+    }
+
+    protected function setQueryString($number)
+    {
+        parse_str($_SERVER['QUERY_STRING'], $queryArgList);
+        $queryArgList['paged'] = $number;
+        $queryString = http_build_query($queryArgList) . "\n";
+
+        return \apply_filters('Municipio/Controller/Archive/setQueryString', $queryString);
     }
 
     /**
