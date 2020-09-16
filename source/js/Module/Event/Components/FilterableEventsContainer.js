@@ -23,6 +23,7 @@ class FilterableEventsContainer extends React.Component {
       startDate: props.startDate,
       tags: props.tags,
       totalPages: 1,
+      translate: '',
     };
   }
 
@@ -46,7 +47,7 @@ class FilterableEventsContainer extends React.Component {
         let value;
         switch (type) {
           case 'int':
-            value = parseInt(urlParams.get(param));           
+            value = parseInt(urlParams.get(param));
             break;
           case 'array':
             // Get all parameter values
@@ -77,17 +78,17 @@ class FilterableEventsContainer extends React.Component {
     this.setState({ ...stateObj }, () => this.getEvents());
   };
 
-   loadQueryString = () => { 
-    let parameters = {}; 
-    let searchString = location.search.substr(1); 
-    let pairs = searchString.split("&"); 
+   loadQueryString = () => {
+    let parameters = {};
+    let searchString = location.search.substr(1);
+    let pairs = searchString.split("&");
     let parts;
     for(let i = 0; i < pairs.length; i++){
         parts = pairs[i].split("=");
         let name = parts[0];
         let data = decodeURI(parts[1]);
         parameters[name] = data;
-    }    
+    }
     return parameters;
   }
   /**
@@ -102,6 +103,7 @@ class FilterableEventsContainer extends React.Component {
       categories,
       tags,
       ageRange,
+      translate,
     } = this.state;
 
     const categoryIds = this.getTaxonomyIds(categories);
@@ -118,11 +120,12 @@ class FilterableEventsContainer extends React.Component {
         categories: categoryIds,
         tags: tagIds,
         ageRange: ageRangeIds,
+        translate,
       },
       { pushState: true }
     );
       if(params.translate){
-        location.hash = "#translate"; 
+        location.hash = "#translate";
       }
 
   };
@@ -217,7 +220,7 @@ class FilterableEventsContainer extends React.Component {
       tags,
     };
 
-    // Fetch events 
+    // Fetch events
     getEvents(url, params)
       .then(response => {
         this.setState({
@@ -532,5 +535,9 @@ const availableQueryStringParams = [
   {
     param: 'tags',
     type: 'array',
+  },
+  {
+    param: 'translate',
+    type: 'string',
   },
 ];
