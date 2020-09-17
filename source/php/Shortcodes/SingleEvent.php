@@ -53,6 +53,7 @@ class SingleEvent
         $fields = is_array(get_field('event_shortc_fields', 'options')) ? get_field('event_shortc_fields', 'options') : array();
         $get_meta = get_post_meta($id);
         $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($id);
+        
         $query_var_date = (!empty(get_query_var('date'))) ? get_query_var('date') : false;
         $meta = array();
 
@@ -73,14 +74,16 @@ class SingleEvent
 
         // Information
         $event_info = $this->eventInfo($query_var_date, $occasions, $meta);
+
         if (in_array('information', $fields) && !empty($event_info)) {
             $i++;
             $ret .= '<section class="accordion-section">';
-            $ret .= '<input type="radio" name="active-section" id="accordion-section-' . $i . '">';
-            $ret .= '<label class="accordion-toggle" for="accordion-section-' . $i . '">';
-            $ret .= '<h3>' . __('Information', 'event-integration') . '</h3>';
+            $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="1" aria-pressed="false">';
+            $ret .= '<label for="accordion-section-' . $i . '" js>';
+            $ret .= __('Information', 'event-integration');
+            $ret .= '<i class="c-icon u-align--top c-icon--color- c-icon--size-md material-icons">keyboard_arrow_up</i>';
             $ret .= '</label>';
-            $ret .= '<div class="accordion-content">';
+            $ret .= '<div class="accordion-content u-display--none" js-toggle-item="1" js-toggle-class="u-display--none">';
             $ret .= $event_info;
             $ret .= '</div>';
             $ret .= '</section>';
@@ -90,11 +93,12 @@ class SingleEvent
         if (in_array('location', $fields) && !empty($meta['location'])) {
             $i++;
             $ret .= '<section class="accordion-section">';
-            $ret .= '<input type="radio" name="active-section" id="accordion-section-' . $i . '">';
+            $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="2" aria-pressed="false" >';
             $ret .= '<label class="accordion-toggle" for="accordion-section-' . $i . '">';
-            $ret .= '<h3>' . __('Location', 'event-integration') . '</h3>';
+            $ret .= __('Location', 'event-integration');
+            $ret .= '<i class="c-icon u-align--top c-icon--color- c-icon--size-md material-icons">keyboard_arrow_up</i>';
             $ret .= '</label>';
-            $ret .= '<div class="accordion-content">';
+            $ret .= '<div class="accordion-content u-display--none" js-toggle-item="2" js-toggle-class="u-display--none">';
             $ret .= $this->eventLocation($meta, $fields);
             $ret .= '</div>';
             $ret .= '</section>';
@@ -105,11 +109,12 @@ class SingleEvent
         if (in_array('booking', $fields) && strpos($booking_info, '<li>')) {
             $i++;
             $ret .= '<section class="accordion-section">';
-            $ret .= '<input type="radio" name="active-section" id="accordion-section-' . $i . '">';
+            $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="3" aria-pressed="false" >';
             $ret .= '<label class="accordion-toggle" for="accordion-section-' . $i . '">';
-            $ret .= '<h3>' . __('Booking and tickets', 'event-integration') . '</h3>';
+            $ret .= __('Booking and tickets', 'event-integration');
+            $ret .= '<i class="c-icon u-align--top c-icon--color- c-icon--size-md material-icons">keyboard_arrow_up</i>';
             $ret .= '</label>';
-            $ret .= '<div class="accordion-content">';
+            $ret .= '<div class="accordion-content u-display--none" js-toggle-item="3" js-toggle-class="u-display--none">';
             $ret .= $booking_info;
             $ret .= '</div>';
             $ret .= '</section>';
@@ -120,11 +125,12 @@ class SingleEvent
         if (in_array('contact', $fields) && !empty($contact_info)) {
             $i++;
             $ret .= '<section class="accordion-section">';
-            $ret .= '<input type="radio" name="active-section" id="accordion-section-' . $i . '">';
+            $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="4" aria-pressed="false" >';
             $ret .= '<label class="accordion-toggle" for="accordion-section-' . $i . '">';
-            $ret .= '<h3>' . __('Contact', 'event-integration') . '</h3>';
+            $ret .= __('Contact', 'event-integration');
+            $ret .= '<i class="c-icon u-align--top c-icon--color- c-icon--size-md material-icons">keyboard_arrow_up</i>';
             $ret .= '</label>';
-            $ret .= '<div class="accordion-content">';
+            $ret .= '<div class="accordion-content u-display--none" js-toggle-item="4" js-toggle-class="u-display--none">';
             $ret .= '<ul>' . $contact_info . '</ul>';
             $ret .= '</div>';
             $ret .= '</section>';
@@ -134,11 +140,12 @@ class SingleEvent
         if (!empty($meta['organizers']) && in_array('organizers', $fields)) {
             $i++;
             $ret .= '<section class="accordion-section">';
-            $ret .= '<input type="radio" name="active-section" id="accordion-section-' . $i . '">';
+            $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="5" aria-pressed="false" >';
             $ret .= '<label class="accordion-toggle" for="accordion-section-' . $i . '">';
-            $ret .= '<h3>' . __('Organizer', 'event-integration') . '</h3>';
+            $ret .= __('Organizer', 'event-integration');
+            $ret .= '<i class="c-icon u-align--top c-icon--color- c-icon--size-md material-icons">keyboard_arrow_up</i>';
             $ret .= '</label>';
-            $ret .= '<div class="accordion-content">';
+            $ret .= '<div class="accordion-content u-display--none" js-toggle-item="5" js-toggle-class="u-display--none">';
             $ret .= $this->eventOrganizer($meta, $fields);
             $ret .= '</div>';
             $ret .= '</section>';
@@ -148,11 +155,12 @@ class SingleEvent
         if (in_array('occasion', $fields)) {
             $i++;
             $ret .= '<section class="accordion-section">';
-            $ret .= '<input type="radio" name="active-section" id="accordion-section-' . $i . '">';
+            $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="6" aria-pressed="false" >';
             $ret .= '<label class="accordion-toggle" for="accordion-section-' . $i . '">';
-            $ret .= '<h3>' . __('Occasions', 'event-integration') . '</h3>';
+            $ret .= __('Occasions', 'event-integration');
+            $ret .= '<i class="c-icon u-align--top c-icon--color- c-icon--size-md material-icons">keyboard_arrow_up</i>';
             $ret .= '</label>';
-            $ret .= '<div class="accordion-content">';
+            $ret .= '<div class="accordion-content u-display--none" js-toggle-item="6" js-toggle-class="u-display--none">';
             $ret .= $this->eventOccasions($occasions);
             $ret .= '</div>';
             $ret .= '</section>';
@@ -166,11 +174,12 @@ class SingleEvent
         if ($links_exist && in_array('links', $fields)) {
             $i++;
             $ret .= '<section class="accordion-section">';
-            $ret .= '<input type="radio" name="active-section" id="accordion-section-' . $i . '">';
+            $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="7" aria-pressed="false" >';
             $ret .= '<label class="accordion-toggle" for="accordion-section-' . $i . '">';
-            $ret .= '<h3>' . __('Links', 'event-integration') . '</h3>';
+            $ret .= __('Links', 'event-integration');
+            $ret .= '<i class="c-icon u-align--top c-icon--color- c-icon--size-md material-icons">keyboard_arrow_up</i>';
             $ret .= '</label>';
-            $ret .= '<div class="accordion-content">';
+            $ret .= '<div class="accordion-content u-display--none" js-toggle-item="7" js-toggle-class="u-display--none">';
             $ret .= $this->eventLinks($meta);
             $ret .= '</div>';
             $ret .= '</section>';

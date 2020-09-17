@@ -1,179 +1,287 @@
 @extends('templates.master')
 
 @section('content')
-    <div class="container main-container">
-        @include('partials.breadcrumbs')
+<div class="container main-container">
+    @grid([
+        "container" => true,
+        "row_gap" => 4
+    
+        ])
+            @if(!empty($event['image_src']))
+                @grid([
+                    "col" => [
+                        "xs" => [1,13],
+                        "sm" => [1,13],
+                        "md" => [1,13],
+                        "lg" => [1,8],
+                        "xl" => [1,8]
+                    ],
+                    "row" => [
+                        "xs" => [2,2],
+                        "sm" => [2,2],
+                        "md" => [2,2],
+                        "lg" => [2,2],
+                        "xl" => [2,2]
+                    ]
+                ])
+                                 
+                    @image([
+                        'src'=> $event['image_src'],
+                    ])
+                    @endimage
+          
+                @endgrid
+            @endif
 
-        <div class="grid single-event" id="readspeaker-read">
-            <div class="grid-md-7 u-mb-4">
-                <div class="grid sm-gutter">
-                    @if(!empty($event['image_src']))
-                        <div class="grid-md-12 u-mb-2">
-                            <img src="{{ $event['image_src'] }}" alt="{{ the_title() }}" class="img-inherit-width">
-                        </div>
-                    @endif
+            @if(!empty($event['occasion']))
+                @grid([
+                    "col" => [
+                        "xs" => [1,13],
+                        "sm" => [1,13],
+                        "md" => [1,13],
+                        "lg" => [1,8],
+                        "xl" => [1,8]
+                    ],
+                    "row" => [
+                        "xs" => [3,6],
+                        "sm" => [3,6],
+                        "md" => [3,6],
+                        "lg" => [3,6],
+                        "xl" => [3,6]
+                    ]
+                ])
+                            
+                    
+                @typography(['variant' => 'h1', 'element' => 'span'])
+                    {{ $event['occasion']['date_parts']['date'] }}
+                @endtypography
 
-                    @if(!empty($event['occasion']))
-                        <div class="grid-fit-content u-pt-1">
-                            <div class="date-box box-filled box-filled-1 ratio-1-1 u-p-4 u-p-5@lg u-p-5@xl">
-                                <div class="content text-center u-flex u-flex-column u-justify-content-center">
-                                    <span class="h1 u-lh-1">{{ $event['occasion']['date_parts']['date'] }}</span>
-                                    <span class="u-lh-1">{{ $event['occasion']['date_parts']['month_short'] }}</span>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
+                @typography(['variant' => 'h4', 'element' => 'span'])
+                    {{ $event['occasion']['date_parts']['month_short'] }}
+                @endtypography
+                
 
-                    <div class="grid-auto">
-                        <h1>{{ the_title() }}</h1>
-                    </div>
-                </div>
-            </div>
+                @typography(['variant' => 'h1', 'element' => 'span'])
+                    {{ the_title() }}
+                @endtypography
 
-            <div class="grid-md-12">
-                @if (is_single() && is_active_sidebar('content-area-top'))
-                    <div class="grid grid--columns sidebar-content-area sidebar-content-area-top">
-                        <?php dynamic_sidebar('content-area-top'); ?>
-                    </div>
+                @endgrid
+            @endif
+            
+            @grid([
+                "col" => [
+                    "xs" => [1,13],
+                    "sm" => [1,13],
+                    "md" => [1,13],
+                    "lg" => [1,8],
+                    "xl" => [1,8]
+                ],
+                "row" => [
+                    "xs" => [6,7],
+                    "sm" => [6,7],
+                    "md" => [6,7],
+                    "lg" => [6,7],
+                    "xl" => [6,7]
+                ]
+            ])
+                @if (!empty($event['occasion']['formatted']))
+                                                
+                    @typography(['variant' => 'meta', 'element' => 'span'])
+                        @icon([
+                            'icon' => 'access_time',
+                            'size' => 'sm',
+                            'classList' => ['u-align--top']
+                        ])
+                        @endicon 
+                        <?php _e('Occasion', 'event-integration'); ?>
+                    @endtypography
+
+                    @typography(['variant' => 'meta', 'element' => 'strong'])
+                        {{ $event['occasion']['formatted'] }}
+                    @endtypography
+        
+            
                 @endif
-                <div class="grid">
-                    <div class="grid-md-7 u-mr-auto">
-                        <div class="grid">
-                            <div class="grid-md-12 u-mb-4 u-mb-3@xs">
-                                <div class="creamy"></div>
-                                <div class="grid u-pt-2">
-                                    @if (!empty($event['occasion']['formatted']))
-                                        <div class="grid-md-fit-content u-mr-auto u-mb-2">
-                                            <div class="grid sm-gutter grid-va-middle">
-                                                <div class="grid-fit-content">
-                                                    <i class="pricon pricon-clock"></i>
-                                                </div>
-                                                <div class="grid-fit-content u-lh-1">
-                                                    <small><?php _e('Occasion', 'event-integration'); ?></small>
-                                                    <br>
-                                                    <small><b>{{ $event['occasion']['formatted'] }}</b></small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endif
 
-                                    @if ($event['location'])
-                                        <div class="grid-md-fit-content u-mr-auto u-mb-2">
-                                            <div class="grid sm-gutter grid-va-middle">
-                                                <div class="grid-fit-content">
-                                                    <i class="pricon pricon-location-pin"></i>
-                                                </div>
-                                                <div class="grid-fit-content u-lh-1">
-                                                    <small><?php _e('Location', 'event-integration'); ?></small>
-                                                    <br>
-                                                    <small><b>{{ $event['location']['title'] }}</b></small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endif
-
-                                    @if ($event['booking_link'])
-                                        <div class="grid-md-fit-content u-mr-auto u-mb-2">
-                                            <div class="grid sm-gutter grid-va-middle">
-                                                <div class="grid-fit-content">
-                                                    <i class="pricon pricon-ticket"></i>
-                                                </div>
-                                                <div class="grid-fit-content u-lh-1">
-                                                    <small><?php _e('Tickets', 'event-integration') ?></small>
-                                                    <br>
-                                                    <a href="{{ $event['booking_link'] }}">
-                                                        <small><b><?php _e(
-                                                                    'Book tickets now',
-                                                                    'event-integration'
-                                                                ) ?></b></small>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endif
-
-                                    @if ($event['age_group'])
-                                        <div class="grid-md-fit-content u-mr-auto u-mb-2">
-                                            <div class="grid sm-gutter grid-va-middle">
-                                                <div class="grid-fit-content">
-                                                    <i class="pricon pricon-info-o"></i>
-                                                </div>
-                                                <div class="grid-fit-content u-lh-1">
-                                                    <small><?php _e('Age', 'event-integration') ?></small>
-                                                    <br>
-                                                    <small><b>{{ $event['age_group'] }}</b></small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endif
-                                </div>
-                                <div class="creamy"></div>
-                            </div>
-
-                            <div class="grid-md-12 u-mb-3">
-                                <article id="article">
-                                    {!! the_post() !!}
-
-                                    @if ($event['cancelled'])
-                                        <p>
-                                            <strong class="text-danger">{{ $event['cancelled'] }}</strong>
-                                            {{ $event['exception_information'] ? ' - ' . $event['exception_information'] : ''  }}
-                                        </p>
-                                    @endif
-
-                                    @if ($event['rescheduled'])
-                                        <p>
-                                            <strong class="text-danger">{{ $event['rescheduled'] }}</strong>
-                                            {{ $event['exception_information'] ? ' - ' . $event['exception_information'] : ''  }}
-                                        </p>
-                                    @endif
-
-                                    @if (!empty(get_extended($post->post_content)['main']) && !empty(get_extended($post->post_content)['extended']))
-                                        {!! apply_filters('the_lead', get_extended($post->post_content)['main']) !!}
-                                        {!! apply_filters('the_content', get_extended($post->post_content)['extended']) !!}
-                                    @else
-                                        {!! apply_filters('the_content', $post->post_content) !!}
-                                    @endif
-
-                                    @if (is_single() && is_active_sidebar('content-area'))
-                                        <div class="grid grid--columns sidebar-content-area sidebar-content-area-bottom">
-                                            <?php dynamic_sidebar('content-area'); ?>
-                                        </div>
-                                    @endif
-                                </article>
-                            </div>
-
-                            <div class="grid-md-12 u-mb-3">
-                                @include('partials.accessibility-menu')
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="grid-md-4 u-mb-3">
-                        {!! do_shortcode('[single_event_accordion]') !!}
-                    </div>
-
-                    <div class="grid-md-12">
-                        @include('partials.blog.post-footer')
-                    </div>
-                </div>
-
-                @if (is_single() && comments_open())
-                    <div class="grid">
-                        <div class="grid-sm-12">
-                            @include('partials.blog.comments-form')
-                        </div>
-                    </div>
-                    <div class="grid">
-                        <div class="grid-sm-12">
-                            @include('partials.blog.comments')
-                        </div>
-                    </div>
+                @if ($event['location'])
+            
+                    @typography(['variant' => 'meta', 'element' => 'span'])
+                        @icon([
+                            'icon' => 'room',
+                            'size' => 'sm',
+                            'classList' => ['u-align--top']
+                        ])
+                        @endicon 
+                        <?php _e('Location', 'event-integration'); ?>
+                    @endtypography
+                    
+                    @typography(['variant' => 'meta', 'element' => 'strong'])
+                        {{ $event['location']['title'] }}
+                    @endtypography
+                        
                 @endif
-            </div>
 
-            @include('partials.sidebar-right')
-        </div>
-    </div>
+                @if($event['booking_link'])
+            
+                    @typography(['variant' => 'meta', 'element' => 'span'])
+                        @icon([
+                            'icon' => 'room',
+                            'size' => 'sm'
+                        ])
+                        @endicon    
+
+                        {{ _e('Tickets', 'event-integration') }}
+                    @endtypography
+
+                    @typography(['variant' => 'meta', 'element' => 'strong'])
+
+                        @link(['href' => $event['booking_link']])
+                            {{ _e('Book tickets now', 'event-integration') }}
+                        @endlink
+
+                    @endtypography
+
+                @endif
+
+            @endgrid
+
+            @grid([
+                "col" => [
+                    "xs" => [1,13],
+                    "sm" => [1,13],
+                    "md" => [1,13],
+                    "lg" => [1,8],
+                    "xl" => [1,8]
+                ],
+                "row" => [
+                    "xs" => [7,8],
+                    "sm" => [7,8],
+                    "md" => [7,8],
+                    "lg" => [7,8],
+                    "xl" => [7,8]
+                ]
+            ])
+                                
+                @if (!empty(get_extended($post->post_content)['main']) && !empty(get_extended($post->post_content)['extended']))
+                    {!! apply_filters('the_lead', get_extended($post->post_content)['main']) !!}
+                    {!! apply_filters('the_content', get_extended($post->post_content)['extended']) !!}
+                @else
+                    {!! apply_filters('the_content', $post->post_content) !!}
+                @endif
+        
+            @endgrid
+
+            @if($event['age_group'])
+                @grid([
+                    "col" => [
+                        "xs" => [1,13],
+                        "sm" => [1,13],
+                        "md" => [1,13],
+                        "lg" => [1,8],
+                        "xl" => [1,8]
+                    ],
+                    "row" => [
+                        "xs" => [8,9],
+                        "sm" => [8,9],
+                        "md" => [8,9],
+                        "lg" => [8,9],
+                        "xl" => [8,9]
+                    ]
+                ])
+                    @if($event['age_group'])
+                        <small><?php _e('Age', 'event-integration') ?></small>
+                        <br>
+                        <small><b>{{ $event['age_group'] }}</b></small>      
+                    @endif
+                @endgrid
+            @endif
+
+            @if ($event['rescheduled'])
+                @grid([
+                    "col" => [
+                        "xs" => [1,13],
+                        "sm" => [1,13],
+                        "md" => [1,13],
+                        "lg" => [1,8],
+                        "xl" => [1,8]
+                    ],
+                    "row" => [
+                        "xs" => [9,10],
+                        "sm" => [9,10],
+                        "md" => [9,10],
+                        "lg" => [9,10],
+                        "xl" => [9,10]
+                    ]
+                ])
+                    
+                    @typography([
+                        'element' => 'strong',
+                        'classList' => ['u-color__text--danger']
+                    ])
+                        {{ $event['rescheduled'] }}
+                    @endtypography
+
+                    @typography(['element' => 'span'])
+                        {{ $event['exception_information'] ? ' - ' . $event['exception_information'] : ''  }}   
+                    @endtypography
+                    
+                @endgrid
+            @endif
+
+            @if ($event['cancelled'])
+                @grid([
+                    "col" => [
+                        "xs" => [1,13],
+                        "sm" => [1,13],
+                        "md" => [1,13],
+                        "lg" => [1,8],
+                        "xl" => [1,8]
+                    ],
+                    "row" => [
+                        "xs" => [10,11],
+                        "sm" => [10,11],
+                        "md" => [10,11],
+                        "lg" => [10,11],
+                        "xl" => [10,11]
+                    ]
+                ])
+                    
+                    @typography([
+                        'element' => 'strong',
+                        'classList' => ['u-color__text--danger']
+                    ])
+                        {{ $event['cancelled'] }}
+                    @endtypography
+
+                    @typography(['element' => 'span'])
+                        {{ $event['exception_information'] ? ' - ' . $event['exception_information'] : ''  }}
+                    @endtypography
+
+                @endgrid
+            @endif
+
+            @grid([
+                    "col" => [
+                        "xs" => [1,13],
+                        "sm" => [1,13],
+                        "md" => [1,13],
+                        "lg" => [9,13],
+                        "xl" => [9,13]
+                    ],
+                    "row" => [
+                        "xs" => [11,12],
+                        "sm" => [11,12],
+                        "md" => [11,12],
+                        "lg" => [2,11],
+                        "xl" => [2,11]
+                    ]
+                ])
+
+                    {!! do_shortcode('[single_event_accordion]') !!}
+
+                @endgrid
+    @endgrid
+
+</div>
 @stop
 
