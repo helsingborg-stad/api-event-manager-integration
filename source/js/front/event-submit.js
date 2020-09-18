@@ -6,35 +6,37 @@ export default (() => {
 
     EventManagerIntegration.Event.Form = (function($) {
         function Form() {
-            $('.submit-event').each(
-                function(index, eventForm) {
-                    var apiUrl = eventintegration.apiurl;
-                    apiUrl = apiUrl.replace(/\/$/, '');
+            document.addEventListener('DOMContentLoaded', (event) => {
+              $('.submit-event').each(
+                  function(index, eventForm) {
+                      var apiUrl = eventintegration.apiurl;
+                      apiUrl = apiUrl.replace(/\/$/, '');
 
-                    $('#recurring-event', eventForm)
-                        .children('.box')
-                        .hide();
-                    this.handleEvents($(eventForm), apiUrl);
-                    this.hyperformExtensions(eventForm);
-                    this.datePickerSettings();
+                      $('#recurring-event', eventForm)
+                          .children('.box')
+                          .hide();
+                      this.handleEvents($(eventForm), apiUrl);
+                      this.hyperformExtensions(eventForm);
+                      this.datePickerSettings();
 
-                    if (document.getElementById('location') !== null) {
-                        this.loadPostType($(eventForm), apiUrl, 'location');
-                    }
-                    if (document.getElementById('organizer') !== null) {
-                        this.loadPostType($(eventForm), apiUrl, 'organizer');
-                    }
-                    if (document.getElementById('user_groups') !== null) {
-                        this.loadTaxonomy($(eventForm), apiUrl, 'user_groups');
-                    }
-                    if (document.getElementById('event_categories') !== null) {
-                        this.loadTaxonomy($(eventForm), apiUrl, 'event_categories');
-                    }
-                    if (document.getElementById('event_tags') !== null) {
-                        this.loadTaxonomy($(eventForm), apiUrl, 'event_tags');
-                    }
-                }.bind(this)
-            );
+                      if (document.getElementById('location') !== null) {
+                          this.loadPostType($(eventForm), apiUrl, 'location');
+                      }
+                      if (document.getElementById('organizer') !== null) {
+                          this.loadPostType($(eventForm), apiUrl, 'organizer');
+                      }
+                      if (document.getElementById('user_groups') !== null) {
+                          this.loadTaxonomy($(eventForm), apiUrl, 'user_groups');
+                      }
+                      if (document.getElementById('event_categories') !== null) {
+                          this.loadTaxonomy($(eventForm), apiUrl, 'event_categories');
+                      }
+                      if (document.getElementById('event_tags') !== null) {
+                          this.loadTaxonomy($(eventForm), apiUrl, 'event_tags');
+                      }
+                  }.bind(this)
+              );
+            });
         }
 
         /**
