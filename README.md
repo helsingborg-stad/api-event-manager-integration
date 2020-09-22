@@ -3,6 +3,9 @@ Event Manager Integration
 
 Import and display events from [Event Manager API](https://github.com/helsingborg-stad/api-event-manager).
 
+## Download plugin.
+To download a complete out of the box working plugin without the need to compile or fetch dependencies.  
+Go [here](https://github.com/helsingborg-stad/api-event-manager-integration/releases) and download the `full-release.zip` from the latest version.  
 
 ## Getting started
 1. Download & activate plugin
