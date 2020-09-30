@@ -522,12 +522,31 @@ export default (() => {
             // Recurring date events
             this.initRecurringEndHourEvent();
             this.initRecurringEndMinuteEvent();
+
+            // set min and max dates
+            this.datePickerSettings();
         };
 
         Form.prototype.datePickerSettings = function() {
-            $.datepicker.setDefaults({
-                minDate: 'now',
-                maxDate: new Date().getDate() + 365,
+            const aYearFromNow = new Date();
+            aYearFromNow.setFullYear(aYearFromNow.getFullYear() + 1);
+
+            const startDates = [ document.querySelectorAll('input[name="start_date"]'),  document.querySelectorAll('input[name="recurring_start_d"]')];
+            startDates.forEach( dateInputs => { 
+                Array.from(dateInputs).forEach(
+                    (element) =>{
+                        $(element).datepicker('option', 'minDate', new Date());  
+                        $(element).datepicker('option', 'maxDate', aYearFromNow);  
+                    } 
+                ); 
+            });
+            const endDates = [ document.querySelectorAll('input[name="end_date"]'),  document.querySelectorAll('input[name="recurring_end_d"]')];
+            endDates.forEach( dateInputs => { 
+                Array.from(dateInputs).forEach(
+                    (element) =>{
+                        $(element).datepicker('option', 'maxDate', aYearFromNow);  
+                    } 
+                ); 
             });
         };
 
