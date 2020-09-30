@@ -22,7 +22,9 @@ class Event extends \Modularity\Module
 
         add_filter(
             'acf/fields/taxonomy/wp_list_categories/name=mod_event_categories_list',
-            array($this, 'filterEventCategories'), 10, 2
+            array($this, 'filterEventCategories'),
+            10,
+            2
         );
     }
 
@@ -44,7 +46,6 @@ class Event extends \Modularity\Module
             $controller = new $class($this, $this->args, $this->data);
             $this->data = array_merge($this->data, $controller->data);
         }
-
     }
 
     public function data(): array
@@ -364,7 +365,7 @@ class Event extends \Modularity\Module
             wp_enqueue_script(
                 'modularity-'.$this->slug,
                 EVENTMANAGERINTEGRATION_URL.'/dist/'.\EventManagerIntegration\Helper\CacheBust::name(
-                    'js/Module/Event/Index.js'
+                    'js/event-integration-module-event.js'
                 ),
                 array('jquery', 'react', 'react-dom'),
                 false,
