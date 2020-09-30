@@ -531,22 +531,14 @@ export default (() => {
             const aYearFromNow = new Date();
             aYearFromNow.setFullYear(aYearFromNow.getFullYear() + 1);
 
-            const startDates = [ document.querySelectorAll('input[name="start_date"]'),  document.querySelectorAll('input[name="recurring_start_d"]')];
-            startDates.forEach( dateInputs => { 
-                Array.from(dateInputs).forEach(
-                    (element) =>{
-                        $(element).datepicker('option', 'minDate', new Date());  
+            ['input[name="start_date"]', 'input[name="recurring_start_d"]', 'input[name="end_date"]', 'input[name="recurring_end_d"]'].forEach(name => {
+                const els = document.querySelectorAll(name)
+                if (els) {
+                    Array.from(els).forEach((element) =>{
+                        if (['input[name="start_date"]', 'input[name="recurring_start_d"]'].includes(name)) $(element).datepicker('option', 'minDate', new Date());  
                         $(element).datepicker('option', 'maxDate', aYearFromNow);  
-                    } 
-                ); 
-            });
-            const endDates = [ document.querySelectorAll('input[name="end_date"]'),  document.querySelectorAll('input[name="recurring_end_d"]')];
-            endDates.forEach( dateInputs => { 
-                Array.from(dateInputs).forEach(
-                    (element) =>{
-                        $(element).datepicker('option', 'maxDate', aYearFromNow);  
-                    } 
-                ); 
+                    });
+                }
             });
         };
 
