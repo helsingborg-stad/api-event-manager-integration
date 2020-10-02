@@ -3,7 +3,6 @@
 @section('content')
     <div class="container main-container o-grid u-margin__y--5">                
                 @if(!empty($event['image_src']))
-                {{-- @php die(var_dump($event['image_src']));@endphp --}}
                     <div class="o-grid-12 o-grid-8@lg">
                         @image([
                             'src'=> $event['image_src'],
