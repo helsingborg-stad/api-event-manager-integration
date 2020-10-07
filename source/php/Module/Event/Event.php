@@ -222,7 +222,7 @@ class Event extends \Modularity\Module
 
         if ($numberOfPages > 1) {
             for ($i = 1; $i < $numberOfPages; $i++) {
-                $href = $archiveUrl . '?' . $this->setQueryString($i);
+                $href = $archiveUrl . '?' . $this->setQueryString($i). "#event";
     
                 $pagination[] = array(
                     'href' => $href,

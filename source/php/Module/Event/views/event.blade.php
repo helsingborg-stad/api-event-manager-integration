@@ -1,4 +1,4 @@
-<div class="{{ $classes }} {{ isset($font_size) ? $font_size : '' }}" data-module-id="{{ $ID }}">
+<div id="event-{{$ID}}" class="{{ $classes }} {{ isset($font_size) ? $font_size : '' }}" data-module-id="{{ $ID }}">
     <ul class="u-unlist u-margin--0 u-padding--0">
         <div class="event-module-content">
             @include('partials.list')
@@ -11,7 +11,8 @@
                 'list' => $paginationList, 
                 'classList' => ['u-margin--1'], 
                 'current' => isset($_GET['paged']) ? $_GET['paged'] : 1,
-                'linkPrefix' => '?paged='
+                'linkPrefix' => '?paged=',
+                'anchorTag' => '#event-' . $ID
             ])
             @endpagination
         @endif
