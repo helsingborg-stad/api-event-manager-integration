@@ -20,7 +20,7 @@
                 'text' =>  __('More events', 'event-integration'),
                 'color' => 'primary',
                 'style' => 'basic',
-                'link' => get_post_type_archive_link('event'),
+                'href' => get_post_type_archive_link('event'),
                 'icon' => 'add',
                 'reversePositions' => true,
             ])
