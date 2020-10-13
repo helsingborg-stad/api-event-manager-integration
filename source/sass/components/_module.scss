@@ -4,135 +4,64 @@
     }
 }
 
-.modularity-mod-event {
-    .event-module-content {
-        min-height: 47px;
+$event-date-size:  56px;
 
-        li {
-            padding: 0px !important;
-        }
-
-        img {
-            padding: 5px 0;
-        }
-
-        .title + p {
-            padding: 6px 0 0 0;
-        }
-
-        .event-date {
-            display: table-cell;
-            width: 60px;
-            min-width: 60px;
-            border-right: 1px solid #e7e5e1;
-            font-weight: 300;
-            font-size: .8rem;
-            height: 100%;
-            line-height: 140%;
-            vertical-align: middle;
-            text-align: center;
-            padding:7px 0;
-            span {
-                display: block;
-            }
-        }
-
-        .event-info {
-            display: table-cell;
-            vertical-align: middle;
-            word-break: break-word;
-        }
-
-        .loading-wrapper {
-            padding-top: 20px;
-        }
-    }
-
-    .event-module-footer {
+.c-collection.c-collection--event {
+    .c-collection__date {
         display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        background-color: #f6f5f2;
-        border: 1px solid #e7e5e1;
-        border-top: 0px;
-        margin: 0;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: $event-date-size;
+        height: $event-date-size;
+        background-color: rgba(black, 0.05);
+    };
 
-        a {
-            text-decoration: none;
-        }
+    .c-collection__divider.c-collection__divider--inset {
+        margin-left: 96px;
+    }
 
-        li {
-            margin-right: 6px;
-        }
+    .c-collection__date {
+        font-weight: 500;
 
-        .disabled {
-            cursor: default;
+    }
+    .c-collection__day {
+        font-size: 20px;
+        line-height: 1;
+        margin-bottom: 6px;
+    }
 
-            &.temporary {
-                opacity: 1 !important;
+    .c-collection__day.c-collection__day--today,
+    .c-collection__day.c-collection__day--range {
+        font-size: 18px;
+    }
+
+    .c-collection__month {
+        line-height: 1;
+        font-size: 14px;
+        text-transform: uppercase;
+    }
+
+    .c-collection__icon,
+    .c-collection__secondary,
+    .c-collection__content {
+        align-self: flex-start;
+    }
+
+    .c-collection__content {
+        h1, h2, h3, h4 {
+            & + p {
+                margin-top: 8px;
             }
         }
 
-        .event-module-archive {
-            a {
-                text-decoration: none;
-                font-size: 14px;
-                color: #666;
-
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-
-            li {
-                line-height: 3;
-            }
+        p + p {
+            margin-top: 4px;
         }
     }
 
-    .box-panel {
-        .event-info {
-            padding: 10px 15px;
-        }
-
-        .passed-event {
-            .event-info a, .event-date {
-                color: #8c8c8c;
-            }
-        }
-    }
-
-    .box-filled {
-        padding: 0px;
-
-        .event-module-list {
-            padding: 0 5px;
-        }
-
-        .box-title {
-            padding: 15px 15px 0 15px;
-        }
-
-        .event-date + .event-info {
-            padding: 10px 15px;
-        }
-
-        .event-info {
-            p:last-child {
-                padding: 0 0 15px 0;
-            }
-
-            .pricon {
-                display: none;
-            }
-        }
-
-        .text-sm {
-            opacity: 0.85;
-        }
-    }
-
-    &__pagination input {
-        max-width: 55px;
+    .c-collection__secondary  {
+        text-align: right;
     }
 }
+
