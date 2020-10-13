@@ -528,6 +528,7 @@ export default (() => {
         };
 
         Form.prototype.datePickerSettings = function() {
+
             const aYearFromNow = new Date();
             aYearFromNow.setFullYear(aYearFromNow.getFullYear() + 1);
 
@@ -535,11 +536,13 @@ export default (() => {
                 const els = document.querySelectorAll(name)
                 if (els) {
                     Array.from(els).forEach((element) =>{
-                        if (['input[name="start_date"]', 'input[name="recurring_start_d"]'].includes(name)) $(element).datepicker('option', 'minDate', new Date());  
-                        $(element).datepicker('option', 'maxDate', aYearFromNow);  
-                    });
+                            if (['input[name="start_date"]', 'input[name="recurring_start_d"]'].includes(name)) $(element).datepicker('option', 'minDate', new Date());  
+                            $(element).datepicker('option', 'maxDate', aYearFromNow);  
+                        }
+                    );
                 }
             });
+            document.getElementById('ui-datepicker-div').style = "display: none";
         };
 
         Form.prototype.handleEvents = function(eventForm, apiUrl) {
