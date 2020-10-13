@@ -1,113 +1,85 @@
 
-		@if (!$hideTitle && !empty($post_title))   
-			@typography(['variant' => 'h4', 'element' => 'h4', 'classList' => ['box-title']])
-				{{_e($post_title, 'event-integration')}}
-			@endtypography
-		@endif
 
-	<ul class="event-module-list">
-
-			@if (!$events)
-				<li><span class="event-info">{{$no_events}}</span></li>
-			@else
-			
-			@foreach ($events as $event)
-
-				{!! (isset($event->end_date) && (strtotime($event->end_date) < $date_now)) ? '<li class="passed-event ">' : '<li>' !!}
-
-					@if (!empty($event->start_date) && in_array('occasion', $mod_event_fields) && $mod_event_occ_pos == 'left')
-						<span class="event-date">
-							@if ($event->occasionStart['today'] == true)
-								<span><strong><?php _e('Today', 'event-integration'); ?>
-										@if (date('Y-m-d', strtotime($event->end_date)) !== date('Y-m-d', strtotime($event->start_date)))
-											-
-											<strong><span class="">{{ $event->occasionEnd['date'] }} {{ $event->occasionEnd['month'] }}</span></strong>
-
-										@endif
-									</strong></span>
-								<span>{{ $event->occasionStart['time'] }}</span>
-							@else
-								@if (date('Y-m-d', strtotime($event->end_date)) !== date('Y-m-d', strtotime($event->start_date)))
-									@if($event->occasionStart['month'] !== $event->occasionEnd['month'])
-										<strong><span>{{ $event->occasionStart['date'] }}</span></strong>
-										<span>{{ $event->occasionStart['month'] }}</span>
-											-
-											<strong><span class="">{{ $event->occasionEnd['date'] }}</span></strong>
-										<span>{{ $event->occasionEnd['month'] }}</span>
-									@else
-											<strong><span>{{ $event->occasionStart['date'] }} - {{ $event->occasionEnd['date'] }} </span></strong>
-											<span>{{ $event->occasionStart['month'] }}</span>
-
-									@endif
-								@else
-									<strong><span>{{ $event->occasionStart['date'] }}</span></strong>
-									<span>{{ $event->occasionStart['month'] }}</span>
-								@endif
-
-							@endif
-						</span>
-					@endif
-
-					<span class="event-info">
-
-						@if (in_array('image', $mod_event_fields))
-							@if (get_the_post_thumbnail($event->ID))
-								{!! get_the_post_thumbnail($event->ID, 'large', array('class' => 'image-responsive')) !!}
-							@elseif ($mod_event_def_image)
-								{!! wp_get_attachment_image($mod_event_def_image->ID, array('700', '500'), "", array( "class" => "image-responsive" )) !!}
-							@endif
-						@endif
-
-						@if (!empty($event->post_title))
-							@link([
-								'href' => esc_url(add_query_arg('date', preg_replace('/\D/', '', $event->start_date), get_permalink($event->ID)))
-							])
-								{{$event->post_title}}
-							@endlink
-						@endif
-
-						@if (! empty($event->start_date) && ! empty($event->end_date) && in_array('occasion', $mod_event_fields) && $mod_event_occ_pos == 'below')
-							<p class="event-date">
-								 @icon([
-									'icon' => 'date_range',
-									'size' => 'md',
-									'classList' => ['u-align--top']
-								])
-								@endicon 
-								<strong><?php _e('Date', 'event-integration'); ?>: </strong>
-								{{ \EventManagerIntegration\App::formatEventDate($event->start_date, $event->end_date) }}
-							</p>
-						@endif
-
-						@if (in_array('location', $mod_event_fields))
-						
-							@if($event->location_name)
-								<p class="event-location">
-									@icon([
-										'icon' => 'location_searching',
-										'size' => 'md',
-										'classList' => ['u-align--top']
-									])
-									@endicon
-									<strong><?php _e('Location', 'event-integration'); ?>:</strong> {{ $event->location_name }}</p>
-								</p>
-							@endif
-						@endif
-
-						@if (in_array('description', $mod_event_fields) && $event->content_mode == 'custom' && ! empty($event->content))
-							{!! \EventManagerIntegration\Helper\QueryEvents::stringLimiter($event->content, $descr_limit) !!}
-						@elseif (! empty($event->post_content) && in_array('description', $mod_event_fields))
-							{!! \EventManagerIntegration\Helper\QueryEvents::stringLimiter($event->post_content, $descr_limit) !!}
-						@endif
-
+@if (!empty($events))
+	@collection(['classList' => ['c-collection--event', 'c-collection--bordered']])
+		@foreach($events as $event)
+		@php
+			$event->passed = (isset($event->end_date) && (strtotime($event->end_date) < $date_now)) ? true : false;
+		@endphp
+		
+			{{-- @if(!$loop->first)
+				<hr class="c-collection__divider c-collection__divider--inset" />
+			@endif --}}
+			<a href="{{get_permalink($event->ID)}}" class="c-collection__item c-collection__item--action {{$event->passed ? 'c-collection__item--passed' : ''}}">
+				<span class="c-collection__icon c-collection__icon--date">
+					<span class="c-collection__date">
+						<strong class="c-collection__day"><span>{{ $event->occasionStart['date'] }}</span></strong>
+						<span class="c-collection__month">{{ $event->occasionStart['month'] }}</span>										
 					</span>
-				</li>
-			@endforeach
-		@endif
-	</ul>
+				</span>
+				<span class="c-collection__content">
+					@typography(['element' => 'h4'])
+						{{$event->post_title}}
+						@typography(['variant' => 'meta', 'element' => 'p'])
+							{{\EventManagerIntegration\Helper\SingleEventData::singleEventDate($event->ID)['formatted']}}
+						@endtypography
+					@endtypography
+				</span>
 
+				@if($event->passed)
+					<span class="c-collection__secondary">
+						@typography(['variant' => 'meta', 'element' => 'p'])
+							<?php _e('Passed', 'event-integration'); ?>
+						@endtypography
+					</span>
+				@elseif ($event->occasionStart['today'] == true)
+					<span class="c-collection__secondary">
+						@typography(['variant' => 'meta', 'element' => 'p'])
+							<?php _e('Today', 'event-integration'); ?>
+						@endtypography
+					</span>
+				@endif
+			</a>
+		@endforeach
+	@endcollection
 
+	@if ($mod_event_pagination && $pagesCount > 1 || $mod_event_archive)
+		<div class="c-card__footer">
+			<div class="o-grid o-grid--no-gutter o-grid--no-margin">
+				@if ($mod_event_pagination && $pagesCount > 1)
+					<div class="o-grid-12 o-grid-auto@sm">
+						@pagination([
+							'list' => $paginationList, 
+							'classList' => [], 
+							'current' => isset($_GET['paged']) ? $_GET['paged'] : 1,
+							'linkPrefix' => '?paged=',
+							'anchorTag' => '#event-' . $ID
+							])
+						@endpagination
+					</div>
+				@endif
 
-
+				@if ($mod_event_archive)
+					<div class="o-grid-12 o-grid-auto@sm  u-text-align--right">
+						@button([
+							'text' =>  __('More events', 'event-integration'),
+							'color' => 'primary',
+							'style' => 'basic',
+							'href' => get_post_type_archive_link('event'),
+							'icon' => 'add',
+							'reversePositions' => true,
+							'size' => 'lg'
+							])
+						@endbutton 
+					</div>
+				@endif
+			</div>
+		</div>
+	@endif
+@else
+	<div class="c-card__body">
+		{{$no_events}}
+	</div>
+@endif
 
 
