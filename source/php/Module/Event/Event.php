@@ -26,7 +26,6 @@ class Event extends \Modularity\Module
             10,
             2
         );
-        
     }
 
     public function template()
@@ -95,7 +94,7 @@ class Event extends \Modularity\Module
 
         $data['classes'] = !empty($this->args) ? implode(
             ' ',
-            apply_filters('Modularity/Module/Classes', array('box', 'box-panel'), 'mod-event', $this->args)
+            apply_filters('Modularity/Module/Classes', array('c-card--panel'), 'mod-event', $this->args)
         ) : array();
     
         $data['events'] = $this->setOccassion($data['events']);
@@ -186,10 +185,9 @@ class Event extends \Modularity\Module
         return $events;
     }
 
-    private function setOccassion($events) {
-        
-        foreach($events as $event) {
-            
+    private function setOccassion($events)
+    {
+        foreach ($events as $event) {
             $occasionStart = \EventManagerIntegration\App::formatShortDate($event->start_date);
             $occasionEnd = \EventManagerIntegration\App::formatShortDate($event->end_date);
             $date = $occasionStart['date'] . ' ' . $occasionStart['month'] . ' - ' .  $occasionEnd['date'] . ' ' .$occasionEnd['month'];
@@ -197,15 +195,14 @@ class Event extends \Modularity\Module
             
             $event->occasionStart = $occasionStart;
             $event->occasionEnd = $occasionEnd;
-            
         }
 
         return $events;
     }
 
-    private function setLocation($events) {
-
-        foreach($events as $event) {
+    private function setLocation($events)
+    {
+        foreach ($events as $event) {
             $event->location_name = \EventManagerIntegration\Helper\SingleEventData::getEventLocation($event->ID, $event->start_date)['title'];
         }
 
