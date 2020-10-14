@@ -706,6 +706,6 @@ export default (() => {
         };
 
         return new Form();
-    })(jQuery);
+    })($);
 
 })();
