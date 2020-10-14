@@ -47,7 +47,7 @@
 		<div class="c-card__footer">
 			<div class="o-grid o-grid--no-gutter o-grid--no-margin">
 				@if ($mod_event_pagination && $pagesCount > 1)
-					<div class="o-grid-12 o-grid-auto@sm">
+					<div class="o-grid-12 o-grid-auto@sm u-display--none@xs">
 						@pagination([
 							'list' => $paginationList, 
 							'classList' => [], 
@@ -60,7 +60,7 @@
 				@endif
 
 				@if ($mod_event_archive)
-					<div class="o-grid-12 o-grid-auto@sm  u-text-align--right">
+					<div class="o-grid-12 o-grid-auto@sm u-text-align--right">
 						@button([
 							'text' =>  __('More events', 'event-integration'),
 							'color' => 'primary',
@@ -68,7 +68,8 @@
 							'href' => get_post_type_archive_link('event'),
 							'icon' => 'add',
 							'reversePositions' => true,
-							'size' => 'lg'
+							'size' => 'lg',
+							'classList' => ['u-display--block@xs']
 							])
 						@endbutton 
 					</div>
