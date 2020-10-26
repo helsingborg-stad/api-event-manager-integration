@@ -1,7 +1,7 @@
-@extends('templates.master')
+@extends('templates.single')
 
-@section('content')
-<div class="container main-container">
+@section('layout')
+<div class="o-container">
     @grid([
         "container" => true,
         "row_gap" => 4
