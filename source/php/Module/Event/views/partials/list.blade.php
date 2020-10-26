@@ -68,7 +68,7 @@
 							'href' => get_post_type_archive_link('event'),
 							'icon' => 'add',
 							'reversePositions' => true,
-							'size' => 'lg',
+							'size' => 'md',
 							'classList' => ['u-display--block@xs']
 							])
 						@endbutton 
