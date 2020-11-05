@@ -25,20 +25,6 @@
 						@endtypography
 					@endtypography
 				</span>
-
-				@if($event->passed)
-					<span class="c-collection__secondary">
-						@typography(['variant' => 'meta', 'element' => 'p'])
-							<?php _e('Passed', 'event-integration'); ?>
-						@endtypography
-					</span>
-				@elseif ($event->occasionStart['today'] == true)
-					<span class="c-collection__secondary">
-						@typography(['variant' => 'meta', 'element' => 'p'])
-							<?php _e('Today', 'event-integration'); ?>
-						@endtypography
-					</span>
-				@endif
 			</a>
 		@endforeach
 	@endcollection
