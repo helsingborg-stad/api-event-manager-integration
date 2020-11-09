@@ -1,7 +1,11 @@
 
 @card([
     'heading' => apply_filters('the_title', $post_title),
-    'classList' => [$classes]
+    'classList' => [$classes],
+    'attributeList' => [
+        'modularity-event' => '',
+        'js-pagination-target' => ''
+    ]
 ])
     @if (!$hideTitle && !empty($post_title))
         <div class="c-card__header">
