@@ -83,7 +83,7 @@ class Event extends \Modularity\Module
 
         // List module data
         $data['pagesCount'] = $this->countPages($id);
-        $data['events'] = $this->getEvents($id, $page);
+        $data['events'] = $this->getEvents($id, $page, false);
         $data['mod_event_fields'] = isset($data['mod_event_fields']) && is_array($data['mod_event_fields'])
             ? $data['mod_event_fields'] : array();
         $data['descr_limit'] = !empty($data['mod_event_descr_limit']) ? $data['mod_event_descr_limit'] : null;
@@ -181,7 +181,7 @@ class Event extends \Modularity\Module
         );
 
         $events = \EventManagerIntegration\Helper\QueryEvents::getEventsByInterval($params, $page);
-        
+
         return $events;
     }
 
