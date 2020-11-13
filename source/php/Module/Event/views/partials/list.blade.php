@@ -1,8 +1,15 @@
 
 
 @if (!empty($events))
-	@collection(['classList' => ['c-collection--event', 'c-collection--bordered']])
-		@foreach($events as $event)
+    @collection([
+        'classList' => [
+            'c-collection--event', 'c-collection--bordered'
+        ],
+        'attributeList' => [
+            'js-pagination-container' => '',
+        ]
+    ])
+        @foreach($events as $event)
 		@php
 			$event->passed = (isset($event->end_date) && (strtotime($event->end_date) < $date_now)) ? true : false;
 		@endphp
@@ -10,7 +17,7 @@
 			{{-- @if(!$loop->first)
 				<hr class="c-collection__divider c-collection__divider--inset" />
 			@endif --}}
-			<a href="{{get_permalink($event->ID)}}" class="c-collection__item c-collection__item--action {{$event->passed ? 'c-collection__item--passed' : ''}}">
+			<a href="{{get_permalink($event->ID)}}" class="c-collection__item c-collection__item--action {{$event->passed ? 'c-collection__item--passed' : ''}}" js-pagination-item>
 				<span class="c-collection__icon c-collection__icon--date">
 					<span class="c-collection__date">
 						<strong class="c-collection__day"><span>{{ $event->occasionStart['date'] }}</span></strong>
@@ -36,11 +43,14 @@
 					<div class="o-grid-12 o-grid-auto@sm u-display--none@xs">
 						@pagination([
 							'list' => $paginationList, 
-							'classList' => [], 
+                            'classList' => [],
 							'current' => isset($_GET['paged']) ? $_GET['paged'] : 1,
 							'linkPrefix' => '?paged=',
-							'anchorTag' => '#event-' . $ID
-							])
+                            'anchorTag' => '#event-' . $ID,
+                            'useJS' => true,
+                            'perPage' => 6,
+                            'maxPages' => 5
+                        ])
 						@endpagination
 					</div>
 				@endif
