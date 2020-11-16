@@ -1,7 +1,7 @@
 @extends('templates.single')
 
 @section('layout')
-<div class="o-container o-grid o-grid-12 u-paddng--3 u-padding--5@lg">
+<div class="o-container o-grid o-grid-12 u-padding--3 u-padding--5@lg">
     @if(!empty($event['image_src']))
 
         <div class="o-grid-12 o-grid-8@lg">
@@ -13,17 +13,22 @@
     @endif
 
     @if(!empty($event['occasion']))
-        <div class="o-grid-12 o-grid-8@lg">
-            @typography(['variant' => 'h1', 'element' => 'span'])
-                {{ $event['occasion']['date_parts']['date'] }}
-            @endtypography
+        <div class="o-grid-12 o-grid-8@lg modularity-event-heading">
+            <div class="modularity-event-date-box">
+                @typography(['variant' => 'h1', 'element' => 'span'])
+                    {{ $event['occasion']['date_parts']['date'] }}
+                @endtypography
 
-            @typography(['variant' => 'h4', 'element' => 'span'])
-                {{ $event['occasion']['date_parts']['month_short'] }}
-            @endtypography
-            
+                @typography(['variant' => 'h4', 'element' => 'span'])
+                    {{ $event['occasion']['date_parts']['month_short'] }}
+                @endtypography
+            </div>
 
-            @typography(['variant' => 'h1', 'element' => 'span'])
+            @typography([
+                'variant' => 'h1',
+                'element' => 'span',
+                'classList' => ['modularity-event-title']
+            ])
                 {{ the_title() }}
             @endtypography
 
