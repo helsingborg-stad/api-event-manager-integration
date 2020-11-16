@@ -1,5 +1,3 @@
-
-
 @if (!empty($events))
     @collection([
         'classList' => [
@@ -48,8 +46,8 @@
 							'linkPrefix' => '?paged=',
                             'anchorTag' => '#event-' . $ID,
                             'useJS' => true,
-                            'perPage' => 6,
-                            'maxPages' => 5
+                            'perPage' => $mod_event_limit,
+                            'maxPages' => $mod_event_pagination_limit
                         ])
 						@endpagination
 					</div>
