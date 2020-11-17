@@ -71,7 +71,7 @@ class SingleEvent
 
         $i = 0;
         //$ret = '<div class="accordion accordion-icon accordion-list event-info-shortcode">';
-        $ret = '<div id="5fa9395f2ea66" class="c-accordion u-rounded" js-expand-container="" data-uid="5fa9395f2eab2">';
+        $ret = '<div id="5fa9395f2ea66" class="modularity-event-accordion c-accordion u-rounded" js-expand-container="" data-uid="5fa9395f2eab2">';
 
         // Information
         $event_info = $this->eventInfo($query_var_date, $occasions, $meta);
