@@ -1,7 +1,8 @@
 @extends('templates.single')
 
 @section('layout')
-<div class="o-container o-grid o-grid-12 u-padding--3 u-padding--5@lg">
+<div class="o-container">
+<div class="o-grid u-margin__top--4">
     @if(!empty($event['image_src']))
 
         <div class="o-grid-12 o-grid-8@lg">
@@ -117,6 +118,7 @@
     <div class="o-grid-12 o-grid-4@lg">
             {!! do_shortcode('[single_event_accordion]') !!}
     </div>
+</div>
 </div>
 @stop
 
