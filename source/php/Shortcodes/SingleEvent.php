@@ -70,100 +70,107 @@ class SingleEvent
         $meta['location'] = \EventManagerIntegration\Helper\SingleEventData::getEventLocation($id);
 
         $i = 0;
-        $ret = '<div class="accordion accordion-icon accordion-list event-info-shortcode">';
+        //$ret = '<div class="accordion accordion-icon accordion-list event-info-shortcode">';
+        $ret = '<div id="5fa9395f2ea66" class="modularity-event-accordion c-accordion u-rounded" js-expand-container="" data-uid="5fa9395f2eab2">';
 
         // Information
         $event_info = $this->eventInfo($query_var_date, $occasions, $meta);
 
         if (in_array('information', $fields) && !empty($event_info)) {
             $i++;
-            $ret .= '<section class="accordion-section">';
-            $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="1" aria-pressed="false">';
-            $ret .= '<label for="accordion-section-' . $i . '" js>';
-            $ret .= __('Information', 'event-integration');
-            $ret .= '<i class="c-icon u-align--top c-icon--color- c-icon--size-md material-icons">keyboard_arrow_up</i>';
-            $ret .= '</label>';
-            $ret .= '<div class="accordion-content u-display--none" js-toggle-item="1" js-toggle-class="u-display--none">';
-            $ret .= $event_info;
+            $ret .= '<div class="c-accordion__section">';
+                $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="1" aria-pressed="false">';
+                $ret .= '<button class="c-accordion__button" aria-controls="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-expanded="false" js-expand-button="">';
+                $ret .= '<span class="c-accordion__button-wrapper" tabindex="-1">';
+                $ret .= __('Information', 'event-integration');
+                $ret .= '<i id="" class="c-icon c-accordion__icon c-icon--color- c-icon--size-md material-icons" data-uid="5fa9395f2efc3">keyboard_arrow_down</i>';
+                $ret .= '</span></button></div>';
+                $ret .= '<div class="c-accordion__content" id="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-hidden="true">';
+                    $ret .= $event_info;
+                $ret .= '</div>';
             $ret .= '</div>';
-            $ret .= '</section>';
         }
 
         // Location
         if (in_array('location', $fields) && !empty($meta['location'])) {
             $i++;
-            $ret .= '<section class="accordion-section">';
-            $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="2" aria-pressed="false" >';
-            $ret .= '<label class="accordion-toggle" for="accordion-section-' . $i . '">';
+            $ret .= '<div class="c-accordion__section">';
+            $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="1" aria-pressed="false">';
+            $ret .= '<button class="c-accordion__button" aria-controls="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-expanded="false" js-expand-button="">';
+            $ret .= '<span class="c-accordion__button-wrapper" tabindex="-1">';
             $ret .= __('Location', 'event-integration');
-            $ret .= '<i class="c-icon u-align--top c-icon--color- c-icon--size-md material-icons">keyboard_arrow_up</i>';
-            $ret .= '</label>';
-            $ret .= '<div class="accordion-content u-display--none" js-toggle-item="2" js-toggle-class="u-display--none">';
+            $ret .= '<i id="" class="c-icon c-accordion__icon c-icon--color- c-icon--size-md material-icons" data-uid="5fa9395f2efc3">keyboard_arrow_down</i>';
+            $ret .= '</span></button></div>';
+            $ret .= '<div class="c-accordion__content" id="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-hidden="true">';
             $ret .= $this->eventLocation($meta, $fields);
             $ret .= '</div>';
-            $ret .= '</section>';
+            $ret .= '</div>';
         }
 
         // Booking information
         $booking_info = $this->eventBooking($meta);
         if (in_array('booking', $fields) && strpos($booking_info, '<li>')) {
             $i++;
-            $ret .= '<section class="accordion-section">';
-            $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="3" aria-pressed="false" >';
-            $ret .= '<label class="accordion-toggle" for="accordion-section-' . $i . '">';
-            $ret .= __('Booking and tickets', 'event-integration');
-            $ret .= '<i class="c-icon u-align--top c-icon--color- c-icon--size-md material-icons">keyboard_arrow_up</i>';
-            $ret .= '</label>';
-            $ret .= '<div class="accordion-content u-display--none" js-toggle-item="3" js-toggle-class="u-display--none">';
+            $ret .= '<div class="c-accordion__section">';
+            $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="1" aria-pressed="false">';
+            $ret .= '<button class="c-accordion__button" aria-controls="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-expanded="false" js-expand-button="">';
+            $ret .= '<span class="c-accordion__button-wrapper" tabindex="-1">';
+            $ret .=  __('Booking and tickets', 'event-integration');
+            $ret .= '<i id="" class="c-icon c-accordion__icon c-icon--color- c-icon--size-md material-icons" data-uid="5fa9395f2efc3">keyboard_arrow_down</i>';
+            $ret .= '</span></button></div>';
+            $ret .= '<div class="c-accordion__content" id="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-hidden="true">';
             $ret .= $booking_info;
             $ret .= '</div>';
-            $ret .= '</section>';
+            $ret .= '</div>';
         }
 
         // Contact
         $contact_info = $this->eventContact($meta);
         if (in_array('contact', $fields) && !empty($contact_info)) {
             $i++;
-            $ret .= '<section class="accordion-section">';
-            $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="4" aria-pressed="false" >';
-            $ret .= '<label class="accordion-toggle" for="accordion-section-' . $i . '">';
-            $ret .= __('Contact', 'event-integration');
-            $ret .= '<i class="c-icon u-align--top c-icon--color- c-icon--size-md material-icons">keyboard_arrow_up</i>';
-            $ret .= '</label>';
-            $ret .= '<div class="accordion-content u-display--none" js-toggle-item="4" js-toggle-class="u-display--none">';
+            $ret .= '<div class="c-accordion__section">';
+            $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="1" aria-pressed="false">';
+            $ret .= '<button class="c-accordion__button" aria-controls="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-expanded="false" js-expand-button="">';
+            $ret .= '<span class="c-accordion__button-wrapper" tabindex="-1">';
+            $ret .=  __('Contact', 'event-integration');
+            $ret .= '<i id="" class="c-icon c-accordion__icon c-icon--color- c-icon--size-md material-icons" data-uid="5fa9395f2efc3">keyboard_arrow_down</i>';
+            $ret .= '</span></button></div>';
+            $ret .= '<div class="c-accordion__content" id="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-hidden="true">';
             $ret .= '<ul>' . $contact_info . '</ul>';
             $ret .= '</div>';
-            $ret .= '</section>';
+            $ret .= '</div>';
         }
 
         // Organizers
         if (!empty($meta['organizers']) && in_array('organizers', $fields)) {
             $i++;
-            $ret .= '<section class="accordion-section">';
-            $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="5" aria-pressed="false" >';
-            $ret .= '<label class="accordion-toggle" for="accordion-section-' . $i . '">';
-            $ret .= __('Organizer', 'event-integration');
-            $ret .= '<i class="c-icon u-align--top c-icon--color- c-icon--size-md material-icons">keyboard_arrow_up</i>';
-            $ret .= '</label>';
-            $ret .= '<div class="accordion-content u-display--none" js-toggle-item="5" js-toggle-class="u-display--none">';
+            $ret .= '<div class="c-accordion__section">';
+            $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="1" aria-pressed="false">';
+            $ret .= '<button class="c-accordion__button" aria-controls="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-expanded="false" js-expand-button="">';
+            $ret .= '<span class="c-accordion__button-wrapper" tabindex="-1">';
+            $ret .=  __('Organizer', 'event-integration');
+            $ret .= '<i id="" class="c-icon c-accordion__icon c-icon--color- c-icon--size-md material-icons" data-uid="5fa9395f2efc3">keyboard_arrow_down</i>';
+            $ret .= '</span></button></div>';
+            $ret .= '<div class="c-accordion__content" id="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-hidden="true">';
             $ret .= $this->eventOrganizer($meta, $fields);
             $ret .= '</div>';
-            $ret .= '</section>';
+            $ret .= '</div>';
         }
 
         // Occasions
         if (in_array('occasion', $fields)) {
             $i++;
-            $ret .= '<section class="accordion-section">';
-            $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="6" aria-pressed="false" >';
-            $ret .= '<label class="accordion-toggle" for="accordion-section-' . $i . '">';
-            $ret .= __('Occasions', 'event-integration');
-            $ret .= '<i class="c-icon u-align--top c-icon--color- c-icon--size-md material-icons">keyboard_arrow_up</i>';
-            $ret .= '</label>';
-            $ret .= '<div class="accordion-content u-display--none" js-toggle-item="6" js-toggle-class="u-display--none">';
-            $ret .= $this->eventOccasions($occasions);
+            $ret .= '<div class="c-accordion__section">';
+                $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="1" aria-pressed="false">';
+                $ret .= '<button class="c-accordion__button" aria-controls="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-expanded="false" js-expand-button="">';
+                $ret .= '<span class="c-accordion__button-wrapper" tabindex="-1">';
+                $ret .=  __('Occasions', 'event-integration');
+                $ret .= '<i id="" class="c-icon c-accordion__icon c-icon--color- c-icon--size-md material-icons" data-uid="5fa9395f2efc3">keyboard_arrow_down</i>';
+                $ret .= '</span></button></div>';
+                $ret .= '<div class="c-accordion__content" id="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-hidden="true">';
+                $ret .= $this->eventOccasions($occasions);
+                $ret .= '</div>';
             $ret .= '</div>';
-            $ret .= '</section>';
         }
 
         // Check if any links exist in array
@@ -173,16 +180,17 @@ class SingleEvent
         // Social media and streaming links
         if ($links_exist && in_array('links', $fields)) {
             $i++;
-            $ret .= '<section class="accordion-section">';
-            $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="7" aria-pressed="false" >';
-            $ret .= '<label class="accordion-toggle" for="accordion-section-' . $i . '">';
-            $ret .= __('Links', 'event-integration');
-            $ret .= '<i class="c-icon u-align--top c-icon--color- c-icon--size-md material-icons">keyboard_arrow_up</i>';
-            $ret .= '</label>';
-            $ret .= '<div class="accordion-content u-display--none" js-toggle-item="7" js-toggle-class="u-display--none">';
+            $ret .= '<div class="c-accordion__section">';
+            $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="1" aria-pressed="false">';
+            $ret .= '<button class="c-accordion__button" aria-controls="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-expanded="false" js-expand-button="">';
+            $ret .= '<span class="c-accordion__button-wrapper" tabindex="-1">';
+            $ret .=  __('Links', 'event-integration');
+            $ret .= '<i id="" class="c-icon c-accordion__icon c-icon--color- c-icon--size-md material-icons" data-uid="5fa9395f2efc3">keyboard_arrow_down</i>';
+            $ret .= '</span></button></div>';
+            $ret .= '<div class="c-accordion__content" id="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-hidden="true">';
             $ret .= $this->eventLinks($meta);
             $ret .= '</div>';
-            $ret .= '</section>';
+            $ret .= '</div>';
         }
 
         $ret .= '</div>'; // End accordion
