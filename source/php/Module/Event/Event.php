@@ -418,46 +418,45 @@ class Event extends \Modularity\Module
             true
         );
 
-        if ($this->template === 'index') {
-            // Enqueue React
-            class_exists('\Modularity\Helper\React') ?
-                \Modularity\Helper\React::enqueue() :
-                \EventManagerIntegration\Helper\React::enqueue();
+        // Enqueue React
+        class_exists('\Modularity\Helper\React') ?
+            \Modularity\Helper\React::enqueue() :
+            \EventManagerIntegration\Helper\React::enqueue();
 
-            wp_enqueue_script(
-                'modularity-'.$this->slug,
-                EVENTMANAGERINTEGRATION_URL.'/dist/'.\EventManagerIntegration\Helper\CacheBust::name(
-                    'js/event-integration-module-event.js'
+        wp_enqueue_script(
+            'modularity-'.$this->slug,
+            EVENTMANAGERINTEGRATION_URL.'/dist/'.\EventManagerIntegration\Helper\CacheBust::name(
+                'js/event-integration-module-event.js'
+            ),
+            array('jquery', 'react', 'react-dom'),
+            false,
+            true
+        );
+
+        wp_localize_script(
+            'modularity-'.$this->slug,
+            'modEvent',
+            array(
+                'moreEvents' => __('More events', 'event-integration'),
+                'noEventsFound' => __('No events found', 'event-integration'),
+                'next' => __('Next', 'event-integration'),
+                'prev' => __('Previous', 'event-integration'),
+                'search' => __('Search', 'event-integration'),
+                'from' => __('From', 'event-integration'),
+                'to' => __('To', 'event-integration'),
+                'date' => __('date', 'event-integration'),
+                'categories' => __('Categories', 'event-integration'),
+                'tags' => __('Tags', 'event-integration'),
+                'age' => __('Age', 'event-integration'),
+                'ageGroupDescription' => __(
+                    'Filter on events that is targeted for given the age',
+                    'event-integration'
                 ),
-                array('jquery', 'react', 'react-dom'),
-                false,
-                true
-            );
-
-            wp_localize_script(
-                'modularity-'.$this->slug,
-                'modEvent',
-                array(
-                    'moreEvents' => __('More events', 'event-integration'),
-                    'noEventsFound' => __('No events found', 'event-integration'),
-                    'next' => __('Next', 'event-integration'),
-                    'prev' => __('Previous', 'event-integration'),
-                    'search' => __('Search', 'event-integration'),
-                    'from' => __('From', 'event-integration'),
-                    'to' => __('To', 'event-integration'),
-                    'date' => __('date', 'event-integration'),
-                    'categories' => __('Categories', 'event-integration'),
-                    'tags' => __('Tags', 'event-integration'),
-                    'age' => __('Age', 'event-integration'),
-                    'ageGroupDescription' => __(
-                        'Filter on events that is targeted for given the age',
-                        'event-integration'
-                    ),
-                    'years' => __('years', 'event-integration'),
-                    'selectAge' => __('Select age', 'event-integration'),
-                )
-            );
-        }
+                'years' => __('years', 'event-integration'),
+                'selectAge' => __('Select age', 'event-integration'),
+            )
+        );
+        
     }
 
     /**
