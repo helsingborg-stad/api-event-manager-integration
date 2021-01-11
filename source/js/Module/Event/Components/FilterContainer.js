@@ -24,9 +24,9 @@ const FilterContainer = ({
   updateSearchString,
 }) => (
   <form onSubmit={onSubmit}>
-    <div className="grid">
+    <div className="o-grid">
       {settings.mod_event_filter_search && (
-        <div className="grid-md-12 grid-lg-auto u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
+        <div className="o-grid-12">
           <SearchBar
             translation={translation}
             searchString={searchString}
@@ -36,7 +36,7 @@ const FilterContainer = ({
       )}
 
       {settings.mod_event_filter_dates && (
-        <div className="grid-sm-12 grid-md-6 grid-lg-auto u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
+        <div className="o-grid-12@xs o-grid-6">
           <DateFilter
             id="filter-date-from"
             label={`${translation.from} ${translation.date}`}
@@ -48,7 +48,7 @@ const FilterContainer = ({
       )}
 
       {settings.mod_event_filter_dates && (
-        <div className="grid-sm-12 grid-md-6 grid-lg-auto u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
+        <div className="o-grid-12@xs o-grid-6">
           <DateFilter
             id="filter-date-to"
             label={`${translation.to} ${translation.date}`}
@@ -66,7 +66,7 @@ const FilterContainer = ({
       )}
 
       {settings.mod_event_filter_categories && categories.length > 0 && (
-        <div className="grid-fit-content u-mr-auto u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
+        <div className="o-grid-fit">
           <CategoriesFilter
             title={translation.categories}
             categories={categories}
@@ -76,7 +76,7 @@ const FilterContainer = ({
       )}
 
       {settings.mod_event_filter_tags && tags.length > 0 && (
-        <div className="grid-fit-content u-mr-auto u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
+        <div className="o-grid-fit">
           <CategoriesFilter
             title={translation.tags}
             categories={tags}
@@ -85,8 +85,18 @@ const FilterContainer = ({
         </div>
       )}
 
-      <div className="grid-fit-content">
-        <Button title={translation.search} color="primary" submit />
+      <div className="o-grid-auto">
+        <button 
+          className="c-button c-button__filled c-button__filled--primary c-button--md ripple ripple--before" 
+          aria-pressed="false"
+          type="submit"
+          title={translation.search}>
+            <span class="c-button__label">
+              <span class="c-button__label-text">
+              {translation.search}
+              </span>
+            </span>
+        </button>
       </div>
     </div>
   </form>

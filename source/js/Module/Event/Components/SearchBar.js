@@ -2,22 +2,18 @@ import PropTypes from 'prop-types';
 
 const SearchBar = ({ searchString, translation, updateSearchString }) => (
   <div>
-    <label htmlFor="filter-keyword" className="text-sm sr-only">
-      <strong>{translation.search}</strong>
-    </label>
+    <div className="c-field c-field--icon c-field--md c-field--radius-md c-field__text">
+        <i className="c-icon c-icon--size-md material-icons">
+          search
+        </i>
 
-    <div className="input-group">
-      <span className="input-group-addon">
-        <i className="fa fa-search" />
-      </span>
-      <input
-        className="form-control"
+        <input 
         id="filter-keyword"
         onChange={updateSearchString}
         placeholder={translation.search}
         type="text"
-        value={searchString}
-      />
+        value={searchString} />
+        <label className="c-field__text--label">{translation.search}</label>
     </div>
   </div>
 );
