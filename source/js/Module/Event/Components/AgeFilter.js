@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 
 const AgeFilter = ({ translation, ageRange, onAgeChange }) => (
   <div>
-    <label htmlFor="filter-categories" className="text-sm sr-only">
-      {translation.selectAge}
-    </label>
-    <Dropdown title={translation.selectAge} toggleClass="btn">
+    <Dropdown title={translation.selectAge}>
       {ageRange.map(item => (
         <label key={item.value} className="checkbox u-px-1">
           <input
