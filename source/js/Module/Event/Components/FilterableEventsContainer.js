@@ -1,4 +1,4 @@
-import { Button, Notice, Pagination, PreLoader } from 'hbg-react';
+import { Button, Pagination, PreLoader } from 'hbg-react';
 import update from 'immutability-helper';
 import PropTypes from 'prop-types';
 import setQuery from 'set-query-string';
@@ -157,6 +157,7 @@ class FilterableEventsContainer extends React.Component {
 
     // Declare states and props
     const { currentPage, searchString, startDate, endDate } = this.state;
+    console.log("🚀 ~ file: FilterableEventsContainer.js ~ line 160 ~ FilterableEventsContainer ~ currentPage", currentPage)
     let { categories, tags, ageRange } = this.state;
     const {
       distance,
@@ -198,6 +199,7 @@ class FilterableEventsContainer extends React.Component {
     const ageGroup = ageRange.filter(age => age.checked).map(age => age.value);
     // The API base url
     const url = `${restUrl}wp/v2/event/module`;
+    console.log("🚀 ~ file: FilterableEventsContainer.js ~ line 201 ~ FilterableEventsContainer ~ url", url)
     // Create list of query parameters
     const params = {
       _wpnonce: nonce,
@@ -216,15 +218,19 @@ class FilterableEventsContainer extends React.Component {
       start_date: startDate,
       tags,
     };
+    console.log("🚀 ~ file: FilterableEventsContainer.js ~ line 220 ~ FilterableEventsContainer ~ params", params)
 
     // Fetch events 
     getEvents(url, params)
       .then(response => {
+      console.log("🚀 ~ file: FilterableEventsContainer.js ~ line 223 ~ FilterableEventsContainer ~ response", response)
         this.setState({
           error: null,
           isLoaded: true,
           items: response.items,
           totalPages: response.totalPages,
+        }, () => {
+          console.log(this.state.items);
         });
       })
       .catch(error => {
@@ -268,6 +274,7 @@ class FilterableEventsContainer extends React.Component {
    */
   paginationInput = e => {
     const { totalPages } = this.state;
+    console.log("🚀 ~ file: FilterableEventsContainer.js ~ line 275 ~ FilterableEventsContainer ~ e.target.value", e.target.value)
     let currentPage = e.target.value ? parseInt(e.target.value) : '';
     currentPage = currentPage > totalPages ? totalPages : currentPage;
 
@@ -397,6 +404,7 @@ class FilterableEventsContainer extends React.Component {
       tags,
       totalPages,
     } = this.state;
+      console.log("🚀 ~ file: FilterableEventsContainer.js ~ line 407 ~ FilterableEventsContainer ~ render ~ items", items)
     const { settings, translation, gridColumn, archiveUrl } = this.props;
 
     return (
@@ -428,27 +436,37 @@ class FilterableEventsContainer extends React.Component {
           </div>
         )}
 
-        {!isLoaded && (
-          <div className="u-pt-5 u-pb-8">
-            <PreLoader />
-          </div>
-        )}
+        <div className={`modularity-event-index__body ${!isLoaded && items.length > 0 ? 'is-disabled' : ''}`} style={{paddingTop: '40px', paddingBottom: '64px'}}>
+          {!isLoaded && (
+            <div className={`modularity-event-index__loader modularity-event-index__loader--top ${items.length > 0 ? 'modularity-event-index__loader--float' : ''}`}>
+              <PreLoader />
+            </div>
+          )}
 
-        {(error || (isLoaded && items.length === 0)) && (
-          <div className="u-mb-3">
-            <Notice type="info">{translation.noEventsFound}</Notice>
-          </div>
-        )}
+          <div className="modularity-event-index__content">
+            {(error || (isLoaded && items.length === 0)) && (
+              <span>
+                {translation.noEventsFound}
+              </span>
+            )}
 
-        {isLoaded && items.length > 0 && (
-          <div className="grid grid--columns">
-            <EventList
-              items={items}
-              gridColumn={gridColumn}
-              displayFields={settings.mod_event_fields}
-            />
+            {items.length > 0 && (
+                <EventList
+                  items={items}
+                  gridColumn={gridColumn}
+                  displayFields={settings.mod_event_fields}
+                />
+            )}
+
           </div>
-        )}
+
+            {!isLoaded && items.length > 0 && (
+              <div className="modularity-event-index__loader modularity-event-index__loader--bottom">
+                <PreLoader />
+              </div>
+            )}
+        </div>
+
 
         <div className="grid">
           {settings.mod_event_archive && (

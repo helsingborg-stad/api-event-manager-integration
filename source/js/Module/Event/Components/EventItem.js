@@ -1,27 +1,29 @@
 import PropTypes from 'prop-types';
 
 const EventItem = ({ event, gridColumn, displayFields }) => (
-  <div className={`u-flex ${gridColumn}`}>
-    <a className="c-card c-card--action u-text-center" href={event.permalink}>
+    <a className="c-card c-card--action" href={event.permalink} style={{textAlign: 'center'}}>
       {displayFields.includes('image') && event.image_url && (
-        <img className="c-card__image" src={event.image_url} alt={event.post_title} />
+        <div className="c-card__image u-ratio-16-9" style={{backgroundImage: `url('${event.image_url}')`}}>
+
+        </div>
       )}
 
       <div className="c-card__body">
+        {event.post_title && <h3 className="c-card__title">{event.post_title}</h3>}
+
         {displayFields.includes('occasion') && event.occasion && (
-          <div className="c-card__time u-mb-2">
+          <span className="c-card__time">
             <time>{event.occasion}</time>
-          </div>
+          </span>
         )}
 
-        {event.post_title && <h4 className="c-card__title">{event.post_title}</h4>}
-
         {displayFields.includes('location') && event.location && (
-          <span className="c-card__sub o-text-small">{event.location}</span>
+          <div>
+            <i class="u-text-small">{event.location}</i>
+          </div>
         )}
       </div>
     </a>
-  </div>
 );
 
 EventItem.propTypes = {

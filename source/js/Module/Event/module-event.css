@@ -1,0 +1,21 @@
+.DayPicker {
+  position: absolute;
+  z-index: 9999;
+  background: white;
+  border-radius: 12.5px;
+  box-shadow: 0px 7px 29px -15px black;
+}
+
+.modularity-event-index
+  .modularity-event-index__body.is-disabled
+  .modularity-event-index__content {
+  opacity: 0.3;
+  user-select: none;
+  pointer-events: none;
+}
+.modularity-event-index
+  .modularity-event-index__loader.modularity-event-index__loader--float {
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+}
