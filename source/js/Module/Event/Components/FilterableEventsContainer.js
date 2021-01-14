@@ -239,6 +239,8 @@ class FilterableEventsContainer extends React.Component {
           items: [],
           isLoaded: true,
           error: Error(translation.somethingWentWrong),
+          totalPages: 1,
+          currentPage: 1
         });
       });
   };
