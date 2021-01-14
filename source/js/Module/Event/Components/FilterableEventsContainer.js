@@ -468,14 +468,14 @@ class FilterableEventsContainer extends React.Component {
         </div>
 
 
-        <div className="grid">
+        <div className="o-grid">
           {settings.mod_event_archive && (
-            <div className="grid-xs-12 grid-md-auto u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
+            <div className="o-grid-12@xs o-grid-auto@md">
               <Button href={archiveUrl} color="primary" title={translation.moreEvents} />
             </div>
           )}
           {settings.mod_event_pagination && (
-            <div className="grid-xs-12 grid-md-fit-content u-ml-auto modularity-mod-event__pagination">
+            <div className="o-grid-12@xs o-grid-fit@md u-ml-auto modularity-mod-event__pagination">
               <Pagination
                 current={currentPage}
                 input={this.paginationInput}
