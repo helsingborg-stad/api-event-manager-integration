@@ -157,7 +157,6 @@ class FilterableEventsContainer extends React.Component {
 
     // Declare states and props
     const { currentPage, searchString, startDate, endDate } = this.state;
-    console.log("🚀 ~ file: FilterableEventsContainer.js ~ line 160 ~ FilterableEventsContainer ~ currentPage", currentPage)
     let { categories, tags, ageRange } = this.state;
     const {
       distance,
@@ -199,7 +198,6 @@ class FilterableEventsContainer extends React.Component {
     const ageGroup = ageRange.filter(age => age.checked).map(age => age.value);
     // The API base url
     const url = `${restUrl}wp/v2/event/module`;
-    console.log("🚀 ~ file: FilterableEventsContainer.js ~ line 201 ~ FilterableEventsContainer ~ url", url)
     // Create list of query parameters
     const params = {
       _wpnonce: nonce,
@@ -218,19 +216,15 @@ class FilterableEventsContainer extends React.Component {
       start_date: startDate,
       tags,
     };
-    console.log("🚀 ~ file: FilterableEventsContainer.js ~ line 220 ~ FilterableEventsContainer ~ params", params)
 
     // Fetch events 
     getEvents(url, params)
       .then(response => {
-      console.log("🚀 ~ file: FilterableEventsContainer.js ~ line 223 ~ FilterableEventsContainer ~ response", response)
         this.setState({
           error: null,
           isLoaded: true,
           items: response.items,
           totalPages: response.totalPages,
-        }, () => {
-          console.log(this.state.items);
         });
       })
       .catch(error => {
@@ -276,7 +270,6 @@ class FilterableEventsContainer extends React.Component {
    */
   paginationInput = e => {
     const { totalPages } = this.state;
-    console.log("🚀 ~ file: FilterableEventsContainer.js ~ line 275 ~ FilterableEventsContainer ~ e.target.value", e.target.value)
     let currentPage = e.target.value ? parseInt(e.target.value) : '';
     currentPage = currentPage > totalPages ? totalPages : currentPage;
 
