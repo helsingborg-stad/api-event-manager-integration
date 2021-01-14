@@ -404,7 +404,7 @@ class FilterableEventsContainer extends React.Component {
       tags,
       totalPages,
     } = this.state;
-      console.log("🚀 ~ file: FilterableEventsContainer.js ~ line 407 ~ FilterableEventsContainer ~ render ~ items", items)
+
     const { settings, translation, gridColumn, archiveUrl } = this.props;
 
     return (
@@ -459,12 +459,6 @@ class FilterableEventsContainer extends React.Component {
             )}
 
           </div>
-
-            {!isLoaded && items.length > 0 && (
-              <div className="modularity-event-index__loader modularity-event-index__loader--bottom">
-                <PreLoader />
-              </div>
-            )}
         </div>
 
 
