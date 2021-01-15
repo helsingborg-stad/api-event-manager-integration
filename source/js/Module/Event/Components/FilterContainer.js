@@ -87,7 +87,7 @@ const FilterContainer = ({
 
       <div className="o-grid-fit">
         <button 
-          className="c-button c-button__filled c-button__filled--primary c-button--md ripple ripple--before" 
+          className="c-button c-button__filled c-button__filled--default c-button--md ripple ripple--before" 
           aria-pressed="false"
           type="submit"
           title={translation.search}>
