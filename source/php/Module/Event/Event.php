@@ -432,12 +432,13 @@ class Event extends \Modularity\Module
             false,
             true
         );
+        
         wp_enqueue_style(
             'modularity-'.$this->slug,
             EVENTMANAGERINTEGRATION_URL.'/dist/'.\EventManagerIntegration\Helper\CacheBust::name(
                 'js/event-integration-module-event.css'
             ),
-            array(),
+            array()
         );
 
         wp_localize_script(
