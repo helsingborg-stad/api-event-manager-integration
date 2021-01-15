@@ -26,7 +26,7 @@ const FilterContainer = ({
   <form onSubmit={onSubmit}>
     <div className="o-grid">
       {settings.mod_event_filter_search && (
-        <div className="o-grid-12">
+        <div className="o-grid-12 o-grid-auto@lg">
           <SearchBar
             translation={translation}
             searchString={searchString}
@@ -36,7 +36,7 @@ const FilterContainer = ({
       )}
 
       {settings.mod_event_filter_dates && (
-        <div className="o-grid-12@xs o-grid-6">
+        <div className="o-grid-12@xs o-grid-6@md o-grid-auto@lg">
           <DateFilter
             id="filter-date-from"
             label={`${translation.from} ${translation.date}`}
@@ -48,7 +48,7 @@ const FilterContainer = ({
       )}
 
       {settings.mod_event_filter_dates && (
-        <div className="o-grid-12@xs o-grid-6">
+        <div className="o-grid-12@xs o-grid-6@md o-grid-auto@lg">
           <DateFilter
             id="filter-date-to"
             label={`${translation.to} ${translation.date}`}
@@ -60,7 +60,7 @@ const FilterContainer = ({
       )}
 
       {settings.mod_event_filter_age_group && ageRange.length > 0 && (
-        <div className="grid-fit-content u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
+        <div className="o-grid-fit u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
           <AgeFilter translation={translation} ageRange={ageRange} onAgeChange={onAgeChange} />
         </div>
       )}
@@ -85,9 +85,9 @@ const FilterContainer = ({
         </div>
       )}
 
-      <div className="o-grid-auto">
+      <div className="o-grid-fit">
         <button 
-          className="c-button c-button__filled c-button__filled--primary c-button--md ripple ripple--before" 
+          className="c-button c-button__filled c-button__filled--default c-button--md ripple ripple--before" 
           aria-pressed="false"
           type="submit"
           title={translation.search}>

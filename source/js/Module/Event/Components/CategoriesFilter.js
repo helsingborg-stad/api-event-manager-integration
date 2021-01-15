@@ -3,11 +3,7 @@ import PropTypes from 'prop-types';
 
 const CategoriesFilter = ({ categories, onCategoryChange, title }) => (
   <div>
-    <label htmlFor="filter-categories" className="text-sm sr-only">
-      {title}
-    </label>
-
-    <Dropdown title={title} toggleClass="btn" id="filter-categories">
+    <Dropdown title={title} id="filter-categories">
       {categories.map(item => (
         <div key={item.id} style={{ maxWidth: '250px', width: 'max-content' }}>
           <label className="checkbox u-px-1">

@@ -58,7 +58,7 @@ class Event extends \Modularity\Module
         $data = get_fields($id);
 
         parse_str($_SERVER['QUERY_STRING'], $queryArgList);
-        $page = $queryArgList['paged'];
+        $page = $queryArgList['paged'] ?? 1;
 
         // Cards module data
         $data['settings'] = $data;
@@ -432,6 +432,13 @@ class Event extends \Modularity\Module
             false,
             true
         );
+        wp_enqueue_style(
+            'modularity-'.$this->slug,
+            EVENTMANAGERINTEGRATION_URL.'/dist/'.\EventManagerIntegration\Helper\CacheBust::name(
+                'js/event-integration-module-event.css'
+            ),
+            array(),
+        );
 
         wp_localize_script(
             'modularity-'.$this->slug,
@@ -456,7 +463,6 @@ class Event extends \Modularity\Module
                 'selectAge' => __('Select age', 'event-integration'),
             )
         );
-        
     }
 
     /**

@@ -1,4 +1,4 @@
-import { Button, Notice, Pagination, PreLoader } from 'hbg-react';
+import { Button, Pagination, PreLoader } from 'hbg-react';
 import update from 'immutability-helper';
 import PropTypes from 'prop-types';
 import setQuery from 'set-query-string';
@@ -233,6 +233,8 @@ class FilterableEventsContainer extends React.Component {
           items: [],
           isLoaded: true,
           error: Error(translation.somethingWentWrong),
+          totalPages: 1,
+          currentPage: 1
         });
       });
   };
@@ -397,6 +399,7 @@ class FilterableEventsContainer extends React.Component {
       tags,
       totalPages,
     } = this.state;
+
     const { settings, translation, gridColumn, archiveUrl } = this.props;
 
     return (
@@ -428,36 +431,40 @@ class FilterableEventsContainer extends React.Component {
           </div>
         )}
 
-        {!isLoaded && (
-          <div className="u-pt-5 u-pb-8">
-            <PreLoader />
-          </div>
-        )}
+        <div className={`modularity-event-index__body ${!isLoaded && items.length > 0 ? 'is-disabled' : ''}`} style={{paddingTop: '40px', paddingBottom: '64px'}}>
+          {!isLoaded && (
+            <div className={`modularity-event-index__loader modularity-event-index__loader--top ${items.length > 0 ? 'modularity-event-index__loader--float' : ''}`}>
+              <PreLoader />
+            </div>
+          )}
 
-        {(error || (isLoaded && items.length === 0)) && (
-          <div className="u-mb-3">
-            <Notice type="info">{translation.noEventsFound}</Notice>
-          </div>
-        )}
+          <div className="modularity-event-index__content">
+            {(error || (isLoaded && items.length === 0)) && (
+              <span>
+                {translation.noEventsFound}
+              </span>
+            )}
 
-        {isLoaded && items.length > 0 && (
-          <div className="grid grid--columns">
-            <EventList
-              items={items}
-              gridColumn={gridColumn}
-              displayFields={settings.mod_event_fields}
-            />
-          </div>
-        )}
+            {items.length > 0 && (
+                <EventList
+                  items={items}
+                  gridColumn={gridColumn}
+                  displayFields={settings.mod_event_fields}
+                />
+            )}
 
-        <div className="grid">
+          </div>
+        </div>
+
+
+        <div className="o-grid">
           {settings.mod_event_archive && (
-            <div className="grid-xs-12 grid-md-auto u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
+            <div className="o-grid-12@xs o-grid-auto@md">
               <Button href={archiveUrl} color="primary" title={translation.moreEvents} />
             </div>
           )}
           {settings.mod_event_pagination && (
-            <div className="grid-xs-12 grid-md-fit-content u-ml-auto modularity-mod-event__pagination">
+            <div className="o-grid-12@xs o-grid-fit@md u-ml-auto modularity-mod-event__pagination">
               <Pagination
                 current={currentPage}
                 input={this.paginationInput}
