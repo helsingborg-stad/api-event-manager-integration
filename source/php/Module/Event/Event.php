@@ -83,7 +83,7 @@ class Event extends \Modularity\Module
 
         // List module data
         $data['pagesCount'] = $this->countPages($id);
-        $data['events'] = $this->getEvents($id, $page, false);
+        $data['events'] = $this->getEvents($id, $page);
         $data['mod_event_fields'] = isset($data['mod_event_fields']) && is_array($data['mod_event_fields'])
             ? $data['mod_event_fields'] : array();
         $data['descr_limit'] = !empty($data['mod_event_descr_limit']) ? $data['mod_event_descr_limit'] : null;
@@ -128,7 +128,7 @@ class Event extends \Modularity\Module
         }
 
         $max_per_page = (isset($fields->mod_event_limit)) ? $fields->mod_event_limit : 10;
-        $events = self::getEvents($module_id, 1, false);
+        $events = self::getEvents($module_id, 1);
         $total_posts = count($events);  //Total number of posts returned
         $pages = ceil($total_posts / $max_per_page);
 
@@ -147,10 +147,11 @@ class Event extends \Modularity\Module
      * @param  bool $useLimit  True = limit by setting, false = get all
      * @return array           Array with event objects
      */
-    public function getEvents($module_id, $page = 1, $useLimit = true)
+    public function getEvents($module_id, $page = 1)
     {
         $fields = json_decode(json_encode(get_fields($module_id)));
-        $display_limit = ($useLimit == true && isset($fields->mod_event_limit)) ? $fields->mod_event_limit : -1;
+        $eventPagination = $fields->mod_event_pagination;
+        $display_limit = ($eventPagination == false && isset($fields->mod_event_limit)) ? $fields->mod_event_limit : -1;
         $days_ahead = isset($fields->mod_event_interval) ? $fields->mod_event_interval : 0;
 
         // Set start and end date
