@@ -13,23 +13,34 @@ class DateFilter extends React.Component {
     };
   }
 
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleClickOutside, false);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside, false);
+  }
+
+  handleClickOutside = (e) => {
+    if (this.node.contains(e.target)) {
+      return;
+    }
+    this.setState({...this.state, showDayPicker: false})
+  }  
+
   render() {
     const {showDayPicker} = this.state;
-    const { id, label, onDayChange, formatDate, value } = this.props;
+    const { id, label, onDayChange, value } = this.props;
     return (
-      <div>
+      <div ref={node => this.node = node}>
           <Input
             className="form-control"
             id={id}
             label={label}
             type="text"
             value={value}
-            onFocus={(e) => {
+            onFocus={() => {
               this.setState({...this.state, showDayPicker: true})
             }}
-            // onBlur={(e) => {
-            //   console.log('blurred!!');
-            // }}
           />
 
           {
