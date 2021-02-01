@@ -4,9 +4,12 @@
         'classList' => [
             'u-display--none'
         ],
+        'attributeList' => [
+            'event-submit__success' => ''
+        ],
         'type' => 'success',
         'message' => [
-            'text' => 'Tellus Sem Lorem Malesuada Ipsum',
+            'text' => '#@ event-submit__success__text @#',
             'size' => 'sm'
         ],
         'icon' => [
