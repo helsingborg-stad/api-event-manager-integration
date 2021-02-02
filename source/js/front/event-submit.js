@@ -15,8 +15,8 @@ export default (() => {
                         .children('.box')
                         .hide();
                     this.handleEvents($(eventForm), apiUrl);
-                    this.hyperformExtensions(eventForm);
-                    this.datePickerSettings();
+                    // this.hyperformExtensions(eventForm);
+                    // this.datePickerSettings();
 
                     if (document.getElementById('location') !== null) {
                         this.loadPostType($(eventForm), apiUrl, 'location');
@@ -531,10 +531,10 @@ export default (() => {
         Form.prototype.handleEvents = function(eventForm, apiUrl) {
             this.initDateEvents();
 
-            const submitBtn = document.querySelector('[event-submit__submit-button]');
-
-            submitBtn.addEventListener('click', (e) => {
-                e.preventDefault();
+            $(eventForm).on(
+                'submit',
+                function(e) {
+                    e.preventDefault();
 
                     var fileInput = eventForm.find('#image_input'),
                         formData = this.jsonData(eventForm),
@@ -560,49 +560,6 @@ export default (() => {
                                 let noticeSuccess = $('[event-submit__error]', eventForm);
                                 noticeSuccess[0].querySelector('[id^="notice__text__"]').innerHTML = eventIntegrationFront.something_went_wrong;
                                 $('[event-submit__error]', eventForm).removeClass('u-display--none');
-                            }
-                        });
-                        // Submit post if media is not set
-                    } else {
-                        this.submitEventAjax(eventForm, formData);
-                    }
-            })
-
-            $(eventForm).on(
-                'submit',
-                function(e) {
-                    e.preventDefault();
-
-                    var fileInput = eventForm.find('#image_input'),
-                        formData = this.jsonData(eventForm),
-                        imageData = new FormData();
-
-                    $('.submit-error', eventForm).addClass('hidden');
-                    $('.submit-success', eventForm).removeClass('hidden');
-                    $('.submit-success .success', eventForm)
-                        .empty()
-                        .append('<i class="fa fa-send"></i>Skickar...</li>');
-
-                    // Upload media first and append it to the post.
-                    if (fileInput.val()) {
-                        imageData.append('file', fileInput[0].files[0]);
-                        $.when(this.submitImageAjax(eventForm, imageData)).then(function(
-                            response,
-                            textStatus
-                        ) {
-                            if (response.success) {
-                                formData['featured_media'] = response.data;
-                                Form.prototype.submitEventAjax(eventForm, formData);
-                            } else {
-                                $('.submit-success', eventForm).addClass('hidden');
-                                $('.submit-error', eventForm).removeClass('hidden');
-                                $('.submit-error .warning', eventForm)
-                                    .empty()
-                                    .append(
-                                        '<i class="fa fa-warning"></i>' +
-                                            eventIntegrationFront.something_went_wrong +
-                                            '</li>'
-                                    );
                             }
                         });
                         // Submit post if media is not set
