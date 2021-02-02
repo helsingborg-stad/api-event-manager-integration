@@ -358,6 +358,7 @@ export default (() => {
 
         // Send Ajax request with post data
         Form.prototype.submitEventAjax = function(eventForm, formData) {
+
             $.ajax({
                 url: eventintegration.ajaxurl,
                 type: 'POST',
@@ -367,26 +368,24 @@ export default (() => {
                 },
                 success: function(response) {
                     if (response.success) {
-                        $('.submit-success', eventForm).removeClass('hidden');
-                        $('.submit-success .success', eventForm)
-                            .empty()
-                            .append('<i class="fa fa-send"></i>Evenemanget har skickats!</li>');
+                        $('[event-submit__error]', eventForm).addClass('u-display--none');
+                        let noticeSuccess = $('[event-submit__success]', eventForm);
+                        noticeSuccess[0].querySelector('[id^="notice__text__"]').innerHTML = 'Evenemanget har skickats!';
+                        $('[event-submit__success]', eventForm).removeClass('u-display--none');
+                        
                         Form.prototype.cleanForm(eventForm);
                     } else {
-                        console.log(response.data);
-                        $('.submit-success', eventForm).addClass('hidden');
-                        $('.submit-error', eventForm).removeClass('hidden');
-                        $('.submit-error .warning', eventForm)
-                            .empty()
-                            .append('<i class="fa fa-warning"></i>' + response.data + '</li>');
+                        $('[event-submit__success]', eventForm).addClass('u-display--none');
+                        let noticeSuccess = $('[event-submit__error]', eventForm);
+                        noticeSuccess[0].querySelector('[id^="notice__text__"]').innerHTML = response.data;
+                        $('[event-submit__error]', eventForm).removeClass('u-display--none');
                     }
                 },
                 error: function(jqXHR, textStatus) {
-                    $('.submit-success', eventForm).addClass('hidden');
-                    $('.submit-error', eventForm).removeClass('hidden');
-                    $('.submit-error .warning', eventForm)
-                        .empty()
-                        .append('<i class="fa fa-warning"></i>' + textStatus + '</li>');
+                    $('[event-submit__success]', eventForm).addClass('u-display--none');
+                    let noticeSuccess = $('[event-submit__error]', eventForm);
+                    noticeSuccess[0].querySelector('[id^="notice__text__"]').innerHTML = textStatus;
+                    $('[event-submit__error]', eventForm).removeClass('u-display--none');
                 },
             });
         };
@@ -531,6 +530,43 @@ export default (() => {
 
         Form.prototype.handleEvents = function(eventForm, apiUrl) {
             this.initDateEvents();
+
+            const submitBtn = document.querySelector('[event-submit__submit-button]');
+
+            submitBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                    var fileInput = eventForm.find('#image_input'),
+                        formData = this.jsonData(eventForm),
+                        imageData = new FormData();
+
+                    $('[event-submit__error]', eventForm).addClass('u-display--none');
+                    let noticeSuccess = $('[event-submit__success]', eventForm);
+                    noticeSuccess[0].querySelector('[id^="notice__text__"]').innerHTML = 'Skickar...';
+                    $('[event-submit__success]', eventForm).removeClass('u-display--none');
+
+                    // Upload media first and append it to the post.
+                    if (fileInput.val()) {
+                        imageData.append('file', fileInput[0].files[0]);
+                        $.when(this.submitImageAjax(eventForm, imageData)).then(function(
+                            response,
+                            textStatus
+                        ) {
+                            if (response.success) {
+                                formData['featured_media'] = response.data;
+                                Form.prototype.submitEventAjax(eventForm, formData);
+                            } else {
+                                $('[event-submit__success]', eventForm).addClass('u-display--none');
+                                let noticeSuccess = $('[event-submit__error]', eventForm);
+                                noticeSuccess[0].querySelector('[id^="notice__text__"]').innerHTML = eventIntegrationFront.something_went_wrong;
+                                $('[event-submit__error]', eventForm).removeClass('u-display--none');
+                            }
+                        });
+                        // Submit post if media is not set
+                    } else {
+                        this.submitEventAjax(eventForm, formData);
+                    }
+            })
 
             $(eventForm).on(
                 'submit',
