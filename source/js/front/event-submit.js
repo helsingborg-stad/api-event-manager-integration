@@ -705,6 +705,19 @@ export default (() => {
         // Format date and time
         Form.prototype.formatDate = function(date, hh, mm) {
             var dateTime = '';
+
+            //Format from datepicker (dd/mm/yyyy) to wp format (yyyy-mm-dd)
+            if(date.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/)) {
+                let dateExploded = date.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/)
+
+                // Pads date with 0 eg. 06 for june 
+                dateExploded[2] = dateExploded[2].padStart(2, '0')
+                dateExploded[1] = dateExploded[1].padStart(2, '0')
+
+                //YYYY-MM-DD
+                date = `${dateExploded[3]}-${dateExploded[2]}-${dateExploded[1]}`
+            }
+
             if (this.isValidDate(date) && hh && mm) {
                 dateTime = date + ' ' + this.addZero(hh) + ':' + this.addZero(mm) + ':00';
             }
