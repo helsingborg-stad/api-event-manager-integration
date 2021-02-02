@@ -4,6 +4,7 @@
         'variant' => 'subtitle' 
     ])
         {{ $senior_age->label }}
+        @includeWhen($senior_age->required, 'components.required')
     @endtypography
 
     @includeWhen(!$senior_age->hidden_description, 'components.description', [

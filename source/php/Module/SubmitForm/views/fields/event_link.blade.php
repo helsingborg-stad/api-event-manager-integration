@@ -4,6 +4,7 @@
         'variant' => 'subtitle' 
     ])
         {{ $event_link->label }}
+        @includeWhen($event_link->required, 'components.required')
     @endtypography
 
     @includeWhen(!$event_link->hidden_description, 'components.description', [

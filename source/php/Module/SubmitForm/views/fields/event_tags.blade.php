@@ -5,6 +5,7 @@
         'variant' => 'subtitle'
     ])
         {{ $event_tags->label }}
+        @includeWhen($event_tags->required, 'components.required')
     @endtypography
 
     @includeWhen(!$event_tags->hidden_description, 'components.description', [

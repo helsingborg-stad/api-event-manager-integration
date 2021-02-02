@@ -4,6 +4,7 @@
         'variant' => 'subtitle' 
     ])
         {{ __('Contact details', 'event-integration') }}
+        @includeWhen($submitter_email->required, 'components.required')
     @endtypography
 
     @typography([

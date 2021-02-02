@@ -4,6 +4,7 @@
         'variant' => 'subtitle' 
     ])
         {{ $accessibility->label }}
+        @includeWhen($accessibility->required, 'components.required')
     @endtypography
     
     @includeWhen(!$accessibility->hidden_description, 'components.description', [

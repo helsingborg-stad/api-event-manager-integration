@@ -5,6 +5,7 @@
         'variant' => 'subtitle' 
     ])
         {{ $content->label }}
+        @includeWhen($content->required, 'components.required')
     @endtypography
 
     @if(!$content->hidden_description)

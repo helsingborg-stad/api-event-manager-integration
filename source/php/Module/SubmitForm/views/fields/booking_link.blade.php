@@ -4,6 +4,7 @@
         'variant' => 'subtitle' 
     ])
         {{ $booking_link->label }}
+        @includeWhen($booking_link->required, 'components.required')
     @endtypography
 
     @includeWhen(!$booking_link->hidden_description, 'components.description', [

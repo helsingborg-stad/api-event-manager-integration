@@ -5,6 +5,7 @@
         'variant' => 'subtitle' 
     ])
         {{ $price_senior->label }}
+        @includeWhen($price_senior->required, 'components.required')
     @endtypography
 
     @includeWhen(!$price_senior->hidden_description, 'components.description', [

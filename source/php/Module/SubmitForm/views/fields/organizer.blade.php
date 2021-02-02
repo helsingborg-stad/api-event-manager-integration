@@ -4,6 +4,7 @@
         'variant' => 'subtitle' 
     ])
         {{ $organizer->label }}
+        @includeWhen($organizer->required, 'components.required')
     @endtypography
 
     @includeWhen(!$organizer->hidden_description, 'components.description', [

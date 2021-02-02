@@ -4,6 +4,7 @@
         'variant' => 'subtitle' 
     ])
         {{ $location->label }}
+        @includeWhen($location->required, 'components.required')
     @endtypography
 
     @includeWhen(!$location->hidden_description, 'components.description', [
@@ -23,7 +24,9 @@
     ])
     @endfield
 
-    @field([
+    <input name="{{ $location->name }}" id="{{ $location->name }}" type="hidden">
+
+    {{-- @field([
         'id'   => 'location-selector',
         'type' => 'hidden',
         'classList' => ['u-display--none'],
@@ -35,5 +38,5 @@
         'label' => $location->label,
         'required' => $location->required,
     ])
-    @endfield
+    @endfield --}}
 </div>

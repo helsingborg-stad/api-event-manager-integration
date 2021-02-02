@@ -3,6 +3,7 @@
     'variant' => 'subtitle' 
 ])
     {{ $image_input->label }}
+    @includeWhen($image->required, 'components.required')
 @endtypography
 
 <div class="form-group image-box">

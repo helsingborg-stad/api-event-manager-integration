@@ -6,6 +6,7 @@
         'variant' => 'subtitle'
     ])
         {{ $occasion->label }}
+        @includeWhen($occasion->required, 'components.required')
     @endtypography
 
     @includeWhen(!$occasion->hidden_description, 'components.description', [
