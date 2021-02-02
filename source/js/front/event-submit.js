@@ -279,9 +279,9 @@ export default (() => {
                     rcrStartM = $('[name="recurring_start_m"]', this).val();
                 var rcrStartTime =
                     rcrStartH && rcrStartM
-                        ? Form.prototype.addZero(rcrStartH) +
+                        ? rcrStartH.padStart(2, '0') +
                         ':' +
-                        Form.prototype.addZero(rcrStartM) +
+                        rcrStartM.padStart(2, '0') +
                         ':' +
                         '00'
                         : false;
@@ -289,9 +289,9 @@ export default (() => {
                     rcrEndM = $('[name="recurring_end_m"]', this).val();
                 var rcrEndTime =
                     rcrEndH && rcrEndM
-                        ? Form.prototype.addZero(rcrEndH) +
+                        ? rcrEndH.padStart(2, '0') +
                         ':' +
-                        Form.prototype.addZero(rcrEndM) +
+                        rcrEndM.padStart(2, '0') +
                         ':' +
                         '00'
                         : false;
@@ -711,15 +711,15 @@ export default (() => {
                 let dateExploded = date.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/)
 
                 // Pads date with 0 eg. 06 for june 
-                dateExploded[2] = dateExploded[2].padStart(2, '0')
-                dateExploded[1] = dateExploded[1].padStart(2, '0')
+                dateExploded[2] = dateExploded[2].padStart(2,'0')
+                dateExploded[1] = dateExploded[1].padStart(2,'0')
 
                 //YYYY-MM-DD
                 date = `${dateExploded[3]}-${dateExploded[2]}-${dateExploded[1]}`
             }
 
             if (this.isValidDate(date) && hh && mm) {
-                dateTime = date + ' ' + this.addZero(hh) + ':' + this.addZero(mm) + ':00';
+                dateTime = date + ' ' + hh.padStart(2,'0') + ':' + mm.padStart(2,'0') + ':00';
             }
             return dateTime;
         };
@@ -728,14 +728,6 @@ export default (() => {
         Form.prototype.isValidDate = function(dateString) {
             var regEx = /^\d{4}-\d{2}-\d{2}$/;
             return dateString.match(regEx) != null;
-        };
-
-        // Prefix with zero
-        Form.prototype.addZero = function(i) {
-            if (i.toString().length === 1) {
-                i = '0' + i;
-            }
-            return i;
         };
 
         return new Form();
