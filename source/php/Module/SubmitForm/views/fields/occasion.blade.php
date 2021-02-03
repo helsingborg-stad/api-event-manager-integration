@@ -185,7 +185,7 @@
                 @endtypography
 
                 @select([
-                    'required'      => true,
+                    'required'      => false,
                     'preselected'   => 'Monday',
                     'options'       => [
                         'Monday'        => __('Monday', 'event-integration'),
@@ -227,7 +227,7 @@
                             'id' => 'weekly_interval',
                             'type' => 'number',
                             'name' => 'weekly_interval',
-                            'required' => true,
+                            'required' => false,
                             
                         ],
                         'label' => __('Weekly interval', 'event-integration')
@@ -315,7 +315,7 @@
                                 'name' => 'recurring_start_d',
                             ],
                             'classList' => ['datepicker'],
-                            'required' => true,
+                            'required' => false,
                             'datepicker' => [
                                 'title'                 => __('Start date', 'event-integration'),
                                 'required'              => true,
@@ -351,10 +351,10 @@
                                 'name' => 'recurring_end_d',
                             ],
                             'classList' => ['datepicker'],
-                            'required' => true,
+                            'required' => false,
                             'datepicker' => [
                                 'title'                 => __('End date', 'event-integration'),
-                                'required'              => true,
+                                'required'              => false,
                             ]
                         ])
                         @endfield
