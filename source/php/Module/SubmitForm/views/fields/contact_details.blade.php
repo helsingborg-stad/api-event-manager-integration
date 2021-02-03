@@ -74,7 +74,7 @@
                 'pattern' => '^[^@]+@[^@]+\.[^@]+$',
                 'autocomplete' => 'e-mail',
             ],
-            'label' => __('Repeat email', 'event-integration'),
+            'label' => $submitter_phone->label,
             'required' => $submitter_phone->required,
         ])
         @endfield
