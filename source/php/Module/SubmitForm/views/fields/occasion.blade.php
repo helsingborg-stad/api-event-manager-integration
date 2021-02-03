@@ -318,7 +318,7 @@
                             'required' => false,
                             'datepicker' => [
                                 'title'                 => __('Start date', 'event-integration'),
-                                'required'              => true,
+                                'required'              => false,
                             ]
                         ])
                         @endfield
