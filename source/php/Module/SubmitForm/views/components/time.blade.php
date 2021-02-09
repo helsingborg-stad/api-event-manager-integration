@@ -1,19 +1,19 @@
 @php
     $hourId = $hourId ?? uniqid();
     $minuteId = $minuteId ?? uniqid();
+    $required = !$required ? $required : true;
 
 @endphp
-
+{{var_dump($required)}}
 <div class="o-grid">
     <div class="o-grid-6">
         @field([
             'type' => 'number',
-            
+            'required' => $required,
             'attributeList' => [
                 'id' => $hourId ,
                 'type' => 'number',
                 'name' => $hourName,
-                'required' => true,
                 'min' => '0',
                 'max' => '24',
                 
@@ -28,11 +28,11 @@
             'type' => 'number',
             'min' => '0',
             'max' => '59',
+            'required' => $required,
             'attributeList' => [
                 'id' => $minuteId,
                 'type' => 'number',
                 'name' => $minuteName,
-                'required' => true,
                 'min' => '0',
             'max' => '59',
             ],
