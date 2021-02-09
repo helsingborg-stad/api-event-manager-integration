@@ -139,6 +139,7 @@
 
                 </div>
             </div>
+            
             <div class="form-group">
 
                 @button([
@@ -223,11 +224,11 @@
                         'type' => 'number',
                         'min' => '1',
                         'max' => '52',
+                        'required' => false,
                         'attributeList' => [
                             'id' => 'weekly_interval',
                             'type' => 'number',
                             'name' => 'weekly_interval',
-                            'required' => false,
                             
                         ],
                         'label' => __('Weekly interval', 'event-integration')
@@ -258,6 +259,7 @@
                         'minuteName' => 'recurring_start_m',
                         'hourLabel' => 'HH',
                         'minuteLabel' => 'MM',
+                        'required' => false
                     ])
 
                 </div>
@@ -284,6 +286,7 @@
                         'minuteName' => 'recurring_end_m',
                         'hourLabel' => 'HH',
                         'minuteLabel' => 'MM',
+                        'required' => false
                     ])
 
                 </div>
