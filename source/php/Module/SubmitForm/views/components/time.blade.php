@@ -2,9 +2,8 @@
     $hourId = $hourId ?? uniqid();
     $minuteId = $minuteId ?? uniqid();
     $required = !$required ? $required : true;
-
 @endphp
-{{var_dump($required)}}
+
 <div class="o-grid">
     <div class="o-grid-6">
         @field([
