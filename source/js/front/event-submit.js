@@ -626,8 +626,8 @@ export default (() => {
                             .removeAttr('id')
                             .end()
                             .insertAfter($occuranceGroup)
-                            .find('.datepicker')
-                            .datepicker()
+                            // .find('.datepicker')
+                            // .datepicker()
                             .end();
 
                     // Re init date events
