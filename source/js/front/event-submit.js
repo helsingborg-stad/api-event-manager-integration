@@ -15,8 +15,8 @@ export default (() => {
                         .children('.box')
                         .hide();
                     this.handleEvents($(eventForm), apiUrl);
-                    this.hyperformExtensions(eventForm);
-                    this.datePickerSettings();
+                    // this.hyperformExtensions(eventForm);
+                    // this.datePickerSettings();
 
                     if (document.getElementById('location') !== null) {
                         this.loadPostType($(eventForm), apiUrl, 'location');
@@ -279,9 +279,9 @@ export default (() => {
                     rcrStartM = $('[name="recurring_start_m"]', this).val();
                 var rcrStartTime =
                     rcrStartH && rcrStartM
-                        ? Form.prototype.addZero(rcrStartH) +
+                        ? rcrStartH.padStart(2, '0') +
                         ':' +
-                        Form.prototype.addZero(rcrStartM) +
+                        rcrStartM.padStart(2, '0') +
                         ':' +
                         '00'
                         : false;
@@ -289,9 +289,9 @@ export default (() => {
                     rcrEndM = $('[name="recurring_end_m"]', this).val();
                 var rcrEndTime =
                     rcrEndH && rcrEndM
-                        ? Form.prototype.addZero(rcrEndH) +
+                        ? rcrEndH.padStart(2, '0') +
                         ':' +
-                        Form.prototype.addZero(rcrEndM) +
+                        rcrEndM.padStart(2, '0') +
                         ':' +
                         '00'
                         : false;
@@ -358,6 +358,7 @@ export default (() => {
 
         // Send Ajax request with post data
         Form.prototype.submitEventAjax = function(eventForm, formData) {
+
             $.ajax({
                 url: eventintegration.ajaxurl,
                 type: 'POST',
@@ -367,26 +368,24 @@ export default (() => {
                 },
                 success: function(response) {
                     if (response.success) {
-                        $('.submit-success', eventForm).removeClass('hidden');
-                        $('.submit-success .success', eventForm)
-                            .empty()
-                            .append('<i class="fa fa-send"></i>Evenemanget har skickats!</li>');
+                        $('[event-submit__error]', eventForm).addClass('u-display--none');
+                        let noticeSuccess = $('[event-submit__success]', eventForm);
+                        noticeSuccess[0].querySelector('[id^="notice__text__"]').innerHTML = 'Evenemanget har skickats!';
+                        $('[event-submit__success]', eventForm).removeClass('u-display--none');
+                        
                         Form.prototype.cleanForm(eventForm);
                     } else {
-                        console.log(response.data);
-                        $('.submit-success', eventForm).addClass('hidden');
-                        $('.submit-error', eventForm).removeClass('hidden');
-                        $('.submit-error .warning', eventForm)
-                            .empty()
-                            .append('<i class="fa fa-warning"></i>' + response.data + '</li>');
+                        $('[event-submit__success]', eventForm).addClass('u-display--none');
+                        let noticeSuccess = $('[event-submit__error]', eventForm);
+                        noticeSuccess[0].querySelector('[id^="notice__text__"]').innerHTML = response.data;
+                        $('[event-submit__error]', eventForm).removeClass('u-display--none');
                     }
                 },
                 error: function(jqXHR, textStatus) {
-                    $('.submit-success', eventForm).addClass('hidden');
-                    $('.submit-error', eventForm).removeClass('hidden');
-                    $('.submit-error .warning', eventForm)
-                        .empty()
-                        .append('<i class="fa fa-warning"></i>' + textStatus + '</li>');
+                    $('[event-submit__success]', eventForm).addClass('u-display--none');
+                    let noticeSuccess = $('[event-submit__error]', eventForm);
+                    noticeSuccess[0].querySelector('[id^="notice__text__"]').innerHTML = textStatus;
+                    $('[event-submit__error]', eventForm).removeClass('u-display--none');
                 },
             });
         };
@@ -541,11 +540,10 @@ export default (() => {
                         formData = this.jsonData(eventForm),
                         imageData = new FormData();
 
-                    $('.submit-error', eventForm).addClass('hidden');
-                    $('.submit-success', eventForm).removeClass('hidden');
-                    $('.submit-success .success', eventForm)
-                        .empty()
-                        .append('<i class="fa fa-send"></i>Skickar...</li>');
+                    $('[event-submit__error]', eventForm).addClass('u-display--none');
+                    let noticeSuccess = $('[event-submit__success]', eventForm);
+                    noticeSuccess[0].querySelector('[id^="notice__text__"]').innerHTML = 'Skickar...';
+                    $('[event-submit__success]', eventForm).removeClass('u-display--none');
 
                     // Upload media first and append it to the post.
                     if (fileInput.val()) {
@@ -558,15 +556,10 @@ export default (() => {
                                 formData['featured_media'] = response.data;
                                 Form.prototype.submitEventAjax(eventForm, formData);
                             } else {
-                                $('.submit-success', eventForm).addClass('hidden');
-                                $('.submit-error', eventForm).removeClass('hidden');
-                                $('.submit-error .warning', eventForm)
-                                    .empty()
-                                    .append(
-                                        '<i class="fa fa-warning"></i>' +
-                                            eventIntegrationFront.something_went_wrong +
-                                            '</li>'
-                                    );
+                                $('[event-submit__success]', eventForm).addClass('u-display--none');
+                                let noticeSuccess = $('[event-submit__error]', eventForm);
+                                noticeSuccess[0].querySelector('[id^="notice__text__"]').innerHTML = eventIntegrationFront.something_went_wrong;
+                                $('[event-submit__error]', eventForm).removeClass('u-display--none');
                             }
                         });
                         // Submit post if media is not set
@@ -633,8 +626,8 @@ export default (() => {
                             .removeAttr('id')
                             .end()
                             .insertAfter($occuranceGroup)
-                            .find('.datepicker')
-                            .datepicker()
+                            // .find('.datepicker')
+                            // .datepicker()
                             .end();
 
                     // Re init date events
@@ -669,8 +662,21 @@ export default (() => {
         // Format date and time
         Form.prototype.formatDate = function(date, hh, mm) {
             var dateTime = '';
+
+            //Format from datepicker (dd/mm/yyyy) to wp format (yyyy-mm-dd)
+            if(date.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/)) {
+                let dateExploded = date.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/)
+
+                // Pads date with 0 eg. 06 for june 
+                dateExploded[2] = dateExploded[2].padStart(2,'0')
+                dateExploded[1] = dateExploded[1].padStart(2,'0')
+
+                //YYYY-MM-DD
+                date = `${dateExploded[3]}-${dateExploded[2]}-${dateExploded[1]}`
+            }
+
             if (this.isValidDate(date) && hh && mm) {
-                dateTime = date + ' ' + this.addZero(hh) + ':' + this.addZero(mm) + ':00';
+                dateTime = date + ' ' + hh.padStart(2,'0') + ':' + mm.padStart(2,'0') + ':00';
             }
             return dateTime;
         };
@@ -679,14 +685,6 @@ export default (() => {
         Form.prototype.isValidDate = function(dateString) {
             var regEx = /^\d{4}-\d{2}-\d{2}$/;
             return dateString.match(regEx) != null;
-        };
-
-        // Prefix with zero
-        Form.prototype.addZero = function(i) {
-            if (i.toString().length === 1) {
-                i = '0' + i;
-            }
-            return i;
         };
 
         return new Form();
