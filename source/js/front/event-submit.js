@@ -18,10 +18,13 @@ export default (() => {
                     // this.hyperformExtensions(eventForm);
                     // this.datePickerSettings();
 
-                    if (document.getElementById('location') !== null) {
+                    
+                    if (document.getElementById('location-selector') !== null) {
+                        console.log(apiUrl)
                         this.loadPostType($(eventForm), apiUrl, 'location');
                     }
-                    if (document.getElementById('organizer') !== null) {
+                    if (document.getElementById('organizer-selector') !== null) {
+                        console.log(apiUrl)
                         this.loadPostType($(eventForm), apiUrl, 'organizer');
                     }
                     if (document.getElementById('user_groups') !== null) {
@@ -175,8 +178,10 @@ export default (() => {
         // Get a post type from API and add to input init autocomplete
         Form.prototype.loadPostType = function(eventForm, resource, postType) {
             resource += '/' + postType + '/complete?_jsonp=get' + postType;
+    
+            console.log(postType);
             new autoComplete({
-                selector: '#' + postType + '-selector',
+                selector: '#input_' + postType + '-selector',
                 minChars: 1,
                 source: function(term, suggest) {
                     term = term.toLowerCase();
@@ -188,11 +193,13 @@ export default (() => {
                         jsonpCallback: 'get' + postType,
                         crossDomain: true,
                         success: function(response) {
+                            console.log(response);
                             var suggestions = [];
                             $(response).each(function(index, item) {
                                 if (~item.title.toLowerCase().indexOf(term))
                                     suggestions.push([item.title, item.id, postType]);
                             });
+                            (suggestions);
                             suggest(suggestions);
                         },
                     });
@@ -215,7 +222,7 @@ export default (() => {
                     );
                 },
                 onSelect: function(e, term, item) {
-                    $('#' + item.getAttribute('data-type') + '-selector').val(
+                    $('#input_' + item.getAttribute('data-type') + '-selector').val(
                         item.getAttribute('data-langname')
                     );
                     $('#' + item.getAttribute('data-type')).val(item.getAttribute('data-lang'));
