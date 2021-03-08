@@ -25,5 +25,7 @@
     @endfield
 
     <input name="{{ $organizer->name }}" id="{{ $organizer->name }}" type="hidden">
+    <input name="contact_phone" id="contact_phone" type="hidden">
+    <input name="contact_email" id="contact_email" type="hidden">
 
 </div>
