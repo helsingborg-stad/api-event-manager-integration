@@ -24,6 +24,8 @@
     ])
     @endfield
 
+    
+    {{'-----'}}
     <input name="{{ $location->name }}" id="{{ $location->name }}" type="hidden">
 
     {{-- @field([

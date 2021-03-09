@@ -18,10 +18,11 @@ export default (() => {
                     // this.hyperformExtensions(eventForm);
                     // this.datePickerSettings();
 
-                    if (document.getElementById('location') !== null) {
+                    
+                    if (document.getElementById('location-selector') !== null) {
                         this.loadPostType($(eventForm), apiUrl, 'location');
                     }
-                    if (document.getElementById('organizer') !== null) {
+                    if (document.getElementById('organizer-selector') !== null) {
                         this.loadPostType($(eventForm), apiUrl, 'organizer');
                     }
                     if (document.getElementById('user_groups') !== null) {
@@ -175,8 +176,9 @@ export default (() => {
         // Get a post type from API and add to input init autocomplete
         Form.prototype.loadPostType = function(eventForm, resource, postType) {
             resource += '/' + postType + '/complete?_jsonp=get' + postType;
+ 
             new autoComplete({
-                selector: '#' + postType + '-selector',
+                selector: '#input_' + postType + '-selector',
                 minChars: 1,
                 source: function(term, suggest) {
                     term = term.toLowerCase();
@@ -191,8 +193,18 @@ export default (() => {
                             var suggestions = [];
                             $(response).each(function(index, item) {
                                 if (~item.title.toLowerCase().indexOf(term))
-                                    suggestions.push([item.title, item.id, postType]);
+                                    suggestions.push(
+                                        [
+                                            item.title, 
+                                            item.id, 
+                                            postType, 
+                                            item.contact_phone ? item.contact_phone : '' , 
+                                            item.contact_email ? item.contact_email : ''
+                                        ]
+                                    );
                             });
+                            (suggestions);
+
                             suggest(suggestions);
                         },
                     });
@@ -209,16 +221,28 @@ export default (() => {
                         item[1] +
                         '" data-val="' +
                         search +
+                        '" contact-phone="' +
+                        item[3] +
+                        '" contact-email="' +
+                        item[4] +
                         '"> ' +
                         item[0].replace(re, '<b>$1</b>') +
                         '</div>'
                     );
                 },
                 onSelect: function(e, term, item) {
-                    $('#' + item.getAttribute('data-type') + '-selector').val(
+                    $('#input_' + item.getAttribute('data-type') + '-selector').val(
                         item.getAttribute('data-langname')
                     );
                     $('#' + item.getAttribute('data-type')).val(item.getAttribute('data-lang'));
+
+                    if(item.getAttribute('contact-phone')){
+                        $('#contact_email').val(item.getAttribute('contact-email'));
+                    }
+
+                    if(item.getAttribute('contact-email')){
+                        $('#contact_phone').val(item.getAttribute('contact-phone'));
+                    }
                 },
             });
         };
