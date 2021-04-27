@@ -19,7 +19,6 @@
                         @endtypography
                    @endslot 
                 @endcard
-                {{var_dump($post->startDate)}}
             </div>
         @endforeach
     </div>
