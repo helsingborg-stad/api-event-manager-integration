@@ -15,7 +15,7 @@
                    @slot('subHeading')
                    @typography(['variant' => 'meta', 'element' => 'p'])
                         @icon(['icon' => 'date_range']) @endicon
-                        {{ \EventManagerIntegration\App::formatEventDate($post->startDate, $post->endDate) }}
+                        @date(['action' => '', 'timestamp' => \EventManagerIntegration\App::formatEventDate($post->startDate, $post->endDate)])@enddate
                         @endtypography
                    @endslot
                 @endcard
