@@ -1,3 +1,4 @@
+import { createRef } from 'react';
 import { Button, Pagination, PreLoader } from 'hbg-react';
 import update from 'immutability-helper';
 import PropTypes from 'prop-types';
@@ -5,6 +6,7 @@ import setQuery from 'set-query-string';
 import { getEvents } from '../../../Api/events';
 import EventList from './EventList';
 import FilterContainer from './FilterContainer';
+import scrollIntoView from 'scroll-into-view-if-needed';
 
 class FilterableEventsContainer extends React.Component {
   constructor(props) {
@@ -24,6 +26,8 @@ class FilterableEventsContainer extends React.Component {
       tags: props.tags,
       totalPages: 1,
     };
+
+    this.myRef = createRef()
   }
 
   componentDidMount() {
@@ -46,7 +50,7 @@ class FilterableEventsContainer extends React.Component {
         let value;
         switch (type) {
           case 'int':
-            value = parseInt(urlParams.get(param));           
+            value = parseInt(urlParams.get(param));
             break;
           case 'array':
             // Get all parameter values
@@ -77,17 +81,17 @@ class FilterableEventsContainer extends React.Component {
     this.setState({ ...stateObj }, () => this.getEvents());
   };
 
-   loadQueryString = () => { 
-    let parameters = {}; 
-    let searchString = location.search.substr(1); 
-    let pairs = searchString.split("&"); 
+   loadQueryString = () => {
+    let parameters = {};
+    let searchString = location.search.substr(1);
+    let pairs = searchString.split("&");
     let parts;
     for(let i = 0; i < pairs.length; i++){
         parts = pairs[i].split("=");
         let name = parts[0];
         let data = decodeURI(parts[1]);
         parameters[name] = data;
-    }    
+    }
     return parameters;
   }
   /**
@@ -122,7 +126,7 @@ class FilterableEventsContainer extends React.Component {
       { pushState: true }
     );
       if(params.translate){
-        location.hash = "#translate"; 
+        location.hash = "#translate";
       }
 
   };
@@ -217,7 +221,7 @@ class FilterableEventsContainer extends React.Component {
       tags,
     };
 
-    // Fetch events 
+    // Fetch events
     getEvents(url, params)
       .then(response => {
         this.setState({
@@ -240,6 +244,16 @@ class FilterableEventsContainer extends React.Component {
   };
 
   /**
+   * Scroll to top of event container (if not visible).
+   */
+  executeScroll = () => scrollIntoView(this.myRef.current, {
+    behavior: 'auto',
+    scrollMode: 'if-needed',
+    block: 'start',
+    inline: 'start'
+  });
+
+  /**
    * Pagination next page handler
    */
   nextPage = () => {
@@ -249,6 +263,8 @@ class FilterableEventsContainer extends React.Component {
     }
     currentPage += 1;
     this.setState({ currentPage }, () => this.getEvents());
+
+    this.executeScroll();
   };
 
   /**
@@ -262,6 +278,8 @@ class FilterableEventsContainer extends React.Component {
 
     currentPage -= 1;
     this.setState({ currentPage }, () => this.getEvents());
+
+    this.executeScroll();
   };
 
   /**
@@ -431,7 +449,7 @@ class FilterableEventsContainer extends React.Component {
           </div>
         )}
 
-        <div className={`modularity-event-index__body ${!isLoaded && items.length > 0 ? 'is-disabled' : ''}`} style={{paddingTop: '40px', paddingBottom: '64px'}}>
+        <div ref={this.myRef} className={`modularity-event-index__body ${!isLoaded && items.length > 0 ? 'is-disabled' : ''}`} style={{paddingTop: '40px', paddingBottom: '64px'}}>
           {!isLoaded && (
             <div className={`modularity-event-index__loader modularity-event-index__loader--top ${items.length > 0 ? 'modularity-event-index__loader--float' : ''}`}>
               <PreLoader />

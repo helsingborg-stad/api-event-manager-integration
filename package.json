@@ -45,6 +45,7 @@
     "react-onclickoutside": "^6.9.1",
     "sass": "^1.26.10",
     "sass-loader": "^7",
+    "scroll-into-view-if-needed": "^2.2.28",
     "set-query-string": "^2.2.0",
     "uuid": "^3.4.0",
     "webpack": "^4.46.0",
