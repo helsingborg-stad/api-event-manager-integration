@@ -35,14 +35,14 @@
 
         </div>
     @endif
-            
+
     <div class="o-grid-12 o-grid-8@lg">
         @if (!empty($event['occasion']['formatted']))
             @typography(['variant' => 'h4', 'element' => 'h4'])
                 {{ $event['occasion']['formatted'] }}
             @endtypography
 
-    
+
         @endif
 
         @if ($event['location'])
@@ -71,49 +71,44 @@
             {!! apply_filters('the_content', $post->post_content) !!}
         @endif
 
-    </div>
-
-    @if($event['age_group'])
-        <div class="o-grid-12 o-grid-8@lg">
-            @if($event['age_group'])
+        @if($event['age_group'])
+            <div class="u-margin__top--3">
                 <small><?php _e('Age', 'event-integration') ?></small>
                 <br>
-                <small><b>{{ $event['age_group'] }}</b></small>      
-            @endif
-        </div>
-    @endif
+                <small><b>{{ $event['age_group'] }}</b></small>
+            </div>
+        @endif
 
-    @if ($event['rescheduled'])
-        <div class="o-grid-12 o-grid-8@lg">
+        @if ($event['rescheduled'])
+            <div class="u-margin__top--3">
+                @typography([
+                    'element' => 'strong',
+                    'classList' => ['u-color__text--danger']
+                ])
+                    {{ $event['rescheduled'] }}
+                @endtypography
 
-            @typography([
-                'element' => 'strong',
-                'classList' => ['u-color__text--danger']
-            ])
-                {{ $event['rescheduled'] }}
-            @endtypography
+                @typography(['element' => 'span'])
+                    {{ $event['exception_information'] ? ' - ' . $event['exception_information'] : ''  }}
+                @endtypography
+            </div>
+        @endif
 
-            @typography(['element' => 'span'])
-                {{ $event['exception_information'] ? ' - ' . $event['exception_information'] : ''  }}   
-            @endtypography
-            
-        </div>
-    @endif
+        @if ($event['cancelled'])
+            <div class="u-margin__top--3">
+                @typography([
+                    'element' => 'strong',
+                    'classList' => ['u-color__text--danger']
+                ])
+                    {{ $event['cancelled'] }}
+                @endtypography
 
-    @if ($event['cancelled'])
-        <div class="o-grid-12 o-grid-8@lg">
-            @typography([
-                'element' => 'strong',
-                'classList' => ['u-color__text--danger']
-            ])
-                {{ $event['cancelled'] }}
-            @endtypography
-
-            @typography(['element' => 'span'])
-                {{ $event['exception_information'] ? ' - ' . $event['exception_information'] : ''  }}
-            @endtypography
-        </div>
-    @endif
+                @typography(['element' => 'span'])
+                    {{ $event['exception_information'] ? ' - ' . $event['exception_information'] : ''  }}
+                @endtypography
+            </div>
+        @endif
+    </div>
 
     <div class="o-grid-12 o-grid-4@lg">
             {!! do_shortcode('[single_event_accordion]') !!}
