@@ -99,30 +99,32 @@ class EventArchive
      */
     public function eventFilterWhere($where)
     {
-        $from = null;
-        $to = null;
+        $fromDate = null;
+        $toDate = null;
 
         if (isset($_GET['from']) && !empty($_GET['from'])) {
-            $from = sanitize_text_field($_GET['from']);
+            $fromDate = str_replace('/', '-', sanitize_text_field($_GET['from']));
+            $fromDate = date('Y-m-d', strtotime($fromDate));
         }
 
         if (isset($_GET['to']) && !empty($_GET['to'])) {
-            $to = date('Y-m-d', strtotime("+1 day", strtotime(sanitize_text_field($_GET['to']))));
+            $toDate = str_replace('/', '-', sanitize_text_field($_GET['to']));
+            $toDate = date('Y-m-d', strtotime("+1 day", strtotime($toDate)));
         }
 
-        if (!is_null($from) && !is_null($to)) {
+        if (!is_null($fromDate) && !is_null($toDate)) {
             // USE BETWEEN ON START DATE
             $where = str_replace(
-                "{$this->db->posts}.post_date >= '{$from}'",
-                "{$this->dbTable}.start_date BETWEEN CAST('{$from}' AS DATE) AND CAST('{$to}' AS DATE)",
+                "{$this->db->posts}.post_date >= '{$fromDate}'",
+                "{$this->dbTable}.start_date BETWEEN CAST('{$fromDate}' AS DATE) AND CAST('{$toDate}' AS DATE)",
                 $where
             );
             $where = str_replace(
-                "AND {$this->db->posts}.post_date <= '{$to}'",
+                "AND {$this->db->posts}.post_date <= '{$toDate}'",
                 "",
                 $where
             );
-        } elseif (!is_null($from) || !is_null($to)) {
+        } elseif (!is_null($fromDate) || !is_null($toDate)) {
             // USE FROM OR TO
             $where = str_replace("{$this->db->posts}.post_date >=", "{$this->dbTable}.start_date >=", $where);
             $where = str_replace("{$this->db->posts}.post_date <=", "{$this->dbTable}.end_date <=", $where);
@@ -153,5 +155,4 @@ class EventArchive
     {
         return "{$this->dbTable}.start_date ASC";
     }
-
 }
