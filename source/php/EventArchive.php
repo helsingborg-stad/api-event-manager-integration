@@ -61,8 +61,6 @@ class EventArchive
             return $query;
         }
 
-        $query->set('posts_per_page', 50);
-
         add_filter('posts_fields', array($this, 'eventFilterSelect'));
         add_filter('posts_join', array($this, 'eventFilterJoin'));
         add_filter('posts_where', array($this, 'eventFilterWhere'), 10, 2);
