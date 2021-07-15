@@ -169,7 +169,6 @@ class FilterableEventsContainer extends React.Component {
       lat,
       lng,
       moduleId,
-      nonce,
       restUrl,
       settings,
       translation,
@@ -204,7 +203,6 @@ class FilterableEventsContainer extends React.Component {
     const url = `${restUrl}wp/v2/event/module`;
     // Create list of query parameters
     const params = {
-      _wpnonce: nonce,
       age_group: ageGroup,
       categories,
       distance,
@@ -512,7 +510,6 @@ FilterableEventsContainer.propTypes = {
   lat: PropTypes.string,
   lng: PropTypes.string,
   moduleId: PropTypes.string.isRequired,
-  nonce: PropTypes.string.isRequired,
   restUrl: PropTypes.string.isRequired,
   settings: PropTypes.object.isRequired,
   startDate: PropTypes.string.isRequired,
