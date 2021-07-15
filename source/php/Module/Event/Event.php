@@ -16,7 +16,7 @@ class Event extends \Modularity\Module
         $this->namePlural = __('Events', 'event-integration');
         $this->description = __('Outputs a list if upcoming events', 'event-integration');
         $this->lang = function_exists('pll_current_language') ? pll_current_language('slug') : null;
-        
+
         add_action('wp_ajax_nopriv_ajax_pagination', array($this, 'ajaxPagination'));
         add_action('wp_ajax_ajax_pagination', array($this, 'ajaxPagination'));
 
@@ -62,7 +62,6 @@ class Event extends \Modularity\Module
 
         // Cards module data
         $data['settings'] = $data;
-        $data['nonce'] = wp_create_nonce('wp_rest');
         $this->template = !empty($data['mod_event_display']) ? $data['mod_event_display'] : 'list';
         $data['template'] = $this->template;
         $data['archive_url'] = get_post_type_archive_link('event');
@@ -96,7 +95,7 @@ class Event extends \Modularity\Module
             ' ',
             apply_filters('Modularity/Module/Classes', array('c-card--panel'), 'mod-event', $this->args)
         ) : array();
-    
+
         $data['events'] = $this->setOccassion($data['events']);
         $data['events'] = $this->setLocation($data['events']);
         $data['paginationList'] = $this->getPagination($data['pagesCount']);
@@ -192,8 +191,8 @@ class Event extends \Modularity\Module
             $occasionStart = \EventManagerIntegration\App::formatShortDate($event->start_date);
             $occasionEnd = \EventManagerIntegration\App::formatShortDate($event->end_date);
             $date = $occasionStart['date'] . ' ' . $occasionStart['month'] . ' - ' .  $occasionEnd['date'] . ' ' .$occasionEnd['month'];
-            
-            
+
+
             $event->occasionStart = $occasionStart;
             $event->occasionEnd = $occasionEnd;
         }
@@ -221,14 +220,14 @@ class Event extends \Modularity\Module
         if ($numberOfPages > 1) {
             for ($i = 1; $i < $numberOfPages; $i++) {
                 $href = $archiveUrl . '?' . $this->setQueryString($i). "#event";
-    
+
                 $pagination[] = array(
                     'href' => $href,
                     'label' => (string) $i
                 );
             }
         }
-        
+
         return \apply_filters('Municipio/Controller/Archive/prepareSearchResultObject', $pagination);
     }
 
@@ -433,7 +432,7 @@ class Event extends \Modularity\Module
             false,
             true
         );
-        
+
         wp_enqueue_style(
             'modularity-'.$this->slug,
             EVENTMANAGERINTEGRATION_URL.'/dist/'.\EventManagerIntegration\Helper\CacheBust::name(

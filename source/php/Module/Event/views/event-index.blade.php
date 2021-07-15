@@ -8,7 +8,6 @@
     <div class="grid-xs-12">
         <div class="modularity-event-{{ $template }}"
              data-module-id="{{ $ID }}"
-             data-nonce="{{ $nonce }}"
              data-settings="{{ json_encode($settings) }}"
              data-grid-column="{{ $gridColumn }}"
              data-archive-url="{{ $archive_url }}"
