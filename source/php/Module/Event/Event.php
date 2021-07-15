@@ -67,7 +67,6 @@ class Event extends \Modularity\Module
         $data['archive_url'] = get_post_type_archive_link('event');
         $data['rest_url'] = get_rest_url();
         $days_ahead = isset($data['mod_event_interval']) ? $data['mod_event_interval'] : 0;
-        $data['start_date'] = date('Y-m-d', strtotime("now"));
         $data['end_date'] = date('Y-m-d', strtotime("today midnight +$days_ahead days"));
         $data['only_todays_date'] = $data['mod_events_hide_past_events'] ?? false;
         $data['lat'] = (isset($data['mod_event_geographic']['lat'])) ? $data['mod_event_geographic']['lat'] : null;

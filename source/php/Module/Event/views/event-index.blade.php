@@ -12,7 +12,6 @@
              data-grid-column="{{ $gridColumn }}"
              data-archive-url="{{ $archive_url }}"
              data-rest-url="{{ $rest_url }}"
-             data-start-date="{{ $start_date }}"
              data-end-date="{{ $end_date }}"
              data-lat="{{ $lat }}"
              data-lng="{{ $lng }}"
