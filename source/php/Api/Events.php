@@ -28,21 +28,9 @@ class Events
                 'methods' => \WP_REST_Server::READABLE,
                 'callback' => array($this, 'getEvents'),
                 'args' => $this->getCollectionParams(),
-                'permission_callback' => array($this, 'validateNonce'),
+                'permission_callback' => '__return_true',
             )
         );
-    }
-
-    /**
-     * Validates nonce
-     * @param $request
-     * @return bool
-     */
-    public function validateNonce($request)
-    {
-        $nonce = $request->get_param('_wpnonce');
-
-        return wp_verify_nonce($nonce, 'wp_rest');
     }
 
     /**
@@ -271,10 +259,10 @@ class Events
             switch ($template) {
                 case 'index':
                     if (function_exists('municipio_get_thumbnail_source') && municipio_get_thumbnail_source(
-                            $event->ID,
-                            array($data['imageDimensions']['width'], $data['imageDimensions']['height']),
-                            $data['imageRatio']
-                        )) {
+                        $event->ID,
+                        array($data['imageDimensions']['width'], $data['imageDimensions']['height']),
+                        $data['imageRatio']
+                    )) {
                         $event->image_url = municipio_get_thumbnail_source(
                             $event->ID,
                             array($data['imageDimensions']['width'], $data['imageDimensions']['height']),
@@ -295,8 +283,8 @@ class Events
                     break;
                 default:
                     if (function_exists('municipio_get_thumbnail_source') && municipio_get_thumbnail_source(
-                            $event->ID
-                        )) {
+                        $event->ID
+                    )) {
                         $event->image_url = municipio_get_thumbnail_source($event->ID);
                     } elseif (!empty($data['mod_event_def_image'])) {
                         $src = wp_get_attachment_image_src(
@@ -306,7 +294,6 @@ class Events
                         $event->image_url = $src[0] ?? null;
                     }
             }
-
         }
 
         return $events;

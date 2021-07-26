@@ -12,10 +12,8 @@ class App
         add_action('wp_enqueue_scripts', array($this, 'enqueueFront'), 950);
         add_action('admin_enqueue_scripts', array($this, 'enqueueAdmin'));
 
-        /* Register cron action */
-        add_action('import_events_daily', array($this, 'importEventsCron'));
-
         new Install();
+        new Cron();
         new Api\Events();
         new OAuth\OAuthAdmin();
         new OAuth\OAuthRequests();
@@ -66,7 +64,7 @@ class App
     {
         // If child theme is active, insert plugin view path after child views path.
         if (is_child_theme()) {
-            array_splice( $array, 2, 0, array(EVENTMANAGERINTEGRATION_VIEW_PATH) );
+            array_splice($array, 2, 0, array(EVENTMANAGERINTEGRATION_VIEW_PATH));
         } else {
             // Add view path first in the list if child theme is not active.
             array_unshift($array, EVENTMANAGERINTEGRATION_VIEW_PATH);
@@ -82,8 +80,10 @@ class App
     public function enqueueAdmin()
     {
         // Styles
-        wp_register_style('event-integration-admin',
-            EVENTMANAGERINTEGRATION_URL . '/dist/' . Helper\CacheBust::name('css/event-manager-integration-admin.css'));
+        wp_register_style(
+            'event-integration-admin',
+            EVENTMANAGERINTEGRATION_URL . '/dist/' . Helper\CacheBust::name('css/event-manager-integration-admin.css')
+        );
         wp_enqueue_style('event-integration-admin');
 
         // Scripts
@@ -114,7 +114,8 @@ class App
         // Styles
         wp_enqueue_style(
             'event-integration',
-            EVENTMANAGERINTEGRATION_URL . '/dist/' . Helper\CacheBust::name('css/event-manager-integration.css'));
+            EVENTMANAGERINTEGRATION_URL . '/dist/' . Helper\CacheBust::name('css/event-manager-integration.css')
+        );
 
         // Scripts
 
@@ -189,36 +190,15 @@ class App
     }
 
     /**
-     * Start cron jobs
-     * @return void
-     */
-    public function importEventsCron()
-    {
-        if (get_field('event_daily_import', 'option') == true && $apiUrl = Helper\ApiUrl::buildApiUrl()) {
-            new Parser\EventManagerApi($apiUrl);
-        }
-    }
-
-    public static function addCronJob()
-    {
-        wp_schedule_event(time(), 'hourly', 'import_events_daily');
-    }
-
-    public static function removeCronJob()
-    {
-        wp_clear_scheduled_hook('import_events_daily');
-    }
-
-    /**
      * Import publishing groups from Event Manager API
      * @return void
      */
     public static function importPublishingGroups()
     {
-        $api_url = get_field('event_api_url', 'option');
-        if ($api_url) {
-            $api_url = rtrim($api_url, '/') . '/user_groups';
-            new Parser\EventManagerGroups($api_url);
+        $apiUrl = get_field('event_api_url', 'option');
+        if ($apiUrl) {
+            $apiUrl = rtrim($apiUrl, '/') . '/user_groups';
+            new Parser\EventManagerGroups($apiUrl);
         }
     }
 }
