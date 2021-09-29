@@ -1,7 +1,7 @@
 <div class="grid {{ $classes }}">
-    @if (!$hideTitle && !empty($post_title))
+    @if (!$hideTitle && !empty($postTitle))
         <div class="grid-xs-12 u-mb-4">
-            <h4 class="box-title">{!! apply_filters('the_title', $post_title) !!}</h4>
+            <h4 class="box-title">{!! $postTitle !!}</h4>
         </div>
     @endif
 
