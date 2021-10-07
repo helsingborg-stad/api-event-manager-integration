@@ -69,7 +69,7 @@
         @field([
             'type' => 'number',
             'attributeList' => [
-                'type' => 'number',
+                'type' => 'tel',
                 'name' => $submitter_phone->name,
                 'pattern' => '^[^@]+@[^@]+\.[^@]+$',
                 'autocomplete' => 'tel',
