@@ -9,14 +9,25 @@ namespace EventManagerIntegration\OAuth;
 class OAuthRequests
 {
     public function __construct()
-    {
+    {   
+        $event = 'event';
+        $organizer = 'organizer';
+
         add_action('wp_ajax_request_oauth', array($this, 'requestOAuth'));
         add_action('wp_ajax_access_oauth', array($this, 'accessOAuth'));
         add_action('wp_ajax_delete_oauth', array($this, 'deleteOAuth'));
         add_action('wp_ajax_nopriv_submit_event', array($this, 'submitEvent'));
-        add_action('wp_ajax_submit_event', array($this, 'submitEvent'));
+        //add_action('wp_ajax_submit_event', array($this, 'submitEvent'));
         add_action('wp_ajax_nopriv_submit_image', array($this, 'submitImage'));
         add_action('wp_ajax_submit_image', array($this, 'submitImage'));
+        add_action('wp_ajax_submit_event', 
+           function() use ( $event ) { 
+               $this->submitEvent( $event ); 
+        });
+        add_action('wp_ajax_submit_organizer', 
+           function() use ( $organizer ) { 
+               $this->submitEvent( $organizer ); 
+        });
     }
 
     /**
@@ -169,7 +180,7 @@ class OAuthRequests
     /**
      * Submit an event to Event Manager API
      */
-    public function submitEvent()
+    public function submitEvent($type)
     {
         if (! isset($_POST['data'])) {
             wp_send_json_error(__('Form data is missing, please try again.', 'event-integration'), 'event-integration');
@@ -186,7 +197,76 @@ class OAuthRequests
         $accessTokenSecret           = get_option('_event_token_secret');
         $oauthVersion                = "1.0";
         $apiUrl                      = rtrim(get_field('event_api_url', 'option'), '/');
-        $apiResourceUrl              = $apiUrl . '/event';
+        $apiResourceUrl              = $apiUrl . '/' . $type;
+        $nonce                       = md5(mt_rand());
+        $oauthSignatureMethod        = "HMAC-SHA1";
+        $oauthTimestamp              = time();
+
+        $sigBase = "POST&" . rawurlencode($apiResourceUrl) . "&"
+            . rawurlencode("oauth_consumer_key=" . rawurlencode($consumerKey)
+            . "&oauth_nonce=" . rawurlencode($nonce)
+            . "&oauth_signature_method=" . rawurlencode($oauthSignatureMethod)
+            . "&oauth_timestamp=" . $oauthTimestamp
+            . "&oauth_token=" . rawurlencode($accessToken)
+            . "&oauth_version=" . rawurlencode($oauthVersion));
+        $sigKey = rawurlencode($consumerSecret) . "&" . rawurlencode($accessTokenSecret);
+        $oauthSig = base64_encode(hash_hmac("sha1", $sigBase, $sigKey, true));
+        $authHeader = "OAuth oauth_consumer_key=" . rawurlencode($consumerKey) . ","
+            . "oauth_nonce=" . rawurlencode($nonce) . ","
+            . "oauth_signature_method=" . rawurlencode($oauthSignatureMethod) . ","
+            . "oauth_signature=" . rawurlencode($oauthSig) . ","
+            . "oauth_timestamp=". rawurlencode($oauthTimestamp) . ","
+            . "oauth_token=" . rawurlencode($accessToken) . ","
+            . "oauth_version=" . rawurlencode($oauthVersion);
+
+        // Make the request
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $apiResourceUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, defined('DEV_MODE') && DEV_MODE === true ? false : 2);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, defined('DEV_MODE') && DEV_MODE === true ? false : 2);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-type: application/json',
+            'Authorization: OAuth ' . $authHeader
+        ));
+
+        $output = curl_exec($ch);
+        $output = json_decode($output);
+
+        // Get Http code
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        // Return response
+        if ($httpCode === 201) {
+            // Event was created
+            wp_send_json_success($output);
+        } else {
+            // Something went wrong
+            wp_send_json_error(__('Something went wrong posting the event', 'event-integration'));
+        }
+    }
+
+    public function fisk()
+    {
+        if (! isset($_POST['data'])) {
+            wp_send_json_error(__('Form data is missing, please try again.', 'event-integration'), 'event-integration');
+        }
+
+        $postData                    = $this->sanitizeInput($_POST['data']);
+        // Add consumer name to postData
+        $clientUrl                   = parse_url(get_site_url());
+        $postData['consumer_client'] = !empty($postData['client_name']) ? $clientUrl['host'] . ' - ' . $postData['client_name'] : $clientUrl['host'];
+        $postData                    = json_encode($postData);
+        $consumerKey                 = get_option('_event_client');
+        $consumerSecret              = get_option('_event_secret');
+        $accessToken                 = get_option('_event_token');
+        $accessTokenSecret           = get_option('_event_token_secret');
+        $oauthVersion                = "1.0";
+        $apiUrl                      = rtrim(get_field('event_api_url', 'option'), '/');
+        $apiResourceUrl              = $apiUrl . '/organizer';
         $nonce                       = md5(mt_rand());
         $oauthSignatureMethod        = "HMAC-SHA1";
         $oauthTimestamp              = time();
