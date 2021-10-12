@@ -14,6 +14,10 @@ export default (() => {
                     $('#recurring-event', eventForm)
                         .children('.box')
                         .hide();
+
+                    $('#new-organizer', eventForm)
+                        .hide();
+
                     this.handleEvents($(eventForm), apiUrl);
                     // this.hyperformExtensions(eventForm);
                     // this.datePickerSettings();
@@ -381,13 +385,21 @@ export default (() => {
         };
 
         // Send Ajax request with post data
-        Form.prototype.submitEventAjax = function(eventForm, formData) {
+        Form.prototype.submitAjax = function(eventForm, formData, action) {
+            console.log("SUBMIT")
+            console.log(formData);
+            
+            /* formData = {
+                'title': 'WADDAP',
+                'email': 'waddap@waddap.com',
+                'phone': '123'
+            } */
 
-            $.ajax({
+            return $.ajax({
                 url: eventintegration.ajaxurl,
                 type: 'POST',
                 data: {
-                    action: 'submit_event',
+                    action: action,
                     data: formData,
                 },
                 success: function(response) {
@@ -398,6 +410,8 @@ export default (() => {
                         $('[event-submit__success]', eventForm).removeClass('u-display--none');
                         
                         Form.prototype.cleanForm(eventForm);
+                        
+                        return response;
                     } else {
                         $('[event-submit__success]', eventForm).addClass('u-display--none');
                         let noticeSuccess = $('[event-submit__error]', eventForm);
@@ -406,6 +420,8 @@ export default (() => {
                     }
                 },
                 error: function(jqXHR, textStatus) {
+                    console.log(jqXHR);
+                    console.log(textStatus);
                     $('[event-submit__success]', eventForm).addClass('u-display--none');
                     let noticeSuccess = $('[event-submit__error]', eventForm);
                     noticeSuccess[0].querySelector('[id^="notice__text__"]').innerHTML = textStatus;
@@ -562,7 +578,16 @@ export default (() => {
 
                     var fileInput = eventForm.find('#image_input'),
                         formData = this.jsonData(eventForm),
-                        imageData = new FormData();
+                        imageData = new FormData(),
+                        organizerData = {title: '', phone: '', email: ''},
+                        newOrganizerinputs = $('#new-organizer input');
+        
+                    newOrganizerinputs.each((index, element) => {
+                        
+                        organizerData[element.getAttribute('field')] = element.value;
+                    });
+
+                    console.log(organizerData);
 
                     $('[event-submit__error]', eventForm).addClass('u-display--none');
                     let noticeSuccess = $('[event-submit__success]', eventForm);
@@ -578,7 +603,7 @@ export default (() => {
                         ) {
                             if (response.success) {
                                 formData['featured_media'] = response.data;
-                                Form.prototype.submitEventAjax(eventForm, formData);
+                                Form.prototype.submitAjax(eventForm, formData, 'submit_event');
                             } else {
                                 $('[event-submit__success]', eventForm).addClass('u-display--none');
                                 let noticeSuccess = $('[event-submit__error]', eventForm);
@@ -588,7 +613,23 @@ export default (() => {
                         });
                         // Submit post if media is not set
                     } else {
-                        this.submitEventAjax(eventForm, formData);
+                        console.log(organizerData);
+                        organizerData['status'] = 'publish';
+                        this.submitAjax(eventForm, organizerData, 'submit_organizer').then(function(response) {
+                            
+                            console.log(response);
+
+                            formData['organizers'] = [{
+                                organizer: response.data.id,
+                                main_organizer: true
+                            }]
+                            console.log(formData)
+                            //formData['organizer'] = response.data.id;
+                            
+                            console.log(formData);
+                            
+                            Form.prototype.submitAjax(eventForm, formData, 'submit_event');
+                        });  
                     }
                 }.bind(this)
             );
@@ -633,6 +674,12 @@ export default (() => {
                     .hide()
                     .find('input')
                     .prop('required', false);
+            });
+
+             // Show/hide inouts for new and excisting organizer.
+             $('input:radio[name=organizer-type]', eventForm).change(function(event) {
+                $('#new-organizer').toggle();
+                $('#excisting-organizer').toggle();                
             });
 
             // Add new occurance
