@@ -71,7 +71,6 @@
             'attributeList' => [
                 'type' => 'tel',
                 'name' => $submitter_phone->name,
-                'pattern' => '^[^@]+@[^@]+\.[^@]+$',
                 'autocomplete' => 'tel',
             ],
             'label' => $submitter_phone->label,
