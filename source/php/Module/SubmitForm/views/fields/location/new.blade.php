@@ -26,9 +26,8 @@
 
 @field([
     'id'   => 'location-phone',
-    'type' => 'number',
     'attributeList' => [
-        'type' => 'text',
+        'type' => 'tel',
         'name' => $location->name . '-postal-code',
         'field' => 'postal_code',
         'autocomplete' => 'off'

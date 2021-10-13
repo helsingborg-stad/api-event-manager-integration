@@ -13,9 +13,8 @@
 
 @field([
     'id'   => 'organizer-phone',
-    'type' => 'tel',
     'attributeList' => [
-        'type' => 'text',
+        'type' => 'tel',
         'name' => $organizer->name . '-phone',
         'field' => 'phone',
         'autocomplete' => 'off'
@@ -26,9 +25,8 @@
 
 @field([
     'id'   => 'organizer-mail',
-    'type' => 'email',
     'attributeList' => [
-        'type' => 'text',
+        'type' => 'email',
         'name' => $organizer->name . '-mail',
         'field' => 'email',
         'autocomplete' => 'off'
