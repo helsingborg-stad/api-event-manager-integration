@@ -12,21 +12,42 @@ class OAuthRequests
     {   
         $event = 'event';
         $organizer = 'organizer';
+        $location = 'location';
 
         add_action('wp_ajax_request_oauth', array($this, 'requestOAuth'));
         add_action('wp_ajax_access_oauth', array($this, 'accessOAuth'));
         add_action('wp_ajax_delete_oauth', array($this, 'deleteOAuth'));
-        add_action('wp_ajax_nopriv_submit_event', array($this, 'submitEvent'));
-        //add_action('wp_ajax_submit_event', array($this, 'submitEvent'));
         add_action('wp_ajax_nopriv_submit_image', array($this, 'submitImage'));
         add_action('wp_ajax_submit_image', array($this, 'submitImage'));
+
         add_action('wp_ajax_submit_event', 
            function() use ( $event ) { 
                $this->submitEvent( $event ); 
         });
+
+        add_action('wp_ajax_nopriv_submit_event', 
+           function() use ( $event ) { 
+               $this->submitEvent( $event ); 
+        });
+        
         add_action('wp_ajax_submit_organizer', 
            function() use ( $organizer ) { 
                $this->submitEvent( $organizer ); 
+        });
+
+        add_action('wp_ajax_nopriv_submit_organizer', 
+           function() use ( $organizer ) { 
+               $this->submitEvent( $organizer ); 
+        });
+
+        add_action('wp_ajax_submit_location', 
+           function() use ( $location ) { 
+               $this->submitEvent( $location ); 
+        });
+
+        add_action('wp_ajax_nopriv_submit_location', 
+           function() use ( $location ) { 
+               $this->submitEvent( $location ); 
         });
     }
 
