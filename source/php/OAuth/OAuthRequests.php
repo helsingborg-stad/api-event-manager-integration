@@ -9,14 +9,46 @@ namespace EventManagerIntegration\OAuth;
 class OAuthRequests
 {
     public function __construct()
-    {
+    {   
+        $event = 'event';
+        $organizer = 'organizer';
+        $location = 'location';
+
         add_action('wp_ajax_request_oauth', array($this, 'requestOAuth'));
         add_action('wp_ajax_access_oauth', array($this, 'accessOAuth'));
         add_action('wp_ajax_delete_oauth', array($this, 'deleteOAuth'));
-        add_action('wp_ajax_nopriv_submit_event', array($this, 'submitEvent'));
-        add_action('wp_ajax_submit_event', array($this, 'submitEvent'));
         add_action('wp_ajax_nopriv_submit_image', array($this, 'submitImage'));
         add_action('wp_ajax_submit_image', array($this, 'submitImage'));
+
+        add_action('wp_ajax_submit_event', 
+           function() use ( $event ) { 
+               $this->submitEvent( $event ); 
+        });
+
+        add_action('wp_ajax_nopriv_submit_event', 
+           function() use ( $event ) { 
+               $this->submitEvent( $event ); 
+        });
+        
+        add_action('wp_ajax_submit_organizer', 
+           function() use ( $organizer ) { 
+               $this->submitEvent( $organizer ); 
+        });
+
+        add_action('wp_ajax_nopriv_submit_organizer', 
+           function() use ( $organizer ) { 
+               $this->submitEvent( $organizer ); 
+        });
+
+        add_action('wp_ajax_submit_location', 
+           function() use ( $location ) { 
+               $this->submitEvent( $location ); 
+        });
+
+        add_action('wp_ajax_nopriv_submit_location', 
+           function() use ( $location ) { 
+               $this->submitEvent( $location ); 
+        });
     }
 
     /**
@@ -169,7 +201,7 @@ class OAuthRequests
     /**
      * Submit an event to Event Manager API
      */
-    public function submitEvent()
+    public function submitEvent($type)
     {
         if (! isset($_POST['data'])) {
             wp_send_json_error(__('Form data is missing, please try again.', 'event-integration'), 'event-integration');
@@ -186,7 +218,7 @@ class OAuthRequests
         $accessTokenSecret           = get_option('_event_token_secret');
         $oauthVersion                = "1.0";
         $apiUrl                      = rtrim(get_field('event_api_url', 'option'), '/');
-        $apiResourceUrl              = $apiUrl . '/event';
+        $apiResourceUrl              = $apiUrl . '/' . $type;
         $nonce                       = md5(mt_rand());
         $oauthSignatureMethod        = "HMAC-SHA1";
         $oauthTimestamp              = time();
