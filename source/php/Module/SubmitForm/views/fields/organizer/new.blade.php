@@ -7,7 +7,7 @@
         'field' => 'title',
         'autocomplete' => 'off'
     ],
-    'label' => 'name'
+    'label' => __('Name', 'event-integration')
 ])
 @endfield
 
@@ -20,7 +20,7 @@
         'field' => 'phone',
         'autocomplete' => 'off'
     ],
-    'label' => 'phone'
+    'label' => __('Phone', 'event-integration')
 ])
 @endfield
 
@@ -33,7 +33,7 @@
         'field' => 'email',
         'autocomplete' => 'off'
     ],
-    'label' => 'email'
+    'label' => __('Email', 'event-integration')
 ])
 @endfield
 

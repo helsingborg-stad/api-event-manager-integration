@@ -38,7 +38,7 @@
 @endfield
 
 @field([
-    'id'   => 'organizer-mail',
+    'id'   => 'location-city',
     'type' => 'text',
     'attributeList' => [
         'type' => 'text',
