@@ -21,6 +21,18 @@ export default (() => {
                     $('#new-location', eventForm)
                         .hide();
 
+                    var organizerInputs = $('#new-organizer').find('input'),
+                        locationInputs = $('#new-location').find('input');
+
+                    locationInputs.each((index, element) => {
+                        $('label[for="' + element.id + '"').append('<span class="u-color__text--danger"> * </span>')
+                    });
+
+
+                    organizerInputs.each((index, element) => {
+                        $('label[for="' + element.id + '"').append('<span class="u-color__text--danger"> * </span>')
+                    });
+                    
                     this.handleEvents($(eventForm), apiUrl);
                     // this.hyperformExtensions(eventForm);
                     // this.datePickerSettings();
@@ -695,13 +707,17 @@ export default (() => {
             // Show/hide inputs for new and excisting organizer.
             $('input:radio[name=organizer-type]', eventForm).change(function(event) {
                 $('#new-organizer').toggle();
-                $('#excisting-organizer').toggle();                
+                $('#excisting-organizer').toggle();
+
+                Form.prototype.toggleRequired($('#new-organizer').find('input'));
             });
 
             // Show/hide inputs for new and excisting organizer.
             $('input:radio[name=location-type]', eventForm).change(function(event) {
                 $('#new-location').toggle();
-                $('#excisting-location').toggle();                
+                $('#excisting-location').toggle();      
+                
+                Form.prototype.toggleRequired($('#new-location').find('input'));                
             });
 
             // Add new occurance
@@ -743,6 +759,16 @@ export default (() => {
                     .remove();
             });
         };
+
+        Form.prototype.toggleRequired = function(inputs) {
+            inputs.each((index, element) => {
+                if($(element).prop('required')) {
+                    $(element).removeAttr('required');
+                } else {
+                    $(element).prop('required', true);
+                }
+            });
+        }
 
         // Clean up form
         Form.prototype.cleanForm = function(eventForm) {
