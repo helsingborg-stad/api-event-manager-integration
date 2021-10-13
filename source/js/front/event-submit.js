@@ -18,6 +18,9 @@ export default (() => {
                     $('#new-organizer', eventForm)
                         .hide();
 
+                    $('#new-location', eventForm)
+                        .hide();
+
                     this.handleEvents($(eventForm), apiUrl);
                     // this.hyperformExtensions(eventForm);
                     // this.datePickerSettings();
@@ -386,14 +389,21 @@ export default (() => {
 
         // Send Ajax request with post data
         Form.prototype.submitAjax = function(eventForm, formData, action) {
-            console.log("SUBMIT")
-            console.log(formData);
             
-            /* formData = {
-                'title': 'WADDAP',
-                'email': 'waddap@waddap.com',
-                'phone': '123'
-            } */
+            if(action === 'submit_organizer' || action === 'submit_location') {
+                var allFieldsHasValue = Object.keys(formData).every(
+                    (key) => {
+                         return formData[key].length > 0 
+                    }
+                );
+                
+                if(!allFieldsHasValue) {                    
+                    return new Promise((resolve) => {
+                        resolve({success: false});
+                    });                    
+                }
+
+            }
 
             return $.ajax({
                 url: eventintegration.ajaxurl,
@@ -419,9 +429,7 @@ export default (() => {
                         $('[event-submit__error]', eventForm).removeClass('u-display--none');
                     }
                 },
-                error: function(jqXHR, textStatus) {
-                    console.log(jqXHR);
-                    console.log(textStatus);
+                error: function(jqXHR, textStatus) {                    
                     $('[event-submit__success]', eventForm).addClass('u-display--none');
                     let noticeSuccess = $('[event-submit__error]', eventForm);
                     noticeSuccess[0].querySelector('[id^="notice__text__"]').innerHTML = textStatus;
@@ -580,14 +588,17 @@ export default (() => {
                         formData = this.jsonData(eventForm),
                         imageData = new FormData(),
                         organizerData = {title: '', phone: '', email: ''},
-                        newOrganizerinputs = $('#new-organizer input');
+                        locationData = {title: '', street_address: '', city: '', postal_code: ''},
+                        newOrganizerinputs = $('#new-organizer input'),
+                        newLocationinputs = $('#new-location input');
         
-                    newOrganizerinputs.each((index, element) => {
-                        
+                    newOrganizerinputs.each((index, element) => {                        
                         organizerData[element.getAttribute('field')] = element.value;
                     });
 
-                    console.log(organizerData);
+                    newLocationinputs.each((index, element) => {                        
+                        locationData[element.getAttribute('field')] = element.value;
+                    });
 
                     $('[event-submit__error]', eventForm).addClass('u-display--none');
                     let noticeSuccess = $('[event-submit__success]', eventForm);
@@ -613,23 +624,28 @@ export default (() => {
                         });
                         // Submit post if media is not set
                     } else {
-                        console.log(organizerData);
                         organizerData['status'] = 'publish';
                         this.submitAjax(eventForm, organizerData, 'submit_organizer').then(function(response) {
                             
-                            console.log(response);
+                            if(response.success) {
+                                formData['organizers'] = [{
+                                    organizer: response.data.id,
+                                    main_organizer: true
+                                }];
+                                formData['contact_phone'] = response.data.phone;
+                                formData['contact_email'] = response.data.email;
+                            }
+                            
+                        }).then(function() {
+                            
+                            Form.prototype.submitAjax(eventForm, locationData, 'submit_location').then((response) => {
+                                if(response.success) {
+                                   formData['location'] = response.data.id;
+                                }
 
-                            formData['organizers'] = [{
-                                organizer: response.data.id,
-                                main_organizer: true
-                            }]
-                            console.log(formData)
-                            //formData['organizer'] = response.data.id;
-                            
-                            console.log(formData);
-                            
-                            Form.prototype.submitAjax(eventForm, formData, 'submit_event');
-                        });  
+                                Form.prototype.submitAjax(eventForm, formData, 'submit_event');
+                            }); 
+                        }) 
                     }
                 }.bind(this)
             );
@@ -676,10 +692,16 @@ export default (() => {
                     .prop('required', false);
             });
 
-             // Show/hide inouts for new and excisting organizer.
-             $('input:radio[name=organizer-type]', eventForm).change(function(event) {
+            // Show/hide inputs for new and excisting organizer.
+            $('input:radio[name=organizer-type]', eventForm).change(function(event) {
                 $('#new-organizer').toggle();
                 $('#excisting-organizer').toggle();                
+            });
+
+            // Show/hide inputs for new and excisting organizer.
+            $('input:radio[name=location-type]', eventForm).change(function(event) {
+                $('#new-location').toggle();
+                $('#excisting-location').toggle();                
             });
 
             // Add new occurance
