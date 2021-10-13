@@ -30,7 +30,7 @@
             'name' => 'location-type',
         ],
         'classList' => ['u-display--inline-block'],
-        'label' => __('New location', 'Event recurrence rules', 'event-integration')
+        'label' => $translations['newLocation']
     ])
     @endoption
     

@@ -30,7 +30,7 @@
             'name' => 'organizer-type',
         ],
         'classList' => ['u-display--inline-block'],
-        'label' => __('New organizer', 'Event recurrence rules', 'event-integration')
+        'label' => $translations['newOrganizer']
     ])
     @endoption
 

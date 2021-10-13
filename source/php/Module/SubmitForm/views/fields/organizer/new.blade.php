@@ -7,7 +7,7 @@
         'field' => 'title',
         'autocomplete' => 'off'
     ],
-    'label' => __('Name', 'event-integration')
+    'label' => $translations['name']
 ])
 @endfield
 
@@ -19,7 +19,7 @@
         'field' => 'phone',
         'autocomplete' => 'off'
     ],
-    'label' => __('Phone', 'event-integration')
+    'label' => $translations['phoneNumber']
 ])
 @endfield
 
@@ -31,7 +31,7 @@
         'field' => 'email',
         'autocomplete' => 'off'
     ],
-    'label' => __('Email', 'event-integration')
+    'label' => $translations['email']
 ])
 @endfield
 

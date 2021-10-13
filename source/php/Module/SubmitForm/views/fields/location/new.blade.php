@@ -7,7 +7,7 @@
         'field' => 'title',
         'autocomplete' => 'off'
     ],
-    'label' => __('Name', 'event-integration')
+    'label' => $translations['name']
 ])
 @endfield
 
@@ -20,7 +20,7 @@
         'field' => 'street_address',
         'autocomplete' => 'off'
     ],
-    'label' => __('Street address', 'event-integration')
+    'label' => $translations['streetAddress']
 ])
 @endfield
 
@@ -32,7 +32,7 @@
         'field' => 'postal_code',
         'autocomplete' => 'off'
     ],
-    'label' => __('Postal code', 'event-integration')
+    'label' => $translations['postalCode']
 ])
 @endfield
 
@@ -45,7 +45,7 @@
         'field' => 'city',
         'autocomplete' => 'off'
     ],
-    'label' => __('City', 'event-integration')
+    'label' => $translations['city']
 ])
 @endfield
 
