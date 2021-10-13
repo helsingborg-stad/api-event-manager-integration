@@ -636,7 +636,6 @@ export default (() => {
                         });
                         // Submit post if media is not set
                     } else {
-                        organizerData['status'] = 'publish';
                         this.submitAjax(eventForm, organizerData, 'submit_organizer').then(function(response) {
                             
                             if(response.success) {
