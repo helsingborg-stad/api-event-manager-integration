@@ -185,7 +185,7 @@ class SubmitEvent
         );
 
         $fields['translations'] =  [
-            'name' => __('Name', 'event-intregration'),
+            'name' => _e('Name', 'event-intregration'),
             'streetAddress' => __('Street address', 'event-intregration'),
             'postalCode' => __('Postal code', 'event-intregration'),
             'city' => __('City', 'event-intregration'),
