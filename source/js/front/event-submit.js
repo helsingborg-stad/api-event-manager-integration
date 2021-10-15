@@ -596,7 +596,7 @@ export default (() => {
                 function(e) {
                     e.preventDefault();
 
-                    var fileInput = eventForm.find('#image_input'),
+                    var fileInput = $(eventForm.find('#fs_image_input')[0]),
                         formData = this.jsonData(eventForm),
                         imageData = new FormData(),
                         organizerData = {title: '', phone: '', email: ''},
@@ -619,15 +619,37 @@ export default (() => {
 
                     // Upload media first and append it to the post.
                     if (fileInput.val()) {
-                        imageData.append('file', fileInput[0].files[0]);
-                        $.when(this.submitImageAjax(eventForm, imageData)).then(function(
-                            response,
-                            textStatus
+                        imageData.append('file', fileInput.prop('files')[0]);
+
+                        $.when(
+                            this.submitImageAjax(eventForm, imageData), 
+                            this.submitAjax(eventForm, organizerData, 'submit_organizer'), 
+                            this.submitAjax(eventForm, locationData, 'submit_location')
+                        ).then(function(
+                            imageResponse,
+                            organizerResponse,
+                            locationResponse
                         ) {
-                            if (response.success) {
-                                formData['featured_media'] = response.data;
-                                Form.prototype.submitAjax(eventForm, formData, 'submit_event');
-                            } else {
+                            if (imageResponse[0].success) {
+                                formData['featured_media'] = imageResponse[0].data;                                
+                            }
+                            
+                            if(organizerResponse[0].success) {
+                                formData['organizers'] = [{
+                                    organizer: organizerResponse[0].data.id,
+                                    main_organizer: true
+                                }];
+                                formData['contact_phone'] = organizerResponse[0].data.phone;
+                                formData['contact_email'] = organizerResponse[0].data.email;
+                            }
+
+                            if(locationResponse[0].success) {
+                                formData['location'] = locationResponse[0].data.id;
+                            }                         
+                         
+                            Form.prototype.submitAjax(eventForm, formData, 'submit_event');
+                            
+                            if(!imageResponse.success || !organizerResponse.success || !locationResponse.success) {
                                 $('[event-submit__success]', eventForm).addClass('u-display--none');
                                 let noticeSuccess = $('[event-submit__error]', eventForm);
                                 noticeSuccess[0].querySelector('[id^="notice__text__"]').innerHTML = eventIntegrationFront.something_went_wrong;
@@ -635,28 +657,6 @@ export default (() => {
                             }
                         });
                         // Submit post if media is not set
-                    } else {
-                        this.submitAjax(eventForm, organizerData, 'submit_organizer').then(function(response) {
-                            
-                            if(response.success) {
-                                formData['organizers'] = [{
-                                    organizer: response.data.id,
-                                    main_organizer: true
-                                }];
-                                formData['contact_phone'] = response.data.phone;
-                                formData['contact_email'] = response.data.email;
-                            }
-                            
-                        }).then(function() {
-                            
-                            Form.prototype.submitAjax(eventForm, locationData, 'submit_location').then((response) => {
-                                if(response.success) {
-                                   formData['location'] = response.data.id;
-                                }
-
-                                Form.prototype.submitAjax(eventForm, formData, 'submit_event');
-                            }); 
-                        }) 
                     }
                 }.bind(this)
             );
