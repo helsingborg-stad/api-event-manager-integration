@@ -19,7 +19,7 @@
             'name' => 'location-type',
         ],
         'classList' => ['u-display--inline-block'],
-        'label' => __('Excisting location', 'event-integration')
+        'label' => $translations['existingLocation']
     ])
     @endoption
 

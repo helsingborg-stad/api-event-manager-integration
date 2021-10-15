@@ -19,7 +19,7 @@
             'name' => 'organizer-type',
         ],
         'classList' => ['u-display--inline-block'],
-        'label' => __('Excisting organizer', 'event-integration')
+        'label' => $translations['existingOrganizer']
     ])
     @endoption
 

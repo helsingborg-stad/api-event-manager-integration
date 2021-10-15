@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2021-10-13 22:13+0200\n"
-"PO-Revision-Date: 2021-10-13 22:13+0200\n"
+"POT-Creation-Date: 2021-10-15 10:55+0200\n"
+"PO-Revision-Date: 2021-10-15 10:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -1197,15 +1197,21 @@ msgid "City"
 msgstr "Ort"
 
 #: source/php/Helper/SubmitEvent.php:194
-#, fuzzy
-#| msgid "New organization"
 msgid "New organizer"
-msgstr "Ny Arrangör"
+msgstr "Ny arrangör"
 
 #: source/php/Helper/SubmitEvent.php:195
 #: source/php/Module/Location/Location.php:31
 msgid "New location"
 msgstr "Ny plats"
+
+#: source/php/Helper/SubmitEvent.php:196
+msgid "Existing location"
+msgstr "Befintlig plats"
+
+#: source/php/Helper/SubmitEvent.php:197
+msgid "Existing organizer"
+msgstr "Befintlig arrangör"
 
 #: source/php/Module/Event/Event.php:16 source/php/Widget/DisplayEvents.php:13
 msgid "Events"

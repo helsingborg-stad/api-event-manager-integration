@@ -185,14 +185,16 @@ class SubmitEvent
         );
 
         $fields['translations'] =  [
-            'name' => __('Name', 'event-intregration'),
-            'streetAddress' => __('Street address', 'event-intregration'),
-            'postalCode' => __('Postal code', 'event-intregration'),
-            'city' => __('City', 'event-intregration'),
-            'phoneNumber' => __('Phone number', 'event-intregration'),
-            'email' => __('Email', 'event-intregration'),
-            'newOrganizer' => __('New organizer', 'event-intregration'),
-            'newLocation' => __('New location', 'event-intregration'),
+            'name' => __('Name', 'event-integration'),
+            'streetAddress' => __('Street address', 'event-integration'),
+            'postalCode' => __('Postal code', 'event-integration'),
+            'city' => __('City', 'event-integration'),
+            'phoneNumber' => __('Phone number', 'event-integration'),
+            'email' => __('Email', 'event-integration'),
+            'newOrganizer' => __('New organizer', 'event-integration'),
+            'newLocation' => __('New location', 'event-integration'),
+            'existingLocation' => __('Existing location', 'event-integration'),
+            'existingOrganizer' => __('Existing organizer', 'event-integration'),
         ]; 
 
         return $fields;
