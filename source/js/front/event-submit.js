@@ -411,7 +411,7 @@ export default (() => {
                 
                 if(!allFieldsHasValue) {                    
                     return new Promise((resolve) => {
-                        resolve({success: false});
+                        resolve([{success: false}]);
                     });                    
                 }
 
