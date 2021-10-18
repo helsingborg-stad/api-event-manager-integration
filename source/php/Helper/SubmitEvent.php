@@ -185,19 +185,18 @@ class SubmitEvent
         );
 
         $fields['translations'] =  [
-            'name' => __('Name', 'event-integration'),
-            'streetAddress' => __('Street address', 'event-integration'),
-            'postalCode' => __('Postal code', 'event-integration'),
-            'city' => __('City', 'event-integration'),
-            'phoneNumber' => __('Phone number', 'event-integration'),
-            'email' => __('Email', 'event-integration'),
-            'newOrganizer' => __('New organizer', 'event-integration'),
-            'newLocation' => __('New location', 'event-integration'),
-            'existingLocation' => __('Existing location', 'event-integration'),
-            'existingOrganizer' => __('Existing organizer', 'event-integration'),
-            'identifiablePersons' => __('Are there identifiable persons on the image/images?', 'event-integration'),
-            'acceptedCondition' => __('They have accepted that the image is used to promote this event and have been informed that after the image has been added to the database, it may appear in different channels to promote the event.', 'event-integration'),
-
+            'name'                  => __('Name', 'event-integration'),
+            'streetAddress'         => __('Street address', 'event-integration'),
+            'postalCode'            => __('Postal code', 'event-integration'),
+            'city'                  => __('City', 'event-integration'),
+            'phoneNumber'           => __('Phone number', 'event-integration'),
+            'email'                 => __('Email', 'event-integration'),
+            'newOrganizer'          => __('New organizer', 'event-integration'),
+            'newLocation'           => __('New location', 'event-integration'),
+            'existingLocation'      => __('Existing location', 'event-integration'),
+            'existingOrganizer'     => __('Existing organizer', 'event-integration'),
+            'identifiablePersons'   => __('Are there identifiable persons on the image/images?', 'event-integration'),
+            'acceptedCondition'     => __('They have accepted that the image is used to promote this event and have been informed that after the image has been added to the database, it may appear in different channels to promote the event.', 'event-integration'),
         ]; 
 
         return $fields;
