@@ -6,6 +6,7 @@ class SubmitForm extends \Modularity\Module
 {
     public $slug = 'event-submit';
     public $supports = array();
+    public $isBlockCompatible = false;
 
     public function init()
     {

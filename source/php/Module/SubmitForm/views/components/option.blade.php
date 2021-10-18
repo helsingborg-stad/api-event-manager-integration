@@ -18,7 +18,7 @@
         id="{{ $id }}"
         placeholder="{{ $label }}"
         value=""
-        aria-checked="/"
+        aria-checked="false"
     >
 
     <label for="{{ $id }}" class="c-option__checkbox--label">

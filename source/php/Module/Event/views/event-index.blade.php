@@ -1,19 +1,17 @@
 <div class="grid {{ $classes }}">
-    @if (!$hideTitle && !empty($post_title))
+    @if (!$hideTitle && !empty($postTitle))
         <div class="grid-xs-12 u-mb-4">
-            <h4 class="box-title">{!! apply_filters('the_title', $post_title) !!}</h4>
+            <h4 class="box-title">{!! $postTitle !!}</h4>
         </div>
     @endif
 
     <div class="grid-xs-12">
         <div class="modularity-event-{{ $template }}"
              data-module-id="{{ $ID }}"
-             data-nonce="{{ $nonce }}"
              data-settings="{{ json_encode($settings) }}"
              data-grid-column="{{ $gridColumn }}"
              data-archive-url="{{ $archive_url }}"
              data-rest-url="{{ $rest_url }}"
-             data-start-date="{{ $start_date }}"
              data-end-date="{{ $end_date }}"
              data-lat="{{ $lat }}"
              data-lng="{{ $lng }}"

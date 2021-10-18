@@ -11,18 +11,36 @@
         'description' => $organizer->description
     ])
     
-    @field([
-        'id'   => 'organizer-selector',
-        'type' => 'text',
+    @option([
+        'type' => 'radio',
+        'checked' => 'true',
         'attributeList' => [
-            'type' => 'text',
-            'name' => $organizer->name,
-            'autocomplete' => 'off'
+            'data-id' => 'excisting-organizer',
+            'name' => 'organizer-type',
         ],
-        'label' => $organizer->label,
-        'required' => $organizer->required,
+        'classList' => ['u-display--inline-block'],
+        'label' => $translations['existingOrganizer']
     ])
-    @endfield
+    @endoption
+
+    @option([
+        'type' => 'radio',
+        'attributeList' => [
+            'data-id' => 'new-organizer',
+            'name' => 'organizer-type',
+        ],
+        'classList' => ['u-display--inline-block'],
+        'label' => $translations['newOrganizer']
+    ])
+    @endoption
+
+    <div id="excisting-organizer" class="form-group">
+        @include('fields.organizer.excisting')
+    </div>
+
+    <div id="new-organizer" class="form-group">
+        @include('fields.organizer.new')    
+    </div>
 
     <input name="{{ $organizer->name }}" id="{{ $organizer->name }}" type="hidden">
     <input name="contact_phone" id="contact_phone" type="hidden">

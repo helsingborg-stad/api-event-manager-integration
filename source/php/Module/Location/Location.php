@@ -6,6 +6,7 @@ class Location extends \Modularity\Module
 {
     public $slug = 'location';
     public $supports = array();
+    public $isBlockCompatible = false;
 
     public function init()
     {

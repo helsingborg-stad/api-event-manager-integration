@@ -12,12 +12,14 @@ document.addEventListener('DOMContentLoaded', e => {
 
   const domElements = document.getElementsByClassName('modularity-event-index');
   const translation = modEvent;
-  
+  const todaysDate = new Date();
+  const startDate = todaysDate.toLocaleDateString('sv-SE');
+
   if (domElements.length > 0) {
     for (let i = 0; i < domElements.length; i++) {
       const element = domElements[i];
       const { settings, categories, tags, groups, ageRange } = element.dataset;
-  
+
       ReactDOM.render(
         <FilterableEventsContainer
           {...element.dataset}
@@ -27,6 +29,7 @@ document.addEventListener('DOMContentLoaded', e => {
           settings={JSON.parse(settings)}
           tags={JSON.parse(tags)}
           translation={translation}
+          startDate={startDate}
         />,
         element
       );

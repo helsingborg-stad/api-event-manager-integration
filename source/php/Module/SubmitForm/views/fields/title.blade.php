@@ -18,7 +18,6 @@
             'type' => 'text',
             'name' => $title->name,
         ],
-        'label' => $title->label,
         'required' => $title->required,
     ])
     @endfield

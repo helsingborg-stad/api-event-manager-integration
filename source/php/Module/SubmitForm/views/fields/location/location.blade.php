@@ -10,35 +10,38 @@
     @includeWhen(!$location->hidden_description, 'components.description', [
         'description' => $location->description
     ])
-    
-    @field([
-        'id'   => 'location-selector',
-        'type' => 'text',
-        'attributeList' => [
-            'type' => 'text',
-            'name' => 'q',
-            'autocomplete' => 'off'
-        ],
-        'label' => $location->label,
-        'required' => $location->required,
-    ])
-    @endfield
 
+    @option([
+        'type' => 'radio',
+        'checked' => 'true',
+        'attributeList' => [
+            'data-id' => 'excisting-location',
+            'name' => 'location-type',
+        ],
+        'classList' => ['u-display--inline-block'],
+        'label' => $translations['existingLocation']
+    ])
+    @endoption
+
+    @option([
+        'type' => 'radio',
+        'attributeList' => [
+            'data-id' => 'new-location',
+            'name' => 'location-type',
+        ],
+        'classList' => ['u-display--inline-block'],
+        'label' => $translations['newLocation']
+    ])
+    @endoption
     
-    {{'-----'}}
+    <div id="excisting-location" class="form-group">
+        @include('fields.location.excisting')
+    </div>
+
+    <div id="new-location" class="form-group">
+        @include('fields.location.new')    
+    </div>
+    
     <input name="{{ $location->name }}" id="{{ $location->name }}" type="hidden">
 
-    {{-- @field([
-        'id'   => 'location-selector',
-        'type' => 'hidden',
-        'classList' => ['u-display--none'],
-        'attributeList' => [
-            'type' => 'text',
-            'name' => $location->name,
-            'autocomplete' => 'off'
-        ],
-        'label' => $location->label,
-        'required' => $location->required,
-    ])
-    @endfield --}}
 </div>

@@ -15,7 +15,7 @@
 
     @option([
         'type' => 'radio',
-        'checked' => true,
+        'checked' => 'true',
         'attributeList' => [
             'data-id' => 'single-event',
             'name' => 'occurance-type',

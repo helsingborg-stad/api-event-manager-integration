@@ -19,6 +19,7 @@ class Options
         add_action('wp_ajax_save_draw_points', array($this, 'saveDrawPoints'));
         add_action('acf/render_field/type=message', array($this, 'renderAcfField'), 11, 1);
         add_filter('acf/update_value/name=event_import_from_location', array($this, 'updateLocationOption'), 10, 1);
+        add_filter('acf/update_value/name=event_daily_import', array($this, 'updateCronOption'), 10, 1);
     }
 
     /**
@@ -42,6 +43,20 @@ class Options
     {
         if ($value != 'area') {
             update_option('event_import_area', null);
+        }
+
+        return $value;
+    }
+
+    /**
+     * Unregister cron event when option is disabled
+     * @param  string $value   the value of the field
+     * @return string          the new value
+     */
+    public function updateCronOption($value)
+    {
+        if (!$value) {
+            \EventManagerIntegration\Cron::removeCronJob();
         }
 
         return $value;

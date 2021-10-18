@@ -14,6 +14,25 @@ export default (() => {
                     $('#recurring-event', eventForm)
                         .children('.box')
                         .hide();
+
+                    $('#new-organizer', eventForm)
+                        .hide();
+
+                    $('#new-location', eventForm)
+                        .hide();
+
+                    var organizerInputs = $('#new-organizer').find('input'),
+                        locationInputs = $('#new-location').find('input');
+
+                    locationInputs.each((index, element) => {
+                        $('label[for="' + element.id + '"').append('<span class="u-color__text--danger"> * </span>')
+                    });
+
+
+                    organizerInputs.each((index, element) => {
+                        $('label[for="' + element.id + '"').append('<span class="u-color__text--danger"> * </span>')
+                    });
+                    
                     this.handleEvents($(eventForm), apiUrl);
                     // this.hyperformExtensions(eventForm);
                     // this.datePickerSettings();
@@ -379,13 +398,28 @@ export default (() => {
         };
 
         // Send Ajax request with post data
-        Form.prototype.submitEventAjax = function(eventForm, formData) {
+        Form.prototype.submitAjax = function(eventForm, formData, action) {
+            
+            if(action === 'submit_organizer' || action === 'submit_location') {
+                var allFieldsHasValue = Object.keys(formData).every(
+                    (key) => {
+                         return formData[key].length > 0 
+                    }
+                );
+                
+                if(!allFieldsHasValue) {                    
+                    return new Promise((resolve) => {
+                        resolve({success: false});
+                    });                    
+                }
 
-            $.ajax({
+            }
+
+            return $.ajax({
                 url: eventintegration.ajaxurl,
                 type: 'POST',
                 data: {
-                    action: 'submit_event',
+                    action: action,
                     data: formData,
                 },
                 success: function(response) {
@@ -396,6 +430,8 @@ export default (() => {
                         $('[event-submit__success]', eventForm).removeClass('u-display--none');
                         
                         Form.prototype.cleanForm(eventForm);
+                        
+                        return response;
                     } else {
                         $('[event-submit__success]', eventForm).addClass('u-display--none');
                         let noticeSuccess = $('[event-submit__error]', eventForm);
@@ -403,7 +439,7 @@ export default (() => {
                         $('[event-submit__error]', eventForm).removeClass('u-display--none');
                     }
                 },
-                error: function(jqXHR, textStatus) {
+                error: function(jqXHR, textStatus) {                    
                     $('[event-submit__success]', eventForm).addClass('u-display--none');
                     let noticeSuccess = $('[event-submit__error]', eventForm);
                     noticeSuccess[0].querySelector('[id^="notice__text__"]').innerHTML = textStatus;
@@ -560,7 +596,19 @@ export default (() => {
 
                     var fileInput = eventForm.find('#image_input'),
                         formData = this.jsonData(eventForm),
-                        imageData = new FormData();
+                        imageData = new FormData(),
+                        organizerData = {title: '', phone: '', email: ''},
+                        locationData = {title: '', street_address: '', city: '', postal_code: ''},
+                        newOrganizerinputs = $('#new-organizer input'),
+                        newLocationinputs = $('#new-location input');
+        
+                    newOrganizerinputs.each((index, element) => {                        
+                        organizerData[element.getAttribute('field')] = element.value;
+                    });
+
+                    newLocationinputs.each((index, element) => {                        
+                        locationData[element.getAttribute('field')] = element.value;
+                    });
 
                     $('[event-submit__error]', eventForm).addClass('u-display--none');
                     let noticeSuccess = $('[event-submit__success]', eventForm);
@@ -576,7 +624,7 @@ export default (() => {
                         ) {
                             if (response.success) {
                                 formData['featured_media'] = response.data;
-                                Form.prototype.submitEventAjax(eventForm, formData);
+                                Form.prototype.submitAjax(eventForm, formData, 'submit_event');
                             } else {
                                 $('[event-submit__success]', eventForm).addClass('u-display--none');
                                 let noticeSuccess = $('[event-submit__error]', eventForm);
@@ -586,7 +634,27 @@ export default (() => {
                         });
                         // Submit post if media is not set
                     } else {
-                        this.submitEventAjax(eventForm, formData);
+                        this.submitAjax(eventForm, organizerData, 'submit_organizer').then(function(response) {
+                            
+                            if(response.success) {
+                                formData['organizers'] = [{
+                                    organizer: response.data.id,
+                                    main_organizer: true
+                                }];
+                                formData['contact_phone'] = response.data.phone;
+                                formData['contact_email'] = response.data.email;
+                            }
+                            
+                        }).then(function() {
+                            
+                            Form.prototype.submitAjax(eventForm, locationData, 'submit_location').then((response) => {
+                                if(response.success) {
+                                   formData['location'] = response.data.id;
+                                }
+
+                                Form.prototype.submitAjax(eventForm, formData, 'submit_event');
+                            }); 
+                        }) 
                     }
                 }.bind(this)
             );
@@ -633,6 +701,22 @@ export default (() => {
                     .prop('required', false);
             });
 
+            // Show/hide inputs for new and excisting organizer.
+            $('input:radio[name=organizer-type]', eventForm).change(function(event) {
+                $('#new-organizer').toggle();
+                $('#excisting-organizer').toggle();
+
+                Form.prototype.toggleRequired($('#new-organizer').find('input'));
+            });
+
+            // Show/hide inputs for new and excisting organizer.
+            $('input:radio[name=location-type]', eventForm).change(function(event) {
+                $('#new-location').toggle();
+                $('#excisting-location').toggle();      
+                
+                Form.prototype.toggleRequired($('#new-location').find('input'));                
+            });
+
             // Add new occurance
             $('.add-occurance', eventForm).click(
                 function(event) {
@@ -672,6 +756,16 @@ export default (() => {
                     .remove();
             });
         };
+
+        Form.prototype.toggleRequired = function(inputs) {
+            inputs.each((index, element) => {
+                if($(element).prop('required')) {
+                    $(element).removeAttr('required');
+                } else {
+                    $(element).prop('required', true);
+                }
+            });
+        }
 
         // Clean up form
         Form.prototype.cleanForm = function(eventForm) {

@@ -12,11 +12,9 @@
                     'content' => $post->excerptShort,
                     'tags' => $post->termsUnlinked
                 ])
-                   @slot('subHeading')
-                   @typography(['variant' => 'meta', 'element' => 'p'])
+                   @slot('meta')
                         @icon(['icon' => 'date_range']) @endicon
-                        @date(['action' => 'formatDate', 'format' => 'D d M Y H:i' ,'timestamp' => $post->startDate])@enddate
-                        @endtypography
+                        @date(['action' => 'formatDate', 'format' => 'D d M Y H:i' ,'timestamp' => $post->startDate])@enddate                    
                    @endslot 
                 @endcard
             </div>

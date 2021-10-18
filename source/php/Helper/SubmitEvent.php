@@ -11,6 +11,8 @@ class SubmitEvent
     {
         $data = get_fields($id);
 
+        
+
         $fields = array(
             'title' => (object)array(
                 'name' => 'title',
@@ -181,6 +183,19 @@ class SubmitEvent
                 'hidden_description' => !empty($data['submitter_phone']['hidden_description']),
             ),
         );
+
+        $fields['translations'] =  [
+            'name' => __('Name', 'event-integration'),
+            'streetAddress' => __('Street address', 'event-integration'),
+            'postalCode' => __('Postal code', 'event-integration'),
+            'city' => __('City', 'event-integration'),
+            'phoneNumber' => __('Phone number', 'event-integration'),
+            'email' => __('Email', 'event-integration'),
+            'newOrganizer' => __('New organizer', 'event-integration'),
+            'newLocation' => __('New location', 'event-integration'),
+            'existingLocation' => __('Existing location', 'event-integration'),
+            'existingOrganizer' => __('Existing organizer', 'event-integration'),
+        ]; 
 
         return $fields;
     }
