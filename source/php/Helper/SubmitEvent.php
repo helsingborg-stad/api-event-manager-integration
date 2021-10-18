@@ -195,6 +195,8 @@ class SubmitEvent
             'newLocation' => __('New location', 'event-integration'),
             'existingLocation' => __('Existing location', 'event-integration'),
             'existingOrganizer' => __('Existing organizer', 'event-integration'),
+            'elevatorRamp' => __('Elevator/ramp', 'event-integration'),
+            'accessibleToilet' => __('Accessible toilet', 'event-integration'),
         ]; 
 
         return $fields;

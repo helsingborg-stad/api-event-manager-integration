@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2021-10-15 10:55+0200\n"
-"PO-Revision-Date: 2021-10-15 10:56+0200\n"
+"POT-Creation-Date: 2021-10-18 10:22+0200\n"
+"PO-Revision-Date: 2021-10-18 10:25+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -1201,7 +1201,6 @@ msgid "New organizer"
 msgstr "Ny arrangör"
 
 #: source/php/Helper/SubmitEvent.php:195
-#: source/php/Module/Location/Location.php:31
 msgid "New location"
 msgstr "Ny plats"
 
@@ -1212,6 +1211,14 @@ msgstr "Befintlig plats"
 #: source/php/Helper/SubmitEvent.php:197
 msgid "Existing organizer"
 msgstr "Befintlig arrangör"
+
+#: source/php/Helper/SubmitEvent.php:198
+msgid "Elevator/ramp"
+msgstr "Hiss/ramp"
+
+#: source/php/Helper/SubmitEvent.php:199
+msgid "Accessible toilet"
+msgstr "Handikapptoalett"
 
 #: source/php/Module/Event/Event.php:16 source/php/Widget/DisplayEvents.php:13
 msgid "Events"
@@ -1310,10 +1317,6 @@ msgstr "Information"
 #| msgid "Display events"
 msgid "Displays an event submit form"
 msgstr "Visning av evenemang"
-
-#: source/php/Module/SubmitForm/SubmitForm.php:26
-msgid "Recurring"
-msgstr ""
 
 #: source/php/OAuth/OAuthAdmin.php:22 source/php/OAuth/OAuthAdmin.php:23
 #: source/php/OAuth/OAuthAdmin.php:36
@@ -1988,12 +1991,6 @@ msgstr ""
 
 #~ msgid "Today"
 #~ msgstr "Idag"
-
-#~ msgid "Elevator/ramp"
-#~ msgstr "Hiss/ramp"
-
-#~ msgid "Accessible toilet"
-#~ msgstr "Handikapptoalett"
 
 #~ msgid "Are there identifiable persons on the image/images?"
 #~ msgstr "Finns det identifierbara personer på bilden/bilderna?"

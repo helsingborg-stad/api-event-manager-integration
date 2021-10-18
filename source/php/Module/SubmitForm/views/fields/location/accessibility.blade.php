@@ -17,7 +17,7 @@
         'attributeList' => [
             'name' => $accessibility->name
         ],
-        'label' => __('Elevator/ramp', 'event-integration')
+        'label' => $translations['elevatorRamp']
     ])
     @endoption
 
@@ -27,7 +27,7 @@
         'attributeList' => [
             'name' => $accessibility->name,
         ],
-        'label' => __('Accessible toilet', 'event-integration')
+        'label' => $translations['accessibleToilet']
     ])
     @endoption
 </div>
