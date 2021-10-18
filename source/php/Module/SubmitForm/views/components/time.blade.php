@@ -5,37 +5,19 @@
 @endphp
 
 <div class="o-grid">
-    <div class="o-grid-6">
+    <div class="o-grid-12">
         @field([
-            'type' => 'number',
+            'type' => 'time',
             'required' => $required,
             'attributeList' => [
                 'id' => $hourId ,
-                'type' => 'number',
-                'name' => $hourName,
+                'type' => 'time',
+                'name' => $name,
                 'min' => '0',
                 'max' => '24',
                 
             ],
-            'label' => $hourLabel
-        ])
-        @endfield
-    </div>
-
-    <div class="o-grid-6">
-        @field([
-            'type' => 'number',
-            'min' => '0',
-            'max' => '59',
-            'required' => $required,
-            'attributeList' => [
-                'id' => $minuteId,
-                'type' => 'number',
-                'name' => $minuteName,
-                'min' => '0',
-            'max' => '59',
-            ],
-            'label' => $minuteLabel
+            'label' => $label
         ])
         @endfield
     </div>

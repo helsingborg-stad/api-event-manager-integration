@@ -32,7 +32,7 @@
             'name' => 'occurance-type',
         ],
         'classList' => ['u-display--inline-block'],
-        'label' => __('Schedule', 'Event recurrence rules', 'event-integration')
+        'label' => __('Recurring', 'event-integration')
     ])
     @endoption
 
@@ -52,11 +52,6 @@
             <div class="form-group occurrence occurance-group-single gutter gutter-bottom">
                 <div class="form-group">
 
-                    @typography([
-                        'variant' => 'subtitle'
-                    ])
-                        {{ __('Start date', 'event-integration') }}
-                    @endtypography
 
                     @field([
                         'type' => 'datepicker',
@@ -77,19 +72,10 @@
 
                 </div>
 
-                <div class="form-group form-horizontal">
-
-                    @typography([
-                        'variant' => 'subtitle'
-                    ])
-                        {{ __('Start time', 'event-integration') }}
-                    @endtypography
-
+                <div class="form-group form-horizontal">                    
                     @include('components.time', [
-                        'hourName' => 'start_time_h',
-                        'minuteName' => 'start_time_m',
-                        'hourLabel' => 'HH',
-                        'minuteLabel' => 'MM',
+                        'name' => 'start_time',
+                        'label' => __('Start time', 'event-integration')
                     ])
 
                 </div>
@@ -97,11 +83,6 @@
 
                 <div class="form-group">
 
-                    @typography([
-                        'variant' => 'subtitle'
-                    ])
-                        {{ __('End date', 'event-integration') }}
-                    @endtypography
 
                     @field([
                         'type' => 'datepicker',
@@ -123,18 +104,9 @@
                 </div>
 
                 <div class="form-group form-horizontal">
-
-                    @typography([
-                        'variant' => 'subtitle'
-                    ])
-                        {{ __('End time', 'event-integration') }}
-                    @endtypography
-
                     @include('components.time', [
-                        'hourName' => 'end_time_h',
-                        'minuteName' => 'end_time_m',
-                        'hourLabel' => 'HH',
-                        'minuteLabel' => 'MM',
+                        'name' => 'end_time',
+                        'label' => __('Start time', 'event-integration')
                     ])
 
                 </div>

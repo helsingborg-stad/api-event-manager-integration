@@ -294,16 +294,14 @@ export default (() => {
 
             // Occasion
             objData['occasions'] = [];
-            $('.occurance-group-single', form).each(function(index) {
+            $('.occurance-group-single', form).each(function(index) {                
                 var startDate = Form.prototype.formatDate(
                     $('[name="start_date"]', this).val(),
-                    $('[name="start_time_h"]', this).val(),
-                    $('[name="start_time_m"]', this).val()
+                    $('[name="start_time"]', this).val()                    
                 );
                 var endDate = Form.prototype.formatDate(
                     $('[name="end_date"]', this).val(),
-                    $('[name="end_time_h"]', this).val(),
-                    $('[name="end_time_m"]', this).val()
+                    $('[name="end_time"]', this).val()                    
                 );
                 if (startDate && endDate) {
                     objData['occasions'].push({
@@ -778,8 +776,10 @@ export default (() => {
         };
 
         // Format date and time
-        Form.prototype.formatDate = function(date, hh, mm) {
+        Form.prototype.formatDate = function(date, time) {
             var dateTime = '';
+            var hh = time.split(':')[0];
+            var mm = time.split(':')[1];
 
             //Format from datepicker (dd/mm/yyyy) to wp format (yyyy-mm-dd)
             if(date.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/)) {
