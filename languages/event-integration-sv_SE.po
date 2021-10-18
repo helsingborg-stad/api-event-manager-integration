@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2021-10-15 10:55+0200\n"
-"PO-Revision-Date: 2021-10-15 10:56+0200\n"
+"POT-Creation-Date: 2021-10-18 09:55+0200\n"
+"PO-Revision-Date: 2021-10-18 09:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 1.8.12\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: event-manager-integration.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -1201,7 +1201,6 @@ msgid "New organizer"
 msgstr "Ny arrangör"
 
 #: source/php/Helper/SubmitEvent.php:195
-#: source/php/Module/Location/Location.php:31
 msgid "New location"
 msgstr "Ny plats"
 
@@ -1212,6 +1211,20 @@ msgstr "Befintlig plats"
 #: source/php/Helper/SubmitEvent.php:197
 msgid "Existing organizer"
 msgstr "Befintlig arrangör"
+
+#: source/php/Helper/SubmitEvent.php:198
+msgid "Are there identifiable persons on the image/images?"
+msgstr "Finns det identifierbara personer på bilden/bilderna?"
+
+#: source/php/Helper/SubmitEvent.php:199
+msgid ""
+"They have accepted that the image is used to promote this event and have "
+"been informed that after the image has been added to the database, it may "
+"appear in different channels to promote the event."
+msgstr ""
+"De har godkänt att bilden används för att marknadsföra detta evenemang och "
+"har informerats om att efter att bilden lagts in i databasen kan komma att "
+"synas i olika kanaler för att marknadsföra evenemanget."
 
 #: source/php/Module/Event/Event.php:16 source/php/Widget/DisplayEvents.php:13
 msgid "Events"
@@ -1310,10 +1323,6 @@ msgstr "Information"
 #| msgid "Display events"
 msgid "Displays an event submit form"
 msgstr "Visning av evenemang"
-
-#: source/php/Module/SubmitForm/SubmitForm.php:26
-msgid "Recurring"
-msgstr ""
 
 #: source/php/OAuth/OAuthAdmin.php:22 source/php/OAuth/OAuthAdmin.php:23
 #: source/php/OAuth/OAuthAdmin.php:36
@@ -1813,6 +1822,15 @@ msgstr "Teckenbegränsning av beskrivning:"
 msgid "-1 equals no limit"
 msgstr "-1 är lika med ingen gräns"
 
+#: vendor/helsingborg-stad/acf-export-manager/src/AcfExportManager.php:364
+msgid "Export with AcfExportManager"
+msgstr ""
+
+#: vendor/helsingborg-stad/acf-export-manager/src/AcfExportManager.php:408
+#, php-format
+msgid "Exported %d fieldgroup(s)."
+msgstr ""
+
 #: views/submit-form.blade.php:29 views/submit-form.blade.php:39
 msgid "Single occurrence"
 msgstr "Enstaka datum"
@@ -1994,18 +2012,6 @@ msgstr ""
 
 #~ msgid "Accessible toilet"
 #~ msgstr "Handikapptoalett"
-
-#~ msgid "Are there identifiable persons on the image/images?"
-#~ msgstr "Finns det identifierbara personer på bilden/bilderna?"
-
-#~ msgid ""
-#~ "They have accepted that the image is used to promote this event and have "
-#~ "been informed that after the image has been added to the database, it may "
-#~ "appear in different channels to promote the event."
-#~ msgstr ""
-#~ "De har godkänt att bilden används för att marknadsföra detta evenemang "
-#~ "och har informerats om att efter att bilden lagts in i databasen kan "
-#~ "komma att synas i olika kanaler för att marknadsföra evenemanget."
 
 #~ msgid "Tickets"
 #~ msgstr "Biljetter"
