@@ -614,9 +614,6 @@ export default (() => {
                     let noticeSuccess = $('[event-submit__success]', eventForm);
                     noticeSuccess[0].querySelector('[id^="notice__text__"]').innerHTML = 'Skickar...';
                     $('[event-submit__success]', eventForm).removeClass('u-display--none');
-
-                    // Upload media first and append it to the post.
-                    if (fileInput.val()) {
                         imageData.append('file', fileInput.prop('files')[0]);
 
                         $.when(
@@ -654,8 +651,6 @@ export default (() => {
                                 $('[event-submit__error]', eventForm).removeClass('u-display--none');
                             }
                         });
-                        // Submit post if media is not set
-                    }
                 }.bind(this)
             );
 
