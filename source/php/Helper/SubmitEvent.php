@@ -197,6 +197,9 @@ class SubmitEvent
             'existingOrganizer' => __('Existing organizer', 'event-integration'),
             'elevatorRamp' => __('Elevator/ramp', 'event-integration'),
             'accessibleToilet' => __('Accessible toilet', 'event-integration'),
+            'identifiablePersons' => __('Are there identifiable persons on the image/images?', 'event-integration'),
+            'acceptedCondition' => __('They have accepted that the image is used to promote this event and have been informed that after the image has been added to the database, it may appear in different channels to promote the event.', 'event-integration'),
+
         ]; 
 
         return $fields;
