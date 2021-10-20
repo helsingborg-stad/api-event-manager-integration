@@ -29,7 +29,8 @@
         'type' => 'email',
         'name' => $organizer->name . '-mail',
         'field' => 'email',
-        'autocomplete' => 'off'
+        'autocomplete' => 'off',
+        'pattern' => '^[^@]+@[^@]+\.[^@]+$'
     ],
     'label' => $translations['email']
 ])
