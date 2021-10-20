@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2021-10-18 11:11+0200\n"
-"PO-Revision-Date: 2021-10-18 11:12+0200\n"
+"POT-Creation-Date: 2021-10-20 10:44+0200\n"
+"PO-Revision-Date: 2021-10-20 10:46+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 2.3\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: event-manager-integration.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -1234,6 +1234,10 @@ msgstr ""
 "har informerats om att efter att bilden lagts in i databasen kan komma att "
 "synas i olika kanaler för att marknadsföra evenemanget."
 
+#: source/php/Helper/SubmitEvent.php:202
+msgid "Recurring"
+msgstr "Återkommande"
+
 #: source/php/Module/Event/Event.php:16 source/php/Widget/DisplayEvents.php:13
 msgid "Events"
 msgstr "Evenemang"
@@ -1829,15 +1833,6 @@ msgstr "Teckenbegränsning av beskrivning:"
 #: source/php/Widget/DisplayEvents.php:150
 msgid "-1 equals no limit"
 msgstr "-1 är lika med ingen gräns"
-
-#: vendor/helsingborg-stad/acf-export-manager/src/AcfExportManager.php:364
-msgid "Export with AcfExportManager"
-msgstr ""
-
-#: vendor/helsingborg-stad/acf-export-manager/src/AcfExportManager.php:408
-#, php-format
-msgid "Exported %d fieldgroup(s)."
-msgstr ""
 
 #: views/submit-form.blade.php:29 views/submit-form.blade.php:39
 msgid "Single occurrence"
