@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 const EventItem = ({ event, gridColumn, displayFields }) => (
     <a className="c-card c-card--action" href={event.permalink} style={{textAlign: 'center', height: '100%'}}>
       {displayFields.includes('image') && event.image_url && (
-        <div className="c-card__image u-ratio-16-9" style={{backgroundImage: `url('${event.image_url}')`}}>
-
+        <div className="c-card__image c-card__image--secondary">
+          <div className="c-card__image-background" style={{backgroundImage: `url('${event.image_url}')`}}></div>
         </div>
       )}
 
