@@ -52,7 +52,11 @@ class App
         });
 
         // Add view paths
-        add_filter('Municipio/blade/view_paths', array($this, 'addViewPaths'), 2, 1);
+        add_action('template_redirect', function () {
+            if (get_post_type() === 'event') {
+                add_filter('Municipio/blade/view_paths', array($this, 'addViewPaths'), 2, 1);
+            }
+        }, 10);
     }
 
     /**
