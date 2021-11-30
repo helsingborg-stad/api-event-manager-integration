@@ -10,7 +10,7 @@ class EventForm extends \Modularity\Module
 
     public function init()
     {
-        $this->nameSingular = __('Event form', 'event-integration');
+        $this->nameSingular = __('Event form v2', 'event-integration'); // TODO: Remove v2!
         $this->namePlural = __('Event forms', 'event-integration');
         $this->description = __('Displays submit event form', 'event-integration');
     }
