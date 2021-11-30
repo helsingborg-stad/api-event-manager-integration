@@ -26,6 +26,7 @@ class App
         new Admin\MediaLibrary();
         new Shortcodes\SingleEventAdmin();
         new Shortcodes\SubmitForm();
+        new Shortcodes\EventForm();
 
         /* Register Modularity v2 modules */
         add_action('plugins_loaded', function () {
