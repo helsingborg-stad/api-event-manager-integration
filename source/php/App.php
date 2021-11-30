@@ -26,7 +26,6 @@ class App
         new Admin\MediaLibrary();
         new Shortcodes\SingleEvent();
         new Shortcodes\SubmitForm();
-        new Shortcodes\EventForm();
 
         /* Register Modularity v2 modules */
         add_action('plugins_loaded', function () {
@@ -44,6 +43,11 @@ class App
                 modularity_register_module(
                     EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/SubmitForm',
                     'SubmitForm'
+                );
+
+                modularity_register_module(
+                    EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/EventForm',
+                    'EventForm'
                 );
             }
         });
