@@ -15,6 +15,8 @@
     @endif
             
     <div class="c-card__body">
-        {{-- Form goes in here --}}
+        @if (!empty($fields))
+            @include('partials.event-form')
+        @endif
     </div>
 @endcard
