@@ -26,7 +26,7 @@ class EventForm extends \Modularity\Module
 
     public function template()
     {
-        return "event-form.blade.php";
+        return "mod-event-form.blade.php";
     }
 
     /**
