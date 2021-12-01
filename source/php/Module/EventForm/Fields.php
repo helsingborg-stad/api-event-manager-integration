@@ -9,11 +9,11 @@ class Fields
      * @param int $id module ID
      * @return array Form field data
      */
-    public static function get($id = 0)
+    public static function get(int $id = 0)
     {
         $data = get_fields($id);
 
-        $fields = [
+        return [
             'title' => (object)[
                 'name' => 'title',
                 'label' => !empty($data['title']['label']) ? $data['title']['label'] : __(
@@ -27,6 +27,10 @@ class Fields
                 'required' => true,
                 'hidden' => false,
                 'hidden_description' => !empty($data['title']['hidden_description']),
+                'type' => [
+                    'component' => 'input',
+                    'props' => [],
+                ]
             ],
             'content' => (object)[
                 'name' => 'content',
@@ -303,7 +307,5 @@ class Fields
                 'hidden_description' => !empty($data['submitter_phone']['hidden_description']),
             ],
         ];
-
-        return $fields;
     }
 }
