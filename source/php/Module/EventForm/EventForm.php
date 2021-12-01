@@ -18,6 +18,8 @@ class EventForm extends \Modularity\Module
     public function data(): array
     {
         $data = [];
+
+        $data['fields'] = \EventManagerIntegration\Module\EventForm\Fields::get($this->id);
         $data['classes'] = implode(' ', apply_filters('Modularity/Module/Classes', array(), $this->post_type, $this->args));
         return $data;
     }
