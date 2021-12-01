@@ -6,4 +6,15 @@
             </span>
         </div>
     @endforeach
+
+    @button([
+        'text'              => __('Send', 'event-integration'),
+        'color'             => 'primary',
+        'style'             => 'filled',
+        'type'              => 'submit',
+        'attributeList'    => [
+            'event-submit__submit-button' => ''
+        ]
+    ])
+    @endbutton
 </form>
