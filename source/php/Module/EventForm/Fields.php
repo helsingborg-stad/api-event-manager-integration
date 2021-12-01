@@ -9,7 +9,7 @@ class Fields
      * @param int $id module ID
      * @return array Form field data
      */
-    public static function get(int $id = 0)
+    public static function get(?int $id = 0)
     {
         $data = get_fields($id);
 
@@ -27,7 +27,7 @@ class Fields
                 'required' => true,
                 'hidden' => false,
                 'hidden_description' => !empty($data['title']['hidden_description']),
-                'type' => [
+                'type' => (object)[
                     'component' => 'input',
                     'props' => [],
                 ]
@@ -39,14 +39,14 @@ class Fields
                     'event-integration'
                 ),
                 'description' => !empty($data['content']['description']) ? $data['content']['description'] :
-                    __('Describe your event. What happens and why should you visit it?', 'event-integration') . '<br>' .
-                    __('Plain language tips', 'event-integration') . ':<br>' .
-                    __('Write the most important first.', 'event-integration') . '<br>' .
-                    __('Use words that you think the readers understand.', 'event-integration') . '<br>' .
-                    __('Write short and concise.', 'event-integration'),
+                    __('Describe your event. What happens and why should you visit it?', 'event-integration'),
                 'required' => true,
                 'hidden' => false,
                 'hidden_description' => !empty($data['content']['hidden_description']),
+                'type' => (object)[
+                    'component' => 'textarea',
+                    'props' => [],
+                ]
             ],
             'occasion' => (object)[
                 'name' => '',
@@ -75,6 +75,10 @@ class Fields
                 'required' => !empty($data['event_link']['required']),
                 'hidden' => !empty($data['event_link']['hidden']),
                 'hidden_description' => !empty($data['event_link']['hidden_description']),
+                'type' => (object)[
+                    'component' => 'input',
+                    'props' => [],
+                ]
             ],
             'booking_link' => (object)[
                 'name' => 'booking_link',
@@ -89,6 +93,10 @@ class Fields
                 'required' => !empty($data['booking_link']['required']),
                 'hidden' => !empty($data['booking_link']['hidden']),
                 'hidden_description' => !empty($data['booking_link']['hidden_description']),
+                'type' => (object)[
+                    'component' => 'input',
+                    'props' => [],
+                ]
             ],
             'price_adult' => (object)[
                 'name' => 'price_adult',
@@ -103,6 +111,10 @@ class Fields
                 'required' => !empty($data['price_adult']['required']),
                 'hidden' => !empty($data['price_adult']['hidden']),
                 'hidden_description' => !empty($data['price_adult']['hidden_description']),
+                'type' => (object)[
+                    'component' => 'number',
+                    'props' => [],
+                ]
             ],
             'price_student' => (object)[
                 'name' => 'price_student',
