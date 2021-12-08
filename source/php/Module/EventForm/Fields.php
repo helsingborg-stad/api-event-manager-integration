@@ -70,6 +70,10 @@ class Fields
                         'required' => !empty($data['image_input']['required']),
                         'hidden' => !empty($data['image_input']['hidden']),
                         'hidden_description' => !empty($data['image_input']['hidden_description']),
+                        'type' => (object)[
+                            'component' => 'image',
+                            'props' => [],
+                        ]
                     ],
                 ],
             ],
