@@ -225,7 +225,7 @@
                     ])
                         {{ __('Start time for the event', 'event-integration') }}
                     @endtypography
-{{-- 
+{{--
                     @include('components.time', [
                         'hourName' => 'recurring_start_h',
                         'minuteName' => 'recurring_start_m',
@@ -252,7 +252,7 @@
                     ])
                         {{ __('End time for the event', 'event-integration') }}
                     @endtypography
-{{-- 
+{{--
                     @include('components.time', [
                         'hourName' => 'recurring_end_h',
                         'minuteName' => 'recurring_end_m',
