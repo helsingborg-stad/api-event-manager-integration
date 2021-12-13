@@ -1,10 +1,11 @@
 @field([
     'id'   => $field->name,
-    'type' => 'text',
+    'type' => $field->type->props->type ?? 'text',
     'attributeList' => [
-        'type' => 'text',
+        'type' => $field->type->props['type'] ?? 'text',
         'name' => $field->name,
     ],
+    'label' => $field->label,
     'required' => $field->required,
 ])
 @endfield
