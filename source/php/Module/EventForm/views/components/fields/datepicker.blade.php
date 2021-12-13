@@ -73,10 +73,10 @@
                 </div>
 
                 <div class="form-group form-horizontal">                    
-                    @include('components.time', [
+                    {{-- @include('.time', [
                         'name' => 'start_time',
                         'label' => __('Start time', 'event-integration')
-                    ])
+                    ]) --}}
 
                 </div>
 
@@ -104,10 +104,10 @@
                 </div>
 
                 <div class="form-group form-horizontal">
-                    @include('components.time', [
+                    {{-- @include('components.time', [
                         'name' => 'end_time',
                         'label' => __('Start time', 'event-integration')
-                    ])
+                    ]) --}}
 
                 </div>
             </div>
@@ -225,14 +225,14 @@
                     ])
                         {{ __('Start time for the event', 'event-integration') }}
                     @endtypography
-
+{{-- 
                     @include('components.time', [
                         'hourName' => 'recurring_start_h',
                         'minuteName' => 'recurring_start_m',
                         'hourLabel' => 'HH',
                         'minuteLabel' => 'MM',
                         'required' => false
-                    ])
+                    ]) --}}
 
                 </div>
 
@@ -252,14 +252,14 @@
                     ])
                         {{ __('End time for the event', 'event-integration') }}
                     @endtypography
-
+{{-- 
                     @include('components.time', [
                         'hourName' => 'recurring_end_h',
                         'minuteName' => 'recurring_end_m',
                         'hourLabel' => 'HH',
                         'minuteLabel' => 'MM',
                         'required' => false
-                    ])
+                    ]) --}}
 
                 </div>
 
