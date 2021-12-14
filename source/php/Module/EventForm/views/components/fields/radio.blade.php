@@ -4,7 +4,7 @@
         'checked' => $option->checked,
         'attributeList' => [
             'data-id' => $option->id,
-            'name' => $field->props['name'],1
+            'name' => $field->type->props['name'],
         ],
         'classList' => ['u-display--inline-block'],
         'label' => $option->label
