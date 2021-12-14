@@ -1,42 +1,3 @@
-{{-- Occasions --}}
-
-<div class="form-group u-display--inline-block">
-    @typography([
-        'variant' => 'subtitle'
-    ])
-        {{ $occasion->label }}
-        @includeWhen($occasion->required, 'components.required')
-    @endtypography
-
-    @includeWhen(!$occasion->hidden_description, 'components.description', [
-        'description' => $occasion->description
-    ])
-
-    @option([
-        'type' => 'radio',
-        'checked' => 'true',
-        'attributeList' => [
-            'data-id' => 'single-event',
-            'name' => 'occurance-type',
-        ],
-        'classList' => ['u-display--inline-block'],
-        'label' => __('Single occurrence', 'event-integration')
-    ])
-    @endoption
-
-    @option([
-        'type' => 'radio',
-        'attributeList' => [
-            'data-id' => 'recurring-event',
-            'name' => 'occurance-type',
-        ],
-        'classList' => ['u-display--inline-block'],
-        'label' => __('Recurring', 'event-integration')
-    ])
-    @endoption
-
-</div>
-
 {{-- Single/multiple occasions --}}
 <div id="single-event" class="event-occasion form-group">
     <div class="box box-panel box-panel-secondary">
@@ -76,7 +37,6 @@
                         'name' => 'start_time',
                         'label' => __('Start time', 'event-integration')
                     ])
-
                 </div>
 
 
