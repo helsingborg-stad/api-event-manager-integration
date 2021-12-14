@@ -1,12 +1,13 @@
-@textarea([
+@field([
     'id'            => $content->name,
     'type'          => 'text',
     'label'         => $content->label,
     'required'      =>  $content->required,
-    'rows'          => '5',
+    'multiline'      => true,
     'attributeList' => [
         'type' => 'textarea',
         'name' => $content->name,
+        'rows'          => '5',
     ],
 ])
-@endtextarea
+@endfield
