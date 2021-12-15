@@ -15,7 +15,6 @@
                 'name' => $name,
                 'min' => '0',
                 'max' => '24',
-                
             ],
             'label' => $label
         ])
