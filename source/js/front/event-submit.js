@@ -689,7 +689,9 @@ export default (() => {
                     .find('input')
                     .prop('required', true);
                 $('#' + id)
-                    .siblings('.event-occasion')
+                    .parent()
+                    .parent()
+                    .find('.event-occasion:not(#' + id + ')')
                     .children('.box')
                     .hide()
                     .find('input')
