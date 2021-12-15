@@ -46,7 +46,7 @@ return (object)[
                 'component' => 'group',
                 'props' => [
                     'id' => 'single-event',
-                    'className' => 'event-occurance',
+                    'className' => 'event-occasion',
                     'fields' => [
                         (object)[
                             'name' => '',
@@ -128,18 +128,50 @@ return (object)[
                     ],
                 ]
             ],
-            'date' => (object)[
-                'name' => '',
-                'label' => '',
-                'description' => '',
-                'required' => false,
-                'hidden' => false,
-                'hidden_description' => !empty($data['occasion']['hidden_description']),
-                'type' => (object)[
-                    'component' => 'fullform',
-                    'props' => [],
+        ],
+        'recurring-event' => (object)[
+            'name' => '',
+            'label' => '',
+            'description' => '',
+            'required' => false,
+            'hidden' => false,
+            'hidden_description' => !empty($data['occasion']['hidden_description']),
+            'type' => (object)[
+                'component' => 'group',
+                'props' => [
+                    'id' => 'recurring-event',
+                    'className' => 'event-occasion',
+                    'fields' => [
+                        (object)[
+                            'name' => '',
+                            'label' => __('Start date', 'event-integration'),
+                            'description' => '',
+                            'required' => true,
+                            'hidden' => false,
+                            'hidden_description' => !empty($data['occasion']['hidden_description']),
+                            'type' => (object)[
+                                'component' => 'datepicker',
+                                'props' => [
+                                    'name' => 'start_date',
+                                    'title' => __('Date', 'event-integration')
+                                ],
+                            ]
+                        ],
+                    ],
                 ]
             ],
         ],
-    ]
+        /*'date' => (object)[
+            'name' => '',
+            'label' => '',
+            'description' => '',
+            'required' => false,
+            'hidden' => false,
+            'hidden_description' => !empty($data['occasion']['hidden_description']),
+            'type' => (object)[
+                'component' => 'fullform',
+                'props' => [],
+            ]
+        ],*/
+    ],
 ];
