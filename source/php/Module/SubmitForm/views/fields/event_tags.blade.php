@@ -1,6 +1,5 @@
 {{-- Tags --}}
 <div class="form-group">
-
     @typography([
         'variant' => 'subtitle'
     ])
@@ -22,7 +21,6 @@
         'options' => [
             'loading'   => __('Loading', 'event-integration') . "...",
         ]
-    ])
+    ])4
     @endselect
-    
 </div>
