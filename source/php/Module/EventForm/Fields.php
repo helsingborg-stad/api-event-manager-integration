@@ -24,7 +24,10 @@ class Fields
             [
                 'name' => 'content',
                 'label' => __('Description', 'event-integration'),
-                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'description' => __(
+                    'Describe your event. What happens and why should you visit it?',
+                    'event-integration'
+                ),
                 'type' => 'textarea',
                 'required' => true,
             ],
@@ -32,8 +35,14 @@ class Fields
                 'name' => 'event_image',
                 'label' => __('Upload an image', 'event-integration'),
                 'description' =>
-                    __('Keep in mind that the image may be cropped, so avoid text in the image.', 'event-integration') . '<br>' .
-                    __('Images with identifiable persons are not accepted and will be replaced.', 'event-integration') . '<br>' .
+                    __(
+                        'Keep in mind that the image may be cropped, so avoid text in the image.',
+                        'event-integration'
+                    ) . '<br>' .
+                    __(
+                        'Images with identifiable persons are not accepted and will be replaced.',
+                        'event-integration'
+                    ) . '<br>' .
                     __('You must also have the right to use and distribute the image.', 'event-integration'),
                 'type' => 'image',
                 'required' => false,
@@ -41,11 +50,17 @@ class Fields
             [
                 'name' => 'event_image_copyright_compliance',
                 'label' => __('Rights', 'event-integration'),
-                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'description' => __(
+                    'Describe your event. What happens and why should you visit it?',
+                    'event-integration'
+                ),
                 'type' => 'checkbox',
                 'required' => true,
                 'options' => [
-                    'approved' => __('I have the right to use the image/images to promote this event.', 'event-integration')
+                    'approved' => __(
+                        'I have the right to use the image/images to promote this event.',
+                        'event-integration'
+                    )
                 ],
                 'condition' => [
                     [
@@ -58,7 +73,10 @@ class Fields
             [
                 'name' => 'event_image_gdpr_compliance',
                 'label' => __('Rights', 'event-integration'),
-                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'description' => __(
+                    'Describe your event. What happens and why should you visit it?',
+                    'event-integration'
+                ),
                 'type' => 'radio',
                 'required' => true,
                 'options' => [
@@ -76,11 +94,17 @@ class Fields
             [
                 'name' => 'event_image_marketing_compliance',
                 'label' => '',
-                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'description' => __(
+                    'Describe your event. What happens and why should you visit it?',
+                    'event-integration'
+                ),
                 'type' => 'checkbox',
                 'required' => true,
                 'options' => [
-                    'approved' => __('They have approved that the image is used to market this event and have been informed that after the image has been added to the database, it may appear in various channels to market the event.', 'event-integration')
+                    'approved' => __(
+                        'They have approved that the image is used to market this event and have been informed that after the image has been added to the database, it may appear in various channels to market the event.',
+                        'event-integration'
+                    )
                 ],
                 'condition' => [
                     [
@@ -95,8 +119,11 @@ class Fields
             //  Section 2
             [
                 'name' => 'event_schema_type',
-                'label' => __('Rights', 'event-integration'),
-                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'label' => __('Schedule', 'event-integration'),
+                'description' => __(
+                    'Describe your event. What happens and why should you visit it?',
+                    'event-integration'
+                ),
                 'type' => 'radio',
                 'required' => true,
                 'options' => [
@@ -108,8 +135,11 @@ class Fields
 
             [
                 'name' => 'event_schema_start_date',
-                'label' => __('Rights', 'event-integration'),
-                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'label' => __('Start date', 'event-integration'),
+                'description' => __(
+                    'Describe your event. What happens and why should you visit it?',
+                    'event-integration'
+                ),
                 'type' => 'date',
                 'required' => true,
                 'condition' => [
@@ -122,9 +152,12 @@ class Fields
             ],
             [
                 'name' => 'event_schema_start_time',
-                'label' => __('Rights', 'event-integration'),
-                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
-                'type' => 'date',
+                'label' => __('Start time', 'event-integration'),
+                'description' => __(
+                    'Describe your event. What happens and why should you visit it?',
+                    'event-integration'
+                ),
+                'type' => 'time',
                 'required' => true,
                 'condition' => [
                     [
@@ -137,8 +170,11 @@ class Fields
 
             [
                 'name' => 'event_schema_end_date',
-                'label' => __('Rights', 'event-integration'),
-                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'label' => __('End date', 'event-integration'),
+                'description' => __(
+                    'Describe your event. What happens and why should you visit it?',
+                    'event-integration'
+                ),
                 'type' => 'date',
                 'required' => true,
                 'condition' => [
@@ -152,9 +188,12 @@ class Fields
 
             [
                 'name' => 'event_schema_end_time',
-                'label' => __('Rights', 'event-integration'),
-                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
-                'type' => 'date',
+                'label' => __('End time', 'event-integration'),
+                'description' => __(
+                    'Describe your event. What happens and why should you visit it?',
+                    'event-integration'
+                ),
+                'type' => 'time',
                 'required' => true,
                 'condition' => [
                     [
@@ -168,14 +207,20 @@ class Fields
             [
                 'name' => 'event_schema_recurring',
                 'label' => __('Rights', 'event-integration'),
-                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'description' => __(
+                    'Describe your event. What happens and why should you visit it?',
+                    'event-integration'
+                ),
                 'type' => 'repeater',
                 'minRows' => 1,
                 'subFields' => [
                     [
                         'name' => 'start_date',
                         'label' => __('Rights', 'event-integration'),
-                        'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                        'description' => __(
+                            'Describe your event. What happens and why should you visit it?',
+                            'event-integration'
+                        ),
                         'type' => 'date',
                         'required' => true,
                         'condition' => [
@@ -189,7 +234,10 @@ class Fields
                     [
                         'name' => 'start_time',
                         'label' => __('Rights', 'event-integration'),
-                        'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                        'description' => __(
+                            'Describe your event. What happens and why should you visit it?',
+                            'event-integration'
+                        ),
                         'type' => 'date',
                         'required' => true,
                         'condition' => [
@@ -204,7 +252,10 @@ class Fields
                     [
                         'name' => 'end_date',
                         'label' => __('Rights', 'event-integration'),
-                        'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                        'description' => __(
+                            'Describe your event. What happens and why should you visit it?',
+                            'event-integration'
+                        ),
                         'type' => 'date',
                         'required' => true,
                         'condition' => [
@@ -218,7 +269,10 @@ class Fields
                     [
                         'name' => 'end_time',
                         'label' => __('Rights', 'event-integration'),
-                        'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                        'description' => __(
+                            'Describe your event. What happens and why should you visit it?',
+                            'event-integration'
+                        ),
                         'type' => 'date',
                         'required' => true,
                         'condition' => [
@@ -250,21 +304,30 @@ class Fields
             [
                 'name' => 'event_website_url',
                 'label' => __('Website', 'event-integration'),
-                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'description' => __(
+                    'Describe your event. What happens and why should you visit it?',
+                    'event-integration'
+                ),
                 'type' => 'url',
                 'required' => true,
             ],
             [
                 'name' => 'event_booking_url',
                 'label' => __('Event booking page', 'event-integration'),
-                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'description' => __(
+                    'Describe your event. What happens and why should you visit it?',
+                    'event-integration'
+                ),
                 'type' => 'url',
                 'required' => false,
             ],
             [
                 'name' => 'event_price_adult',
                 'label' => __('Event booking page', 'event-integration'),
-                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'description' => __(
+                    'Describe your event. What happens and why should you visit it?',
+                    'event-integration'
+                ),
                 'type' => 'number',
                 'required' => false,
                 'suffix' => 'kr'
@@ -272,7 +335,10 @@ class Fields
             [
                 'name' => 'event_price_student',
                 'label' => __('Event booking page', 'event-integration'),
-                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'description' => __(
+                    'Describe your event. What happens and why should you visit it?',
+                    'event-integration'
+                ),
                 'type' => 'number',
                 'required' => false,
                 'suffix' => 'kr'
@@ -280,7 +346,10 @@ class Fields
             [
                 'name' => 'event_price_kid',
                 'label' => __('Event booking page', 'event-integration'),
-                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'description' => __(
+                    'Describe your event. What happens and why should you visit it?',
+                    'event-integration'
+                ),
                 'type' => 'number',
                 'required' => false,
                 'suffix' => 'kr'
@@ -288,7 +357,10 @@ class Fields
             [
                 'name' => 'event_age_kid',
                 'label' => __('Event booking page', 'event-integration'),
-                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'description' => __(
+                    'Describe your event. What happens and why should you visit it?',
+                    'event-integration'
+                ),
                 'type' => 'number',
                 'required' => false,
                 'suffix' => __('years', 'event-integration')
@@ -296,7 +368,10 @@ class Fields
             [
                 'name' => 'event_price_senior',
                 'label' => __('Event booking page', 'event-integration'),
-                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'description' => __(
+                    'Describe your event. What happens and why should you visit it?',
+                    'event-integration'
+                ),
                 'type' => 'number',
                 'required' => false,
                 'suffix' => 'kr'
@@ -304,7 +379,10 @@ class Fields
             [
                 'name' => 'event_age_senior',
                 'label' => __('Event booking page', 'event-integration'),
-                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'description' => __(
+                    'Describe your event. What happens and why should you visit it?',
+                    'event-integration'
+                ),
                 'type' => 'number',
                 'required' => false,
                 'suffix' => __('years', 'event-integration')
@@ -312,7 +390,10 @@ class Fields
             [
                 'name' => 'event_target_age',
                 'label' => __('Rights', 'event-integration'),
-                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'description' => __(
+                    'Describe your event. What happens and why should you visit it?',
+                    'event-integration'
+                ),
                 'type' => 'radio',
                 'required' => true,
                 'options' => [
@@ -324,7 +405,10 @@ class Fields
             [
                 'name' => 'event_target_age',
                 'label' => __('Rights', 'event-integration'),
-                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'description' => __(
+                    'Describe your event. What happens and why should you visit it?',
+                    'event-integration'
+                ),
                 'type' => 'radio',
                 'required' => true,
                 'options' => [
@@ -336,7 +420,10 @@ class Fields
             [
                 'name' => 'event_target_age_from',
                 'label' => __('From', 'event-integration'),
-                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'description' => __(
+                    'Describe your event. What happens and why should you visit it?',
+                    'event-integration'
+                ),
                 'type' => 'number',
                 'required' => false,
                 'suffix' => __('years', 'event-integration'),
@@ -351,7 +438,10 @@ class Fields
             [
                 'name' => 'event_target_age_to',
                 'label' => __('To', 'event-integration'),
-                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'description' => __(
+                    'Describe your event. What happens and why should you visit it?',
+                    'event-integration'
+                ),
                 'type' => 'number',
                 'required' => false,
                 'suffix' => __('years', 'event-integration'),
