@@ -684,7 +684,7 @@ export default (() => {
             $('input:radio[name=occurance-type]', eventForm).change(function(event) {
                 var id = $(this).data('id');
                 $('#' + id)
-                    .children('.form-group .box')
+                    .find('.form-group.box')
                     .show()
                     .find('input')
                     .prop('required', true);
@@ -692,7 +692,7 @@ export default (() => {
                     .parent()
                     .parent()
                     .find('.event-occasion:not(#' + id + ')')
-                    .children('.box')
+                    .find('.box')
                     .hide()
                     .find('input')
                     .prop('required', false);
@@ -711,7 +711,7 @@ export default (() => {
                 $('#new-location').toggle();
                 $('#excisting-location').toggle();      
                 
-                Form.prototype.toggleRequired($('#new-location').find('input'));                
+                Form.prototype.toggleRequired($('#new-location').find('input'));
             });
 
             // Add new occurance
@@ -720,7 +720,8 @@ export default (() => {
                     event.preventDefault();
                     var $occuranceGroup = $(event.target)
                             .parent()
-                            .prev('[class*=occurance-group]'),
+                            .parent()
+                            .find('[class*=occurance-group]'),
                         $duplicate = $occuranceGroup
                             .clone()
                             .find('input')
