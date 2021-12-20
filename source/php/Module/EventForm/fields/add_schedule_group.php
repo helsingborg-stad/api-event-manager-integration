@@ -46,67 +46,145 @@ return (object)[
                 'component' => 'group',
                 'props' => [
                     'id' => 'single-event',
-                    'className' => 'event-occasion',
+                    'classList' => 'event-occasion',
                     'fields' => [
                         (object)[
                             'name' => '',
-                            'label' => __('Start date', 'event-integration'),
+                            'label' => '',
                             'description' => '',
-                            'required' => true,
+                            'required' => false,
                             'hidden' => false,
-                            'hidden_description' => !empty($data['occasion']['hidden_description']),
+                            'hidden_description' => '',
                             'type' => (object)[
-                                'component' => 'datepicker',
+                                'component' => 'group',
                                 'props' => [
-                                    'name' => 'start_date',
-                                    'title' => __('Date', 'event-integration')
-                                ],
-                            ]
-                        ],
-                        (object)[
-                            'name' => '',
-                            'label' => __('Start time', 'event-integration'),
-                            'description' => '',
-                            'required' => true,
-                            'hidden' => false,
-                            'hidden_description' => !empty($data['occasion']['hidden_description']),
-                            'type' => (object)[
-                                'component' => 'time',
-                                'props' => [
-                                    'name' => 'start_time',
-                                    'label' => __('Start time', 'event-integration')
-                                ],
-                            ]
-                        ],
-                        (object)[
-                            'name' => '',
-                            'label' => __('End date', 'event-integration'),
-                            'description' => '',
-                            'required' => true,
-                            'hidden' => false,
-                            'hidden_description' => !empty($data['occasion']['hidden_description']),
-                            'type' => (object)[
-                                'component' => 'datepicker',
-                                'props' => [
-                                    'name' => 'end_date',
-                                    'title' => __('Date', 'event-integration')
-                                ],
-                            ]
-                        ],
-                        (object)[
-                            'name' => '',
-                            'label' => __('End time', 'event-integration'),
-                            'description' => '',
-                            'required' => true,
-                            'hidden' => false,
-                            'hidden_description' => !empty($data['occasion']['hidden_description']),
-                            'type' => (object)[
-                                'component' => 'time',
-                                'props' => [
-                                    'name' => 'end_time',
-                                    'label' => __('End time', 'event-integration')
-                                ],
-                            ]
+                                    'id' => '',
+                                    'classList' => 'occurrence occurance-group-recurring gutter gutter-bottom',
+                                    'fields' => [
+
+                                        (object)[
+                                            'name' => '',
+                                            'label' => __('Start date', 'event-integration'),
+                                            'description' => '',
+                                            'required' => true,
+                                            'hidden' => false,
+                                            'hidden_description' => !empty($data['occasion']['hidden_description']),
+                                            'type' => (object)[
+                                                'component' => 'datepicker',
+                                                'props' => [
+                                                    'name' => 'start_date',
+                                                    'title' => __('Date', 'event-integration')
+                                                ],
+                                            ]
+                                        ],
+                                        (object)[
+                                            'name' => '',
+                                            'label' => __('Start time', 'event-integration'),
+                                            'description' => '',
+                                            'required' => true,
+                                            'hidden' => false,
+                                            'hidden_description' => !empty($data['occasion']['hidden_description']),
+                                            'type' => (object)[
+                                                'component' => 'time',
+                                                'props' => [
+                                                    'name' => 'start_time',
+                                                    'label' => __('Start time', 'event-integration')
+                                                ],
+                                            ]
+                                        ],
+                                        (object)[
+                                            'name' => '',
+                                            'label' => __('End date', 'event-integration'),
+                                            'description' => '',
+                                            'required' => true,
+                                            'hidden' => false,
+                                            'hidden_description' => !empty($data['occasion']['hidden_description']),
+                                            'type' => (object)[
+                                                'component' => 'datepicker',
+                                                'props' => [
+                                                    'name' => 'end_date',
+                                                    'title' => __('Date', 'event-integration')
+                                                ],
+                                            ]
+                                        ],
+                                        (object)[
+                                            'name' => '',
+                                            'label' => __('End time', 'event-integration'),
+                                            'description' => '',
+                                            'required' => true,
+                                            'hidden' => false,
+                                            (object)[
+                                                'name' => '',
+                                                'label' => __('Start date', 'event-integration'),
+                                                'description' => '',
+                                                'required' => true,
+                                                'hidden' => false,
+                                                'hidden_description' => !empty($data['occasion']['hidden_description']),
+                                                'type' => (object)[
+                                                    'component' => 'datepicker',
+                                                    'props' => [
+                                                        'name' => 'start_date',
+                                                        'title' => __('Date', 'event-integration')
+                                                    ],
+                                                ]
+                                            ],
+                                            (object)[
+                                                'name' => '',
+                                                'label' => __('Start time', 'event-integration'),
+                                                'description' => '',
+                                                'required' => true,
+                                                'hidden' => false,
+                                                'hidden_description' => !empty($data['occasion']['hidden_description']),
+                                                'type' => (object)[
+                                                    'component' => 'time',
+                                                    'props' => [
+                                                        'name' => 'start_time',
+                                                        'label' => __('Start time', 'event-integration')
+                                                    ],
+                                                ]
+                                            ],
+                                            (object)[
+                                                'name' => '',
+                                                'label' => __('End date', 'event-integration'),
+                                                'description' => '',
+                                                'required' => true,
+                                                'hidden' => false,
+                                                'hidden_description' => !empty($data['occasion']['hidden_description']),
+                                                'type' => (object)[
+                                                    'component' => 'datepicker',
+                                                    'props' => [
+                                                        'name' => 'end_date',
+                                                        'title' => __('Date', 'event-integration')
+                                                    ],
+                                                ]
+                                            ],
+                                            (object)[
+                                                'name' => '',
+                                                'label' => __('End time', 'event-integration'),
+                                                'description' => '',
+                                                'required' => true,
+                                                'hidden' => false,
+                                                'hidden_description' => !empty($data['occasion']['hidden_description']),
+                                                'type' => (object)[
+                                                    'component' => 'time',
+                                                    'props' => [
+                                                        'name' => 'end_time',
+                                                        'label' => __('End time', 'event-integration')
+                                                    ],
+                                                ]
+                                            ],
+                                            'hidden_description' => !empty($data['occasion']['hidden_description']),
+                                            'type' => (object)[
+                                                'component' => 'time',
+                                                'props' => [
+                                                    'name' => 'end_time',
+                                                    'label' => __('End time', 'event-integration')
+                                                ],
+                                            ]
+                                        ],
+                                    ]
+                                ]
+                            ],
                         ],
                         (object)[
                             'name' => '',
@@ -140,7 +218,7 @@ return (object)[
                 'component' => 'group',
                 'props' => [
                     'id' => 'recurring-event',
-                    'className' => 'event-occasion',
+                    'classList' => 'event-occasion',
                     'fields' => [
                         (object)[
                             'name' => '',
