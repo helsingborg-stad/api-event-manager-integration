@@ -12,330 +12,369 @@ class Fields
     public static function get(?int $id = 0)
     {
         $data = get_fields($id);
+        $fields = [
+            // Section 1
+            [
+                'name' => 'title',
+                'label' => __('Event name', 'event-integration'),
+                'description' => __('Name of the event.', 'event-integration'),
+                'type' => 'text',
+                'required' => true,
+            ],
+            [
+                'name' => 'content',
+                'label' => __('Description', 'event-integration'),
+                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'type' => 'textarea',
+                'required' => true,
+            ],
+            [
+                'name' => 'event_image',
+                'label' => __('Upload an image', 'event-integration'),
+                'description' =>
+                    __('Keep in mind that the image may be cropped, so avoid text in the image.', 'event-integration') . '<br>' .
+                    __('Images with identifiable persons are not accepted and will be replaced.', 'event-integration') . '<br>' .
+                    __('You must also have the right to use and distribute the image.', 'event-integration'),
+                'type' => 'image',
+                'required' => false,
+            ],
+            [
+                'name' => 'event_image_copyright_compliance',
+                'label' => __('Rights', 'event-integration'),
+                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'type' => 'checkbox',
+                'required' => true,
+                'options' => [
+                    'approved' => __('I have the right to use the image/images to promote this event.', 'event-integration')
+                ],
+                'condition' => [
+                    [
+                        "key" => "event_image",
+                        "compare" => "!=",
+                        "value" => ''
+                    ]
+                ]
+            ],
+            [
+                'name' => 'event_image_gdpr_compliance',
+                'label' => __('Rights', 'event-integration'),
+                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'type' => 'radio',
+                'required' => true,
+                'options' => [
+                    'no' => __('No person is identifiable in the photo', 'event-integration'),
+                    'yes' => __('There are identifiable people in the picture / pictures', 'event-integration'),
+                ],
+                'condition' => [
+                    [
+                        "key" => "event_image",
+                        "compare" => "!=",
+                        "value" => ''
+                    ]
+                ]
+            ],
+            [
+                'name' => 'event_image_marketing_compliance',
+                'label' => '',
+                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'type' => 'checkbox',
+                'required' => true,
+                'options' => [
+                    'approved' => __('They have approved that the image is used to market this event and have been informed that after the image has been added to the database, it may appear in various channels to market the event.', 'event-integration')
+                ],
+                'condition' => [
+                    [
+                        "key" => "event_image",
+                        "compare" => "!=",
+                        "value" => ''
+                    ]
+                ]
+            ],
+            // End Section 1
 
-        return [
-            (object)[
-                'label' => __('1. Describe your event', 'event-integration'),
-                'fields' => [
-                    'title' => (object)[
-                        'name' => 'title',
-                        'label' => !empty($data['title']['label']) ? $data['title']['label'] : __(
-                            'Event name',
-                            'event-integration'
-                        ),
-                        'description' => !empty($data['title']['description']) ? $data['title']['description'] : __(
-                            'Name of the event.',
-                            'event-integration'
-                        ),
-                        'required' => true,
-                        'hidden' => false,
-                        'hidden_description' => !empty($data['title']['hidden_description']),
-                        'type' => (object)[
-                            'component' => 'input',
-                            'props' => [],
-                        ]
-                    ],
-                    'content' => (object)[
-                        'name' => 'content',
-                        'label' => !empty($data['content']['label']) ? $data['content']['label'] : __(
-                            'Description',
-                            'event-integration'
-                        ),
-                        'description' => !empty($data['content']['description']) ? $data['content']['description'] :
-                            __('Describe your event. What happens and why should you visit it?', 'event-integration'),
-                        'required' => true,
-                        'hidden' => false,
-                        'hidden_description' => !empty($data['content']['hidden_description']),
-                        'type' => (object)[
-                            'component' => 'textarea',
-                            'props' => [],
-                        ]
-                    ],
-                    'image_input' => (object)[
-                        'name' => 'image_input',
-                        'label' => !empty($data['image_input']['label']) ? $data['image_input']['label'] : __(
-                            'Upload an image',
-                            'event-integration'
-                        ),
-                        'description' => !empty($data['image_input']['description']) ? $data['image_input']['description'] :
-                            __(
-                                'Keep in mind that the image may be cropped, so avoid text in the image.',
-                                'event-integration'
-                            ) . '<br>' .
-                            __(
-                                'Images with identifiable persons are not accepted and will be replaced.',
-                                'event-integration'
-                            ) . '<br>' .
-                            __('You must also have the right to use and distribute the image.', 'event-integration'),
-                        'required' => !empty($data['image_input']['required']),
-                        'hidden' => !empty($data['image_input']['hidden']),
-                        'hidden_description' => !empty($data['image_input']['hidden_description']),
-                        'type' => (object)[
-                            'component' => 'image',
-                            'props' => [],
-                        ]
-                    ],
+            //  Section 2
+            [
+                'name' => 'event_schema_type',
+                'label' => __('Rights', 'event-integration'),
+                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'type' => 'radio',
+                'required' => true,
+                'options' => [
+                    'single-date' => __('Enstaka datum', 'event-integration'),
+                    'recurring-event' => __('Återkommande tillfällen', 'event-integration'),
+                ],
+                'value' => 'not-recurring',
+            ],
+
+            [
+                'name' => 'event_schema_start_date',
+                'label' => __('Rights', 'event-integration'),
+                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'type' => 'date',
+                'required' => true,
+                'condition' => [
+                    [
+                        "key" => "event_schema_type",
+                        "compare" => "=",
+                        "value" => 'single-date'
+                    ]
                 ],
             ],
-            (object)[
-                'label' => __('2. Add schedule', 'event-integration'),
-                'fields' => [
-                    'occasion' => (object)[
-                        'name' => '',
-                        'label' => !empty($data['occasion']['label']) ? $data['occasion']['label'] : __(
-                            'Event occurrence',
-                            'event-integration'
-                        ),
-                        'description' => !empty($data['occasion']['description']) ? $data['occasion']['description'] : __(
-                            'Add occasions to this event. Does the event occur each week? Then add a rule for recurring events. Note that end time for the event can\'t be the same as the start time.',
-                            'event-integration'
-                        ),
-                        'required' => true,
-                        'hidden' => false,
-                        'hidden_description' => !empty($data['occasion']['hidden_description']),
-                        'type' => (object)[
-                            'component' => 'datepicker',
-                            'props' => [],
-                        ]
-                    ],
+            [
+                'name' => 'event_schema_start_time',
+                'label' => __('Rights', 'event-integration'),
+                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'type' => 'date',
+                'required' => true,
+                'condition' => [
+                    [
+                        "key" => "event_schema_type",
+                        "compare" => "=",
+                        "value" => 'single-date'
+                    ]
                 ],
             ],
-            'event_link' => (object)[
-                'name' => 'event_link',
-                'label' => !empty($data['event_link']['label']) ? $data['event_link']['label'] : __(
-                    'Website',
-                    'event-integration'
-                ),
-                'description' => !empty($data['event_link']['description']) ? $data['event_link']['description'] : __(
-                    'Link to event website.',
-                    'event-integration'
-                ),
-                'required' => !empty($data['event_link']['required']),
-                'hidden' => !empty($data['event_link']['hidden']),
-                'hidden_description' => !empty($data['event_link']['hidden_description']),
-                'type' => (object)[
-                    'component' => 'input',
-                    'props' => [],
-                ]
+
+            [
+                'name' => 'event_schema_end_date',
+                'label' => __('Rights', 'event-integration'),
+                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'type' => 'date',
+                'required' => true,
+                'condition' => [
+                    [
+                        "key" => "event_schema_type",
+                        "compare" => "=",
+                        "value" => 'single-date'
+                    ]
+                ],
             ],
-            'booking_link' => (object)[
-                'name' => 'booking_link',
-                'label' => !empty($data['booking_link']['label']) ? $data['booking_link']['label'] : __(
-                    'Link to booking',
-                    'event-integration'
-                ),
-                'description' => !empty($data['booking_link']['description']) ? $data['booking_link']['description'] : __(
-                    'Link to the event\'s booking page.',
-                    'event-integration'
-                ),
-                'required' => !empty($data['booking_link']['required']),
-                'hidden' => !empty($data['booking_link']['hidden']),
-                'hidden_description' => !empty($data['booking_link']['hidden_description']),
-                'type' => (object)[
-                    'component' => 'input',
-                    'props' => [],
-                ]
+
+            [
+                'name' => 'event_schema_end_time',
+                'label' => __('Rights', 'event-integration'),
+                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'type' => 'date',
+                'required' => true,
+                'condition' => [
+                    [
+                        "key" => "event_schema_type",
+                        "compare" => "=",
+                        "value" => 'single-date'
+                    ]
+                ],
             ],
-            'price_adult' => (object)[
-                'name' => 'price_adult',
-                'label' => !empty($data['price_adult']['label']) ? $data['price_adult']['label'] : __(
-                    'Price adult',
-                    'event-integration'
-                ),
-                'description' => !empty($data['price_adult']['description']) ? $data['price_adult']['description'] : __(
-                    'Price for adults. Are there multiple price ranges? Please add it in the description.',
-                    'event-integration'
-                ),
-                'required' => !empty($data['price_adult']['required']),
-                'hidden' => !empty($data['price_adult']['hidden']),
-                'hidden_description' => !empty($data['price_adult']['hidden_description']),
-                'type' => (object)[
-                    'component' => 'number',
-                    'props' => [],
-                ]
+
+            [
+                'name' => 'event_schema_recurring',
+                'label' => __('Rights', 'event-integration'),
+                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'type' => 'repeater',
+                'minRows' => 1,
+                'subFields' => [
+                    [
+                        'name' => 'start_date',
+                        'label' => __('Rights', 'event-integration'),
+                        'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                        'type' => 'date',
+                        'required' => true,
+                        'condition' => [
+                            [
+                                "key" => "event_schema_type",
+                                "compare" => "=",
+                                "value" => 'single-date'
+                            ]
+                        ],
+                    ],
+                    [
+                        'name' => 'start_time',
+                        'label' => __('Rights', 'event-integration'),
+                        'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                        'type' => 'date',
+                        'required' => true,
+                        'condition' => [
+                            [
+                                "key" => "event_schema_type",
+                                "compare" => "=",
+                                "value" => 'single-date'
+                            ]
+                        ],
+                    ],
+
+                    [
+                        'name' => 'end_date',
+                        'label' => __('Rights', 'event-integration'),
+                        'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                        'type' => 'date',
+                        'required' => true,
+                        'condition' => [
+                            [
+                                "key" => "event_schema_type",
+                                "compare" => "=",
+                                "value" => 'single-date'
+                            ]
+                        ],
+                    ],
+                    [
+                        'name' => 'end_time',
+                        'label' => __('Rights', 'event-integration'),
+                        'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                        'type' => 'date',
+                        'required' => true,
+                        'condition' => [
+                            [
+                                "key" => "event_schema_type",
+                                "compare" => "=",
+                                "value" => 'single-date'
+                            ]
+                        ],
+                    ],
+                ],
+                'condition' => [
+                    [
+                        "key" => "event_schema_type",
+                        "compare" => "=",
+                        "value" => 'recurring-event'
+                    ]
+                ],
+                'labels' => [
+                    'addButton' => __('Add date', 'event-integration'),
+                    'removeButton' => __('Remove date', 'event-integration'),
+                ],
+
             ],
-            'price_student' => (object)[
-                'name' => 'price_student',
-                'label' => !empty($data['price_student']['label']) ? $data['price_student']['label'] : __(
-                    'Price student',
-                    'event-integration'
-                ),
-                'description' => !empty($data['price_student']['description']) ? $data['price_student']['description'] : __(
-                    'Price for students.',
-                    'event-integration'
-                ),
-                'required' => !empty($data['price_student']['required']),
-                'hidden' => !empty($data['price_student']['hidden']),
-                'hidden_description' => !empty($data['price_student']['hidden_description']),
+            // End Section 2
+
+
+            // Section 3
+            [
+                'name' => 'event_website_url',
+                'label' => __('Website', 'event-integration'),
+                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'type' => 'url',
+                'required' => true,
             ],
-            'price_children' => (object)[
-                'name' => 'price_children',
-                'label' => !empty($data['price_children']['label']) ? $data['price_children']['label'] : __(
-                    'Price children',
-                    'event-integration'
-                ),
-                'description' => !empty($data['price_children']['description']) ? $data['price_children']['description'] : __(
-                    'Price for children.',
-                    'event-integration'
-                ),
-                'required' => !empty($data['price_children']['required']),
-                'hidden' => !empty($data['price_children']['hidden']),
-                'hidden_description' => !empty($data['price_children']['hidden_description']),
-            ],
-            'children_age' => (object)[
-                'name' => 'children_age',
-                'label' => !empty($data['children_age']['label']) ? $data['children_age']['label'] : __(
-                    'Age restriction for children price',
-                    'event-integration'
-                ),
-                'description' => !empty($data['children_age']['description']) ? $data['children_age']['description'] : __(
-                    'Children price is valid up to this age.',
-                    'event-integration'
-                ),
-                'required' => !empty($data['children_age']['required']),
-                'hidden' => !empty($data['children_age']['hidden']),
-                'hidden_description' => !empty($data['children_age']['hidden_description']),
-            ],
-            'price_senior' => (object)[
-                'name' => 'price_senior',
-                'label' => !empty($data['price_senior']['label']) ? $data['price_senior']['label'] : __(
-                    'Price senior',
-                    'event-integration'
-                ),
-                'description' => !empty($data['price_senior']['description']) ? $data['price_senior']['description'] : __(
-                    'Price for seniors.',
-                    'event-integration'
-                ),
-                'required' => !empty($data['price_senior']['required']),
-                'hidden' => !empty($data['price_senior']['hidden']),
-                'hidden_description' => !empty($data['price_senior']['hidden_description']),
-            ],
-            'senior_age' => (object)[
-                'name' => 'senior_age',
-                'label' => !empty($data['senior_age']['label']) ? $data['senior_age']['label'] : __(
-                    'Age restriction for senior price',
-                    'event-integration'
-                ),
-                'description' => !empty($data['senior_age']['description']) ? $data['senior_age']['description'] : __(
-                    'Senior price is valid from this age.',
-                    'event-integration'
-                ),
-                'required' => !empty($data['senior_age']['required']),
-                'hidden' => !empty($data['senior_age']['hidden']),
-                'hidden_description' => !empty($data['senior_age']['hidden_description']),
-            ],
-            'age_group' => (object)[
-                'name' => 'age_group',
-                'label' => !empty($data['age_group']['label']) ? $data['age_group']['label'] : __(
-                    'Age group',
-                    'event-integration'
-                ),
-                'description' => !empty($data['age_group']['description']) ? $data['age_group']['description'] : __(
-                    'Age group that the activity is addressed to.',
-                    'event-integration'
-                ),
-                'required' => !empty($data['age_group']['required']),
-                'hidden' => !empty($data['age_group']['hidden']),
-                'hidden_description' => !empty($data['age_group']['hidden_description']),
-            ],
-            'organizer' => (object)[
-                'name' => 'organizer',
-                'label' => !empty($data['organizer']['label']) ? $data['organizer']['label'] : __(
-                    'Organizer',
-                    'event-integration'
-                ),
-                'description' => !empty($data['organizer']['description']) ? $data['organizer']['description'] : __(
-                    'Type name of organizer, select from suggestions. If your business is not available, please add an organizer to the description.',
-                    'event-integration'
-                ),
+            [
+                'name' => 'event_booking_url',
+                'label' => __('Event booking page', 'event-integration'),
+                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'type' => 'url',
                 'required' => false,
-                'hidden' => !empty($data['organizer']['hidden']),
-                'hidden_description' => !empty($data['organizer']['hidden_description']),
             ],
-            'location' => (object)[
-                'name' => 'location',
-                'label' => !empty($data['location']['label']) ? $data['location']['label'] : __(
-                    'Location',
-                    'event-integration'
-                ),
-                'description' => !empty($data['location']['description']) ? $data['location']['description'] : __(
-                    'Type location name and select from suggestions. If the location is not available, please add an address in the description.',
-                    'event-integration'
-                ),
+            [
+                'name' => 'event_price_adult',
+                'label' => __('Event booking page', 'event-integration'),
+                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'type' => 'number',
                 'required' => false,
-                'hidden' => !empty($data['location']['hidden']),
-                'hidden_description' => !empty($data['location']['hidden_description']),
+                'suffix' => 'kr'
             ],
-            'accessibility' => (object)[
-                'name' => 'accessibility',
-                'label' => !empty($data['accessibility']['label']) ? $data['accessibility']['label'] : __(
-                    'Accessibility',
-                    'event-integration'
-                ),
-                'description' => !empty($data['accessibility']['description']) ? $data['accessibility']['description'] : __(
-                    'Select which accessibility actions that exist for the event.',
-                    'event-integration'
-                ),
+            [
+                'name' => 'event_price_student',
+                'label' => __('Event booking page', 'event-integration'),
+                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'type' => 'number',
                 'required' => false,
-                'hidden' => !empty($data['accessibility']['hidden']),
-                'hidden_description' => !empty($data['accessibility']['hidden_description']),
+                'suffix' => 'kr'
             ],
-            'event_categories' => (object)[
-                'name' => 'event_categories',
-                'label' => !empty($data['event_categories']['label']) ? $data['event_categories']['label'] : __(
-                    'Categories',
-                    'event-integration'
-                ),
-                'description' => !empty($data['event_categories']['description']) ? $data['event_categories']['description'] : __(
-                    'Select appropriate categories for your event or activity. To select multiple categories, press Ctrl (Windows) / command (macOS) at the same time as you click on the categories.',
-                    'event-integration'
-                ),
-                'required' => !empty($data['event_categories']['required']),
-                'hidden' => !empty($data['event_categories']['hidden']),
-                'hidden_description' => !empty($data['event_categories']['hidden_description']),
+            [
+                'name' => 'event_price_kid',
+                'label' => __('Event booking page', 'event-integration'),
+                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'type' => 'number',
+                'required' => false,
+                'suffix' => 'kr'
             ],
-            'event_tags' => (object)[
-                'name' => 'event_tags',
-                'label' => !empty($data['event_tags']['label']) ? $data['event_tags']['label'] : __(
-                    'Tags',
-                    'event-integration'
-                ),
-                'description' => !empty($data['event_tags']['description']) ? $data['event_tags']['description'] : __(
-                    'Select appropriate tags for your event or activity. To select multiple tags, press Ctrl (Windows) / command (macOS) at the same time as you click on the tags.',
-                    'event-integration'
-                ),
-                'required' => !empty($data['event_tags']['required']),
-                'hidden' => !empty($data['event_tags']['hidden']),
-                'hidden_description' => !empty($data['event_tags']['hidden_description']),
+            [
+                'name' => 'event_age_kid',
+                'label' => __('Event booking page', 'event-integration'),
+                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'type' => 'number',
+                'required' => false,
+                'suffix' => __('years', 'event-integration')
             ],
-            'submitter_email' => (object)[
-                'name' => 'submitter_email',
-                'label' => !empty($data['submitter_email']['label']) ? $data['submitter_email']['label'] : __(
-                    'Email',
-                    'event-integration'
-                ),
-                'description' => !empty($data['submitter_email']['description']) ? $data['submitter_email']['description'] : __(
-                    'Your email address.',
-                    'event-integration'
-                ),
-                'required' => !empty($data['submitter_email']['required']),
-                'hidden' => !empty($data['submitter_email']['hidden']),
-                'hidden_description' => !empty($data['submitter_email']['hidden_description']),
+            [
+                'name' => 'event_price_senior',
+                'label' => __('Event booking page', 'event-integration'),
+                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'type' => 'number',
+                'required' => false,
+                'suffix' => 'kr'
             ],
-            'submitter_phone' => (object)[
-                'name' => 'submitter_phone',
-                'label' => !empty($data['submitter_phone']['label']) ? $data['submitter_phone']['label'] : __(
-                    'Phone number',
-                    'event-integration'
-                ),
-                'description' => !empty($data['submitter_phone']['description']) ? $data['submitter_phone']['description'] : __(
-                    'Your phone number.',
-                    'event-integration'
-                ),
-                'required' => !empty($data['submitter_phone']['required']),
-                'hidden' => !empty($data['submitter_phone']['hidden']),
-                'hidden_description' => !empty($data['submitter_phone']['hidden_description']),
+            [
+                'name' => 'event_age_senior',
+                'label' => __('Event booking page', 'event-integration'),
+                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'type' => 'number',
+                'required' => false,
+                'suffix' => __('years', 'event-integration')
             ],
+            [
+                'name' => 'event_target_age',
+                'label' => __('Rights', 'event-integration'),
+                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'type' => 'radio',
+                'required' => true,
+                'options' => [
+                    'all' => __('All ages', 'event-integration'),
+                    'specified' => __('Specified age group', 'event-integration'),
+                ],
+                'value' => '',
+            ],
+            [
+                'name' => 'event_target_age',
+                'label' => __('Rights', 'event-integration'),
+                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'type' => 'radio',
+                'required' => true,
+                'options' => [
+                    'all' => __('All ages', 'event-integration'),
+                    'specified' => __('Specified age group', 'event-integration'),
+                ],
+                'value' => '',
+            ],
+            [
+                'name' => 'event_target_age_from',
+                'label' => __('From', 'event-integration'),
+                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'type' => 'number',
+                'required' => false,
+                'suffix' => __('years', 'event-integration'),
+                'condition' => [
+                    [
+                        "key" => "event_target_age",
+                        "compare" => "=",
+                        "value" => 'specified'
+                    ]
+                ],
+            ],
+            [
+                'name' => 'event_target_age_to',
+                'label' => __('To', 'event-integration'),
+                'description' => __('Describe your event. What happens and why should you visit it?', 'event-integration'),
+                'type' => 'number',
+                'required' => false,
+                'suffix' => __('years', 'event-integration'),
+                'condition' => [
+                    [
+                        "key" => "event_target_age",
+                        "compare" => "=",
+                        "value" => 'specified'
+                    ]
+                ],
+            ],
+            // End Section 3
+
+
+            // Section 4
+
+            // End Section 4
         ];
+
+        return apply_filters(
+            'EventManagerIntegration/Module/EventForm/Fields',
+            $fields,
+            $data
+        );
     }
 }
