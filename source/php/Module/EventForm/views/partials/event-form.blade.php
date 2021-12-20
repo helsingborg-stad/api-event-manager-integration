@@ -1,41 +1,14 @@
-<form name="submit-event" class="submit-event" enctype="multipart/form-data">
-    @foreach($fields as $fieldGroup)
-        @if(isset($fieldGroup->fields) && is_array($fieldGroup->fields))
-            <div class="field-group">
-                @typography([
-                    'variant' => 'title'
-                ])
-                    {{ $fieldGroup->label }}
-                @endtypography
-
-                @foreach($fieldGroup->fields as $field)
-                    <div class="form-group">
-                        @typography([
-                        'variant' => 'subtitle'
-                        ])
-                            {{ $field->label }}
-                            @includeWhen($field->required, 'components.required')
-                        @endtypography
-
-                        @includeWhen(!$field->hidden_description, 'components.description', [
-                            'description' => $field->description
-                        ])
-
-                        @if(isset($field->type))
-                            @includeWhen(!$field->hidden, 'components.fields.' . $field->type->component)
-                        @else
-                            <span>
-                                {{$field->label}}
-                            </span>
-                        @endif
-                    </div>
-                @endforeach
-            </div>
-        @else
-            <div>
-                <span><b>{{ $fieldGroup->label }}</b> not implemented</span>
-            </div>
-        @endif
+<form name="submit-event" class="submit-event-form js-event-form" enctype="multipart/form-data">
+    @foreach($fields as $field)
+        @includeFirst(
+            [
+                'components.fields.' . $field['type'] ?? '', 
+                'components.fields._error'
+            ], 
+            [
+                'field' => $field
+            ]
+        )
     @endforeach
 
     @button([
