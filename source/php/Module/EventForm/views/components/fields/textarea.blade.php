@@ -1,13 +1,9 @@
-@field([
-    'id'            => $content->name,
-    'type'          => 'text',
-    'label'         => $content->label,
-    'required'      =>  $content->required,
+@include('components.fields.field', ['field' => array_merge($field, ['props' => [
     'multiline'      => true,
     'attributeList' => [
-        'type' => 'textarea',
-        'name' => $content->name,
-        'rows'          => '5',
+        'type' => $field['type'],
+        'name' => $field['name'],
+        'rows' => $field['rows'] ?? '5',
     ],
-])
-@endfield
+    'helperText' => $field['description'] ?? ''
+]])])
