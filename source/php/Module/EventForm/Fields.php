@@ -64,9 +64,9 @@ class Fields
                 ],
                 'condition' => [
                     [
-                        "key" => "event_image",
-                        "compare" => "!=",
-                        "value" => ''
+                        'key' => 'event_image',
+                        'compare' => '!=',
+                        'value' => ''
                     ]
                 ]
             ],
@@ -85,9 +85,9 @@ class Fields
                 ],
                 'condition' => [
                     [
-                        "key" => "event_image",
-                        "compare" => "!=",
-                        "value" => ''
+                        'key' => 'event_image',
+                        'compare' => '!=',
+                        'value' => ''
                     ]
                 ]
             ],
@@ -108,9 +108,9 @@ class Fields
                 ],
                 'condition' => [
                     [
-                        "key" => "event_image",
-                        "compare" => "!=",
-                        "value" => ''
+                        'key' => 'event_image',
+                        'compare' => '!=',
+                        'value' => ''
                     ]
                 ]
             ],
@@ -144,9 +144,9 @@ class Fields
                 'required' => true,
                 'condition' => [
                     [
-                        "key" => "event_schema_type",
-                        "compare" => "=",
-                        "value" => 'single-date'
+                        'key' => 'event_schema_type',
+                        'compare' => '=',
+                        'value' => 'single-date'
                     ]
                 ],
             ],
@@ -161,9 +161,9 @@ class Fields
                 'required' => true,
                 'condition' => [
                     [
-                        "key" => "event_schema_type",
-                        "compare" => "=",
-                        "value" => 'single-date'
+                        'key' => 'event_schema_type',
+                        'compare' => '=',
+                        'value' => 'single-date'
                     ]
                 ],
             ],
@@ -179,9 +179,9 @@ class Fields
                 'required' => true,
                 'condition' => [
                     [
-                        "key" => "event_schema_type",
-                        "compare" => "=",
-                        "value" => 'single-date'
+                        'key' => 'event_schema_type',
+                        'compare' => '=',
+                        'value' => 'single-date'
                     ]
                 ],
             ],
@@ -197,9 +197,9 @@ class Fields
                 'required' => true,
                 'condition' => [
                     [
-                        "key" => "event_schema_type",
-                        "compare" => "=",
-                        "value" => 'single-date'
+                        'key' => 'event_schema_type',
+                        'compare' => '=',
+                        'value' => 'single-date'
                     ]
                 ],
             ],
@@ -216,79 +216,50 @@ class Fields
                 'subFields' => [
                     [
                         'name' => 'start_date',
-                        'label' => __('Rights', 'event-integration'),
+                        'label' => __('Start date', 'event-integration'),
                         'description' => __(
                             'Describe your event. What happens and why should you visit it?',
                             'event-integration'
                         ),
                         'type' => 'date',
                         'required' => true,
-                        'condition' => [
-                            [
-                                "key" => "event_schema_type",
-                                "compare" => "=",
-                                "value" => 'single-date'
-                            ]
-                        ],
                     ],
                     [
                         'name' => 'start_time',
-                        'label' => __('Rights', 'event-integration'),
+                        'label' => __('Start time', 'event-integration'),
                         'description' => __(
                             'Describe your event. What happens and why should you visit it?',
                             'event-integration'
                         ),
-                        'type' => 'date',
+                        'type' => 'time',
                         'required' => true,
-                        'condition' => [
-                            [
-                                "key" => "event_schema_type",
-                                "compare" => "=",
-                                "value" => 'single-date'
-                            ]
-                        ],
                     ],
-
                     [
                         'name' => 'end_date',
-                        'label' => __('Rights', 'event-integration'),
+                        'label' => __('End date', 'event-integration'),
                         'description' => __(
                             'Describe your event. What happens and why should you visit it?',
                             'event-integration'
                         ),
                         'type' => 'date',
                         'required' => true,
-                        'condition' => [
-                            [
-                                "key" => "event_schema_type",
-                                "compare" => "=",
-                                "value" => 'single-date'
-                            ]
-                        ],
                     ],
                     [
-                        'name' => 'end_time',
-                        'label' => __('Rights', 'event-integration'),
+                        'name' => 'event_schema_end_time',
+                        'label' => __('End time', 'event-integration'),
                         'description' => __(
                             'Describe your event. What happens and why should you visit it?',
                             'event-integration'
                         ),
-                        'type' => 'date',
+                        'type' => 'time',
                         'required' => true,
-                        'condition' => [
-                            [
-                                "key" => "event_schema_type",
-                                "compare" => "=",
-                                "value" => 'single-date'
-                            ]
-                        ],
                     ],
                 ],
                 'condition' => [
                     [
-                        "key" => "event_schema_type",
-                        "compare" => "=",
-                        "value" => 'recurring-event'
+                        'key' => 'event_schema_type',
+                        'compare' => '=',
+                        'value' => 'recurring-event'
                     ]
                 ],
                 'labels' => [
@@ -429,9 +400,9 @@ class Fields
                 'suffix' => __('years', 'event-integration'),
                 'condition' => [
                     [
-                        "key" => "event_target_age",
-                        "compare" => "=",
-                        "value" => 'specified'
+                        'key' => 'event_target_age',
+                        'compare' => '=',
+                        'value' => 'specified'
                     ]
                 ],
             ],
@@ -447,9 +418,9 @@ class Fields
                 'suffix' => __('years', 'event-integration'),
                 'condition' => [
                     [
-                        "key" => "event_target_age",
-                        "compare" => "=",
-                        "value" => 'specified'
+                        'key' => 'event_target_age',
+                        'compare' => '=',
+                        'value' => 'specified'
                     ]
                 ],
             ],
