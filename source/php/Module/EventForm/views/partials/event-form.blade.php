@@ -1,14 +1,16 @@
 <form name="submit-event" class="submit-event-form js-event-form" enctype="multipart/form-data">
     @foreach($fields as $field)
-        @includeFirst(
-            [
-                'components.fields.' . $field['type'] ?? '', 
-                'components.fields._error'
-            ], 
-            [
-                'field' => $field
-            ]
-        )
+        <div @if(!empty($field['condition']))data-condition="{{ json_encode($field['condition'] ?? []) }}"@endif>
+            @includeFirst(
+                [
+                    'components.fields.' . $field['type'] ?? '',
+                    'components.fields._error'
+                ],
+                [
+                    'field' => $field
+                ]
+            )
+        </div>
     @endforeach
 
     @button([
