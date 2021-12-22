@@ -27,8 +27,14 @@ const eventForm = {
                 if (targetField) {
                     switch (condition.compare) {
                         case '=':
+                            if (targetField.files !== null) {
+                                return targetField.files.length == condition.value;
+                            }
                             return targetField.value == condition.value;
                         case '!=':
+                            if (targetField.files !== null) {
+                                return targetField.files.length != condition.value;
+                            }
                             return targetField.value != condition.value;
                         default:
                             console.warn(`Compare condition '${condition.compare}' not supported`);
@@ -42,8 +48,14 @@ const eventForm = {
 
             if (conditionResult.every(x => x === true)) {
                 field.classList.remove('u-display--none');
+                field.querySelectorAll('input').forEach(x => {
+                    x.required = true;
+                });
             } else {
                 field.classList.add('u-display--none');
+                field.querySelectorAll('input').forEach(x => {
+                    x.required = false;
+                });
             }
         }
     }
