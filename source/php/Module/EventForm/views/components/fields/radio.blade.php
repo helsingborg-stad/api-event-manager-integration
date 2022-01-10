@@ -11,5 +11,4 @@
         'label' => $label
     ])
     @endoption
-    @php ($i++)
 @endforeach
