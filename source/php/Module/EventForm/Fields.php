@@ -296,6 +296,35 @@ class Fields
                     ]
                 ],
             ],
+
+            [
+                'name' => 'event_location',
+                'label' => __('Location', 'event-integration'),
+                'description' => __('Write the name of the place and choose from the suggestions we give you.', 'event-integration'),
+                'type' => 'radio',
+                'required' => true,
+                'options' => [
+                    'existing' => __('Existing location', 'event-integration'),
+                    'new' => __('Add a new location', 'event-integration'),
+                ],
+                'value' => 'existing',
+            ],
+
+            [
+                'name' => 'event_existing_location',
+                'type' => 'select',
+                'required' => true,
+                'options' => [
+                    'sundstorget' => __('Sundstorget', 'event-integration'),
+                ],
+                'condition' => [
+                    [
+                        "key" => "event_location",
+                        "compare" => "=",
+                        "value" => 'existing'
+                    ]
+                ],
+            ],
             // End Section 2
 
 
