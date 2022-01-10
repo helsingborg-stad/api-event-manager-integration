@@ -325,6 +325,19 @@ class Fields
                     ]
                 ],
             ],
+
+            [
+                'name' => 'event_accessibility',
+                'label' => __('Accessibility', 'event-integration'),
+                'description' => __('Select which accessibility adjustments are available for the site.', 'event-integration'),
+                'type' => 'checkbox',
+                'options' => [
+                    'elevator-ramp' => __('Elevator/ramp', 'event-integration'),
+                    'handicap-toilet' => __('Handicap toilet', 'event-integration'),
+                ],
+                'value' => [],
+            ],
+
             // End Section 2
 
 
