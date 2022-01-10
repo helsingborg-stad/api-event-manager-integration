@@ -428,7 +428,64 @@ class Fields
 
 
             // Section 4
-
+            [
+                'name' => 'event_categories',
+                'label' => __('Choose categories that fit the event', 'event-integration'),
+                'type' => 'select',
+                'multiple' => true,
+                'required' => false,
+                'suffix' => __('years', 'event-integration'),
+                'condition' => [
+                    [
+                        "key" => "event_target_age",
+                        "compare" => "=",
+                        "value" => 'specified'
+                    ]
+                ],
+            ],
+            [
+                'name' => 'event_tags',
+                'label' => __('Choose tags that fit the event', 'event-integration'),
+                'type' => 'select',
+                'multiple' => true,
+                'required' => false,
+                'suffix' => __('years', 'event-integration'),
+                'condition' => [
+                    [
+                        "key" => "event_target_age",
+                        "compare" => "=",
+                        "value" => 'specified'
+                    ]
+                ],
+            ],
+            [
+                'name' => 'event_contact_email',
+                'label' => __('E-mail address', 'event-integration'),
+                'type' => 'email',
+                'required' => false,
+                'suffix' => __('years', 'event-integration'),
+                'condition' => [
+                    [
+                        "key" => "event_target_age",
+                        "compare" => "=",
+                        "value" => 'specified'
+                    ]
+                ],
+            ],
+            [
+                'name' => 'event_contact_phone',
+                'label' => __('Phonenumber', 'event-integration'),
+                'type' => 'number',
+                'required' => false,
+                'suffix' => __('years', 'event-integration'),
+                'condition' => [
+                    [
+                        "key" => "event_target_age",
+                        "compare" => "=",
+                        "value" => 'specified'
+                    ]
+                ],
+            ],
             // End Section 4
         ];
 
