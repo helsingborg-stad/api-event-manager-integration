@@ -345,126 +345,72 @@ class Fields
             [
                 'name' => 'event_website_url',
                 'label' => __('Website', 'event-integration'),
-                'description' => __(
-                    'Describe your event. What happens and why should you visit it?',
-                    'event-integration'
-                ),
                 'type' => 'url',
                 'required' => true,
             ],
             [
                 'name' => 'event_booking_url',
                 'label' => __('Event booking page', 'event-integration'),
-                'description' => __(
-                    'Describe your event. What happens and why should you visit it?',
-                    'event-integration'
-                ),
                 'type' => 'url',
                 'required' => false,
             ],
             [
                 'name' => 'event_price_adult',
-                'label' => __('Event booking page', 'event-integration'),
-                'description' => __(
-                    'Describe your event. What happens and why should you visit it?',
-                    'event-integration'
-                ),
+                'label' => __('For adults', 'event-integration'),
                 'type' => 'number',
                 'required' => false,
                 'suffix' => 'kr'
             ],
             [
                 'name' => 'event_price_student',
-                'label' => __('Event booking page', 'event-integration'),
-                'description' => __(
-                    'Describe your event. What happens and why should you visit it?',
-                    'event-integration'
-                ),
+                'label' => __('Students', 'event-integration'),
                 'type' => 'number',
                 'required' => false,
                 'suffix' => 'kr'
             ],
             [
-                'name' => 'event_price_kid',
-                'label' => __('Event booking page', 'event-integration'),
-                'description' => __(
-                    'Describe your event. What happens and why should you visit it?',
-                    'event-integration'
-                ),
+                'name' => 'event_price_children',
+                'label' => __('Child price', 'event-integration'),
                 'type' => 'number',
                 'required' => false,
                 'suffix' => 'kr'
             ],
             [
-                'name' => 'event_age_kid',
-                'label' => __('Event booking page', 'event-integration'),
-                'description' => __(
-                    'Describe your event. What happens and why should you visit it?',
-                    'event-integration'
-                ),
+                'name' => 'event_age_children',
+                'label' => __('Age limit for child price', 'event-integration'),
                 'type' => 'number',
                 'required' => false,
                 'suffix' => __('years', 'event-integration')
             ],
             [
                 'name' => 'event_price_senior',
-                'label' => __('Event booking page', 'event-integration'),
-                'description' => __(
-                    'Describe your event. What happens and why should you visit it?',
-                    'event-integration'
-                ),
+                'label' => __('Pensioner price', 'event-integration'),
                 'type' => 'number',
                 'required' => false,
                 'suffix' => 'kr'
             ],
             [
                 'name' => 'event_age_senior',
-                'label' => __('Event booking page', 'event-integration'),
-                'description' => __(
-                    'Describe your event. What happens and why should you visit it?',
-                    'event-integration'
-                ),
+                'label' => __('Age limit for pensioner price', 'event-integration'),
                 'type' => 'number',
                 'required' => false,
                 'suffix' => __('years', 'event-integration')
             ],
             [
                 'name' => 'event_target_age',
-                'label' => __('Rights', 'event-integration'),
-                'description' => __(
-                    'Describe your event. What happens and why should you visit it?',
-                    'event-integration'
-                ),
+                'label' => __('Age group that the event is aimed at', 'event-integration'),
                 'type' => 'radio',
                 'required' => true,
                 'options' => [
                     'all' => __('All ages', 'event-integration'),
                     'specified' => __('Specified age group', 'event-integration'),
                 ],
-                'value' => '',
-            ],
-            [
-                'name' => 'event_target_age',
-                'label' => __('Rights', 'event-integration'),
-                'description' => __(
-                    'Describe your event. What happens and why should you visit it?',
-                    'event-integration'
-                ),
-                'type' => 'radio',
-                'required' => true,
-                'options' => [
-                    'all' => __('All ages', 'event-integration'),
-                    'specified' => __('Specified age group', 'event-integration'),
-                ],
-                'value' => '',
+                'value' => 'all',
             ],
             [
                 'name' => 'event_target_age_from',
                 'label' => __('From', 'event-integration'),
-                'description' => __(
-                    'Describe your event. What happens and why should you visit it?',
-                    'event-integration'
-                ),
+                'description' => __('Leave "From" or "To" blank if the upper or lower limit is missing.', 'event-integration'),
                 'type' => 'number',
                 'required' => false,
                 'suffix' => __('years', 'event-integration'),
@@ -479,10 +425,6 @@ class Fields
             [
                 'name' => 'event_target_age_to',
                 'label' => __('To', 'event-integration'),
-                'description' => __(
-                    'Describe your event. What happens and why should you visit it?',
-                    'event-integration'
-                ),
                 'type' => 'number',
                 'required' => false,
                 'suffix' => __('years', 'event-integration'),
@@ -495,7 +437,6 @@ class Fields
                 ],
             ],
             // End Section 3
-
 
             // Section 4
             [
