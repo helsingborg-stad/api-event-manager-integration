@@ -1,8 +1,7 @@
-@php ($i = 0)
 @foreach($field['options'] as $value => $label)
     @option([
         'type' => 'radio',
-        'checked' => $i === 0,
+        'checked' => $loop->index === 0,
         'attributeList' => [
             'data-id' => $option->id,
             'name' => $field['name'],
