@@ -1,6 +1,5 @@
 {{-- Tags --}}
 <div class="form-group">
-
     @typography([
         'variant' => 'subtitle'
     ])
@@ -24,5 +23,4 @@
         ]
     ])
     @endselect
-    
 </div>
