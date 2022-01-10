@@ -115,7 +115,6 @@ class Fields
                 ]
             ],
             // End Section 1
-
             //  Section 2
             [
                 'name' => 'event_schema_type',
@@ -132,7 +131,6 @@ class Fields
                 ],
                 'value' => 'not-recurring',
             ],
-
             [
                 'name' => 'event_schema_start_date',
                 'label' => __('Start date', 'event-integration'),
@@ -167,7 +165,6 @@ class Fields
                     ]
                 ],
             ],
-
             [
                 'name' => 'event_schema_end_date',
                 'label' => __('End date', 'event-integration'),
@@ -203,7 +200,6 @@ class Fields
                     ]
                 ],
             ],
-
             [
                 'name' => 'event_schema_recurring',
                 'label' => __('Rights', 'event-integration'),
@@ -268,7 +264,6 @@ class Fields
                 ],
 
             ],
-
             [
                 'name' => 'event_organizer',
                 'label' => __('Organizer', 'event-integration'),
@@ -296,7 +291,6 @@ class Fields
                     ]
                 ],
             ],
-
             [
                 'name' => 'event_location',
                 'label' => __('Location', 'event-integration'),
@@ -309,7 +303,6 @@ class Fields
                 ],
                 'value' => 'existing',
             ],
-
             [
                 'name' => 'event_existing_location',
                 'type' => 'select',
@@ -325,7 +318,6 @@ class Fields
                     ]
                 ],
             ],
-
             [
                 'name' => 'event_accessibility',
                 'label' => __('Accessibility', 'event-integration'),
@@ -337,10 +329,7 @@ class Fields
                 ],
                 'value' => [],
             ],
-
             // End Section 2
-
-
             // Section 3
             [
                 'name' => 'event_website_url',
@@ -437,7 +426,6 @@ class Fields
                 ],
             ],
             // End Section 3
-
             // Section 4
             [
                 'name' => 'event_categories',
