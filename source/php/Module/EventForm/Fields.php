@@ -268,6 +268,34 @@ class Fields
                 ],
 
             ],
+
+            [
+                'name' => 'event_organizer',
+                'label' => __('Organizer', 'event-integration'),
+                'description' => __('Write the name of the organizer and choose from the suggestions we give you.', 'event-integration'),
+                'type' => 'radio',
+                'required' => true,
+                'options' => [
+                    'existing' => __('Existing organizer', 'event-integration'),
+                    'new' => __('Add a new organizer', 'event-integration'),
+                ],
+                'value' => 'existing',
+            ],
+            [
+                'name' => 'event_existing_organizer',
+                'type' => 'select',
+                'required' => true,
+                'options' => [
+                    'hbg' => __('Helsingborg Stad', 'event-integration'),
+                ],
+                'condition' => [
+                    [
+                        "key" => "event_organizer",
+                        "compare" => "=",
+                        "value" => 'existing'
+                    ]
+                ],
+            ],
             // End Section 2
 
 
