@@ -285,9 +285,9 @@ class Fields
                 ],
                 'condition' => [
                     [
-                        "key" => "event_organizer",
-                        "compare" => "=",
-                        "value" => 'existing'
+                        'key' => 'event_organizer',
+                        'compare' => '=',
+                        'value' => 'existing'
                     ]
                 ],
             ],
@@ -312,9 +312,9 @@ class Fields
                 ],
                 'condition' => [
                     [
-                        "key" => "event_location",
-                        "compare" => "=",
-                        "value" => 'existing'
+                        'key' => 'event_location',
+                        'compare' => '=',
+                        'value' => 'existing'
                     ]
                 ],
             ],
@@ -436,9 +436,9 @@ class Fields
                 'suffix' => __('years', 'event-integration'),
                 'condition' => [
                     [
-                        "key" => "event_target_age",
-                        "compare" => "=",
-                        "value" => 'specified'
+                        'key' => 'event_target_age',
+                        'compare' => '=',
+                        'value' => 'specified'
                     ]
                 ],
             ],
@@ -451,9 +451,9 @@ class Fields
                 'suffix' => __('years', 'event-integration'),
                 'condition' => [
                     [
-                        "key" => "event_target_age",
-                        "compare" => "=",
-                        "value" => 'specified'
+                        'key' => 'event_target_age',
+                        'compare' => '=',
+                        'value' => 'specified'
                     ]
                 ],
             ],
@@ -465,9 +465,9 @@ class Fields
                 'suffix' => __('years', 'event-integration'),
                 'condition' => [
                     [
-                        "key" => "event_target_age",
-                        "compare" => "=",
-                        "value" => 'specified'
+                        'key' => 'event_target_age',
+                        'compare' => '=',
+                        'value' => 'specified'
                     ]
                 ],
             ],
@@ -479,9 +479,9 @@ class Fields
                 'suffix' => __('years', 'event-integration'),
                 'condition' => [
                     [
-                        "key" => "event_target_age",
-                        "compare" => "=",
-                        "value" => 'specified'
+                        'key' => 'event_target_age',
+                        'compare' => '=',
+                        'value' => 'specified'
                     ]
                 ],
             ],
