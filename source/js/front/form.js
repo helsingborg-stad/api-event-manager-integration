@@ -4,6 +4,7 @@ const eventForm = {
             forms.forEach(form => {
                 const conditionalFields = form.querySelectorAll('[data-condition]');
                 conditionalFields.forEach(field => eventForm.setupConditionalFields(form, field));
+                eventForm.setupRepeaters(form);
             });
         },
         setupConditionalFields: (form, field) => {
@@ -57,6 +58,30 @@ const eventForm = {
                     x.required = false;
                 });
             }
+        },
+        setupRepeaters: (form) => {
+            const repeaters = form.querySelectorAll('.js-repeater');
+            repeaters.forEach(repeater => {
+                const addButton = repeater.querySelector('.btn-repeater-add');
+                const removeButton = repeater.querySelector('.btn-repeater-remove');
+                addButton.addEventListener('click', (e) => {
+                    const subFieldsClone = repeater.querySelector('.sub-fields').cloneNode(true);
+                    subFieldsClone.querySelectorAll('input').forEach(field => {field.value = '';});
+                    repeater.insertBefore(subFieldsClone, addButton);
+                    if (repeater.querySelectorAll('.sub-fields').length > 1) {
+                        removeButton.classList.remove('u-display--none');
+                    }
+                });
+                removeButton.addEventListener('click', (e) => {
+                    const subFields =  repeater.querySelectorAll('.sub-fields');
+                    if (subFields.length > 1) {
+                        subFields[subFields.length - 1].remove();
+                    }
+                    if (subFields.length === 1) {
+                        removeButton.classList.add('u-display--none');
+                    }
+                });
+            });
         }
     }
 ;
