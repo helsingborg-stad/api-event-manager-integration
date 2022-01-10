@@ -21,6 +21,6 @@
         'options' => [
             'loading'   => __('Loading', 'event-integration') . "...",
         ]
-    ])4
+    ])
     @endselect
 </div>
