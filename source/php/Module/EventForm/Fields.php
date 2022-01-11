@@ -32,7 +32,7 @@ class Fields
                 'required' => true,
             ],
             [
-                'name' => 'event_image',
+                'name' => 'image_input',
                 'label' => __('Upload an image', 'event-integration'),
                 'description' =>
                     __(
@@ -64,7 +64,7 @@ class Fields
                 ],
                 'condition' => [
                     [
-                        'key' => 'event_image',
+                        'key' => 'image_input',
                         'compare' => '!=',
                         'value' => ''
                     ]
@@ -85,7 +85,7 @@ class Fields
                 ],
                 'condition' => [
                     [
-                        'key' => 'event_image',
+                        'key' => 'image_input',
                         'compare' => '!=',
                         'value' => ''
                     ]
@@ -108,7 +108,7 @@ class Fields
                 ],
                 'condition' => [
                     [
-                        'key' => 'event_image',
+                        'key' => 'image_input',
                         'compare' => '!=',
                         'value' => ''
                     ]
@@ -319,7 +319,7 @@ class Fields
                 ],
             ],
             [
-                'name' => 'event_accessibility',
+                'name' => 'accessibility',
                 'label' => __('Accessibility', 'event-integration'),
                 'description' => __('Select which accessibility adjustments are available for the site.', 'event-integration'),
                 'type' => 'checkbox',
@@ -332,54 +332,54 @@ class Fields
             // End Section 2
             // Section 3
             [
-                'name' => 'event_website_url',
+                'name' => 'event_link',
                 'label' => __('Website', 'event-integration'),
                 'type' => 'url',
                 'required' => true,
             ],
             [
-                'name' => 'event_booking_url',
+                'name' => 'booking_link',
                 'label' => __('Event booking page', 'event-integration'),
                 'type' => 'url',
                 'required' => false,
             ],
             [
-                'name' => 'event_price_adult',
+                'name' => 'price_adult',
                 'label' => __('For adults', 'event-integration'),
                 'type' => 'number',
                 'required' => false,
                 'suffix' => 'kr'
             ],
             [
-                'name' => 'event_price_student',
+                'name' => 'price_student',
                 'label' => __('Students', 'event-integration'),
                 'type' => 'number',
                 'required' => false,
                 'suffix' => 'kr'
             ],
             [
-                'name' => 'event_price_children',
+                'name' => 'price_children',
                 'label' => __('Child price', 'event-integration'),
                 'type' => 'number',
                 'required' => false,
                 'suffix' => 'kr'
             ],
             [
-                'name' => 'event_age_children',
+                'name' => 'children_age',
                 'label' => __('Age limit for child price', 'event-integration'),
                 'type' => 'number',
                 'required' => false,
                 'suffix' => __('years', 'event-integration')
             ],
             [
-                'name' => 'event_price_senior',
+                'name' => 'price_senior',
                 'label' => __('Pensioner price', 'event-integration'),
                 'type' => 'number',
                 'required' => false,
                 'suffix' => 'kr'
             ],
             [
-                'name' => 'event_age_senior',
+                'name' => 'senior_age',
                 'label' => __('Age limit for pensioner price', 'event-integration'),
                 'type' => 'number',
                 'required' => false,
@@ -458,7 +458,7 @@ class Fields
                 ],
             ],
             [
-                'name' => 'event_contact_email',
+                'name' => 'submitter_email',
                 'label' => __('E-mail address', 'event-integration'),
                 'type' => 'email',
                 'required' => false,
@@ -472,7 +472,7 @@ class Fields
                 ],
             ],
             [
-                'name' => 'event_contact_phone',
+                'name' => 'submitter_phone',
                 'label' => __('Phonenumber', 'event-integration'),
                 'type' => 'number',
                 'required' => false,
