@@ -434,13 +434,6 @@ class Fields
                 'multiple' => true,
                 'required' => false,
                 'suffix' => __('years', 'event-integration'),
-                'condition' => [
-                    [
-                        'key' => 'event_target_age',
-                        'compare' => '=',
-                        'value' => 'specified'
-                    ]
-                ],
             ],
             [
                 'name' => 'event_tags',
@@ -449,13 +442,6 @@ class Fields
                 'multiple' => true,
                 'required' => false,
                 'suffix' => __('years', 'event-integration'),
-                'condition' => [
-                    [
-                        'key' => 'event_target_age',
-                        'compare' => '=',
-                        'value' => 'specified'
-                    ]
-                ],
             ],
             [
                 'name' => 'submitter_email',
@@ -463,13 +449,6 @@ class Fields
                 'type' => 'email',
                 'required' => false,
                 'suffix' => __('years', 'event-integration'),
-                'condition' => [
-                    [
-                        'key' => 'event_target_age',
-                        'compare' => '=',
-                        'value' => 'specified'
-                    ]
-                ],
             ],
             [
                 'name' => 'submitter_phone',
@@ -477,13 +456,6 @@ class Fields
                 'type' => 'number',
                 'required' => false,
                 'suffix' => __('years', 'event-integration'),
-                'condition' => [
-                    [
-                        'key' => 'event_target_age',
-                        'compare' => '=',
-                        'value' => 'specified'
-                    ]
-                ],
             ],
             // End Section 4
         ];
