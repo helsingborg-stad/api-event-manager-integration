@@ -477,6 +477,7 @@ class Fields
                         'name' => 'submitter_email',
                         'label' => __('E-mail address', 'event-integration'),
                         'type' => 'email',
+                        'placeholder' => __('example@email.com', 'event-integration'),
                         'required' => false,
                         'suffix' => __('years', 'event-integration'),
                     ],
