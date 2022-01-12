@@ -295,9 +295,13 @@ class Fields
                         'type' => 'select',
                         'required' => true,
                         'options' => [
-                            'hbg' => __('Helsingborg Stad', 'event-integration'),
+                            '' => __('Loading...', 'event-integration'),
                         ],
-                        'condition' => [
+                        'dataSource' => [
+                    'type' => 'post',
+                    'name' => 'organizer'
+                ],
+                'condition' => [
                             [
                                 'key' => 'event_organizer',
                                 'compare' => '=',
@@ -322,7 +326,11 @@ class Fields
                         'type' => 'select',
                         'required' => true,
                         'options' => [
-                            'sundstorget' => __('Sundstorget', 'event-integration'),
+                            '' => __('Loading...', 'event-integration'),
+                ],
+                'dataSource' => [
+                    'type' => 'post',
+                    'name' => 'location'
                         ],
                         'condition' => [
                             [

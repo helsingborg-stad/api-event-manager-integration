@@ -12,6 +12,9 @@
     'required' => $field['required'] ?? false,
     'preselected' => $preselected,
     'options' => $field['options'],
+    'attributeList' => [
+        'data-source' => htmlspecialchars(json_encode($field['dataSource']), ENT_QUOTES, 'UTF-8')
+    ],
     'multiple' => $field['multiple'] ?? false,
 ])
 @endselect
