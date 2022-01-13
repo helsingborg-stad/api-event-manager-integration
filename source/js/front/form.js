@@ -7,7 +7,7 @@ const eventForm = {
                 eventForm.setupConditionalFields(form, field)
             );
             eventForm.setupRepeaters(form);
-            eventForm.setupRemoteSelect(form);
+            eventForm.setupRemoteSelect(form, eventintegration ?? {});
         });
     },
     setupConditionalFields: (form, field) => {
@@ -100,11 +100,11 @@ const eventForm = {
             });
         });
     },
-    setupRemoteSelect: (form) => {
-        if (eventintegration?.apiurl === undefined) {
+    setupRemoteSelect: (form, {apiurl}) => {
+        if (apiurl === undefined) {
             return;
         }
-        const apiUrl = eventintegration.apiurl.replace(/\/$/, '');
+        const apiUrl = apiurl.replace(/\/$/, '');
         const selects = form.querySelectorAll('select[data-source*=type]');
         selects.forEach((select) => {
             const dataSource = JSON.parse(select.dataset.source);
