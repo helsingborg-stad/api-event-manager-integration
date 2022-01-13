@@ -101,8 +101,10 @@ const eventForm = {
         });
     },
     setupRemoteSelect: (form) => {
-        var apiUrl = eventintegration.apiurl;
-        apiUrl = apiUrl.replace(/\/$/, '');
+        if (eventintegration?.apiurl === undefined) {
+            return;
+        }
+        const apiUrl = eventintegration.apiurl.replace(/\/$/, '');
         const selects = form.querySelectorAll('select[data-source*=type]');
         selects.forEach((select) => {
             const dataSource = JSON.parse(select.dataset.source);
