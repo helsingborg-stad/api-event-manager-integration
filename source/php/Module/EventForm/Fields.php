@@ -310,6 +310,37 @@ class Fields
                         ],
                     ],
                     [
+                        'name' => 'event_new_organizer',
+                        'type' => 'section',
+                        'fields' => [
+                            [
+                                'name' => 'organizer-name',
+                                'label' => __('Name', 'event-integration'),
+                                'type' => 'text',
+                                'required' => true,
+                            ],
+                            [
+                                'name' => 'organizer-phone',
+                                'label' => __('Street address', 'event-integration'),
+                                'type' => 'text',
+                                'required' => true,
+                            ],
+                            [
+                                'name' => 'organizer-mail',
+                                'label' => __('Postal code', 'event-integration'),
+                                'type' => 'email',
+                                'required' => true,
+                            ],
+                        ],
+                        'condition' => [
+                            [
+                                'key' => 'event_organizer',
+                                'compare' => '=',
+                                'value' => 'new'
+                            ]
+                        ],
+                    ],
+                    [
                         'name' => 'event_location',
                         'label' => __('Location', 'event-integration'),
                         'description' => __('Write the name of the place and choose from the suggestions we give you.', 'event-integration'),
@@ -337,6 +368,43 @@ class Fields
                                 'key' => 'event_location',
                                 'compare' => '=',
                                 'value' => 'existing'
+                            ]
+                        ],
+                    ],
+                    [
+                        'name' => 'event_new_location',
+                        'type' => 'section',
+                        'fields' => [
+                            [
+                                'name' => 'location-title',
+                                'label' => __('Name', 'event-integration'),
+                                'type' => 'text',
+                                'required' => true,
+                            ],
+                            [
+                                'name' => 'location-street-address',
+                                'label' => __('Street address', 'event-integration'),
+                                'type' => 'text',
+                                'required' => true,
+                            ],
+                            [
+                                'name' => 'location-postal-code',
+                                'label' => __('Postal code', 'event-integration'),
+                                'type' => 'number',
+                                'required' => true,
+                            ],
+                            [
+                                'name' => 'location-city',
+                                'label' => __('City', 'event-integration'),
+                                'type' => 'text',
+                                'required' => true,
+                            ],
+                        ],
+                        'condition' => [
+                            [
+                                'key' => 'event_location',
+                                'compare' => '=',
+                                'value' => 'new'
                             ]
                         ],
                     ],
