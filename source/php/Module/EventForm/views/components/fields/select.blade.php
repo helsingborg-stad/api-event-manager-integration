@@ -11,6 +11,7 @@
     'label' => $field['label'],
     'required' => $field['required'] ?? false,
     'preselected' => $preselected,
-    'options' => $field['options']
+    'options' => $field['options'],
+    'multiple' => $field['multiple'] ?? false,
 ])
 @endselect
