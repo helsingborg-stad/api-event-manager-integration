@@ -140,8 +140,8 @@ class Fields
                         'type' => 'radio',
                         'required' => true,
                         'options' => [
-                            'single-date' => __('Enstaka datum', 'event-integration'),
-                            'recurring-event' => __('Återkommande tillfällen', 'event-integration'),
+                            'single-date' => __('Single dates', 'event-integration'),
+                            'recurring-event' => __('Recurring occasions', 'event-integration'),
                         ],
                         'value' => 'not-recurring',
                     ],
