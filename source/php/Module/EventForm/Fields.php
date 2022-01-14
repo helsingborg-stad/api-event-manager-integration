@@ -146,76 +146,7 @@ class Fields
                         'value' => 'not-recurring',
                     ],
                     [
-                        'name' => 'event_schema_start_date',
-                        'label' => __('Start date', 'event-integration'),
-                        'description' => __(
-                            'Describe your event. What happens and why should you visit it?',
-                            'event-integration'
-                        ),
-                        'type' => 'date',
-                        'required' => true,
-                        'condition' => [
-                            [
-                                'key' => 'event_schema_type',
-                                'compare' => '=',
-                                'value' => 'single-date'
-                            ]
-                        ],
-                    ],
-                    [
-                        'name' => 'event_schema_start_time',
-                        'label' => __('Start time', 'event-integration'),
-                        'description' => __(
-                            'Describe your event. What happens and why should you visit it?',
-                            'event-integration'
-                        ),
-                        'type' => 'time',
-                        'required' => true,
-                        'condition' => [
-                            [
-                                'key' => 'event_schema_type',
-                                'compare' => '=',
-                                'value' => 'single-date'
-                            ]
-                        ],
-                    ],
-                    [
-                        'name' => 'event_schema_end_date',
-                        'label' => __('End date', 'event-integration'),
-                        'description' => __(
-                            'Describe your event. What happens and why should you visit it?',
-                            'event-integration'
-                        ),
-                        'type' => 'date',
-                        'required' => true,
-                        'condition' => [
-                            [
-                                'key' => 'event_schema_type',
-                                'compare' => '=',
-                                'value' => 'single-date'
-                            ]
-                        ],
-                    ],
-
-                    [
-                        'name' => 'event_schema_end_time',
-                        'label' => __('End time', 'event-integration'),
-                        'description' => __(
-                            'Describe your event. What happens and why should you visit it?',
-                            'event-integration'
-                        ),
-                        'type' => 'time',
-                        'required' => true,
-                        'condition' => [
-                            [
-                                'key' => 'event_schema_type',
-                                'compare' => '=',
-                                'value' => 'single-date'
-                            ]
-                        ],
-                    ],
-                    [
-                        'name' => 'event_schema_recurring',
+                        'name' => 'event_schema_single_date',
                         'label' => __('Rights', 'event-integration'),
                         'description' => __(
                             'Describe your event. What happens and why should you visit it?',
@@ -269,14 +200,57 @@ class Fields
                             [
                                 'key' => 'event_schema_type',
                                 'compare' => '=',
-                                'value' => 'recurring-event'
+                                'value' => 'single-date'
                             ]
                         ],
                         'labels' => [
                             'addButton' => __('Add date', 'event-integration'),
                             'removeButton' => __('Remove date', 'event-integration'),
                         ],
-
+                    ],
+                    [
+                        'name' => 'event_schema_recurring_date',
+                        'type' => 'section',
+                        'fields' => [
+                            [
+                                'name' => 'weekday',
+                                'label' => __('Weekday', 'event-integration'),
+                                'description' => __(
+                                    'The event will occur on this weekday.',
+                                    'event-integration'
+                                ),
+                                'type' => 'select',
+                                'required' => true,
+                                'options' => [
+                                    'Monday' => __('Monday', 'event-integration'),
+                                    'Tuesday' => __('Tuesday', 'event-integration'),
+                                    'Wednesday' => __('Wednesday', 'event-integration'),
+                                    'Thursday' => __('Thursday', 'event-integration'),
+                                    'Friday' => __('Friday', 'event-integration'),
+                                    'Saturday' => __('Saturday', 'event-integration'),
+                                    'Sunday' => __('Sunday', 'event-integration'),
+                                ],
+                            ],
+                            [
+                                'name' => 'weekly_interval',
+                                'label' => __('Weekly interval', 'event-integration'),
+                                'description' => __(
+                                    'Enter the weekly interval when the event occurs. 1 equals every week.',
+                                    'event-integration'
+                                ),
+                                'type' => 'number',
+                                'required' => true,
+                                'min' => 1,
+                                'max' => 52,
+                            ],
+                        ],
+                        'condition' => [
+                            [
+                                'key' => 'event_schema_type',
+                                'compare' => '=',
+                                'value' => 'recurring-event'
+                            ]
+                        ],
                     ],
                     [
                         'name' => 'event_organizer',
