@@ -9,5 +9,5 @@
     'required' => $field['required'],
     'helperText' => $field['description'] ?? '',
     'placeholder' => $field['placeholder'] ?? '',
-], (array )$field['props'] ?? []))
+], (array) $field['props'] ?? []))
 @endfield
