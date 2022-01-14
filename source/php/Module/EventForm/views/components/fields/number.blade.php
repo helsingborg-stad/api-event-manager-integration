@@ -2,6 +2,7 @@
     $attributeList = [
         'type' => $field['type'],
         'name' => $field['name'],
+        'placeholder' => $field['placeholder'] ?? '',
     ];
     if (!empty($field['min'])) {
         $attributeList['min'] = $field['min'];

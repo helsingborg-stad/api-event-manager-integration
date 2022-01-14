@@ -243,6 +243,20 @@ class Fields
                                 'min' => 1,
                                 'max' => 52,
                             ],
+                            [
+                                'name' => 'recurring_start_time',
+                                'label' => __('Start time', 'event-integration'),
+                                'description' => __('Start time for the event', 'event-integration'),
+                                'type' => 'time',
+                                'required' => true,
+                            ],
+                            [
+                                'name' => 'recurring_end_time',
+                                'label' => __('End time', 'event-integration'),
+                                'description' => __('End time for the event', 'event-integration'),
+                                'type' => 'time',
+                                'required' => true,
+                            ],
                         ],
                         'condition' => [
                             [
