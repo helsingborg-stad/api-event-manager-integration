@@ -52,11 +52,12 @@ $acfExportManager = new AcfExportManager\AcfExportManager();
 $acfExportManager->setTextdomain('event-integration');
 $acfExportManager->setExportFolder(EVENTMANAGERINTEGRATION_PATH . 'AcfFields/');
 $acfExportManager->autoExport(array(
-    'event-module' 		=> 'group_583fe4ee88439',
-    'location-module'	=> 'group_5948e8bc3bf75',
-    'options' 			=> 'group_583557753bd73',
-    'shortcodes' 		=> 'group_58526d565e1f5',
-    'event-form-module'	=> 'group_5c599a27e446a',
+    'event-module' 		 => 'group_583fe4ee88439',
+    'location-module'	 => 'group_5948e8bc3bf75',
+    'options' 			 => 'group_583557753bd73',
+    'shortcodes' 		 => 'group_58526d565e1f5',
+    'event-form-module'	 => 'group_5c599a27e446a',
+    'options-debug-info' => 'group_61e13ea95de0e'
 ));
 $acfExportManager->import();
 

@@ -20,6 +20,11 @@ class Options
         add_action('acf/render_field/type=message', array($this, 'renderAcfField'), 11, 1);
         add_filter('acf/update_value/name=event_import_from_location', array($this, 'updateLocationOption'), 10, 1);
         add_filter('acf/update_value/name=event_daily_import', array($this, 'updateCronOption'), 10, 1);
+
+        add_filter('acf/load_field/key=field_61e1418a5107c', function ($field) {
+            $field['value'] = \EventManagerIntegration\Helper\ApiUrl::buildApiUrl();
+            return $field;
+        });
     }
 
     /**

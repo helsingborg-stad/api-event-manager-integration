@@ -1,0 +1,60 @@
+[{
+    "key": "group_61e13ea95de0e",
+    "title": "Api-URL",
+    "fields": [
+        {
+            "key": "field_61e13eb3b9173",
+            "label": "API Request URL",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "The api provider may request you to send the request url if any issues arise in the import. Communicate this url when you are requesting assistance.",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        {
+            "key": "field_61e1418a5107c",
+            "label": "API Request URL",
+            "name": "api_request_url_field",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "event-options"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": ""
+}]
+
