@@ -108,7 +108,10 @@ const eventForm = {
         const selects = form.querySelectorAll('select[data-source*=type]');
         selects.forEach((select) => {
             const dataSource = JSON.parse(select.dataset.source);
-            const url = apiUrl + '/' + dataSource.name + '/complete';
+            let url = apiUrl + '/' + dataSource.name;
+            if (dataSource.type === 'post') {
+                url += '/complete';
+            }
             fetch(url)
                 .then((data) => data.json())
                 .then((items) => {
@@ -120,7 +123,11 @@ const eventForm = {
                         .forEach((item) => {
                             const option = document.createElement('option');
                             option.setAttribute('value', item.id);
-                            option.innerText = item.title;
+                            if (dataSource.type === 'post') {
+                                option.innerText = item.title;
+                            } else {
+                                option.innerText = item.name;
+                            }
                             select.appendChild(option);
                         });
                 });
