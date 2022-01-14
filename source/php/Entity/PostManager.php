@@ -204,8 +204,21 @@ abstract class PostManager
 
         // Update if duplicate
         if (isset($duplicate->ID)) {
-            //Check if event needs to be updated
-            if (get_post_meta($duplicate->ID, 'last_update', true) != $meta['last_update']) {
+            /*
+            Check if event needs to be updated
+            Hours has intentianally been removed from compare,
+            as it is may cause timezone issues. 
+            Known flaws: 
+            - Unneccsesary update can be executed at new day
+            - Update may not go trough if post is saved 
+              exactly the same minute of any hour. 
+              But will work most of the time.
+            */
+
+            $localTime = date("Y-m-d \H:i:s", strtotime(get_post_meta($duplicate->ID, 'last_update', true)));
+            $remoteTime = date("Y-m-d \H:i:s", strtotime($meta['last_update']));
+
+            if ($localTime != $remoteTime) {
                 $post['ID'] = $duplicate->ID;
                 $this->ID = wp_update_post($post);
                 $isDuplicate = true;
