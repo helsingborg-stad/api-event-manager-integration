@@ -298,10 +298,10 @@ class Fields
                             '' => __('Loading...', 'event-integration'),
                         ],
                         'dataSource' => [
-                    'type' => 'post',
-                    'name' => 'organizer'
-                ],
-                'condition' => [
+                            'type' => 'post',
+                            'name' => 'organizer'
+                        ],
+                        'condition' => [
                             [
                                 'key' => 'event_organizer',
                                 'compare' => '=',
@@ -327,10 +327,10 @@ class Fields
                         'required' => true,
                         'options' => [
                             '' => __('Loading...', 'event-integration'),
-                ],
-                'dataSource' => [
-                    'type' => 'post',
-                    'name' => 'location'
+                        ],
+                        'dataSource' => [
+                            'type' => 'post',
+                            'name' => 'location'
                         ],
                         'condition' => [
                             [
@@ -471,7 +471,10 @@ class Fields
                         'type' => 'select',
                         'multiple' => true,
                         'required' => false,
-                        'suffix' => __('years', 'event-integration'),
+                        'dataSource' => [
+                            'type' => 'taxonomy',
+                            'name' => 'event_categories'
+                        ],
                     ],
                     [
                         'name' => 'event_tags',
@@ -479,7 +482,10 @@ class Fields
                         'type' => 'select',
                         'multiple' => true,
                         'required' => false,
-                        'suffix' => __('years', 'event-integration'),
+                        'dataSource' => [
+                            'type' => 'taxonomy',
+                            'name' => 'event_tags'
+                        ],
                     ],
                     [
                         'name' => 'submitter_email',
