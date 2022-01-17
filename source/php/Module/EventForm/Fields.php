@@ -277,6 +277,24 @@ class Fields
                         ],
                     ],
                     [
+                        'name' => 'event_location_information_heading',
+                        'label' => __('Location information', 'event-integration'),
+                        'element' => 'h2',
+                        'bottomMargin' => true,
+                        'type' => 'heading',
+                    ],
+                    [
+                        'name' => 'event_organizer_heading',
+                        'label' => __('Organizer', 'event-integration'),
+                        'description' => __(
+                            'Write the name of the place and choose from the suggestions we give you.',
+                            'event-integration'
+                        ),
+                        'element' => 'h3',
+                        'bottomMargin' => false,
+                        'type' => 'heading',
+                    ],
+                    [
                         'name' => 'event_organizer',
                         'label' => __('Organizer', 'event-integration'),
                         'description' => __('Write the name of the organizer and choose from the suggestions we give you.', 'event-integration'),
@@ -428,6 +446,12 @@ class Fields
                 'fields' => [
                     // Section 3
                     [
+                        'name' => 'event_links_heading',
+                        'label' => __('Links', 'event-integration'),
+                        'element' => 'h3',
+                        'type' => 'heading',
+                    ],
+                    [
                         'name' => 'event_link',
                         'label' => __('Website', 'event-integration'),
                         'type' => 'url',
@@ -438,6 +462,13 @@ class Fields
                         'label' => __('Event booking page', 'event-integration'),
                         'type' => 'url',
                         'required' => false,
+                    ],
+                    [
+                        'name' => 'event_price_heading',
+                        'label' => __('Price', 'event-integration'),
+                        'element' => 'h3',
+                        'type' => 'heading',
+                        'topMargin' => true
                     ],
                     [
                         'name' => 'price_adult',
@@ -480,6 +511,13 @@ class Fields
                         'type' => 'number',
                         'required' => false,
                         'suffix' => __('years', 'event-integration')
+                    ],
+                    [
+                        'name' => 'target_age_heading',
+                        'label' => __('Age group that the event is aimed at', 'event-integration'),
+                        'element' => 'h3',
+                        'bottomMargin' => false,
+                        'type' => 'heading',
                     ],
                     [
                         'name' => 'event_target_age',
@@ -532,6 +570,17 @@ class Fields
                 'fields' => [
                     // Section 4
                     [
+                        'name' => 'event_categories_heading',
+                        'label' => __('Categorize the event', 'event-integration'),
+                        'description' => __(
+                            'Add tags and categories to make it easier to show the event in the right place and make it easier to find for visitors.',
+                            'event-integration'
+                        ),
+                        'element' => 'h3',
+                        'bottomMargin' => false,
+                        'type' => 'heading',
+                    ],
+                    [
                         'name' => 'event_categories',
                         'label' => __('Choose categories that fit the event', 'event-integration'),
                         'type' => 'select',
@@ -552,6 +601,18 @@ class Fields
                             'type' => 'taxonomy',
                             'name' => 'event_tags'
                         ],
+                    ],
+                    [
+                        'name' => 'event_contact_information_heading',
+                        'label' => __('Contact information', 'event-integration'),
+                        'description' => __(
+                            'Add your contact details below.',
+                            'event-integration'
+                        ),
+                        'element' => 'h3',
+                        'topMargin' => true,
+                        'bottomMargin' => true,
+                        'type' => 'heading',
                     ],
                     [
                         'name' => 'submitter_email',
