@@ -132,6 +132,16 @@ class Fields
                 'fields' => [
                     //  Section 2
                     [
+                        'name' => 'event_schema_heading',
+                        'label' => __('When is the event?', 'event-integration'),
+                        'description' => __(
+                            'If the event is recurring you can add a schedule for upcoming occasions.',
+                            'event-integration'),
+                        'element' => 'h3',
+                        'type' => 'heading',
+                        'bottomMargin' => false
+                    ],
+                    [
                         'name' => 'event_schema_type',
                         'label' => __('Schedule', 'event-integration'),
                         'description' => __(
