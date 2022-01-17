@@ -295,7 +295,11 @@ class Fields
                         'type' => 'select',
                         'required' => true,
                         'options' => [
-                            'hbg' => __('Helsingborg Stad', 'event-integration'),
+                            '' => __('Loading...', 'event-integration'),
+                        ],
+                        'dataSource' => [
+                            'type' => 'post',
+                            'name' => 'organizer'
                         ],
                         'condition' => [
                             [
@@ -322,7 +326,11 @@ class Fields
                         'type' => 'select',
                         'required' => true,
                         'options' => [
-                            'sundstorget' => __('Sundstorget', 'event-integration'),
+                            '' => __('Loading...', 'event-integration'),
+                        ],
+                        'dataSource' => [
+                            'type' => 'post',
+                            'name' => 'location'
                         ],
                         'condition' => [
                             [
@@ -463,7 +471,10 @@ class Fields
                         'type' => 'select',
                         'multiple' => true,
                         'required' => false,
-                        'suffix' => __('years', 'event-integration'),
+                        'dataSource' => [
+                            'type' => 'taxonomy',
+                            'name' => 'event_categories'
+                        ],
                     ],
                     [
                         'name' => 'event_tags',
@@ -471,7 +482,10 @@ class Fields
                         'type' => 'select',
                         'multiple' => true,
                         'required' => false,
-                        'suffix' => __('years', 'event-integration'),
+                        'dataSource' => [
+                            'type' => 'taxonomy',
+                            'name' => 'event_tags'
+                        ],
                     ],
                     [
                         'name' => 'submitter_email',
