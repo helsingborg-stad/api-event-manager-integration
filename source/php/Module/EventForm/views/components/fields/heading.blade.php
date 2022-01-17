@@ -1,7 +1,7 @@
 @php
     $class = [];
-    $class[] = ($field['topMargin'] ?? true) ? 'u-margin__top--3' : '';
-    $class[] = ($field['bottomMargin'] ?? true) ? 'u-margin__bottom--3' : '';
+    $class[] = $field['topMargin'] ? 'u-margin__top--3' : '';
+    $class[] = $field['bottomMargin'] ? 'u-margin__bottom--3' : '';
     $class = trim(implode(' ', $class));
 @endphp
 
