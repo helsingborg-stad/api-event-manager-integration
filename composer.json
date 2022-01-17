@@ -18,6 +18,7 @@
     "require": {
         "helsingborg-stad/acf-export-manager": ">=1.0.0",
         "philo/laravel-blade": "^3.1",
-        "ralouphie/mimey": "^2.1"
+        "ralouphie/mimey": "^2.1",
+        "justinrainbow/json-schema": "^5.2"
     }
 }
