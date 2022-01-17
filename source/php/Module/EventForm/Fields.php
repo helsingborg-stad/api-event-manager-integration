@@ -228,7 +228,7 @@ class Fields
                         ),
                         'type' => 'repeater',
                         'minRows' => 1,
-                        'subFields' => [
+                        'fields' => [
                             [
                                 'name' => 'start_date',
                                 'label' => __('Start date', 'event-integration'),
