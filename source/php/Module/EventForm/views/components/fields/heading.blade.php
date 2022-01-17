@@ -1,7 +1,7 @@
 @php
     $class = [];
-    $class[] = !$field['removeTopMargin'] ? 'u-margin__top--3' : '';
-    $class[] = !$field['removeBottomMargin'] ? 'u-margin__bottom--3' : '';
+    $class[] = ($field['topMargin'] ?? true) ? 'u-margin__top--3' : '';
+    $class[] = ($field['bottomMargin'] ?? true) ? 'u-margin__bottom--3' : '';
     $class = trim(implode(' ', $class));
 @endphp
 
@@ -15,7 +15,7 @@
     @endif
     @if (!empty($field['description']))
         @typography([
-            'element' => "p"
+            'element' => 'p'
             ])
             {!! $field['description'] !!}
         @endtypography
