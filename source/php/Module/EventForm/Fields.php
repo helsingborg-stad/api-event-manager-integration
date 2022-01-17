@@ -286,6 +286,18 @@ class Fields
                         'name' => 'event_location_information_heading',
                         'label' => __('Location information', 'event-integration'),
                         'element' => 'h2',
+                        'bottomMargin' => true,
+                        'type' => 'heading',
+                    ],
+                    [
+                        'name' => 'event_organizer_heading',
+                        'label' => __('Organizer', 'event-integration'),
+                        'description' => __(
+                            'Write the name of the place and choose from the suggestions we give you.',
+                            'event-integration'
+                        ),
+                        'element' => 'h3',
+                        'bottomMargin' => false,
                         'type' => 'heading',
                     ],
                     [
@@ -505,6 +517,13 @@ class Fields
                         'type' => 'number',
                         'required' => false,
                         'suffix' => __('years', 'event-integration')
+                    ],
+                    [
+                        'name' => 'target_age_heading',
+                        'label' => __('Age group that the event is aimed at', 'event-integration'),
+                        'element' => 'h3',
+                        'bottomMargin' => false,
+                        'type' => 'heading',
                     ],
                     [
                         'name' => 'event_target_age',
