@@ -4,7 +4,6 @@ const eventFormSubmit = {
         forms.forEach(form => {
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
-                console.log('prevented');
 
                 /*
                 var fileInput = $(eventForm.find('#fs_image_input')[0]),
@@ -34,7 +33,13 @@ const eventFormSubmit = {
                 if (formData.event_organizer === 'new') {
                     // create event_organizer
                 } else {
-                    // use existing
+                    formData['organizers'] = [{
+                        organizer: formData['event_existing_organizer'],
+                        main_organizer: true
+                    }];
+                    // How should we retrieve this? Add phone and email as data on the options?
+                    //formData['contact_phone'] = organizerResponse[0].data.phone;
+                    //formData['contact_email'] = organizerResponse[0].data.email;
                     formRequests.push([]);
                 }
 
@@ -47,9 +52,25 @@ const eventFormSubmit = {
 
                 Promise.all(formRequests)
                     .then(([imageResponse, organizerResponse, locationResponse]) => {
+                        if (imageResponse?.success) {
+                            formData['featured_media'] = imageResponse.data;
+                        }
+
+                        if (organizerResponse?.success) {
+                            formData['organizers'] = [{
+                                organizer: organizerResponse.data.id,
+                                main_organizer: true
+                            }];
+                            formData['contact_phone'] = organizerResponse.data.phone;
+                            formData['contact_email'] = organizerResponse.data.email;
+                        }
+
+                        if (locationResponse?.success) {
+                            formData['location'] = locationResponse.data.id;
+                        }
+
                         console.log(imageResponse, organizerResponse, locationResponse);
                     });
-                console.log(formData);
             });
         });
     },
