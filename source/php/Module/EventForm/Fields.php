@@ -26,15 +26,6 @@ class Fields
                         'description' => __('Name of the event.', 'event-integration'),
                         'type' => 'text',
                         'required' => true,
-                        'width' => 6
-                    ],
-                    [
-                        'name' => 'title',
-                        'label' => __('Event name', 'event-integration'),
-                        'description' => __('Name of the event.', 'event-integration'),
-                        'type' => 'text',
-                        'required' => true,
-                        'width' => 6
                     ],
                     [
                         'name' => 'content',
@@ -286,7 +277,6 @@ class Fields
                         'name' => 'event_location_information_heading',
                         'label' => __('Location information', 'event-integration'),
                         'element' => 'h2',
-                        'bottomMargin' => true,
                         'type' => 'heading',
                     ],
                     [
