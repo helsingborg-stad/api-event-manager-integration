@@ -26,6 +26,15 @@ class Fields
                         'description' => __('Name of the event.', 'event-integration'),
                         'type' => 'text',
                         'required' => true,
+                        'width' => 6
+                    ],
+                    [
+                        'name' => 'title',
+                        'label' => __('Event name', 'event-integration'),
+                        'description' => __('Name of the event.', 'event-integration'),
+                        'type' => 'text',
+                        'required' => true,
+                        'width' => 6
                     ],
                     [
                         'name' => 'content',
@@ -37,6 +46,7 @@ class Fields
                         'type' => 'textarea',
                         'required' => true,
                     ],
+    
                     [
                         'name' => 'image_input',
                         'label' => __('Upload an image', 'event-integration'),
@@ -130,16 +140,6 @@ class Fields
                 'description' => __('Add information about how often and when the event occurs.', 'event-integration'),
                 'fields' => [
                     //  Section 2
-                    [
-                        'name' => 'event_schema_heading',
-                        'label' => __('When is the event?', 'event-integration'),
-                        'description' => __(
-                            'If the event is recurring you can add a schedule for upcoming occasions.',
-                            'event-integration'),
-                        'element' => 'h3',
-                        'type' => 'heading',
-                        'bottomMargin' => false
-                    ],
                     [
                         'name' => 'event_schema_type',
                         'label' => __('Schedule', 'event-integration'),
@@ -281,17 +281,6 @@ class Fields
                         'label' => __('Location information', 'event-integration'),
                         'element' => 'h2',
                         'bottomMargin' => true,
-                        'type' => 'heading',
-                    ],
-                    [
-                        'name' => 'event_organizer_heading',
-                        'label' => __('Organizer', 'event-integration'),
-                        'description' => __(
-                            'Write the name of the place and choose from the suggestions we give you.',
-                            'event-integration'
-                        ),
-                        'element' => 'h3',
-                        'bottomMargin' => false,
                         'type' => 'heading',
                     ],
                     [
@@ -511,13 +500,6 @@ class Fields
                         'type' => 'number',
                         'required' => false,
                         'suffix' => __('years', 'event-integration')
-                    ],
-                    [
-                        'name' => 'target_age_heading',
-                        'label' => __('Age group that the event is aimed at', 'event-integration'),
-                        'element' => 'h3',
-                        'bottomMargin' => false,
-                        'type' => 'heading',
                     ],
                     [
                         'name' => 'event_target_age',
