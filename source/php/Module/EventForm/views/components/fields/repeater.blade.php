@@ -10,19 +10,7 @@ if (!empty($field['labels']) && !empty($field['labels']['removeButton'])) {
 @endphp
 <div class="js-repeater">
     <div class="sub-fields">
-        @foreach($field['subFields'] as $subField)
-            <div @if(!empty($subField['condition']))data-condition="{{ json_encode($subField['condition'] ?? []) }}"@endif>
-                @includeFirst(
-                    [
-                        'components.fields.' . $subField['type'] ?? '',
-                        'components.fields._error'
-                    ],
-                    [
-                        'field' => $subField
-                    ]
-                )
-            </div>
-        @endforeach
+        @include('partials.field-loop', ['fields' => $field['subFields']])
     </div>
     @button([
         'text' => $addButtonLabel,
