@@ -274,6 +274,12 @@ class Fields
                         'type' => 'heading',
                     ],
                     [
+                        'name' => 'event_location_information_heading',
+                        'label' => __('Location information', 'event-integration'),
+                        'element' => 'h2',
+                        'type' => 'heading',
+                    ],
+                    [
                         'name' => 'event_organizer',
                         'label' => __('Organizer', 'event-integration'),
                         'description' => __('Write the name of the organizer and choose from the suggestions we give you.', 'event-integration'),
@@ -573,6 +579,18 @@ class Fields
                             'type' => 'taxonomy',
                             'name' => 'event_tags'
                         ],
+                    ],
+                    [
+                        'name' => 'event_contact_information_heading',
+                        'label' => __('Contact information', 'event-integration'),
+                        'description' => __(
+                            'Add your contact details below.',
+                            'event-integration'
+                        ),
+                        'element' => 'h3',
+                        'marginTop' => true,
+                        'marginBottom' => true,
+                        'type' => 'heading',
                     ],
                     [
                         'name' => 'event_contact_information_heading',
