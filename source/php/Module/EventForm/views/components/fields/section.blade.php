@@ -14,17 +14,5 @@
         </header>
     @endif
 
-    @foreach($field['fields'] as $subField)
-        <div @if(!empty($subField['condition']))data-condition="{{ json_encode($subField['condition'] ?? []) }}"@endif>
-            @includeFirst(
-                [
-                    'components.fields.' . $subField['type'] ?? '',
-                    'components.fields._error'
-                ],
-                [
-                    'field' => $subField
-                ]
-            )
-        </div>
-    @endforeach
+    @include('partials.field-loop', ['fields' => $field['fields']])
 </section>
