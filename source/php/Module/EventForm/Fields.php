@@ -164,6 +164,7 @@ class Fields
                                     'event-integration'
                                 ),
                                 'type' => 'date',
+                                'span' => 6,
                                 'required' => true,
                             ],
                             [
@@ -174,6 +175,7 @@ class Fields
                                     'event-integration'
                                 ),
                                 'type' => 'time',
+                                'span' => 6,
                                 'required' => true,
                             ],
                             [
@@ -184,6 +186,7 @@ class Fields
                                     'event-integration'
                                 ),
                                 'type' => 'date',
+                                'span' => 6,
                                 'required' => true,
                             ],
                             [
@@ -194,6 +197,7 @@ class Fields
                                     'event-integration'
                                 ),
                                 'type' => 'time',
+                                'span' => 6,
                                 'required' => true,
                             ],
                         ],
@@ -249,6 +253,7 @@ class Fields
                                 'label' => __('Start time', 'event-integration'),
                                 'description' => __('Start time for the event', 'event-integration'),
                                 'type' => 'time',
+                                'span' => 6,
                                 'required' => true,
                             ],
                             [
@@ -256,6 +261,7 @@ class Fields
                                 'label' => __('End time', 'event-integration'),
                                 'description' => __('End time for the event', 'event-integration'),
                                 'type' => 'time',
+                                'span' => 6,
                                 'required' => true,
                             ],
                         ],
