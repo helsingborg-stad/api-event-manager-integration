@@ -37,6 +37,7 @@ class Fields
                         'type' => 'textarea',
                         'required' => true,
                     ],
+    
                     [
                         'name' => 'image_input',
                         'label' => __('Upload an image', 'event-integration'),
