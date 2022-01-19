@@ -300,7 +300,11 @@ class Fields
                         ],
                         'dataSource' => [
                             'type' => 'post',
-                            'name' => 'organizer'
+                            'name' => 'organizer',
+                            'hiddenFields' => [
+                                'contact_email' => 'contact_email',
+                                'contact_phone' => 'contact_phone'
+                            ]
                         ],
                         'condition' => [
                             [
