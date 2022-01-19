@@ -5,48 +5,37 @@ const eventFormSubmit = {
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
 
-                /*
-                var fileInput = $(eventForm.find('#fs_image_input')[0]),
-                        formData = this.jsonData(eventForm),
-                        imageData = new FormData(),
-                        organizerData = {title: '', phone: '', email: ''},
-                        locationData = {title: '', street_address: '', city: '', postal_code: ''},
-                        newOrganizerinputs = $('#new-organizer input'),
-                        newLocationinputs = $('#new-location input');
-
-                    newOrganizerinputs.each((index, element) => {
-                        organizerData[element.getAttribute('field')] = element.value;
-                    });
-
-                    newLocationinputs.each((index, element) => {
-                        locationData[element.getAttribute('field')] = element.value;
-                    });
-                 */
                 const imageInput = form.querySelector('input[name="image_input"]');
-                const formData = eventFormSubmit.serializeArray(form);
+                const formData = eventFormSubmit.formToJsonData(form);
 
                 const imageData = new FormData();
                 imageData.append('file', imageInput.files[0]);
                 const formRequests = [];
                 formRequests.push(eventFormSubmit.submitImageData(imageData));
 
+                console.log(formData)
                 if (formData.event_organizer === 'new') {
-                    // create event_organizer
+                    const organizerData = {title: '', phone: '', email: ''};
+                    Object.keys(organizerData).forEach(key => {
+                        const organizerField = form.querySelector(`organizer-${key}`);
+                        if (organizerField) {
+                            organizerData[key] = organizerField.value;
+                        }
+                    });
+
+                    formRequests.push(eventFormSubmit.submitFormData(organizerData, 'submit_organizer'));
                 } else {
                     formData['organizers'] = [{
                         organizer: formData['event_existing_organizer'],
                         main_organizer: true
                     }];
-                    // How should we retrieve this? Add phone and email as data on the options?
-                    //formData['contact_phone'] = organizerResponse[0].data.phone;
-                    //formData['contact_email'] = organizerResponse[0].data.email;
                     formRequests.push([]);
                 }
 
                 if (formData.event_location === 'new') {
                     // create event_location
                 } else {
-                    // use existing
+                    formData['location'] = formData['event_existing_location'];
                     formRequests.push([]);
                 }
 
@@ -95,6 +84,40 @@ const eventFormSubmit = {
                 .then(json => resolve(json))
                 .catch(err => reject(err));
         });
+    },
+    formToJsonData: (form) => {
+      const formArray = eventFormSubmit.serializeArray(form);
+      let formData = {};
+      let groups;
+      const categories = [];
+      const tags = [];
+
+      formArray.forEach(field => {
+          switch (field.name) {
+              case 'user_groups':
+                  groups = field.value.split(',').map(value => parseInt(value, 10));
+                  break;
+              case 'event_categories':
+                  categories.push(parseInt(field.value));
+                  break;
+              case 'event_tags':
+                  tags.push(parseInt(field.value));
+                  break;
+              default:
+                  formData[field.name] = field.value;
+          }
+      });
+
+        formData['accessibility'] = [];
+        form.querySelectorAll("input[name='accessibility']:checked").forEach(input => {
+            formData['accessibility'].push(input.value);
+        });
+
+        formData['user_groups'] = groups;
+        formData['event_categories'] = categories;
+        formData['event_tags'] = tags;
+
+      return formData;
     },
     serializeArray: (form) => {
         const formData = new FormData(form);
