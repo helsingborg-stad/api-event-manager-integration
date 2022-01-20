@@ -8,7 +8,7 @@ if (!empty($field['labels']) && !empty($field['labels']['removeButton'])) {
     $removeButtonLabel = $field['labels']['removeButton'];
 }
 @endphp
-<div class="js-repeater">
+<div id="{{ $field['name'] }}" class="js-repeater">
     <div class="sub-fields">
         @foreach($field['subFields'] as $subField)
             <div @if(!empty($subField['condition']))data-condition="{{ json_encode($subField['condition'] ?? []) }}"@endif>

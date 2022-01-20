@@ -168,7 +168,7 @@ const eventForm = {
             hiddenField.value = JSON.parse(selectedOption.dataset.hiddenFields)[key];
             select.parentNode.insertBefore(hiddenField, select);
         }
-    }
+    },
 };
 
 document.addEventListener('DOMContentLoaded', function () {
