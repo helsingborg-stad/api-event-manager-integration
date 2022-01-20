@@ -13,11 +13,10 @@ const eventFormSubmit = {
                 const formRequests = [];
                 formRequests.push(eventFormSubmit.submitImageData(imageData));
 
-                console.log(formData)
                 if (formData.event_organizer === 'new') {
                     const organizerData = {title: '', phone: '', email: ''};
                     Object.keys(organizerData).forEach(key => {
-                        const organizerField = form.querySelector(`organizer-${key}`);
+                        const organizerField = form.querySelector(`[name="organizer-${key}"]`);
                         if (organizerField) {
                             organizerData[key] = organizerField.value;
                         }
@@ -33,7 +32,15 @@ const eventFormSubmit = {
                 }
 
                 if (formData.event_location === 'new') {
-                    // create event_location
+                    const locationData = {title: '', street_address: '', city: '', postal_code: ''};
+                    Object.keys(locationData).forEach(key => {
+                        const locationField = form.querySelector(`[name="location-${key.replace('_', '-')}"]`);
+                        if (locationField) {
+                            locationData[key] = locationField.value;
+                        }
+                    });
+
+                    formRequests.push(eventFormSubmit.submitFormData(locationData, 'submit_location'));
                 } else {
                     formData['location'] = formData['event_existing_location'];
                     formRequests.push([]);
@@ -58,7 +65,10 @@ const eventFormSubmit = {
                             formData['location'] = locationResponse.data.id;
                         }
 
-                        console.log(imageResponse, organizerResponse, locationResponse);
+                        eventFormSubmit.submitFormData(formData, 'submit_event').then(response => {
+                            console.log(imageResponse, organizerResponse, locationResponse);
+                            console.log(response);
+                        });
                     });
             });
         });
@@ -68,7 +78,22 @@ const eventFormSubmit = {
         return eventFormSubmit.submitForm(data);
     },
     submitFormData: (data, action) => {
-        return eventFormSubmit.submitForm({data, action});
+        let formData = new FormData();
+        formData = eventFormSubmit.buildFormData(formData, data, 'data');
+        formData.append('action', action);
+        return eventFormSubmit.submitForm(new URLSearchParams(formData));
+    },
+    buildFormData: (formData, data, parentKey) => {
+        if (data && typeof data === 'object' && !(data instanceof Date) && !(data instanceof File)) {
+            Object.keys(data).forEach(key => {
+                formData = eventFormSubmit.buildFormData(formData, data[key], parentKey ? `${parentKey}[${key}]` : key);
+            });
+        } else {
+            const value = data == null ? '' : data;
+
+            formData.append(parentKey, value);
+        }
+        return formData;
     },
     submitForm: (body) => {
         return new Promise((resolve, reject) => {
@@ -86,27 +111,50 @@ const eventFormSubmit = {
         });
     },
     formToJsonData: (form) => {
-      const formArray = eventFormSubmit.serializeArray(form);
-      let formData = {};
-      let groups;
-      const categories = [];
-      const tags = [];
+        const formArray = eventFormSubmit.serializeArray(form);
+        let formData = {};
+        let groups;
+        const categories = [];
+        const tags = [];
 
-      formArray.forEach(field => {
-          switch (field.name) {
-              case 'user_groups':
-                  groups = field.value.split(',').map(value => parseInt(value, 10));
-                  break;
-              case 'event_categories':
-                  categories.push(parseInt(field.value));
-                  break;
-              case 'event_tags':
-                  tags.push(parseInt(field.value));
-                  break;
-              default:
-                  formData[field.name] = field.value;
-          }
-      });
+        formArray.forEach(field => {
+            switch (field.name) {
+                case 'user_groups':
+                    groups = field.value.split(',').map(value => parseInt(value, 10));
+                    break;
+                case 'event_categories':
+                    categories.push(parseInt(field.value));
+                    break;
+                case 'event_tags':
+                    tags.push(parseInt(field.value));
+                    break;
+                default:
+                    formData[field.name] = field.value;
+            }
+        });
+
+        formData['occasions'] = [];
+        form
+            .querySelectorAll('#event_schema_single_date .sub-fields')
+            .forEach(occasionGroup => {
+                const startDate = eventFormSubmit.formatDate(
+                    occasionGroup.querySelector('[name="start_date"]').value,
+                    occasionGroup.querySelector('[name="start_time"]').value
+                );
+                const endDate = eventFormSubmit.formatDate(
+                    occasionGroup.querySelector('[name="end_date"]').value,
+                    occasionGroup.querySelector('[name="end_time"]').value
+                );
+                if (startDate && endDate) {
+                    formData['occasions'].push({
+                        start_date: startDate,
+                        end_date: endDate,
+                        status: 'scheduled',
+                        content_mode: 'master',
+                    });
+                }
+            });
+
 
         formData['accessibility'] = [];
         form.querySelectorAll("input[name='accessibility']:checked").forEach(input => {
@@ -117,7 +165,7 @@ const eventFormSubmit = {
         formData['event_categories'] = categories;
         formData['event_tags'] = tags;
 
-      return formData;
+        return formData;
     },
     serializeArray: (form) => {
         const formData = new FormData(form);
@@ -128,7 +176,33 @@ const eventFormSubmit = {
         }
 
         return pairs;
-    }
+    },
+    formatDate: (date, time) => {
+        let dateTime = '';
+        let hh = time.split(':')[0];
+        let mm = time.split(':')[1];
+
+        //Format from datepicker (dd/mm/yyyy) to wp format (yyyy-mm-dd)
+        if (date.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/)) {
+            let dateExploded = date.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/)
+
+            // Pads date with 0 eg. 06 for june
+            dateExploded[2] = dateExploded[2].padStart(2, '0')
+            dateExploded[1] = dateExploded[1].padStart(2, '0')
+
+            //YYYY-MM-DD
+            date = `${dateExploded[3]}-${dateExploded[2]}-${dateExploded[1]}`
+        }
+
+        if (eventFormSubmit.isValidDate(date) && hh && mm) {
+            dateTime = date + ' ' + hh.padStart(2, '0') + ':' + mm.padStart(2, '0') + ':00';
+        }
+        return dateTime;
+    },
+    isValidDate: (dateString) => {
+        const regEx = /^\d{4}-\d{2}-\d{2}$/;
+        return dateString.match(regEx) != null;
+    },
 };
 
 document.addEventListener('DOMContentLoaded', function () {
