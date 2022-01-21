@@ -138,26 +138,25 @@ const eventForm = {
         }
     },
     createSelectOption: (select, dataSource, item, index) => {
-        {
-            const option = document.createElement('option');
-            if (index === 0) {
-                option.setAttribute('selected', 'selected');
-            }
-            option.setAttribute('value', item.id);
-            if (dataSource.type === 'post') {
-                option.innerText = item.title;
-            } else {
-                option.innerText = item.name;
-            }
-            if (dataSource.hiddenFields !== undefined) {
-                const hiddenFieldsData = {};
-                Object.keys(dataSource.hiddenFields).forEach(key => {
-                    hiddenFieldsData[dataSource.hiddenFields[key]] = item[key];
-                });
-                option.setAttribute('data-hidden-fields', JSON.stringify(hiddenFieldsData));
-            }
-            select.appendChild(option);
+        const option = document.createElement('option');
+        if (index === 0) {
+            option.setAttribute('selected', 'selected');
         }
+        option.setAttribute('value', item.id);
+        if (dataSource.type === 'post') {
+            option.innerText = item.title;
+        } else {
+            option.innerText = item.name;
+        }
+        if (dataSource.hiddenFields !== undefined) {
+            const hiddenFieldsData = {};
+            Object.keys(dataSource.hiddenFields).forEach(key => {
+                hiddenFieldsData[dataSource.hiddenFields[key]] = item[key];
+            });
+            option.setAttribute('data-hidden-fields', JSON.stringify(hiddenFieldsData));
+        }
+        select.appendChild(option);
+
     },
     createHiddenField: (select, key) => {
         const selectedOption = select.querySelector('option[selected]');
