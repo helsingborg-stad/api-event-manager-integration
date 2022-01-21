@@ -69,7 +69,7 @@ const eventFormSubmit = {
                             console.log(imageResponse, organizerResponse, locationResponse);
                             console.log(response);
                         });
-                    });
+                    }).catch(e => console.error(e));
             });
         });
     },
@@ -98,7 +98,6 @@ const eventFormSubmit = {
     submitForm: (body) => {
         return new Promise((resolve, reject) => {
             if (!eventintegration?.ajaxurl) {
-                console.error('[submitImageData] No ajax url defined');
                 return reject('[submitImageData] No ajax url defined');
             }
             fetch(eventintegration.ajaxurl,
