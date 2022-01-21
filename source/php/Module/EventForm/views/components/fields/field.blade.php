@@ -7,6 +7,8 @@
     ],
     'label' => $field['label'],
     'required' => $field['required'],
+    'icon' => $field['icon'] ?? '',
+    'prefix' => $field['prefix'] ?? '',
     'suffix' => $field['suffix'] ?? '',
     'helperText' => $field['description'] ?? '',
     'placeholder' => $field['placeholder'] ?? '',
