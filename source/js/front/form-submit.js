@@ -82,7 +82,11 @@ const eventFormSubmit = {
                                 successNotice.classList.remove('u-display--none');
                             });
                         }
-                    }).catch(e => console.error(e));
+                    }).catch(e => {
+                    form.querySelector('.event-submit__success').classList.add('u-display--none');
+                    const errorNotice = form.querySelector('.event-submit__error');
+                    errorNotice.querySelector('[id^="notice__text__"]').innerHTML = e.message;
+                });
             });
         });
     },
