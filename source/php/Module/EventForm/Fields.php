@@ -164,6 +164,7 @@ class Fields
                                     'event-integration'
                                 ),
                                 'type' => 'date',
+                                'span' => 6,
                                 'required' => true,
                             ],
                             [
@@ -174,6 +175,7 @@ class Fields
                                     'event-integration'
                                 ),
                                 'type' => 'time',
+                                'span' => 6,
                                 'required' => true,
                             ],
                             [
@@ -184,6 +186,7 @@ class Fields
                                     'event-integration'
                                 ),
                                 'type' => 'date',
+                                'span' => 6,
                                 'required' => true,
                             ],
                             [
@@ -194,6 +197,7 @@ class Fields
                                     'event-integration'
                                 ),
                                 'type' => 'time',
+                                'span' => 6,
                                 'required' => true,
                             ],
                         ],
@@ -249,6 +253,7 @@ class Fields
                                 'label' => __('Start time', 'event-integration'),
                                 'description' => __('Start time for the event', 'event-integration'),
                                 'type' => 'time',
+                                'span' => 6,
                                 'required' => true,
                             ],
                             [
@@ -256,6 +261,7 @@ class Fields
                                 'label' => __('End time', 'event-integration'),
                                 'description' => __('End time for the event', 'event-integration'),
                                 'type' => 'time',
+                                'span' => 6,
                                 'required' => true,
                             ],
                         ],
@@ -266,12 +272,6 @@ class Fields
                                 'value' => 'recurring-event'
                             ]
                         ],
-                    ],
-                    [
-                        'name' => 'event_location_information_heading',
-                        'label' => __('Location information', 'event-integration'),
-                        'element' => 'h2',
-                        'type' => 'heading',
                     ],
                     [
                         'name' => 'event_location_information_heading',
@@ -579,18 +579,6 @@ class Fields
                             'type' => 'taxonomy',
                             'name' => 'event_tags'
                         ],
-                    ],
-                    [
-                        'name' => 'event_contact_information_heading',
-                        'label' => __('Contact information', 'event-integration'),
-                        'description' => __(
-                            'Add your contact details below.',
-                            'event-integration'
-                        ),
-                        'element' => 'h3',
-                        'marginTop' => true,
-                        'marginBottom' => true,
-                        'type' => 'heading',
                     ],
                     [
                         'name' => 'event_contact_information_heading',
