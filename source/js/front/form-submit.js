@@ -5,6 +5,9 @@ const eventFormSubmit = {
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
 
+                form.querySelector('.event-submit__success').classList.add('u-display--none');
+                form.querySelector('.event-submit__error').classList.add('u-display--none');
+
                 const imageInput = form.querySelector('input[name="image_input"]');
                 const formData = eventFormSubmit.formToJsonData(form);
 
@@ -65,10 +68,20 @@ const eventFormSubmit = {
                             formData['location'] = locationResponse.data.id;
                         }
 
-                        eventFormSubmit.submitFormData(formData, 'submit_event').then(response => {
-                            console.log(imageResponse, organizerResponse, locationResponse);
-                            console.log(response);
-                        });
+                        const errorResponses = [imageResponse, organizerResponse, locationResponse].filter(x => !Array.isArray(x) && !x.success).map(x => x.data);
+                        if (errorResponses.length > 0) {
+                            form.querySelector('.event-submit__success').classList.add('u-display--none');
+                            const errorNotice = form.querySelector('.event-submit__error');
+                            errorNotice.querySelector('[id^="notice__text__"]').innerHTML = errorResponses.join('<br />');
+                            errorNotice.classList.remove('u-display--none');
+                        } else {
+                            eventFormSubmit.submitFormData(formData, 'submit_event').then(response => {
+                                form.querySelector('.event-submit__error').classList.add('u-display--none');
+                                const successNotice = form.querySelector('.event-submit__success');
+                                successNotice.querySelector('[id^="notice__text__"]').innerHTML = 'Evenemanget har skickats!';
+                                successNotice.classList.remove('u-display--none');
+                            });
+                        }
                     }).catch(e => console.error(e));
             });
         });
