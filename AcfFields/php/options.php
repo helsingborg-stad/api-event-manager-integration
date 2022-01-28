@@ -26,7 +26,7 @@
             'label' => __('Days ahead', 'event-integration'),
             'name' => 'days_ahead',
             'type' => 'number',
-            'instructions' => __('Import events that occurs within given number of days.', 'event-integration'),
+            'instructions' => __('Import events that occurs within given number of days. Try to keep it as short as possible to avoid unnecessary datatranfer.', 'event-integration'),
             'required' => 1,
             'conditional_logic' => 0,
             'wrapper' => array(
@@ -39,7 +39,7 @@
             'prepend' => '',
             'append' => __('days', 'event-integration'),
             'min' => 1,
-            'max' => 365,
+            'max' => 730,
             'step' => '',
         ),
         2 => array(
