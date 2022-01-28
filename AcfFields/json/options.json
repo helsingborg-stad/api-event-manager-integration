@@ -23,7 +23,7 @@
             "label": "Days ahead",
             "name": "days_ahead",
             "type": "number",
-            "instructions": "Import events that occurs within given number of days. Try to keep it as short as possible to avoid unnecessary datatranfer.",
+            "instructions": "Import events that occurs within given number of days. Try to keep it as short as possible to avoid unnecessary datatransfer.",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
