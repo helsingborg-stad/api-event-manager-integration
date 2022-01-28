@@ -63,12 +63,12 @@ const eventForm = {
         if (conditionResult.every((x) => x === true)) {
             field.classList.remove('u-display--none');
             field.querySelectorAll('input').forEach((x) => {
-                x.required = true;
+                x.disabled = false;
             });
         } else {
             field.classList.add('u-display--none');
             field.querySelectorAll('input').forEach((x) => {
-                x.required = false;
+                x.disabled = true;
             });
         }
     },
