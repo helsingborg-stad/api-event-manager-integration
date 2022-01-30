@@ -37,7 +37,7 @@ const eventFormValidate = {
             } else {
                 return input;
             }
-        } while(!fieldWrapper.matches('.c-field'));
+        } while(!fieldWrapper.matches('.c-field, .c-option'));
 
         return fieldWrapper;
     },
