@@ -1,22 +1,16 @@
+
 <div class="c-field">
-    @if(!empty($field['label']))
-        <div class="c-field__label">
-            {!! $field['label'] !!}
-        </div>
-    @endif
-    
+    @include('components.fields.label', ['label' => $field['label']])
+
     @imageinput([
         'classList' => ['unlist'],
         'name' => $field['name'],
         'display' => 'area',
         'multiple' => false,
-        'label' => 'Choose images...'
+        'label' => $field['label'] ?? '',
+        'helperText' => $field['description'] ?? '',
     ])
     @endimageinput
 
-    @if(!empty($field['description']))
-        <div class="c-field__helper">
-            {!! $field['description'] !!}
-        </div>
-    @endif
+    @include('components.fields.helper', ['helper' => $field['description']])
 </div>
