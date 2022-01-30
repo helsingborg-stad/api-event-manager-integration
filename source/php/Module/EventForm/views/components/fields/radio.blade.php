@@ -1,9 +1,5 @@
 <div class="c-field">
-    @if(!empty($field['label']))
-        <div class="c-field__label">
-            {!! $field['label'] !!}
-        </div>
-    @endif
+    @include('components.fields.label', ['label' => $field['label']])
 
     @foreach($field['options'] as $value => $label)
         @option([
@@ -20,9 +16,5 @@
         @endoption
     @endforeach
 
-    @if(!empty($field['description']))
-        <div class="c-field__helper">
-            {!! $field['description'] !!}
-        </div>
-    @endif
+    @include('components.fields.helper', ['helper' => $field['description']])
 </div>
