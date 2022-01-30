@@ -8,7 +8,8 @@
             'value' => $value,
         ],
         'classList' => ['u-display--inline-block'],
-        'label' => $label
+        'label' => $label,
+        'required' => $field['required'] ?? false
     ])
     @endoption
 @endforeach
