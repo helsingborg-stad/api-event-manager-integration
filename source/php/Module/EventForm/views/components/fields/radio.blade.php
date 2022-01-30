@@ -5,12 +5,6 @@
         </div>
     @endif
 
-    @if(!empty($field['description']))
-        <div class="c-field__helper">
-            {!! $field['description'] !!}
-        </div>
-    @endif
-
     @foreach($field['options'] as $value => $label)
         @option([
             'type' => 'radio',
@@ -25,4 +19,10 @@
         ])
         @endoption
     @endforeach
+
+    @if(!empty($field['description']))
+        <div class="c-field__helper">
+            {!! $field['description'] !!}
+        </div>
+    @endif
 </div>
