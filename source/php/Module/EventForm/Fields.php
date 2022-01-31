@@ -190,7 +190,7 @@ class Fields
                                 'required' => true,
                             ],
                             [
-                                'name' => 'event_schema_end_time',
+                                'name' => 'end_time',
                                 'label' => __('End time', 'event-integration'),
                                 'description' => __(
                                     'Describe your event. What happens and why should you visit it?',
@@ -300,7 +300,11 @@ class Fields
                         ],
                         'dataSource' => [
                             'type' => 'post',
-                            'name' => 'organizer'
+                            'name' => 'organizer',
+                            'hiddenFields' => [
+                                'contact_email' => 'contact_email',
+                                'contact_phone' => 'contact_phone'
+                            ]
                         ],
                         'condition' => [
                             [
@@ -322,13 +326,13 @@ class Fields
                             ],
                             [
                                 'name' => 'organizer-phone',
-                                'label' => __('Street address', 'event-integration'),
-                                'type' => 'text',
+                                'label' => __('Phone number', 'event-integration'),
+                                'type' => 'number',
                                 'required' => true,
                             ],
                             [
-                                'name' => 'organizer-mail',
-                                'label' => __('Postal code', 'event-integration'),
+                                'name' => 'organizer-email',
+                                'label' => __('E-mail address', 'event-integration'),
                                 'type' => 'email',
                                 'required' => true,
                             ],

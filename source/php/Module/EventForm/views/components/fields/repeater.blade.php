@@ -8,7 +8,7 @@ if (!empty($field['labels']) && !empty($field['labels']['removeButton'])) {
     $removeButtonLabel = $field['labels']['removeButton'];
 }
 @endphp
-<div class="js-repeater">
+<div id="{{ $field['name'] }}" class="js-repeater">
     <div class="sub-fields">
         @include('partials.field-loop', ['fields' => $field['subFields']])
     </div>

@@ -114,26 +114,62 @@ const eventForm = {
             }
             fetch(url)
                 .then((data) => data.json())
-                .then((items) => {
-                    select
-                        .querySelectorAll('option')
-                        .forEach((option) => option.remove());
-                    items
-                        .sort((a, b) => a.title > b.title)
-                        .forEach((item) => {
-                            const option = document.createElement('option');
-                            option.setAttribute('value', item.id);
-                            if (dataSource.type === 'post') {
-                                option.innerText = item.title;
-                            } else {
-                                option.innerText = item.name;
-                            }
-                            select.appendChild(option);
-                        });
-                });
+                .then((items) => eventForm.setupSelectOptions(select, dataSource, items));
         });
     },
+    setupSelectOptions: (select, dataSource, items) => {
+        select
+            .querySelectorAll('option')
+            .forEach((option) => option.remove());
+        items
+            .sort((a, b) => a.title > b.title)
+            .forEach((item, index) => eventForm.createSelectOption(select, dataSource, item, index));
+        if (dataSource.hiddenFields !== undefined) {
+            select.addEventListener('change', () => {
+                const selectedOption = select.querySelector('option[selected]');
+                if (selectedOption) {
+                    Object.values(dataSource.hiddenFields).forEach(key => {
+                        const hiddenField = select.parentNode.querySelector(`input[name=${key}]`);
+                        hiddenField.value = JSON.parse(selectedOption.dataset.hiddenFields)[key];
+                    });
+                }
+            });
+            Object.values(dataSource.hiddenFields).forEach(key => eventForm.createHiddenField(select, key));
+        }
+    },
+    createSelectOption: (select, dataSource, item, index) => {
+        const option = document.createElement('option');
+        if (index === 0) {
+            option.setAttribute('selected', 'selected');
+        }
+        option.setAttribute('value', item.id);
+        if (dataSource.type === 'post') {
+            option.innerText = item.title;
+        } else {
+            option.innerText = item.name;
+        }
+        if (dataSource.hiddenFields !== undefined) {
+            const hiddenFieldsData = {};
+            Object.keys(dataSource.hiddenFields).forEach(key => {
+                hiddenFieldsData[dataSource.hiddenFields[key]] = item[key];
+            });
+            option.setAttribute('data-hidden-fields', JSON.stringify(hiddenFieldsData));
+        }
+        select.appendChild(option);
+
+    },
+    createHiddenField: (select, key) => {
+        const selectedOption = select.querySelector('option[selected]');
+        if (selectedOption) {
+            const hiddenField = document.createElement('input');
+            hiddenField.name = key;
+            hiddenField.type = 'hidden';
+            hiddenField.value = JSON.parse(selectedOption.dataset.hiddenFields)[key];
+            select.parentNode.insertBefore(hiddenField, select);
+        }
+    },
 };
+
 document.addEventListener('DOMContentLoaded', function () {
     eventForm.setupForms();
 });
