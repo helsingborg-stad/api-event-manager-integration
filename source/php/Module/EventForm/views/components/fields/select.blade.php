@@ -13,7 +13,8 @@
     'preselected' => $preselected,
     'options' => $field['options'],
     'attributeList' => [
-        'data-source' => htmlspecialchars(json_encode($field['dataSource']), ENT_QUOTES, 'UTF-8')
+        'data-source' => htmlspecialchars(json_encode($field['dataSource']), ENT_QUOTES, 'UTF-8'),
+        'name' => $field['name']
     ],
     'multiple' => $field['multiple'] ?? false,
 ])
