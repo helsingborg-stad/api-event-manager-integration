@@ -7,7 +7,7 @@ const eventFormValidate = {
             // Validate fields on change
             ['keyup', 'change'].forEach(function(e) {
                 inputs.forEach(input => {
-                    input.addEventListener(e, function() { eventFormValidate.validateInput(input); });
+                    input.addEventListener(e, () => eventFormValidate.validateInput(input));
                 });
             });
 
