@@ -1,6 +1,6 @@
 <div id="{{ $field['name'] }}" class="js-repeater">
     <div class="sub-fields">
-        @include('partials.field-loop', ['fields' => $field['subFields']])
+        @include('partials.field-loop', ['fields' => $field['fields']])
     </div>
     @button([
         'text' => $field['labels']['addButton'],
