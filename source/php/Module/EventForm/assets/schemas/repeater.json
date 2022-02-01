@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "minRows": {
+      "type": "integer"
+    },
+    "fields": {
+      "type": "array",
+      "items": []
+    },
+    "condition": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "compare": {
+              "type": "string"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "key",
+            "compare",
+            "value"
+          ]
+        }
+      ]
+    },
+    "labels": {
+      "type": "object",
+      "properties": {
+        "addButton": {
+          "type": "string"
+        },
+        "removeButton": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "addButton",
+        "removeButton"
+      ]
+    }
+  },
+  "required": [
+    "name",
+    "label",
+    "description",
+    "type",
+    "minRows",
+    "fields",
+    "labels"
+  ]
+}
