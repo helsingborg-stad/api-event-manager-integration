@@ -1,4 +1,3 @@
-
 <div class="c-field">
     @include('components.fields.label', ['label' => $field['label']])
 
