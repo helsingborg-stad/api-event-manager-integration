@@ -53,7 +53,7 @@ class Fields
                             __('You must also have the right to use and distribute the image.', 'event-integration'),
                         'type' => 'image',
                         'required' => false,
-                        'aspectRatio' => '4:3'
+                        'aspectRatio' => '16:9'
                     ],
                     [
                         'name' => 'event_image_copyright_compliance',
