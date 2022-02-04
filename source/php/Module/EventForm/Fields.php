@@ -293,6 +293,7 @@ class Fields
                     ],
                     [
                         'name' => 'event_existing_organizer',
+                        'label' => __('Organizer', 'event-integration'),
                         'type' => 'select',
                         'required' => true,
                         'options' => [
@@ -359,6 +360,7 @@ class Fields
                     ],
                     [
                         'name' => 'event_existing_location',
+                        'label' => __('Location', 'event-integration'),
                         'type' => 'select',
                         'required' => true,
                         'options' => [
