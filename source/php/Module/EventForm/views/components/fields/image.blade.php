@@ -3,6 +3,9 @@
     'name' => $field['name'],
     'display' => 'area',
     'multiple' => false,
-    'label' => 'Choose images...'
+    'label' => 'Choose images...',
+    'maxFileSize' => $field['maxFileSize'] ?? 0,
+    'maxWidth' => $field['maxWidth'] ?? 0,
+    'maxHeight' => $field['maxHeight'] ?? 0,
 ])
 @endimageinput
