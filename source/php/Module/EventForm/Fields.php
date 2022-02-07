@@ -53,6 +53,7 @@ class Fields
                             __('You must also have the right to use and distribute the image.', 'event-integration'),
                         'type' => 'image',
                         'required' => false,
+                        'aspectRatio' => '16:9'
                     ],
                     [
                         'name' => 'event_image_copyright_compliance',
@@ -293,6 +294,7 @@ class Fields
                     ],
                     [
                         'name' => 'event_existing_organizer',
+                        'label' => __('Organizer', 'event-integration'),
                         'type' => 'select',
                         'required' => true,
                         'options' => [
@@ -359,6 +361,7 @@ class Fields
                     ],
                     [
                         'name' => 'event_existing_location',
+                        'label' => __('Location', 'event-integration'),
                         'type' => 'select',
                         'required' => true,
                         'options' => [
