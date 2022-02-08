@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2022-01-13 10:25+0100\n"
-"PO-Revision-Date: 2022-01-13 10:28+0100\n"
+"POT-Creation-Date: 2022-02-08 10:02+0100\n"
+"PO-Revision-Date: 2022-02-08 10:13+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: event-manager-integration.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -282,7 +282,7 @@ msgstr "Åldersgrupp"
 #: AcfFields/php/event-form-module.php:1328
 #: source/php/Admin/AdminDisplayEvent.php:166
 #: source/php/Helper/SubmitEvent.php:120
-#: source/php/Module/EventForm/Fields.php:283
+#: source/php/Module/EventForm/Fields.php:284
 #: source/php/Shortcodes/SingleEvent.php:151
 #: source/php/Shortcodes/SingleEvent.php:276 views/submit-form.blade.php:164
 #: views/submit-form.blade.php:166
@@ -293,7 +293,7 @@ msgstr "Arrangör"
 #: AcfFields/php/event-module.php:604 AcfFields/php/shortcodes.php:57
 #: source/php/Admin/AdminDisplayEvent.php:146
 #: source/php/Helper/SubmitEvent.php:128
-#: source/php/Module/EventForm/Fields.php:310
+#: source/php/Module/EventForm/Fields.php:350
 #: source/php/Module/Location/Location.php:13
 #: source/php/Shortcodes/SingleEvent.php:101
 #: source/php/Shortcodes/SingleEvent.php:251 views/submit-form.blade.php:171
@@ -303,7 +303,7 @@ msgstr "Plats"
 
 #: AcfFields/php/event-form-module.php:1514
 #: source/php/Helper/SubmitEvent.php:136
-#: source/php/Module/EventForm/Fields.php:337
+#: source/php/Module/EventForm/Fields.php:418
 msgid "Accessibility"
 msgstr "Tillgänglighet"
 
@@ -334,7 +334,8 @@ msgstr "E-postadress till personen som skickat in evenemanget."
 
 #: AcfFields/php/event-form-module.php:2055
 #: source/php/Helper/SubmitEvent.php:179 source/php/Helper/SubmitEvent.php:192
-#: views/submit-form.blade.php:237 views/submit-form.blade.php:238
+#: source/php/Module/EventForm/Fields.php:329 views/submit-form.blade.php:237
+#: views/submit-form.blade.php:238
 msgid "Phone number"
 msgstr "Telefonnummer"
 
@@ -615,6 +616,7 @@ msgstr "Priser"
 
 #: AcfFields/php/location-module.php:26 AcfFields/php/shortcodes.php:62
 #: source/php/Admin/AdminDisplayEvent.php:175
+#: source/php/Module/EventForm/Fields.php:439
 #: source/php/Shortcodes/SingleEvent.php:187
 #: source/php/Shortcodes/SingleEvent.php:296
 msgid "Links"
@@ -1035,19 +1037,15 @@ msgstr "Namn på evenemang."
 
 #: source/php/Helper/SubmitEvent.php:29
 #: source/php/Module/EventForm/Fields.php:34
-#: source/php/Module/EventForm/Fields.php:60
-#: source/php/Module/EventForm/Fields.php:83
-#: source/php/Module/EventForm/Fields.php:104
-#: source/php/Module/EventForm/Fields.php:137
-#: source/php/Module/EventForm/Fields.php:152
-#: source/php/Module/EventForm/Fields.php:169
-#: source/php/Module/EventForm/Fields.php:186
-#: source/php/Module/EventForm/Fields.php:204
-#: source/php/Module/EventForm/Fields.php:221
-#: source/php/Module/EventForm/Fields.php:231
-#: source/php/Module/EventForm/Fields.php:241
-#: source/php/Module/EventForm/Fields.php:251
-#: source/php/Module/EventForm/Fields.php:261 views/submit-form.blade.php:13
+#: source/php/Module/EventForm/Fields.php:61
+#: source/php/Module/EventForm/Fields.php:84
+#: source/php/Module/EventForm/Fields.php:105
+#: source/php/Module/EventForm/Fields.php:138
+#: source/php/Module/EventForm/Fields.php:153
+#: source/php/Module/EventForm/Fields.php:163
+#: source/php/Module/EventForm/Fields.php:174
+#: source/php/Module/EventForm/Fields.php:185
+#: source/php/Module/EventForm/Fields.php:196 views/submit-form.blade.php:13
 msgid "Describe your event. What happens and why should you visit it?"
 msgstr "Beskriv ditt evenemang. Vad händer där och varför ska man besöka det?"
 
@@ -1082,7 +1080,7 @@ msgstr ""
 "för evenemanget inte kan vara samma som starttiden."
 
 #: source/php/Helper/SubmitEvent.php:48
-#: source/php/Module/EventForm/Fields.php:358
+#: source/php/Module/EventForm/Fields.php:445
 #: source/php/Module/Location/views/location.blade.php:65
 #: views/submit-form.blade.php:146 views/submit-form.blade.php:148
 msgid "Website"
@@ -1177,23 +1175,23 @@ msgstr ""
 "respektive tagg."
 
 #: source/php/Helper/SubmitEvent.php:160
-#: source/php/Module/EventForm/Fields.php:42 views/submit-form.blade.php:197
+#: source/php/Module/EventForm/Fields.php:43 views/submit-form.blade.php:197
 #: views/submit-form.blade.php:207 views/submit-form.blade.php:220
 msgid "Upload an image"
 msgstr "Ladda upp en bild"
 
 #: source/php/Helper/SubmitEvent.php:162
-#: source/php/Module/EventForm/Fields.php:45 views/submit-form.blade.php:201
+#: source/php/Module/EventForm/Fields.php:46 views/submit-form.blade.php:201
 msgid "Keep in mind that the image may be cropped, so avoid text in the image."
 msgstr "Tänk på att bilden kan bli beskuren, undvik därför text i bilden."
 
 #: source/php/Helper/SubmitEvent.php:163
-#: source/php/Module/EventForm/Fields.php:49 views/submit-form.blade.php:202
+#: source/php/Module/EventForm/Fields.php:50 views/submit-form.blade.php:202
 msgid "Images with identifiable persons are not accepted and will be replaced."
 msgstr "Bilder med igenkännbara personer godkänns inte och kommer ersättas."
 
 #: source/php/Helper/SubmitEvent.php:164
-#: source/php/Module/EventForm/Fields.php:52 views/submit-form.blade.php:203
+#: source/php/Module/EventForm/Fields.php:53 views/submit-form.blade.php:203
 msgid "You must also have the right to use and distribute the image."
 msgstr "Du måste även ha rätt att använda och sprida bilden."
 
@@ -1206,18 +1204,23 @@ msgid "Your phone number."
 msgstr "Ditt telefonnummer."
 
 #: source/php/Helper/SubmitEvent.php:188
+#: source/php/Module/EventForm/Fields.php:323
+#: source/php/Module/EventForm/Fields.php:385
 msgid "Name"
 msgstr "Namn"
 
 #: source/php/Helper/SubmitEvent.php:189
+#: source/php/Module/EventForm/Fields.php:391
 msgid "Street address"
 msgstr "Gatuadress"
 
 #: source/php/Helper/SubmitEvent.php:190
+#: source/php/Module/EventForm/Fields.php:397
 msgid "Postal code"
 msgstr "Postnummer"
 
 #: source/php/Helper/SubmitEvent.php:191
+#: source/php/Module/EventForm/Fields.php:403
 msgid "City"
 msgstr "Ort"
 
@@ -1230,17 +1233,17 @@ msgid "New location"
 msgstr "Ny plats"
 
 #: source/php/Helper/SubmitEvent.php:196
-#: source/php/Module/EventForm/Fields.php:315
+#: source/php/Module/EventForm/Fields.php:355
 msgid "Existing location"
 msgstr "Befintlig plats"
 
 #: source/php/Helper/SubmitEvent.php:197
-#: source/php/Module/EventForm/Fields.php:288
+#: source/php/Module/EventForm/Fields.php:289
 msgid "Existing organizer"
 msgstr "Befintlig arrangör"
 
 #: source/php/Helper/SubmitEvent.php:198
-#: source/php/Module/EventForm/Fields.php:341
+#: source/php/Module/EventForm/Fields.php:422
 msgid "Elevator/ramp"
 msgstr "Hiss/ramp"
 
@@ -1295,14 +1298,14 @@ msgid "Search"
 msgstr "Sök"
 
 #: source/php/Module/Event/Event.php:452
-#: source/php/Module/EventForm/Fields.php:423
+#: source/php/Module/EventForm/Fields.php:517
 #: source/php/PostTypes/Events.php:141
 #: source/php/Shortcodes/SingleEvent.php:357
 msgid "From"
 msgstr "Från"
 
 #: source/php/Module/Event/Event.php:453
-#: source/php/Module/EventForm/Fields.php:438
+#: source/php/Module/EventForm/Fields.php:532
 msgid "To"
 msgstr "Till"
 
@@ -1315,14 +1318,10 @@ msgid "Filter on events that is targeted for given the age"
 msgstr "Filtrera på evenemang som är riktade till en ålder"
 
 #: source/php/Module/Event/Event.php:462
-#: source/php/Module/EventForm/Fields.php:394
-#: source/php/Module/EventForm/Fields.php:408
-#: source/php/Module/EventForm/Fields.php:427
-#: source/php/Module/EventForm/Fields.php:441
-#: source/php/Module/EventForm/Fields.php:466
-#: source/php/Module/EventForm/Fields.php:474
-#: source/php/Module/EventForm/Fields.php:482
-#: source/php/Module/EventForm/Fields.php:489
+#: source/php/Module/EventForm/Fields.php:488
+#: source/php/Module/EventForm/Fields.php:502
+#: source/php/Module/EventForm/Fields.php:521
+#: source/php/Module/EventForm/Fields.php:535
 #: source/php/PostTypes/Events.php:139 source/php/PostTypes/Events.php:141
 #: source/php/PostTypes/Events.php:143
 #: source/php/Shortcodes/SingleEvent.php:355
@@ -1336,15 +1335,15 @@ msgstr "år"
 msgid "Select age"
 msgstr "Välj ålder"
 
-#: source/php/Module/EventForm/EventForm.php:13
+#: source/php/Module/EventForm/EventForm.php:16
 msgid "Event form v2"
 msgstr ""
 
-#: source/php/Module/EventForm/EventForm.php:14
+#: source/php/Module/EventForm/EventForm.php:17
 msgid "Event forms v2"
 msgstr ""
 
-#: source/php/Module/EventForm/EventForm.php:15
+#: source/php/Module/EventForm/EventForm.php:18
 msgid "Displays submit event form"
 msgstr "Visar formuläret för att skicka evenemang"
 
@@ -1357,30 +1356,30 @@ msgid ""
 "Your event needs to have a name and a brief description and you also have "
 "the option to attach an image that will be visible along with the text."
 msgstr ""
-"Ditt evenemang behöver ha ett namn och enkortfattad beskrivning och du har "
+"Ditt evenemang behöver ha ett namn och en kortfattad beskrivning och du har "
 "även möjligheten att bifoga en bild som kommer synas tillsammans med texten."
 
-#: source/php/Module/EventForm/Fields.php:58
-#: source/php/Module/EventForm/Fields.php:81
-#: source/php/Module/EventForm/Fields.php:219
+#: source/php/Module/EventForm/Fields.php:59
+#: source/php/Module/EventForm/Fields.php:82
+#: source/php/Module/EventForm/Fields.php:151
 msgid "Rights"
 msgstr "Rättigheter"
 
-#: source/php/Module/EventForm/Fields.php:67
+#: source/php/Module/EventForm/Fields.php:68
 msgid "I have the right to use the image/images to promote this event."
 msgstr ""
 "Jag har rätt att använda bilden/bilderna för att marknadsföra detta "
 "evenemang."
 
-#: source/php/Module/EventForm/Fields.php:89
+#: source/php/Module/EventForm/Fields.php:90
 msgid "No person is identifiable in the photo"
 msgstr "Ingen person är identifierbar på bilden/bilderna"
 
-#: source/php/Module/EventForm/Fields.php:90
+#: source/php/Module/EventForm/Fields.php:91
 msgid "There are identifiable people in the picture / pictures"
 msgstr "Det finns identifierbara personer på bilden/bilderna"
 
-#: source/php/Module/EventForm/Fields.php:111
+#: source/php/Module/EventForm/Fields.php:112
 msgid ""
 "They have approved that the image is used to market this event and have been "
 "informed that after the image has been added to the database, it may appear "
@@ -1390,97 +1389,155 @@ msgstr ""
 "har informerats om att efter att bilden lagts in i databasen kan komma att "
 "synas i olika kanaler för att marknadsföra evenemanget."
 
-#: source/php/Module/EventForm/Fields.php:129
+#: source/php/Module/EventForm/Fields.php:130
 msgid "2. Add schedule"
 msgstr "2. Lägg till schema"
 
-#: source/php/Module/EventForm/Fields.php:130
+#: source/php/Module/EventForm/Fields.php:131
 msgid "Add information about how often and when the event occurs."
 msgstr "Lägg till information om hur ofta och när händelsen inträffar."
 
-#: source/php/Module/EventForm/Fields.php:135
+#: source/php/Module/EventForm/Fields.php:136
 msgid "Schedule"
 msgstr "Schema"
 
-#: source/php/Module/EventForm/Fields.php:143
+#: source/php/Module/EventForm/Fields.php:144
 msgid "Single dates"
 msgstr "Enstaka datum"
 
-#: source/php/Module/EventForm/Fields.php:144
+#: source/php/Module/EventForm/Fields.php:145
 msgid "Recurring occasions"
 msgstr "Återkommande tillfällen"
 
-#: source/php/Module/EventForm/Fields.php:150
-#: source/php/Module/EventForm/Fields.php:229 views/submit-form.blade.php:43
+#: source/php/Module/EventForm/Fields.php:161 views/submit-form.blade.php:43
 #: views/submit-form.blade.php:124 views/submit-form.blade.php:126
 msgid "Start date"
 msgstr "Startdatum"
 
-#: source/php/Module/EventForm/Fields.php:167
-#: source/php/Module/EventForm/Fields.php:239 views/submit-form.blade.php:47
+#: source/php/Module/EventForm/Fields.php:172
+#: source/php/Module/EventForm/Fields.php:253 views/submit-form.blade.php:47
 #: views/submit-form.blade.php:104
 msgid "Start time"
 msgstr "Starttid"
 
-#: source/php/Module/EventForm/Fields.php:184
-#: source/php/Module/EventForm/Fields.php:249 views/submit-form.blade.php:57
+#: source/php/Module/EventForm/Fields.php:183 views/submit-form.blade.php:57
 #: views/submit-form.blade.php:130 views/submit-form.blade.php:132
 msgid "End date"
 msgstr "Slutdatum"
 
-#: source/php/Module/EventForm/Fields.php:202
-#: source/php/Module/EventForm/Fields.php:259 views/submit-form.blade.php:61
+#: source/php/Module/EventForm/Fields.php:194
+#: source/php/Module/EventForm/Fields.php:261 views/submit-form.blade.php:61
 #: views/submit-form.blade.php:114
 msgid "End time"
 msgstr "Sluttid"
 
-#: source/php/Module/EventForm/Fields.php:276
+#: source/php/Module/EventForm/Fields.php:212
 msgid "Add date"
 msgstr "Lägg till datum"
 
-#: source/php/Module/EventForm/Fields.php:277
+#: source/php/Module/EventForm/Fields.php:213
 msgid "Remove date"
 msgstr "Ta bort datum"
 
-#: source/php/Module/EventForm/Fields.php:284
+#: source/php/Module/EventForm/Fields.php:222 views/submit-form.blade.php:86
+msgid "Weekday"
+msgstr "Veckodag"
+
+#: source/php/Module/EventForm/Fields.php:224 views/submit-form.blade.php:87
+msgid "The event will occur on this weekday."
+msgstr "Evenemanget inträffar på vald veckodag."
+
+#: source/php/Module/EventForm/Fields.php:230 views/submit-form.blade.php:89
+msgid "Monday"
+msgstr "Måndag"
+
+#: source/php/Module/EventForm/Fields.php:231 views/submit-form.blade.php:90
+msgid "Tuesday"
+msgstr "Tisdag"
+
+#: source/php/Module/EventForm/Fields.php:232 views/submit-form.blade.php:91
+msgid "Wednesday"
+msgstr "Onsdag"
+
+#: source/php/Module/EventForm/Fields.php:233 views/submit-form.blade.php:92
+msgid "Thursday"
+msgstr "Torsdag"
+
+#: source/php/Module/EventForm/Fields.php:234 views/submit-form.blade.php:93
+msgid "Friday"
+msgstr "Fredag"
+
+#: source/php/Module/EventForm/Fields.php:235 views/submit-form.blade.php:94
+msgid "Saturday"
+msgstr "Lördag"
+
+#: source/php/Module/EventForm/Fields.php:236 views/submit-form.blade.php:95
+msgid "Sunday"
+msgstr "Söndag"
+
+#: source/php/Module/EventForm/Fields.php:241 views/submit-form.blade.php:99
+#: views/submit-form.blade.php:101
+msgid "Weekly interval"
+msgstr "Veckointervall"
+
+#: source/php/Module/EventForm/Fields.php:243 views/submit-form.blade.php:100
+msgid "Enter the weekly interval when the event occurs. 1 equals every week."
+msgstr ""
+"Ange med vilken veckointervall händelsen inträffar. 1 motsvarar varje vecka."
+
+#: source/php/Module/EventForm/Fields.php:254 views/submit-form.blade.php:105
+msgid "Start time for the event"
+msgstr "Evenemangets starttid"
+
+#: source/php/Module/EventForm/Fields.php:262 views/submit-form.blade.php:115
+msgid "End time for the event"
+msgstr "Evenemangets sluttid"
+
+#: source/php/Module/EventForm/Fields.php:278
+msgid "Location information"
+msgstr "Platsinformation"
+
+#: source/php/Module/EventForm/Fields.php:285
 msgid ""
 "Write the name of the organizer and choose from the suggestions we give you."
 msgstr "Skriv arrangörens namn och välj från de förslag som vi ger dig."
 
-#: source/php/Module/EventForm/Fields.php:289
+#: source/php/Module/EventForm/Fields.php:290
 msgid "Add a new organizer"
 msgstr "Lägg till en ny arrangör"
 
-#: source/php/Module/EventForm/Fields.php:298
-msgid "Helsingborg Stad"
+#: source/php/Module/EventForm/Fields.php:299
+#: source/php/Module/EventForm/Fields.php:365
+msgid "Loading..."
 msgstr ""
 
-#: source/php/Module/EventForm/Fields.php:311
+#: source/php/Module/EventForm/Fields.php:335
+#: source/php/Module/EventForm/Fields.php:601
+msgid "E-mail address"
+msgstr "E-postadress"
+
+#: source/php/Module/EventForm/Fields.php:351
 msgid ""
 "Write the name of the place and choose from the suggestions we give you."
 msgstr "Skriv platsens namn och välj från de förslag som vi ger dig."
 
-#: source/php/Module/EventForm/Fields.php:316
+#: source/php/Module/EventForm/Fields.php:356
 msgid "Add a new location"
 msgstr "Lägg till ny plats"
 
-#: source/php/Module/EventForm/Fields.php:325
-msgid "Sundstorget"
-msgstr ""
-
-#: source/php/Module/EventForm/Fields.php:338
+#: source/php/Module/EventForm/Fields.php:419
 msgid "Select which accessibility adjustments are available for the site."
 msgstr "Välj vilka tillgänglighetsanpassningar som finns för platsen."
 
-#: source/php/Module/EventForm/Fields.php:342
+#: source/php/Module/EventForm/Fields.php:423
 msgid "Handicap toilet"
 msgstr "Handikapptoalett"
 
-#: source/php/Module/EventForm/Fields.php:352
+#: source/php/Module/EventForm/Fields.php:433
 msgid "3. More information about the event"
 msgstr "3. Mer information om evenemanget"
 
-#: source/php/Module/EventForm/Fields.php:353
+#: source/php/Module/EventForm/Fields.php:434
 msgid ""
 "Where can you read more about the event, buy tickets and information about "
 "the event's availability."
@@ -1488,76 +1545,97 @@ msgstr ""
 "Var kan du läsa mer om evenemanget, köpa biljetter och information om "
 "evenemangets tillgänglighet."
 
-#: source/php/Module/EventForm/Fields.php:364
+#: source/php/Module/EventForm/Fields.php:451
 msgid "Event booking page"
 msgstr "Bokningssida för evenemang"
 
-#: source/php/Module/EventForm/Fields.php:370
+#: source/php/Module/EventForm/Fields.php:457 views/submit-form.blade.php:158
+#: views/submit-form.blade.php:160
+msgid "Price"
+msgstr "Pris"
+
+#: source/php/Module/EventForm/Fields.php:464
 msgid "For adults"
 msgstr "För vuxna"
 
-#: source/php/Module/EventForm/Fields.php:377
+#: source/php/Module/EventForm/Fields.php:471
 msgid "Students"
 msgstr "Studenter"
 
-#: source/php/Module/EventForm/Fields.php:384
+#: source/php/Module/EventForm/Fields.php:478
 msgid "Child price"
 msgstr "Barnpris:"
 
-#: source/php/Module/EventForm/Fields.php:391
+#: source/php/Module/EventForm/Fields.php:485
 msgid "Age limit for child price"
 msgstr "Åldersgräns för barnpris"
 
-#: source/php/Module/EventForm/Fields.php:398
+#: source/php/Module/EventForm/Fields.php:492
 msgid "Pensioner price"
 msgstr "Pensionärspris"
 
-#: source/php/Module/EventForm/Fields.php:405
+#: source/php/Module/EventForm/Fields.php:499
 msgid "Age limit for pensioner price"
 msgstr "Åldersgräns för pensionärspris"
 
-#: source/php/Module/EventForm/Fields.php:412
+#: source/php/Module/EventForm/Fields.php:506
 msgid "Age group that the event is aimed at"
 msgstr "Åldersgrupp som evenemanget riktar sig till"
 
-#: source/php/Module/EventForm/Fields.php:416
+#: source/php/Module/EventForm/Fields.php:510
 msgid "All ages"
 msgstr "Alla åldrar"
 
-#: source/php/Module/EventForm/Fields.php:417
+#: source/php/Module/EventForm/Fields.php:511
 msgid "Specified age group"
 msgstr "Specificerad åldersgrupp"
 
-#: source/php/Module/EventForm/Fields.php:424
+#: source/php/Module/EventForm/Fields.php:518
 msgid "Leave \"From\" or \"To\" blank if the upper or lower limit is missing."
 msgstr ""
 "Lämna \"Från\" eller \"Till\" tomt om den övre eller nedre gränsen saknas."
 
-#: source/php/Module/EventForm/Fields.php:456
+#: source/php/Module/EventForm/Fields.php:550
 msgid "4. Other"
 msgstr "4. Övrigt"
 
-#: source/php/Module/EventForm/Fields.php:457
+#: source/php/Module/EventForm/Fields.php:551
 msgid "How is the event found and who is responsible?"
 msgstr "Hur hittas händelsen och vem är ansvarig?"
 
-#: source/php/Module/EventForm/Fields.php:462
+#: source/php/Module/EventForm/Fields.php:556
+msgid "Categorize the event"
+msgstr "Kategorisera ditt event"
+
+#: source/php/Module/EventForm/Fields.php:558
+msgid ""
+"Add tags and categories to make it easier to show the event in the right "
+"place and make it easier to find for visitors."
+msgstr ""
+"Lägg till taggar och kategorier för att göra det enklare att visa eventet på "
+"rätt platser och enklare att hitta för besökare."
+
+#: source/php/Module/EventForm/Fields.php:567
 msgid "Choose categories that fit the event"
 msgstr "Välj kategorier som passar evenemanget"
 
-#: source/php/Module/EventForm/Fields.php:470
+#: source/php/Module/EventForm/Fields.php:578
 msgid "Choose tags that fit the event"
 msgstr "Välj taggar som passar evenemanget"
 
-#: source/php/Module/EventForm/Fields.php:478
-msgid "E-mail address"
-msgstr "E-postadress"
+#: source/php/Module/EventForm/Fields.php:589
+msgid "Contact information"
+msgstr "Kontaktinformation"
 
-#: source/php/Module/EventForm/Fields.php:480
+#: source/php/Module/EventForm/Fields.php:591
+msgid "Add your contact details below."
+msgstr "Fyll i din kontaktinformation nedan."
+
+#: source/php/Module/EventForm/Fields.php:603
 msgid "example@email.com"
 msgstr "exempel@email.se"
 
-#: source/php/Module/EventForm/Fields.php:486
+#: source/php/Module/EventForm/Fields.php:608
 msgid "Phonenumber"
 msgstr "Telefonnummer"
 
@@ -2099,6 +2177,15 @@ msgstr "Teckenbegränsning av beskrivning:"
 msgid "-1 equals no limit"
 msgstr "-1 är lika med ingen gräns"
 
+#: vendor/helsingborg-stad/acf-export-manager/src/AcfExportManager.php:364
+msgid "Export with AcfExportManager"
+msgstr ""
+
+#: vendor/helsingborg-stad/acf-export-manager/src/AcfExportManager.php:408
+#, php-format
+msgid "Exported %d fieldgroup(s)."
+msgstr ""
+
 #: views/submit-form.blade.php:29 views/submit-form.blade.php:39
 msgid "Single occurrence"
 msgstr "Enstaka datum"
@@ -2116,59 +2203,6 @@ msgstr "Lägg till"
 msgid "Recurrence rules for weekly recurring event"
 msgstr "Schema för återkommande evenemang"
 
-#: views/submit-form.blade.php:86
-msgid "Weekday"
-msgstr "Veckodag"
-
-#: views/submit-form.blade.php:87
-msgid "The event will occur on this weekday."
-msgstr "Evenemanget inträffar på vald veckodag."
-
-#: views/submit-form.blade.php:89
-msgid "Monday"
-msgstr "Måndag"
-
-#: views/submit-form.blade.php:90
-msgid "Tuesday"
-msgstr "Tisdag"
-
-#: views/submit-form.blade.php:91
-msgid "Wednesday"
-msgstr "Onsdag"
-
-#: views/submit-form.blade.php:92
-msgid "Thursday"
-msgstr "Torsdag"
-
-#: views/submit-form.blade.php:93
-msgid "Friday"
-msgstr "Fredag"
-
-#: views/submit-form.blade.php:94
-msgid "Saturday"
-msgstr "Lördag"
-
-#: views/submit-form.blade.php:95
-msgid "Sunday"
-msgstr "Söndag"
-
-#: views/submit-form.blade.php:99 views/submit-form.blade.php:101
-msgid "Weekly interval"
-msgstr "Veckointervall"
-
-#: views/submit-form.blade.php:100
-msgid "Enter the weekly interval when the event occurs. 1 equals every week."
-msgstr ""
-"Ange med vilken veckointervall händelsen inträffar. 1 motsvarar varje vecka."
-
-#: views/submit-form.blade.php:105
-msgid "Start time for the event"
-msgstr "Evenemangets starttid"
-
-#: views/submit-form.blade.php:115
-msgid "End time for the event"
-msgstr "Evenemangets sluttid"
-
 #: views/submit-form.blade.php:125
 msgid "When the recurring event period starts"
 msgstr "Evenemanget inträffar löpande fr.o.m. detta datum"
@@ -2180,10 +2214,6 @@ msgstr "Evenemanget inträffar löpande t.o.m. detta datum"
 #: views/submit-form.blade.php:153
 msgid "Link to the event's booking page, e.g. ticketmaster."
 msgstr "Länk till evenemangets bokningssida, exempelvis Ticketmaster."
-
-#: views/submit-form.blade.php:158 views/submit-form.blade.php:160
-msgid "Price"
-msgstr "Pris"
 
 #: views/submit-form.blade.php:159
 msgid ""
