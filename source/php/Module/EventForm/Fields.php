@@ -447,7 +447,7 @@ class Fields
                         'name' => 'event_link',
                         'label' => __('Website', 'event-integration'),
                         'type' => 'url',
-                        'required' => true,
+                        'required' => false,
                     ],
                     [
                         'name' => 'booking_link',
@@ -466,49 +466,49 @@ class Fields
                         'name' => 'price_adult',
                         'label' => __('For adults', 'event-integration'),
                         'type' => 'number',
-                        'required' => false,
+                        'required' => true,
                         'suffix' => 'kr'
                     ],
                     [
                         'name' => 'price_student',
                         'label' => __('Students', 'event-integration'),
                         'type' => 'number',
-                        'required' => false,
+                        'required' => true,
                         'suffix' => 'kr'
                     ],
                     [
                         'name' => 'price_children',
                         'label' => __('Child price', 'event-integration'),
                         'type' => 'number',
-                        'required' => false,
+                        'required' => true,
                         'suffix' => 'kr'
                     ],
                     [
                         'name' => 'children_age',
                         'label' => __('Age limit for child price', 'event-integration'),
                         'type' => 'number',
-                        'required' => false,
+                        'required' => true,
                         'suffix' => __('years', 'event-integration')
                     ],
                     [
                         'name' => 'price_senior',
                         'label' => __('Pensioner price', 'event-integration'),
                         'type' => 'number',
-                        'required' => false,
+                        'required' => true,
                         'suffix' => 'kr'
                     ],
                     [
                         'name' => 'senior_age',
                         'label' => __('Age limit for pensioner price', 'event-integration'),
                         'type' => 'number',
-                        'required' => false,
+                        'required' => true,
                         'suffix' => __('years', 'event-integration')
                     ],
                     [
                         'name' => 'event_target_age',
                         'label' => __('Age group that the event is aimed at', 'event-integration'),
                         'type' => 'radio',
-                        'required' => true,
+                        'required' => false,
                         'options' => [
                             'all' => __('All ages', 'event-integration'),
                             'specified' => __('Specified age group', 'event-integration'),
@@ -570,7 +570,7 @@ class Fields
                         'label' => __('Choose categories that fit the event', 'event-integration'),
                         'type' => 'select',
                         'multiple' => true,
-                        'required' => false,
+                        'required' => true,
                         'dataSource' => [
                             'type' => 'taxonomy',
                             'name' => 'event_categories'
@@ -604,13 +604,13 @@ class Fields
                         'label' => __('E-mail address', 'event-integration'),
                         'type' => 'email',
                         'placeholder' => __('example@email.com', 'event-integration'),
-                        'required' => false,
+                        'required' => true,
                     ],
                     [
                         'name' => 'submitter_phone',
                         'label' => __('Phonenumber', 'event-integration'),
                         'type' => 'number',
-                        'required' => false,
+                        'required' => true,
                     ],
                     // End Section 4
                 ],
