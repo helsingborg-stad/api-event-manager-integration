@@ -9,6 +9,7 @@
 
 @select([
     'label' => $field['label'],
+    'helperText' => $field['description'],
     'required' => $field['required'] ?? false,
     'preselected' => $preselected,
     'options' => $field['options'],
