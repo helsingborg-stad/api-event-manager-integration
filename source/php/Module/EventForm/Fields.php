@@ -148,10 +148,6 @@ class Fields
                             [
                                 'name' => 'start_date',
                                 'label' => __('Start date', 'event-integration'),
-                                'description' => __(
-                                    'Describe your event. What happens and why should you visit it?',
-                                    'event-integration'
-                                ),
                                 'type' => 'date',
                                 'span' => 6,
                                 'required' => true,
@@ -159,10 +155,6 @@ class Fields
                             [
                                 'name' => 'start_time',
                                 'label' => __('Start time', 'event-integration'),
-                                'description' => __(
-                                    'Describe your event. What happens and why should you visit it?',
-                                    'event-integration'
-                                ),
                                 'type' => 'time',
                                 'span' => 6,
                                 'required' => true,
@@ -170,10 +162,6 @@ class Fields
                             [
                                 'name' => 'end_date',
                                 'label' => __('End date', 'event-integration'),
-                                'description' => __(
-                                    'Describe your event. What happens and why should you visit it?',
-                                    'event-integration'
-                                ),
                                 'type' => 'date',
                                 'span' => 6,
                                 'required' => true,
@@ -181,10 +169,6 @@ class Fields
                             [
                                 'name' => 'end_time',
                                 'label' => __('End time', 'event-integration'),
-                                'description' => __(
-                                    'Describe your event. What happens and why should you visit it?',
-                                    'event-integration'
-                                ),
                                 'type' => 'time',
                                 'span' => 6,
                                 'required' => true,
