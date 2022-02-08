@@ -605,14 +605,12 @@ class Fields
                         'type' => 'email',
                         'placeholder' => __('example@email.com', 'event-integration'),
                         'required' => false,
-                        'suffix' => __('years', 'event-integration'),
                     ],
                     [
                         'name' => 'submitter_phone',
                         'label' => __('Phonenumber', 'event-integration'),
                         'type' => 'number',
                         'required' => false,
-                        'suffix' => __('years', 'event-integration'),
                     ],
                     // End Section 4
                 ],
