@@ -140,6 +140,7 @@ class App
         wp_localize_script('event-integration', 'eventintegration', array(
             'ajaxurl' => admin_url('admin-ajax.php'),
             'apiurl' => get_field('event_api_url', 'option'),
+            'selectString' => __('Select...', 'event-integration')
         ));
         wp_localize_script('event-integration', 'eventIntegrationFront', array(
             'event_pagination_error' => __("Something went wrong, please try again later.", 'event-integration'),
