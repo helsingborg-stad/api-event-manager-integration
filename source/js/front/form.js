@@ -100,7 +100,7 @@ const eventForm = {
             });
         });
     },
-    setupRemoteSelect: (form, {apiurl}) => {
+    setupRemoteSelect: (form, {apiurl, selectString}) => {
         if (apiurl === undefined) {
             return;
         }
@@ -114,20 +114,24 @@ const eventForm = {
             }
             fetch(url)
                 .then((data) => data.json())
-                .then((items) => eventForm.setupSelectOptions(select, dataSource, items));
+                .then((items) => eventForm.setupSelectOptions(selectString, select, dataSource, items));
         });
     },
-    setupSelectOptions: (select, dataSource, items) => {
+    setupSelectOptions: (selectString, select, dataSource, items) => {
         select
             .querySelectorAll('option')
             .forEach((option) => option.remove());
+        const defaultOption = document.createElement('option');
+        defaultOption.setAttribute('selected', 'selected');
+        defaultOption.innerText = selectString;
+        select.appendChild(defaultOption);
         items
             .sort((a, b) => a.title > b.title)
             .forEach((item, index) => eventForm.createSelectOption(select, dataSource, item, index));
         if (dataSource.hiddenFields !== undefined) {
             select.addEventListener('change', () => {
                 const selectedOption = select.querySelector('option[selected]');
-                if (selectedOption) {
+                if (selectedOption && selectedOption.dataset.hiddenFields) {
                     Object.values(dataSource.hiddenFields).forEach(key => {
                         const hiddenField = select.parentNode.querySelector(`input[name=${key}]`);
                         hiddenField.value = JSON.parse(selectedOption.dataset.hiddenFields)[key];
@@ -139,9 +143,6 @@ const eventForm = {
     },
     createSelectOption: (select, dataSource, item, index) => {
         const option = document.createElement('option');
-        if (index === 0) {
-            option.setAttribute('selected', 'selected');
-        }
         option.setAttribute('value', item.id);
         if (dataSource.type === 'post') {
             option.innerText = item.title;
@@ -159,7 +160,7 @@ const eventForm = {
 
     },
     createHiddenField: (select, key) => {
-        const selectedOption = select.querySelector('option[selected]');
+        const selectedOption = select.querySelector('option[data-hidden-fields]');
         if (selectedOption) {
             const hiddenField = document.createElement('input');
             hiddenField.name = key;
