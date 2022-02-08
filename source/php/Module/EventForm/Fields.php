@@ -58,10 +58,6 @@ class Fields
                     [
                         'name' => 'event_image_copyright_compliance',
                         'label' => __('Rights', 'event-integration'),
-                        'description' => __(
-                            'Describe your event. What happens and why should you visit it?',
-                            'event-integration'
-                        ),
                         'type' => 'checkbox',
                         'required' => true,
                         'options' => [
@@ -81,10 +77,6 @@ class Fields
                     [
                         'name' => 'event_image_gdpr_compliance',
                         'label' => __('Rights', 'event-integration'),
-                        'description' => __(
-                            'Describe your event. What happens and why should you visit it?',
-                            'event-integration'
-                        ),
                         'type' => 'radio',
                         'required' => true,
                         'options' => [
@@ -102,10 +94,6 @@ class Fields
                     [
                         'name' => 'event_image_marketing_compliance',
                         'label' => '',
-                        'description' => __(
-                            'Describe your event. What happens and why should you visit it?',
-                            'event-integration'
-                        ),
                         'type' => 'checkbox',
                         'required' => true,
                         'options' => [
@@ -116,9 +104,9 @@ class Fields
                         ],
                         'condition' => [
                             [
-                                'key' => 'image_input',
-                                'compare' => '!=',
-                                'value' => ''
+                                'key' => 'event_image_gdpr_compliance',
+                                'compare' => '=',
+                                'value' => 'yes'
                             ]
                         ]
                     ],
