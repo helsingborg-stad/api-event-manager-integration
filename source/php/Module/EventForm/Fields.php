@@ -663,7 +663,7 @@ class Fields
                         ),
                         'element' => 'h3',
                         'marginTop' => true,
-                        'marginBottom' => true,
+                        'marginBottom' => false,
                         'type' => 'heading',
                     ],
                     [
