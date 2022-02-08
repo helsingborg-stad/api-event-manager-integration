@@ -17,7 +17,7 @@ const eventFormSubmit = {
                 formRequests.push(eventFormSubmit.submitImageData(imageData));
 
                 if (formData.event_organizer === 'new') {
-                    const organizerData = {title: '', phone: '', email: ''};
+                    const organizerData = { title: '', phone: '', email: '' };
                     Object.keys(organizerData).forEach(key => {
                         const organizerField = form.querySelector(`[name="organizer-${key}"]`);
                         if (organizerField) {
@@ -35,7 +35,7 @@ const eventFormSubmit = {
                 }
 
                 if (formData.event_location === 'new') {
-                    const locationData = {title: '', street_address: '', city: '', postal_code: ''};
+                    const locationData = { title: '', street_address: '', city: '', postal_code: '' };
                     Object.keys(locationData).forEach(key => {
                         const locationField = form.querySelector(`[name="location-${key.replace('_', '-')}"]`);
                         if (locationField) {
@@ -76,17 +76,20 @@ const eventFormSubmit = {
                             errorNotice.classList.remove('u-display--none');
                         } else {
                             eventFormSubmit.submitFormData(formData, 'submit_event').then(response => {
-                                form.querySelector('.event-submit__error').classList.add('u-display--none');
-                                const successNotice = form.querySelector('.event-submit__success');
-                                successNotice.querySelector('[id^="notice__text__"]').innerHTML = 'Evenemanget har skickats!';
-                                successNotice.classList.remove('u-display--none');
+                                if (response.success) {
+                                    form.querySelector('.event-submit__success').classList.add('u-display--none');
+                                    const errorNotice = form.querySelector('.event-submit__error');
+                                    errorNotice.querySelector('[id^="notice__text__"]').innerHTML = response.data;
+                                } else {
+                                    form.querySelector('.event-submit__error').classList.add('u-display--none');
+                                }
                             });
                         }
                     }).catch(e => {
-                    form.querySelector('.event-submit__success').classList.add('u-display--none');
-                    const errorNotice = form.querySelector('.event-submit__error');
-                    errorNotice.querySelector('[id^="notice__text__"]').innerHTML = e.message;
-                });
+                        form.querySelector('.event-submit__success').classList.add('u-display--none');
+                        const errorNotice = form.querySelector('.event-submit__error');
+                        errorNotice.querySelector('[id^="notice__text__"]').innerHTML = e.message;
+                    });
             });
         });
     },
@@ -188,7 +191,7 @@ const eventFormSubmit = {
         const pairs = [];
 
         for (const [name, value] of formData) {
-            pairs.push({name, value});
+            pairs.push({ name, value });
         }
 
         return pairs;
