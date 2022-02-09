@@ -11,7 +11,9 @@
                 'value' => $value,
             ],
             'classList' => ['u-display--inline-block'],
-            'label' => $label
+            'label' => $label,
+            'size' => $field['size'],
+            'required' => $field['required']
         ])
         @endoption
     @endforeach

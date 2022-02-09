@@ -96,6 +96,7 @@ class Fields
                         'label' => '',
                         'type' => 'checkbox',
                         'required' => true,
+                        'size' => 'sm',
                         'options' => [
                             'approved' => __(
                                 'They have approved that the image is used to market this event and have been informed that after the image has been added to the database, it may appear in various channels to market the event.',
@@ -301,7 +302,7 @@ class Fields
                             [
                                 'name' => 'organizer-phone',
                                 'label' => __('Phone number', 'event-integration'),
-                                'type' => 'number',
+                                'type' => 'text',
                                 'required' => true,
                             ],
                             [
@@ -397,7 +398,7 @@ class Fields
                             'elevator-ramp' => __('Elevator/ramp', 'event-integration'),
                             'handicap-toilet' => __('Handicap toilet', 'event-integration'),
                         ],
-                        'value' => [],
+                        'value' => []
                     ],
                     // End Section 2
                 ],
@@ -581,7 +582,7 @@ class Fields
                     [
                         'name' => 'submitter_phone',
                         'label' => __('Phonenumber', 'event-integration'),
-                        'type' => 'number',
+                        'type' => 'text',
                         'required' => true,
                     ],
                     // End Section 4
