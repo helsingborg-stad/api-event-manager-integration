@@ -100,7 +100,7 @@ const eventForm = {
             });
         });
     },
-    setupRemoteSelect: (form, {apiurl, selectString}) => {
+    setupRemoteSelect: (form, { apiurl, selectString }) => {
         if (apiurl === undefined) {
             return;
         }
@@ -121,10 +121,12 @@ const eventForm = {
         select
             .querySelectorAll('option')
             .forEach((option) => option.remove());
-        const defaultOption = document.createElement('option');
-        defaultOption.setAttribute('selected', 'selected');
-        defaultOption.innerText = selectString;
-        select.appendChild(defaultOption);
+        if (!select.multiple) {
+            const defaultOption = document.createElement('option');
+            defaultOption.setAttribute('selected', 'selected');
+            defaultOption.innerText = selectString;
+            select.appendChild(defaultOption);
+        }
         items
             .sort((a, b) => a.title > b.title)
             .forEach((item, index) => eventForm.createSelectOption(select, dataSource, item, index));
