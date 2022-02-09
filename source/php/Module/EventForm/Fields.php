@@ -317,7 +317,7 @@ class Fields
                             [
                                 'name' => 'organizer-phone',
                                 'label' => __('Phone number', 'event-integration'),
-                                'type' => 'number',
+                                'type' => 'text',
                                 'required' => true,
                             ],
                             [
@@ -597,7 +597,7 @@ class Fields
                     [
                         'name' => 'submitter_phone',
                         'label' => __('Phonenumber', 'event-integration'),
-                        'type' => 'number',
+                        'type' => 'text',
                         'required' => true,
                     ],
                     // End Section 4
