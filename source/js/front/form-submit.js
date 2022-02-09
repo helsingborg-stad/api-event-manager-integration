@@ -70,28 +70,33 @@ const eventFormSubmit = {
 
                         const errorResponses = [imageResponse, organizerResponse, locationResponse].filter(x => !Array.isArray(x) && !x.success).map(x => x.data);
                         if (errorResponses.length > 0) {
-                            form.querySelector('.event-submit__success').classList.add('u-display--none');
-                            const errorNotice = form.querySelector('.event-submit__error');
-                            errorNotice.querySelector('[id^="notice__text__"]').innerHTML = errorResponses.join('<br />');
-                            errorNotice.classList.remove('u-display--none');
+                            eventFormSubmit.displayErorrNotice(form, errorResponses.join('<br />'));
                         } else {
                             eventFormSubmit.submitFormData(formData, 'submit_event').then(response => {
                                 if (response.success) {
-                                    form.querySelector('.event-submit__success').classList.add('u-display--none');
-                                    const errorNotice = form.querySelector('.event-submit__error');
-                                    errorNotice.querySelector('[id^="notice__text__"]').innerHTML = response.data;
+                                    eventFormSubmit.displaySuccessNotice(form, 'Success');
                                 } else {
-                                    form.querySelector('.event-submit__error').classList.add('u-display--none');
+                                    eventFormSubmit.displayErorrNotice(form, response.data);
                                 }
                             });
                         }
                     }).catch(e => {
-                        form.querySelector('.event-submit__success').classList.add('u-display--none');
-                        const errorNotice = form.querySelector('.event-submit__error');
-                        errorNotice.querySelector('[id^="notice__text__"]').innerHTML = e.message;
+                        eventFormSubmit.displayErorrNotice(form, e.message);
                     });
             });
         });
+    },
+    displayErorrNotice: (form, text) => {
+        form.querySelector('.event-submit__success').classList.add('u-display--none');
+        const errorNotice = form.querySelector('.event-submit__error');
+        errorNotice.classList.remove('u-display--none');
+        errorNotice.querySelector('[id^="notice__text__"]').innerHTML = text;
+    },
+    displaySuccessNotice: (form, text) => {
+        form.querySelector('.event-submit__error').classList.add('u-display--none');
+        const successNotice = form.querySelector('.event-submit__success');
+        successNotice.classList.remove('u-display--none');
+        successNotice.querySelector('[id^="notice__text__"]').innerHTML = text;
     },
     submitImageData: (data) => {
         data.append('action', 'submit_image');
