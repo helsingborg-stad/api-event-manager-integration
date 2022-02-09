@@ -9,9 +9,7 @@
         'color' => 'primary',
         'style' => 'filled',
         'type' => 'submit',
-        'attributeList' => [
-            'event-submit__submit-button' => ''
-        ]
+        'classList' => ['event-submit__submit-button'],
     ])
     @endbutton
 </form>
