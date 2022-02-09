@@ -5,6 +5,9 @@ const eventFormSubmit = {
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
 
+                const submitButton = form.querySelector('.event-submit__submit-button');
+                submitButton.disabled = true;
+
                 form.querySelector('.event-submit__success').classList.add('u-display--none');
                 form.querySelector('.event-submit__error').classList.add('u-display--none');
 
@@ -82,6 +85,8 @@ const eventFormSubmit = {
                         }
                     }).catch(e => {
                         eventFormSubmit.displayErorrNotice(form, e.message);
+                    }).finally(x => {
+                        submitButton.disabled = false;
                     });
             });
         });
