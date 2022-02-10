@@ -125,6 +125,7 @@ const eventForm = {
             const defaultOption = document.createElement('option');
             defaultOption.setAttribute('selected', 'selected');
             defaultOption.innerText = selectString;
+            defaultOption.value = '';
             select.appendChild(defaultOption);
         }
         items
