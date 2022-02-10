@@ -30,7 +30,7 @@
     "file-loader": "^3.0.1",
     "import-glob-loader": "^1.1.0",
     "mini-css-extract-plugin": "^0.7.0",
-    "node-sass": "^4",
+    "node-sass": "^7",
     "optimize-css-assets-webpack-plugin": "^5",
     "sass-loader": "^7",
     "webpack": "^4",
