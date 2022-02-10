@@ -137,79 +137,6 @@ class Fields
                         'value' => 'not-recurring',
                     ],
                     [
-                        'name' => 'event_schema_start_date',
-                        'label' => __('Start date', 'event-integration'),
-                        'description' => __(
-                            'Describe your event. What happens and why should you visit it?',
-                            'event-integration'
-                        ),
-                        'type' => 'date',
-                        'span' => 6,
-                        'required' => true,
-                        'condition' => [
-                            [
-                                'key' => 'event_schema_type',
-                                'compare' => '=',
-                                'value' => 'single-date'
-                            ]
-                        ],
-                    ],
-                    [
-                        'name' => 'event_schema_start_time',
-                        'label' => __('Start time', 'event-integration'),
-                        'description' => __(
-                            'Describe your event. What happens and why should you visit it?',
-                            'event-integration'
-                        ),
-                        'type' => 'time',
-                        'span' => 6,
-                        'required' => true,
-                        'condition' => [
-                            [
-                                'key' => 'event_schema_type',
-                                'compare' => '=',
-                                'value' => 'single-date'
-                            ]
-                        ],
-                    ],
-                    [
-                        'name' => 'event_schema_end_date',
-                        'label' => __('End date', 'event-integration'),
-                        'description' => __(
-                            'Describe your event. What happens and why should you visit it?',
-                            'event-integration'
-                        ),
-                        'type' => 'date',
-                        'required' => true,
-                        'span' => 6,
-                        'condition' => [
-                            [
-                                'key' => 'event_schema_type',
-                                'compare' => '=',
-                                'value' => 'single-date'
-                            ]
-                        ],
-                    ],
-
-                    [
-                        'name' => 'event_schema_end_time',
-                        'label' => __('End time', 'event-integration'),
-                        'description' => __(
-                            'Describe your event. What happens and why should you visit it?',
-                            'event-integration'
-                        ),
-                        'type' => 'time',
-                        'span' => 6,
-                        'required' => true,
-                        'condition' => [
-                            [
-                                'key' => 'event_schema_type',
-                                'compare' => '=',
-                                'value' => 'single-date'
-                            ]
-                        ],
-                    ],
-                    [
                         'name' => 'event_schema_recurring',
                         'label' => __('Rights', 'event-integration'),
                         'description' => __(
@@ -319,12 +246,6 @@ class Fields
                                 'value' => 'recurring-event'
                             ]
                         ],
-                    ],
-                    [
-                        'name' => 'event_location_information_heading',
-                        'label' => __('Location information', 'event-integration'),
-                        'element' => 'h2',
-                        'type' => 'heading',
                     ],
                     [
                         'name' => 'event_location_information_heading',
@@ -649,18 +570,6 @@ class Fields
                         'element' => 'h3',
                         'marginTop' => true,
                         'marginBottom' => false,
-                        'type' => 'heading',
-                    ],
-                    [
-                        'name' => 'event_contact_information_heading',
-                        'label' => __('Contact information', 'event-integration'),
-                        'description' => __(
-                            'Add your contact details below.',
-                            'event-integration'
-                        ),
-                        'element' => 'h3',
-                        'marginTop' => true,
-                        'marginBottom' => true,
                         'type' => 'heading',
                     ],
                     [
