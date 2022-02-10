@@ -191,7 +191,9 @@ const eventFormSubmit = {
             formData['accessibility'].push(input.value);
         });
 
-        formData['user_groups'] = groups;
+        if (groups) {
+            formData['user_groups'] = groups;
+        }
         formData['event_categories'] = categories;
         formData['event_tags'] = tags;
 
