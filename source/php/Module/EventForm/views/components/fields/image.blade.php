@@ -1,9 +1,13 @@
 @imageinput([
     'classList' => ['unlist'],
     'name' => $field['name'],
-    'required' => $field['required'] ?? false,
     'display' => 'area',
     'multiple' => false,
-    'label' => 'Choose images...'
+    'required' => $field['required'],
+    'label' => $field['label'] ?? '',
+    'helperText' => $field['description'] ?? '',
+    'maxFileSize' => $field['maxFileSize'] ?? 0,
+    'maxWidth' => $field['maxWidth'] ?? 0,
+    'maxHeight' => $field['maxHeight'] ?? 0,
 ])
 @endimageinput
