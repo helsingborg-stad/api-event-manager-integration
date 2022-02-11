@@ -185,6 +185,30 @@ const eventFormSubmit = {
                 }
             });
 
+        // Recurring occasions
+        formData['rcr_rules'] = [];
+        {
+            const occasionGroup = form.querySelector('#event_schema_recurring_date');
+            const startTime = occasionGroup.querySelector('[name="recurring_start_time"]').value
+            const endTime = occasionGroup.querySelector('[name="recurring_end_time"]').value
+
+            let startDate = occasionGroup.querySelector('[name="recurring_start_date"]').value;
+            startDate = eventFormSubmit.isValidDate(startDate) ? startDate : false;
+            let endDate = occasionGroup.querySelector('[name="recurring_end_date"]').value;
+            endDate = eventFormSubmit.isValidDate(endDate) ? endDate : false;
+
+            if (startTime && endTime && startDate && endDate) {
+                formData['rcr_rules'].push({
+                    rcr_week_day: occasionGroup.querySelector('[name="weekday"]').value,
+                    rcr_weekly_interval: occasionGroup.querySelector('[name="weekly_interval"]').value,
+                    rcr_start_time: startTime,
+                    rcr_end_time: endTime,
+                    rcr_start_date: startDate,
+                    rcr_end_date: endDate,
+                });
+            }
+        }
+
 
         formData['accessibility'] = [];
         form.querySelectorAll("input[name='accessibility']:checked").forEach(input => {
