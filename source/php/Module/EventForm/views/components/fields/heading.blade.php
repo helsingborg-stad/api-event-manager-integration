@@ -5,7 +5,7 @@
     $class = trim(implode(' ', $class));
 @endphp
 
-<div class="{!! $class !!}">
+<div class="{{$class}}">
     @if (!empty($field['label']))
         @typography([
             'element' => $field['element'] ?? 'h2'
