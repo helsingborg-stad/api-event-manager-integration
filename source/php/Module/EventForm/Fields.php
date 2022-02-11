@@ -395,8 +395,8 @@ class Fields
                         'description' => __('Select which accessibility adjustments are available for the site.', 'event-integration'),
                         'type' => 'checkbox',
                         'options' => [
-                            'elevator-ramp' => __('Elevator/ramp', 'event-integration'),
-                            'handicap-toilet' => __('Handicap toilet', 'event-integration'),
+                            'elevator_ ramp' => __('Elevator/ramp', 'event-integration'),
+                            'accessible_toilet' => __('Handicap toilet', 'event-integration'),
                         ],
                         'value' => []
                     ],
