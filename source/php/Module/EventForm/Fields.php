@@ -137,7 +137,7 @@ class Fields
                         'value' => 'not-recurring',
                     ],
                     [
-                        'name' => 'event_schema_recurring',
+                        'name' => 'event_schema_single_date',
                         'label' => __('Rights', 'event-integration'),
                         'description' => __(
                             'Describe your event. What happens and why should you visit it?',
