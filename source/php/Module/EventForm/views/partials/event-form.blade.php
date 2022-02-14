@@ -1,4 +1,4 @@
-<form name="submit-event" class="submit-event-form js-event-form" enctype="multipart/form-data">
+<form name="submit-event" class="submit-event-form js-event-form js-form-validation" enctype="multipart/form-data">
     @include('partials.field-loop', ['fields' => $fields])
 
     @include('components.notice_warning')
