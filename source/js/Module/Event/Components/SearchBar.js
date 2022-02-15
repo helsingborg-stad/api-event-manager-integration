@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Input, Button } from 'hbg-react';
+import { Input, Button } from '@helsingborg-stad/hbg-react';
 const SearchBar = ({ searchString, translation, updateSearchString }) => (
   <div>
       <Input

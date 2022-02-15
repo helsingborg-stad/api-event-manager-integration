@@ -1,6 +1,6 @@
 
 import PropTypes from 'prop-types';
-import { Input } from 'hbg-react';
+import { Input } from '@helsingborg-stad/hbg-react';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import DayPicker from 'react-day-picker';
 import { months, weekdaysLong, weekdaysShort } from '../../../Config/dateLocalization';

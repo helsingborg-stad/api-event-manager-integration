@@ -1,5 +1,5 @@
 import { createRef } from 'react';
-import { Button, Pagination, PreLoader } from 'hbg-react';
+import { Button, Pagination, PreLoader } from '@helsingborg-stad/hbg-react';
 import update from 'immutability-helper';
 import PropTypes from 'prop-types';
 import setQuery from 'set-query-string';
