@@ -1,4 +1,3 @@
-import { Button } from 'hbg-react';
 import PropTypes from 'prop-types';
 import AgeFilter from './AgeFilter';
 import CategoriesFilter from './CategoriesFilter';

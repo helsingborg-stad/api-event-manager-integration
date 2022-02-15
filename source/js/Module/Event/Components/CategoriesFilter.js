@@ -1,4 +1,4 @@
-import { Dropdown } from 'hbg-react';
+import { Dropdown } from '@helsingborg-stad/hbg-react';
 import PropTypes from 'prop-types';
 
 const CategoriesFilter = ({ categories, onCategoryChange, title }) => (

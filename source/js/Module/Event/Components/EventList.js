@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import uuidv1 from 'uuid/v1';
+import { v4 as uuidv4 } from 'uuid';
 import EventItem from './EventItem';
 
 class EventList extends React.Component {
@@ -10,7 +10,7 @@ class EventList extends React.Component {
         {items.map(event => (
           <div className={`o-grid-12 o-grid-4@md`}>
               <EventItem
-                key={uuidv1()}
+                key={uuidv4()}
                 event={event}
                 gridColumn={gridColumn}
                 displayFields={displayFields}
