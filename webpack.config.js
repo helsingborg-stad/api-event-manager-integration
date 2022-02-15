@@ -79,13 +79,6 @@ module.exports = {
               importLoaders: 3, // 0 => no loaders (default); 1 => postcss-loader; 2 => sass-loader
             },
           },
-          // {
-          //   loader: 'postcss-loader',
-          //   options: {
-          //     plugins: [autoprefixer, require('postcss-object-fit-images')],
-          //     sourceMap: true,
-          //   },
-          // },
           {
             loader: 'sass-loader',
             options: {}
