@@ -86,6 +86,9 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         add_filter('the_lead', array($this, 'eventContentLead'));
         add_filter('query_vars', array($this, 'addDateQueryVar'));
         add_filter('Modularity/Module/Posts/Date', array($this, 'formatPostDate'), 10, 3);
+        add_filter('Municipio/Helper/Post/postObject', array($this, 'formatPublishDate'), 10);
+
+
         add_filter('Municipio/viewData', array($this, 'singleViewData'));
 
         add_filter('acf/update_value/name=event_filter_group', array($this, 'updateGroupValue'), 10, 3);
@@ -157,6 +160,13 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         $occasions = get_post_meta($postId, 'occasions_complete', true);
 
         return $occasions[0]['start_date'] ?? '';
+    }
+
+    public function formatPublishDate($post) {
+        if (isset($post->start_date)) {
+            $post->post_date = $post->start_date;
+        }
+        return $post;
     }
 
     /**
