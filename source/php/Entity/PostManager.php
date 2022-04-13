@@ -226,8 +226,12 @@ abstract class PostManager
                 return false;
             }
         } else {
-            // Create if not duplicate
-            $this->ID = wp_insert_post($post, true);
+            // Create if not duplicate, and occasions exists
+            if (isset($post['occasions_complete']) && !empty($post['occasions_complete'])) {
+                $this->ID = wp_insert_post($post, true);
+            } else {
+                return false;
+            }
         }
 
         // Remove empty meta values from db
