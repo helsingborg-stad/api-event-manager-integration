@@ -227,7 +227,7 @@ abstract class PostManager
             }
         } else {
             // Create if not duplicate, and occasions exists
-            if (isset($post['occasions_complete']) && !empty($post['occasions_complete'])) {
+            if (isset($post['meta_input']['occasions_complete']) && !empty($post['meta_input']['occasions_complete'])) {
                 $this->ID = wp_insert_post($post, true);
             } else {
                 return false;
