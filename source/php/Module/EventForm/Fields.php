@@ -37,15 +37,15 @@ class Fields
                         'type' => 'textarea',
                         'required' => true,
                     ],
-    
+
                     [
                         'name' => 'image_input',
                         'label' => __('Upload an image', 'event-integration'),
                         'description' =>
-                            __(
-                                'Keep in mind that the image may be cropped, so avoid text in the image.',
-                                'event-integration'
-                            ) . '<br>' .
+                        __(
+                            'Keep in mind that the image may be cropped, so avoid text in the image.',
+                            'event-integration'
+                        ) . '<br>' .
                             __(
                                 'Images with identifiable persons are not accepted and will be replaced.',
                                 'event-integration'
@@ -70,7 +70,7 @@ class Fields
                             [
                                 'key' => 'image_input',
                                 'compare' => '!=',
-                                'value' => ''
+                                'compareValue' => ''
                             ]
                         ]
                     ],
@@ -87,7 +87,7 @@ class Fields
                             [
                                 'key' => 'image_input',
                                 'compare' => '!=',
-                                'value' => ''
+                                'compareValue' => ''
                             ]
                         ]
                     ],
@@ -107,7 +107,7 @@ class Fields
                             [
                                 'key' => 'event_image_gdpr_compliance',
                                 'compare' => '=',
-                                'value' => 'yes'
+                                'compareValue' => 'yes'
                             ]
                         ]
                     ],
@@ -179,7 +179,7 @@ class Fields
                             [
                                 'key' => 'event_schema_type',
                                 'compare' => '=',
-                                'value' => 'single-date'
+                                'compareValue' => 'single-date'
                             ]
                         ],
                         'labels' => [
@@ -257,7 +257,7 @@ class Fields
                             [
                                 'key' => 'event_schema_type',
                                 'compare' => '=',
-                                'value' => 'recurring-event'
+                                'compareValue' => 'recurring-event'
                             ]
                         ],
                     ],
@@ -299,7 +299,7 @@ class Fields
                             [
                                 'key' => 'event_organizer',
                                 'compare' => '=',
-                                'value' => 'existing'
+                                'compareValue' => 'existing'
                             ]
                         ],
                     ],
@@ -330,7 +330,7 @@ class Fields
                             [
                                 'key' => 'event_organizer',
                                 'compare' => '=',
-                                'value' => 'new'
+                                'compareValue' => 'new'
                             ]
                         ],
                     ],
@@ -362,7 +362,7 @@ class Fields
                             [
                                 'key' => 'event_location',
                                 'compare' => '=',
-                                'value' => 'existing'
+                                'compareValue' => 'existing'
                             ]
                         ],
                     ],
@@ -399,7 +399,7 @@ class Fields
                             [
                                 'key' => 'event_location',
                                 'compare' => '=',
-                                'value' => 'new'
+                                'compareValue' => 'new'
                             ]
                         ],
                     ],
@@ -450,46 +450,135 @@ class Fields
                         'marginTop' => true
                     ],
                     [
+                        'name' => 'event_price_free',
+                        'label' => __('Free event', 'event-integration'),
+                        'type' => 'checkbox',
+                        'options' => [
+                            'free' => __(
+                                'The event is free',
+                                'event-integration'
+                            )
+                        ]
+                    ],
+                    [
                         'name' => 'price_adult',
                         'label' => __('For adults', 'event-integration'),
                         'type' => 'number',
                         'required' => true,
-                        'suffix' => 'kr'
+                        'suffix' => 'kr',
+                        'condition' => [
+                            [
+                                'key' => 'event_price_free',
+                                'compare' => '=',
+                                'compareValue' => false
+                            ]
+                        ],
+                        'conditionValue' => [
+                            'key' => 'event_price_free',
+                            'compare' => '=',
+                            'compareValue' => true,
+                            'value' => 0
+                        ],
                     ],
                     [
                         'name' => 'price_student',
                         'label' => __('Students', 'event-integration'),
                         'type' => 'number',
                         'required' => true,
-                        'suffix' => 'kr'
+                        'suffix' => 'kr',
+                        'condition' => [
+                            [
+                                'key' => 'event_price_free',
+                                'compare' => '=',
+                                'compareValue' => false
+                            ]
+                        ],
+                        'conditionValue' => [
+                            'key' => 'event_price_free',
+                            'compare' => '=',
+                            'compareValue' => true,
+                            'value' => 0
+                        ],
                     ],
                     [
                         'name' => 'price_children',
                         'label' => __('Child price', 'event-integration'),
                         'type' => 'number',
                         'required' => true,
-                        'suffix' => 'kr'
+                        'suffix' => 'kr',
+                        'condition' => [
+                            [
+                                'key' => 'event_price_free',
+                                'compare' => '=',
+                                'compareValue' => false
+                            ]
+                        ],
+                        'conditionValue' => [
+                            'key' => 'event_price_free',
+                            'compare' => '=',
+                            'compareValue' => true,
+                            'value' => 0
+                        ],
                     ],
                     [
                         'name' => 'children_age',
                         'label' => __('Age limit for child price', 'event-integration'),
                         'type' => 'number',
                         'required' => true,
-                        'suffix' => __('years', 'event-integration')
+                        'suffix' => __('years', 'event-integration'),
+                        'condition' => [
+                            [
+                                'key' => 'event_price_free',
+                                'compare' => '=',
+                                'compareValue' => false
+                            ]
+                        ],
+                        'conditionValue' => [
+                            'key' => 'event_price_free',
+                            'compare' => '=',
+                            'compareValue' => true,
+                            'value' => 0
+                        ],
                     ],
                     [
                         'name' => 'price_senior',
                         'label' => __('Pensioner price', 'event-integration'),
                         'type' => 'number',
                         'required' => true,
-                        'suffix' => 'kr'
+                        'suffix' => 'kr',
+                        'condition' => [
+                            [
+                                'key' => 'event_price_free',
+                                'compare' => '=',
+                                'compareValue' => false
+                            ]
+                        ],
+                        'conditionValue' => [
+                            'key' => 'event_price_free',
+                            'compare' => '=',
+                            'compareValue' => true,
+                            'value' => 0
+                        ],
                     ],
                     [
                         'name' => 'senior_age',
                         'label' => __('Age limit for pensioner price', 'event-integration'),
                         'type' => 'number',
                         'required' => true,
-                        'suffix' => __('years', 'event-integration')
+                        'suffix' => __('years', 'event-integration'),
+                        'condition' => [
+                            [
+                                'key' => 'event_price_free',
+                                'compare' => '=',
+                                'compareValue' => false
+                            ]
+                        ],
+                        'conditionValue' => [
+                            'key' => 'event_price_free',
+                            'compare' => '=',
+                            'compareValue' => true,
+                            'value' => 0
+                        ],
                     ],
                     [
                         'name' => 'event_target_age',
@@ -513,7 +602,7 @@ class Fields
                             [
                                 'key' => 'event_target_age',
                                 'compare' => '=',
-                                'value' => 'specified'
+                                'compareValue' => 'specified'
                             ]
                         ],
                     ],
@@ -527,7 +616,7 @@ class Fields
                             [
                                 'key' => 'event_target_age',
                                 'compare' => '=',
-                                'value' => 'specified'
+                                'compareValue' => 'specified'
                             ]
                         ],
                     ],

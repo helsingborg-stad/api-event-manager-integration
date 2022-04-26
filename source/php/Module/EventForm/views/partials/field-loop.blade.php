@@ -3,7 +3,7 @@
         @php
             $colSpan = $field['span'] ?? 12;
         @endphp
-        <div class="o-grid-12 o-grid-{{$colSpan}}@sm" @if(!empty($field['condition']))data-condition="{{ json_encode($field['condition'] ?? []) }}"@endif>
+        <div class="o-grid-12 o-grid-{{$colSpan}}@sm" @if(!empty($field['condition']))data-condition="{{ json_encode($field['condition'] ?? []) }}"@endif @if(!empty($field['conditionValue']))data-condition-value="{{ json_encode($field['conditionValue'] ?? []) }}"@endif>
             @includeFirst(
                 [
                     'components.fields.' . $field['type'] ?? '',

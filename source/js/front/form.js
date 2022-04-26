@@ -6,6 +6,12 @@ const eventForm = {
             conditionalFields.forEach((field) =>
                 eventForm.setupConditionalFields(form, field)
             );
+            const conditionalValueFields = form.querySelectorAll(
+                '[data-condition-value]'
+            );
+            conditionalValueFields.forEach((field) =>
+                eventForm.setupConditionalValueFields(form, field)
+            );
             eventForm.setupRepeaters(form);
             eventForm.setupRemoteSelect(form, eventintegration ?? {});
         });
@@ -25,8 +31,31 @@ const eventForm = {
             );
         });
     },
-    setVisiblity: (form, field) => {
-        const conditions = JSON.parse(field.dataset.condition);
+    setupConditionalValueFields: (form, field) => {
+        const conditionValue = JSON.parse(field.dataset.conditionValue);
+        form.querySelectorAll(`input[name="${conditionValue.key}"]`).forEach(
+            (targetField) => {
+                targetField.addEventListener('change', (e) => {
+                    const conditionResult = eventForm.checkConditions(form, [
+                        conditionValue,
+                    ]);
+                    if (conditionResult.every((x) => x === true)) {
+                        field.querySelectorAll('input').forEach((x) => {
+                            x.dataset.oldValue = x.value;
+                            x.value = conditionValue.value;
+                        });
+                    } else {
+                        field.querySelectorAll('input').forEach((x) => {
+                            if ('oldValue' in x.dataset) {
+                                x.value = x.dataset.oldValue
+                            }
+                        });
+                    }
+                });
+            }
+        );
+    },
+    checkConditions: (form, conditions) => {
         const conditionResult = conditions.map((condition) => {
             let targetField = form.querySelector(
                 `input[name="${condition.key}"]:checked`
@@ -39,15 +68,31 @@ const eventForm = {
             if (targetField) {
                 switch (condition.compare) {
                     case '=':
-                        if (targetField.files !== null) {
-                            return targetField.files.length == condition.value;
+                        if (targetField.type === 'checkbox') {
+                            return (
+                                targetField.checked == condition.compareValue
+                            );
                         }
-                        return targetField.value == condition.value;
+                        if (targetField.files !== null) {
+                            return (
+                                targetField.files.length ==
+                                condition.compareValue
+                            );
+                        }
+                        return targetField.value == condition.compareValue;
                     case '!=':
-                        if (targetField.files !== null) {
-                            return targetField.files.length != condition.value;
+                        if (targetField.type === 'checkbox') {
+                            return (
+                                targetField.checked != condition.compareValue
+                            );
                         }
-                        return targetField.value != condition.value;
+                        if (targetField.files !== null) {
+                            return (
+                                targetField.files.length !=
+                                condition.compareValue
+                            );
+                        }
+                        return targetField.value != condition.compareValue;
                     default:
                         console.warn(
                             `Compare condition '${condition.compare}' not supported`
@@ -60,6 +105,11 @@ const eventForm = {
             return false;
         });
 
+        return conditionResult;
+    },
+    setVisiblity: (form, field) => {
+        const conditions = JSON.parse(field.dataset.condition);
+        const conditionResult = eventForm.checkConditions(form, conditions);
         if (conditionResult.every((x) => x === true)) {
             field.classList.remove('u-display--none');
             field.querySelectorAll('input').forEach((x) => {
@@ -114,13 +164,18 @@ const eventForm = {
             }
             fetch(url)
                 .then((data) => data.json())
-                .then((items) => eventForm.setupSelectOptions(selectString, select, dataSource, items));
+                .then((items) =>
+                    eventForm.setupSelectOptions(
+                        selectString,
+                        select,
+                        dataSource,
+                        items
+                    )
+                );
         });
     },
     setupSelectOptions: (selectString, select, dataSource, items) => {
-        select
-            .querySelectorAll('option')
-            .forEach((option) => option.remove());
+        select.querySelectorAll('option').forEach((option) => option.remove());
         if (!select.multiple) {
             const defaultOption = document.createElement('option');
             defaultOption.setAttribute('selected', 'selected');
@@ -130,18 +185,26 @@ const eventForm = {
         }
         items
             .sort((a, b) => a.title > b.title)
-            .forEach((item, index) => eventForm.createSelectOption(select, dataSource, item, index));
+            .forEach((item, index) =>
+                eventForm.createSelectOption(select, dataSource, item, index)
+            );
         if (dataSource.hiddenFields !== undefined) {
             select.addEventListener('change', () => {
                 const selectedOption = select.querySelector('option[selected]');
                 if (selectedOption && selectedOption.dataset.hiddenFields) {
-                    Object.values(dataSource.hiddenFields).forEach(key => {
-                        const hiddenField = select.parentNode.querySelector(`input[name=${key}]`);
-                        hiddenField.value = JSON.parse(selectedOption.dataset.hiddenFields)[key];
+                    Object.values(dataSource.hiddenFields).forEach((key) => {
+                        const hiddenField = select.parentNode.querySelector(
+                            `input[name=${key}]`
+                        );
+                        hiddenField.value = JSON.parse(
+                            selectedOption.dataset.hiddenFields
+                        )[key];
                     });
                 }
             });
-            Object.values(dataSource.hiddenFields).forEach(key => eventForm.createHiddenField(select, key));
+            Object.values(dataSource.hiddenFields).forEach((key) =>
+                eventForm.createHiddenField(select, key)
+            );
         }
     },
     createSelectOption: (select, dataSource, item, index) => {
@@ -154,21 +217,27 @@ const eventForm = {
         }
         if (dataSource.hiddenFields !== undefined) {
             const hiddenFieldsData = {};
-            Object.keys(dataSource.hiddenFields).forEach(key => {
+            Object.keys(dataSource.hiddenFields).forEach((key) => {
                 hiddenFieldsData[dataSource.hiddenFields[key]] = item[key];
             });
-            option.setAttribute('data-hidden-fields', JSON.stringify(hiddenFieldsData));
+            option.setAttribute(
+                'data-hidden-fields',
+                JSON.stringify(hiddenFieldsData)
+            );
         }
         select.appendChild(option);
-
     },
     createHiddenField: (select, key) => {
-        const selectedOption = select.querySelector('option[data-hidden-fields]');
+        const selectedOption = select.querySelector(
+            'option[data-hidden-fields]'
+        );
         if (selectedOption) {
             const hiddenField = document.createElement('input');
             hiddenField.name = key;
             hiddenField.type = 'hidden';
-            hiddenField.value = JSON.parse(selectedOption.dataset.hiddenFields)[key];
+            hiddenField.value = JSON.parse(selectedOption.dataset.hiddenFields)[
+                key
+            ];
             select.parentNode.insertBefore(hiddenField, select);
         }
     },
