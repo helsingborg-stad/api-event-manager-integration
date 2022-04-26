@@ -5,7 +5,10 @@
 }
 
 .submit-event-form {
-    .sub-fields, .form-section {
+    .sub-fields,
+    .form-section,
+    .form-group.submit-error,
+    .form-group.submit-success {
         margin-bottom: 1rem;
     }
 }
