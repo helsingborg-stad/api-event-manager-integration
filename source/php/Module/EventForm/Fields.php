@@ -62,7 +62,7 @@ class Fields
                         'required' => true,
                         'options' => [
                             'approved' => __(
-                                'I have the right to use the image/images to promote this event.',
+                                'I have the right to use the image to promote this event.',
                                 'event-integration'
                             )
                         ],
@@ -81,7 +81,7 @@ class Fields
                         'required' => true,
                         'options' => [
                             'no' => __('No person is identifiable in the photo', 'event-integration'),
-                            'yes' => __('There are identifiable people in the picture / pictures', 'event-integration'),
+                            'yes' => __('There are identifiable people in the picture', 'event-integration'),
                         ],
                         'condition' => [
                             [

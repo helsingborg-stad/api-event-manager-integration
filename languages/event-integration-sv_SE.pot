@@ -1205,7 +1205,7 @@ msgid "Accessible toilet"
 msgstr ""
 
 #: source/php/Helper/SubmitEvent.php:200
-msgid "Are there identifiable persons on the image/images?"
+msgid "Are there identifiable persons on the image?"
 msgstr ""
 
 #: source/php/Helper/SubmitEvent.php:201
@@ -1314,7 +1314,7 @@ msgid "Rights"
 msgstr ""
 
 #: source/php/Module/EventForm/Fields.php:69
-msgid "I have the right to use the image/images to promote this event."
+msgid "I have the right to use the image to promote this event."
 msgstr ""
 
 #: source/php/Module/EventForm/Fields.php:91
@@ -1322,7 +1322,7 @@ msgid "No person is identifiable in the photo"
 msgstr ""
 
 #: source/php/Module/EventForm/Fields.php:92
-msgid "There are identifiable people in the picture / pictures"
+msgid "There are identifiable people in the picture"
 msgstr ""
 
 #: source/php/Module/EventForm/Fields.php:113
@@ -2167,7 +2167,7 @@ msgid "I have the right to use this image to promote this event."
 msgstr ""
 
 #: views/submit-form.blade.php:216
-msgid "There are no identifiable persons on the image/images."
+msgid "There are no identifiable persons on the image."
 msgstr ""
 
 #: views/submit-form.blade.php:225

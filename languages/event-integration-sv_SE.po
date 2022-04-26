@@ -1302,8 +1302,8 @@ msgid "Accessible toilet"
 msgstr "Handikapptoalett"
 
 #: source/php/Helper/SubmitEvent.php:200
-msgid "Are there identifiable persons on the image/images?"
-msgstr "Finns det identifierbara personer på bilden/bilderna?"
+msgid "Are there identifiable persons on the image?"
+msgstr "Finns det identifierbara personer på bilden?"
 
 #: source/php/Helper/SubmitEvent.php:201
 msgid ""
@@ -1425,18 +1425,18 @@ msgid "Rights"
 msgstr "Rättigheter"
 
 #: source/php/Module/EventForm/Fields.php:65
-msgid "I have the right to use the image/images to promote this event."
+msgid "I have the right to use the image to promote this event."
 msgstr ""
-"Jag har rätt att använda bilden/bilderna för att marknadsföra detta "
+"Jag har rätt att använda bilden för att marknadsföra detta "
 "evenemang."
 
 #: source/php/Module/EventForm/Fields.php:83
 msgid "No person is identifiable in the photo"
-msgstr "Ingen person är identifierbar på bilden/bilderna"
+msgstr "Ingen person är identifierbar på bilden"
 
 #: source/php/Module/EventForm/Fields.php:84
-msgid "There are identifiable people in the picture / pictures"
-msgstr "Det finns identifierbara personer på bilden/bilderna"
+msgid "There are identifiable people in the picture"
+msgstr "Det finns identifierbara personer på bilden"
 
 #: source/php/Module/EventForm/Fields.php:101
 msgid ""
@@ -2400,8 +2400,8 @@ msgstr ""
 "Jag har rätt att använda denna bild för att marknadsföra detta evenemang."
 
 #: views/submit-form.blade.php:216
-msgid "There are no identifiable persons on the image/images."
-msgstr "Det finns inga identifierbara personer på bilden/bilderna."
+msgid "There are no identifiable persons on the image."
+msgstr "Det finns inga identifierbara personer på bilden."
 
 #: views/submit-form.blade.php:225
 msgid "Contact details"
