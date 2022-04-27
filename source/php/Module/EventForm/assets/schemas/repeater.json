@@ -33,14 +33,14 @@
             "compare": {
               "type": "string"
             },
-            "value": {
+            "compareValue": {
               "type": "string"
             }
           },
           "required": [
             "key",
             "compare",
-            "value"
+            "compareValue"
           ]
         }
       ]
