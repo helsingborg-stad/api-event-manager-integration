@@ -1,18 +1,12 @@
-@card([])
-    <div class="c-card__body">
-        @include('partials.heading', ['heading' => get_the_title()])
-        
-        @include('partials.occasions')
+@if($locationInfo)
+    @card([])
+        <div class="c-card__body">
+            @include('partials.heading', ['heading' => __('Location', 'event-integration')])
+            
+            @if($locationInfo['latitude'] && $locationInfo['longitude'] && $locationInfo['title'])
+                <div id="event-map" data-lat="{{$locationInfo['latitude']}}" data-lng="{{$locationInfo['longitude']}}" data-title="{{$locationInfo['title']}}"></div>
+            @endif
 
-        @dump($event['occasion'])
-        
-        @if ($event['location'])
-            @typography([])
-                <strong>{{ _e('Location:', 'event-integration') }}</strong> {{ $event['location']['title'] }}
-            @endtypography
-        @endif
-
-        @include('partials.heading', ['heading' => __('Price', 'event-integration')])
-        @include('partials.price')
-    </div>
-@endcard
+        </div>
+    @endcard
+@endif
