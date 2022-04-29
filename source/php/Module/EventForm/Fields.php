@@ -124,10 +124,6 @@ class Fields
                     [
                         'name' => 'event_schema_type',
                         'label' => __('Schedule', 'event-integration'),
-                        'description' => __(
-                            'Describe your event. What happens and why should you visit it?',
-                            'event-integration'
-                        ),
                         'type' => 'radio',
                         'required' => true,
                         'options' => [
@@ -139,10 +135,6 @@ class Fields
                     [
                         'name' => 'event_schema_single_date',
                         'label' => __('Rights', 'event-integration'),
-                        'description' => __(
-                            'Describe your event. What happens and why should you visit it?',
-                            'event-integration'
-                        ),
                         'type' => 'repeater',
                         'minRows' => 1,
                         'fields' => [
