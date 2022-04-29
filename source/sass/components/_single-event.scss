@@ -29,11 +29,6 @@
         }
     }
     
-    .modularity-event-ticket-box {
-        background: #fff;
-        border: 1px solid #000;
-    }
-    
     .modularity-event-content p:first-child {
         font-weight: bold;
     }
@@ -48,5 +43,13 @@
         ul {
             list-style: none;
         }
+    }
+
+    #event-map {
+        height: 250px;
+        width: 100%;
+        border-radius: 3px;
+        margin: 0 0 15px 0;
+        border: 1px solid #e5e5e5;
     }
 }
