@@ -112,10 +112,27 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
 
         // Gather event data
         $eventData = array();
+        $meta = $this->getMeta($post->ID);
         $eventData['occasion'] = \EventManagerIntegration\Helper\SingleEventData::singleEventDate();
+        $eventData['occasions'] = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($post->ID);
         $eventData['cancelled'] = !empty($eventData['occasion']['status']) && $eventData['occasion']['status'] === 'cancelled' ? __('Cancelled', 'event-integration') : null;
         $eventData['rescheduled'] = !empty($eventData['occasion']['status']) && $eventData['occasion']['status'] === 'rescheduled' ? __('Rescheduled', 'event-integration') : null;
         $eventData['exception_information'] = !empty($eventData['occasion']['exception_information']) ? $eventData['occasion']['exception_information'] : null;
+        
+        $extendedContent = get_extended(get_the_content($post->ID));
+        $eventData['introText'] = '';
+        if(!empty($extendedContent['extended'])) {
+            $eventData['content'] = $extendedContent['main'];
+            $eventData['introText'] = $extendedContent['extended'];
+        } else {
+            // Split content into paragraphs and put first paragraph in separate variable        
+            $paragraphs = $this->getParagraphs($extendedContent['main']);
+            if(isset($paragraphs[0])) {
+                $eventData['introText'] = $paragraphs[0];
+                unset($paragraphs[0]);
+            }
+            $eventData['content'] = implode('', $paragraphs);
+        }
 
         if (function_exists('municipio_get_thumbnail_source')) {
             $eventData['image_src'] = municipio_get_thumbnail_source(
@@ -146,10 +163,125 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             $eventData['age_group'] = sprintf('%s %s %s', __('Up to', 'event-integration'), $ageGroupTo, __('years', 'event-integration'));
         }
 
+        $data['contactInfo'] = $this->getContactInfo($meta);
+        $data['bookingInfo'] = $this->getBookingInfo($meta);
+        $data['locationInfo'] = is_array($meta['location']) && !empty($meta['location']) ? $meta['location'] : null;
         $data['post'] = $post;
+        // $data['meta'] = $meta;
         $data['event'] = $eventData;
 
         return $data;
+    }
+
+    public function extractMetaFields($meta, $fields)
+    {
+        $extracted = [];
+        foreach($fields as $field) {
+            if(isset($meta[$field])) {
+                $extracted[$field] = $meta[$field];
+            }
+        }
+        return $extracted;
+    }
+
+    public function getMeta($id)
+    {
+        $meta = [];
+        foreach(get_post_meta($id) ?: [] as $key => $value) {
+            $meta[$key] = isset($value[0]) ? maybe_unserialize($value[0]) : $value;
+        }
+        return $meta;
+    }
+
+    public function getParagraphs($text)
+    {
+        preg_match_all("/<\s*p[^>]*>([^<]*)<\s*\/\s*p\s*>/", $text, $matches);
+        return $matches[0] ?? [];
+    }
+
+    public function getContactInfo($meta)
+    {
+        $fields = [
+            'contact_information',
+            'contact_email',
+            'contact_phone'
+        ];
+        
+        return $this->extractMetaFields($meta, $fields);
+    }
+
+    public function formatPrice($price)
+    {
+        if ($price == 0) {
+            $price = _x('Free', 'Free event entrance', 'event-integration');
+        } elseif ($price !== '') {
+            $price .= ' kr';
+        }
+
+        return $price;
+    }
+
+    // public function getPriceInfo($meta) {
+    //     $priceInfo = [];
+
+    //     $priceInfo['adults'] = sprintf(__('Price: %s', 'event-integration'), $bookingInfo['price_adult']);
+
+    //     if(($bookingInfo['price_children'])
+    //         $priceInfo['children'] = sprintf(__('Children (up to %s years old): %s', 'event-integration'), $bookingInfo['children_age'], $bookingInfo['price_children']);
+    //     @endif
+
+    //     @if($bookingInfo['price_senior'])
+    //         <li>{{ printf(__('Seniors (from %s years old): %s', 'event-integration'), $bookingInfo['senior_age'], $bookingInfo['price_senior']) }}</li>
+    //     @endif
+
+    //     @if($bookingInfo['price_senior'])
+    //         <li>{{ printf(__('Students: %s', 'event-integration'), $bookingInfo['price_student']) }}</li>
+    //     @endif
+    // }
+
+    public function getBookingInfo($meta)
+    {
+        $fields = [
+            'booking_link',
+            'booking_phone',
+            'booking_email',
+            'price_adult',
+            'children_age',
+            'price_children',
+            'senior_age',
+            'price_senior',
+            'price_student',
+            'age_restriction',
+            'ticket_release_date',
+            'tickets_remaining',
+            'additional_ticket_types',
+            'price_range',
+            'additional_ticket_retailers',
+            'booking_group',
+            'price_information',
+            'ticket_includes',
+            'membership_cards'
+        ];
+
+        $bookingInfo = $this->extractMetaFields($meta, $fields);
+
+        $priceFields = [
+            'price_adult',
+            'price_children',
+            'price_senior',
+            'price_student'
+        ];
+
+        foreach($priceFields as $priceField) {
+            if(isset($bookingInfo[$priceField])) {
+                $bookingInfo[$priceField] = [
+                    'price'         => $bookingInfo[$priceField],
+                    'formatted_price'  => $this->formatPrice($bookingInfo[$priceField]),
+                ];
+            }
+        }
+
+        return $bookingInfo;
     }
 
     public function formatPostDate($date, $postId, $postType)
