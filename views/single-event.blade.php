@@ -5,26 +5,51 @@
 <div class="o-grid u-margin__top--4">
     @if(!empty($event['image_src']))
 
-        <div class="o-grid-12 o-grid-8@lg">
-            @image([
-                'src'=> $event['image_src'],
+        <div class="o-grid-12">
+            @segment([
+                'layout'            => 'full-width',
+                'image'             => $event['image_src'],
+                'background'        => 'primary',
+                'textColor'         => 'light',
+                'overlay'           => 'dark',
+                'classList'         => ['modularity-event-hero'],
+                'textAlignment'     => 'center',
+                'title'             => get_the_title(),
+                'subTitle'          => 123,
+                'content'           => $event['occasion']['formatted'] ?? false,
             ])
-            @endimage
+            {{-- <div class="u-display--flex u-align-items--center u-flex-direction--column">
+                @typography(['variant' => 'h2', 'element' => 'span', 'classList' => ['c-segment__title']])
+                    {{_e('Event', 'event-integration')}}
+                @endtypography
+
+                @typography(['variant' => 'h1', 'element' => 'h1', 'classList' => ['c-segment__title', 'u-margin--0']])
+                    {{ the_title() }}
+                @endtypography
+
+                @if(!empty($event['occasion']))
+                    @typography(['variant' => 'h2', 'element' => 'span', 'classList' => ['c-segment__text']])
+                        {{ $event['occasion']['formatted'] }}
+                    @endtypography
+                @endif
+            </div> --}}
+            @endsegment
         </div>
     @endif
-
-    @if(!empty($event['occasion']))
-        <div class="o-grid-12 o-grid-8@lg modularity-event-heading">
-            <div class="modularity-event-date-box">
-                @typography(['variant' => 'h1', 'element' => 'span'])
-                    {{ $event['occasion']['date_parts']['date'] }}
-                @endtypography
-
-                @typography(['variant' => 'h4', 'element' => 'span'])
-                    {{ $event['occasion']['date_parts']['month_short'] }}
-                @endtypography
-            </div>
-
+    <div class="o-grid-12 o-grid-8@lg">
+        <div class="modularity-event-heading">
+            @if(!empty($event['occasion']))
+                <div class="modularity-event-date-box">
+                    @typography(['element' => 'span'])
+                        {{ $event['occasion']['date_parts']['date'] }}
+                    @endtypography
+    
+                    @typography(['element' => 'span'])
+                        {{ $event['occasion']['date_parts']['month_short'] }}
+                    @endtypography
+                </div>
+            @endif
+            
             @typography([
                 'variant' => 'h1',
                 'element' => 'span',
@@ -32,44 +57,19 @@
             ])
                 {{ the_title() }}
             @endtypography
-
         </div>
-    @endif
 
-    <div class="o-grid-12 o-grid-8@lg">
-        @if (!empty($event['occasion']['formatted']))
-            @typography(['variant' => 'h4', 'element' => 'h4'])
-                {{ $event['occasion']['formatted'] }}
-            @endtypography
+        <div class="modularity-event-content">
+            @if(!empty($event['introText']))
+                <strong>{!! $event['introText'] !!}</strong>
+            @endif
 
+            @include('partials.ticket')
 
-        @endif
-
-        @if ($event['location'])
-            @typography(['variant' => 'h4', 'element' => 'h4'])
-                {{ $event['location']['title'] }}
-            @endtypography
-        @endif
-
-        @if($event['booking_link'])
-            @button([
-                'color' => 'primary',
-                'style' => 'filled',
-                'href' => $event['booking_link'],
-                'classList' => ['u-margin__top--3']
-            ])
-            {{_e('Book tickets now', 'event-integration')}}
-            @endbutton
-        @endif
-    </div>
-
-    <div class="o-grid-12 o-grid-8@lg">
-        @if (!empty(get_extended($post->post_content)['main']) && !empty(get_extended($post->post_content)['extended']))
-            {!! apply_filters('the_lead', get_extended($post->post_content)['main']) !!}
-            {!! apply_filters('the_content', get_extended($post->post_content)['extended']) !!}
-        @else
-            {!! apply_filters('the_content', $post->post_content) !!}
-        @endif
+            @if(!empty($event['content']))
+                {!! $event['content'] !!}
+            @endif
+        </div>
 
         @if($event['age_group'])
             <div class="u-margin__top--3">
@@ -111,7 +111,8 @@
     </div>
 
     <div class="o-grid-12 o-grid-4@lg">
-            {!! do_shortcode('[single_event_accordion]') !!}
+        @include('partials.right-sidebar')
+        {!! do_shortcode('[single_event_accordion]') !!}
     </div>
 </div>
 </div>
