@@ -159,11 +159,12 @@ class QueryEvents
         $completeQuery = $wpdb->prepare($query, $post_id);
         $occasions = $wpdb->get_results($completeQuery);
 
-        // Unserialize array strings
-        foreach ($occasions as $occasion) {
+        // Unserialize array strings and format date
+        foreach ($occasions as $key => &$occasion) {
             foreach ($occasion as &$field) {
                 $field = maybe_unserialize($field);
             }
+            $occasion->formatted = \EventManagerIntegration\App::formatEventDate($occasion->start_date, $occasion->end_date);
         }
 
         return $occasions;
