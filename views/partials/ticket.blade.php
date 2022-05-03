@@ -1,7 +1,6 @@
-@card([
-    'classList' => ['u-margin__top--5']
-])
+@card([])
     <div class="c-card__body">
+
         @include('partials.heading', ['heading' => __('Ticket', 'event-integration')])
 
         @if($bookingInfo['price_information'])

@@ -9,7 +9,7 @@
             
             @if($contactInfo['contact_phone'])
                 <li>
-                    {{ _e('Phone:', 'event-integration') }}
+                    {{ __('Phone:', 'event-integration') }}
                     @link(['href' => 'tel:' . $contactInfo['contact_phone']])
                         {{ $contactInfo['contact_phone'] }}
                     @endlink
@@ -18,7 +18,7 @@
             
             @if($contactInfo['contact_email'])
                 <li>
-                    {{ _e('E-mail:', 'event-integration') }}
+                    {{ __('E-mail:', 'event-integration') }}
                     @link(['href' => 'mailto:' . $contactInfo['contact_email']])
                         {{ $contactInfo['contact_email'] }}
                     @endlink
