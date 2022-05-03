@@ -91,23 +91,9 @@ class SingleEventData
             }
         }
 
-        $singleOccasion['duration_formatted'] = self::formatDuration($singleOccasion['start_date'], $singleOccasion['end_date']);
+        $singleOccasion['duration_formatted'] = human_time_diff(strtotime($singleOccasion['start_date']), strtotime($singleOccasion['end_date']));
 
         return $singleOccasion;
-    }
-
-    /**
-     * Format the duration from start to end. E.g 1 hour
-     * @param  array  $occasions  All occasions of an event
-     * @param  string $dateFormat event start date
-     * @return string/boolean
-     */
-    public static function formatDuration($start, $end)
-    {
-        $start = new \DateTime($start);
-        $end = new \DateTime($end);
-        $interval = $start->diff($end);
-        return $interval->format('%h hours');
     }
 
     /**
