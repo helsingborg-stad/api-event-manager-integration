@@ -118,7 +118,8 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         $eventData['cancelled'] = !empty($eventData['occasion']['status']) && $eventData['occasion']['status'] === 'cancelled' ? __('Cancelled', 'event-integration') : null;
         $eventData['rescheduled'] = !empty($eventData['occasion']['status']) && $eventData['occasion']['status'] === 'rescheduled' ? __('Rescheduled', 'event-integration') : null;
         $eventData['exception_information'] = !empty($eventData['occasion']['exception_information']) ? $eventData['occasion']['exception_information'] : null;
-        
+        $eventData['eventArchive'] = add_query_arg('s', $post->post_title, get_post_type_archive_link(self::$postTypeSlug));
+
         $extendedContent = get_extended(get_the_content($post->ID));
         $eventData['introText'] = '';
         if(!empty($extendedContent['extended'])) {
@@ -147,6 +148,8 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         }
 
         $eventData['location'] = \EventManagerIntegration\Helper\SingleEventData::getEventLocation($post->ID);
+        $eventData['organizers'] = $meta['organizers'] ?? [];
+        $eventData['supporters'] = $meta['supporters'] ?? [];
 
         $bookingLink = get_post_meta($post->ID, 'booking_link', true);
         $eventData['booking_link'] = !empty($bookingLink) ? $bookingLink : null;
@@ -162,12 +165,15 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         } elseif (!empty($ageGroupTo)) {
             $eventData['age_group'] = sprintf('%s %s %s', __('Up to', 'event-integration'), $ageGroupTo, __('years', 'event-integration'));
         }
+        
+        $locationInfo = is_array($meta['location']) ? $meta['location'] : [];
+        $locationInfo['additional_locations'] = $meta['additional_locations'] ?? null;
+        $locationInfo['accessibility'] = $meta['accessibility'] ?? null;
 
+        $data['locationInfo'] = $locationInfo;
         $data['contactInfo'] = $this->getContactInfo($meta);
         $data['bookingInfo'] = $this->getBookingInfo($meta);
-        $data['locationInfo'] = is_array($meta['location']) && !empty($meta['location']) ? $meta['location'] : null;
         $data['post'] = $post;
-        // $data['meta'] = $meta;
         $data['event'] = $eventData;
 
         return $data;
@@ -208,17 +214,6 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         ];
         
         return $this->extractMetaFields($meta, $fields);
-    }
-
-    public function formatPrice($price)
-    {
-        if ($price == 0) {
-            $price = _x('Free', 'Free event entrance', 'event-integration');
-        } elseif ($price !== '') {
-            $price .= ' kr';
-        }
-
-        return $price;
     }
 
     // public function getPriceInfo($meta) {
@@ -276,7 +271,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             if(isset($bookingInfo[$priceField])) {
                 $bookingInfo[$priceField] = [
                     'price'         => $bookingInfo[$priceField],
-                    'formatted_price'  => $this->formatPrice($bookingInfo[$priceField]),
+                    'formatted_price'  => \EventManagerIntegration\App::formatPrice($bookingInfo[$priceField]),
                 ];
             }
         }
