@@ -17,7 +17,7 @@
                         'href' => $card['website'],
                         'color' => 'primary',
                         'style' => 'filled',
-                        'icon' => 'arrow_right',
+                        'icon' => 'arrow_forward',
                         'classList' => ['u-margin__top--2']
                     ])
                     @endbutton
