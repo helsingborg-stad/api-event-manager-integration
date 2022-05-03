@@ -193,6 +193,23 @@ class App
         return $date;
     }
 
+
+    /**
+     * Format an event price
+     * @param  number $price The price to format
+     * @return string 
+     */
+    public static function formatPrice($price)
+    {
+        if ($price === 0) {
+            $price = _x('Free', 'Free event entrance', 'event-integration');
+        } elseif ($price !== '') {
+            $price .= ' kr';
+        }
+
+        return $price;
+    }
+
     /**
      * Import publishing groups from Event Manager API
      * @return void
