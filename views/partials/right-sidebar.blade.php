@@ -5,3 +5,5 @@
 @include('partials.organizer')
 {{-- @include('partials.date') --}}
 @includeWhen(!empty($contactInfo), 'partials.contacts')
+@include('partials.taxonomies')
+@include('partials.links')

@@ -1,6 +1,6 @@
 @card([])
     <div class="c-card__body">
-        @include('partials.heading', ['heading' => __('Organizer', 'event-integration')])
+        @include('partials.heading', ['heading' => $lang->organizer])
 
         @if(!empty($event['organizers']))
             @foreach($event['organizers'] as $organizer)
@@ -37,7 +37,7 @@
 
         @if(!empty($event['supporters']))
             @typography([])
-                <strong>{{ __('Supporters', 'event-integration') }}</strong>
+                <strong>{{ $lang->supporters }}</strong>
             @endtypography
 
             <ul>

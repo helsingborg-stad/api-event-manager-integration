@@ -1,6 +1,6 @@
 @card([])
     <div class="c-card__body">
-        @include('partials.heading', ['heading' => __('Contact', 'event-integration')])
+        @include('partials.heading', ['heading' => $lang->contact])
         
         <ul class="unlist u-margin__top--2">
             @if($contactInfo['contact_information'])
@@ -9,7 +9,7 @@
             
             @if($contactInfo['contact_phone'])
                 <li>
-                    {{ __('Phone:', 'event-integration') }}
+                    {{ $lang->contactPhone }}
                     @link(['href' => 'tel:' . $contactInfo['contact_phone']])
                         {{ $contactInfo['contact_phone'] }}
                     @endlink
@@ -18,7 +18,7 @@
             
             @if($contactInfo['contact_email'])
                 <li>
-                    {{ __('E-mail:', 'event-integration') }}
+                    {{ $lang->contactEmail }}
                     @link(['href' => 'mailto:' . $contactInfo['contact_email']])
                         {{ $contactInfo['contact_email'] }}
                     @endlink

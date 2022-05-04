@@ -1,28 +1,28 @@
 <ul>
     @if($bookingInfo['price_adult']['formatted_price'])
         <li>
-            <strong>{{ _e('Standard:', 'event-integration') }}</strong>
+            <strong>{{ $lang->priceStandard }}</strong>
             {{ $bookingInfo['price_adult']['formatted_price'] }}
         </li>
     @endif
 
     @if($bookingInfo['price_children']['formatted_price'])
         <li>
-            <strong>{{ sprintf(__('Children (below %d years):', 'event-integration'), $bookingInfo['children_age']) }}</strong>
+            <strong>{{ sprintf($lang->priceChildren, $bookingInfo['children_age']) }}</strong>
             {{ $bookingInfo['price_children']['formatted_price'] }}
         </li>
     @endif
 
     @if($bookingInfo['price_senior']['formatted_price'])
         <li>
-            <strong>{{ sprintf(__('Seniors (above %d years):', 'event-integration'), $bookingInfo['senior_age']) }}</strong>
+            <strong>{{ sprintf($lang->priceSeniors, $bookingInfo['senior_age']) }}</strong>
             {{ $bookingInfo['price_senior']['formatted_price'] }}
         </li>
     @endif
 
     @if($bookingInfo['price_student']['formatted_price'])
         <li>
-            <strong>{{ _e('Students:', 'event-integration') }}</strong>
+            <strong>{{ $lang->priceStudents }}</strong>
             {{ $bookingInfo['price_student']['formatted_price'] }}
         </li>
     @endif
@@ -30,8 +30,9 @@
 
 @if($bookingInfo['membership_cards'])
     @typography([])
-        <strong>{{ _e('Included in membership cards', 'event-integration') }}</strong>
+        <strong>{{ $lang->membershipCardsIncluded }}</strong>
     @endtypography
+
     <ul class="unlist">
         @foreach($bookingInfo['membership_cards'] as $card)
             <li>{{ $card['post_title'] }}</li>
@@ -41,14 +42,14 @@
 
 @if(!empty($bookingInfo['booking_group']) && is_array($bookingInfo['booking_group']))
     @typography([])
-        <strong>{{ _e('Group prices', 'event-integration') }}</strong>
+        <strong>{{ $lang->priceGroups }}</strong>
     @endtypography
 
     <ul>
         @foreach ($bookingInfo['booking_group'] as $group)
             <li>
                 {{ sprintf(
-                    __('%d to %d people: %s', 'event-integration'),
+                    $lang->priceGroupsRange,
                     $group['min_persons'],
                     $group['max_persons'],
                     $group['price_group']
@@ -64,30 +65,30 @@
         'variant'   => 'h3',
         'classList' => ['c-card__heading', 'u-margin__top--2']
     ])
-        <strong>{{ _e('Price range', 'event-integration') }}</strong>
+        {{ $lang->priceRange }}
     @endtypography
     <ul>
         @if($bookingInfo['price_range']['seated_minimum_price'])
             <li>
-                <strong>{{ __('Seated minimum price:', 'event-integration') }}</strong> {{ $bookingInfo['price_range']['seated_minimum_price'] }}
+                <strong>{{ $lang->priceSeatedMin }}</strong> {{ $bookingInfo['price_range']['seated_minimum_price'] }}
             </li>
         @endif
 
         @if($bookingInfo['price_range']['seated_maximum_price'])
             <li>
-                <strong>{{ __('Seated maximum price:', 'event-integration') }}</strong> {{ $bookingInfo['price_range']['seated_maximum_price'] }}
+                <strong>{{ $lang->priceSeatedMax }}</strong> {{ $bookingInfo['price_range']['seated_maximum_price'] }}
             </li>
         @endif
 
         @if($bookingInfo['price_range']['standing_minimum_price'])
             <li>
-                <strong>{{ __('Standing minimum price:', 'event-integration') }}</strong> {{ $bookingInfo['price_range']['standing_minimum_price'] }}
+                <strong>{{ $lang->priceStandingMin }}</strong> {{ $bookingInfo['price_range']['standing_minimum_price'] }}
             </li>
         @endif
 
         @if($bookingInfo['price_range']['standing_maximum_price'])
             <li>
-                <strong>{{ __('Standing maximum price:', 'event-integration') }}</strong> {{ $bookingInfo['price_range']['standing_maximum_price'] }}
+                <strong>{{ $lang->priceStandingMax }}</strong> {{ $bookingInfo['price_range']['standing_maximum_price'] }}
             </li>
         @endif
     </ul>
@@ -99,7 +100,7 @@
         'variant'   => 'h3',
         'classList' => ['c-card__heading', 'u-margin__top--2']
     ])
-        <strong>{{ _e('Ticket retailers', 'event-integration') }}</strong>
+        {{ $lang->ticketRetailers }}
     @endtypography
 
     @if(!empty($bookingInfo['additional_ticket_retailers']) && is_array($bookingInfo['additional_ticket_retailers']))
@@ -121,14 +122,14 @@
 
                 @if(!empty($retailer['ticket_release_date']))
                     <li>
-                        <strong>{{ __('Ticket release date', 'event-integration') }}</strong>
+                        <strong>{{ $lang->ticketReleaseDate }}</strong>
                         {{ $retailer['ticket_release_date'] }}
                     </li>
                 @endif
 
                 @if(!empty($retailer['ticket_stop_date']))
                     <li>
-                        <strong>{{ __('Ticket stop date', 'event-integration') }}</strong>
+                        <strong>{{ $lang->ticketStopDate }}</strong>
                         {{ $retailer['ticket_stop_date'] }}
                     </li>
                 @endif

@@ -11,9 +11,9 @@
                         ])
                             {{ $occasion->formatted }}
                             @if($occassion->status === 'cancelled')
-                                - <strong>{{ __('Cancelled', 'event-integration') }}</strong>
+                                - <strong>{{ $lang->cancelled }}</strong>
                             @elseif($occassion->status === 'rescheduled')
-                                - <strong>{{ __('Rescheduled', 'event-integration') }}</strong>
+                                - <strong>{{ $lang->rescheduled }}</strong>
                             @endif
                         @endlink
                     </li>
@@ -25,7 +25,7 @@
                     @link([
                         'href' => $event['eventArchive']
                     ])
-                        {{ __('Show all occasions', 'event-integration') }}
+                        {{ $lang->occasionShowAll }}
                     @endlink
                 @endtypography
             @endif
@@ -33,23 +33,22 @@
 
         <ul class="unlist u-margin__top--3">
             @if ($event['occasion']['duration_formatted'])
-                <li><strong>{{ __('Duration:', 'event-integration') }}</strong> {{ $event['occasion']['duration_formatted'] }}</li>
+                <li><strong>{{ $lang->occasionDuration }}</strong> {{ $event['occasion']['duration_formatted'] }}</li>
             @endif
 
             @if ($locationInfo)
-                <li><strong>{{ __('Location:', 'event-integration') }}</strong> {{ $locationInfo['title'] }}</li>
+                <li><strong>{{ $lang->location }}</strong> {{ $locationInfo['title'] }}</li>
             @endif
 
 
             @if($event['age_group'])
-                <li><strong>{{ __('Age:', 'event-integration') }}</strong> {{ $event['age_group'] }}</li>
+                <li><strong>{{ $lang->age }}</strong> {{ $event['age_group'] }}</li>
             @endif
-
         </ul>
         
         @if($locationInfo['accessibility'])
             <div class="u-margin__top--3">
-                <strong>{{ __('Accessibility on the location', 'event-integration') }}</strong>
+                <strong>{{ $lang->locationAccessibility }}</strong>
                 <ul>
                     @foreach($locationInfo['accessibility'] as $accessibility)
                         <li>{{ $accessibility }}</li>
@@ -57,12 +56,13 @@
                 </ul>
             </div>
         @endif
+        
         @typography([
             'element'   => 'h2',
             'variant'   => 'h3',
             'classList' => ['c-card__heading', 'u-margin__top--2']
         ])
-            {{ __('Price', 'event-integration') }}
+            {{ $lang->price }}
         @endtypography
         @include('partials.price')
     </div>
