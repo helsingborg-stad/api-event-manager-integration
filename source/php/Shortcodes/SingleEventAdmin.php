@@ -6,7 +6,7 @@
 
 namespace EventManagerIntegration\Shortcodes;
 
-class SingleEvent
+class SingleEventAdmin
 {
     public static $postTypeSlug = 'event';
 
