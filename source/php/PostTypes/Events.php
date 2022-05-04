@@ -169,14 +169,82 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         $locationInfo = is_array($meta['location']) ? $meta['location'] : [];
         $locationInfo['additional_locations'] = $meta['additional_locations'] ?? null;
         $locationInfo['accessibility'] = $meta['accessibility'] ?? null;
+        $locationInfo['groups'] = $meta['groups'] ?? null;
+        $locationInfo['categories'] = $meta['categories'] ?? null;
+        $locationInfo['tags'] = $meta['tags'] ?? null;
 
         $data['locationInfo'] = $locationInfo;
         $data['contactInfo'] = $this->getContactInfo($meta);
         $data['bookingInfo'] = $this->getBookingInfo($meta);
         $data['post'] = $post;
+        $data['social'] = $this->getSocialLinks($meta);
         $data['event'] = $eventData;
 
+        $data['lang'] = (object) array(
+            'ticket'                    => __('Ticket', 'event-integration'),
+            'ticketIncludes'            => __('The ticket includes %s.', 'event-integration'),
+            'ticketBuy'                 => __('Buy ticket', 'event-integration'),
+            'ticketRetailers'           => __('Ticket retailers', 'event-integration'),
+            'ticketReleaseDate'         => __('Ticket release date', 'event-integration'),
+            'ticketStopDate'            => __('Ticket stop date', 'event-integration'),
+            'ticketTypes'               => __('Ticket types', 'event-integration'),
+            'ticketSeated'              => __('Seated', 'event-integration'),
+            'ticketStanding'            => __('Standing', 'event-integration'),
+            'price'                     => __('Accessibility on the location', 'event-integration'),
+            'priceStandard'             => __('Standard:', 'event-integration'),
+            'priceChildren'             => __('Children (below %d years):', 'event-integration'),
+            'priceSeniors'              => __('Seniors (above %d years):', 'event-integration'),
+            'priceStudents'             => __('Students:', 'event-integration'),
+            'priceGroups'               => __('Group prices', 'event-integration'),
+            'priceRange'                => __('Price range', 'event-integration'),
+            'priceGroupsRange'          => __('%d to %d people: %s', 'event-integration'),
+            'priceSeatedMin'            => __('Seated minimum price:', 'event-integration'),
+            'priceSeatedMax'            => __('Seated maximum price:', 'event-integration'),
+            'priceStandingMin'          => __('Standing minimum price:', 'event-integration'),
+            'priceStandingMax'          => __('Standing maximum price:', 'event-integration'),
+            'priceMin'                  => __('Minimum price:', 'event-integration'),
+            'priceMax'                  => __('Maximum price:', 'event-integration'),
+            'membershipCardsIncluded'   => __('Included in membership cards', 'event-integration'),
+            'organizer'                 => __('Organizer', 'event-integration'),
+            'supporters'                => __('Supporters', 'event-integration'),
+            'location'                  => __('Location', 'event-integration'),
+            'locationAccessibility'     => __('Accessibility on the location', 'event-integration'),
+            'locationOthers'            => __('Other locations', 'event-integration'),
+            'cancelled'                 => __('Cancelled', 'event-integration'),
+            'rescheduled'               => __('Rescheduled', 'event-integration'),
+            'occasionShowAll'           => __('Show all occasions', 'event-integration'),
+            'occasionDuration'          => __('Duration:', 'event-integration'),
+            'age'                       => __('Age:', 'event-integration'),
+            'date'                      => __('Date', 'event-integration'),
+            'contact'                   => __('Contact', 'event-integration'),
+            'contactPhone'              => __('Phone:', 'event-integration'),
+            'contactEmail'              => __('E-mail:', 'event-integration'),
+            'groups'                    => __('Groups', 'event-integration'),
+            'categories'                => __('Categories', 'event-integration'),
+            'tags'                      => __('Tags', 'event-integration'),
+            'socialLinks'               => __('Social links', 'event-integration')
+        );
+
         return $data;
+    }
+
+    public function getSocialLinks($meta) {
+        $fields = [
+            'facebook' => 'Facebook',
+            'twitter' => 'Twitter',
+            'instagram' => 'Instagram',
+            'google_music' => 'Google Music',
+            'spotify' => 'Spotify',
+            'soundcloud' => 'Soundcloud',
+            'deezer' => 'Deezer',
+            'youtube' => 'YouTube',
+            'vimeo' => 'Vimeo',
+        ];
+        
+        return [
+            'links' => $this->extractMetaFields($meta, array_keys($fields)),
+            'labels' => $fields
+        ];
     }
 
     public function extractMetaFields($meta, $fields)
@@ -215,24 +283,6 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         
         return $this->extractMetaFields($meta, $fields);
     }
-
-    // public function getPriceInfo($meta) {
-    //     $priceInfo = [];
-
-    //     $priceInfo['adults'] = sprintf(__('Price: %s', 'event-integration'), $bookingInfo['price_adult']);
-
-    //     if(($bookingInfo['price_children'])
-    //         $priceInfo['children'] = sprintf(__('Children (up to %s years old): %s', 'event-integration'), $bookingInfo['children_age'], $bookingInfo['price_children']);
-    //     @endif
-
-    //     @if($bookingInfo['price_senior'])
-    //         <li>{{ printf(__('Seniors (from %s years old): %s', 'event-integration'), $bookingInfo['senior_age'], $bookingInfo['price_senior']) }}</li>
-    //     @endif
-
-    //     @if($bookingInfo['price_senior'])
-    //         <li>{{ printf(__('Students: %s', 'event-integration'), $bookingInfo['price_student']) }}</li>
-    //     @endif
-    // }
 
     public function getBookingInfo($meta)
     {
