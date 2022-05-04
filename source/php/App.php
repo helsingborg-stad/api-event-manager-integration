@@ -24,7 +24,7 @@ class App
         new Admin\Options();
         new Admin\AdminDisplayEvent();
         new Admin\MediaLibrary();
-        new Shortcodes\SingleEvent();
+        new Shortcodes\SingleEventAdmin();
         new Shortcodes\SubmitForm();
 
         /* Register Modularity v2 modules */
