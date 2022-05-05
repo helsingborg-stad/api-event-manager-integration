@@ -190,7 +190,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             'ticketTypes'               => __('Ticket types', 'event-integration'),
             'ticketSeated'              => __('Seated', 'event-integration'),
             'ticketStanding'            => __('Standing', 'event-integration'),
-            'price'                     => __('Accessibility on the location', 'event-integration'),
+            'price'                     => __('Price', 'event-integration'),
             'priceStandard'             => __('Standard:', 'event-integration'),
             'priceChildren'             => __('Children (below %d years):', 'event-integration'),
             'priceSeniors'              => __('Seniors (above %d years):', 'event-integration'),
