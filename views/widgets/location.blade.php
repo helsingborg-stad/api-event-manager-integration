@@ -7,7 +7,6 @@
                 <div class="u-margin__top--2" id="event-map" data-lat="{{$locationInfo['latitude']}}" data-lng="{{$locationInfo['longitude']}}" data-title="{{$locationInfo['title']}}"></div>
             @endif
 
-
             <ul class="unlist">
                 <li>{{ $locationInfo['title'] }}</li>
                 <li>{{ $locationInfo['street_address'] }}</li>
