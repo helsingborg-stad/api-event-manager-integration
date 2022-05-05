@@ -1,55 +1,18 @@
+$single-event-color-map-border: var(--color-border, #e5e5e5) !default;
+$single-event-width-map-border: var(--border-width-card, 2px) !default;
+
 .single-event {
-    .date-box {
-        span {
-            color: #fff;
-        }
-    }
-    .modularity-event-heading {
-        display: inline-flex;
-    
-        .modularity-event-date-box {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: flex-end;
-            width: 94px;
-            height: 94px;
-            padding: 12px;
-            background-color: #000;
-            color: #fff;
-            text-transform: uppercase;
-            gap: 12px;
-            font-size: 24px;
-            line-height: 24px;
-        }
-    
-        .modularity-event-title {
-            align-self: center;
-            margin-left: 16px;
-        }
-    }
-    
-    .modularity-event-content p:first-child {
-        font-weight: bold;
-    }
-    
     .modularity-event-hero {
         padding-top: 20%;
         padding-bottom: 20%;
         gap: 0;
     }
     
-    .modularity-event-accordion {
-        ul {
-            list-style: none;
-        }
-    }
-
     #event-map {
         height: 250px;
         width: 100%;
         border-radius: 3px;
         margin: 0 0 15px 0;
-        border: 1px solid #e5e5e5;
+        border: 1px solid $single-event-color-map-border;
     }
 }
