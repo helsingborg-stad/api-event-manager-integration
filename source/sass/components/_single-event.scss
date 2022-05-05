@@ -1,5 +1,6 @@
-$single-event-color-map-border: var(--color-border, #e5e5e5) !default;
-$single-event-width-map-border: var(--border-width-card, 2px) !default;
+$single-event-map-border-color: var(--color-border, #e5e5e5) !default;
+$single-event-map-border-width: var(--border-width-medium, 2px) !default;
+$single-event-map-border-radius: var(--radius-md, var(--base, 8px)) !default;
 
 .single-event {
     .modularity-event-hero {
@@ -11,8 +12,8 @@ $single-event-width-map-border: var(--border-width-card, 2px) !default;
     #event-map {
         height: 250px;
         width: 100%;
-        border-radius: 3px;
-        margin: 0 0 15px 0;
-        border: 1px solid $single-event-color-map-border;
+        border-radius: $single-event-map-border-radius;
+        margin: 0 0 calc(var(--base, 8px) * 2) 0;
+        border: $single-event-map-border-width solid $single-event-map-border-color;
     }
 }
