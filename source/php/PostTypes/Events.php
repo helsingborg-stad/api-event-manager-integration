@@ -112,10 +112,28 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
 
         // Gather event data
         $eventData = array();
+        $meta = $this->getMeta($post->ID);
         $eventData['occasion'] = \EventManagerIntegration\Helper\SingleEventData::singleEventDate();
+        $eventData['occasions'] = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($post->ID);
         $eventData['cancelled'] = !empty($eventData['occasion']['status']) && $eventData['occasion']['status'] === 'cancelled' ? __('Cancelled', 'event-integration') : null;
         $eventData['rescheduled'] = !empty($eventData['occasion']['status']) && $eventData['occasion']['status'] === 'rescheduled' ? __('Rescheduled', 'event-integration') : null;
         $eventData['exception_information'] = !empty($eventData['occasion']['exception_information']) ? $eventData['occasion']['exception_information'] : null;
+        $eventData['eventArchive'] = add_query_arg('s', urlencode($post->post_title), get_post_type_archive_link(self::$postTypeSlug));
+
+        $extendedContent = get_extended(get_the_content($post->ID));
+        $eventData['introText'] = '';
+        if(!empty($extendedContent['extended'])) {
+            $eventData['content'] = $extendedContent['main'];
+            $eventData['introText'] = $extendedContent['extended'];
+        } else {
+            // Split content into paragraphs and put first paragraph in separate variable        
+            $paragraphs = $this->getParagraphs($extendedContent['main']);
+            if(isset($paragraphs[0])) {
+                $eventData['introText'] = $paragraphs[0];
+                unset($paragraphs[0]);
+            }
+            $eventData['content'] = implode('', $paragraphs);
+        }
 
         if (function_exists('municipio_get_thumbnail_source')) {
             $eventData['image_src'] = municipio_get_thumbnail_source(
@@ -130,6 +148,8 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         }
 
         $eventData['location'] = \EventManagerIntegration\Helper\SingleEventData::getEventLocation($post->ID);
+        $eventData['organizers'] = $meta['organizers'] ?? [];
+        $eventData['supporters'] = $meta['supporters'] ?? [];
 
         $bookingLink = get_post_meta($post->ID, 'booking_link', true);
         $eventData['booking_link'] = !empty($bookingLink) ? $bookingLink : null;
@@ -145,11 +165,168 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         } elseif (!empty($ageGroupTo)) {
             $eventData['age_group'] = sprintf('%s %s %s', __('Up to', 'event-integration'), $ageGroupTo, __('years', 'event-integration'));
         }
+        
+        $locationInfo = is_array($meta['location']) ? $meta['location'] : [];
+        $locationInfo['additional_locations'] = $meta['additional_locations'] ?? null;
+        $locationInfo['accessibility'] = $meta['accessibility'] ?? null;
+        $locationInfo['groups'] = $meta['groups'] ?? null;
+        $locationInfo['categories'] = $meta['categories'] ?? null;
+        $locationInfo['tags'] = $meta['tags'] ?? null;
 
+        $data['locationInfo'] = $locationInfo;
+        $data['contactInfo'] = $this->getContactInfo($meta);
+        $data['bookingInfo'] = $this->getBookingInfo($meta);
         $data['post'] = $post;
+        $data['social'] = $this->getSocialLinks($meta);
         $data['event'] = $eventData;
 
+        $data['lang'] = (object) array(
+            'ticket'                    => __('Ticket', 'event-integration'),
+            'ticketIncludes'            => __('The ticket includes %s.', 'event-integration'),
+            'ticketBuy'                 => __('Buy ticket', 'event-integration'),
+            'ticketRetailers'           => __('Ticket retailers', 'event-integration'),
+            'ticketReleaseDate'         => __('Ticket release date', 'event-integration'),
+            'ticketStopDate'            => __('Ticket stop date', 'event-integration'),
+            'ticketTypes'               => __('Ticket types', 'event-integration'),
+            'ticketSeated'              => __('Seated', 'event-integration'),
+            'ticketStanding'            => __('Standing', 'event-integration'),
+            'price'                     => __('Price', 'event-integration'),
+            'priceStandard'             => __('Standard:', 'event-integration'),
+            'priceChildren'             => __('Children (below %d years):', 'event-integration'),
+            'priceSeniors'              => __('Seniors (above %d years):', 'event-integration'),
+            'priceStudents'             => __('Students:', 'event-integration'),
+            'priceGroups'               => __('Group prices', 'event-integration'),
+            'priceRange'                => __('Price range', 'event-integration'),
+            'priceGroupsRange'          => __('%d to %d people: %s', 'event-integration'),
+            'priceSeatedMin'            => __('Seated minimum price:', 'event-integration'),
+            'priceSeatedMax'            => __('Seated maximum price:', 'event-integration'),
+            'priceStandingMin'          => __('Standing minimum price:', 'event-integration'),
+            'priceStandingMax'          => __('Standing maximum price:', 'event-integration'),
+            'priceMin'                  => __('Minimum price:', 'event-integration'),
+            'priceMax'                  => __('Maximum price:', 'event-integration'),
+            'membershipCardsIncluded'   => __('Included in membership cards', 'event-integration'),
+            'organizer'                 => __('Organizer', 'event-integration'),
+            'supporters'                => __('Supporters', 'event-integration'),
+            'location'                  => __('Location', 'event-integration'),
+            'locationAccessibility'     => __('Accessibility on the location', 'event-integration'),
+            'locationOthers'            => __('Other locations', 'event-integration'),
+            'cancelled'                 => __('Cancelled', 'event-integration'),
+            'rescheduled'               => __('Rescheduled', 'event-integration'),
+            'occasionShowAll'           => __('Show all occasions', 'event-integration'),
+            'occasionDuration'          => __('Duration:', 'event-integration'),
+            'age'                       => __('Age:', 'event-integration'),
+            'date'                      => __('Date', 'event-integration'),
+            'contact'                   => __('Contact', 'event-integration'),
+            'contactPhone'              => __('Phone:', 'event-integration'),
+            'contactEmail'              => __('E-mail:', 'event-integration'),
+            'groups'                    => __('Groups', 'event-integration'),
+            'categories'                => __('Categories', 'event-integration'),
+            'tags'                      => __('Tags', 'event-integration'),
+            'socialLinks'               => __('Social links', 'event-integration')
+        );
+
         return $data;
+    }
+
+    public function getSocialLinks($meta) {
+        $fields = [
+            'facebook' => 'Facebook',
+            'twitter' => 'Twitter',
+            'instagram' => 'Instagram',
+            'google_music' => 'Google Music',
+            'spotify' => 'Spotify',
+            'soundcloud' => 'Soundcloud',
+            'deezer' => 'Deezer',
+            'youtube' => 'YouTube',
+            'vimeo' => 'Vimeo',
+        ];
+        
+        return [
+            'links' => $this->extractMetaFields($meta, array_keys($fields)),
+            'labels' => $fields
+        ];
+    }
+
+    public function extractMetaFields($meta, $fields)
+    {
+        $extracted = [];
+        foreach($fields as $field) {
+            if(isset($meta[$field])) {
+                $extracted[$field] = $meta[$field];
+            }
+        }
+        return $extracted;
+    }
+
+    public function getMeta($id)
+    {
+        $meta = [];
+        foreach(get_post_meta($id) ?: [] as $key => $value) {
+            $meta[$key] = isset($value[0]) ? maybe_unserialize($value[0]) : $value;
+        }
+        return $meta;
+    }
+
+    public function getParagraphs($text)
+    {
+        preg_match_all("/<\s*p[^>]*>([^<]*)<\s*\/\s*p\s*>/", $text, $matches);
+        return $matches[0] ?? [];
+    }
+
+    public function getContactInfo($meta)
+    {
+        $fields = [
+            'contact_information',
+            'contact_email',
+            'contact_phone'
+        ];
+        
+        return $this->extractMetaFields($meta, $fields);
+    }
+
+    public function getBookingInfo($meta)
+    {
+        $fields = [
+            'booking_link',
+            'booking_phone',
+            'booking_email',
+            'price_adult',
+            'children_age',
+            'price_children',
+            'senior_age',
+            'price_senior',
+            'price_student',
+            'age_restriction',
+            'ticket_release_date',
+            'tickets_remaining',
+            'additional_ticket_types',
+            'price_range',
+            'additional_ticket_retailers',
+            'booking_group',
+            'price_information',
+            'ticket_includes',
+            'membership_cards'
+        ];
+
+        $bookingInfo = $this->extractMetaFields($meta, $fields);
+
+        $priceFields = [
+            'price_adult',
+            'price_children',
+            'price_senior',
+            'price_student'
+        ];
+
+        foreach($priceFields as $priceField) {
+            if(isset($bookingInfo[$priceField])) {
+                $bookingInfo[$priceField] = [
+                    'price'         => $bookingInfo[$priceField],
+                    'formatted_price'  => \EventManagerIntegration\App::formatPrice($bookingInfo[$priceField]),
+                ];
+            }
+        }
+
+        return $bookingInfo;
     }
 
     public function formatPostDate($date, $postId, $postType)

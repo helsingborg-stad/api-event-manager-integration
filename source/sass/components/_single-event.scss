@@ -1,33 +1,19 @@
+$single-event-map-border-color: var(--color-border, #e5e5e5) !default;
+$single-event-map-border-width: var(--border-width-medium, 2px) !default;
+$single-event-map-border-radius: var(--radius-md, var(--base, 8px)) !default;
+
 .single-event {
-    .date-box {
-        span {
-            color: #fff;
-        }
+    .modularity-event-hero {
+        padding-top: 20%;
+        padding-bottom: 20%;
+        gap: 0;
     }
-}
-.modularity-event-heading {
-    display: inline-flex;
-
-    .modularity-event-date-box {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 64px;
-        height: 64px;
-        min-width: 64px;
-        min-height: 64px;
-        background-color: rgba(0,0,0,.05);
-    }
-
-    .modularity-event-title {
-        align-self: center;
-        margin-left: 16px;
-    }
-}
-
-.modularity-event-accordion {
-    ul {
-        list-style: none;
+    
+    #event-map {
+        height: 250px;
+        width: 100%;
+        border-radius: $single-event-map-border-radius;
+        margin: 0 0 calc(var(--base, 8px) * 2) 0;
+        border: $single-event-map-border-width solid $single-event-map-border-color;
     }
 }

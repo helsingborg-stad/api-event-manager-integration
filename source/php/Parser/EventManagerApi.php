@@ -6,6 +6,8 @@ use \EventManagerIntegration\Event as Event;
 
 class EventManagerApi extends \EventManagerIntegration\Parser
 {
+    // public $membershipCards;
+
     public function __construct($url)
     {
         parent::__construct($url);
@@ -49,6 +51,16 @@ class EventManagerApi extends \EventManagerIntegration\Parser
                     // Save events to database
                     foreach ($events as $event) {
                         $event['lang'] = !empty($event['lang']) ? $event['lang'] : $language;
+                        
+                        // Add additional membership card data
+                        if(isset($event['membership_cards']) && is_array($event['membership_cards']) && !empty($event['membership_cards'])) {
+                            foreach($event['membership_cards'] as $key => $card) {
+                                $cardData = $this->getMembershipCardById(($card->ID));
+                                if(isset($cardData['website'])) {
+                                    $event['membership_cards'][$key]['website'] = $cardData['website'];
+                                }
+                            }
+                        }
                         $this->saveEvent($event);
                         if (isset($event['id'])) {
                             $eventIds[] = $event['id'];
@@ -75,6 +87,62 @@ class EventManagerApi extends \EventManagerIntegration\Parser
 
         // Sync category translations
         \EventManagerIntegration\Helper\Translations::defineCategoryTranslations();
+    }
+
+    /**
+     * Get the data for a given membership card ID
+     * @param int $id The ID of the membership card
+     * @return array|boolean Card data if card id is found, false if nothing found
+     */
+    public function getMembershipCardById($id)
+    {
+        $membershipCards = $this->getMembershipCards();
+
+        if(is_array($membershipCards)) {
+            foreach($membershipCards as $card) {
+                if($card->ID === $id) {
+                    return $card;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Fetch memberships cards
+     * @return array|boolean
+     */
+    public function fetchMembershipCards()
+    {
+        // Check API url
+        if (!$apiUrl = get_field('event_api_url', 'option')) {
+            return false;
+        }
+
+        $apiUrl = untrailingslashit($apiUrl) . '/membership-card';
+        $membershipCards = \EventManagerIntegration\Parser::requestApi($apiUrl);
+
+        if(is_wp_error($membershipCards)) {
+            return false;
+        }
+
+        return $membershipCards;
+    }
+
+    /**
+     * Fetch memberships cards
+     * @return array|WP_ERROR
+     */
+    public function getMembershipCards()
+    {
+        if(isset($this->membershipCards)) {
+            return $this->membershipCards;
+        }
+
+        $this->membershipCards = $this->fetchMembershipCards();
+        
+        return $this->membershipCards;
     }
 
     /**

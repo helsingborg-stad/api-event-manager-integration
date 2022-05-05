@@ -24,7 +24,7 @@ class App
         new Admin\Options();
         new Admin\AdminDisplayEvent();
         new Admin\MediaLibrary();
-        new Shortcodes\SingleEvent();
+        new Shortcodes\SingleEventAdmin();
         new Shortcodes\SubmitForm();
 
         /* Register Modularity v2 modules */
@@ -191,6 +191,23 @@ class App
         $start = date('Y-m-d H:i:s', strtotime($door_time));
         $date = mysql2date('j F Y', $start, true) . ', ' . mysql2date('H:i', $start, true);
         return $date;
+    }
+
+
+    /**
+     * Format an event price
+     * @param  number $price The price to format
+     * @return string 
+     */
+    public static function formatPrice($price)
+    {
+        if ($price === 0) {
+            $price = _x('Free', 'Free event entrance', 'event-integration');
+        } elseif ($price !== '') {
+            $price .= ' kr';
+        }
+
+        return $price;
     }
 
     /**
