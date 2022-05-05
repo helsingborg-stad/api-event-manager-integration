@@ -54,7 +54,7 @@
         </div>
 
         <div class="o-grid-12 o-grid-4@lg o-grid">
-            @include('partials.right-sidebar')
+            @include('partials.sidebar-right')
         </div>
     </div>
 </div>
