@@ -4,7 +4,6 @@
 <div class="o-container">
     <div class="o-grid u-margin__top--4">
         @if(!empty($event['image_src']))
-
             <div class="o-grid-12">
                 @segment([
                     'layout'            => 'full-width',
@@ -22,23 +21,18 @@
             </div>
         @endif
         <div class="o-grid-12 o-grid-8@lg">
-            <div class="modularity-event-heading">
-                @if(!empty($event['occasion']))
-                    <div class="modularity-event-date-box">
-                        @typography(['element' => 'span'])
-                            {{ $event['occasion']['date_parts']['date'] }}
-                        @endtypography
-        
-                        @typography(['element' => 'span'])
-                            {{ $event['occasion']['date_parts']['month_short'] }}
-                        @endtypography
-                    </div>
+            <div class="modularity-event-heading u-display--inline-flex">
+                @if(isset($event['occasion']['formatted']))
+                    @datebadge([
+                        'date' => $event['occasion']['start_date']
+                    ])
+                    @enddatebadge
                 @endif
                 
                 @typography([
                     'variant' => 'h1',
                     'element' => 'span',
-                    'classList' => ['modularity-event-title']
+                    'classList' => ['modularity-event-title', 'u-align-self--center', 'u-margin__left--2']
                 ])
                     {{ the_title() }}
                 @endtypography
@@ -51,7 +45,7 @@
                     <strong>{!! $event['introText'] !!}</strong>
                 @endif
 
-                @include('partials.ticket')
+                @include('widgets.ticket')
 
                 @if(!empty($event['content']))
                     {!! $event['content'] !!}
