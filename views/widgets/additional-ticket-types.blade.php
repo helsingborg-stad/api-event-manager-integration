@@ -1,7 +1,7 @@
 @if($bookingInfo['additional_ticket_types'] && !empty($bookingInfo['additional_ticket_types']))
     @card([])
         <div class="c-card__body">
-            @include('partials.heading', ['heading' => $lang->ticketTypes])
+            @include('partials.heading', ['heading' => $eventLang->ticketTypes])
 
             @if(!empty($bookingInfo['additional_ticket_types']) && is_array($bookingInfo['additional_ticket_types']))
                 @foreach ($bookingInfo['additional_ticket_types'] as $index => $ticketType)
@@ -14,20 +14,20 @@
                     <ul>
                         @if(!empty($ticketType['ticket_type']))
                             <li>
-                                <strong>{{ $ticketType['ticket_type'] === 'seated' ? $lang->ticketSeated : $lang->ticketStanding }}</strong>
+                                <strong>{{ $ticketType['ticket_type'] === 'seated' ? $eventLang->ticketSeated : $eventLang->ticketStanding }}</strong>
                             </li>
                         @endif
 
                         @if($ticketType['minimum_price'])
                             <li>
-                                <strong>{{ $lang->priceMin }}</strong>
+                                <strong>{{ $eventLang->priceMin }}</strong>
                                 {{ $ticketType['minimum_price'] }}
                             </li>
                         @endif
 
                         @if($ticketType['maximum_price'])
                             <li>
-                                <strong>{{ $lang->priceMax }}</strong>
+                                <strong>{{ $eventLang->priceMax }}</strong>
                                 {{ $ticketType['maximum_price'] }}
                             </li>
                         @endif

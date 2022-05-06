@@ -180,7 +180,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         $data['social'] = $this->getSocialLinks($meta);
         $data['event'] = $eventData;
 
-        $data['lang'] = (object) array(
+        $data['eventLang'] = (object) array(
             'ticket'                    => __('Ticket', 'event-integration'),
             'ticketIncludes'            => __('The ticket includes %s.', 'event-integration'),
             'ticketBuy'                 => __('Buy ticket', 'event-integration'),
@@ -228,7 +228,8 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         return $data;
     }
 
-    public function getSocialLinks($meta) {
+    public function getSocialLinks($meta)
+    {
         $fields = [
             'facebook' => 'Facebook',
             'twitter' => 'Twitter',

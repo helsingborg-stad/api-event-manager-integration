@@ -1,7 +1,7 @@
 @card([])
     <div class="c-card__body">
 
-        @include('partials.heading', ['heading' => $lang->ticket])
+        @include('partials.heading', ['heading' => $eventLang->ticket])
 
         @if($bookingInfo['price_information'])
             @typography
@@ -11,7 +11,7 @@
 
         @if($bookingInfo['ticket_includes'])
             @typography
-                {{ sprintf($lang->ticketIncludes, $bookingInfo['ticket_includes']) }}
+                {{ sprintf($eventLang->ticketIncludes, $bookingInfo['ticket_includes']) }}
             @endtypography
         @endif
         
@@ -23,7 +23,7 @@
                 'classList' => ['u-margin__top--3'],
                 'icon' => 'arrow_forward',
                 'fullWidth' => true,
-                'text' => $lang->ticketBuy
+                'text' => $eventLang->ticketBuy
             ])
             @endbutton
         @endif
