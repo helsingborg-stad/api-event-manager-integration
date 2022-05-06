@@ -1,6 +1,6 @@
 @card([])
     <div class="c-card__body">
-        @include('partials.heading', ['heading' => $lang->date])
+        @include('partials.heading', ['heading' => $eventLang->date])
 
         @if(is_array($event['occasions']))
             <ul>
@@ -11,9 +11,9 @@
                         ])
                             {{ $occasion->formatted }}
                             @if($occassion->status === 'cancelled')
-                                - <strong>{{ $lang->cancelled }}</strong>
+                                - <strong>{{ $eventLang->cancelled }}</strong>
                             @elseif($occassion->status === 'rescheduled')
-                                - <strong>{{ $lang->rescheduled }}</strong>
+                                - <strong>{{ $eventLang->rescheduled }}</strong>
                             @endif
                         @endlink
                     </li>
@@ -25,7 +25,7 @@
                     @link([
                         'href' => $event['eventArchive']
                     ])
-                        {{ $lang->occasionShowAll }}
+                        {{ $eventLang->occasionShowAll }}
                     @endlink
                 @endtypography
             @endif

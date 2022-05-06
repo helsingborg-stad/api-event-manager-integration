@@ -1,7 +1,7 @@
 @if(!empty($social['links']))
     @card([])
         <div class="c-card__body">
-            @include('partials.heading', ['heading' => $lang->socialLinks])
+            @include('partials.heading', ['heading' => $eventLang->socialLinks])
 
             <ul>
                 @foreach ($social['links'] as $key => $link)

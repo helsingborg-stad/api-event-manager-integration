@@ -1,4 +1,4 @@
-<div class="o-grid">
+<div class="o-grid single-event-sidebar-right">
     @include('widgets.info')
     @include('widgets.membership-cards')
     @include('widgets.additional-ticket-types')

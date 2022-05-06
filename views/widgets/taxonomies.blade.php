@@ -7,7 +7,7 @@
                     'variant'   => 'h3',
                     'classList' => ['c-card__heading', 'u-margin__top--2']
                 ])
-                    {{ $lang->groups }}
+                    {{ $eventLang->groups }}
                 @endtypography
                 <ul>
                     @foreach ($groups as $group)
@@ -22,7 +22,7 @@
                     'variant'   => 'h3',
                     'classList' => ['c-card__heading', 'u-margin__top--2']
                 ])
-                    {{ $lang->categories }}
+                    {{ $eventLang->categories }}
                 @endtypography
                 <ul>
                     @foreach ($categories as $category)
@@ -37,7 +37,7 @@
                     'variant'   => 'h3',
                     'classList' => ['c-card__heading', 'u-margin__top--2']
                 ])
-                    {{ $lang->tags }}
+                    {{ $eventLang->tags }}
                 @endtypography
                 <ul>
                     @foreach ($tags as $tag)

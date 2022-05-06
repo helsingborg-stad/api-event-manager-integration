@@ -1,7 +1,7 @@
 @if($locationInfo)
     @card([])
         <div class="c-card__body">
-            @include('partials.heading', ['heading' => $lang->location])
+            @include('partials.heading', ['heading' => $eventLang->location])
             
             @if($locationInfo['latitude'] && $locationInfo['longitude'])
                 <div class="u-margin__top--2" id="event-map" data-lat="{{$locationInfo['latitude']}}" data-lng="{{$locationInfo['longitude']}}" data-title="{{$locationInfo['title']}}"></div>
@@ -15,7 +15,7 @@
 
             @if($locationInfo['additional_locations'])
                 @typography([])
-                    <strong>{{ $lang->locationOthers }}</strong>
+                    <strong>{{ $eventLang->locationOthers }}</strong>
                     @foreach($locationInfo['additional_locations'] as $location)
                         <ul class="unlist u-margin__top--2">
                             <li>{{ $location['title'] }}</li>
