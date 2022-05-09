@@ -14,7 +14,7 @@
                     <ul>
                         @if(!empty($ticketType['ticket_type']))
                             <li>
-                                <strong>{{ $ticketType['ticket_type'] === 'seated' ? $eventLang->ticketSeated : $eventLang->ticketStanding }}</strong>
+                                <strong>{{ strtolower($ticketType['ticket_type']) === 'seated' ? $eventLang->ticketSeated : $eventLang->ticketStanding }}</strong>
                             </li>
                         @endif
 
