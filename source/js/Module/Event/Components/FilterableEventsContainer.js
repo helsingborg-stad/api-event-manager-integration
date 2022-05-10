@@ -25,6 +25,7 @@ class FilterableEventsContainer extends React.Component {
       startDate: props.startDate,
       tags: props.tags,
       totalPages: 1,
+      translate: '',
     };
 
     this.myRef = createRef()
@@ -106,6 +107,7 @@ class FilterableEventsContainer extends React.Component {
       categories,
       tags,
       ageRange,
+      translate,
     } = this.state;
 
     const categoryIds = this.getTaxonomyIds(categories);
@@ -122,6 +124,7 @@ class FilterableEventsContainer extends React.Component {
         categories: categoryIds,
         tags: tagIds,
         ageRange: ageRangeIds,
+        translate,
       },
       { pushState: true }
     );
@@ -554,5 +557,9 @@ const availableQueryStringParams = [
   {
     param: 'tags',
     type: 'array',
+  },
+  {
+    param: 'translate',
+    type: 'string',
   },
 ];

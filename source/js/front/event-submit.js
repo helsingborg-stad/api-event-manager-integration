@@ -6,55 +6,37 @@ export default (() => {
 
     EventManagerIntegration.Event.Form = (function($) {
         function Form() {
-            $('.submit-event').each(
-                function(index, eventForm) {
-                    var apiUrl = eventintegration.apiurl;
-                    apiUrl = apiUrl.replace(/\/$/, '');
+            document.addEventListener('DOMContentLoaded', (event) => {
+              $('.submit-event').each(
+                  function(index, eventForm) {
+                      var apiUrl = eventintegration.apiurl;
+                      apiUrl = apiUrl.replace(/\/$/, '');
 
-                    $('#recurring-event', eventForm)
-                        .children('.box')
-                        .hide();
+                      $('#recurring-event', eventForm)
+                          .children('.box')
+                          .hide();
+                      this.handleEvents($(eventForm), apiUrl);
+                      this.hyperformExtensions(eventForm);
+                      this.datePickerSettings();
 
-                    $('#new-organizer', eventForm)
-                        .hide();
-
-                    $('#new-location', eventForm)
-                        .hide();
-
-                    var organizerInputs = $('#new-organizer').find('input'),
-                        locationInputs = $('#new-location').find('input');
-
-                    locationInputs.each((index, element) => {
-                        $('label[for="' + element.id + '"').append('<span class="u-color__text--danger"> * </span>')
-                    });
-
-
-                    organizerInputs.each((index, element) => {
-                        $('label[for="' + element.id + '"').append('<span class="u-color__text--danger"> * </span>')
-                    });
-                    
-                    this.handleEvents($(eventForm), apiUrl);
-                    // this.hyperformExtensions(eventForm);
-                    // this.datePickerSettings();
-
-                    
-                    if (document.getElementById('location-selector') !== null) {
-                        this.loadPostType($(eventForm), apiUrl, 'location');
-                    }
-                    if (document.getElementById('organizer-selector') !== null) {
-                        this.loadPostType($(eventForm), apiUrl, 'organizer');
-                    }
-                    if (document.getElementById('user_groups') !== null) {
-                        this.loadTaxonomy($(eventForm), apiUrl, 'user_groups');
-                    }
-                    if (document.getElementById('event_categories') !== null) {
-                        this.loadTaxonomy($(eventForm), apiUrl, 'event_categories');
-                    }
-                    if (document.getElementById('event_tags') !== null) {
-                        this.loadTaxonomy($(eventForm), apiUrl, 'event_tags');
-                    }
-                }.bind(this)
-            );
+                      if (document.getElementById('location') !== null) {
+                          this.loadPostType($(eventForm), apiUrl, 'location');
+                      }
+                      if (document.getElementById('organizer') !== null) {
+                          this.loadPostType($(eventForm), apiUrl, 'organizer');
+                      }
+                      if (document.getElementById('user_groups') !== null) {
+                          this.loadTaxonomy($(eventForm), apiUrl, 'user_groups');
+                      }
+                      if (document.getElementById('event_categories') !== null) {
+                          this.loadTaxonomy($(eventForm), apiUrl, 'event_categories');
+                      }
+                      if (document.getElementById('event_tags') !== null) {
+                          this.loadTaxonomy($(eventForm), apiUrl, 'event_tags');
+                      }
+                  }.bind(this)
+              );
+            });
         }
 
         /**
@@ -577,13 +559,27 @@ export default (() => {
             // Recurring date events
             this.initRecurringEndHourEvent();
             this.initRecurringEndMinuteEvent();
+
+            // set min and max dates
+            this.datePickerSettings();
         };
 
         Form.prototype.datePickerSettings = function() {
-            $.datepicker.setDefaults({
-                minDate: 'now',
-                maxDate: new Date().getDate() + 365,
+
+            const aYearFromNow = new Date();
+            aYearFromNow.setFullYear(aYearFromNow.getFullYear() + 1);
+
+            ['input[name="start_date"]', 'input[name="recurring_start_d"]', 'input[name="end_date"]', 'input[name="recurring_end_d"]'].forEach(name => {
+                const els = document.querySelectorAll(name)
+                if (els) {
+                    Array.from(els).forEach((element) =>{
+                            if (['input[name="start_date"]', 'input[name="recurring_start_d"]'].includes(name)) $(element).datepicker('option', 'minDate', new Date());  
+                            $(element).datepicker('option', 'maxDate', aYearFromNow);  
+                        }
+                    );
+                }
             });
+            document.getElementById('ui-datepicker-div').style = "display: none";
         };
 
         Form.prototype.handleEvents = function(eventForm, apiUrl) {
@@ -801,6 +797,6 @@ export default (() => {
         };
 
         return new Form();
-    })(jQuery);
+    })($);
 
 })();

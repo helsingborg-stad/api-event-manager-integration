@@ -635,7 +635,7 @@ msgid "Days ahead"
 msgstr ""
 
 #: AcfFields/php/options.php:29
-msgid "Import events that occurs within given number of days."
+msgid "Import events that occurs within given number of days. Try to keep it as short as possible to avoid unnecessary datatransfer."
 msgstr ""
 
 #: AcfFields/php/options.php:40
