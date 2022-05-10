@@ -55,7 +55,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
                         // Add additional membership card data
                         if(isset($event['membership_cards']) && is_array($event['membership_cards']) && !empty($event['membership_cards'])) {
                             foreach($event['membership_cards'] as $key => $card) {
-                                $cardData = $this->getMembershipCardById(($card->ID));
+                                $cardData = $this->getMembershipCardById($card->ID);
                                 if(isset($cardData['website'])) {
                                     $event['membership_cards'][$key]['website'] = $cardData['website'];
                                 }
