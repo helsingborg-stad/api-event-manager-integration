@@ -1,32 +1,34 @@
-<ul>
-    @if($bookingInfo['price_adult']['formatted_price'])
-        <li>
-            <strong>{{ $eventLang->priceStandard }}</strong>
-            {{ $bookingInfo['price_adult']['formatted_price'] }}
-        </li>
-    @endif
+@if($bookingInfo['price_adult']['formatted_price'])
+    <ul>
+        @if($bookingInfo['price_adult']['formatted_price'])
+            <li>
+                <strong>{{ $eventLang->priceStandard }}</strong>
+                {{ $bookingInfo['price_adult']['formatted_price'] }}
+            </li>
+        @endif
 
-    @if($bookingInfo['price_children']['formatted_price'])
-        <li>
-            <strong>{{ sprintf($eventLang->priceChildren, $bookingInfo['children_age']) }}</strong>
-            {{ $bookingInfo['price_children']['formatted_price'] }}
-        </li>
-    @endif
+        @if($bookingInfo['price_children']['formatted_price'])
+            <li>
+                <strong>{{ sprintf($eventLang->priceChildren, $bookingInfo['children_age']) }}</strong>
+                {{ $bookingInfo['price_children']['formatted_price'] }}
+            </li>
+        @endif
 
-    @if($bookingInfo['price_senior']['formatted_price'])
-        <li>
-            <strong>{{ sprintf($eventLang->priceSeniors, $bookingInfo['senior_age']) }}</strong>
-            {{ $bookingInfo['price_senior']['formatted_price'] }}
-        </li>
-    @endif
+        @if($bookingInfo['price_senior']['formatted_price'])
+            <li>
+                <strong>{{ sprintf($eventLang->priceSeniors, $bookingInfo['senior_age']) }}</strong>
+                {{ $bookingInfo['price_senior']['formatted_price'] }}
+            </li>
+        @endif
 
-    @if($bookingInfo['price_student']['formatted_price'])
-        <li>
-            <strong>{{ $eventLang->priceStudents }}</strong>
-            {{ $bookingInfo['price_student']['formatted_price'] }}
-        </li>
-    @endif
-</ul>
+        @if($bookingInfo['price_student']['formatted_price'])
+            <li>
+                <strong>{{ $eventLang->priceStudents }}</strong>
+                {{ $bookingInfo['price_student']['formatted_price'] }}
+            </li>
+        @endif
+    </ul>
+@endif
 
 @if($bookingInfo['membership_cards'])
     @typography([])
