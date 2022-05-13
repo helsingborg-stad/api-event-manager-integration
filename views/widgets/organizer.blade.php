@@ -10,29 +10,31 @@
                             <strong>{{ $organizer['organizer'] }}</strong>
                         @endtypography
                     @endif
-                    <ul>
-                        @if(!empty($organizer['organizer_phone']))
-                            <li>
-                                @link(['href' => 'tel:' . $organizer['organizer_phone']])
-                                    {{ $organizer['organizer_phone'] }}
-                                @endlink
-                            </li>
-                        @endif
+                    @if(!empty($organizer['organizer_phone']) || !empty($organizer['organizer_email']) || !empty($organizer['organizer_link']))
+                        <ul>
+                            @if(!empty($organizer['organizer_phone']))
+                                <li>
+                                    @link(['href' => 'tel:' . $organizer['organizer_phone']])
+                                        {{ $organizer['organizer_phone'] }}
+                                    @endlink
+                                </li>
+                            @endif
 
-                        @if(!empty($organizer['organizer_email']))
-                            <li>
-                                @link(['href' => 'mailto:' . $organizer['organizer_email']])
-                                    {{ $organizer['organizer_email'] }}
-                                @endlink
-                            </li>
-                        @endif
+                            @if(!empty($organizer['organizer_email']))
+                                <li>
+                                    @link(['href' => 'mailto:' . $organizer['organizer_email']])
+                                        {{ $organizer['organizer_email'] }}
+                                    @endlink
+                                </li>
+                            @endif
 
-                        @if($parsedUrl = parse_url($organizer['organizer_link']))
-                            @link(['href' => $organizer['organizer_link']])
-                                <li>{{ ucfirst($parsedUrl['host']) }}</li>
-                            @endlink
-                        @endif
-                    </ul>
+                            @if($parsedUrl = parse_url($organizer['organizer_link']))
+                                @link(['href' => $organizer['organizer_link']])
+                                    <li>{{ ucfirst($parsedUrl['host']) }}</li>
+                                @endlink
+                            @endif
+                        </ul>
+                    @endif
                 @endforeach
             @endif
 
