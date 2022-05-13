@@ -4,6 +4,6 @@
         'variant'   => 'h3',
         'classList' => ['c-card__heading']
     ])
-        {{ $heading }}
+        {!! $heading !!}
     @endtypography
 @endif
