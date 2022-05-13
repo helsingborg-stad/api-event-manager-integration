@@ -122,8 +122,7 @@ class FilterableEventsContainer extends React.Component {
         categories: categoryIds,
         tags: tagIds,
         ageRange: ageRangeIds,
-      },
-      { pushState: true }
+      }
     );
       if(params.translate){
         location.hash = "#translate";
@@ -157,7 +156,9 @@ class FilterableEventsContainer extends React.Component {
     this.setState({ isLoaded: false, error: null });
 
     // Set query parameters from state
-    this.setQueryString();
+    if (!document.querySelector('meta[http-equiv="X-Translated-By"]')) {
+      this.setQueryString();
+    }
 
     // Declare states and props
     const { currentPage, searchString, startDate, endDate } = this.state;
