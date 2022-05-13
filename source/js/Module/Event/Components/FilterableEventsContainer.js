@@ -122,7 +122,8 @@ class FilterableEventsContainer extends React.Component {
         categories: categoryIds,
         tags: tagIds,
         ageRange: ageRangeIds,
-      }
+      },
+      { pushState: true }
     );
       if(params.translate){
         location.hash = "#translate";
