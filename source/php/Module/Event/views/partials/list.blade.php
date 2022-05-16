@@ -60,11 +60,10 @@
 							'text' =>  __('More events', 'event-integration'),
 							'color' => 'secondary',
 							'style' => 'filled',
-							'size' => 'sm',
 							'href' => get_post_type_archive_link('event'),
 							'icon' => 'add',
 							'reversePositions' => true,
-							'size' => 'md',
+							'size' => 'sm',
 							'classList' => ['u-display--block@xs']
 							])
 						@endbutton 
