@@ -97,6 +97,7 @@ class Event extends \Modularity\Module
 
         $data['events'] = $this->setOccassion($data['events']);
         $data['events'] = $this->setLocation($data['events']);
+        $data['events'] = $this->setPermalink($data['events']);
         $data['paginationList'] = $this->getPagination($data['pagesCount']);
         $data['no_events'] = translate('No events found', 'event-integration');
 
@@ -203,6 +204,21 @@ class Event extends \Modularity\Module
     {
         foreach ($events as $event) {
             $event->location_name = \EventManagerIntegration\Helper\SingleEventData::getEventLocation($event->ID, $event->start_date)['title'];
+        }
+
+        return $events;
+    }
+
+    private function setPermalink($events)
+    {
+        foreach ($events as $event) {
+            $event->permalink = esc_url(
+                add_query_arg(
+                    'date',
+                    preg_replace('/\D/', '', $event->start_date),
+                    get_permalink($event->ID)
+                )
+            );
         }
 
         return $events;

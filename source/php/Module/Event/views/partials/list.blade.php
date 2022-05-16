@@ -11,11 +11,7 @@
 		@php
 			$event->passed = (isset($event->end_date) && (strtotime($event->end_date) < $date_now)) ? true : false;
 		@endphp
-		
-			{{-- @if(!$loop->first)
-				<hr class="c-collection__divider c-collection__divider--inset" />
-			@endif --}}
-			<a href="{{get_permalink($event->ID)}}" class="c-collection__item c-collection__item--action {{$event->passed ? 'c-collection__item--passed' : ''}}" js-pagination-item>
+			<a href="{{$event->permalink}}" class="c-collection__item c-collection__item--action {{$event->passed ? 'c-collection__item--passed' : ''}}" js-pagination-item>
 				<span class="c-collection__icon c-collection__icon--date">
 					<span class="c-collection__date">
 						<strong class="c-collection__day"><span>{{ $event->occasionStart['date'] }}</span></strong>
