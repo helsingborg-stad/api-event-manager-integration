@@ -41,7 +41,8 @@
 					<div class="o-grid-12 o-grid-auto@sm u-display--none@xs">
 						@pagination([
 							'list' => $paginationList, 
-                            'classList' => [],
+              'classList' => [],
+							'buttonSize' => 'sm',
 							'current' => isset($_GET['paged']) ? $_GET['paged'] : 1,
 							'linkPrefix' => '?paged=',
                             'anchorTag' => '#event-' . $ID,
@@ -57,8 +58,9 @@
 					<div class="o-grid-12 o-grid-auto@sm u-text-align--right">
 						@button([
 							'text' =>  __('More events', 'event-integration'),
-							'color' => 'primary',
-							'style' => 'basic',
+							'color' => 'secondary',
+							'style' => 'filled',
+							'size' => 'sm',
 							'href' => get_post_type_archive_link('event'),
 							'icon' => 'add',
 							'reversePositions' => true,
