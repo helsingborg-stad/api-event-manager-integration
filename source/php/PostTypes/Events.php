@@ -270,7 +270,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
 
     public function getParagraphs($text)
     {
-        preg_match_all("/<\s*p[^>]*>([^<]*)<\s*\/\s*p\s*>/", $text, $matches);
+        preg_match_all("/<p.*?>(.*?)<\/p>/is", $text, $matches);
         return $matches[0] ?? [];
     }
 
