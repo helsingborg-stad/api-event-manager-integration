@@ -41,17 +41,17 @@
 
     @include('partials.exception-information')
 
-    <div class="modularity-event-content o-grid">
+    <div class="modularity-event-content">
         @if(!empty($event['introText']))
             <strong>{!! $event['introText'] !!}</strong>
         @endif
 
-        @include('widgets.ticket')
+        <div class="u-margin__y--4">
+            @include('widgets.ticket')
+        </div>
 
         @if(!empty($event['content']))
-            <div>
-                {!! $event['content'] !!}
-            </div>
+            {!! $event['content'] !!}
         @endif
     </div>
 @stop
