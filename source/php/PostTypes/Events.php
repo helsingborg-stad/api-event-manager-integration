@@ -361,7 +361,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
                 if(isset($data[$key])) {
                     $data[$key] = $this->addPriceInfo($priceField, $data[$key]);
                 }
-            } elseif(isset($data[$priceField])) {
+            } elseif(isset($data[$priceField]) && !empty($data[$priceField])) {
                 $data[$priceField] = [
                     'price'         => $data[$priceField],
                     'formatted_price'  => \EventManagerIntegration\App::formatPrice($data[$priceField]),

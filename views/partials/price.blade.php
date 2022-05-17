@@ -1,4 +1,12 @@
 @if(isset($bookingInfo['price_adult']['formatted_price']) && !empty($bookingInfo['price_adult']['formatted_price']))
+    @typography([
+        'element'   => 'h2',
+        'variant'   => 'h3',
+        'classList' => ['c-card__heading', 'u-margin__top--2']
+    ])
+        {{ $eventLang->price }}
+    @endtypography
+    
     <ul>
         @if($bookingInfo['price_adult']['formatted_price'])
             <li>
