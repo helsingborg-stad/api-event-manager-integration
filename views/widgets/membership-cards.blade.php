@@ -12,7 +12,7 @@
 
                 @if($card['website'])
                     @button([
-                        'text' => ucfirst(parse_url($card['website'])['host']),
+                        'text' => ucfirst(str_replace('www.', '', strtolower(parse_url($card['website'])['host']))),
                         'fullWidth' => true,
                         'href' => $card['website'],
                         'color' => 'primary',

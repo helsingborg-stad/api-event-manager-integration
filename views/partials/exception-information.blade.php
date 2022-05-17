@@ -1,5 +1,5 @@
 @if ($event['rescheduled'])
-    <div class="u-margin__top--3">
+    <div>
         @typography([
             'element' => 'strong',
             'classList' => ['u-color__text--danger']
@@ -14,7 +14,7 @@
 @endif
 
 @if ($event['cancelled'])
-    <div class="u-margin__top--3">
+    <div>
         @typography([
             'element' => 'strong',
             'classList' => ['u-color__text--danger']

@@ -1,36 +1,46 @@
-<ul>
-    @if($bookingInfo['price_adult']['formatted_price'])
-        <li>
-            <strong>{{ $lang->priceStandard }}</strong>
-            {{ $bookingInfo['price_adult']['formatted_price'] }}
-        </li>
-    @endif
+@if(isset($bookingInfo['price_adult']['formatted_price']) && !empty($bookingInfo['price_adult']['formatted_price']))
+    @typography([
+        'element'   => 'h2',
+        'variant'   => 'h3',
+        'classList' => ['c-card__heading', 'u-margin__top--2']
+    ])
+        {{ $eventLang->price }}
+    @endtypography
+    
+    <ul>
+        @if($bookingInfo['price_adult']['formatted_price'])
+            <li>
+                <strong>{{ $eventLang->priceStandard }}</strong>
+                {{ $bookingInfo['price_adult']['formatted_price'] }}
+            </li>
+        @endif
 
-    @if($bookingInfo['price_children']['formatted_price'])
-        <li>
-            <strong>{{ sprintf($lang->priceChildren, $bookingInfo['children_age']) }}</strong>
-            {{ $bookingInfo['price_children']['formatted_price'] }}
-        </li>
-    @endif
+        @if($bookingInfo['price_children']['formatted_price'])
+            <li>
+                <strong>{{ sprintf($eventLang->priceChildren, $bookingInfo['children_age']) }}</strong>
+                {{ $bookingInfo['price_children']['formatted_price'] }}
+            </li>
+        @endif
 
-    @if($bookingInfo['price_senior']['formatted_price'])
-        <li>
-            <strong>{{ sprintf($lang->priceSeniors, $bookingInfo['senior_age']) }}</strong>
-            {{ $bookingInfo['price_senior']['formatted_price'] }}
-        </li>
-    @endif
+        @if($bookingInfo['price_senior']['formatted_price'])
+            <li>
+                <strong>{{ sprintf($eventLang->priceSeniors, $bookingInfo['senior_age']) }}</strong>
+                {{ $bookingInfo['price_senior']['formatted_price'] }}
+            </li>
+        @endif
 
-    @if($bookingInfo['price_student']['formatted_price'])
-        <li>
-            <strong>{{ $lang->priceStudents }}</strong>
-            {{ $bookingInfo['price_student']['formatted_price'] }}
-        </li>
-    @endif
-</ul>
+        @if($bookingInfo['price_student']['formatted_price'])
+            <li>
+                <strong>{{ $eventLang->priceStudents }}</strong>
+                {{ $bookingInfo['price_student']['formatted_price'] }}
+            </li>
+        @endif
+    </ul>
+@endif
 
 @if($bookingInfo['membership_cards'])
     @typography([])
-        <strong>{{ $lang->membershipCardsIncluded }}</strong>
+        <strong>{{ $eventLang->membershipCardsIncluded }}</strong>
     @endtypography
 
     <ul class="unlist">
@@ -42,17 +52,17 @@
 
 @if(!empty($bookingInfo['booking_group']) && is_array($bookingInfo['booking_group']))
     @typography([])
-        <strong>{{ $lang->priceGroups }}</strong>
+        <strong>{{ $eventLang->priceGroups }}</strong>
     @endtypography
 
     <ul>
         @foreach ($bookingInfo['booking_group'] as $group)
             <li>
                 {{ sprintf(
-                    $lang->priceGroupsRange,
+                    $eventLang->priceGroupsRange,
                     $group['min_persons'],
                     $group['max_persons'],
-                    $group['price_group']
+                    $group['price_group']['formatted_price']
                 ) }}
             </li>
         @endforeach
@@ -65,30 +75,30 @@
         'variant'   => 'h3',
         'classList' => ['c-card__heading', 'u-margin__top--2']
     ])
-        {{ $lang->priceRange }}
+        {{ $eventLang->priceRange }}
     @endtypography
     <ul>
-        @if($bookingInfo['price_range']['seated_minimum_price'])
+        @if($bookingInfo['price_range']['seated_minimum_price']['formatted_price'])
             <li>
-                <strong>{{ $lang->priceSeatedMin }}</strong> {{ $bookingInfo['price_range']['seated_minimum_price'] }}
+                <strong>{{ $eventLang->priceSeatedMin }}</strong> {{ $bookingInfo['price_range']['seated_minimum_price']['formatted_price'] }}
             </li>
         @endif
 
-        @if($bookingInfo['price_range']['seated_maximum_price'])
+        @if($bookingInfo['price_range']['seated_maximum_price']['formatted_price'])
             <li>
-                <strong>{{ $lang->priceSeatedMax }}</strong> {{ $bookingInfo['price_range']['seated_maximum_price'] }}
+                <strong>{{ $eventLang->priceSeatedMax }}</strong> {{ $bookingInfo['price_range']['seated_maximum_price']['formatted_price'] }}
             </li>
         @endif
 
-        @if($bookingInfo['price_range']['standing_minimum_price'])
+        @if($bookingInfo['price_range']['standing_minimum_price']['formatted_price'])
             <li>
-                <strong>{{ $lang->priceStandingMin }}</strong> {{ $bookingInfo['price_range']['standing_minimum_price'] }}
+                <strong>{{ $eventLang->priceStandingMin }}</strong> {{ $bookingInfo['price_range']['standing_minimum_price']['formatted_price'] }}
             </li>
         @endif
 
-        @if($bookingInfo['price_range']['standing_maximum_price'])
+        @if($bookingInfo['price_range']['standing_maximum_price']['formatted_price'])
             <li>
-                <strong>{{ $lang->priceStandingMax }}</strong> {{ $bookingInfo['price_range']['standing_maximum_price'] }}
+                <strong>{{ $eventLang->priceStandingMax }}</strong> {{ $bookingInfo['price_range']['standing_maximum_price']['formatted_price'] }}
             </li>
         @endif
     </ul>
@@ -100,7 +110,7 @@
         'variant'   => 'h3',
         'classList' => ['c-card__heading', 'u-margin__top--2']
     ])
-        {{ $lang->ticketRetailers }}
+        {{ $eventLang->ticketRetailers }}
     @endtypography
 
     @if(!empty($bookingInfo['additional_ticket_retailers']) && is_array($bookingInfo['additional_ticket_retailers']))
@@ -122,14 +132,14 @@
 
                 @if(!empty($retailer['ticket_release_date']))
                     <li>
-                        <strong>{{ $lang->ticketReleaseDate }}</strong>
+                        <strong>{{ $eventLang->ticketReleaseDate }}</strong>
                         {{ $retailer['ticket_release_date'] }}
                     </li>
                 @endif
 
                 @if(!empty($retailer['ticket_stop_date']))
                     <li>
-                        <strong>{{ $lang->ticketStopDate }}</strong>
+                        <strong>{{ $eventLang->ticketStopDate }}</strong>
                         {{ $retailer['ticket_stop_date'] }}
                     </li>
                 @endif

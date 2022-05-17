@@ -90,8 +90,10 @@ class SingleEventData
                 }
             }
         }
-
-        $singleOccasion['duration_formatted'] = human_time_diff(strtotime($singleOccasion['start_date']), strtotime($singleOccasion['end_date']));
+        
+        if(!empty($singleOccasion)) {
+            $singleOccasion['duration_formatted'] = human_time_diff(strtotime($singleOccasion['start_date']), strtotime($singleOccasion['end_date']));
+        }
 
         return $singleOccasion;
     }

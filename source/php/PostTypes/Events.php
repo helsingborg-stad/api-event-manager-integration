@@ -110,11 +110,24 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
 
         global $post;
 
+        $occasion = \EventManagerIntegration\Helper\SingleEventData::singleEventDate();
+        $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($post->ID);
+
+        // If event date has passed, redirect to next occasion
+        if(empty($occasion)) {
+            $nextOccasion = $occasions[0] ?? false;
+            if(isset($nextOccasion->permalink)) {
+                wp_redirect($nextOccasion->permalink);
+            }
+        }
+
         // Gather event data
         $eventData = array();
+
+        $eventData['occasion'] = $occasion;
+        $eventData['occasions'] = $occasions;
+
         $meta = $this->getMeta($post->ID);
-        $eventData['occasion'] = \EventManagerIntegration\Helper\SingleEventData::singleEventDate();
-        $eventData['occasions'] = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($post->ID);
         $eventData['cancelled'] = !empty($eventData['occasion']['status']) && $eventData['occasion']['status'] === 'cancelled' ? __('Cancelled', 'event-integration') : null;
         $eventData['rescheduled'] = !empty($eventData['occasion']['status']) && $eventData['occasion']['status'] === 'rescheduled' ? __('Rescheduled', 'event-integration') : null;
         $eventData['exception_information'] = !empty($eventData['occasion']['exception_information']) ? $eventData['occasion']['exception_information'] : null;
@@ -180,7 +193,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         $data['social'] = $this->getSocialLinks($meta);
         $data['event'] = $eventData;
 
-        $data['lang'] = (object) array(
+        $data['eventLang'] = (object) array(
             'ticket'                    => __('Ticket', 'event-integration'),
             'ticketIncludes'            => __('The ticket includes %s.', 'event-integration'),
             'ticketBuy'                 => __('Buy ticket', 'event-integration'),
@@ -191,10 +204,10 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             'ticketSeated'              => __('Seated', 'event-integration'),
             'ticketStanding'            => __('Standing', 'event-integration'),
             'price'                     => __('Price', 'event-integration'),
-            'priceStandard'             => __('Standard:', 'event-integration'),
+            'priceStandard'             => __('Standard', 'event-integration'),
             'priceChildren'             => __('Children (below %d years):', 'event-integration'),
             'priceSeniors'              => __('Seniors (above %d years):', 'event-integration'),
-            'priceStudents'             => __('Students:', 'event-integration'),
+            'priceStudents'             => __('Students', 'event-integration'),
             'priceGroups'               => __('Group prices', 'event-integration'),
             'priceRange'                => __('Price range', 'event-integration'),
             'priceGroupsRange'          => __('%d to %d people: %s', 'event-integration'),
@@ -213,12 +226,12 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             'cancelled'                 => __('Cancelled', 'event-integration'),
             'rescheduled'               => __('Rescheduled', 'event-integration'),
             'occasionShowAll'           => __('Show all occasions', 'event-integration'),
-            'occasionDuration'          => __('Duration:', 'event-integration'),
-            'age'                       => __('Age:', 'event-integration'),
+            'occasionDuration'          => __('Duration', 'event-integration'),
+            'age'                       => __('Age', 'event-integration'),
             'date'                      => __('Date', 'event-integration'),
             'contact'                   => __('Contact', 'event-integration'),
-            'contactPhone'              => __('Phone:', 'event-integration'),
-            'contactEmail'              => __('E-mail:', 'event-integration'),
+            'contactPhone'              => __('Phone', 'event-integration'),
+            'contactEmail'              => __('E-mail', 'event-integration'),
             'groups'                    => __('Groups', 'event-integration'),
             'categories'                => __('Categories', 'event-integration'),
             'tags'                      => __('Tags', 'event-integration'),
@@ -228,7 +241,8 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         return $data;
     }
 
-    public function getSocialLinks($meta) {
+    public function getSocialLinks($meta)
+    {
         $fields = [
             'facebook' => 'Facebook',
             'twitter' => 'Twitter',
@@ -269,7 +283,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
 
     public function getParagraphs($text)
     {
-        preg_match_all("/<\s*p[^>]*>([^<]*)<\s*\/\s*p\s*>/", $text, $matches);
+        preg_match_all("/<p.*?>(.*?)<\/p>/is", $text, $matches);
         return $matches[0] ?? [];
     }
 
@@ -314,19 +328,48 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             'price_adult',
             'price_children',
             'price_senior',
-            'price_student'
+            'price_student',
+            'price_range' => [
+                'seated_minimum_price',
+                'seated_maximum_price',
+                'standing_minimum_price',
+                'standing_maximum_price'
+            ]
         ];
 
-        foreach($priceFields as $priceField) {
-            if(isset($bookingInfo[$priceField])) {
-                $bookingInfo[$priceField] = [
-                    'price'         => $bookingInfo[$priceField],
-                    'formatted_price'  => \EventManagerIntegration\App::formatPrice($bookingInfo[$priceField]),
-                ];
+        $bookingInfo = $this->addPriceInfo($priceFields, $bookingInfo);
+
+        if(isset($bookingInfo['booking_group']) && !empty($bookingInfo['booking_group'])) {
+            foreach($bookingInfo['booking_group'] as &$bookingGroup) {
+                $bookingGroup = $this->addPriceInfo(['price_group'], $bookingGroup);
+            }
+        }
+
+        if(isset($bookingInfo['additional_ticket_types']) && !empty($bookingInfo['additional_ticket_types'])) {
+            foreach($bookingInfo['additional_ticket_types'] as &$ticketType) {
+                $ticketType = $this->addPriceInfo(['minimum_price', 'maximum_price'], $ticketType);
             }
         }
 
         return $bookingInfo;
+    }
+
+    public function addPriceInfo($priceFields, $data)
+    {
+        foreach($priceFields as $key => $priceField) {
+            if(is_array($priceField)) {
+                if(isset($data[$key])) {
+                    $data[$key] = $this->addPriceInfo($priceField, $data[$key]);
+                }
+            } elseif(isset($data[$priceField]) && !empty($data[$priceField])) {
+                $data[$priceField] = [
+                    'price'         => $data[$priceField],
+                    'formatted_price'  => \EventManagerIntegration\App::formatPrice($data[$priceField]),
+                ];
+            }
+        }
+
+        return $data;
     }
 
     public function formatPostDate($date, $postId, $postType)

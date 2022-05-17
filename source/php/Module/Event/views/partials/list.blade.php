@@ -11,11 +11,7 @@
 		@php
 			$event->passed = (isset($event->end_date) && (strtotime($event->end_date) < $date_now)) ? true : false;
 		@endphp
-		
-			{{-- @if(!$loop->first)
-				<hr class="c-collection__divider c-collection__divider--inset" />
-			@endif --}}
-			<a href="{{get_permalink($event->ID)}}" class="c-collection__item c-collection__item--action {{$event->passed ? 'c-collection__item--passed' : ''}}" js-pagination-item>
+			<a href="{{$event->permalink}}" class="c-collection__item c-collection__item--action {{$event->passed ? 'c-collection__item--passed' : ''}}" js-pagination-item>
 				<span class="c-collection__icon c-collection__icon--date">
 					<span class="c-collection__date">
 						<strong class="c-collection__day"><span>{{ $event->occasionStart['date'] }}</span></strong>
@@ -36,12 +32,13 @@
 
 	@if ($mod_event_pagination && $pagesCount > 1 || $mod_event_archive)
 		<div class="c-card__footer">
-			<div class="o-grid o-grid--no-gutter o-grid--no-margin">
+			<div class="o-grid">
 				@if ($mod_event_pagination && $pagesCount > 1)
 					<div class="o-grid-12 o-grid-auto@sm u-display--none@xs">
 						@pagination([
 							'list' => $paginationList, 
-                            'classList' => [],
+              'classList' => [],
+							'buttonSize' => 'sm',
 							'current' => isset($_GET['paged']) ? $_GET['paged'] : 1,
 							'linkPrefix' => '?paged=',
                             'anchorTag' => '#event-' . $ID,
@@ -57,12 +54,12 @@
 					<div class="o-grid-12 o-grid-auto@sm u-text-align--right">
 						@button([
 							'text' =>  __('More events', 'event-integration'),
-							'color' => 'primary',
-							'style' => 'basic',
+							'color' => 'secondary',
+							'style' => 'filled',
 							'href' => get_post_type_archive_link('event'),
 							'icon' => 'add',
 							'reversePositions' => true,
-							'size' => 'md',
+							'size' => 'sm',
 							'classList' => ['u-display--block@xs']
 							])
 						@endbutton 
