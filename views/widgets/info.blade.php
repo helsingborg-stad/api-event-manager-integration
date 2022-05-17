@@ -57,13 +57,6 @@
             </div>
         @endif
         
-        @typography([
-            'element'   => 'h2',
-            'variant'   => 'h3',
-            'classList' => ['c-card__heading', 'u-margin__top--2']
-        ])
-            {{ $eventLang->price }}
-        @endtypography
         @include('partials.price')
     </div>
 @endcard
