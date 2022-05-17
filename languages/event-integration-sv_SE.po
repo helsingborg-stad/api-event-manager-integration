@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
 "POT-Creation-Date: 2022-05-17 10:05+0200\n"
-"PO-Revision-Date: 2022-05-17 10:20+0200\n"
+"PO-Revision-Date: 2022-05-17 10:22+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -448,11 +448,11 @@ msgstr "Visa evenemang som inträffar inom angivet antal dagar."
 
 #: AcfFields/php/event-module.php:261 AcfFields/php/event-module.php:264
 msgid "Only show events starting on todays date"
-msgstr "Visa bara event som startar på dagens datum"
+msgstr "Visa bara evenemang som startar på dagens datum"
 
 #: AcfFields/php/event-module.php:280 AcfFields/php/event-module.php:283
 msgid "Hide past events"
-msgstr "Dölj tidigare event"
+msgstr "Dölj tidigare evenemang"
 
 #: AcfFields/php/event-module.php:326
 msgid "Image ratio"
@@ -994,7 +994,7 @@ msgstr "Välj…"
 
 #: source/php/App.php:144
 msgid "The event has been submitted!"
-msgstr "Eventet har skickats in!"
+msgstr "Evenemanget har skickats in!"
 
 #: source/php/App.php:147
 msgid "Something went wrong, please try again later."
@@ -1598,7 +1598,7 @@ msgstr "Gratis evenemang"
 
 #: source/php/Module/EventForm/Fields.php:452
 msgid "The event is free"
-msgstr "Event är gratis"
+msgstr "Evenemanget är gratis"
 
 #: source/php/Module/EventForm/Fields.php:459
 msgid "For adults"
@@ -1651,15 +1651,15 @@ msgstr "Hur hittas händelsen och vem är ansvarig?"
 
 #: source/php/Module/EventForm/Fields.php:629
 msgid "Categorize the event"
-msgstr "Kategorisera ditt event"
+msgstr "Kategorisera ditt evenemang"
 
 #: source/php/Module/EventForm/Fields.php:631
 msgid ""
 "Add tags and categories to make it easier to show the event in the right "
 "place and make it easier to find for visitors."
 msgstr ""
-"Lägg till taggar och kategorier för att göra det enklare att visa eventet på "
-"rätt platser och enklare att hitta för besökare."
+"Lägg till taggar och kategorier för att göra det enklare att visa evenemanget "
+"på rätt platser och enklare att hitta för besökare."
 
 #: source/php/Module/EventForm/Fields.php:640
 msgid "Choose categories that fit the event"
