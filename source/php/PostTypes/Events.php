@@ -110,11 +110,24 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
 
         global $post;
 
+        $occasion = \EventManagerIntegration\Helper\SingleEventData::singleEventDate();
+        $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($post->ID);
+
+        // If event date has passed, redirect to next occasion
+        if(empty($occasion)) {
+            $nextOccasion = $occasions[0] ?? false;
+            if(isset($nextOccasion->permalink)) {
+                wp_redirect($nextOccasion->permalink);
+            }
+        }
+
         // Gather event data
         $eventData = array();
+
+        $eventData['occasion'] = $occasion;
+        $eventData['occasions'] = $occasions;
+
         $meta = $this->getMeta($post->ID);
-        $eventData['occasion'] = \EventManagerIntegration\Helper\SingleEventData::singleEventDate();
-        $eventData['occasions'] = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($post->ID);
         $eventData['cancelled'] = !empty($eventData['occasion']['status']) && $eventData['occasion']['status'] === 'cancelled' ? __('Cancelled', 'event-integration') : null;
         $eventData['rescheduled'] = !empty($eventData['occasion']['status']) && $eventData['occasion']['status'] === 'rescheduled' ? __('Rescheduled', 'event-integration') : null;
         $eventData['exception_information'] = !empty($eventData['occasion']['exception_information']) ? $eventData['occasion']['exception_information'] : null;
@@ -315,19 +328,48 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             'price_adult',
             'price_children',
             'price_senior',
-            'price_student'
+            'price_student',
+            'price_range' => [
+                'seated_minimum_price',
+                'seated_maximum_price',
+                'standing_minimum_price',
+                'standing_maximum_price'
+            ]
         ];
 
-        foreach($priceFields as $priceField) {
-            if(isset($bookingInfo[$priceField])) {
-                $bookingInfo[$priceField] = [
-                    'price'         => $bookingInfo[$priceField],
-                    'formatted_price'  => \EventManagerIntegration\App::formatPrice($bookingInfo[$priceField]),
-                ];
+        $bookingInfo = $this->addPriceInfo($priceFields, $bookingInfo);
+
+        if(isset($bookingInfo['booking_group']) && !empty($bookingInfo['booking_group'])) {
+            foreach($bookingInfo['booking_group'] as &$bookingGroup) {
+                $bookingGroup = $this->addPriceInfo(['price_group'], $bookingGroup);
+            }
+        }
+
+        if(isset($bookingInfo['additional_ticket_types']) && !empty($bookingInfo['additional_ticket_types'])) {
+            foreach($bookingInfo['additional_ticket_types'] as &$ticketType) {
+                $ticketType = $this->addPriceInfo(['minimum_price', 'maximum_price'], $ticketType);
             }
         }
 
         return $bookingInfo;
+    }
+
+    public function addPriceInfo($priceFields, $data)
+    {
+        foreach($priceFields as $key => $priceField) {
+            if(is_array($priceField)) {
+                if(isset($data[$key])) {
+                    $data[$key] = $this->addPriceInfo($priceField, $data[$key]);
+                }
+            } elseif(isset($data[$priceField])) {
+                $data[$priceField] = [
+                    'price'         => $data[$priceField],
+                    'formatted_price'  => \EventManagerIntegration\App::formatPrice($data[$priceField]),
+                ];
+            }
+        }
+
+        return $data;
     }
 
     public function formatPostDate($date, $postId, $postType)
