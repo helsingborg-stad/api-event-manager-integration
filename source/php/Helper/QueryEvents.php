@@ -165,7 +165,11 @@ class QueryEvents
                 $field = maybe_unserialize($field);
             }
             $occasion->formatted = \EventManagerIntegration\App::formatEventDate($occasion->start_date, $occasion->end_date);
-            $occasion->permalink = get_permalink($occasion->event_id);
+            $occasion->permalink = add_query_arg(
+                'date',
+                preg_replace('/\D/', '', $occasion->start_date),
+                get_permalink($occasion->event_id)
+            );
         }
 
         return $occasions;

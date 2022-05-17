@@ -18,17 +18,17 @@
                             </li>
                         @endif
 
-                        @if($ticketType['minimum_price'])
+                        @if($ticketType['minimum_price']['formatted_price'])
                             <li>
                                 <strong>{{ $eventLang->priceMin }}</strong>
-                                {{ $ticketType['minimum_price'] }}
+                                {{ $ticketType['minimum_price']['formatted_price'] }}
                             </li>
                         @endif
 
-                        @if($ticketType['maximum_price'])
+                        @if($ticketType['maximum_price']['formatted_price'])
                             <li>
                                 <strong>{{ $eventLang->priceMax }}</strong>
-                                {{ $ticketType['maximum_price'] }}
+                                {{ $ticketType['maximum_price']['formatted_price'] }}
                             </li>
                         @endif
                     </ul>
