@@ -421,7 +421,7 @@ class FilterableEventsContainer extends React.Component {
     const { settings, translation, gridColumn, archiveUrl } = this.props;
 
     return (
-      <div>
+      <div class="o-grid">
         {(settings.mod_event_filter_search ||
           settings.mod_event_filter_dates ||
           settings.mod_event_filter_age_group ||
@@ -449,14 +449,15 @@ class FilterableEventsContainer extends React.Component {
           </div>
         )}
 
-        <div ref={this.myRef} className={`modularity-event-index__body ${!isLoaded && items.length > 0 ? 'is-disabled' : ''}`} style={{paddingTop: '40px', paddingBottom: '64px'}}>
+        <div ref={this.myRef} className={`modularity-event-index__body ${!isLoaded && items.length > 0 ? 'is-disabled' : ''}`}>
           {!isLoaded && (
             <div className={`modularity-event-index__loader modularity-event-index__loader--top ${items.length > 0 ? 'modularity-event-index__loader--float' : ''}`}>
               <PreLoader />
             </div>
           )}
 
-          <div className="modularity-event-index__content">
+          <div className="o-grid-12 modularity-event-index__content">
+            
             {(error || (isLoaded && items.length === 0)) && (
               <span>
                 {translation.noEventsFound}
