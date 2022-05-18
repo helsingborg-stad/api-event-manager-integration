@@ -1,13 +1,15 @@
-<div class="o-grid {{ $classes }}">
-    @if (!$hideTitle && !empty($postTitle))
-        @typography([
-            'element' => 'h4', 
-            'variant' => 'h2'
-        ])
-            {!! $postTitle !!}
-        @endtypography
-    @endif
 
+@if (!$hideTitle && !empty($postTitle))
+    @typography([
+        'element' => 'h4', 
+        'variant' => 'h2', 
+        'classList' => ['module-title']
+    ])
+        {!! $postTitle !!}
+    @endtypography
+@endif
+
+<div class="o-grid {{ $classes }}">
     <div class="o-grid-12">
         <div class="modularity-event-{{ $template }}"
              data-module-id="{{ $ID }}"
