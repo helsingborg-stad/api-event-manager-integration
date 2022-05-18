@@ -142,7 +142,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             // Split content into paragraphs and put first paragraph in separate variable        
             $paragraphs = $this->getParagraphs($extendedContent['main']);
             if(isset($paragraphs[0])) {
-                $eventData['introText'] = $paragraphs[0];
+                $eventData['introText'] = $this->addLeadClass($paragraphs[0]);
                 unset($paragraphs[0]);
             }
             $eventData['content'] = implode('', $paragraphs);
@@ -283,8 +283,23 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
 
     public function getParagraphs($text)
     {
-        preg_match_all("/<p.*?>(.*?)<\/p>/is", $text, $matches);
+        preg_match_all("/<.*?>(.*?)<\/.*?>/is", $text, $matches);
         return $matches[0] ?? [];
+    }
+
+    public function addLeadClass($text) {
+        //Load doc as string
+        $doc = new \DOMDocument();
+        $doc->loadXML($text);
+
+        $root = $doc->documentElement;
+        $class = $root->getAttribute('class');
+        $root->setAttribute('class', implode(
+            ' ',
+            array_filter([$class, 'lead'])
+        ));
+
+        return $root->c14n();
     }
 
     public function getContactInfo($meta)
