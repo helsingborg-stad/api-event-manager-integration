@@ -41,9 +41,9 @@
 
     @include('partials.exception-information')
 
-    <div class="modularity-event-content">
+    <article class="c-article modularity-event-content">
         @if(!empty($event['introText']))
-            <strong>{!! $event['introText'] !!}</strong>
+            {!! $event['introText'] !!}
         @endif
 
         <div class="u-margin__y--4">
@@ -53,7 +53,7 @@
         @if(!empty($event['content']))
             {!! $event['content'] !!}
         @endif
-    </div>
+    </article>
 @stop
 
 @section('sidebar-right')
