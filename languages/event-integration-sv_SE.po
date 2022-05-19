@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2022-05-19 11:04+0200\n"
-"PO-Revision-Date: 2022-05-19 11:05+0200\n"
+"POT-Creation-Date: 2022-05-19 17:30+0200\n"
+"PO-Revision-Date: 2022-05-19 17:31+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -1046,6 +1046,11 @@ msgstr "Kunde inte skapa mappen"
 #: source/php/Entity/PostManager.php:266
 msgid "please go ahead and create it manually and rerun the import."
 msgstr "vänligen skapa den manuellt och gör om importen."
+
+#: source/php/Helper/SingleEventData.php:111
+#, php-format
+msgid "%d days"
+msgstr "%d dagar"
 
 #: source/php/Helper/SubmitEvent.php:19 views/submit-form.blade.php:7
 #: views/submit-form.blade.php:8
