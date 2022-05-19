@@ -193,10 +193,18 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         $data['social'] = $this->getSocialLinks($meta);
         $data['event'] = $eventData;
 
+        $bookingLinkType = $meta['booking_link_type'] ?? 'buy';
+        $bookingLinkButtonLabels = [
+            'buy'               => __('Buy ticket', 'event-integration'),
+            'book'              => __('Book now', 'event-integration'),
+            'submit_interest'   => __('Submit interest', 'event-integration'),
+            'book_free'         => __('Book free ticket', 'event-integration')
+        ];
+
         $data['eventLang'] = (object) array(
             'ticket'                    => __('Ticket', 'event-integration'),
             'ticketIncludes'            => __('The ticket includes %s.', 'event-integration'),
-            'ticketBuy'                 => __('Buy ticket', 'event-integration'),
+            'bookingLinkButton'         => $bookingLinkButtonLabels[$bookingLinkType] ?? '',
             'ticketRetailers'           => __('Ticket retailers', 'event-integration'),
             'ticketReleaseDate'         => __('Ticket release date', 'event-integration'),
             'ticketStopDate'            => __('Ticket stop date', 'event-integration'),

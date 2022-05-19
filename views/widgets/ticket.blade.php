@@ -24,7 +24,7 @@
                     'classList' => ['u-margin__top--3'],
                     'icon' => 'arrow_forward',
                     'fullWidth' => true,
-                    'text' => $eventLang->ticketBuy
+                    'text' => $eventLang->bookingLinkButton
                 ])
                 @endbutton
             @endif
