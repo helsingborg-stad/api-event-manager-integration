@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2022-05-17 13:08+0200\n"
-"PO-Revision-Date: 2022-05-17 13:08+0200\n"
+"POT-Creation-Date: 2022-05-20 09:30+0200\n"
+"PO-Revision-Date: 2022-05-20 09:30+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -1604,8 +1604,8 @@ msgid "The event is free"
 msgstr "Evenemanget är gratis"
 
 #: source/php/Module/EventForm/Fields.php:459
-msgid "For adults"
-msgstr "För vuxna"
+msgid "Standard price"
+msgstr "Standardpris"
 
 #: source/php/Module/EventForm/Fields.php:479
 #: source/php/PostTypes/Events.php:210
@@ -2421,6 +2421,9 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "http://www.helsingborg.se"
 msgstr ""
+
+#~ msgid "For adults"
+#~ msgstr "För vuxna"
 
 #~ msgid "Age:"
 #~ msgstr "Ålder:"
