@@ -456,7 +456,7 @@ class Fields
                     ],
                     [
                         'name' => 'price_adult',
-                        'label' => __('For adults', 'event-integration'),
+                        'label' => __('Standard price', 'event-integration'),
                         'type' => 'number',
                         'required' => true,
                         'suffix' => 'kr',
@@ -478,7 +478,7 @@ class Fields
                         'name' => 'price_student',
                         'label' => __('Students', 'event-integration'),
                         'type' => 'number',
-                        'required' => true,
+                        'required' => false,
                         'suffix' => 'kr',
                         'condition' => [
                             [
@@ -498,7 +498,7 @@ class Fields
                         'name' => 'price_children',
                         'label' => __('Child price', 'event-integration'),
                         'type' => 'number',
-                        'required' => true,
+                        'required' => false,
                         'suffix' => 'kr',
                         'condition' => [
                             [
@@ -518,7 +518,7 @@ class Fields
                         'name' => 'children_age',
                         'label' => __('Age limit for child price', 'event-integration'),
                         'type' => 'number',
-                        'required' => true,
+                        'required' => false,
                         'suffix' => __('years', 'event-integration'),
                         'condition' => [
                             [
@@ -538,7 +538,7 @@ class Fields
                         'name' => 'price_senior',
                         'label' => __('Pensioner price', 'event-integration'),
                         'type' => 'number',
-                        'required' => true,
+                        'required' => false,
                         'suffix' => 'kr',
                         'condition' => [
                             [
@@ -558,7 +558,7 @@ class Fields
                         'name' => 'senior_age',
                         'label' => __('Age limit for pensioner price', 'event-integration'),
                         'type' => 'number',
-                        'required' => true,
+                        'required' => false,
                         'suffix' => __('years', 'event-integration'),
                         'condition' => [
                             [
