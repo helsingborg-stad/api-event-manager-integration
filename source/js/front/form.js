@@ -112,12 +112,12 @@ const eventForm = {
         const conditionResult = eventForm.checkConditions(form, conditions);
         if (conditionResult.every((x) => x === true)) {
             field.classList.remove('u-display--none');
-            field.querySelectorAll('input').forEach((x) => {
+            field.querySelectorAll('input, select').forEach((x) => {
                 x.disabled = false;
             });
         } else {
             field.classList.add('u-display--none');
-            field.querySelectorAll('input').forEach((x) => {
+            field.querySelectorAll('input, select').forEach((x) => {
                 x.disabled = true;
             });
         }
