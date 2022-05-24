@@ -301,6 +301,11 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         $doc->loadXML($text);
 
         $root = $doc->documentElement;
+
+        if(empty($root)) {
+            return $text;
+        }
+
         $class = $root->getAttribute('class');
         $root->setAttribute('class', implode(
             ' ',
