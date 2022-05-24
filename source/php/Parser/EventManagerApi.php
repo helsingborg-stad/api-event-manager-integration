@@ -6,7 +6,7 @@ use \EventManagerIntegration\Event as Event;
 
 class EventManagerApi extends \EventManagerIntegration\Parser
 {
-    // public $membershipCards;
+    public $membershipCards;
 
     public function __construct($url)
     {
@@ -122,7 +122,13 @@ class EventManagerApi extends \EventManagerIntegration\Parser
             return false;
         }
 
-        $apiUrl = untrailingslashit($apiUrl) . '/membership-card';
+        $apiUrl = add_query_arg(
+            array(
+                'per_page' => 100,
+            ),
+            untrailingslashit($apiUrl) . '/membership-card'
+        );
+
         $membershipCards = \EventManagerIntegration\Parser::requestApi($apiUrl);
 
         if(is_wp_error($membershipCards)) {
@@ -141,9 +147,9 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         if(isset($this->membershipCards)) {
             return $this->membershipCards;
         }
-
-        $this->membershipCards = $this->fetchMembershipCards();
         
+        $this->membershipCards = $this->fetchMembershipCards();
+
         return $this->membershipCards;
     }
 

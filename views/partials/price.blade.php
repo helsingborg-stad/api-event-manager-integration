@@ -8,28 +8,28 @@
     @endtypography
     
     <ul>
-        @if($bookingInfo['price_adult']['formatted_price'])
+        @if(isset($bookingInfo['price_adult']['formatted_price']))
             <li>
                 <strong>{{ $eventLang->priceStandard }}</strong>
                 {{ $bookingInfo['price_adult']['formatted_price'] }}
             </li>
         @endif
 
-        @if($bookingInfo['price_children']['formatted_price'])
+        @if(isset($bookingInfo['price_children']['formatted_price']))
             <li>
                 <strong>{{ sprintf($eventLang->priceChildren, $bookingInfo['children_age']) }}</strong>
                 {{ $bookingInfo['price_children']['formatted_price'] }}
             </li>
         @endif
 
-        @if($bookingInfo['price_senior']['formatted_price'])
+        @if(isset($bookingInfo['price_senior']['formatted_price']))
             <li>
                 <strong>{{ sprintf($eventLang->priceSeniors, $bookingInfo['senior_age']) }}</strong>
                 {{ $bookingInfo['price_senior']['formatted_price'] }}
             </li>
         @endif
 
-        @if($bookingInfo['price_student']['formatted_price'])
+        @if(isset($bookingInfo['price_student']['formatted_price']))
             <li>
                 <strong>{{ $eventLang->priceStudents }}</strong>
                 {{ $bookingInfo['price_student']['formatted_price'] }}
@@ -78,25 +78,25 @@
         {{ $eventLang->priceRange }}
     @endtypography
     <ul>
-        @if($bookingInfo['price_range']['seated_minimum_price']['formatted_price'])
+        @if(isset($bookingInfo['price_range']['seated_minimum_price']['formatted_price']))
             <li>
                 <strong>{{ $eventLang->priceSeatedMin }}</strong> {{ $bookingInfo['price_range']['seated_minimum_price']['formatted_price'] }}
             </li>
         @endif
 
-        @if($bookingInfo['price_range']['seated_maximum_price']['formatted_price'])
+        @if(isset($bookingInfo['price_range']['seated_maximum_price']['formatted_price']))
             <li>
                 <strong>{{ $eventLang->priceSeatedMax }}</strong> {{ $bookingInfo['price_range']['seated_maximum_price']['formatted_price'] }}
             </li>
         @endif
 
-        @if($bookingInfo['price_range']['standing_minimum_price']['formatted_price'])
+        @if(isset($bookingInfo['price_range']['standing_minimum_price']['formatted_price']))
             <li>
                 <strong>{{ $eventLang->priceStandingMin }}</strong> {{ $bookingInfo['price_range']['standing_minimum_price']['formatted_price'] }}
             </li>
         @endif
 
-        @if($bookingInfo['price_range']['standing_maximum_price']['formatted_price'])
+        @if(isset($bookingInfo['price_range']['standing_maximum_price']['formatted_price']))
             <li>
                 <strong>{{ $eventLang->priceStandingMax }}</strong> {{ $bookingInfo['price_range']['standing_maximum_price']['formatted_price'] }}
             </li>
