@@ -302,7 +302,7 @@ class Fields
                         'type' => 'section',
                         'fields' => [
                             [
-                                'name' => 'organizer-name',
+                                'name' => 'organizer-title',
                                 'label' => __('Name', 'event-integration'),
                                 'type' => 'text',
                                 'required' => true,
