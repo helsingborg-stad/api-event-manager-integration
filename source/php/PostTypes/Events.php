@@ -410,9 +410,10 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         return $occasions[0]['start_date'] ?? '';
     }
 
-    public function formatPublishDate($post) {
+    public function formatPublishDate($post)
+    {
         if (isset($post->start_date)) {
-            $post->post_date = $post->start_date;
+            $post->post_date_gmt = get_gmt_from_date($post->start_date);
         }
         return $post;
     }
