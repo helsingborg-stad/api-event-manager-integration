@@ -283,12 +283,12 @@ class FilterableEventsContainer extends React.Component {
   };
 
   /**
-   * Pagination input page number handler
+   * Pagination go to page handler
    * @param e
    */
-  paginationInput = e => {
+   goToPage = page => {
     const { totalPages } = this.state;
-    let currentPage = e.target.value ? parseInt(e.target.value) : '';
+    let currentPage = page ? parseInt(page) : '';
     currentPage = currentPage > totalPages ? totalPages : currentPage;
 
     this.setState({ currentPage }, () => {
@@ -486,7 +486,7 @@ class FilterableEventsContainer extends React.Component {
             <div className="o-grid-12@xs o-grid-fit@md u-ml-auto modularity-mod-event__pagination">
               <Pagination
                 current={currentPage}
-                input={this.paginationInput}
+                goToPage={page => this.goToPage}
                 langNext={translation.next}
                 langPrev={translation.prev}
                 next={this.nextPage}
