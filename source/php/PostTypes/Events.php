@@ -142,7 +142,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             // Split content into paragraphs and put first paragraph in separate variable        
             $paragraphs = $this->getParagraphs($extendedContent['main']);
             if(isset($paragraphs[0])) {
-                $eventData['introText'] = $paragraphs[0];
+                $eventData['introText'] = $this->addLeadClass($paragraphs[0]);
                 unset($paragraphs[0]);
             }
             $eventData['content'] = implode('', $paragraphs);
@@ -193,10 +193,18 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         $data['social'] = $this->getSocialLinks($meta);
         $data['event'] = $eventData;
 
+        $bookingLinkType = $meta['booking_link_type'] ?? 'buy';
+        $bookingLinkButtonLabels = [
+            'buy'               => __('Buy ticket', 'event-integration'),
+            'book'              => __('Book now', 'event-integration'),
+            'submit_interest'   => __('Submit interest', 'event-integration'),
+            'book_free'         => __('Book free ticket', 'event-integration')
+        ];
+
         $data['eventLang'] = (object) array(
             'ticket'                    => __('Ticket', 'event-integration'),
             'ticketIncludes'            => __('The ticket includes %s.', 'event-integration'),
-            'ticketBuy'                 => __('Buy ticket', 'event-integration'),
+            'bookingLinkButton'         => $bookingLinkButtonLabels[$bookingLinkType] ?? '',
             'ticketRetailers'           => __('Ticket retailers', 'event-integration'),
             'ticketReleaseDate'         => __('Ticket release date', 'event-integration'),
             'ticketStopDate'            => __('Ticket stop date', 'event-integration'),
@@ -283,8 +291,28 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
 
     public function getParagraphs($text)
     {
-        preg_match_all("/<p.*?>(.*?)<\/p>/is", $text, $matches);
+        preg_match_all("/<.*?>(.*?)<\/.*?>/is", $text, $matches);
         return $matches[0] ?? [];
+    }
+
+    public function addLeadClass($text) {
+        //Load doc as string
+        $doc = new \DOMDocument();
+        $doc->loadXML($text);
+
+        $root = $doc->documentElement;
+
+        if(empty($root)) {
+            return $text;
+        }
+
+        $class = $root->getAttribute('class');
+        $root->setAttribute('class', implode(
+            ' ',
+            array_filter([$class, 'lead'])
+        ));
+
+        return $root->c14n();
     }
 
     public function getContactInfo($meta)
@@ -382,9 +410,10 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         return $occasions[0]['start_date'] ?? '';
     }
 
-    public function formatPublishDate($post) {
+    public function formatPublishDate($post)
+    {
         if (isset($post->start_date)) {
-            $post->post_date = $post->start_date;
+            $post->post_date_gmt = get_gmt_from_date($post->start_date);
         }
         return $post;
     }

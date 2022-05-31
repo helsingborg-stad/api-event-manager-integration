@@ -92,10 +92,26 @@ class SingleEventData
         }
         
         if(!empty($singleOccasion)) {
-            $singleOccasion['duration_formatted'] = human_time_diff(strtotime($singleOccasion['start_date']), strtotime($singleOccasion['end_date']));
+            $singleOccasion['duration_formatted'] = self::getFormattedTimeDiff(strtotime($singleOccasion['start_date']), strtotime($singleOccasion['end_date']));
         }
 
         return $singleOccasion;
+    }
+
+    /**
+     * Get a formatted time diff for two dates
+     * @param  integer  $start  Event start date timestamp
+     * @param  integer  $end  Event end date timestamp
+     * @return string 
+     */
+    public static function getFormattedTimeDiff($start, $end)
+    {
+        $diff = ($end - $start) / 60 / 60;
+
+        // Add one day to number of days if the diff is more than 24 hours but less than 1 week
+        return $diff >= 24 && $diff < (24 * 7)
+            ? sprintf(__('%d days', 'event-integration'), (floor($diff / 24)) + 1)
+            : human_time_diff($start, $end);
     }
 
     /**

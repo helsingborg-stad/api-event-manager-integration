@@ -6,7 +6,7 @@ use \EventManagerIntegration\Event as Event;
 
 class EventManagerApi extends \EventManagerIntegration\Parser
 {
-    // public $membershipCards;
+    public $membershipCards;
 
     public function __construct($url)
     {
@@ -122,7 +122,13 @@ class EventManagerApi extends \EventManagerIntegration\Parser
             return false;
         }
 
-        $apiUrl = untrailingslashit($apiUrl) . '/membership-card';
+        $apiUrl = add_query_arg(
+            array(
+                'per_page' => 100,
+            ),
+            untrailingslashit($apiUrl) . '/membership-card'
+        );
+
         $membershipCards = \EventManagerIntegration\Parser::requestApi($apiUrl);
 
         if(is_wp_error($membershipCards)) {
@@ -141,9 +147,9 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         if(isset($this->membershipCards)) {
             return $this->membershipCards;
         }
-
-        $this->membershipCards = $this->fetchMembershipCards();
         
+        $this->membershipCards = $this->fetchMembershipCards();
+
         return $this->membershipCards;
     }
 
@@ -168,6 +174,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         $organizers                     = !empty($event['organizers']) ? $event['organizers'] : null;
         $supporters                     = !empty($event['supporters']) ? $event['supporters'] : null;
         $booking_link                   = !empty($event['booking_link']) ? $event['booking_link'] : null;
+        $booking_link_type              = !empty($event['booking_link_type']) ? $event['booking_link_type'] : null;
         $booking_phone                  = !empty($event['booking_phone']) ? $event['booking_phone'] : null;
         $booking_email                  = !empty($event['booking_email']) ? $event['booking_email'] : null;
         $age_restriction                = !empty($event['age_restriction']) ? $event['age_restriction'] : null;
@@ -260,6 +267,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
                         'organizers' => $organizers,
                         'supporters' => $supporters,
                         'booking_link' => $booking_link,
+                        'booking_link_type' => $booking_link_type,
                         'booking_phone' => $booking_phone,
                         'booking_email' => $booking_email,
                         'age_restriction' => $age_restriction,
