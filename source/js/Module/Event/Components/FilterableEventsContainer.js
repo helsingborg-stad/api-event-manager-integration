@@ -486,9 +486,7 @@ class FilterableEventsContainer extends React.Component {
             <div className="o-grid-12@xs o-grid-fit@md u-ml-auto modularity-mod-event__pagination">
               <Pagination
                 current={currentPage}
-                goToPage={page => this.goToPage}
-                langNext={translation.next}
-                langPrev={translation.prev}
+                goToPage={page => this.goToPage(page)}
                 next={this.nextPage}
                 prev={this.prevPage}
                 total={totalPages}
