@@ -477,11 +477,6 @@ class FilterableEventsContainer extends React.Component {
 
 
         <div className="o-grid">
-          {settings.mod_event_archive && (
-            <div className="o-grid-12@xs o-grid-auto@md">
-              <Button href={archiveUrl} color="primary" title={translation.moreEvents} />
-            </div>
-          )}
           {settings.mod_event_pagination && (
             <div className="o-grid-12">
               <Pagination
@@ -491,6 +486,11 @@ class FilterableEventsContainer extends React.Component {
                 prev={this.prevPage}
                 total={totalPages}
               />
+            </div>
+          )}
+            {settings.mod_event_archive && (
+            <div className="o-grid-12 u-display--flex u-justify-content--center">
+              <Button href={archiveUrl} color="primary" title={translation.moreEvents} />
             </div>
           )}
         </div>
