@@ -479,13 +479,15 @@ class FilterableEventsContainer extends React.Component {
         <div className="o-grid">
           {settings.mod_event_pagination && (
             <div className="o-grid-12">
-              <Pagination
-                current={currentPage}
-                goToPage={page => this.goToPage(page)}
-                next={this.nextPage}
-                prev={this.prevPage}
-                total={totalPages}
-              />
+                {totalPages > 1 &&
+                    <Pagination
+                        current={currentPage}
+                        goToPage={page => this.goToPage(page)}
+                        next={this.nextPage}
+                        prev={this.prevPage}
+                        total={totalPages}
+                    />
+                }
             </div>
           )}
             {settings.mod_event_archive && (
