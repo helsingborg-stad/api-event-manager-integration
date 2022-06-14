@@ -586,7 +586,7 @@ class Fields
                         'value' => 'all',
                     ],
                     [
-                        'name' => 'event_target_age_from',
+                        'name' => 'age_group_from',
                         'label' => __('From', 'event-integration'),
                         'description' => __('Leave "From" or "To" blank if the upper or lower limit is missing.', 'event-integration'),
                         'type' => 'number',
@@ -601,7 +601,7 @@ class Fields
                         ],
                     ],
                     [
-                        'name' => 'event_target_age_to',
+                        'name' => 'age_group_to',
                         'label' => __('To', 'event-integration'),
                         'type' => 'number',
                         'required' => false,
