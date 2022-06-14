@@ -13,7 +13,7 @@ const eventForm = {
                 eventForm.setupConditionalValueFields(form, field)
             );
             eventForm.setupRepeaters(form);
-            eventForm.setupRemoteSelect(form, eventintegration ?? {});
+            eventForm.setupRemoteSelect(form, eventIntegrationFront ?? {});
         });
     },
     setupConditionalFields: (form, field) => {
@@ -150,7 +150,7 @@ const eventForm = {
             });
         });
     },
-    setupRemoteSelect: (form, { apiurl, selectString }) => {
+    setupRemoteSelect: (form, { apiurl, select_string }) => {
         if (apiurl === undefined) {
             return;
         }
@@ -166,7 +166,7 @@ const eventForm = {
                 .then((data) => data.json())
                 .then((items) =>
                     eventForm.setupSelectOptions(
-                        selectString,
+                        select_string,
                         select,
                         dataSource,
                         items
@@ -174,12 +174,12 @@ const eventForm = {
                 );
         });
     },
-    setupSelectOptions: (selectString, select, dataSource, items) => {
+    setupSelectOptions: (select_string, select, dataSource, items) => {
         select.querySelectorAll('option').forEach((option) => option.remove());
         if (!select.multiple) {
             const defaultOption = document.createElement('option');
             defaultOption.setAttribute('selected', 'selected');
-            defaultOption.innerText = selectString;
+            defaultOption.innerText = select_string;
             defaultOption.value = '';
             select.appendChild(defaultOption);
         }
