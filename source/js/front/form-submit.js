@@ -77,7 +77,7 @@ const eventFormSubmit = {
                         } else {
                             eventFormSubmit.submitFormData(formData, 'submit_event').then(response => {
                                 if (response.success) {
-                                    eventFormSubmit.displaySuccessNotice(form, eventintegrationFront.event_submitted_message);
+                                    eventFormSubmit.displaySuccessNotice(form, eventIntegrationFront.event_submitted_message);
                                     form.reset();
                                 } else {
                                     eventFormSubmit.displayErorrNotice(form, response.data);
