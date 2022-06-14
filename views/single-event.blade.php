@@ -45,10 +45,12 @@
         @if(!empty($event['introText']))
             {!! $event['introText'] !!}
         @endif
-
-        <div class="u-margin__y--4">
-            @include('widgets.ticket')
-        </div>
+        
+        @if(!empty($event['booking_link']) || !empty($event['ticket_includes']))
+            <div class="{{ !empty($event['introText']) ? 'u-margin__y--4' : 'u-margin__bottom--4'}}">
+                @include('widgets.ticket')
+            </div>
+        @endif
 
         @if(!empty($event['content']))
             {!! $event['content'] !!}

@@ -286,12 +286,12 @@ class FilterableEventsContainer extends React.Component {
   };
 
   /**
-   * Pagination input page number handler
+   * Pagination go to page handler
    * @param e
    */
-  paginationInput = e => {
+   goToPage = page => {
     const { totalPages } = this.state;
-    let currentPage = e.target.value ? parseInt(e.target.value) : '';
+    let currentPage = page ? parseInt(page) : '';
     currentPage = currentPage > totalPages ? totalPages : currentPage;
 
     this.setState({ currentPage }, () => {
@@ -480,22 +480,22 @@ class FilterableEventsContainer extends React.Component {
 
 
         <div className="o-grid">
-          {settings.mod_event_archive && (
-            <div className="o-grid-12@xs o-grid-auto@md">
-              <Button href={archiveUrl} color="primary" title={translation.moreEvents} />
+          {settings.mod_event_pagination && (
+            <div className="o-grid-12">
+                {totalPages > 1 &&
+                    <Pagination
+                        current={currentPage}
+                        goToPage={page => this.goToPage(page)}
+                        next={this.nextPage}
+                        prev={this.prevPage}
+                        total={totalPages}
+                    />
+                }
             </div>
           )}
-          {settings.mod_event_pagination && (
-            <div className="o-grid-12@xs o-grid-fit@md u-ml-auto modularity-mod-event__pagination">
-              <Pagination
-                current={currentPage}
-                input={this.paginationInput}
-                langNext={translation.next}
-                langPrev={translation.prev}
-                next={this.nextPage}
-                prev={this.prevPage}
-                total={totalPages}
-              />
+            {settings.mod_event_archive && (
+            <div className="o-grid-12 u-display--flex u-justify-content--center">
+              <Button href={archiveUrl} color="primary" title={translation.moreEvents} />
             </div>
           )}
         </div>

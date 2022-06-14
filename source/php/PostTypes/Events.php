@@ -133,19 +133,13 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         $eventData['exception_information'] = !empty($eventData['occasion']['exception_information']) ? $eventData['occasion']['exception_information'] : null;
         $eventData['eventArchive'] = add_query_arg('s', urlencode($post->post_title), get_post_type_archive_link(self::$postTypeSlug));
 
-        $extendedContent = get_extended(get_the_content($post->ID));
         $eventData['introText'] = '';
-        if(!empty($extendedContent['extended'])) {
-            $eventData['content'] = $extendedContent['main'];
-            $eventData['introText'] = $extendedContent['extended'];
+        $extendedContent = get_extended($post->post_content);
+        if(!empty($extendedContent['main']) && !empty($extendedContent['extended'])) {
+            $eventData['introText'] = self::createLeadElement($extendedContent['main']);
+            $eventData['content'] = $extendedContent['extended'];
         } else {
-            // Split content into paragraphs and put first paragraph in separate variable        
-            $paragraphs = $this->getParagraphs($extendedContent['main']);
-            if(isset($paragraphs[0])) {
-                $eventData['introText'] = $this->addLeadClass($paragraphs[0]);
-                unset($paragraphs[0]);
-            }
-            $eventData['content'] = implode('', $paragraphs);
+            $eventData['content'] = get_the_content($post->ID);
         }
 
         if (function_exists('municipio_get_thumbnail_source')) {
@@ -289,30 +283,35 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         return $meta;
     }
 
-    public function getParagraphs($text)
-    {
-        preg_match_all("/<.*?>(.*?)<\/.*?>/is", $text, $matches);
-        return $matches[0] ?? [];
-    }
+    /**
+     * Add lead class to first excerpt p-tag
+     *
+     * @param string $lead      The lead string
+     * @param string $search    What to search for
+     * @param string $replace   What to replace with
+     * @return string           The new lead string
+     */
+    private static function createLeadElement($lead, $search = '<p>', $replace = '<p class="lead">') {
 
-    public function addLeadClass($text) {
-        //Load doc as string
-        $doc = new \DOMDocument();
-        $doc->loadXML($text);
+        $pos = strpos($lead, $search);
 
-        $root = $doc->documentElement;
-
-        if(empty($root)) {
-            return $text;
+        if ($pos !== false) {
+            $lead = substr_replace($lead, $replace, $pos, strlen($search));
+        } elseif ($pos === false && $lead === strip_tags($lead)) {
+            $lead = $replace . $lead . '</p>';
         }
 
-        $class = $root->getAttribute('class');
-        $root->setAttribute('class', implode(
-            ' ',
-            array_filter([$class, 'lead'])
-        ));
+        return self::removeEmptyPTag($lead);
+    }
 
-        return $root->c14n();
+    /**
+     * Remove empty ptags from string
+     *
+     * @param string $string    A string that may contain empty ptags
+     * @return string           A string that not contain empty ptags
+     */
+    private static function removeEmptyPTag($string) {
+        return preg_replace("/<p[^>]*>(?:\s|&nbsp;)*<\/p>/", '', $string);
     }
 
     public function getContactInfo($meta)
