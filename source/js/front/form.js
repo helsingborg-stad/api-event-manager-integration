@@ -161,6 +161,8 @@ const eventForm = {
             let url = apiUrl + '/' + dataSource.name;
             if (dataSource.type === 'post') {
                 url += '/complete';
+            } else {
+                url += '?per_page=100';
             }
             fetch(url)
                 .then((data) => data.json())
