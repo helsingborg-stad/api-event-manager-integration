@@ -65,8 +65,7 @@ $acfExportManager->import();
 add_filter(
     '/Modularity/externalViewPath',
     function ($arr) {
-        $arr['mod-event-form'] = EVENTMANAGERINTEGRATION_EVENT_FORM_MODULE_VIEW_PATH;
-        $arr['mod-event-submit'] = EVENTMANAGERINTEGRATION_SUBMIT_FORM_MODULE_VIEW_PATH;
+        $arr['mod-event-submit'] = EVENTMANAGERINTEGRATION_EVENT_FORM_MODULE_VIEW_PATH;
         $arr['mod-event'] = EVENTMANAGERINTEGRATION_MODULE_VIEW_PATH;
         return $arr;
     },

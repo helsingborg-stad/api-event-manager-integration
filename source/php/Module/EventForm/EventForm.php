@@ -4,7 +4,7 @@ namespace EventManagerIntegration\Module;
 
 class EventForm extends \Modularity\Module
 {
-    public $slug = 'event-form';
+    public $slug = 'event-submit';
     public $supports = array();
     public $isBlockCompatible = false;
 

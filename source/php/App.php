@@ -41,11 +41,6 @@ class App
                 );
 
                 modularity_register_module(
-                    EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/SubmitForm',
-                    'SubmitForm'
-                );
-
-                modularity_register_module(
                     EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/EventForm',
                     'EventForm'
                 );
