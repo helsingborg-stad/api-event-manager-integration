@@ -13,7 +13,7 @@ const eventForm = {
                 eventForm.setupConditionalValueFields(form, field)
             );
             eventForm.setupRepeaters(form);
-            eventForm.setupRemoteSelect(form, eventIntegrationFront ?? {});
+            eventForm.setupRemoteSelect(form, eventintegration, eventIntegrationFront ?? {});
         });
     },
     setupConditionalFields: (form, field) => {
@@ -150,7 +150,7 @@ const eventForm = {
             });
         });
     },
-    setupRemoteSelect: (form, { apiurl, select_string }) => {
+    setupRemoteSelect: (form, { apiurl }, { select_string }) => {
         if (apiurl === undefined) {
             return;
         }
