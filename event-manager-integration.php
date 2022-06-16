@@ -4,7 +4,7 @@
  * Plugin Name:       Event Manager Integration
  * Plugin URI:        https://github.com/helsingborg-stad/api-event-manager-integration
  * Description:       Integrate and display events from Event Manager API.
- * Version:           1.0.0
+ * Version:           2.0.0-dev
  * Author:            Jonatan Hanson, Sebastian Thulin
  * Author URI:        http://www.helsingborg.se
  * License:           MIT
@@ -34,6 +34,7 @@ define('EVENTMANAGERINTEGRATION_URL', plugins_url('', __FILE__));
 define('EVENTMANAGERINTEGRATION_VIEW_PATH', EVENTMANAGERINTEGRATION_PATH . 'views/');
 define('EVENTMANAGERINTEGRATION_MODULE_VIEW_PATH', EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/Event/views');
 define('EVENTMANAGERINTEGRATION_SUBMIT_FORM_MODULE_VIEW_PATH', EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/SubmitForm/views');
+define('EVENTMANAGERINTEGRATION_EVENT_FORM_MODULE_VIEW_PATH', EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/EventForm/views');
 define('EVENTMANAGERINTEGRATION_CACHE_DIR', trailingslashit(wp_upload_dir()['basedir']) . 'cache/blade-cache/');
 
 load_plugin_textdomain('event-integration', false, plugin_basename(dirname(__FILE__)) . '/languages');
@@ -64,10 +65,10 @@ $acfExportManager->import();
 add_filter(
     '/Modularity/externalViewPath',
     function ($arr) {
-    $arr['mod-event-submit'] = EVENTMANAGERINTEGRATION_SUBMIT_FORM_MODULE_VIEW_PATH;
-    $arr['mod-event'] = EVENTMANAGERINTEGRATION_MODULE_VIEW_PATH;
-    return $arr;
-},
+        $arr['mod-event-submit'] = EVENTMANAGERINTEGRATION_EVENT_FORM_MODULE_VIEW_PATH;
+        $arr['mod-event'] = EVENTMANAGERINTEGRATION_MODULE_VIEW_PATH;
+        return $arr;
+    },
     10,
     3
 );

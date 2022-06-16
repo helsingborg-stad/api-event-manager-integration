@@ -41,8 +41,8 @@ class App
                 );
 
                 modularity_register_module(
-                    EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/SubmitForm',
-                    'SubmitForm'
+                    EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/EventForm',
+                    'EventForm'
                 );
             }
         });
@@ -140,6 +140,9 @@ class App
             'event_pagination_error' => __("Something went wrong, please try again later.", 'event-integration'),
             'email_not_matching' => __("The email addresses does not match.", 'event-integration'),
             'must_upload_image' => __("You must upload an image.", 'event-integration'),
+            'select_string' => __('Select...', 'event-integration'),
+            'event_submitted_message' => __('The event has been submitted!', 'event-integration'),
+            'event_end_date_invalid' => __('End date can not be before or equal to the start date.', 'event-integration')
         ));
         wp_enqueue_script('event-integration');
     }
