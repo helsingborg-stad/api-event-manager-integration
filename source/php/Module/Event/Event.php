@@ -233,7 +233,7 @@ class Event extends \Modularity\Module
         $currentPage = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
         if ($numberOfPages > 1) {
-            for ($i = 1; $i < $numberOfPages; $i++) {
+            for ($i = 1; $i <= $numberOfPages; $i++) {
                 $href = $archiveUrl . '?' . $this->setQueryString($i). "#event";
 
                 $pagination[] = array(
