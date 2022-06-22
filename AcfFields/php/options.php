@@ -1,7 +1,9 @@
 <?php 
 
-if (function_exists('acf_add_local_field_group')) {
-    acf_add_local_field_group(array(
+
+if (function_exists('acf_add_local_field_group')) {
+
+    acf_add_local_field_group(array(
     'key' => 'group_583557753bd73',
     'title' => 'Event Manager Integration',
     'fields' => array(
@@ -105,25 +107,6 @@
             'min' => -1,
             'max' => '',
             'step' => '',
-        ),
-        5 => array(
-            'key' => 'field_58aaf2615abcb',
-            'label' => __('Google Maps JavaScript API key', 'event-integration'),
-            'name' => 'google_geocode_key',
-            'type' => 'text',
-            'instructions' => __('Needed to display Google maps.', 'event-integration'),
-            'required' => 0,
-            'conditional_logic' => 0,
-            'wrapper' => array(
-                'width' => '',
-                'class' => '',
-                'id' => '',
-            ),
-            'default_value' => '',
-            'placeholder' => '',
-            'prepend' => '',
-            'append' => '',
-            'maxlength' => '',
         ),
         6 => array(
             'key' => 'field_58e380646fa6f',
@@ -378,4 +361,5 @@
     'active' => 1,
     'description' => '',
 ));
-}
+
+}

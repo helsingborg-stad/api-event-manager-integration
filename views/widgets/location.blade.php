@@ -3,15 +3,23 @@
         <div class="c-card__body">
             @include('partials.heading', ['heading' => $eventLang->location])
             
-            @if($locationInfo['latitude'] && $locationInfo['longitude'])
-                <div class="u-margin__top--2" id="event-map" data-lat="{{$locationInfo['latitude']}}" data-lng="{{$locationInfo['longitude']}}" data-title="{{$locationInfo['title']}}"></div>
-            @endif
-
-            <ul class="unlist">
-                <li>{{ $locationInfo['title'] }}</li>
-                <li>{{ $locationInfo['street_address'] }}</li>
-                <li>{{ $locationInfo['postal_code'] }} {{ $locationInfo['city'] }}</li>
-            </ul>
+            @link([
+                'href' => 'https://www.google.com/maps/dir//' . urlencode(
+                    implode(' ', [
+                        $locationInfo['street_address'],
+                        $locationInfo['postal_code'],
+                        $locationInfo['city']
+                    ])
+                )
+            ])
+                <p>
+                    <ul class="unlist">
+                        <li>{{ $locationInfo['title'] }}</li>
+                        <li>{{ $locationInfo['street_address'] }}</li>
+                        <li>{{ $locationInfo['postal_code'] }} {{ $locationInfo['city'] }}</li>
+                    </ul>
+                </p>
+            @endlink
 
             @if($locationInfo['additional_locations'])
                 @typography([])
