@@ -35,11 +35,6 @@
                 <li><strong>{{ $eventLang->occasionDuration }}:</strong> {{ $event['occasion']['duration_formatted'] }}</li>
             @endif
 
-            @if ($locationInfo)
-                <li><strong>{{ $eventLang->location }}:</strong> {{ $locationInfo['title'] }}</li>
-            @endif
-
-
             @if($event['age_group'])
                 <li><strong>{{ $eventLang->age }}:</strong> {{ $event['age_group'] }}</li>
             @endif
