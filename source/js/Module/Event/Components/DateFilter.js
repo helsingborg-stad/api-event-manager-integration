@@ -31,7 +31,7 @@ class DateFilter extends React.Component {
     const {showDayPicker} = this.state;
     const { id, label, onDayChange, value } = this.props;
     return (
-      <div ref={node => this.node = node}>
+      <div ref={node => this.node = node}> 
           <Input
             className="form-control"
             id={id}
@@ -41,8 +41,8 @@ class DateFilter extends React.Component {
             onFocus={() => {
               this.setState({...this.state, showDayPicker: true})
             }}
-          />
-
+            icon_suffix='date_range'
+          />              
           {
             showDayPicker && (
                 <DayPicker

@@ -100,6 +100,17 @@ class Events
                 'default' => 0,
                 'sanitize_callback' => 'absint',
             ),
+            'post_id' => array(
+                'description' => 'The post ID',
+                'type' => 'integer',
+                'default' => 0,
+                'sanitize_callback' => 'absint',
+            ),
+            'settings' => array(
+                'description' => 'The settings.',
+                'type' => 'string',
+                'default' => null,
+            ),
             'search_string' => array(
                 'description' => 'Filter by search string',
                 'type' => 'string',
@@ -211,7 +222,7 @@ class Events
         }
 
         // Sanitize and add meta data to items list
-        $events = $this->mapEventModuleData($params['module_id'], $events);
+        $events = $this->mapEventModuleData($params['module_id'], $params['settings'], $events);
 
         $response = rest_ensure_response($events);
         // Set headers with total counts
@@ -227,11 +238,12 @@ class Events
      * @param array $events   List of events
      * @return array
      */
-    public function mapEventModuleData($moduleId, $events)
+    public function mapEventModuleData($moduleId, $settings, $events)
     {
-        $data = get_fields($moduleId);
+        $data = (!empty(get_fields($moduleId))) ? get_fields($moduleId) : array();
+        $settingsData = json_decode($settings, true);
 
-        $template = $data['mod_event_display'] ?? 'list';
+        $template = $data['mod_event_display'] ?? $settingsData['mod_event_display'] ?? 'list';
 
         $class = '\EventManagerIntegration\Module\Event\TemplateController\\'.ucwords($template).'Template';
 
@@ -241,6 +253,8 @@ class Events
                 $data = array_merge($data, $controller->data);
             }
         }
+        // Default image
+        $defaultImage = (!empty($data['mod_event_def_image'])) ? $data['mod_event_def_image'] : $settingsData['mod_event_def_image'];
 
         foreach ($events as &$event) {
             // Set permalink url with date parameter
@@ -268,29 +282,26 @@ class Events
                             array($data['imageDimensions']['width'], $data['imageDimensions']['height']),
                             $data['imageRatio']
                         );
-                    } elseif (!empty($data['mod_event_def_image'])) {
+                    } elseif (!empty($defaultImage)) {
                         $src = wp_get_attachment_image_src(
-                            $data['mod_event_def_image']['ID'],
+                            $defaultImage['ID'],
                             municipio_to_aspect_ratio(
                                 $data['imageRatio'],
                                 array($data['imageDimensions']['width'], $data['imageDimensions']['height'])
                             )
                         );
-
                         $event->image_url = $src[0] ?? null;
                     }
-
                     break;
                 default:
                     if (function_exists('municipio_get_thumbnail_source') && municipio_get_thumbnail_source(
                         $event->ID
                     )) {
                         $event->image_url = municipio_get_thumbnail_source($event->ID);
-                    } elseif (!empty($data['mod_event_def_image'])) {
+                    } elseif (!empty($defaultImage)) {
                         $src = wp_get_attachment_image_src(
-                            $data['mod_event_def_image']['ID']
+                            $defaultImage['ID']
                         );
-
                         $event->image_url = $src[0] ?? null;
                     }
             }
