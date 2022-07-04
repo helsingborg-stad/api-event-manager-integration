@@ -13,8 +13,12 @@ class Cron
     }
 
     public static function addCronJob()
-    {
-        wp_schedule_event(time(), 'hourly', self::$cronJobName);
+    {   
+        if (!wp_next_scheduled(self::$cronJobName)) {
+            wp_schedule_event(time(), 'daily', self::$cronJobName);
+        } else {
+            wp_reschedule_event(time(), 'daily', self::$cronJobName);
+        } 
     }
 
     public static function removeCronJob()
