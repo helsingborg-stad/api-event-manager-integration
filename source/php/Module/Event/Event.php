@@ -190,11 +190,11 @@ class Event extends \Modularity\Module
         foreach ($events as $event) {
             $occasionStart = \EventManagerIntegration\App::formatShortDate($event->start_date);
             $occasionEnd = \EventManagerIntegration\App::formatShortDate($event->end_date);
-            $date = $occasionStart['date'] . ' ' . $occasionStart['month'] . ' - ' .  $occasionEnd['date'] . ' ' .$occasionEnd['month'];
-
+            $occasionDateFormatted = \EventManagerIntegration\App::formatEventDate($event->start_date, $event->end_date);
 
             $event->occasionStart = $occasionStart;
             $event->occasionEnd = $occasionEnd;
+            $event->occasionDateFormatted = $occasionDateFormatted;
         }
 
         return $events;
