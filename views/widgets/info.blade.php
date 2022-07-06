@@ -50,6 +50,14 @@
                 </ul>
             </div>
         @endif
+
+        @if($event['eventLink'])
+            <div class="u-margin__top--3">
+                @link(['href' => $event['eventLink']])
+                    {{ $eventLang->goToEventWebsite}}
+                @endlink
+            </div>
+        @endif
         
         @include('partials.price')
     </div>
