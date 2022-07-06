@@ -4,6 +4,8 @@
     @include('components.notice_warning')
     @include('components.notice_success')
 
+    @includeWhen($userGroups, 'partials.user_group')
+
     @button([
         'text' => __('Send', 'event-integration'),
         'color' => 'primary',
