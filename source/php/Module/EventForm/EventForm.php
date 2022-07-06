@@ -23,7 +23,8 @@ class EventForm extends \Modularity\Module
     {
         $data = [];
 
-        $data['fields'] = \EventManagerIntegration\Module\EventForm\Fields::get($this->id);
+        $data['fields'] = \EventManagerIntegration\Module\EventForm\Fields::get($this->ID);
+        $data['userGroups'] = get_field('user_groups', $this->ID);
 
         $this->validateFields($data['fields']);
 
