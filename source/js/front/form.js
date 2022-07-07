@@ -192,7 +192,7 @@ const eventForm = {
             );
         if (dataSource.hiddenFields !== undefined) {
             select.addEventListener('change', () => {
-                const selectedOption = select.querySelector('option[selected]');
+                const selectedOption = select.querySelector('option[value="' + select.value + '"]');
                 if (selectedOption && selectedOption.dataset.hiddenFields) {
                     Object.values(dataSource.hiddenFields).forEach((key) => {
                         const hiddenField = select.parentNode.querySelector(
