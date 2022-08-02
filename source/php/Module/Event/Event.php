@@ -80,7 +80,6 @@ class Event extends \Modularity\Module
         $data['categories'] = ($this->template == 'index') ? json_encode($this->getFilterableCategories($id)) : $this->getFilterableCategories($id);
         $data['groups'] = ($this->template == 'index') ? json_encode($this->getModuleGroups($id)) : $this->getModuleGroups($id);
         $data['tags'] = ($this->template == 'index') ? json_encode($this->getFilterableTags($id)) : $this->getFilterableTags($id);
-
         // List module data
         $data['pagesCount'] = $this->countPages($id);
         $data['events'] = $this->getEvents($id, $page);
