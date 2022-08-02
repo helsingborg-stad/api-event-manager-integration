@@ -195,7 +195,16 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             'book_free'         => __('Book free ticket', 'event-integration')
         ];
 
+       
+        $accessibilityType = $locationInfo['accessibility'] ?? 'toilet';
+
+        $accessibilityLabels = [
+            'toilet' => __('Accessible toilet', 'event-integration'),
+            'elevator' => __('Elevator/ramp', 'event-integration')
+        ];
+
         $data['eventLang'] = (object) array(
+            'accessibles'               => $accessibilityLabels,
             'link'                      => __('Event link', 'event-integration'),
             'ticket'                    => __('Ticket', 'event-integration'),
             'goToEventWebsite'          => __('Go to event website', 'event-integration'),
