@@ -223,7 +223,6 @@ class FilterableEventsContainer extends React.Component {
       start_date: startDate,
       tags,
     };
-    console.log(settings);
     // Fetch events
     getEvents(url, params)
       .then(response => {

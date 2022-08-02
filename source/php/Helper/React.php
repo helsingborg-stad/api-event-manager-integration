@@ -23,10 +23,7 @@ class React
 
         //Enqueue react
         wp_enqueue_script('react', EVENTMANAGERINTEGRATION_URL.'/source/js/front/react/react.' . $suffix  . '.js', array(), null);
-        wp_enqueue_script('react-dom', EVENTMANAGERINTEGRATION_URL.'/source/js/front/react/react-dom.' . $suffix  . '.js', array(), null);
-        //wp_enqueue_script('react', 'https://unpkg.com/react@' . $version . '/umd/react.' . $suffix . '.js', array(), null);
-        //wp_enqueue_script('react-dom', 'https://unpkg.com/react-dom@' . $version . '/umd/react-dom.' . $suffix . '.js', array(), null);
-        
+        wp_enqueue_script('react-dom', EVENTMANAGERINTEGRATION_URL.'/source/js/front/react/react-dom.' . $suffix  . '.js', array(), null);      
 
     }
 }
