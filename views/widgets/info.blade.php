@@ -6,16 +6,15 @@
             <ul>
                 @foreach(array_slice($event['occasions'], 0, 3) as $occasion)
                     <li>
-                        @link([
-                            'href' => $occasion->permalink
-                        ])
-                            {{ $occasion->formatted }}
-                            @if($occassion->status === 'cancelled')
-                                - <strong>{{ $eventLang->cancelled }}</strong>
-                            @elseif($occassion->status === 'rescheduled')
-                                - <strong>{{ $eventLang->rescheduled }}</strong>
-                            @endif
-                        @endlink
+                        @if($occasion->formatted !== $event['occasion']['formatted'])
+                            @link([
+                                'href' => $occasion->permalink
+                            ])
+                                @include('partials.occasion-date')
+                            @endlink
+                        @else
+                            @include('partials.occasion-date')
+                        @endif
                     </li>
                 @endforeach
             </ul>
@@ -33,16 +32,11 @@
 
         <ul class="unlist u-margin__top--3">
             @if ($event['occasion']['duration_formatted'])
-                <li><strong>{{ $eventLang->occasionDuration }}</strong> {{ $event['occasion']['duration_formatted'] }}</li>
+                <li><strong>{{ $eventLang->occasionDuration }}:</strong> {{ $event['occasion']['duration_formatted'] }}</li>
             @endif
-
-            @if ($locationInfo)
-                <li><strong>{{ $eventLang->location }}</strong> {{ $locationInfo['title'] }}</li>
-            @endif
-
 
             @if($event['age_group'])
-                <li><strong>{{ $eventLang->age }}</strong> {{ $event['age_group'] }}</li>
+                <li><strong>{{ $eventLang->age }}:</strong> {{ $event['age_group'] }}</li>
             @endif
         </ul>
         
@@ -54,6 +48,14 @@
                         <li>{{ $accessibility }}</li>
                     @endforeach
                 </ul>
+            </div>
+        @endif
+
+        @if($event['eventLink'])
+            <div class="u-margin__top--3">
+                @link(['href' => $event['eventLink']])
+                    {{ $eventLang->goToEventWebsite}}
+                @endlink
             </div>
         @endif
         

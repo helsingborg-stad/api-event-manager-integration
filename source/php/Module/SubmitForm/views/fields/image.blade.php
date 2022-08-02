@@ -40,7 +40,7 @@
     @typography([
         'variant' => 'lead' 
     ])
-        {{ _e('Are there identifiable persons on the image/images?', 'event-integration') }}
+        {{ _e('Are there identifiable persons on the image?', 'event-integration') }}
     @endtypography
 
     @option([

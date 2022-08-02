@@ -10,7 +10,7 @@
                 
                 @if($contactInfo['contact_phone'])
                     <li>
-                        {{ $eventLang->contactPhone }}
+                        {{ $eventLang->contactPhone }}:
                         @link(['href' => 'tel:' . $contactInfo['contact_phone']])
                             {{ $contactInfo['contact_phone'] }}
                         @endlink
@@ -19,7 +19,7 @@
                 
                 @if($contactInfo['contact_email'])
                     <li>
-                        {{ $eventLang->contactEmail }}
+                        {{ $eventLang->contactEmail }}:
                         @link(['href' => 'mailto:' . $contactInfo['contact_email']])
                             {{ $contactInfo['contact_email'] }}
                         @endlink

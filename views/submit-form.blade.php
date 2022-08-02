@@ -213,7 +213,7 @@
             <input type="checkbox" name="approve" id="first-approve"> <?php _e('I have the right to use this image to promote this event.', 'event-integration'); ?>
         </label>
         <label class="checkbox">
-            <input type="checkbox" name="approve" id="second-approve"> <?php _e('There are no identifiable persons on the image/images.', 'event-integration'); ?>
+            <input type="checkbox" name="approve" id="second-approve"> <?php _e('There are no identifiable persons on the image.', 'event-integration'); ?>
         </label>
     </div>
     <div class="form-group image-upload" style="display:none;">

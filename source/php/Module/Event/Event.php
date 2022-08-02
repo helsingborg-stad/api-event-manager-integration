@@ -128,8 +128,8 @@ class Event extends \Modularity\Module
         }
 
         $max_per_page = (isset($fields->mod_event_limit)) ? $fields->mod_event_limit : 10;
-        $events = self::getEvents($module_id, 1);
-        $total_posts = count($events);  //Total number of posts returned
+        $posts = self::getEvents($module_id, 1, array('display_limit' => -1));
+        $total_posts = count($posts);
         $pages = ceil($total_posts / $max_per_page);
 
         if (isset($fields->mod_event_pagination_limit) && $fields->mod_event_pagination_limit >= 0
@@ -142,16 +142,16 @@ class Event extends \Modularity\Module
 
     /**
      * Get included Events
-     * @param  int  $module_id Module ID
-     * @param  int  $page      Pagination page number
-     * @param  bool $useLimit  True = limit by setting, false = get all
-     * @return array           Array with event objects
+     * @param  int    $module_id  Module ID
+     * @param  int    $page       Pagination page number
+     * @param  array  $params     Query params
+     * @return array              Array with event objects
      */
-    public function getEvents($module_id, $page = 1)
+    public function getEvents($module_id, $page = 1, $params = [])
     {
         $fields = json_decode(json_encode(get_fields($module_id)));
         $eventPagination = $fields->mod_event_pagination;
-        $display_limit = ($eventPagination == false && isset($fields->mod_event_limit)) ? $fields->mod_event_limit : -1;
+        $display_limit = isset($fields->mod_event_limit) ? $fields->mod_event_limit : -1;
         $days_ahead = isset($fields->mod_event_interval) ? $fields->mod_event_interval : 0;
 
         // Set start and end date
@@ -167,7 +167,7 @@ class Event extends \Modularity\Module
         $groups = $this->getModuleGroups($module_id);
 
         $taxonomies = (!empty($taxonomies)) ? $taxonomies : null;
-        $params = array(
+        $default_params = array(
             'start_date' => $start_date,
             'end_date' => $end_date,
             'display_limit' => $display_limit,
@@ -181,6 +181,7 @@ class Event extends \Modularity\Module
             'only_todays_date' => $mod_event_only_todays_date
         );
 
+        $params = array_merge($default_params, $params);
         $events = \EventManagerIntegration\Helper\QueryEvents::getEventsByInterval($params, $page);
 
         return $events;
@@ -191,11 +192,11 @@ class Event extends \Modularity\Module
         foreach ($events as $event) {
             $occasionStart = \EventManagerIntegration\App::formatShortDate($event->start_date);
             $occasionEnd = \EventManagerIntegration\App::formatShortDate($event->end_date);
-            $date = $occasionStart['date'] . ' ' . $occasionStart['month'] . ' - ' .  $occasionEnd['date'] . ' ' .$occasionEnd['month'];
-
+            $occasionDateFormatted = \EventManagerIntegration\App::formatEventDate($event->start_date, $event->end_date);
 
             $event->occasionStart = $occasionStart;
             $event->occasionEnd = $occasionEnd;
+            $event->occasionDateFormatted = $occasionDateFormatted;
         }
 
         return $events;
@@ -234,7 +235,7 @@ class Event extends \Modularity\Module
         $currentPage = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
         if ($numberOfPages > 1) {
-            for ($i = 1; $i < $numberOfPages; $i++) {
+            for ($i = 1; $i <= $numberOfPages; $i++) {
                 $href = $archiveUrl . '?' . $this->setQueryString($i). "#event";
 
                 $pagination[] = array(

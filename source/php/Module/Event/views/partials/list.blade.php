@@ -22,7 +22,7 @@
 					@typography(['element' => 'h4'])
 						{{$event->post_title}}
 						@typography(['variant' => 'meta', 'element' => 'p'])
-							{{\EventManagerIntegration\Helper\SingleEventData::singleEventDate($event->ID)['formatted']}}
+							{{$event->occasionDateFormatted}}
 						@endtypography
 					@endtypography
 				</span>

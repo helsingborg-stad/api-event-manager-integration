@@ -132,7 +132,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         $eventData['rescheduled'] = !empty($eventData['occasion']['status']) && $eventData['occasion']['status'] === 'rescheduled' ? __('Rescheduled', 'event-integration') : null;
         $eventData['exception_information'] = !empty($eventData['occasion']['exception_information']) ? $eventData['occasion']['exception_information'] : null;
         $eventData['eventArchive'] = add_query_arg('s', urlencode($post->post_title), get_post_type_archive_link(self::$postTypeSlug));
-
+        $eventData['eventLink'] = $meta['event_link'] ?? false;
         $eventData['introText'] = '';
         $extendedContent = get_extended($post->post_content);
         if(!empty($extendedContent['main']) && !empty($extendedContent['extended'])) {
@@ -196,7 +196,9 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         ];
 
         $data['eventLang'] = (object) array(
+            'link'                      => __('Event link', 'event-integration'),
             'ticket'                    => __('Ticket', 'event-integration'),
+            'goToEventWebsite'          => __('Go to event website', 'event-integration'),
             'ticketIncludes'            => __('The ticket includes %s.', 'event-integration'),
             'bookingLinkButton'         => $bookingLinkButtonLabels[$bookingLinkType] ?? '',
             'ticketRetailers'           => __('Ticket retailers', 'event-integration'),
