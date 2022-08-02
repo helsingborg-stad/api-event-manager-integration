@@ -13,6 +13,7 @@
     <div class="o-grid-12">
         <div class="modularity-event-{{ $template }}"
              data-module-id="{{ $ID }}"
+             data-post-id="{{ $post_id }}"
              data-settings="{{ json_encode($settings) }}"
              data-grid-column="{{ $gridColumn }}"
              data-archive-url="{{ $archive_url }}"
@@ -21,10 +22,10 @@
              data-lat="{{ $lat }}"
              data-lng="{{ $lng }}"
              data-distance="{{ $distance }}"
-             data-categories="{{ json_encode($categories) }}"
-             data-groups="{{ json_encode($groups) }}"
-             data-tags="{{ json_encode($tags) }}"
-             data-age-range="{{ json_encode($age_range) }}"
+             data-categories="{{ $categories }}"
+             data-groups="{{ $groups }}"
+             data-tags="{{ $tags }}"
+             data-age-range="{{ $age_range }}"
              data-lang="{{ $lang }}"
         >
         </div>

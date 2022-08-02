@@ -60,10 +60,13 @@ class Event extends \Modularity\Module
         parse_str($_SERVER['QUERY_STRING'], $queryArgList);
         $page = $queryArgList['paged'] ?? 1;
 
+        global $post;
+
         // Cards module data
         $data['settings'] = $data;
         $this->template = !empty($data['mod_event_display']) ? $data['mod_event_display'] : 'list';
         $data['template'] = $this->template;
+        $data['post_id'] = $post->ID;
         $data['archive_url'] = get_post_type_archive_link('event');
         $data['rest_url'] = get_rest_url();
         $days_ahead = isset($data['mod_event_interval']) ? $data['mod_event_interval'] : 0;
@@ -72,12 +75,11 @@ class Event extends \Modularity\Module
         $data['lat'] = (isset($data['mod_event_geographic']['lat'])) ? $data['mod_event_geographic']['lat'] : null;
         $data['lng'] = (isset($data['mod_event_geographic']['lng'])) ? $data['mod_event_geographic']['lng'] : null;
         $data['distance'] = (isset($data['mod_event_distance'])) ? $data['mod_event_distance'] : null;
-        $data['age_range'] = $this->getAgeFilterRange($id);
+        $data['age_range'] = ($this->template == 'index') ? json_encode($this->getAgeFilterRange($id)) : $this->getAgeFilterRange($id);
         // Taxonomies filter
-        $data['categories'] = $this->getFilterableCategories($id);
-        $data['groups'] = $this->getModuleGroups($id);
-        $data['tags'] = $this->getFilterableTags($id);
-
+        $data['categories'] = ($this->template == 'index') ? json_encode($this->getFilterableCategories($id)) : $this->getFilterableCategories($id);
+        $data['groups'] = ($this->template == 'index') ? json_encode($this->getModuleGroups($id)) : $this->getModuleGroups($id);
+        $data['tags'] = ($this->template == 'index') ? json_encode($this->getFilterableTags($id)) : $this->getFilterableTags($id);
         // List module data
         $data['pagesCount'] = $this->countPages($id);
         $data['events'] = $this->getEvents($id, $page);
@@ -391,7 +393,6 @@ class Event extends \Modularity\Module
         if ($showAllGroups === false && !empty($moduleGroups) && is_array($moduleGroups)) {
             $groups = $moduleGroups;
         }
-
         return $groups;
     }
 
@@ -434,9 +435,7 @@ class Event extends \Modularity\Module
         );
 
         // Enqueue React
-        class_exists('\Modularity\Helper\React') ?
-            \Modularity\Helper\React::enqueue() :
-            \EventManagerIntegration\Helper\React::enqueue();
+        \EventManagerIntegration\Helper\React::enqueue();
 
         wp_enqueue_script(
             'modularity-'.$this->slug,

@@ -174,6 +174,7 @@ class FilterableEventsContainer extends React.Component {
       lat,
       lng,
       moduleId,
+      postId,
       restUrl,
       settings,
       translation,
@@ -217,13 +218,14 @@ class FilterableEventsContainer extends React.Component {
       lat,
       lng,
       module_id: moduleId,
+      post_id: postId,
+      settings: JSON.stringify(settings),
       page: currentPage,
       per_page: perPage,
       search_string: searchString,
       start_date: startDate,
       tags,
     };
-
     // Fetch events
     getEvents(url, params)
       .then(response => {
@@ -516,6 +518,7 @@ FilterableEventsContainer.propTypes = {
   lat: PropTypes.string,
   lng: PropTypes.string,
   moduleId: PropTypes.string.isRequired,
+  postId: PropTypes.string,
   restUrl: PropTypes.string.isRequired,
   settings: PropTypes.object.isRequired,
   startDate: PropTypes.string.isRequired,
