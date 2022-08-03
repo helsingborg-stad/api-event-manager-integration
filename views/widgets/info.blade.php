@@ -44,7 +44,7 @@
             <div class="u-margin__top--3">
                 <strong>{{ $eventLang->locationAccessibility }}</strong>
                 <ul>
-                    @foreach($eventLang->accessibles as $accessibility)
+                    @foreach($eventLang->accessibilityLabels as $accessibility)
                         <li>{{ $accessibility }}</li>
                     @endforeach
                 </ul>
