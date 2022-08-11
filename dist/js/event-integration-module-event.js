@@ -2639,8 +2639,7 @@ class EventList extends React.Component {
     const {
       items,
       gridColumn,
-      displayFields,
-      dateBadge
+      displayFields
     } = this.props;
     return /*#__PURE__*/React.createElement("div", {
       className: "o-grid"
