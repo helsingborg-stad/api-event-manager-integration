@@ -474,6 +474,7 @@ class FilterableEventsContainer extends React.Component {
                   items={items}
                   gridColumn={gridColumn}
                   displayFields={settings.mod_event_fields}
+                  dateBadge={settings.mod_event_show_date_badge}
                 />
             )}
 

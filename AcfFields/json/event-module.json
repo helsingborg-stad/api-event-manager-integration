@@ -53,9 +53,7 @@
                 "3": "Three column",
                 "4": "Four column"
             },
-            "default_value": [
-                3
-            ],
+            "default_value": 3,
             "allow_null": 0,
             "multiple": 0,
             "ui": 0,
@@ -346,9 +344,7 @@
                 "16-9": "Standard Video (16:9)",
                 "4-3": "Standard TV (4:3)"
             },
-            "default_value": [
-                "1-1"
-            ],
+            "default_value": "1-1",
             "allow_null": 0,
             "multiple": 0,
             "ui": 0,
@@ -849,6 +845,33 @@
             "min": "",
             "max": "",
             "step": ""
+        },
+        {
+            "key": "field_62f3af8237389",
+            "label": "Show date badge",
+            "name": "mod_event_show_date_badge",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b2ace4dc65a8",
+                        "operator": "==",
+                        "value": "index"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "20",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
@@ -858,6 +881,13 @@
                 "operator": "==",
                 "value": "mod-event"
             }
+        ],
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/event"
+            }
         ]
     ],
     "menu_order": 0,
@@ -866,7 +896,13 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
-    "description": ""
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "acfe_display_title": "",
+    "acfe_autosync": "",
+    "acfe_form": 0,
+    "acfe_meta": "",
+    "acfe_note": ""
 }]
 

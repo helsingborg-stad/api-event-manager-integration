@@ -1,9 +1,7 @@
 <?php 
 
-
-if (function_exists('acf_add_local_field_group')) {
-
-    acf_add_local_field_group(array(
+if (function_exists('acf_add_local_field_group')) {
+    acf_add_local_field_group(array(
     'key' => 'group_583fe4ee88439',
     'title' => __('Display events', 'event-integration'),
     'fields' => array(
@@ -27,7 +25,7 @@ if (function_exists('acf_add_local_field_group')) {
             'allow_null' => 0,
             'other_choice' => 0,
             'save_other_choice' => 0,
-            'default_value' => 'list',
+            'default_value' => __('list', 'event-integration'),
             'layout' => 'horizontal',
             'return_format' => 'value',
         ),
@@ -58,9 +56,7 @@ if (function_exists('acf_add_local_field_group')) {
                 3 => __('Three column', 'event-integration'),
                 4 => __('Four column', 'event-integration'),
             ),
-            'default_value' => array(
-                0 => 3,
-            ),
+            'default_value' => 3,
             'allow_null' => 0,
             'multiple' => 0,
             'ui' => 0,
@@ -200,7 +196,7 @@ if (function_exists('acf_add_local_field_group')) {
             'prepend' => '',
             'append' => '',
             'min' => '',
-            'max' => '5',
+            'max' => '',
             'step' => '',
         ),
         7 => array(
@@ -352,9 +348,7 @@ if (function_exists('acf_add_local_field_group')) {
                 '16-9' => __('Standard Video (16:9)', 'event-integration'),
                 '4-3' => __('Standard TV (4:3)', 'event-integration'),
             ),
-            'default_value' => array(
-                0 => '1-1',
-            ),
+            'default_value' => __('1-1', 'event-integration'),
             'allow_null' => 0,
             'multiple' => 0,
             'ui' => 0,
@@ -395,7 +389,7 @@ if (function_exists('acf_add_local_field_group')) {
             'allow_null' => 0,
             'other_choice' => 0,
             'save_other_choice' => 0,
-            'default_value' => 'below : Below title',
+            'default_value' => __('below : Below title', 'event-integration'),
             'layout' => 'vertical',
             'return_format' => 'value',
         ),
@@ -856,6 +850,33 @@ if (function_exists('acf_add_local_field_group')) {
             'max' => '',
             'step' => '',
         ),
+        32 => array(
+            'key' => 'field_62f3af8237389',
+            'label' => __('Show date badge', 'event-integration'),
+            'name' => 'mod_event_show_date_badge',
+            'type' => 'true_false',
+            'instructions' => '',
+            'required' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_5b2ace4dc65a8',
+                        'operator' => '==',
+                        'value' => 'index',
+                    ),
+                ),
+            ),
+            'wrapper' => array(
+                'width' => '20',
+                'class' => '',
+                'id' => '',
+            ),
+            'message' => '',
+            'default_value' => 0,
+            'ui' => 1,
+            'ui_on_text' => '',
+            'ui_off_text' => '',
+        ),
     ),
     'location' => array(
         0 => array(
@@ -865,6 +886,13 @@ if (function_exists('acf_add_local_field_group')) {
                 'value' => 'mod-event',
             ),
         ),
+        1 => array(
+            0 => array(
+                'param' => 'block',
+                'operator' => '==',
+                'value' => 'acf/event',
+            ),
+        ),
     ),
     'menu_order' => 0,
     'position' => 'normal',
@@ -872,8 +900,13 @@ if (function_exists('acf_add_local_field_group')) {
     'label_placement' => 'top',
     'instruction_placement' => 'label',
     'hide_on_screen' => '',
-    'active' => 1,
+    'active' => true,
     'description' => '',
+    'show_in_rest' => 0,
+    'acfe_display_title' => '',
+    'acfe_autosync' => '',
+    'acfe_form' => 0,
+    'acfe_meta' => '',
+    'acfe_note' => '',
 ));
-
-}
+}
