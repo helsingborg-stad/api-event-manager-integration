@@ -302,16 +302,17 @@
             },
             "choices": {
                 "occasion": "Occasion",
+                "dateBadge": "Date badge",
                 "image": "Image",
                 "location": "Location",
                 "description": "Description"
             },
             "allow_custom": 0,
-            "save_custom": 0,
             "default_value": [],
             "layout": "vertical",
             "toggle": 1,
-            "return_format": "value"
+            "return_format": "value",
+            "save_custom": 0
         },
         {
             "key": "field_5b2ae170ae36f",
@@ -845,33 +846,6 @@
             "min": "",
             "max": "",
             "step": ""
-        },
-        {
-            "key": "field_62f3af8237389",
-            "label": "Show date badge",
-            "name": "mod_event_show_date_badge",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_5b2ace4dc65a8",
-                        "operator": "==",
-                        "value": "index"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "20",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
         }
     ],
     "location": [

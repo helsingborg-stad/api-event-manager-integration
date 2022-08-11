@@ -2526,7 +2526,6 @@ __webpack_require__.r(__webpack_exports__);
 var today = new Date();
 
 function getDateBadge(event, type) {
-  console.log(event);
   let todaysMonth = parseInt(("0" + today.getMonth()).slice(-2));
   let startMonth = parseInt(event.start_date.substr(5, 2)) - 1;
   let endMonth = parseInt(event.end_date.substr(5, 2)) - 1;
@@ -2568,8 +2567,7 @@ const EventItem = _ref => {
   let {
     event,
     gridColumn,
-    displayFields,
-    dateBadge
+    displayFields
   } = _ref;
   return /*#__PURE__*/React.createElement("a", {
     className: "c-card c-card--action",
@@ -2580,7 +2578,7 @@ const EventItem = _ref => {
     }
   }, displayFields.includes('image') && event.image_url && /*#__PURE__*/React.createElement("div", {
     className: "c-card__image c-card__image--secondary"
-  }, dateBadge ? /*#__PURE__*/React.createElement("div", {
+  }, displayFields.includes('dateBadge') ? /*#__PURE__*/React.createElement("div", {
     class: "c-datebadge c-datebadge--md u-position--absolute u-margin--2"
   }, /*#__PURE__*/React.createElement("div", {
     class: "c-datebadge__daymonth"
@@ -2588,7 +2586,7 @@ const EventItem = _ref => {
     class: "c-typography c-datebadge__date c-typography__variant--h1"
   }, getDateBadge(event, "day")), /*#__PURE__*/React.createElement("span", {
     class: "c-typography c-datebadge__month c-typography__variant--h4"
-  }, getDateBadge(event, "month").substr(0, 3)))) : "", /*#__PURE__*/React.createElement("div", {
+  }, getDateBadge(event, "month").substr(0, 3)), console.log(displayFields))) : "", /*#__PURE__*/React.createElement("div", {
     className: "c-card__image-background",
     style: {
       backgroundImage: `url('${event.image_url}')`
@@ -2652,8 +2650,7 @@ class EventList extends React.Component {
       key: (0,uuid__WEBPACK_IMPORTED_MODULE_1__["default"])(),
       event: event,
       gridColumn: gridColumn,
-      displayFields: displayFields,
-      dateBadge: dateBadge
+      displayFields: displayFields
     }))));
   }
 
@@ -3278,8 +3275,7 @@ class FilterableEventsContainer extends React.Component {
     }, (error || isLoaded && items.length === 0) && /*#__PURE__*/React.createElement("span", null, translation.noEventsFound), items.length > 0 && /*#__PURE__*/React.createElement(_EventList__WEBPACK_IMPORTED_MODULE_5__["default"], {
       items: items,
       gridColumn: gridColumn,
-      displayFields: settings.mod_event_fields,
-      dateBadge: settings.mod_event_show_date_badge
+      displayFields: settings.mod_event_fields
     }))), /*#__PURE__*/React.createElement("div", {
       className: "o-grid"
     }, settings.mod_event_pagination && /*#__PURE__*/React.createElement("div", {

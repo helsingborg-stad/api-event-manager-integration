@@ -5,7 +5,7 @@ import EventItem from './EventItem';
 class EventList extends React.Component {
   render() {
     const { items, gridColumn, displayFields, dateBadge } = this.props;
-    
+
     return (
       <div className="o-grid">
         {items.map(event => (
@@ -15,7 +15,6 @@ class EventList extends React.Component {
                 event={event}
                 gridColumn={gridColumn}
                 displayFields={displayFields}
-                dateBadge={dateBadge}
                 />
             </div>
         ))}

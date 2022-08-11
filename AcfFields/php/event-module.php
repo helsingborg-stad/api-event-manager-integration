@@ -305,17 +305,18 @@
             ),
             'choices' => array(
                 'occasion' => __('Occasion', 'event-integration'),
+                'dateBadge' => __('Date badge', 'event-integration'),
                 'image' => __('Image', 'event-integration'),
                 'location' => __('Location', 'event-integration'),
                 'description' => __('Description', 'event-integration'),
             ),
             'allow_custom' => 0,
-            'save_custom' => 0,
             'default_value' => array(
             ),
             'layout' => 'vertical',
             'toggle' => 1,
             'return_format' => 'value',
+            'save_custom' => 0,
         ),
         12 => array(
             'key' => 'field_5b2ae170ae36f',
@@ -849,33 +850,6 @@
             'min' => '',
             'max' => '',
             'step' => '',
-        ),
-        32 => array(
-            'key' => 'field_62f3af8237389',
-            'label' => __('Show date badge', 'event-integration'),
-            'name' => 'mod_event_show_date_badge',
-            'type' => 'true_false',
-            'instructions' => '',
-            'required' => 0,
-            'conditional_logic' => array(
-                0 => array(
-                    0 => array(
-                        'field' => 'field_5b2ace4dc65a8',
-                        'operator' => '==',
-                        'value' => 'index',
-                    ),
-                ),
-            ),
-            'wrapper' => array(
-                'width' => '20',
-                'class' => '',
-                'id' => '',
-            ),
-            'message' => '',
-            'default_value' => 0,
-            'ui' => 1,
-            'ui_on_text' => '',
-            'ui_off_text' => '',
         ),
     ),
     'location' => array(
