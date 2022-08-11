@@ -2566,7 +2566,6 @@ function getDateBadge(event, type) {
 const EventItem = _ref => {
   let {
     event,
-    gridColumn,
     displayFields
   } = _ref;
   return /*#__PURE__*/React.createElement("a", {
@@ -2586,7 +2585,7 @@ const EventItem = _ref => {
     class: "c-typography c-datebadge__date c-typography__variant--h1"
   }, getDateBadge(event, "day")), /*#__PURE__*/React.createElement("span", {
     class: "c-typography c-datebadge__month c-typography__variant--h4"
-  }, getDateBadge(event, "month").substr(0, 3)), console.log(displayFields))) : "", /*#__PURE__*/React.createElement("div", {
+  }, getDateBadge(event, "month").substr(0, 3)))) : "", /*#__PURE__*/React.createElement("div", {
     className: "c-card__image-background",
     style: {
       backgroundImage: `url('${event.image_url}')`
@@ -2644,11 +2643,10 @@ class EventList extends React.Component {
     return /*#__PURE__*/React.createElement("div", {
       className: "o-grid"
     }, items.map(event => /*#__PURE__*/React.createElement("div", {
-      className: `o-grid-12 o-grid-4@md`
+      className: gridColumn ? gridColumn : `o-grid-12 o-grid-4@md`
     }, /*#__PURE__*/React.createElement(_EventItem__WEBPACK_IMPORTED_MODULE_0__["default"], {
       key: (0,uuid__WEBPACK_IMPORTED_MODULE_1__["default"])(),
       event: event,
-      gridColumn: gridColumn,
       displayFields: displayFields
     }))));
   }

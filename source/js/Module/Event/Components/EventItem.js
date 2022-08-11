@@ -37,11 +37,11 @@ function getDateBadge(event, type) {
   }
 }
 
-const EventItem = ({ event, gridColumn, displayFields }) => (
+const EventItem = ({ event, displayFields }) => (
     <a className="c-card c-card--action" href={event.permalink} style={{textAlign: 'center', height: '100%'}}>
       {displayFields.includes('image') && event.image_url && (
         <div className="c-card__image c-card__image--secondary">
-        {displayFields.includes('dateBadge') ? (<div class="c-datebadge c-datebadge--md u-position--absolute u-margin--2"><div class="c-datebadge__daymonth"><span class="c-typography c-datebadge__date c-typography__variant--h1">{getDateBadge(event, "day")}</span><span class="c-typography c-datebadge__month c-typography__variant--h4">{getDateBadge(event, "month").substr(0, 3)}</span>{console.log(displayFields)}</div></div>) : ""}
+        {displayFields.includes('dateBadge') ? (<div class="c-datebadge c-datebadge--md u-position--absolute u-margin--2"><div class="c-datebadge__daymonth"><span class="c-typography c-datebadge__date c-typography__variant--h1">{getDateBadge(event, "day")}</span><span class="c-typography c-datebadge__month c-typography__variant--h4">{getDateBadge(event, "month").substr(0, 3)}</span></div></div>) : ""}
           <div className="c-card__image-background" style={{backgroundImage: `url('${event.image_url}')`}}></div>
         </div>
       )}
