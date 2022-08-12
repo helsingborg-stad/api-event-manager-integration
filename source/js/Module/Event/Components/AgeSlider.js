@@ -1,7 +1,7 @@
 import { parse } from "uuid";
 
 const sliderFunc = () => {
-    const parent = document.querySelector('.range-slider')
+    const parent = document.querySelector('.age-slider')
 
     if(!parent) {
         return;
@@ -46,11 +46,13 @@ export default function AgeSlider ( { translation } ) {
     
 
     return (
-        <div className="range-slider">
-            <h4> {translation.selectAge} </h4>
+        <div className="age-slider-container">
+            <p className="title"> {translation.selectAge} </p>
 
-            <div className="range-slider">
+            <div className="age-slider">
             <span>min <input type="number" defaultValue="1" min="1" max="100" step="1" /> max <input type="number" defaultValue="100" min="1" max="100" step="1" /></span>
+
+
             <input defaultValue="1" min="1" max="100" step="1" type="range" />
             <input defaultValue="100" min="1" max="100" step="1" type="range" />
 

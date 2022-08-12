@@ -22,26 +22,31 @@
 
 
 /* Age slider */
-.range-slider {
-  width: 300px;
+.age-slider-container {
+  width: 250px;
   margin: auto;
   position: relative;
   height: 100px;
-  /* border: 1px solid blue; */
+  /* background-color: white; */
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0px 0px 5px rgb(134, 132, 132);
+  text-align: center;
 }
-.range-slider input[type="range"] {
+
+.age-slider .title {
+  font-weight: bold;
+  margin: 1rem;
+}
+.age-slider input[type="range"] {
   position: absolute;
   left: 0;
-  bottom: 50%;
+  bottom: 0;
 }
 input[type="number"] {
   border: 1px solid #ddd;
+  border-radius: 4px;
   text-align: center;
-  font-size: 1em;
-}
-input[type="number"]:invalid,
-input[type="number"]:out-of-range {
-  border: 2px solid #ff6347;
 }
 input[type="range"] {
   -webkit-appearance: none;
@@ -51,15 +56,11 @@ input[type="range"] {
 input[type="range"]:focus {
   outline: none;
 }
-input[type="range"]:focus::-webkit-slider-runnable-track {
-  background: #2497e3;
-}
-input[type="range"]:focus::-ms-fill-lower {
-  background: #2497e3;
-}
-input[type="range"]:focus::-ms-fill-upper {
-  background: #2497e3;
-}
+
+
+
+
+
 input[type="range"]::-webkit-slider-runnable-track {
   width: 100%;
   height: 5px;
@@ -69,6 +70,8 @@ input[type="range"]::-webkit-slider-runnable-track {
   box-shadow: none;
   border: 0;
 }
+
+
 input[type="range"]::-webkit-slider-thumb {
   z-index: 2;
   position: relative;
@@ -83,6 +86,8 @@ input[type="range"]::-webkit-slider-thumb {
   appearance: none;
   margin-top: -7px;
 }
+
+
 input[type="range"]::-moz-range-track {
   width: 100%;
   height: 5px;
@@ -92,7 +97,24 @@ input[type="range"]::-moz-range-track {
   box-shadow: none;
   border: 0;
 }
-input[type="range"]::-moz-range-thumb {
+
+
+/* Webkit and stuff... */
+/* input[type="range"]:focus::-webkit-slider-runnable-track {
+  background: #2497e3;
+}
+
+
+input[type="range"]:focus::-ms-fill-lower {
+  background: #2497e3;
+}
+
+
+input[type="range"]:focus::-ms-fill-upper {
+  background: #2497e3;
+} 
+
+  input[type="range"]::-moz-range-thumb {
   z-index: 2;
   position: relative;
   box-shadow: 0px 0px 0px #000;
@@ -103,6 +125,8 @@ input[type="range"]::-moz-range-thumb {
   background: #a1d0ff;
   cursor: pointer;
 }
+
+
 input[type="range"]::-ms-track {
   width: 100%;
   height: 5px;
@@ -111,6 +135,8 @@ input[type="range"]::-ms-track {
   border-color: transparent;
   color: transparent;
 }
+
+
 input[type="range"]::-ms-fill-lower,
 input[type="range"]::-ms-fill-upper {
   background: #2497e3;
@@ -118,6 +144,8 @@ input[type="range"]::-ms-fill-upper {
   box-shadow: none;
   border: 0;
 }
+
+
 input[type="range"]::-ms-thumb {
   z-index: 2;
   position: relative;
@@ -128,4 +156,4 @@ input[type="range"]::-ms-thumb {
   border-radius: 25px;
   background: #a1d0ff;
   cursor: pointer;
-}
+}  */

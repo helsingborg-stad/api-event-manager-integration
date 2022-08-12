@@ -2365,7 +2365,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const sliderFunc = () => {
-  const parent = document.querySelector('.range-slider');
+  const parent = document.querySelector('.age-slider');
 
   if (!parent) {
     return;
@@ -2409,9 +2409,11 @@ function AgeSlider(_ref) {
   } = _ref;
   sliderFunc();
   return /*#__PURE__*/React.createElement("div", {
-    className: "range-slider"
-  }, /*#__PURE__*/React.createElement("h4", null, " ", translation.selectAge, " "), /*#__PURE__*/React.createElement("div", {
-    className: "range-slider"
+    className: "age-slider-container"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "title"
+  }, " ", translation.selectAge, " "), /*#__PURE__*/React.createElement("div", {
+    className: "age-slider"
   }, /*#__PURE__*/React.createElement("span", null, "min ", /*#__PURE__*/React.createElement("input", {
     type: "number",
     defaultValue: "1",
