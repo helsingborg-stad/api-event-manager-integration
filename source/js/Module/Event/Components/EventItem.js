@@ -2,37 +2,44 @@ import PropTypes from 'prop-types';
 var today = new Date();
 
 function getDateBadge(event, type) {
-  let todaysMonth = parseInt(("0"+(today.getMonth())).slice(-2));
-  let startMonth = parseInt(event.start_date.substr(5,2))-1;
-  let endMonth = parseInt(event.end_date.substr(5,2))-1;
+  let startDate = parseInt(event.start_date.substr(0, 4) + event.start_date.substr(5, 2) - 1 + event.start_date.substr(8, 2));
+  let endDate = parseInt(event.end_date.substr(0, 4) + event.end_date.substr(5, 2) - 1 + event.end_date.substr(8, 2));
+  let todaysDate = parseInt(today.getFullYear() + ("0" + (today.getMonth())).slice(-2) + ("0" + today.getDate()).slice(-2));
   let months = ["Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December"];
-  let todaysDay = parseInt(("0" + today.getDate()).slice(-2));
-  let startDay = parseInt(event.start_date.substr(8, 2));
-  let endDay = parseInt(event.end_date.substr(8, 2));
 
-  //not started
-  if (startMonth > todaysMonth || (startMonth === todaysMonth && todaysDay < startDay)) {
+  //get date formula
+  function getDate (date, type) {
+    switch(type) {
+      case "getDay":
+        return date.toString().substr(6,2);
+      case "getMonth":
+        return months[parseInt(date.toString().substr(4,2))];
+    }
+  }
+  //event not started
+  if (startDate > todaysDate) {
     switch(type) {
       case "day":
-        return startDay;
+        return getDate(startDate, "getDay");
       case "month": 
-        return months[startMonth];
+        return getDate(startDate, "getMonth");
     }
-  } //finished
-  else if (endMonth < todaysMonth || (endMonth === todaysMonth && todaysDay > endDay)) {
+  }
+   //event finished
+  else if (todaysDate > endDate) {
    switch(type) {
     case "day":
-      return endDay;
+      return getDate(endDate, "getDay");
     case "month":
-      return months[endMonth];
+      return getDate(endDate, "getMonth");
    }
-  } //ongoing
+  } //event ongoing
   else {
     switch(type) {
       case "day":
-        return todaysDay;
+        return getDate(todaysDate, "getDay"); 
       case "month":
-        return months[todaysMonth];
+        return getDate(todaysDate, "getMonth");
     }
   }
 }
