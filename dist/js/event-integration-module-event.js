@@ -2417,11 +2417,15 @@ function AgeSlider(_ref) {
 
     const range = (minValue, maxValue) => [...Array(maxValue - minValue + 1).keys()].map(i => Number(minValue) + i);
 
-    const selectedRange = range(minValue, maxValue);
-    console.log("selectedRange: ", selectedRange);
-    console.log("ageRange: ", ageRange);
-    const result = ageRange.filter(item => item > 50);
-    console.log(result); // Make all items in selectedRange "checked" or something else to filter real data
+    const selectedRange = range(minValue, maxValue); // console.log("selectedRange: ", selectedRange)
+    // console.log("ageRange: ", ageRange);
+
+    const result = ageRange.filter(item => selectedRange.includes(item.value));
+    console.log("result: ", result);
+    result.map(item => {
+      item.checked = true;
+    }); // console.log("finalResult: ", finalResult);
+    // Make all items in selectedRange "checked" or something else to filter real data
   };
 
   return /*#__PURE__*/React.createElement("div", {

@@ -48,12 +48,18 @@ export default function AgeSlider ( { translation, onAgeChange, ageRange, } ) {
         // Grab all the values in between 
         const range = (minValue, maxValue) => [...Array(maxValue - minValue + 1).keys()].map((i) => (Number(minValue) + i));
         const selectedRange = range(minValue, maxValue);
-        console.log("selectedRange: ", selectedRange)
-        console.log("ageRange: ", ageRange);
+        // console.log("selectedRange: ", selectedRange)
+        // console.log("ageRange: ", ageRange);
 
-        const result = ageRange.filter(item => item > 50)
-        console.log(result);
+        const result = ageRange.filter(item => selectedRange.includes(item.value))
 
+        console.log("result: ", result);
+        
+        result.map((item) => {
+            item.checked = true;
+        })
+        
+        // console.log("finalResult: ", finalResult);
     
         
         // Make all items in selectedRange "checked" or something else to filter real data
