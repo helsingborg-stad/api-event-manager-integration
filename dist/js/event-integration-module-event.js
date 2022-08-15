@@ -2401,17 +2401,6 @@ const sliderFunc = () => {
       rangeS[1].value = number2;
     };
   });
-}; // Change minValue and maxValue on slide
-
-
-const onSlide = () => {
-  let minValue = document.getElementById("minValue").value;
-  let maxValue = document.getElementById("maxValue").value; // Grab all the values in between 
-
-  const range = (minValue, maxValue) => [...Array(maxValue - minValue + 1).keys()].map(i => Number(minValue) + i);
-
-  const selectedRange = range(minValue, maxValue);
-  console.log("selectedRange: ", selectedRange); // Make all items in selectedRange "checked" or something else to filter real data
 };
 
 function AgeSlider(_ref) {
@@ -2420,7 +2409,21 @@ function AgeSlider(_ref) {
     onAgeChange,
     ageRange
   } = _ref;
-  sliderFunc();
+  sliderFunc(); // Change minValue and maxValue on slide
+
+  const onSlide = () => {
+    let minValue = document.getElementById("minValue").value;
+    let maxValue = document.getElementById("maxValue").value; // Grab all the values in between 
+
+    const range = (minValue, maxValue) => [...Array(maxValue - minValue + 1).keys()].map(i => Number(minValue) + i);
+
+    const selectedRange = range(minValue, maxValue);
+    console.log("selectedRange: ", selectedRange);
+    console.log("ageRange: ", ageRange);
+    const result = ageRange.filter(item => item > 50);
+    console.log(result); // Make all items in selectedRange "checked" or something else to filter real data
+  };
+
   return /*#__PURE__*/React.createElement("div", {
     className: "age-slider-container"
   }, /*#__PURE__*/React.createElement("p", {

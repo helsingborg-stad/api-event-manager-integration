@@ -14,11 +14,9 @@ const sliderFunc = () => {
     rangeS.forEach((el) => {
         el.oninput = () => {
             let slide1 = parseFloat(rangeS[0].value), slide2 = parseFloat(rangeS[1].value);
-
             if (slide1 > slide2) {
                 [slide1, slide2] = [slide2, slide1]
             }
-
             numberS[0].value = slide1;
             numberS[1].value = slide2;
         }
@@ -27,35 +25,41 @@ const sliderFunc = () => {
     numberS.forEach((el) => {
         el.oninput = () => {
             let number1 = parseFloat(numberS[0].value), number2 = parseFloat(numberS[1].value);
-
             if (number1 > number2) {
                 let tmp = number1;
                 numberS[0].value = number2;
                 numberS[1].value = tmp
             }
-
             rangeS[0].value = number1;
             rangeS[1].value = number2;
         };
     })
-
 };
 
-// Change minValue and maxValue on slide
-const onSlide = () => {
-    let minValue = document.getElementById("minValue").value;
-    let maxValue = document.getElementById("maxValue").value;
-    // Grab all the values in between 
-    const range = (minValue, maxValue) => [...Array(maxValue - minValue + 1).keys()].map((i) => Number(minValue) + i);
-    const selectedRange = range(minValue, maxValue);
-    console.log("selectedRange: ", selectedRange)
-
-    // Make all items in selectedRange "checked" or something else to filter real data
-}
 
 
 export default function AgeSlider ( { translation, onAgeChange, ageRange, } ) {
     sliderFunc();
+    
+    // Change minValue and maxValue on slide
+    const onSlide = () => {
+        let minValue = document.getElementById("minValue").value;
+        let maxValue = document.getElementById("maxValue").value;
+        // Grab all the values in between 
+        const range = (minValue, maxValue) => [...Array(maxValue - minValue + 1).keys()].map((i) => (Number(minValue) + i));
+        const selectedRange = range(minValue, maxValue);
+        console.log("selectedRange: ", selectedRange)
+        console.log("ageRange: ", ageRange);
+
+        const result = ageRange.filter(item => item > 50)
+        console.log(result);
+
+    
+        
+        // Make all items in selectedRange "checked" or something else to filter real data
+        
+
+    }
     
     return (
         <div className="age-slider-container">
