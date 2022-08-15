@@ -2422,11 +2422,13 @@ function AgeSlider(_ref) {
     let lastItem = selectedRange[selectedRange.length - 1];
 
     for (let i = 0; i < ageRange.length; i++) {
-      if (i >= firstItem && i <= lastItem) {
+      if (i >= firstItem - 1 && i < lastItem) {
         ageRange[i].checked = true;
       } else {
         ageRange[i].checked = false;
       }
+
+      console.log(ageRange);
     }
   };
 
