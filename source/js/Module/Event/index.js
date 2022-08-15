@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', e => {
     for (let i = 0; i < domElements.length; i++) {
       const element = domElements[i];
       const { settings, categories, tags, groups, ageRange } = element.dataset;
+      const resetButtonUrl = element.getAttribute("data-reset-url");
 
       ReactDOM.render(
         <FilterableEventsContainer
@@ -30,6 +31,7 @@ document.addEventListener('DOMContentLoaded', e => {
           tags={JSON.parse(tags)}
           translation={translation}
           startDate={startDate}
+          resetButtonUrl={resetButtonUrl}
         />,
         element
       );

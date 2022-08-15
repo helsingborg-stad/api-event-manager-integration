@@ -61,6 +61,7 @@ class Event extends \Modularity\Module
         $page = $queryArgList['paged'] ?? 1;
 
         global $post;
+        global $wp;
 
         // Cards module data
         $data['settings'] = $data;
@@ -87,6 +88,7 @@ class Event extends \Modularity\Module
             ? $data['mod_event_fields'] : array();
         $data['descr_limit'] = !empty($data['mod_event_descr_limit']) ? $data['mod_event_descr_limit'] : null;
         $data['date_now'] = strtotime('now');
+        $data['reset_url'] = home_url($wp->request);
 
         // Language
         $data['lang'] = $this->lang;
@@ -476,6 +478,7 @@ class Event extends \Modularity\Module
                 ),
                 'years' => __('years', 'event-integration'),
                 'selectAge' => __('Select age', 'event-integration'),
+                'resetFilters' => __('Reset filters', 'event-integration'),
             )
         );
     }

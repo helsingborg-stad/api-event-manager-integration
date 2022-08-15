@@ -21,6 +21,8 @@ const FilterContainer = ({
   toDateChange,
   translation,
   updateSearchString,
+  resetButton,
+  resetButtonUrl,
 }) => (
   <form onSubmit={onSubmit}>
     <div className="o-grid">
@@ -86,7 +88,7 @@ const FilterContainer = ({
 
       <div className="o-grid-fit">
         <button 
-          className="c-button c-button__filled c-button__filled--default c-button--md ripple ripple--before" 
+          className="c-button c-button__filled c-button__filled--primary c-button--md ripple ripple--before" 
           aria-pressed="false"
           type="submit"
           title={translation.search}>
@@ -97,6 +99,20 @@ const FilterContainer = ({
             </span>
         </button>
       </div>
+
+      {resetButton && (
+      <div className="o-grid-fit">
+        <a
+          className="c-button c-button__filled c-button__filled--default c-button--md ripple ripple--before"
+          href={resetButtonUrl}>
+          <span class="c-button__label">
+            <span class="c-button__label-text">
+              {translation.resetFilters}
+            </span>
+          </span>
+        </a>
+      </div>
+      )}
     </div>
   </form>
 );

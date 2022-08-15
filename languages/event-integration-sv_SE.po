@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2022-07-06 12:30+0200\n"
-"PO-Revision-Date: 2022-07-06 12:30+0200\n"
+"POT-Creation-Date: 2022-08-15 14:34+0200\n"
+"PO-Revision-Date: 2022-08-15 14:37+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -317,7 +317,7 @@ msgstr "Evenemangskategorier"
 
 #: AcfFields/php/event-form-module.php:1721 AcfFields/php/event-module.php:531
 #: AcfFields/php/event-module.php:722 source/php/Helper/SubmitEvent.php:152
-#: source/php/Module/Event/Event.php:472 source/php/PostTypes/Events.php:241
+#: source/php/Module/Event/Event.php:473 source/php/PostTypes/Events.php:241
 #: source/php/PostTypes/Events.php:597
 #: source/php/Shortcodes/SingleEventAdmin.php:593
 #: views/submit-form.blade.php:188
@@ -508,7 +508,7 @@ msgid "Show events from the selected groups."
 msgstr "Visa evenemang inom angivna grupper."
 
 #: AcfFields/php/event-module.php:482 AcfFields/php/event-module.php:695
-#: source/php/Helper/SubmitEvent.php:144 source/php/Module/Event/Event.php:471
+#: source/php/Helper/SubmitEvent.php:144 source/php/Module/Event/Event.php:472
 #: source/php/PostTypes/Events.php:240 source/php/PostTypes/Events.php:560
 #: source/php/Shortcodes/SingleEventAdmin.php:587
 #: views/submit-form.blade.php:179
@@ -579,7 +579,7 @@ msgstr "Textsök"
 msgid "Date search"
 msgstr "Datumfiltrering"
 
-#: AcfFields/php/event-module.php:776 source/php/Module/Event/Event.php:473
+#: AcfFields/php/event-module.php:776 source/php/Module/Event/Event.php:474
 #: source/php/PostTypes/Events.php:234
 #: source/php/Shortcodes/SingleEventAdmin.php:355
 #: source/php/Shortcodes/SingleEventAdmin.php:357
@@ -972,7 +972,7 @@ msgstr "Inställningar"
 msgid "Clear map"
 msgstr "Återställ kartan"
 
-#: source/php/Api/Events.php:193
+#: source/php/Api/Events.php:204
 msgid "No events could be found."
 msgstr "Inga evenemang hittades."
 
@@ -1312,47 +1312,47 @@ msgstr "Evenemang"
 msgid "Outputs a list if upcoming events"
 msgstr ""
 
-#: source/php/Module/Event/Event.php:463
+#: source/php/Module/Event/Event.php:464
 msgid "More events"
 msgstr "Fler evenemang"
 
-#: source/php/Module/Event/Event.php:464 source/php/Widget/DisplayEvents.php:56
+#: source/php/Module/Event/Event.php:465 source/php/Widget/DisplayEvents.php:56
 msgid "No events found"
 msgstr "Inga evenemang hittades"
 
-#: source/php/Module/Event/Event.php:465
+#: source/php/Module/Event/Event.php:466
 msgid "Next"
 msgstr "Nästa"
 
-#: source/php/Module/Event/Event.php:466
+#: source/php/Module/Event/Event.php:467
 msgid "Previous"
 msgstr "Föregående"
 
-#: source/php/Module/Event/Event.php:467
+#: source/php/Module/Event/Event.php:468
 msgid "Search"
 msgstr "Sök"
 
-#: source/php/Module/Event/Event.php:468
+#: source/php/Module/Event/Event.php:469
 #: source/php/Module/EventForm/Fields.php:590
 #: source/php/PostTypes/Events.php:171
 #: source/php/Shortcodes/SingleEventAdmin.php:357
 msgid "From"
 msgstr "Från"
 
-#: source/php/Module/Event/Event.php:469
+#: source/php/Module/Event/Event.php:470
 #: source/php/Module/EventForm/Fields.php:605
 msgid "To"
 msgstr "Till"
 
-#: source/php/Module/Event/Event.php:470
+#: source/php/Module/Event/Event.php:471
 msgid "date"
 msgstr "datum"
 
-#: source/php/Module/Event/Event.php:475
+#: source/php/Module/Event/Event.php:476
 msgid "Filter on events that is targeted for given the age"
 msgstr "Filtrera på evenemang som är riktade till en ålder"
 
-#: source/php/Module/Event/Event.php:478
+#: source/php/Module/Event/Event.php:479
 #: source/php/Module/EventForm/Fields.php:522
 #: source/php/Module/EventForm/Fields.php:562
 #: source/php/Module/EventForm/Fields.php:594
@@ -1366,9 +1366,13 @@ msgstr "Filtrera på evenemang som är riktade till en ålder"
 msgid "years"
 msgstr "år"
 
-#: source/php/Module/Event/Event.php:479
+#: source/php/Module/Event/Event.php:480
 msgid "Select age"
 msgstr "Välj ålder"
+
+#: source/php/Module/Event/Event.php:481
+msgid "Reset filters"
+msgstr "Återställ filter"
 
 #: source/php/Module/EventForm/EventForm.php:16
 msgid "Event form v2"

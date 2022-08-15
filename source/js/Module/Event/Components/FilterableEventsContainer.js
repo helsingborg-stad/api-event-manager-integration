@@ -26,6 +26,8 @@ class FilterableEventsContainer extends React.Component {
       tags: props.tags,
       totalPages: 1,
       translate: '',
+      resetButton: false,
+      resetButtonUrl: props.resetButtonUrl,
     };
 
     this.myRef = createRef()
@@ -109,11 +111,17 @@ class FilterableEventsContainer extends React.Component {
       ageRange,
       translate,
     } = this.state;
-
+    
     const categoryIds = this.getTaxonomyIds(categories);
     const tagIds = this.getTaxonomyIds(tags);
     const ageRangeIds = this.getTaxonomyIds(ageRange);
     const params = this.loadQueryString();
+    if (categoryIds > 0 || tagIds > 0) {
+      this.setState({ resetButton: true });
+    }
+    else {
+      this.setState({resetButton: false});
+    }
     // Set query parameters
     setQuery(
       {
@@ -421,6 +429,8 @@ class FilterableEventsContainer extends React.Component {
       startDate,
       tags,
       totalPages,
+      resetButton,
+      resetButtonUrl,
     } = this.state;
 
     const { settings, translation, gridColumn, archiveUrl } = this.props;
@@ -450,6 +460,8 @@ class FilterableEventsContainer extends React.Component {
               toDateChange={this.toDateChange}
               translation={translation}
               updateSearchString={this.updateSearchString}
+              resetButton={resetButton}
+              resetButtonUrl={resetButtonUrl}
             />
           </div>
         )}
