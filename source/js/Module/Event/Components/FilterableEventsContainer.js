@@ -396,6 +396,9 @@ class FilterableEventsContainer extends React.Component {
     const { ageRange } = this.state;
     // Get the index
     const index = ageRange.findIndex(obj => obj.value === id);
+
+    console.log("index: ", index);
+
     // Update state
     this.setState(
       update(this.state, {
@@ -408,7 +411,7 @@ class FilterableEventsContainer extends React.Component {
     );
   };
 
-  
+
 
   render() {
     const {

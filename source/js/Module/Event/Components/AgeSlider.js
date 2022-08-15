@@ -44,10 +44,13 @@ const sliderFunc = () => {
 // Change minValue and maxValue on slide
 const onSlide = () => {
     let minValue = document.getElementById("minValue").value;
-    console.log("minValue: ", minValue);
-
     let maxValue = document.getElementById("maxValue").value;
-    console.log("maxValue: ", maxValue);
+    // Grab all the values in between 
+    const range = (minValue, maxValue) => [...Array(maxValue - minValue + 1).keys()].map((i) => Number(minValue) + i);
+    const selectedRange = range(minValue, maxValue);
+    console.log("selectedRange: ", selectedRange)
+
+    // Make all items in selectedRange "checked" or something else to filter real data
 }
 
 

@@ -2406,9 +2406,12 @@ const sliderFunc = () => {
 
 const onSlide = () => {
   let minValue = document.getElementById("minValue").value;
-  console.log("minValue: ", minValue);
-  let maxValue = document.getElementById("maxValue").value;
-  console.log("maxValue: ", maxValue);
+  let maxValue = document.getElementById("maxValue").value; // Grab all the values in between 
+
+  const range = (minValue, maxValue) => [...Array(maxValue - minValue + 1).keys()].map(i => Number(minValue) + i);
+
+  const selectedRange = range(minValue, maxValue);
+  console.log("selectedRange: ", selectedRange); // Make all items in selectedRange "checked" or something else to filter real data
 };
 
 function AgeSlider(_ref) {
@@ -3247,7 +3250,8 @@ class FilterableEventsContainer extends React.Component {
         ageRange
       } = this.state; // Get the index
 
-      const index = ageRange.findIndex(obj => obj.value === id); // Update state
+      const index = ageRange.findIndex(obj => obj.value === id);
+      console.log("index: ", index); // Update state
 
       this.setState(immutability_helper__WEBPACK_IMPORTED_MODULE_2___default()(this.state, {
         ageRange: {
