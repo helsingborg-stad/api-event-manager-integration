@@ -59,8 +59,8 @@ export default function AgeSlider ( { translation, onAgeChange, ageRange, } ) {
             <p className="title"> {translation.selectAge} </p>
             <div className="age-slider">
                 <span>
-                     {" "} min <input type="number" defaultValue="1" min="1" max="100" step="1" /> 
-                     {" "} max <input type="number" defaultValue="100" min="1" max="100" step="1" />
+                     {" "} min <input type="number" defaultValue="1" min="1" max="100" step="1" onChange={onSlide}/> 
+                     {" "} max <input type="number" defaultValue="100" min="1" max="100" step="1" onChange={onSlide} />
                 </span>
 
                 <input id="minValue" defaultValue="1" min="1" max="100" step="1" type="range" onChange={onSlide} />

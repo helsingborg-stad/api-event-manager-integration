@@ -2429,13 +2429,15 @@ function AgeSlider(_ref) {
     defaultValue: "1",
     min: "1",
     max: "100",
-    step: "1"
+    step: "1",
+    onChange: onSlide
   }), " ", " max ", /*#__PURE__*/React.createElement("input", {
     type: "number",
     defaultValue: "100",
     min: "1",
     max: "100",
-    step: "1"
+    step: "1",
+    onChange: onSlide
   })), /*#__PURE__*/React.createElement("input", {
     id: "minValue",
     defaultValue: "1",
