@@ -408,6 +408,8 @@ class FilterableEventsContainer extends React.Component {
     );
   };
 
+  
+
   render() {
     const {
       ageRange,

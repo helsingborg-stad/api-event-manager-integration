@@ -1,5 +1,6 @@
 import { parse } from "uuid";
 
+// Frontend logic to sync numbers with slides
 const sliderFunc = () => {
     const parent = document.querySelector('.age-slider')
 
@@ -40,22 +41,30 @@ const sliderFunc = () => {
 
 };
 
-export default function AgeSlider ( { translation } ) {
+// Change minValue and maxValue on slide
+const onSlide = () => {
+    let minValue = document.getElementById("minValue").value;
+    console.log("minValue: ", minValue);
 
+    let maxValue = document.getElementById("maxValue").value;
+    console.log("maxValue: ", maxValue);
+}
+
+
+export default function AgeSlider ( { translation, onAgeChange, ageRange, } ) {
     sliderFunc();
     
-
     return (
         <div className="age-slider-container">
             <p className="title"> {translation.selectAge} </p>
-
             <div className="age-slider">
-            <span>min <input type="number" defaultValue="1" min="1" max="100" step="1" /> max <input type="number" defaultValue="100" min="1" max="100" step="1" /></span>
+                <span>
+                     {" "} min <input type="number" defaultValue="1" min="1" max="100" step="1" /> 
+                     {" "} max <input type="number" defaultValue="100" min="1" max="100" step="1" />
+                </span>
 
-
-            <input defaultValue="1" min="1" max="100" step="1" type="range" />
-            <input defaultValue="100" min="1" max="100" step="1" type="range" />
-
+                <input id="minValue" defaultValue="1" min="1" max="100" step="1" type="range" onChange={onSlide} />
+                <input id="maxValue" defaultValue="100" min="1" max="100" step="1" type="range" onChange={onSlide} />
             </div>
         </div>
 

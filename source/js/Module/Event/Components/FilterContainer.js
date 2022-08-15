@@ -63,7 +63,6 @@ const FilterContainer = ({
         <div className="o-grid-fit u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
           {/* <AgeFilter translation={translation} ageRange={ageRange} onAgeChange={onAgeChange} /> */}
 
-
           <AgeSlider translation={translation} ageRange={ageRange} onAgeChange={onAgeChange} />
         </div>
       )}

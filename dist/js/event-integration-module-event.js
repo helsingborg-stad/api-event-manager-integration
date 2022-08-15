@@ -2362,7 +2362,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ AgeSlider)
 /* harmony export */ });
-
+ // Frontend logic to sync numbers with slides
 
 const sliderFunc = () => {
   const parent = document.querySelector('.age-slider');
@@ -2401,11 +2401,21 @@ const sliderFunc = () => {
       rangeS[1].value = number2;
     };
   });
+}; // Change minValue and maxValue on slide
+
+
+const onSlide = () => {
+  let minValue = document.getElementById("minValue").value;
+  console.log("minValue: ", minValue);
+  let maxValue = document.getElementById("maxValue").value;
+  console.log("maxValue: ", maxValue);
 };
 
 function AgeSlider(_ref) {
   let {
-    translation
+    translation,
+    onAgeChange,
+    ageRange
   } = _ref;
   sliderFunc();
   return /*#__PURE__*/React.createElement("div", {
@@ -2414,30 +2424,34 @@ function AgeSlider(_ref) {
     className: "title"
   }, " ", translation.selectAge, " "), /*#__PURE__*/React.createElement("div", {
     className: "age-slider"
-  }, /*#__PURE__*/React.createElement("span", null, "min ", /*#__PURE__*/React.createElement("input", {
+  }, /*#__PURE__*/React.createElement("span", null, " ", " min ", /*#__PURE__*/React.createElement("input", {
     type: "number",
     defaultValue: "1",
     min: "1",
     max: "100",
     step: "1"
-  }), " max ", /*#__PURE__*/React.createElement("input", {
+  }), " ", " max ", /*#__PURE__*/React.createElement("input", {
     type: "number",
     defaultValue: "100",
     min: "1",
     max: "100",
     step: "1"
   })), /*#__PURE__*/React.createElement("input", {
+    id: "minValue",
     defaultValue: "1",
     min: "1",
     max: "100",
     step: "1",
-    type: "range"
+    type: "range",
+    onChange: onSlide
   }), /*#__PURE__*/React.createElement("input", {
+    id: "maxValue",
     defaultValue: "100",
     min: "1",
     max: "100",
     step: "1",
-    type: "range"
+    type: "range",
+    onChange: onSlide
   })));
 }
 
