@@ -53,21 +53,14 @@ export default function AgeSlider ( { translation, onAgeChange, ageRange, } ) {
         let lastItem = selectedRange[selectedRange.length - 1];
 
         for (let i = 0; i < ageRange.length; i++) {
-            if (i>=firstItem && i<=lastItem) {
+            if (i >= firstItem && i <= lastItem) {
                 ageRange[i].checked = true;
-            } 
+            }
             else {
                 ageRange[i].checked = false;
             }
-          
+
         }
-
-
-        const result = ageRange.filter(item => item > 50)
-    
-        
-        // Make all items in selectedRange "checked" or something else to filter real data
-        
 
     }
     

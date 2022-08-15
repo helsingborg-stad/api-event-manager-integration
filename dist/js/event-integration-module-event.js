@@ -2428,8 +2428,6 @@ function AgeSlider(_ref) {
         ageRange[i].checked = false;
       }
     }
-
-    const result = ageRange.filter(item => item > 50); // Make all items in selectedRange "checked" or something else to filter real data
   };
 
   return /*#__PURE__*/React.createElement("div", {
