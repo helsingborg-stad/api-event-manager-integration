@@ -58,23 +58,56 @@ export default function AgeSlider ( { translation, ageRange, } ) {
             // console.log(ageRange);
         }
     }
-    
+
+    const toggleAge = (e) => {
+        e.preventDefault();
+        let toggle = document.querySelector('.age-slider-container');
+        if (toggle) {
+            if (toggle.classList.contains('show-age-slider')) {
+                toggle.classList.remove('show-age-slider')
+                } else {
+                toggle.classList.add('show-age-slider');
+            }
+        }
+    }
+
     return (
-        <Dropdown title={translation.selectAge} className="age-slider-dropdown" >
-            <div className="age-slider-container">
-                <div className="age-slider">
-                    <div className="min-max-age-input" >
-                        <span>
-                            min <input type="number" defaultValue="1" min="1" max="100" step="1" onChange={onSlide}/> 
-                        </span>
-                        <span>
-                            max <input type="number" defaultValue="100" min="1" max="100" step="1" onChange={onSlide} />
-                        </span>
+        // Style inherited from hbg-react/Dropdown component
+        // <Dropdown title={translation.selectAge} className="age-slider-dropdown" >
+        //     <div className="age-slider-container">
+        //         <div className="age-slider">
+        //             <div className="min-max-age-input" >
+        //                 <span>
+        //                     min <input type="number" defaultValue="1" min="1" max="100" step="1" onChange={onSlide}/> 
+        //                 </span>
+        //                 <span>
+        //                     max <input type="number" defaultValue="100" min="1" max="100" step="1" onChange={onSlide} />
+        //                 </span>
+        //             </div>
+        //             <input id="minValue" defaultValue="1" min="1" max="100" step="1" type="range" onChange={onSlide} />
+        //             <input id="maxValue" defaultValue="100" min="1" max="100" step="1" type="range" onChange={onSlide} />
+        //         </div>
+        //     </div>
+        // </Dropdown>
+
+        // Same functionality but completely vanilla JS & style from module-event-css
+
+        <div>
+            <button onClick={toggleAge} >{translation.selectAge}</button>
+                <div className="age-slider-container">
+                    <div className="age-slider">
+                        <div className="min-max-age-input" >
+                            <span>
+                                min <input type="number" defaultValue="1" min="1" max="100" step="1" onChange={onSlide}/> 
+                            </span>
+                            <span>
+                                max <input type="number" defaultValue="100" min="1" max="100" step="1" onChange={onSlide} />
+                            </span>
+                        </div>
+                        <input id="minValue" defaultValue="1" min="1" max="100" step="1" type="range" onChange={onSlide} />
+                        <input id="maxValue" defaultValue="100" min="1" max="100" step="1" type="range" onChange={onSlide} />
                     </div>
-                    <input id="minValue" defaultValue="1" min="1" max="100" step="1" type="range" onChange={onSlide} />
-                    <input id="maxValue" defaultValue="100" min="1" max="100" step="1" type="range" onChange={onSlide} />
                 </div>
-            </div>
-        </Dropdown>
+        </div>
     )
 }
