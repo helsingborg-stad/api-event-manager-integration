@@ -1,5 +1,3 @@
-import { parse } from "uuid";
-
 // Frontend logic to sync numbers with slides
 const sliderFunc = () => {
     const parent = document.querySelector('.age-slider')
@@ -13,7 +11,7 @@ const sliderFunc = () => {
 
     rangeS.forEach((el) => {
         el.oninput = () => {
-            let slide1 = parseFloat(rangeS[0].value), slide2 = parseFloat(rangeS[1].value);
+            let slide1 = parseInt(rangeS[0].value), slide2 = parseInt(rangeS[1].value);
             if (slide1 > slide2) {
                 [slide1, slide2] = [slide2, slide1]
             }
@@ -24,7 +22,7 @@ const sliderFunc = () => {
 
     numberS.forEach((el) => {
         el.oninput = () => {
-            let number1 = parseFloat(numberS[0].value), number2 = parseFloat(numberS[1].value);
+            let number1 = parseInt(numberS[0].value), number2 = parseInt(numberS[1].value);
             if (number1 > number2) {
                 let tmp = number1;
                 numberS[0].value = number2;
@@ -36,48 +34,39 @@ const sliderFunc = () => {
     })
 };
 
-
-
-export default function AgeSlider ( { translation, onAgeChange, ageRange, } ) {
+export default function AgeSlider ( { translation, ageRange, } ) {
     sliderFunc();
     
-    // Change minValue and maxValue on slide
     const onSlide = () => {
-        let minValue = document.getElementById("minValue").value;
-        let maxValue = document.getElementById("maxValue").value;
-        // Grab all the values in between 
-        const range = (minValue, maxValue) => [...Array(maxValue - minValue + 1).keys()].map((i) => (Number(minValue) + i));
-        const selectedRange = range(minValue, maxValue);
-
-        let firstItem = selectedRange[0];
-        let lastItem = selectedRange[selectedRange.length - 1];
-
+        let minValue = parseInt(document.getElementById("minValue").value);
+        let maxValue = parseInt(document.getElementById("maxValue").value);
+        
+        if (minValue > maxValue) {
+            [minValue, maxValue] = [maxValue, minValue];
+        }
+        
         for (let i = 0; i < ageRange.length; i++) {
-            if (i >= (firstItem - 1) && i < lastItem) {
+            if (i >= (minValue - 1) && i < maxValue) {
                 ageRange[i].checked = true;
             }
             else {
                 ageRange[i].checked = false;
             }
-            console.log(ageRange);
+            // console.log(ageRange);
         }
-
     }
-    
     
     return (
         <div className="age-slider-container">
             <p className="title"> {translation.selectAge} </p>
             <div className="age-slider">
                 <span>
-                     {" "} min <input type="number" defaultValue="1" min="1" max="100" step="1" onChange={onSlide}/> 
-                     {" "} max <input type="number" defaultValue="100" min="1" max="100" step="1" onChange={onSlide} />
+                    {" "} min <input type="number" defaultValue="1" min="1" max="100" step="1" onChange={onSlide}/> 
+                    {" "} max <input type="number" defaultValue="100" min="1" max="100" step="1" onChange={onSlide} />
                 </span>
-
-                <input id="minValue" defaultValue="1" min="1" max="100" step="1" type="range" onChange={onSlide} />
-                <input id="maxValue" defaultValue="100" min="1" max="100" step="1" type="range" onChange={onSlide} />
+                    <input id="minValue" defaultValue="1" min="1" max="100" step="1" type="range" onChange={onSlide} />
+                    <input id="maxValue" defaultValue="100" min="1" max="100" step="1" type="range" onChange={onSlide} />
             </div>
         </div>
-
     )
 }

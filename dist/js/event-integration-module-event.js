@@ -2362,8 +2362,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ AgeSlider)
 /* harmony export */ });
- // Frontend logic to sync numbers with slides
-
+// Frontend logic to sync numbers with slides
 const sliderFunc = () => {
   const parent = document.querySelector('.age-slider');
 
@@ -2375,8 +2374,8 @@ const sliderFunc = () => {
         numberS = parent.querySelectorAll('input[type="number"]');
   rangeS.forEach(el => {
     el.oninput = () => {
-      let slide1 = parseFloat(rangeS[0].value),
-          slide2 = parseFloat(rangeS[1].value);
+      let slide1 = parseInt(rangeS[0].value),
+          slide2 = parseInt(rangeS[1].value);
 
       if (slide1 > slide2) {
         [slide1, slide2] = [slide2, slide1];
@@ -2388,8 +2387,8 @@ const sliderFunc = () => {
   });
   numberS.forEach(el => {
     el.oninput = () => {
-      let number1 = parseFloat(numberS[0].value),
-          number2 = parseFloat(numberS[1].value);
+      let number1 = parseInt(numberS[0].value),
+          number2 = parseInt(numberS[1].value);
 
       if (number1 > number2) {
         let tmp = number1;
@@ -2406,29 +2405,25 @@ const sliderFunc = () => {
 function AgeSlider(_ref) {
   let {
     translation,
-    onAgeChange,
     ageRange
   } = _ref;
-  sliderFunc(); // Change minValue and maxValue on slide
+  sliderFunc();
 
   const onSlide = () => {
-    let minValue = document.getElementById("minValue").value;
-    let maxValue = document.getElementById("maxValue").value; // Grab all the values in between 
+    let minValue = parseInt(document.getElementById("minValue").value);
+    let maxValue = parseInt(document.getElementById("maxValue").value);
 
-    const range = (minValue, maxValue) => [...Array(maxValue - minValue + 1).keys()].map(i => Number(minValue) + i);
-
-    const selectedRange = range(minValue, maxValue);
-    let firstItem = selectedRange[0];
-    let lastItem = selectedRange[selectedRange.length - 1];
+    if (minValue > maxValue) {
+      [minValue, maxValue] = [maxValue, minValue];
+    }
 
     for (let i = 0; i < ageRange.length; i++) {
-      if (i >= firstItem - 1 && i < lastItem) {
+      if (i >= minValue - 1 && i < maxValue) {
         ageRange[i].checked = true;
       } else {
         ageRange[i].checked = false;
-      }
+      } // console.log(ageRange);
 
-      console.log(ageRange);
     }
   };
 
@@ -2788,13 +2783,13 @@ const FilterContainer = _ref => {
   }, /*#__PURE__*/React.createElement("div", {
     className: "o-grid"
   }, settings.mod_event_filter_search && /*#__PURE__*/React.createElement("div", {
-    className: "o-grid-12 o-grid-auto@lg"
+    className: "o-grid-12 o-grid"
   }, /*#__PURE__*/React.createElement(_SearchBar__WEBPACK_IMPORTED_MODULE_4__["default"], {
     translation: translation,
     searchString: searchString,
     updateSearchString: updateSearchString
   })), settings.mod_event_filter_dates && /*#__PURE__*/React.createElement("div", {
-    className: "o-grid-12@xs o-grid-6@md o-grid-auto@lg"
+    className: "o-grid-12@xs o-grid-6@md"
   }, /*#__PURE__*/React.createElement(_DateFilter__WEBPACK_IMPORTED_MODULE_3__["default"], {
     id: "filter-date-from",
     label: `${translation.from} ${translation.date}`,
@@ -2802,7 +2797,7 @@ const FilterContainer = _ref => {
     formatDate: formatDate,
     value: startDate
   })), settings.mod_event_filter_dates && /*#__PURE__*/React.createElement("div", {
-    className: "o-grid-12@xs o-grid-6@md o-grid-auto@lg"
+    className: "o-grid-12@xs o-grid-6@md"
   }, /*#__PURE__*/React.createElement(_DateFilter__WEBPACK_IMPORTED_MODULE_3__["default"], {
     id: "filter-date-to",
     label: `${translation.to} ${translation.date}`,
