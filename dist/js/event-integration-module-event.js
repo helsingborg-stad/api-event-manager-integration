@@ -2362,6 +2362,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ AgeSlider)
 /* harmony export */ });
+// Frontend functionality
 const sliderFunc = () => {
   const parent = document.querySelector('.age-slider');
 
@@ -2399,7 +2400,8 @@ const sliderFunc = () => {
       rangeS[1].value = number2;
     };
   });
-};
+}; // ageRange will be modified then passed to FilterableEventsContainer for fetching events
+
 
 function AgeSlider(_ref) {
   let {
@@ -2421,8 +2423,7 @@ function AgeSlider(_ref) {
         ageRange[i].checked = true;
       } else {
         ageRange[i].checked = false;
-      } // console.log(ageRange);
-
+      }
     }
   };
 
@@ -2462,7 +2463,7 @@ function AgeSlider(_ref) {
     id: "up-arrow",
     class: "c-icon c-icon--size-md material-icons hide"
   }, "keyboard_arrow_up"))), /*#__PURE__*/React.createElement("div", {
-    className: "age-slider-container"
+    className: "age-slider-container u-position--absolute u-level-top"
   }, /*#__PURE__*/React.createElement("div", {
     className: "age-slider"
   }, /*#__PURE__*/React.createElement("div", {
@@ -2482,6 +2483,7 @@ function AgeSlider(_ref) {
     step: "1",
     onChange: onSlide
   }))), /*#__PURE__*/React.createElement("input", {
+    className: "u-color__bg--primary",
     id: "minValue",
     defaultValue: "1",
     min: "1",
@@ -2490,6 +2492,7 @@ function AgeSlider(_ref) {
     type: "range",
     onChange: onSlide
   }), /*#__PURE__*/React.createElement("input", {
+    className: "u-color__bg--primary",
     id: "maxValue",
     defaultValue: "100",
     min: "1",

@@ -1,3 +1,4 @@
+// Frontend functionality
 const sliderFunc = () => {
     const parent = document.querySelector('.age-slider')
 
@@ -33,7 +34,8 @@ const sliderFunc = () => {
     })
 };
 
-export default function AgeSlider ( { translation, ageRange, } ) {
+// ageRange will be modified then passed to FilterableEventsContainer for fetching events
+export default function AgeSlider ( { translation, ageRange } ) {
     sliderFunc();
     
     const onSlide = () => {
@@ -51,7 +53,6 @@ export default function AgeSlider ( { translation, ageRange, } ) {
             else {
                 ageRange[i].checked = false;
             }
-            // console.log(ageRange);
         }
     }
     
@@ -82,7 +83,7 @@ export default function AgeSlider ( { translation, ageRange, } ) {
                 <span className="c-button__label-icon"><i id="down-arrow" class="c-icon c-icon--size-md material-icons">keyboard_arrow_down</i></span>
                 <span className="c-button__label-icon"><i id="up-arrow" class="c-icon c-icon--size-md material-icons hide">keyboard_arrow_up</i></span>
             </button>
-            <div className="age-slider-container">
+            <div className="age-slider-container u-position--absolute u-level-top">
                 <div className="age-slider">
                     <div className="min-max-age-input" >
                         <span>
@@ -92,8 +93,8 @@ export default function AgeSlider ( { translation, ageRange, } ) {
                             max <input type="number" defaultValue="100" min="1" max="100" step="1" onChange={onSlide} />
                             </span>
                     </div>
-                    <input id="minValue" defaultValue="1" min="1" max="100" step="1" type="range" onChange={onSlide} />
-                    <input id="maxValue" defaultValue="100" min="1" max="100" step="1" type="range" onChange={onSlide} />
+                    <input className="u-color__bg--primary" id="minValue" defaultValue="1" min="1" max="100" step="1" type="range" onChange={onSlide} />
+                    <input className="u-color__bg--primary" id="maxValue" defaultValue="100" min="1" max="100" step="1" type="range" onChange={onSlide} />
                 </div>
             </div>
         </div>
