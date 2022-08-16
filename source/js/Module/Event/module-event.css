@@ -35,8 +35,12 @@
   padding: 10px;
 }
 
-.show-age-slider {
+.show {
   display: block;
+}
+
+.hide {
+  display: none;
 }
 
 div.min-max-age-input {

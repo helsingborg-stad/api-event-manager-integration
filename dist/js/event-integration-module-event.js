@@ -2362,9 +2362,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ AgeSlider)
 /* harmony export */ });
-/* harmony import */ var _helsingborg_stad_hbg_react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @helsingborg-stad/hbg-react */ "./node_modules/@helsingborg-stad/hbg-react/es/index.js");
- // Frontend logic to sync numbers with slides
-
 const sliderFunc = () => {
   const parent = document.querySelector('.age-slider');
 
@@ -2429,23 +2426,42 @@ function AgeSlider(_ref) {
     }
   };
 
-  const toggleAge = e => {
-    e.preventDefault();
-    let toggle = document.querySelector('.age-slider-container');
+  let toggleState = false;
+  let toggleContainer = document.querySelector('.age-slider-container');
+  let arrowUp = document.querySelector('#up-arrow');
+  let arrowDown = document.querySelector('#down-arrow');
 
-    if (toggle) {
-      if (toggle.classList.contains('show-age-slider')) {
-        toggle.classList.remove('show-age-slider');
-      } else {
-        toggle.classList.add('show-age-slider');
-      }
+  const toggleAge = e => {
+    toggleState = !toggleState;
+    e.preventDefault();
+
+    if (toggleState) {
+      toggleContainer.classList.add('show');
+      arrowUp.classList.remove('hide');
+      arrowDown.classList.add('hide');
+    } else {
+      toggleContainer.classList.remove('show');
+      arrowUp.classList.add('hide');
+      arrowDown.classList.remove('hide');
     }
   };
 
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
     className: "c-button c-button__filled c-button__filled--default c-button--md",
     onClick: toggleAge
-  }, translation.selectAge), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "c-button__label-text"
+  }, translation.selectAge), /*#__PURE__*/React.createElement("span", {
+    className: "c-button__label-icon"
+  }, /*#__PURE__*/React.createElement("i", {
+    id: "down-arrow",
+    class: "c-icon c-icon--size-md material-icons"
+  }, "keyboard_arrow_down")), /*#__PURE__*/React.createElement("span", {
+    className: "c-button__label-icon"
+  }, /*#__PURE__*/React.createElement("i", {
+    id: "up-arrow",
+    class: "c-icon c-icon--size-md material-icons hide"
+  }, "keyboard_arrow_up"))), /*#__PURE__*/React.createElement("div", {
     className: "age-slider-container"
   }, /*#__PURE__*/React.createElement("div", {
     className: "age-slider"

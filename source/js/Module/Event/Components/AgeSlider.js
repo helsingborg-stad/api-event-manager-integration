@@ -1,6 +1,3 @@
-import { Dropdown } from '@helsingborg-stad/hbg-react';
-
-// Frontend logic to sync numbers with slides
 const sliderFunc = () => {
     const parent = document.querySelector('.age-slider')
 
@@ -57,37 +54,48 @@ export default function AgeSlider ( { translation, ageRange, } ) {
             // console.log(ageRange);
         }
     }
+    
+    let toggleState = false;
+    let toggleContainer = document.querySelector('.age-slider-container');
+    let arrowUp = document.querySelector('#up-arrow');
+    let arrowDown = document.querySelector('#down-arrow');
 
     const toggleAge = (e) => {
+        toggleState = !toggleState;
         e.preventDefault();
-        let toggle = document.querySelector('.age-slider-container');
-        if (toggle) {
-            if (toggle.classList.contains('show-age-slider')) {
-                toggle.classList.remove('show-age-slider')
-                } else {
-                toggle.classList.add('show-age-slider');
-            }
+        if (toggleState) {
+            toggleContainer.classList.add('show');
+            arrowUp.classList.remove('hide');
+            arrowDown.classList.add('hide');
+            
+        } else {
+            toggleContainer.classList.remove('show');
+            arrowUp.classList.add('hide');
+            arrowDown.classList.remove('hide');
         }
     }
 
     return (
         <div>
-            <button className="c-button c-button__filled c-button__filled--default c-button--md" onClick={toggleAge} >{translation.selectAge}
+            <button className="c-button c-button__filled c-button__filled--default c-button--md" onClick={toggleAge} >
+                <span className="c-button__label-text">{translation.selectAge}</span>
+                <span className="c-button__label-icon"><i id="down-arrow" class="c-icon c-icon--size-md material-icons">keyboard_arrow_down</i></span>
+                <span className="c-button__label-icon"><i id="up-arrow" class="c-icon c-icon--size-md material-icons hide">keyboard_arrow_up</i></span>
             </button>
-                <div className="age-slider-container">
-                    <div className="age-slider">
-                        <div className="min-max-age-input" >
-                            <span>
-                                min <input type="number" defaultValue="1" min="1" max="100" step="1" onChange={onSlide}/> 
+            <div className="age-slider-container">
+                <div className="age-slider">
+                    <div className="min-max-age-input" >
+                        <span>
+                            min <input type="number" defaultValue="1" min="1" max="100" step="1" onChange={onSlide}/> 
+                        </span>    
+                        <span>
+                            max <input type="number" defaultValue="100" min="1" max="100" step="1" onChange={onSlide} />
                             </span>
-                            <span>
-                                max <input type="number" defaultValue="100" min="1" max="100" step="1" onChange={onSlide} />
-                            </span>
-                        </div>
-                        <input id="minValue" defaultValue="1" min="1" max="100" step="1" type="range" onChange={onSlide} />
-                        <input id="maxValue" defaultValue="100" min="1" max="100" step="1" type="range" onChange={onSlide} />
                     </div>
+                    <input id="minValue" defaultValue="1" min="1" max="100" step="1" type="range" onChange={onSlide} />
+                    <input id="maxValue" defaultValue="100" min="1" max="100" step="1" type="range" onChange={onSlide} />
                 </div>
+            </div>
         </div>
     )
 }
