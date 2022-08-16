@@ -2362,7 +2362,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ AgeSlider)
 /* harmony export */ });
-// Frontend logic to sync numbers with slides
+/* harmony import */ var _helsingborg_stad_hbg_react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @helsingborg-stad/hbg-react */ "./node_modules/@helsingborg-stad/hbg-react/es/index.js");
+ // Frontend logic to sync numbers with slides
+
 const sliderFunc = () => {
   const parent = document.querySelector('.age-slider');
 
@@ -2427,27 +2429,30 @@ function AgeSlider(_ref) {
     }
   };
 
-  return /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/React.createElement(_helsingborg_stad_hbg_react__WEBPACK_IMPORTED_MODULE_0__.Dropdown, {
+    title: translation.selectAge,
+    className: "age-slider-dropdown"
+  }, /*#__PURE__*/React.createElement("div", {
     className: "age-slider-container"
-  }, /*#__PURE__*/React.createElement("p", {
-    className: "title"
-  }, " ", translation.selectAge, " "), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     className: "age-slider"
-  }, /*#__PURE__*/React.createElement("span", null, " ", " min ", /*#__PURE__*/React.createElement("input", {
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "min-max-age-input"
+  }, /*#__PURE__*/React.createElement("span", null, "min ", /*#__PURE__*/React.createElement("input", {
     type: "number",
     defaultValue: "1",
     min: "1",
     max: "100",
     step: "1",
     onChange: onSlide
-  }), " ", " max ", /*#__PURE__*/React.createElement("input", {
+  })), /*#__PURE__*/React.createElement("span", null, "max ", /*#__PURE__*/React.createElement("input", {
     type: "number",
     defaultValue: "100",
     min: "1",
     max: "100",
     step: "1",
     onChange: onSlide
-  })), /*#__PURE__*/React.createElement("input", {
+  }))), /*#__PURE__*/React.createElement("input", {
     id: "minValue",
     defaultValue: "1",
     min: "1",
@@ -2463,7 +2468,7 @@ function AgeSlider(_ref) {
     step: "1",
     type: "range",
     onChange: onSlide
-  })));
+  }))));
 }
 
 /***/ }),
