@@ -1,6 +1,5 @@
 import { Dropdown } from '@helsingborg-stad/hbg-react';
 
-
 // Frontend logic to sync numbers with slides
 const sliderFunc = () => {
     const parent = document.querySelector('.age-slider')
@@ -72,28 +71,9 @@ export default function AgeSlider ( { translation, ageRange, } ) {
     }
 
     return (
-        // Style inherited from hbg-react/Dropdown component
-        // <Dropdown title={translation.selectAge} className="age-slider-dropdown" >
-        //     <div className="age-slider-container">
-        //         <div className="age-slider">
-        //             <div className="min-max-age-input" >
-        //                 <span>
-        //                     min <input type="number" defaultValue="1" min="1" max="100" step="1" onChange={onSlide}/> 
-        //                 </span>
-        //                 <span>
-        //                     max <input type="number" defaultValue="100" min="1" max="100" step="1" onChange={onSlide} />
-        //                 </span>
-        //             </div>
-        //             <input id="minValue" defaultValue="1" min="1" max="100" step="1" type="range" onChange={onSlide} />
-        //             <input id="maxValue" defaultValue="100" min="1" max="100" step="1" type="range" onChange={onSlide} />
-        //         </div>
-        //     </div>
-        // </Dropdown>
-
-        // Same functionality but completely vanilla JS & style from module-event-css
-
         <div>
-            <button onClick={toggleAge} >{translation.selectAge}</button>
+            <button className="c-button c-button__filled c-button__filled--default c-button--md" onClick={toggleAge} >{translation.selectAge}
+            </button>
                 <div className="age-slider-container">
                     <div className="age-slider">
                         <div className="min-max-age-input" >

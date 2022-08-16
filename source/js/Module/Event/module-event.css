@@ -30,14 +30,13 @@
   position: relative;
   height: 80px;
   background-color: white;
-  /* border: 1px solid #ddd; */
-  /* border-radius: 6px; */
   text-align: center;
   display: none;
+  padding: 10px;
 }
 
 .show-age-slider {
-  display: inline-block;
+  display: block;
 }
 
 div.min-max-age-input {
