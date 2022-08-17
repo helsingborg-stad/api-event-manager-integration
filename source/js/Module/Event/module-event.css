@@ -46,52 +46,53 @@ div.min-max-age-input {
   justify-content: space-between;
 }
 
-
-/* Variables */
+/* Color variables */
 :root {
-  --white: #ffffff;
   --grey: #ddd;
   --blue: #2497e3;
   --light-blue: #a1d0ff;
 }
 
-input[type="number"] {
+/* Number input */
+.age-slider input[type="number"] {
   border: 1px solid var(--grey);
   border-radius: 4px;
   text-align: center;
 }
 
+/* Range input */
 .age-slider input[type="range"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  width: 100%;
   position: absolute;
   left: 0;
   bottom: 0;
-  padding: 15px 10px;
+  padding: 15px 0px;
 }
 
-input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-}
-
-input[type="range"]:focus {
-  outline: none;
-}
-
-input[type="range"]::-webkit-slider-runnable-track {
-  width: 100%;
+/* The track */
+  /* Webkit */
+.age-slider input[type="range"]::-webkit-slider-runnable-track {
   height: 5px;
   cursor: pointer;
   background: var(--blue);
-  border-radius: 1px;
-  box-shadow: none;
-  border: 0;
 }
 
-input[type="range"]::-webkit-slider-thumb {
+  /* Mozilla */
+.age-slider input[type="range"]::-moz-range-track {
+  height: 5px;
+  cursor: pointer;
+  background: var(--blue);
+}
+
+/* The handles */
+  /* Webkit */
+.age-slider input[type="range"]::-webkit-slider-thumb {
   z-index: 2;
   position: relative;
-  box-shadow: 0px 0px 0px #000;
+  bottom: 7px;
   border: 1px solid var(--blue);
   height: 18px;
   width: 18px;
@@ -100,49 +101,27 @@ input[type="range"]::-webkit-slider-thumb {
   cursor: pointer;
   -webkit-appearance: none;
   appearance: none;
-  margin-top: -7px;
 }
 
-input[type="range"]::-moz-range-track {
-  width: 100%;
-  height: 5px;
-  cursor: pointer;
-  background: var(--blue);
-  border-radius: 1px;
-  box-shadow: none;
-  border: 0;
-}
-
-
-/* Webkit and stuff... */
-/* input[type="range"]:focus::-webkit-slider-runnable-track {
-  background: #2497e3;
-}
-
-
-input[type="range"]:focus::-ms-fill-lower {
-  background: #2497e3;
-}
-
-
-input[type="range"]:focus::-ms-fill-upper {
-  background: #2497e3;
-} 
-
-  input[type="range"]::-moz-range-thumb {
+  /* Mozilla */
+.age-slider input[type="range"]::-moz-range-thumb {
   z-index: 2;
   position: relative;
-  box-shadow: 0px 0px 0px #000;
-  border: 1px solid #2497e3;
+  bottom: 7px;
+  border: 1px solid var(--blue);
   height: 18px;
   width: 18px;
   border-radius: 25px;
-  background: #a1d0ff;
+  background: var(--light-blue);
   cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 
-input[type="range"]::-ms-track {
+
+/* Microsoft Edge */
+/* input[type="range"]::-ms-track {
   width: 100%;
   height: 5px;
   cursor: pointer;
@@ -151,7 +130,6 @@ input[type="range"]::-ms-track {
   color: transparent;
 }
 
-
 input[type="range"]::-ms-fill-lower,
 input[type="range"]::-ms-fill-upper {
   background: #2497e3;
@@ -159,7 +137,6 @@ input[type="range"]::-ms-fill-upper {
   box-shadow: none;
   border: 0;
 }
-
 
 input[type="range"]::-ms-thumb {
   z-index: 2;
@@ -172,3 +149,19 @@ input[type="range"]::-ms-thumb {
   background: #a1d0ff;
   cursor: pointer;
 }  */
+
+
+
+/* Focus related stuff */
+/* input[type="range"]:focus::-ms-fill-lower {
+  background: #2497e3;
+}
+
+
+input[type="range"]:focus::-ms-fill-upper {
+  background: #2497e3;
+} 
+
+input[type="range"]:focus::-webkit-slider-runnable-track {
+  background: #2497e3;
+} */

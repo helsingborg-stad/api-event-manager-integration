@@ -2370,34 +2370,34 @@ const sliderFunc = () => {
     return;
   }
 
-  const rangeS = parent.querySelectorAll('input[type="range"]'),
-        numberS = parent.querySelectorAll('input[type="number"]');
-  rangeS.forEach(el => {
+  const rangeInput = parent.querySelectorAll('input[type="range"]');
+  const numberInput = parent.querySelectorAll('input[type="number"]');
+  rangeInput.forEach(el => {
     el.oninput = () => {
-      let slide1 = parseInt(rangeS[0].value),
-          slide2 = parseInt(rangeS[1].value);
+      let slide1 = parseInt(rangeInput[0].value),
+          slide2 = parseInt(rangeInput[1].value);
 
       if (slide1 > slide2) {
         [slide1, slide2] = [slide2, slide1];
       }
 
-      numberS[0].value = slide1;
-      numberS[1].value = slide2;
+      numberInput[0].value = slide1;
+      numberInput[1].value = slide2;
     };
   });
-  numberS.forEach(el => {
+  numberInput.forEach(el => {
     el.oninput = () => {
-      let number1 = parseInt(numberS[0].value),
-          number2 = parseInt(numberS[1].value);
+      let number1 = parseInt(numberInput[0].value),
+          number2 = parseInt(numberInput[1].value);
 
       if (number1 > number2) {
         let tmp = number1;
-        numberS[0].value = number2;
-        numberS[1].value = tmp;
+        numberInput[0].value = number2;
+        numberInput[1].value = tmp;
       }
 
-      rangeS[0].value = number1;
-      rangeS[1].value = number2;
+      rangeInput[0].value = number1;
+      rangeInput[1].value = number2;
     };
   });
 }; // ageRange will be modified then passed to FilterableEventsContainer for fetching events
