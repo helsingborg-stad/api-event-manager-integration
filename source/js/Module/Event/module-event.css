@@ -58,6 +58,7 @@ div.min-max-age-input {
   border: 1px solid var(--grey);
   border-radius: 4px;
   text-align: center;
+  width: 60px;
 }
 
 /* Range input */
@@ -70,6 +71,7 @@ div.min-max-age-input {
   left: 0;
   bottom: 0;
   padding: 15px 0px;
+  background: none;
 }
 
 /* The track */
@@ -88,7 +90,8 @@ div.min-max-age-input {
 }
 
 /* The handles */
-  /* Webkit */
+
+/* Webkit */
 .age-slider input[type="range"]::-webkit-slider-thumb {
   z-index: 2;
   position: relative;
@@ -103,7 +106,7 @@ div.min-max-age-input {
   appearance: none;
 }
 
-  /* Mozilla */
+/* Mozilla */
 .age-slider input[type="range"]::-moz-range-thumb {
   z-index: 2;
   position: relative;
@@ -118,7 +121,10 @@ div.min-max-age-input {
   appearance: none;
 }
 
-
+/* special solution */
+.age-slider input[type="range"]::-moz-range-thumb#minValue {
+  z-index: 2;
+}
 
 /* Microsoft Edge */
 /* input[type="range"]::-ms-track {
