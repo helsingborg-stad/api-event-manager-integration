@@ -93,8 +93,8 @@ export default function AgeSlider ( { translation, ageRange } ) {
                             max <input type="number" defaultValue="100" min="1" max="100" step="1" onChange={onSlide} />
                             </span>
                     </div>
-                    <input className="u-color__bg--primary" id="minValue" defaultValue="1" min="1" max="100" step="1" type="range" onChange={onSlide} />
-                    <input className="u-color__bg--primary" id="maxValue" defaultValue="100" min="1" max="100" step="1" type="range" onChange={onSlide} />
+                    <input id="minValue" defaultValue="1" min="1" max="100" step="1" type="range" onChange={onSlide} />
+                    <input id="maxValue" defaultValue="100" min="1" max="100" step="1" type="range" onChange={onSlide} />
                 </div>
             </div>
         </div>

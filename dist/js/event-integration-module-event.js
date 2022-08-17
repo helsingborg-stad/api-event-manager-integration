@@ -2483,7 +2483,6 @@ function AgeSlider(_ref) {
     step: "1",
     onChange: onSlide
   }))), /*#__PURE__*/React.createElement("input", {
-    className: "u-color__bg--primary",
     id: "minValue",
     defaultValue: "1",
     min: "1",
@@ -2492,7 +2491,6 @@ function AgeSlider(_ref) {
     type: "range",
     onChange: onSlide
   }), /*#__PURE__*/React.createElement("input", {
-    className: "u-color__bg--primary",
     id: "maxValue",
     defaultValue: "100",
     min: "1",
