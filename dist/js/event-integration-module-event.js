@@ -2327,13 +2327,13 @@ function AgeFilter(_ref) {
     if (minValue > maxValue) {
       document.getElementById("maxValue").value = minValue;
       document.getElementById("minValue").value = maxValue;
-    }
-
-    for (let i = 0; i < ageRange.length; i++) {
-      if (i >= minValue - 1 && i < maxValue) {
-        ageRange[i].checked = true;
-      } else {
-        ageRange[i].checked = false;
+    } else if (minValue <= maxValue) {
+      for (let i = 0; i < ageRange.length; i++) {
+        if (i >= minValue - 1 && i < maxValue) {
+          ageRange[i].checked = true;
+        } else {
+          ageRange[i].checked = false;
+        }
       }
     }
 
