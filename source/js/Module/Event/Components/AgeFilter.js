@@ -4,7 +4,6 @@ export default function AgeFilter ( { translation, ageRange }) {
     let minValue = parseInt(document.getElementById("minValue").value);
     let maxValue = parseInt(document.getElementById("maxValue").value);
 
-    
     if (minValue > maxValue) {
       document.getElementById("maxValue").value = minValue;
       document.getElementById("minValue").value = maxValue;
@@ -17,10 +16,7 @@ export default function AgeFilter ( { translation, ageRange }) {
         ageRange[i].checked = false;
       }
     }
-
-    console.log(ageRange);
   }
-  
 
   let toggleState = false;
   let toggleContainer = document.querySelector('.age-filter-container');
