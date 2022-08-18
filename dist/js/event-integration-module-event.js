@@ -2323,10 +2323,10 @@ function AgeFilter(_ref) {
   const onInput = () => {
     let minValue = parseInt(document.getElementById("minValue").value);
     let maxValue = parseInt(document.getElementById("maxValue").value);
-    console.log("minValue: ", minValue, "maxValue: ", maxValue);
 
     if (minValue > maxValue) {
-      console.log("minValue is greater than maxValue"); // Some function here...
+      document.getElementById("maxValue").value = minValue;
+      document.getElementById("minValue").value = maxValue;
     }
 
     for (let i = 0; i < ageRange.length; i++) {
@@ -2336,6 +2336,8 @@ function AgeFilter(_ref) {
         ageRange[i].checked = false;
       }
     }
+
+    console.log(ageRange);
   };
 
   let toggleState = false;

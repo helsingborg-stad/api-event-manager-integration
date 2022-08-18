@@ -4,14 +4,12 @@ export default function AgeFilter ( { translation, ageRange }) {
     let minValue = parseInt(document.getElementById("minValue").value);
     let maxValue = parseInt(document.getElementById("maxValue").value);
 
-    console.log("minValue: ", minValue, "maxValue: ", maxValue);
-
+    
     if (minValue > maxValue) {
-      console.log("minValue is greater than maxValue");
-      // Some function here...
-
+      document.getElementById("maxValue").value = minValue;
+      document.getElementById("minValue").value = maxValue;
     }
-
+    
     for (let i = 0; i < ageRange.length; i++) {
       if (i >= (minValue - 1) && i < maxValue) {
         ageRange[i].checked = true;
@@ -19,7 +17,10 @@ export default function AgeFilter ( { translation, ageRange }) {
         ageRange[i].checked = false;
       }
     }
+
+    console.log(ageRange);
   }
+  
 
   let toggleState = false;
   let toggleContainer = document.querySelector('.age-filter-container');
