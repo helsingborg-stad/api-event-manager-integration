@@ -1,9 +1,4 @@
-const AgeInput = () => {
-  console.log("works!");
-};
-
 export default function AgeFilter ( { translation, ageRange }) {
-  AgeInput();
 
   const onInput = () => {
     let minValue = parseInt(document.getElementById("minValue").value);
@@ -11,6 +6,7 @@ export default function AgeFilter ( { translation, ageRange }) {
 
     if (minValue > maxValue) {
       alert("minValue must be lower than maxValue!");
+      return;
     }
 
     for (let i = 0; i < ageRange.length; i++) {
@@ -51,8 +47,10 @@ export default function AgeFilter ( { translation, ageRange }) {
 
       <div className="age-filter-container u-position--absolute u-level-top" >
         <div className="age-input">
+          <label for="minValue"></label>
           <input type="number" id="minValue" defaultValue="1" min="1" max="100" step="1" onChange={onInput}  />
           <span>—</span>
+          <label for="maxValue"></label>
           <input type="number" id="maxValue" defaultValue="100" min="1" max="100" step="1" onChange={onInput}  />
         </div>
       </div>

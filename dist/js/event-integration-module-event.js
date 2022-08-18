@@ -2314,16 +2314,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ AgeFilter)
 /* harmony export */ });
-const AgeInput = () => {
-  console.log("works!");
-};
-
 function AgeFilter(_ref) {
   let {
     translation,
     ageRange
   } = _ref;
-  AgeInput();
 
   const onInput = () => {
     let minValue = parseInt(document.getElementById("minValue").value);
@@ -2331,6 +2326,7 @@ function AgeFilter(_ref) {
 
     if (minValue > maxValue) {
       alert("minValue must be lower than maxValue!");
+      return;
     }
 
     for (let i = 0; i < ageRange.length; i++) {
@@ -2381,7 +2377,9 @@ function AgeFilter(_ref) {
     className: "age-filter-container u-position--absolute u-level-top"
   }, /*#__PURE__*/React.createElement("div", {
     className: "age-input"
-  }, /*#__PURE__*/React.createElement("input", {
+  }, /*#__PURE__*/React.createElement("label", {
+    for: "minValue"
+  }), /*#__PURE__*/React.createElement("input", {
     type: "number",
     id: "minValue",
     defaultValue: "1",
@@ -2389,7 +2387,9 @@ function AgeFilter(_ref) {
     max: "100",
     step: "1",
     onChange: onInput
-  }), /*#__PURE__*/React.createElement("span", null, "\u2014"), /*#__PURE__*/React.createElement("input", {
+  }), /*#__PURE__*/React.createElement("span", null, "\u2014"), /*#__PURE__*/React.createElement("label", {
+    for: "maxValue"
+  }), /*#__PURE__*/React.createElement("input", {
     type: "number",
     id: "maxValue",
     defaultValue: "100",
