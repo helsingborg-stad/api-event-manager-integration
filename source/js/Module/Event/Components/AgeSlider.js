@@ -1,102 +1,84 @@
-// Frontend functionality
-const sliderFunc = () => {
-    const parent = document.querySelector('.age-slider')
+// // Frontend functionality
+// const sliderFunc = () => {
+//     const parent = document.querySelector('.age-input')
 
-    if(!parent) {
-        return;
-    }
+//     if(!parent) {
+//         return;
+//     }
 
-    const rangeInput = parent.querySelectorAll('input[type="range"]'); 
-    const numberInput = parent.querySelectorAll('input[type="number"]');
+//     const numberInput = parent.querySelectorAll('input[type="number"]');
 
-    rangeInput.forEach((el) => {
-        el.oninput = () => {
-            let slide1 = parseInt(rangeInput[0].value), slide2 = parseInt(rangeInput[1].value);
-            if (slide1 > slide2) {
-                [slide1, slide2] = [slide2, slide1]
-            }
-            numberInput[0].value = slide1;
-            numberInput[1].value = slide2;
-        }
-    });
+//     numberInput.forEach((el) => {
+//         el.oninput = () => {
+//             let number1 = parseInt(numberInput[0].value), number2 = parseInt(numberInput[1].value);
+//             if (number1 > number2) {
+//                 let tmp = number1;
+//                 numberInput[0].value = number2;
+//                 numberInput[1].value = tmp
+//             }
+//         };
+//     })
+// };
 
-    numberInput.forEach((el) => {
-        el.oninput = () => {
-            let number1 = parseInt(numberInput[0].value), number2 = parseInt(numberInput[1].value);
-            if (number1 > number2) {
-                let tmp = number1;
-                numberInput[0].value = number2;
-                numberInput[1].value = tmp
-            }
-            rangeInput[0].value = number1;
-            rangeInput[1].value = number2;
-        };
-    })
-};
-
-// ageRange will be modified then passed to FilterableEventsContainer for fetching events
-export default function AgeSlider ( { translation, ageRange } ) {
-    sliderFunc();
+// // ageRange will be modified then passed to FilterableEventsContainer for fetching events
+// export default function AgeSlider ( { translation, ageRange } ) {
+//     sliderFunc();
     
-    const onSlide = () => {
-        let minValue = parseInt(document.getElementById("minValue").value);
-        let maxValue = parseInt(document.getElementById("maxValue").value);
+//     const onInput = () => {
+//         let minValue = parseInt(document.getElementById("minValue").value);
+//         let maxValue = parseInt(document.getElementById("maxValue").value);
         
-        if (minValue > maxValue) {
-            [minValue, maxValue] = [maxValue, minValue];
-        }
+//         if (minValue > maxValue) {
+//             [minValue, maxValue] = [maxValue, minValue];
+//         }
         
-        for (let i = 0; i < ageRange.length; i++) {
-            if (i >= (minValue - 1) && i < maxValue) {
-                ageRange[i].checked = true;
-            }
-            else {
-                ageRange[i].checked = false;
-            }
-        }
-    }
+//         for (let i = 0; i < ageRange.length; i++) {
+//             if (i >= (minValue - 1) && i < maxValue) {
+//                 ageRange[i].checked = true;
+//             }
+//             else {
+//                 ageRange[i].checked = false;
+//             }
+//         }
+//     }
     
-    let toggleState = false;
-    let toggleContainer = document.querySelector('.age-slider-container');
-    let arrowUp = document.querySelector('#up-arrow');
-    let arrowDown = document.querySelector('#down-arrow');
+//     let toggleState = false;
+//     let toggleContainer = document.querySelector('.age-slider-container');
+//     let arrowUp = document.querySelector('#up-arrow');
+//     let arrowDown = document.querySelector('#down-arrow');
 
-    const toggleAge = (e) => {
-        toggleState = !toggleState;
-        e.preventDefault();
-        if (toggleState) {
-            toggleContainer.classList.add('show');
-            arrowUp.classList.remove('hide');
-            arrowDown.classList.add('hide');
+//     const toggleAge = (e) => {
+//         toggleState = !toggleState;
+//         e.preventDefault();
+//         if (toggleState) {
+//             toggleContainer.classList.add('show');
+//             arrowUp.classList.remove('hide');
+//             arrowDown.classList.add('hide');
             
-        } else {
-            toggleContainer.classList.remove('show');
-            arrowUp.classList.add('hide');
-            arrowDown.classList.remove('hide');
-        }
-    }
+//         } else {
+//             toggleContainer.classList.remove('show');
+//             arrowUp.classList.add('hide');
+//             arrowDown.classList.remove('hide');
+//         }
+//     }
 
-    return (
-        <div>
-            <button className="c-button c-button__filled c-button__filled--default c-button--md" onClick={toggleAge} >
-                <span className="c-button__label-text">{translation.selectAge}</span>
-                <span className="c-button__label-icon"><i id="down-arrow" class="c-icon c-icon--size-md material-icons">keyboard_arrow_down</i></span>
-                <span className="c-button__label-icon"><i id="up-arrow" class="c-icon c-icon--size-md material-icons hide">keyboard_arrow_up</i></span>
-            </button>
-            <div className="age-slider-container u-position--absolute u-level-top">
-                <div className="age-slider">
-                    <div className="min-max-age-input" >
-                        <span>
-                            min <input type="number" defaultValue="1" min="1" max="100" step="1" onChange={onSlide}/> 
-                        </span>    
-                        <span>
-                            max <input type="number" defaultValue="100" min="1" max="100" step="1" onChange={onSlide} />
-                            </span>
-                    </div>
-                    <input id="minValue" defaultValue="1" min="1" max="100" step="1" type="range" onChange={onSlide} />
-                    <input id="maxValue" defaultValue="100" min="1" max="100" step="1" type="range" onChange={onSlide} />
-                </div>
-            </div>
-        </div>
-    )
-}
+//     return (
+//         <div>
+//             <button className="c-button c-button__filled c-button__filled--default c-button--md" onClick={toggleAge} >
+//                 <span className="c-button__label-text">{translation.selectAge}</span>
+//                 <span className="c-button__label-icon"><i id="down-arrow" class="c-icon c-icon--size-md material-icons">keyboard_arrow_down</i></span>
+//                 <span className="c-button__label-icon"><i id="up-arrow" class="c-icon c-icon--size-md material-icons hide">keyboard_arrow_up</i></span>
+//             </button>
+//             <div className="age-slider-container u-position--absolute u-level-top">
+//                     <div className="age-input" >
+//                         <span>
+//                             min <input type="number" defaultValue="1" min="1" max="100" step="1" onChange={onInput}/> 
+//                         </span>    
+//                         <span>
+//                             max <input type="number" defaultValue="100" min="1" max="100" step="1" onChange={onInput} />
+//                         </span>
+//                     </div>
+//             </div>
+//         </div>
+//     )
+// }

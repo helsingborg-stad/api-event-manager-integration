@@ -2312,110 +2312,25 @@ const weekdaysShort = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "default": () => (/* binding */ AgeFilter)
 /* harmony export */ });
-/* harmony import */ var _helsingborg_stad_hbg_react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @helsingborg-stad/hbg-react */ "./node_modules/@helsingborg-stad/hbg-react/es/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-
-
-
-const AgeFilter = _ref => {
-  let {
-    translation,
-    ageRange,
-    onAgeChange
-  } = _ref;
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(_helsingborg_stad_hbg_react__WEBPACK_IMPORTED_MODULE_0__.Dropdown, {
-    title: translation.selectAge
-  }, ageRange.map(item => /*#__PURE__*/React.createElement("label", {
-    key: item.value,
-    className: "checkbox u-px-1"
-  }, /*#__PURE__*/React.createElement("input", {
-    type: "checkbox",
-    value: item.value,
-    onChange: e => onAgeChange(e, item.value),
-    checked: item.checked
-  }), ' ', item.value, " ", translation.years))));
+const AgeInput = () => {
+  console.log("works!");
 };
 
-AgeFilter.propTypes = {
-  ageRange: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().array.isRequired),
-  onAgeChange: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().func.isRequired),
-  translation: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().object)
-};
-AgeFilter.defaultProps = {
-  translation: {}
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AgeFilter);
-
-/***/ }),
-
-/***/ "./source/js/Module/Event/Components/AgeSlider.js":
-/*!********************************************************!*\
-  !*** ./source/js/Module/Event/Components/AgeSlider.js ***!
-  \********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ AgeSlider)
-/* harmony export */ });
-// Frontend functionality
-const sliderFunc = () => {
-  const parent = document.querySelector('.age-slider');
-
-  if (!parent) {
-    return;
-  }
-
-  const rangeInput = parent.querySelectorAll('input[type="range"]');
-  const numberInput = parent.querySelectorAll('input[type="number"]');
-  rangeInput.forEach(el => {
-    el.oninput = () => {
-      let slide1 = parseInt(rangeInput[0].value),
-          slide2 = parseInt(rangeInput[1].value);
-
-      if (slide1 > slide2) {
-        [slide1, slide2] = [slide2, slide1];
-      }
-
-      numberInput[0].value = slide1;
-      numberInput[1].value = slide2;
-    };
-  });
-  numberInput.forEach(el => {
-    el.oninput = () => {
-      let number1 = parseInt(numberInput[0].value),
-          number2 = parseInt(numberInput[1].value);
-
-      if (number1 > number2) {
-        let tmp = number1;
-        numberInput[0].value = number2;
-        numberInput[1].value = tmp;
-      }
-
-      rangeInput[0].value = number1;
-      rangeInput[1].value = number2;
-    };
-  });
-}; // ageRange will be modified then passed to FilterableEventsContainer for fetching events
-
-
-function AgeSlider(_ref) {
+function AgeFilter(_ref) {
   let {
     translation,
     ageRange
   } = _ref;
-  sliderFunc();
+  AgeInput();
 
-  const onSlide = () => {
+  const onInput = () => {
     let minValue = parseInt(document.getElementById("minValue").value);
     let maxValue = parseInt(document.getElementById("maxValue").value);
 
     if (minValue > maxValue) {
-      [minValue, maxValue] = [maxValue, minValue];
+      alert("minValue must be lower than maxValue!");
     }
 
     for (let i = 0; i < ageRange.length; i++) {
@@ -2428,7 +2343,7 @@ function AgeSlider(_ref) {
   };
 
   let toggleState = false;
-  let toggleContainer = document.querySelector('.age-slider-container');
+  let toggleContainer = document.querySelector('.age-filter-container');
   let arrowUp = document.querySelector('#up-arrow');
   let arrowDown = document.querySelector('#down-arrow');
 
@@ -2463,43 +2378,109 @@ function AgeSlider(_ref) {
     id: "up-arrow",
     class: "c-icon c-icon--size-md material-icons hide"
   }, "keyboard_arrow_up"))), /*#__PURE__*/React.createElement("div", {
-    className: "age-slider-container u-position--absolute u-level-top"
+    className: "age-filter-container u-position--absolute u-level-top"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "age-slider"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "min-max-age-input"
-  }, /*#__PURE__*/React.createElement("span", null, "min ", /*#__PURE__*/React.createElement("input", {
+    className: "age-input"
+  }, /*#__PURE__*/React.createElement("input", {
     type: "number",
-    defaultValue: "1",
-    min: "1",
-    max: "100",
-    step: "1",
-    onChange: onSlide
-  })), /*#__PURE__*/React.createElement("span", null, "max ", /*#__PURE__*/React.createElement("input", {
-    type: "number",
-    defaultValue: "100",
-    min: "1",
-    max: "100",
-    step: "1",
-    onChange: onSlide
-  }))), /*#__PURE__*/React.createElement("input", {
     id: "minValue",
     defaultValue: "1",
     min: "1",
     max: "100",
     step: "1",
-    type: "range",
-    onChange: onSlide
-  }), /*#__PURE__*/React.createElement("input", {
+    onChange: onInput
+  }), /*#__PURE__*/React.createElement("span", null, "\u2014"), /*#__PURE__*/React.createElement("input", {
+    type: "number",
     id: "maxValue",
     defaultValue: "100",
     min: "1",
     max: "100",
     step: "1",
-    type: "range",
-    onChange: onSlide
+    onChange: onInput
   }))));
 }
+
+/***/ }),
+
+/***/ "./source/js/Module/Event/Components/AgeSlider.js":
+/*!********************************************************!*\
+  !*** ./source/js/Module/Event/Components/AgeSlider.js ***!
+  \********************************************************/
+/***/ (() => {
+
+// // Frontend functionality
+// const sliderFunc = () => {
+//     const parent = document.querySelector('.age-input')
+//     if(!parent) {
+//         return;
+//     }
+//     const numberInput = parent.querySelectorAll('input[type="number"]');
+//     numberInput.forEach((el) => {
+//         el.oninput = () => {
+//             let number1 = parseInt(numberInput[0].value), number2 = parseInt(numberInput[1].value);
+//             if (number1 > number2) {
+//                 let tmp = number1;
+//                 numberInput[0].value = number2;
+//                 numberInput[1].value = tmp
+//             }
+//         };
+//     })
+// };
+// // ageRange will be modified then passed to FilterableEventsContainer for fetching events
+// export default function AgeSlider ( { translation, ageRange } ) {
+//     sliderFunc();
+//     const onInput = () => {
+//         let minValue = parseInt(document.getElementById("minValue").value);
+//         let maxValue = parseInt(document.getElementById("maxValue").value);
+//         if (minValue > maxValue) {
+//             [minValue, maxValue] = [maxValue, minValue];
+//         }
+//         for (let i = 0; i < ageRange.length; i++) {
+//             if (i >= (minValue - 1) && i < maxValue) {
+//                 ageRange[i].checked = true;
+//             }
+//             else {
+//                 ageRange[i].checked = false;
+//             }
+//         }
+//     }
+//     let toggleState = false;
+//     let toggleContainer = document.querySelector('.age-slider-container');
+//     let arrowUp = document.querySelector('#up-arrow');
+//     let arrowDown = document.querySelector('#down-arrow');
+//     const toggleAge = (e) => {
+//         toggleState = !toggleState;
+//         e.preventDefault();
+//         if (toggleState) {
+//             toggleContainer.classList.add('show');
+//             arrowUp.classList.remove('hide');
+//             arrowDown.classList.add('hide');
+//         } else {
+//             toggleContainer.classList.remove('show');
+//             arrowUp.classList.add('hide');
+//             arrowDown.classList.remove('hide');
+//         }
+//     }
+//     return (
+//         <div>
+//             <button className="c-button c-button__filled c-button__filled--default c-button--md" onClick={toggleAge} >
+//                 <span className="c-button__label-text">{translation.selectAge}</span>
+//                 <span className="c-button__label-icon"><i id="down-arrow" class="c-icon c-icon--size-md material-icons">keyboard_arrow_down</i></span>
+//                 <span className="c-button__label-icon"><i id="up-arrow" class="c-icon c-icon--size-md material-icons hide">keyboard_arrow_up</i></span>
+//             </button>
+//             <div className="age-slider-container u-position--absolute u-level-top">
+//                     <div className="age-input" >
+//                         <span>
+//                             min <input type="number" defaultValue="1" min="1" max="100" step="1" onChange={onInput}/> 
+//                         </span>    
+//                         <span>
+//                             max <input type="number" defaultValue="100" min="1" max="100" step="1" onChange={onInput} />
+//                         </span>
+//                     </div>
+//             </div>
+//         </div>
+//     )
+// }
 
 /***/ }),
 
@@ -2784,6 +2765,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _AgeFilter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AgeFilter */ "./source/js/Module/Event/Components/AgeFilter.js");
 /* harmony import */ var _AgeSlider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AgeSlider */ "./source/js/Module/Event/Components/AgeSlider.js");
+/* harmony import */ var _AgeSlider__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_AgeSlider__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _CategoriesFilter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CategoriesFilter */ "./source/js/Module/Event/Components/CategoriesFilter.js");
 /* harmony import */ var _DateFilter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DateFilter */ "./source/js/Module/Event/Components/DateFilter.js");
 /* harmony import */ var _SearchBar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SearchBar */ "./source/js/Module/Event/Components/SearchBar.js");
@@ -2841,7 +2823,7 @@ const FilterContainer = _ref => {
     value: endDate
   })), settings.mod_event_filter_age_group && ageRange.length > 0 && /*#__PURE__*/React.createElement("div", {
     className: "o-grid-fit u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl"
-  }, /*#__PURE__*/React.createElement(_AgeSlider__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, /*#__PURE__*/React.createElement(_AgeFilter__WEBPACK_IMPORTED_MODULE_0__["default"], {
     translation: translation,
     ageRange: ageRange,
     onAgeChange: onAgeChange

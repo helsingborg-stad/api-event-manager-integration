@@ -21,11 +21,11 @@
 }
 
 
-/* Age slider */
-.age-slider-container {
-  width: 250px;
+/* Age filter */
+.age-filter-container {
+  width: 200px;
   margin: auto;
-  height: 80px;
+  height: 50px;
   background-color: white;
   text-align: center;
   display: none;
@@ -40,7 +40,7 @@
   display: none;
 }
 
-div.min-max-age-input {
+div.age-input {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -49,20 +49,18 @@ div.min-max-age-input {
 /* Color variables */
 :root {
   --grey: #ddd;
-  --blue: #2497e3;
-  --light-blue: #a1d0ff;
 }
 
 /* Number input */
-.age-slider input[type="number"] {
+.age-input input[type="number"] {
   border: 1px solid var(--grey);
   border-radius: 4px;
   text-align: center;
-  width: 60px;
+  width: 50px;
 }
 
 /* Range input */
-.age-slider input[type="range"] {
+/* .age-slider input[type="range"] {
   -webkit-appearance: none;
   -moz-appearance: none;
        appearance: none;
@@ -72,27 +70,27 @@ div.min-max-age-input {
   bottom: 0;
   padding: 15px 0px;
   background: none;
-}
+} */
 
 /* The track */
   /* Webkit */
-.age-slider input[type="range"]::-webkit-slider-runnable-track {
+/* .age-slider input[type="range"]::-webkit-slider-runnable-track {
   height: 5px;
   cursor: pointer;
   background: var(--blue);
-}
+} */
 
   /* Mozilla */
-.age-slider input[type="range"]::-moz-range-track {
+/* .age-slider input[type="range"]::-moz-range-track {
   height: 5px;
   cursor: pointer;
   background: var(--blue);
-}
+} */
 
 /* The handles */
 
 /* Webkit */
-.age-slider input[type="range"]::-webkit-slider-thumb {
+/* .age-slider input[type="range"]::-webkit-slider-thumb {
   z-index: 2;
   position: relative;
   bottom: 7px;
@@ -104,10 +102,10 @@ div.min-max-age-input {
   cursor: pointer;
   -webkit-appearance: none;
   appearance: none;
-}
+} */
 
 /* Mozilla */
-.age-slider input[type="range"]::-moz-range-thumb {
+/* .age-slider input[type="range"]::-moz-range-thumb {
   z-index: 2;
   position: relative;
   bottom: 7px;
@@ -119,12 +117,7 @@ div.min-max-age-input {
   cursor: pointer;
   -webkit-appearance: none;
   appearance: none;
-}
-
-/* special solution */
-.age-slider input[type="range"]::-moz-range-thumb#minValue {
-  z-index: 2;
-}
+} */
 
 /* Microsoft Edge */
 /* input[type="range"]::-ms-track {
