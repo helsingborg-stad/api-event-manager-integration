@@ -2323,10 +2323,10 @@ function AgeFilter(_ref) {
   const onInput = () => {
     let minValue = parseInt(document.getElementById("minValue").value);
     let maxValue = parseInt(document.getElementById("maxValue").value);
+    console.log("minValue: ", minValue, "maxValue: ", maxValue);
 
     if (minValue > maxValue) {
-      alert("minValue must be lower than maxValue!");
-      return;
+      console.log("minValue is greater than maxValue"); // Some function here...
     }
 
     for (let i = 0; i < ageRange.length; i++) {
@@ -2399,88 +2399,6 @@ function AgeFilter(_ref) {
     onChange: onInput
   }))));
 }
-
-/***/ }),
-
-/***/ "./source/js/Module/Event/Components/AgeSlider.js":
-/*!********************************************************!*\
-  !*** ./source/js/Module/Event/Components/AgeSlider.js ***!
-  \********************************************************/
-/***/ (() => {
-
-// // Frontend functionality
-// const sliderFunc = () => {
-//     const parent = document.querySelector('.age-input')
-//     if(!parent) {
-//         return;
-//     }
-//     const numberInput = parent.querySelectorAll('input[type="number"]');
-//     numberInput.forEach((el) => {
-//         el.oninput = () => {
-//             let number1 = parseInt(numberInput[0].value), number2 = parseInt(numberInput[1].value);
-//             if (number1 > number2) {
-//                 let tmp = number1;
-//                 numberInput[0].value = number2;
-//                 numberInput[1].value = tmp
-//             }
-//         };
-//     })
-// };
-// // ageRange will be modified then passed to FilterableEventsContainer for fetching events
-// export default function AgeSlider ( { translation, ageRange } ) {
-//     sliderFunc();
-//     const onInput = () => {
-//         let minValue = parseInt(document.getElementById("minValue").value);
-//         let maxValue = parseInt(document.getElementById("maxValue").value);
-//         if (minValue > maxValue) {
-//             [minValue, maxValue] = [maxValue, minValue];
-//         }
-//         for (let i = 0; i < ageRange.length; i++) {
-//             if (i >= (minValue - 1) && i < maxValue) {
-//                 ageRange[i].checked = true;
-//             }
-//             else {
-//                 ageRange[i].checked = false;
-//             }
-//         }
-//     }
-//     let toggleState = false;
-//     let toggleContainer = document.querySelector('.age-slider-container');
-//     let arrowUp = document.querySelector('#up-arrow');
-//     let arrowDown = document.querySelector('#down-arrow');
-//     const toggleAge = (e) => {
-//         toggleState = !toggleState;
-//         e.preventDefault();
-//         if (toggleState) {
-//             toggleContainer.classList.add('show');
-//             arrowUp.classList.remove('hide');
-//             arrowDown.classList.add('hide');
-//         } else {
-//             toggleContainer.classList.remove('show');
-//             arrowUp.classList.add('hide');
-//             arrowDown.classList.remove('hide');
-//         }
-//     }
-//     return (
-//         <div>
-//             <button className="c-button c-button__filled c-button__filled--default c-button--md" onClick={toggleAge} >
-//                 <span className="c-button__label-text">{translation.selectAge}</span>
-//                 <span className="c-button__label-icon"><i id="down-arrow" class="c-icon c-icon--size-md material-icons">keyboard_arrow_down</i></span>
-//                 <span className="c-button__label-icon"><i id="up-arrow" class="c-icon c-icon--size-md material-icons hide">keyboard_arrow_up</i></span>
-//             </button>
-//             <div className="age-slider-container u-position--absolute u-level-top">
-//                     <div className="age-input" >
-//                         <span>
-//                             min <input type="number" defaultValue="1" min="1" max="100" step="1" onChange={onInput}/> 
-//                         </span>    
-//                         <span>
-//                             max <input type="number" defaultValue="100" min="1" max="100" step="1" onChange={onInput} />
-//                         </span>
-//                     </div>
-//             </div>
-//         </div>
-//     )
-// }
 
 /***/ }),
 
@@ -2761,15 +2679,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _AgeFilter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AgeFilter */ "./source/js/Module/Event/Components/AgeFilter.js");
-/* harmony import */ var _AgeSlider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AgeSlider */ "./source/js/Module/Event/Components/AgeSlider.js");
-/* harmony import */ var _AgeSlider__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_AgeSlider__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _CategoriesFilter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CategoriesFilter */ "./source/js/Module/Event/Components/CategoriesFilter.js");
-/* harmony import */ var _DateFilter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DateFilter */ "./source/js/Module/Event/Components/DateFilter.js");
-/* harmony import */ var _SearchBar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SearchBar */ "./source/js/Module/Event/Components/SearchBar.js");
-
+/* harmony import */ var _CategoriesFilter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CategoriesFilter */ "./source/js/Module/Event/Components/CategoriesFilter.js");
+/* harmony import */ var _DateFilter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DateFilter */ "./source/js/Module/Event/Components/DateFilter.js");
+/* harmony import */ var _SearchBar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SearchBar */ "./source/js/Module/Event/Components/SearchBar.js");
 
 
 
@@ -2801,13 +2716,13 @@ const FilterContainer = _ref => {
     className: "o-grid"
   }, settings.mod_event_filter_search && /*#__PURE__*/React.createElement("div", {
     className: "o-grid-12 o-grid"
-  }, /*#__PURE__*/React.createElement(_SearchBar__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, /*#__PURE__*/React.createElement(_SearchBar__WEBPACK_IMPORTED_MODULE_3__["default"], {
     translation: translation,
     searchString: searchString,
     updateSearchString: updateSearchString
   })), settings.mod_event_filter_dates && /*#__PURE__*/React.createElement("div", {
     className: "o-grid-12@xs o-grid-6@md"
-  }, /*#__PURE__*/React.createElement(_DateFilter__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, /*#__PURE__*/React.createElement(_DateFilter__WEBPACK_IMPORTED_MODULE_2__["default"], {
     id: "filter-date-from",
     label: `${translation.from} ${translation.date}`,
     onDayChange: fromDateChange,
@@ -2815,7 +2730,7 @@ const FilterContainer = _ref => {
     value: startDate
   })), settings.mod_event_filter_dates && /*#__PURE__*/React.createElement("div", {
     className: "o-grid-12@xs o-grid-6@md"
-  }, /*#__PURE__*/React.createElement(_DateFilter__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, /*#__PURE__*/React.createElement(_DateFilter__WEBPACK_IMPORTED_MODULE_2__["default"], {
     id: "filter-date-to",
     label: `${translation.to} ${translation.date}`,
     onDayChange: toDateChange,
@@ -2829,13 +2744,13 @@ const FilterContainer = _ref => {
     onAgeChange: onAgeChange
   })), settings.mod_event_filter_categories && categories.length > 0 && /*#__PURE__*/React.createElement("div", {
     className: "o-grid-fit"
-  }, /*#__PURE__*/React.createElement(_CategoriesFilter__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, /*#__PURE__*/React.createElement(_CategoriesFilter__WEBPACK_IMPORTED_MODULE_1__["default"], {
     title: translation.categories,
     categories: categories,
     onCategoryChange: onCategoryChange
   })), settings.mod_event_filter_tags && tags.length > 0 && /*#__PURE__*/React.createElement("div", {
     className: "o-grid-fit"
-  }, /*#__PURE__*/React.createElement(_CategoriesFilter__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, /*#__PURE__*/React.createElement(_CategoriesFilter__WEBPACK_IMPORTED_MODULE_1__["default"], {
     title: translation.tags,
     categories: tags,
     onCategoryChange: onTagChange
@@ -2854,22 +2769,22 @@ const FilterContainer = _ref => {
 };
 
 FilterContainer.propTypes = {
-  ageRange: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().array),
-  categories: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().array),
-  endDate: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string),
-  formatDate: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func),
-  fromDateChange: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func),
-  onAgeChange: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func),
-  onCategoryChange: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func),
-  onSubmit: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func.isRequired),
-  onTagChange: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func),
-  searchString: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string),
-  settings: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().object.isRequired),
-  startDate: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string),
-  tags: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().array),
-  toDateChange: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func),
-  translation: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().object.isRequired),
-  updateSearchString: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func)
+  ageRange: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().array),
+  categories: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().array),
+  endDate: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string),
+  formatDate: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func),
+  fromDateChange: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func),
+  onAgeChange: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func),
+  onCategoryChange: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func),
+  onSubmit: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func.isRequired),
+  onTagChange: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func),
+  searchString: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string),
+  settings: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().object.isRequired),
+  startDate: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string),
+  tags: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().array),
+  toDateChange: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func),
+  translation: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().object.isRequired),
+  updateSearchString: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func)
 };
 FilterContainer.defaultProps = {
   ageRange: [],

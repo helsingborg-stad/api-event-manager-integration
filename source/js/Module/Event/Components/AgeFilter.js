@@ -4,9 +4,12 @@ export default function AgeFilter ( { translation, ageRange }) {
     let minValue = parseInt(document.getElementById("minValue").value);
     let maxValue = parseInt(document.getElementById("maxValue").value);
 
+    console.log("minValue: ", minValue, "maxValue: ", maxValue);
+
     if (minValue > maxValue) {
-      alert("minValue must be lower than maxValue!");
-      return;
+      console.log("minValue is greater than maxValue");
+      // Some function here...
+
     }
 
     for (let i = 0; i < ageRange.length; i++) {

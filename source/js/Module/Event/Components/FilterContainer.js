@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import AgeFilter from './AgeFilter';
-import AgeSlider from './AgeSlider';
 import CategoriesFilter from './CategoriesFilter';
 import DateFilter from './DateFilter';
 import SearchBar from './SearchBar';
@@ -61,9 +60,10 @@ const FilterContainer = ({
 
       {settings.mod_event_filter_age_group && ageRange.length > 0 && (
         <div className="o-grid-fit u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
-          <AgeFilter translation={translation} ageRange={ageRange} onAgeChange={onAgeChange} />
-
-          {/* <AgeSlider translation={translation} ageRange={ageRange} onAgeChange={onAgeChange} /> */}
+          <AgeFilter 
+            translation={translation} 
+            ageRange={ageRange} 
+            onAgeChange={onAgeChange} />
         </div>
       )}
 
