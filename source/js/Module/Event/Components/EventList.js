@@ -5,17 +5,17 @@ import EventItem from './EventItem';
 class EventList extends React.Component {
   render() {
     const { items, gridColumn, displayFields } = this.props;
+
     return (
       <div className="o-grid">
         {items.map(event => (
-          <div className={`o-grid-12 o-grid-4@md`}>
-              <EventItem
-                key={uuidv4()}
-                event={event}
-                gridColumn={gridColumn}
-                displayFields={displayFields}
-                />
-            </div>
+          <div className={gridColumn ?? `o-grid-12 o-grid-4@md`}>
+            <EventItem
+              key={uuidv4()}
+              event={event}
+              displayFields={displayFields}
+            />
+          </div>
         ))}
       </div>
     );
