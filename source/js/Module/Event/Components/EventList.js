@@ -9,7 +9,7 @@ class EventList extends React.Component {
     return (
       <div className="o-grid">
         {items.map(event => (
-          <div className={gridColumn ? gridColumn : `o-grid-12 o-grid-4@md`}>
+          <div className={gridColumn ?? `o-grid-12 o-grid-4@md`}>
             <EventItem
               key={uuidv4()}
               event={event}
