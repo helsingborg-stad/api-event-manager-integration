@@ -21,33 +21,3 @@
 }
 
 /* Age filter */
-.age-filter-container {
-  width: 150px;
-  margin: auto;
-  height: 50px;
-  background-color: white;
-  text-align: center;
-  display: none;
-  padding: 10px;
-}
-
-.show {
-  display: block;
-}
-
-.hide {
-  display: none;
-}
-
-div.age-input {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.age-input input[type="number"] {
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  text-align: center;
-  width: 50px;
-}

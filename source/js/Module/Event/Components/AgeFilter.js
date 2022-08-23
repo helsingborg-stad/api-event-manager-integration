@@ -30,27 +30,27 @@ const AgeFilter = ({ translation, ageRange, onAgeRangeChange, minValue, maxValue
   }
 
   return (
-    <div >
+    <div>
+      {/* <span>{translation.selectAge}</span> */}
+      <div className="age-filter-container ">
+        <Input         
+          id="min"
+          name="min"
+          handleChange={minChanged}
+          label="min"
+          type="number"
+          value={minValue}
+        />
 
-      {translation.selectAge}
-
-      <Input         
-        id="min"
-        name="min"
-        handleChange={minChanged}
-        label="min"
-        type="number"
-        value={minValue}
-      />
-
-      <Input         
-        id="max"
-        name="max"
-        handleChange={maxChanged}
-        label="max"
-        type="number"
-        value={maxValue}
-      />
+        <Input         
+          id="max"
+          name="max"
+          handleChange={maxChanged}
+          label="max"
+          type="number"
+          value={maxValue}
+        />
+      </div>
     </div>
 
   );
