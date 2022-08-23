@@ -8,26 +8,24 @@ const AgeFilter = ({ translation, ageRange, onAgeRangeChange, minValue, maxValue
   const maxLimit = 100;
 
   const minChanged = (e) => {
-    const isMoreThenMax = parseInt(e.target.value) >= maxValue;
-    const isLessThanMinLimit = minLimit > parseInt(e.target.value);
-
-    const value = isMoreThenMax ? maxValue - 1 : isLessThanMinLimit ? minLimit : parseInt(e.target.value);
-
+    const value = parseInt(e.target.value);
+    const isMoreThenMax = value >= maxValue;
+    const isLessThanMinLimit = minLimit > value;
+    
     onChange({
-      min: value,
+      min: isMoreThenMax ? maxValue - 1 : isLessThanMinLimit ? minLimit : value,
       max: maxValue,
     });
   }
 
   const maxChanged = (e) => {
-    const isLessOrEqualsMin = parseInt(e.target.value) <= minValue;
-    const isMoreThenMaxLimit = parseInt(e.target.value) > maxLimit;
-
-    const value = isLessOrEqualsMin ? minValue + 1 : isMoreThenMaxLimit ? minValue +1 : parseInt(e.target.value);
+    const value = parseInt(e.target.value);
+    const isLessOrEqualsMin = value <= minValue;
+    const isMoreThenMaxLimit = value > maxLimit;
 
     onChange({
       min: minValue,
-      max: value,
+      max: isLessOrEqualsMin ? minValue + 1 : isMoreThenMaxLimit ? minValue +1 : value,
     });
   }
 
