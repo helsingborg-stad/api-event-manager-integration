@@ -4,17 +4,30 @@ import { Input } from "@helsingborg-stad/hbg-react";
 
 const AgeFilter = ({ translation, ageRange, onAgeRangeChange, minValue, maxValue, onChange }) => {
     
+  const minLimit = 0;
+  const maxLimit = 100;
+
   const minChanged = (e) => {
+    const isMoreThenMax = parseInt(e.target.value) >= maxValue;
+    const isLessThanMinLimit = minLimit > parseInt(e.target.value);
+
+    const value = isMoreThenMax ? maxValue - 1 : isLessThanMinLimit ? minLimit : parseInt(e.target.value);
+
     onChange({
-      min: e.target.value,
+      min: value,
       max: maxValue,
     });
   }
 
   const maxChanged = (e) => {
+    const isLessOrEqualsMin = parseInt(e.target.value) <= minValue;
+    const isMoreThenMaxLimit = parseInt(e.target.value) > maxLimit;
+
+    const value = isLessOrEqualsMin ? minValue + 1 : isMoreThenMaxLimit ? minValue +1 : parseInt(e.target.value);
+
     onChange({
       min: minValue,
-      max: e.target.value,
+      max: value,
     });
   }
 

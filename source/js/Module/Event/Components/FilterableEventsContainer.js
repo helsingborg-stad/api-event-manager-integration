@@ -417,6 +417,7 @@ class FilterableEventsContainer extends React.Component {
     this.setState({ ageRangeFilter: { min, max } })
   };
   
+
   render() {
     const {
       ageRange,
