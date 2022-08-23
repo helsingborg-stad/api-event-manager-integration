@@ -37,7 +37,7 @@ const FilterContainer = ({
       )}
 
       {settings.mod_event_filter_dates && (
-        <div className="o-grid-12@xs o-grid-6@md o-grid">
+        <div className="o-grid-12@xs o-grid-6@md">
           <DateFilter
             id="filter-date-from"
             label={`${translation.from} ${translation.date}`}
