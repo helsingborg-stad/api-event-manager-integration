@@ -2,7 +2,7 @@ import { Dropdown } from '@helsingborg-stad/hbg-react';
 import PropTypes from 'prop-types';
 
 const CategoriesFilter = ({ categories, onCategoryChange, title }) => (
-  <div>
+  <div className='c-dropdown c-dropdown--scrollable'>
     <Dropdown title={title} id="filter-categories">
       {categories.map(item => (
         <div key={item.id} style={{ maxWidth: '250px', width: 'max-content' }}>
