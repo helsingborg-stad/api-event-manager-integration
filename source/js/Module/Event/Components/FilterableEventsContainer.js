@@ -26,6 +26,7 @@ class FilterableEventsContainer extends React.Component {
       tags: props.tags,
       totalPages: 1,
       translate: '',
+      ageRangeFilter: { min: "" , max: "" },
     };
 
     this.myRef = createRef()
@@ -407,10 +408,19 @@ class FilterableEventsContainer extends React.Component {
       })
     );
   };
-
+  
+  /**
+   * Handle age range number input changes
+   * @param id
+   */
+  onAgeRangeChange = ({ min, max }) => {
+    this.setState({ ageRangeFilter: { min, max } })
+  };
+  
   render() {
     const {
       ageRange,
+      ageRangeFilter,
       categories,
       currentPage,
       endDate,
@@ -435,6 +445,8 @@ class FilterableEventsContainer extends React.Component {
           <div className="u-mb-3">
             <FilterContainer
               ageRange={ageRange}
+              ageRangeFilter={ageRangeFilter}
+              onAgeRangeChange={this.onAgeRangeChange}
               categories={categories}
               endDate={endDate}
               formatDate={this.formatDate}
