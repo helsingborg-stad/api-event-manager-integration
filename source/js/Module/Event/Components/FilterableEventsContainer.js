@@ -116,12 +116,9 @@ class FilterableEventsContainer extends React.Component {
     const tagIds = this.getTaxonomyIds(tags);
     const ageRangeIds = this.getTaxonomyIds(ageRange);
     const params = this.loadQueryString();
-    if (categoryIds > 0 || tagIds > 0) {
-      this.setState({ resetButton: true });
-    }
-    else {
-      this.setState({ resetButton: false });
-    }
+
+    categoryIds > 0 || tagIds > 0 ? this.setState({resetButton: true}) : this.setState({resetButton: false});
+
     // Set query parameters
     setQuery(
       {
