@@ -1,4 +1,3 @@
-
 @if (!$hideTitle && !empty($postTitle))
     @typography([
         'element' => 'h4', 

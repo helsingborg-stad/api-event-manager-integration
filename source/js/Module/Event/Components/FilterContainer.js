@@ -87,31 +87,31 @@ const FilterContainer = ({
       )}
 
       <div className="o-grid-fit">
-        <button 
-          className="c-button c-button__filled c-button__filled--primary c-button--md ripple ripple--before" 
+        <button
+          className="c-button c-button__filled c-button__filled--primary c-button--md ripple ripple--before"
           aria-pressed="false"
           type="submit"
           title={translation.search}>
-            <span class="c-button__label">
-              <span class="c-button__label-text">
+          <span class="c-button__label">
+            <span class="c-button__label-text">
               {translation.search}
-              </span>
             </span>
+          </span>
         </button>
       </div>
 
       {resetButton && (
-      <div className="o-grid-fit">
-        <a
-          className="c-button c-button__filled c-button__filled--default c-button--md ripple ripple--before"
-          href={resetButtonUrl}>
-          <span class="c-button__label">
-            <span class="c-button__label-text">
-              {translation.resetFilters}
+        <div className="o-grid-fit">
+          <a
+            className="c-button c-button__filled c-button__filled--default c-button--md ripple ripple--before"
+            href={resetButtonUrl}>
+            <span class="c-button__label">
+              <span class="c-button__label-text">
+                {translation.resetFilters}
+              </span>
             </span>
-          </span>
-        </a>
-      </div>
+          </a>
+        </div>
       )}
     </div>
   </form>
