@@ -4,8 +4,8 @@ import { Input } from "@helsingborg-stad/hbg-react";
 
 const AgeFilter = ({ translation, ageRange, onAgeRangeChange, minValue, maxValue, onChange }) => {
     
-  const minLimit = 0;
-  const maxLimit = 100;
+  const minLimit = ageRange[0].id;
+  const maxLimit = ageRange.slice(-1).id;
 
   const minChanged = (e) => {
     const value = parseInt(e.target.value);
