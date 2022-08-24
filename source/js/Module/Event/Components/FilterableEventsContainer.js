@@ -26,7 +26,7 @@ class FilterableEventsContainer extends React.Component {
       tags: props.tags,
       totalPages: 1,
       translate: '',
-      ageRangeFilter: { min: "" , max: "" },
+      ageRangeFilter: { min: props.ageRange[0].id , max: props.ageRange.splice(-1)[0].id },
     };
 
     this.myRef = createRef()
