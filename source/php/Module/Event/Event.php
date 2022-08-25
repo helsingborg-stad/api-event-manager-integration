@@ -153,7 +153,7 @@ class Event extends \Modularity\Module
     {
         $fields = json_decode(json_encode(get_fields($module_id)));
         $eventPagination = $fields->mod_event_pagination;
-        $display_limit = isset($fields->mod_event_limit) ? $fields->mod_event_limit : -1;
+        $display_limit = isset($fields->mod_event_limit) ? $fields->mod_event_limit : 1000;
         $days_ahead = isset($fields->mod_event_interval) ? $fields->mod_event_interval : 0;
 
         // Set start and end date
@@ -184,6 +184,7 @@ class Event extends \Modularity\Module
         );
 
         $params = array_merge($default_params, $params);
+
         $events = \EventManagerIntegration\Helper\QueryEvents::getEventsByInterval($params, $page);
 
         return $events;
@@ -207,7 +208,10 @@ class Event extends \Modularity\Module
     private function setLocation($events)
     {
         foreach ($events as $event) {
-            $event->location_name = \EventManagerIntegration\Helper\SingleEventData::getEventLocation($event->ID, $event->start_date)['title'];
+            $event->location_name = \EventManagerIntegration\Helper\SingleEventData::getEventLocation(
+                $event->ID,
+                $event->start_date
+            )['title'] ?? '';
         }
 
         return $events;
