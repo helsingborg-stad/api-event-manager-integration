@@ -388,27 +388,6 @@ class FilterableEventsContainer extends React.Component {
       })
     );
   };
-
-  // /**
-  // OLD
-  //  * Handle age range checkbox changes
-  //  * @param id
-  //  */
-  // onAgeChange = (e, id) => {
-  //   const { ageRange } = this.state;
-  //   // Get the index
-  //   const index = ageRange.findIndex(obj => obj.value === id);
-  //   // Update state
-  //   this.setState(
-  //     update(this.state, {
-  //       ageRange: {
-  //         [index]: {
-  //           checked: { $set: !ageRange[index].checked },
-  //         },
-  //       },
-  //     })
-  //   );
-  // };
   
   /**
    * Handle age range number input changes
