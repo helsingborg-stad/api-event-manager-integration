@@ -26,8 +26,10 @@ class FilterableEventsContainer extends React.Component {
       tags: props.tags,
       totalPages: 1,
       translate: '',
+      ageRangeFilter: { min: props.ageRange[0].id , max: props.ageRange.splice(-1)[0].id },
       resetButton: false,
       resetButtonUrl: props.resetButtonUrl,
+
     };
 
     this.myRef = createRef()
@@ -392,30 +394,29 @@ class FilterableEventsContainer extends React.Component {
       })
     );
   };
-
+  
   /**
-   * Handle age range checkbox changes
+   * Handle age range number input changes
    * @param id
    */
-  onAgeChange = (e, id) => {
+    onAgeRangeChange = ({ min, max, id }) => {
     const { ageRange } = this.state;
-    // Get the index
-    const index = ageRange.findIndex(obj => obj.value === id);
-    // Update state
-    this.setState(
-      update(this.state, {
-        ageRange: {
-          [index]: {
-            checked: { $set: !ageRange[index].checked },
-          },
-        },
-      })
-    );
+    this.setState({ ageRangeFilter: { min, max } });
+
+    for (let i = 0; i < ageRange.length; i++){
+      if( i >= (min - 1) && i < max){
+        ageRange[i].checked = true;
+      } else {
+        ageRange[i].checked = false;
+      }
+    } 
   };
+  
 
   render() {
     const {
       ageRange,
+      ageRangeFilter,
       categories,
       currentPage,
       endDate,
@@ -439,29 +440,32 @@ class FilterableEventsContainer extends React.Component {
           settings.mod_event_filter_age_group ||
           settings.mod_event_filter_tags ||
           settings.mod_event_filter_categories) && (
-            <div className="u-mb-3">
-              <FilterContainer
-                ageRange={ageRange}
-                categories={categories}
-                endDate={endDate}
-                formatDate={this.formatDate}
-                fromDateChange={this.fromDateChange}
-                onAgeChange={this.onAgeChange}
-                onCategoryChange={this.onCategoryChange}
-                onSubmit={this.onSubmit}
-                onTagChange={this.onTagChange}
-                searchString={searchString}
-                settings={settings}
-                startDate={startDate}
-                tags={tags}
-                toDateChange={this.toDateChange}
-                translation={translation}
-                updateSearchString={this.updateSearchString}
-                resetButton={resetButton}
-                resetButtonUrl={resetButtonUrl}
-              />
-            </div>
-          )}
+
+          <div className="u-mb-3">
+            <FilterContainer
+              ageRange={ageRange}
+              ageRangeFilter={ageRangeFilter}
+              onAgeRangeChange={this.onAgeRangeChange}
+              categories={categories}
+              endDate={endDate}
+              formatDate={this.formatDate}
+              fromDateChange={this.fromDateChange}
+              onAgeChange={this.onAgeChange}
+              onCategoryChange={this.onCategoryChange}
+              onSubmit={this.onSubmit}
+              onTagChange={this.onTagChange}
+              searchString={searchString}
+              settings={settings}
+              startDate={startDate}
+              tags={tags}
+              toDateChange={this.toDateChange}
+              translation={translation}
+              updateSearchString={this.updateSearchString}
+              resetButton={resetButton}
+              resetButtonUrl={resetButtonUrl}
+            />
+          </div>
+        )}
 
         <div ref={this.myRef} className={`modularity-event-index__body ${!isLoaded && items.length > 0 ? 'is-disabled' : ''}`}>
           {!isLoaded && (

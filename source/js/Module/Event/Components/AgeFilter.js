@@ -1,32 +1,75 @@
-import { Dropdown } from '@helsingborg-stad/hbg-react';
-import PropTypes from 'prop-types';
+import React from "react";
+import { Input } from "@helsingborg-stad/hbg-react";
 
-const AgeFilter = ({ translation, ageRange, onAgeChange }) => (
-  <div>
-    <Dropdown title={translation.selectAge}>
-      {ageRange.map(item => (
-        <label key={item.value} className="checkbox u-px-1">
-          <input
-            type="checkbox"
-            value={item.value}
-            onChange={e => onAgeChange(e, item.value)}
-            checked={item.checked}
-          />{' '}
-          {item.value} {translation.years}
-        </label>
-      ))}
-    </Dropdown>
-  </div>
-);
+const AgeFilter = ({ translation, ageRange, minValue, maxValue, onChange }) => {
+  const minLimit = ageRange[0].id;
+  const maxLimit = ageRange.slice(-1)[0].id;
 
-AgeFilter.propTypes = {
-  ageRange: PropTypes.array.isRequired,
-  onAgeChange: PropTypes.func.isRequired,
-  translation: PropTypes.object,
-};
+  const minChanged = (e) => {
+    const inputField = e.target;
+    const value = parseInt(e.target.value);
+    const isMoreThenMax = value >= maxValue;
+    const isLessThanMinLimit = minLimit > value;
+    
+    onChange({
+      min: value,
+      max: maxValue,
+    });
 
-AgeFilter.defaultProps = {
-  translation: {},
+    inputField.addEventListener('focusout', () => {
+      onChange({
+        min: isMoreThenMax ? maxValue - 1 : isLessThanMinLimit ? minLimit : value,
+        max: maxValue,
+      });
+    });
+  }
+
+  const maxChanged = (e) => {
+    const inputField = e.target;
+    const value = parseInt(e.target.value);
+    const isLessOrEqualsMin = value <= minValue;
+    const isMoreThenMaxLimit = value > maxLimit;
+
+    onChange({
+      min: minValue,
+      max: value,
+    });
+
+    inputField.addEventListener('focusout', () => {
+      onChange({
+        min: minValue,
+        max: isLessOrEqualsMin ? minValue + 1 : isMoreThenMaxLimit ? maxLimit : value,
+      });
+    });
+  }
+
+  return (
+    <div>
+      {/* <span>{translation.selectAge}</span> */}
+      <div className="age-filter-container o-grid u-flex-wrap--no-wrap">
+        <Input         
+          id="min"
+          name="min"
+          handleChange={minChanged}
+          label="från ålder"
+          type="number"
+          value={minValue}
+          style={{width: "100%"}}
+        />
+        
+        <Input         
+          id="max"
+          name="max"
+          handleChange={maxChanged}
+          label="till ålder"
+          type="number"
+          value={maxValue}
+          style={{width: "100%"}}
+        />
+      </div>
+    </div>
+
+  );
 };
 
 export default AgeFilter;
