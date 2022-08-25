@@ -27,6 +27,8 @@ class FilterableEventsContainer extends React.Component {
       totalPages: 1,
       translate: '',
       ageRangeFilter: { min: props.ageRange[0].id , max: props.ageRange.splice(-1)[0].id },
+      resetButton: false,
+      resetButtonUrl: props.resetButtonUrl,
     };
 
     this.myRef = createRef()
@@ -452,6 +454,8 @@ class FilterableEventsContainer extends React.Component {
               toDateChange={this.toDateChange}
               translation={translation}
               updateSearchString={this.updateSearchString}
+              resetButton={resetButton}
+              resetButtonUrl={resetButtonUrl}
             />
           </div>
         )}
