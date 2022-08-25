@@ -29,6 +29,7 @@ class FilterableEventsContainer extends React.Component {
       ageRangeFilter: { min: props.ageRange[0].id , max: props.ageRange.splice(-1)[0].id },
       resetButton: false,
       resetButtonUrl: props.resetButtonUrl,
+
     };
 
     this.myRef = createRef()
@@ -68,7 +69,7 @@ class FilterableEventsContainer extends React.Component {
             });
             break;
           default:
-          value = urlParams.get(param);
+            value = urlParams.get(param);
         }
 
 
@@ -85,16 +86,16 @@ class FilterableEventsContainer extends React.Component {
     this.setState({ ...stateObj }, () => this.getEvents());
   };
 
-   loadQueryString = () => {
+  loadQueryString = () => {
     let parameters = {};
     let searchString = location.search.substr(1);
     let pairs = searchString.split("&");
     let parts;
-    for(let i = 0; i < pairs.length; i++){
-        parts = pairs[i].split("=");
-        let name = parts[0];
-        let data = decodeURI(parts[1]);
-        parameters[name] = data;
+    for (let i = 0; i < pairs.length; i++) {
+      parts = pairs[i].split("=");
+      let name = parts[0];
+      let data = decodeURI(parts[1]);
+      parameters[name] = data;
     }
     return parameters;
   }
@@ -117,6 +118,9 @@ class FilterableEventsContainer extends React.Component {
     const tagIds = this.getTaxonomyIds(tags);
     const ageRangeIds = this.getTaxonomyIds(ageRange);
     const params = this.loadQueryString();
+
+    categoryIds > 0 || tagIds > 0 ? this.setState({resetButton: true}) : this.setState({resetButton: false});
+
     // Set query parameters
     setQuery(
       {
@@ -131,9 +135,9 @@ class FilterableEventsContainer extends React.Component {
       },
       { pushState: true }
     );
-      if(params.translate){
-        location.hash = "#translate";
-      }
+    if (params.translate) {
+      location.hash = "#translate";
+    }
 
   };
 
@@ -294,7 +298,7 @@ class FilterableEventsContainer extends React.Component {
    * Pagination go to page handler
    * @param e
    */
-   goToPage = page => {
+  goToPage = page => {
     const { totalPages } = this.state;
     let currentPage = page ? parseInt(page) : '';
     currentPage = currentPage > totalPages ? totalPages : currentPage;
@@ -423,6 +427,8 @@ class FilterableEventsContainer extends React.Component {
       startDate,
       tags,
       totalPages,
+      resetButton,
+      resetButtonUrl,
     } = this.state;
 
     const { settings, translation, gridColumn, archiveUrl } = this.props;
@@ -434,6 +440,7 @@ class FilterableEventsContainer extends React.Component {
           settings.mod_event_filter_age_group ||
           settings.mod_event_filter_tags ||
           settings.mod_event_filter_categories) && (
+
           <div className="u-mb-3">
             <FilterContainer
               ageRange={ageRange}
@@ -468,7 +475,7 @@ class FilterableEventsContainer extends React.Component {
           )}
 
           <div className="o-grid-12 modularity-event-index__content">
-            
+
             {(error || (isLoaded && items.length === 0)) && (
               <span>
                 {translation.noEventsFound}
@@ -476,11 +483,11 @@ class FilterableEventsContainer extends React.Component {
             )}
 
             {items.length > 0 && (
-                <EventList
-                  items={items}
-                  gridColumn={gridColumn}
-                  displayFields={settings.mod_event_fields}
-                />
+              <EventList
+                items={items}
+                gridColumn={gridColumn}
+                displayFields={settings.mod_event_fields}
+              />
             )}
 
           </div>
@@ -490,18 +497,18 @@ class FilterableEventsContainer extends React.Component {
         <div className="o-grid">
           {settings.mod_event_pagination && (
             <div className="o-grid-12">
-                {totalPages > 1 &&
-                    <Pagination
-                        current={currentPage}
-                        goToPage={page => this.goToPage(page)}
-                        next={this.nextPage}
-                        prev={this.prevPage}
-                        total={totalPages}
-                    />
-                }
+              {totalPages > 1 &&
+                <Pagination
+                  current={currentPage}
+                  goToPage={page => this.goToPage(page)}
+                  next={this.nextPage}
+                  prev={this.prevPage}
+                  total={totalPages}
+                />
+              }
             </div>
           )}
-            {settings.mod_event_archive && (
+          {settings.mod_event_archive && (
             <div className="o-grid-12 u-display--flex u-justify-content--center">
               <Button href={archiveUrl} color="primary" title={translation.moreEvents} />
             </div>

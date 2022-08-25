@@ -27,7 +27,7 @@ if (function_exists('acf_add_local_field_group')) {
             'allow_null' => 0,
             'other_choice' => 0,
             'save_other_choice' => 0,
-            'default_value' => 'list',
+            'default_value' => __('list', 'event-integration'),
             'layout' => 'horizontal',
             'return_format' => 'value',
         ),
@@ -58,9 +58,7 @@ if (function_exists('acf_add_local_field_group')) {
                 3 => __('Three column', 'event-integration'),
                 4 => __('Four column', 'event-integration'),
             ),
-            'default_value' => array(
-                0 => 3,
-            ),
+            'default_value' => 3,
             'allow_null' => 0,
             'multiple' => 0,
             'ui' => 0,
@@ -200,7 +198,7 @@ if (function_exists('acf_add_local_field_group')) {
             'prepend' => '',
             'append' => '',
             'min' => '',
-            'max' => '5',
+            'max' => '',
             'step' => '',
         ),
         7 => array(
@@ -309,17 +307,18 @@ if (function_exists('acf_add_local_field_group')) {
             ),
             'choices' => array(
                 'occasion' => __('Occasion', 'event-integration'),
+                'dateBadge' => __('Date badge', 'event-integration'),
                 'image' => __('Image', 'event-integration'),
                 'location' => __('Location', 'event-integration'),
                 'description' => __('Description', 'event-integration'),
             ),
             'allow_custom' => 0,
-            'save_custom' => 0,
             'default_value' => array(
             ),
             'layout' => 'vertical',
             'toggle' => 1,
             'return_format' => 'value',
+            'save_custom' => 0,
         ),
         12 => array(
             'key' => 'field_5b2ae170ae36f',
@@ -352,9 +351,7 @@ if (function_exists('acf_add_local_field_group')) {
                 '16-9' => __('Standard Video (16:9)', 'event-integration'),
                 '4-3' => __('Standard TV (4:3)', 'event-integration'),
             ),
-            'default_value' => array(
-                0 => '1-1',
-            ),
+            'default_value' => __('1-1', 'event-integration'),
             'allow_null' => 0,
             'multiple' => 0,
             'ui' => 0,
@@ -395,7 +392,7 @@ if (function_exists('acf_add_local_field_group')) {
             'allow_null' => 0,
             'other_choice' => 0,
             'save_other_choice' => 0,
-            'default_value' => 'below : Below title',
+            'default_value' => __('below : Below title', 'event-integration'),
             'layout' => 'vertical',
             'return_format' => 'value',
         ),
@@ -865,6 +862,13 @@ if (function_exists('acf_add_local_field_group')) {
                 'value' => 'mod-event',
             ),
         ),
+        1 => array(
+            0 => array(
+                'param' => 'block',
+                'operator' => '==',
+                'value' => 'acf/event',
+            ),
+        ),
     ),
     'menu_order' => 0,
     'position' => 'normal',
@@ -872,8 +876,14 @@ if (function_exists('acf_add_local_field_group')) {
     'label_placement' => 'top',
     'instruction_placement' => 'label',
     'hide_on_screen' => '',
-    'active' => 1,
+    'active' => true,
     'description' => '',
+    'show_in_rest' => 0,
+    'acfe_display_title' => '',
+    'acfe_autosync' => '',
+    'acfe_form' => 0,
+    'acfe_meta' => '',
+    'acfe_note' => '',
 ));
 
 }

@@ -27,6 +27,7 @@
              data-tags="{{ $tags }}"
              data-age-range="{{ $age_range }}"
              data-lang="{{ $lang }}"
+             data-reset-url="{{ $reset_url }}"
         >
         </div>
     </div>

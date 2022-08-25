@@ -27,11 +27,13 @@ const FilterContainer = ({
   toDateChange,
   translation,
   updateSearchString,
+  resetButton,
+  resetButtonUrl,
 }) => (
   <form onSubmit={onSubmit}>
     <div className="o-grid">
       {settings.mod_event_filter_search && (
-        <div className="o-grid-12 o-grid-auto@lg">
+        <div className="o-grid-12 o-grid">
           <SearchBar
             translation={translation}
             searchString={searchString}
@@ -41,7 +43,7 @@ const FilterContainer = ({
       )}
 
       {settings.mod_event_filter_dates && (
-        <div className="o-grid-12@xs o-grid-6@md o-grid-auto@lg">
+        <div className="o-grid-12@xs o-grid-6@md">
           <DateFilter
             id="filter-date-from"
             label={`${translation.from} ${translation.date}`}
@@ -53,7 +55,7 @@ const FilterContainer = ({
       )}
 
       {settings.mod_event_filter_dates && (
-        <div className="o-grid-12@xs o-grid-6@md o-grid-auto@lg">
+        <div className="o-grid-12@xs o-grid-6@md o-grid">
           <DateFilter
             id="filter-date-to"
             label={`${translation.to} ${translation.date}`}
@@ -98,18 +100,32 @@ const FilterContainer = ({
       )}
 
       <div className="o-grid-fit">
-        <button 
-          className="c-button c-button__filled c-button__filled--default c-button--md ripple ripple--before" 
+        <button
+          className="c-button c-button__filled c-button__filled--primary c-button--md ripple ripple--before"
           aria-pressed="false"
           type="submit"
           title={translation.search}>
-            <span class="c-button__label">
-              <span class="c-button__label-text">
+          <span class="c-button__label">
+            <span class="c-button__label-text">
               {translation.search}
-              </span>
             </span>
+          </span>
         </button>
       </div>
+
+      {resetButton && (
+        <div className="o-grid-fit">
+          <a
+            className="c-button c-button__filled c-button__filled--default c-button--md ripple ripple--before"
+            href={resetButtonUrl}>
+            <span class="c-button__label">
+              <span class="c-button__label-text">
+                {translation.resetFilters}
+              </span>
+            </span>
+          </a>
+        </div>
+      )}
     </div>
   </form>
 );
