@@ -389,32 +389,42 @@ class FilterableEventsContainer extends React.Component {
     );
   };
 
-  /**
-   * Handle age range checkbox changes
-   * @param id
-   */
-  onAgeChange = (e, id) => {
-    const { ageRange } = this.state;
-    // Get the index
-    const index = ageRange.findIndex(obj => obj.value === id);
-    // Update state
-    this.setState(
-      update(this.state, {
-        ageRange: {
-          [index]: {
-            checked: { $set: !ageRange[index].checked },
-          },
-        },
-      })
-    );
-  };
+  // /**
+  // OLD
+  //  * Handle age range checkbox changes
+  //  * @param id
+  //  */
+  // onAgeChange = (e, id) => {
+  //   const { ageRange } = this.state;
+  //   // Get the index
+  //   const index = ageRange.findIndex(obj => obj.value === id);
+  //   // Update state
+  //   this.setState(
+  //     update(this.state, {
+  //       ageRange: {
+  //         [index]: {
+  //           checked: { $set: !ageRange[index].checked },
+  //         },
+  //       },
+  //     })
+  //   );
+  // };
   
   /**
    * Handle age range number input changes
    * @param id
    */
-  onAgeRangeChange = ({ min, max }) => {
-    this.setState({ ageRangeFilter: { min, max } })
+    onAgeRangeChange = ({ min, max, id }) => {
+    const { ageRange } = this.state;
+    this.setState({ ageRangeFilter: { min, max } });
+
+    for (let i = 0; i < ageRange.length; i++){
+      if( i >= (min - 1) && i < max){
+        ageRange[i].checked = true;
+      } else {
+        ageRange[i].checked = false;
+      }
+    } 
   };
   
 
