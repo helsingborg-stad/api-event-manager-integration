@@ -46,7 +46,7 @@ const AgeFilter = ({ translation, ageRange, minValue, maxValue, onChange }) => {
   return (
     <div>
       {/* <span>{translation.selectAge}</span> */}
-      <div className="age-filter-container ">
+      <div className="age-filter-container o-grid u-flex-wrap--no-wrap">
         <Input         
           id="min"
           name="min"
@@ -54,6 +54,7 @@ const AgeFilter = ({ translation, ageRange, minValue, maxValue, onChange }) => {
           label="min"
           type="number"
           value={minValue}
+          style={{width: "100%"}}
         />
 
         <Input         
@@ -63,6 +64,8 @@ const AgeFilter = ({ translation, ageRange, minValue, maxValue, onChange }) => {
           label="max"
           type="number"
           value={maxValue}
+          style={{width: "100%"}}
+
         />
       </div>
     </div>

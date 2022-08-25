@@ -65,7 +65,7 @@ const FilterContainer = ({
       )}
 
       {settings.mod_event_filter_age_group && ageRange.length > 0 && (
-        <div className="o-grid-12@xs o-grid-6@md o-grid-auto@lg">
+        <div className="o-grid-12@xs o-grid-4@md o-grid-4@lg">
           <AgeFilter 
             translation={translation} 
             ageRange={ageRange} 
