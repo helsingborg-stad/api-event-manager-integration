@@ -51,17 +51,16 @@ const AgeFilter = ({ translation, ageRange, minValue, maxValue, onChange }) => {
           id="min"
           name="min"
           handleChange={minChanged}
-          label="min"
+          label="Ålder från"
           type="number"
           value={minValue}
           style={{width: "100%"}}
         />
-
         <Input         
           id="max"
           name="max"
           handleChange={maxChanged}
-          label="max"
+          label="Ålder till"
           type="number"
           value={maxValue}
           style={{width: "100%"}}
