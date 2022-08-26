@@ -6,41 +6,37 @@ const AgeFilter = ({ translation, ageRange, minValue, maxValue, onChange }) => {
   const maxLimit = ageRange.slice(-1)[0].id;
   const maxInputField = document.querySelector('#max');
   const minInputField = document.querySelector('#min');
-  
+
   const minChanged = (e) => {
-    const inputField = e.target;
     const value = parseInt(e.target.value);
-    const isMoreThenMax = value >= maxValue;
-    const isLessThanMinLimit = minLimit > value;
+    const setValue = value >= maxValue ? maxValue - 1 : minLimit > value ? minLimit : value;
 
       onChange({
         min: value,
         max: maxValue
       }); 
 
-    inputField.addEventListener('focusout', () => {
+    minInputField.addEventListener('focusout', () => {
       onChange({
-        min: isMoreThenMax ? maxValue - 1 : isLessThanMinLimit ? minLimit : value,
+        min: setValue,
         max: parseInt(maxInputField.value)
       });
     });
   }
 
   const maxChanged = (e) => {
-    const inputField = e.target;
     const value = parseInt(e.target.value);
-    const isLessOrEqualsMin = value <= minValue;
-    const isMoreThenMaxLimit = value > maxLimit;
+    const setValue = value <= minValue ? minValue + 1 : value > maxLimit ? maxLimit + 1 : value;
 
       onChange({
         min: minValue,
         max: value,
      }); 
 
-    inputField.addEventListener('focusout', () => {
+    maxInputField.addEventListener('focusout', () => {
       onChange({
         min: parseInt(minInputField.value),
-        max: isLessOrEqualsMin ? minValue + 1 : isMoreThenMaxLimit ? maxLimit + 1 : value,
+        max: setValue,
       });
     });
   }
