@@ -29,6 +29,7 @@ class FilterableEventsContainer extends React.Component {
       ageRangeFilter: { min: props.ageRange[0].id , max: props.ageRange.splice(-1)[0].id },
       resetButton: false,
       resetButtonUrl: props.resetButtonUrl,
+      dateChanged: false,
 
     };
 
@@ -112,15 +113,18 @@ class FilterableEventsContainer extends React.Component {
       tags,
       ageRange,
       translate,
-      ageRangeFilter
+      ageRangeFilter,
+      dateChanged
     } = this.state;
 
     const categoryIds = this.getTaxonomyIds(categories);
     const tagIds = this.getTaxonomyIds(tags);
     const ageRangeIds = this.getTaxonomyIds(ageRange);
     const params = this.loadQueryString();
+
+    console.log(dateChanged);
    
-    categoryIds.length > 0 || tagIds.length > 0 || (ageRangeFilter.max - ageRangeFilter.min) !== ageRange.length ? this.setState({resetButton: true}) : this.setState({resetButton: false});
+    categoryIds.length > 0 || tagIds.length > 0 || (ageRangeFilter.max - ageRangeFilter.min) !== ageRange.length || searchString.length > 0 || dateChanged ? this.setState({resetButton: true}) : this.setState({resetButton: false});
 
     // Set query parameters
     setQuery(
@@ -336,6 +340,7 @@ class FilterableEventsContainer extends React.Component {
    */
   fromDateChange = date => {
     this.setState({ startDate: this.formatDate(date) });
+    this.setState({ dateChanged: true});
   };
 
   /**
@@ -344,6 +349,7 @@ class FilterableEventsContainer extends React.Component {
    */
   toDateChange = date => {
     this.setState({ endDate: this.formatDate(date) });
+    this.setState({ dateChanged: true });
   };
 
   /**
