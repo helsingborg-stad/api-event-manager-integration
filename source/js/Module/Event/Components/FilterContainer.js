@@ -79,53 +79,55 @@ const FilterContainer = ({
         </div>
       )}
 
-      {settings.mod_event_filter_categories && categories.length > 0 && (
-        <div className="o-grid-fit">
-          <CategoriesFilter
-            title={translation.categories}
-            categories={categories}
-            onCategoryChange={onCategoryChange}
-          />
-        </div>
-      )}
+      <div className="o-grid o-grid-8@md u-margin__top--1 u-margin__top--3@md u-margin__top--3@lg">
+        {settings.mod_event_filter_categories && categories.length > 0 && (
+          <div className="o-grid-fit">
+            <CategoriesFilter
+              title={translation.categories}
+              categories={categories}
+              onCategoryChange={onCategoryChange}
+              />
+          </div>
+        )}
 
-      {settings.mod_event_filter_tags && tags.length > 0 && (
-        <div className="o-grid-fit">
-          <CategoriesFilter
-            title={translation.tags}
-            categories={tags}
-            onCategoryChange={onTagChange}
-          />
-        </div>
-      )}
+        {settings.mod_event_filter_tags && tags.length > 0 && (
+          <div className="o-grid-fit">
+            <CategoriesFilter
+              title={translation.tags}
+              categories={tags}
+              onCategoryChange={onTagChange}
+              />
+          </div>
+        )}
 
-      <div className="o-grid-fit">
-        <button
-          className="c-button c-button__filled c-button__filled--primary c-button--md ripple ripple--before"
-          aria-pressed="false"
-          type="submit"
-          title={translation.search}>
-          <span class="c-button__label">
-            <span class="c-button__label-text">
-              {translation.search}
-            </span>
-          </span>
-        </button>
-      </div>
-
-      {resetButton && (
         <div className="o-grid-fit">
-          <a
-            className="c-button c-button__filled c-button__filled--default c-button--md ripple ripple--before"
-            href={resetButtonUrl}>
+          <button
+            className="c-button c-button__filled c-button__filled--primary c-button--md ripple ripple--before"
+            aria-pressed="false"
+            type="submit"
+            title={translation.search}>
             <span class="c-button__label">
               <span class="c-button__label-text">
-                {translation.resetFilters}
+                {translation.search}
               </span>
             </span>
-          </a>
+          </button>
         </div>
-      )}
+
+        {resetButton && (
+          <div className="o-grid-fit">
+            <a
+              className="c-button c-button__filled c-button__filled--default c-button--md ripple ripple--before"
+              href={resetButtonUrl}>
+              <span class="c-button__label">
+                <span class="c-button__label-text">
+                  {translation.resetFilters}
+                </span>
+              </span>
+            </a>
+          </div>
+        )}
+      </div>
     </div>
   </form>
 );
