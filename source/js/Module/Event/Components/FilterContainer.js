@@ -105,8 +105,8 @@ const FilterContainer = ({
           aria-pressed="false"
           type="submit"
           title={translation.search}>
-          <span class="c-button__label">
-            <span class="c-button__label-text">
+          <span className="c-button__label">
+            <span className="c-button__label-text">
               {translation.search}
             </span>
           </span>
@@ -118,8 +118,8 @@ const FilterContainer = ({
           <a
             className="c-button c-button__filled c-button__filled--default c-button--md ripple ripple--before"
             href={resetButtonUrl}>
-            <span class="c-button__label">
-              <span class="c-button__label-text">
+            <span className="c-button__label">
+              <span className="c-button__label-text">
                 {translation.resetFilters}
               </span>
             </span>
