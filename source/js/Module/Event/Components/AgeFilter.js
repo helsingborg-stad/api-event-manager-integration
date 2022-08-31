@@ -61,7 +61,7 @@ const AgeFilter = ({ translation, ageRange, minValue, maxValue, onChange }) => {
           <Input
             id="min"
             name="min"
-            handleChange={onChangeInputHandler(true, ({ min }) =>
+            handleChange={onChangeInputHandler(true, ({ min, max }) =>
               onChange({ min, max })
             )}
             onBlur={onChangeInputHandler(true, ({ min, max }) =>
@@ -77,7 +77,7 @@ const AgeFilter = ({ translation, ageRange, minValue, maxValue, onChange }) => {
           <Input
             id="max"
             name="max"
-            handleChange={onChangeInputHandler(false, ({ min }) =>
+            handleChange={onChangeInputHandler(false, ({ min, max }) =>
               onChange({ min, max })
             )}
             onBlur={onChangeInputHandler(false, ({ min, max }) =>
