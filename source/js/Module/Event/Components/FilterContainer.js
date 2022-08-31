@@ -70,11 +70,11 @@ const FilterContainer = ({
         <div className="o-grid-12@xs o-grid-4@md o-grid-4@lg">
           <AgeFilter 
             translation={translation} 
-            ageRange={ageRange} 
-            onAgeChange={onAgeChange} 
             onChange={onAgeRangeChange}
             minValue={ageRangeFilter.min}
             maxValue={ageRangeFilter.max}
+            minLimit={ageRange[0].id}
+            maxLimit={ageRange.slice(-1)[0].id}
           />
         </div>
       )}

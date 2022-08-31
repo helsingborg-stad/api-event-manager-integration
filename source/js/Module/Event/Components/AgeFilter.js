@@ -1,10 +1,7 @@
 import React from "react";
 import { Input } from "@helsingborg-stad/hbg-react";
 
-const AgeFilter = ({ translation, ageRange, minValue, maxValue, onChange }) => {
-  const minLimit = ageRange[0].id;
-  const maxLimit = ageRange.slice(-1)[0].id;
-
+const AgeFilter = ({ translation, minValue, maxValue, onChange, minLimit = 0, maxLimit = 99}) => {
   const tryGetFirstNonNullValue = (args = {}, callbacks = []) =>
     [...callbacks, () => ""].find((cb) => cb(args) !== null)(args);
 
