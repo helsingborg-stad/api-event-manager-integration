@@ -122,7 +122,11 @@ class FilterableEventsContainer extends React.Component {
     const ageRangeIds = this.getTaxonomyIds(ageRange);
     const params = this.loadQueryString();
    
+    const minAge = ageRangeFilter.min;
+    const maxAge = ageRangeFilter.max;
+
     categoryIds.length > 0 || tagIds.length > 0 || (ageRangeFilter.max - ageRangeFilter.min) !== ageRange.length || searchString.length > 0 || dateChanged ? this.setState({resetButton: true}) : this.setState({resetButton: false});
+
 
     // Set query parameters
     setQuery(
@@ -133,7 +137,9 @@ class FilterableEventsContainer extends React.Component {
         endDate,
         categories: categoryIds,
         tags: tagIds,
-        ageRange: ageRangeIds,
+        // ageRange: ageRangeIds,
+        minAge: minAge,
+        maxAge: maxAge,
         translate,
       },
       { pushState: true }
