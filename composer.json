@@ -17,7 +17,7 @@
     ],
     "require": {
         "helsingborg-stad/acf-export-manager": ">=1.0.0",
-        "philo/laravel-blade": "^3.1",
+        "benjamincrozat/blade": "^3.0",
         "elephox/mimey": "^4.0.2",
         "justinrainbow/json-schema": "^5.2"
     },
