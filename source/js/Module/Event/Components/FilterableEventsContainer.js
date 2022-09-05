@@ -217,10 +217,23 @@ class FilterableEventsContainer extends React.Component {
     tags = tags.map(tag => tag.id);
 
     let checked = ageRange.filter(age => age.checked);
+    console.log(checked.length, ageRangeFilter.max, ageRangeFilter.min);
+    //console.log(ageRange.map(age => age.checked = true));
+ 
+    
+    ((checked.length <= 1) && ageRangeFilter.max && ageRangeFilter.min) ? 
+      ageRange.filter(age => age.value >= ageRangeFilter.min).map(age => age.checked = true)+ console.log("1") :  
+      ((checked.length === 2) && checked[0].value + 1 !== checked[1].value) ? ageRange.map(age => age.checked = true) + console.log(checked[0].value - checked[1].value) : 
+     (ageRangeFilter.min && !ageRangeFilter.max) ? 
+    ageRange.filter(age => age.value >= ageRangeFilter.min).map(age => age.checked = true) + console.log("2") :  
+    (!ageRangeFilter.min && ageRangeFilter.max) ? 
+    ageRange.filter(age => age.value <= ageRangeFilter.max).map(age => age.checked = true) + console.log("3") : 
+    '';
 
-    ((checked.length <= 1) || (checked[0].value - checked[1].value !== -1)) ? ageRange.filter(age => age.value >= ageRangeFilter.min).map(age => age.checked = true) : (ageRangeFilter.min && !ageRangeFilter.max) ? ageRange.filter(age => age.value >= ageRangeFilter.min).map(age => age.checked = true) : (!ageRangeFilter.min && ageRangeFilter.max) ? ageRange.filter(age => age.value <= ageRangeFilter.max).map(age => age.checked = true) : '';
+    //console.log(ageRange.filter(age => age.value <= ageRangeFilter.max).map(age => age.checked = true));
 
     const ageGroup = ageRange.filter(age => age.checked).map(age => age.value);
+    console.log(ageGroup);
 
     // The API base url
     const url = `${restUrl}wp/v2/event/module`;
