@@ -19,16 +19,3 @@
   width: 100%;
   z-index: 2;
 }
-
-/* Age filter */
-/* Chrome, Safari, Edge, Opera */
-div.age-filter-container input::-webkit-outer-spin-button,
-div.age-filter-container input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0
-}
-
-/* Firefox - does not seem to work - maybe have to change the component in hbg-react? */
-div.age-filter-container input[type=number] {
-  -moz-appearance: none;
-}

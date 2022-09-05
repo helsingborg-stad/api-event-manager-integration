@@ -483,6 +483,8 @@ class Event extends \Modularity\Module
                 'years' => __('years', 'event-integration'),
                 'selectAge' => __('Select age', 'event-integration'),
                 'resetFilters' => __('Reset filters', 'event-integration'),
+                'fromAge' => __('From age', 'event-integration'),
+                'toAge' => __('To age', 'event-integration')
             )
         );
     }

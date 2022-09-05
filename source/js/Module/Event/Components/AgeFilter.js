@@ -64,7 +64,7 @@ const AgeFilter = ({ translation, minValue, maxValue, onChange, minLimit = 0, ma
             onBlur={onChangeInputHandler(true, ({ min, max }) =>
               onChange({ min: getMinValue({ min, max }), max })
             )}
-            label="från ålder"
+            label={translation.fromAge}
             type="number"
             value={minValue}
             style={{ width: "100%" }}
@@ -80,7 +80,7 @@ const AgeFilter = ({ translation, minValue, maxValue, onChange, minLimit = 0, ma
             onBlur={onChangeInputHandler(false, ({ min, max }) =>
               onChange({ min, max: getMaxValue({ min, max }) })
             )}
-            label="till ålder"
+            label={translation.toAge}
             type="number"
             value={maxValue}
             style={{ width: "100%" }}
