@@ -122,7 +122,9 @@ class FilterableEventsContainer extends React.Component {
     const ageRangeIds = this.getTaxonomyIds(ageRange);
     const params = this.loadQueryString();
    
-    const ageMinMax = ageRangeFilter.max && ageRangeFilter.min ? [ageRangeFilter.max, ageRangeFilter.min] : ageRangeFilter.max ? [ageRangeFilter.max] : ageRangeFilter.min ? [ageRangeFilter.min] : [];
+/*      const ageMinMax = ageRangeFilter.max && ageRangeFilter.min ? [ageRangeFilter.max, ageRangeFilter.min] : ageRangeFilter.max ? [ageRangeFilter.max] : ageRangeFilter.min ? [ageRangeFilter.min] : [];
+
+    console.log(ageMinMax); */
 
     categoryIds.length > 0 || tagIds.length > 0 || (ageRangeFilter.max - ageRangeFilter.min) !== ageRange.length || searchString.length > 0 || dateChanged ? this.setState({resetButton: true}) : this.setState({resetButton: false});
 
@@ -136,7 +138,8 @@ class FilterableEventsContainer extends React.Component {
         endDate,
         categories: categoryIds,
         tags: tagIds,
-        ageRange: ageMinMax,
+        minAge: ageRangeFilter.min,
+        maxAge: ageRangeFilter.max,
         translate,
       },
       { pushState: true }
