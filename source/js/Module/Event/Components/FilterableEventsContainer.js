@@ -178,7 +178,7 @@ class FilterableEventsContainer extends React.Component {
     }
 
     // Declare states and props
-    const { currentPage, searchString, startDate, endDate } = this.state;
+    const { currentPage, searchString, startDate, endDate, ageRangeFilter } = this.state;
     let { categories, tags, ageRange } = this.state;
     const {
       distance,
@@ -216,8 +216,12 @@ class FilterableEventsContainer extends React.Component {
     // Collect IDS
     tags = tags.map(tag => tag.id);
 
-    // Filter checked ages and return the values
+    let checked = ageRange.filter(age => age.checked);
+
+    ((checked.length <= 1) || (checked[0].value - checked[1].value !== -1)) ? ageRange.filter(age => age.value >= ageRangeFilter.min).map(age => age.checked = true) : (ageRangeFilter.min && !ageRangeFilter.max) ? ageRange.filter(age => age.value >= ageRangeFilter.min).map(age => age.checked = true) : (!ageRangeFilter.min && ageRangeFilter.max) ? ageRange.filter(age => age.value <= ageRangeFilter.max).map(age => age.checked = true) : '';
+
     const ageGroup = ageRange.filter(age => age.checked).map(age => age.value);
+
     // The API base url
     const url = `${restUrl}wp/v2/event/module`;
     // Create list of query parameters
