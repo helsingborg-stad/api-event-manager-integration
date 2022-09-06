@@ -1,71 +1,93 @@
 import React from "react";
 import { Input } from "@helsingborg-stad/hbg-react";
 
-const AgeFilter = ({ translation, ageRange, minValue, maxValue, onChange }) => {
-  const minLimit = ageRange[0].id;
-  const maxLimit = ageRange.slice(-1)[0].id;
-  const maxInputField = document.querySelector('#max');
-  const minInputField = document.querySelector('#min');
+const AgeFilter = ({ translation, minValue, maxValue, onChange, minLimit = 0, maxLimit = 99}) => {
+  const tryGetFirstNonNullValue = (args = {}, callbacks = []) =>
+    [...callbacks, () => ""].find((cb) => cb(args) !== null)(args);
 
-  const minChanged = (e) => {
-    const value = parseInt(e.target.value);
-    const setValue = value >= maxValue ? maxValue - 1 : minLimit > value ? minLimit : value;
+  const getMinValue = ({ min, max }) =>
+    tryGetFirstNonNullValue(
+      {
+        min,
+        max,
+        isEmpty: isNaN(min),
+        isMoreThenMax: min >= max && !isNaN(max),
+        isLessThanMinLimit: minLimit > min,
+      },
+      [
+        ({ isEmpty }) => (isEmpty ? "" : null),
+        ({ max, isMoreThenMax }) => (isMoreThenMax ? max - 1 : null),
+        ({ isLessThanMinLimit }) => (isLessThanMinLimit ? minLimit : null),
+        ({ min }) => min,
+      ]
+    );
 
-      onChange({
-        min: value,
-        max: maxValue
-      }); 
+  const getMaxValue = ({ min, max }) =>
+    tryGetFirstNonNullValue(
+      {
+        min,
+        max,
+        isEmpty: isNaN(max),
+        isLessOrEqualsMin: !isNaN(min) && max <= min,
+        isMoreThenMaxLimit: max > maxLimit,
+      },
+      [
+        ({ isEmpty }) => (isEmpty ? "" : null),
+        ({ min, isLessOrEqualsMin }) => (isLessOrEqualsMin ? min + 1 : null),
+        ({ isMoreThenMaxLimit }) => (isMoreThenMaxLimit ? maxLimit : null),
+        ({ max }) => max,
+      ]
+    );
 
-    minInputField.addEventListener('focusout', () => {
-      onChange({
-        min: setValue,
-        max: parseInt(maxInputField.value)
-      });
-    });
-  }
+  const onChangeInputHandler =
+    (isMin = true, onChangeCallback = (min, max) => {}) =>
+    ({ target: { value } }) => {
+      const isMax = !isMin;
+      const [min, max] = [
+        parseInt(isMin ? value : minValue),
+        parseInt(isMax ? value : maxValue),
+      ];
 
-  const maxChanged = (e) => {
-    const value = parseInt(e.target.value);
-    const setValue = value <= minValue ? minValue + 1 : value > maxLimit ? maxLimit + 1 : value;
-
-      onChange({
-        min: minValue,
-        max: value,
-     }); 
-
-    maxInputField.addEventListener('focusout', () => {
-      onChange({
-        min: parseInt(minInputField.value),
-        max: setValue,
-      });
-    });
-  }
+      onChangeCallback({ min, max });
+    };
 
   return (
     <div>
-      <div className="age-filter-container o-grid u-flex-wrap--no-wrap">
-        <Input         
-          id="min"
-          name="min"
-          handleChange={minChanged}
-          label="från ålder"
-          type="number"
-          value={minValue}
-          style={{width: "100%"}}
-        />
-        
-        <Input         
-          id="max"
-          name="max"
-          handleChange={maxChanged}
-          label="till ålder"
-          type="number"
-          value={maxValue}
-          style={{width: "100%"}}
-        />
+      <div className="age-filter-container o-grid o-grid--form u-flex-wrap--no-wrap">
+        <div className="o-grid-6">
+          <Input
+            id="min"
+            name="min"
+            handleChange={onChangeInputHandler(true, ({ min, max }) =>
+              onChange({ min, max })
+            )}
+            onBlur={onChangeInputHandler(true, ({ min, max }) =>
+              onChange({ min: getMinValue({ min, max }), max })
+            )}
+            label={translation.fromAge}
+            type="number"
+            value={minValue}
+            style={{ width: "100%" }}
+          />
+        </div>
+        <div className="o-grid-6">
+          <Input
+            id="max"
+            name="max"
+            handleChange={onChangeInputHandler(false, ({ min, max }) =>
+              onChange({ min, max })
+            )}
+            onBlur={onChangeInputHandler(false, ({ min, max }) =>
+              onChange({ min, max: getMaxValue({ min, max }) })
+            )}
+            label={translation.toAge}
+            type="number"
+            value={maxValue}
+            style={{ width: "100%" }}
+          />
+        </div>
       </div>
     </div>
-
   );
 };
 
