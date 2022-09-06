@@ -26,13 +26,13 @@ class FilterableEventsContainer extends React.Component {
       tags: props.tags,
       totalPages: 1,
       translate: '',
-      ageRangeFilter: { min: props.ageRange[0].id ? props.ageRange[0].id : 0, max: props.ageRange[0].id ? props.ageRange.splice(-1)[0].id : 0 },
+      ageRangeFilter: { min: props.ageRange !== undefined ? props.ageRange[0].id : 0, max: props.ageRange[0] !== undefined ? props.ageRange.splice(-1)[0].id : 0 },
       resetButton: false,
       resetButtonUrl: props.resetButtonUrl,
       dateChanged: false,
 
     };
-
+    
     this.myRef = createRef()
   }
 
