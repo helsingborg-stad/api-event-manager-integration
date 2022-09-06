@@ -58,8 +58,11 @@ class QueryEvents
         $searchString = !empty($params['search_string']) ? $params['search_string'] : null;
         $hidePastEvents = !empty($params['hide_past_events']) ? $params['hide_past_events'] : false;
         $onlyTodaysDate = !empty($params['only_todays_date']) ? $params['only_todays_date'] : false;
+
         // Filter by age
-        $ageGroup = (!empty($params['age_group']) && is_array($params['age_group'])) ? $params['age_group'] : null;
+        $ageGroup = (!empty($params['age_group']) && is_array($params['age_group'])) ? $params['age_group'] : false;		
+		$ageMin = isset( $ageGroup['min'] ) ? (int) $ageGroup['min'] : false;
+		$ageMax = isset( $ageGroup['max'] ) ? (int) $ageGroup['max'] : false;
 
         // Calculate offset
         $page = (!is_numeric($page)) ? 1 : $page;
@@ -71,13 +74,16 @@ class QueryEvents
         SELECT      *, $wpdb->posts.ID AS ID
         FROM        $wpdb->posts
         LEFT JOIN   $db_table ON ($wpdb->posts.ID = $db_table.event_id) ";
-        $query .= ($ageGroup) ? "LEFT JOIN $wpdb->postmeta age_from ON $wpdb->posts.ID = age_from.post_id " : '';
+        
+		$query .= ($ageGroup) ? "LEFT JOIN $wpdb->postmeta age_from ON $wpdb->posts.ID = age_from.post_id " : '';
         $query .= ($ageGroup) ? "LEFT JOIN $wpdb->postmeta age_to ON $wpdb->posts.ID = age_to.post_id " : '';
-        $query .= ($categories) ? "LEFT JOIN $wpdb->term_relationships term1 ON ($wpdb->posts.ID = term1.object_id) " : '';
+        
+		$query .= ($categories) ? "LEFT JOIN $wpdb->term_relationships term1 ON ($wpdb->posts.ID = term1.object_id) " : '';
         $query .= ($tags) ? "LEFT JOIN $wpdb->term_relationships term2 ON ($wpdb->posts.ID = term2.object_id) " : '';
         $query .= ($groups) ? "LEFT JOIN $wpdb->term_relationships term3 ON ($wpdb->posts.ID = term3.object_id) " : '';
         $query .= ($languageId) ? "LEFT JOIN $wpdb->term_relationships term4 ON ($wpdb->posts.ID = term4.object_id) " : '';
-        $query .= "
+       
+		$query .= "
         WHERE $wpdb->posts.post_type = %s
         AND $wpdb->posts.post_status = %s
         AND ($db_table.start_date BETWEEN %s AND %s OR $db_table.end_date BETWEEN %s AND %s) ";
@@ -90,20 +96,27 @@ class QueryEvents
             $query .= " AND $db_table.end_date <= '". date('Y-m-d H:i:s', strtotime('tomorrow - 1 second'))."' ";
         }
 
-        if ($ageGroup) {
-            $query .= "AND (age_from.meta_key = 'age_group_from' AND age_to.meta_key = 'age_group_to' AND (";
+		if ( $ageMin ) {
+			$query .= " AND age_from.meta_key = 'age_group_from' AND age_from.meta_value >= {$ageMin} ";
+		}
+		if ( $ageMax ) {
+			$query .= " AND age_to.meta_key = 'age_group_to' AND age_to.meta_value <= {$ageMax} ";
+		}
 
-            $numItems = count($ageGroup);
-            $i = 0;
-            foreach ($ageGroup as $key => $age) {
-                if (++$i === $numItems) {
-                    $query .= "{$age} BETWEEN age_from.meta_value AND age_to.meta_value";
-                } else {
-                    $query .= "{$age} BETWEEN age_from.meta_value AND age_to.meta_value OR ";
-                }
-            }
-            $query .= ")) ";
-        }
+        // if ($ageGroup) {
+        //     $query .= "AND (age_from.meta_key = 'age_group_from' AND age_to.meta_key = 'age_group_to' AND (";
+
+        //     $numItems = count($ageGroup);
+        //     $i = 0;
+        //     foreach ($ageGroup as $key => $age) {
+        //         if (++$i === $numItems) {
+        //             $query .= "{$age} BETWEEN age_from.meta_value AND age_to.meta_value";
+        //         } else {
+        //             $query .= "{$age} BETWEEN age_from.meta_value AND age_to.meta_value OR ";
+        //         }
+        //     }
+        //     $query .= ")) ";
+        // }
 
         $query .= ($searchString) ? "AND (($wpdb->posts.post_title LIKE %s) OR ($wpdb->posts.post_content LIKE %s))" : '';
         $query .= ($categories) ? "AND (term1.term_taxonomy_id IN ($categories)) " : '';
@@ -111,8 +124,10 @@ class QueryEvents
         $query .= ($groups) ? "AND (term3.term_taxonomy_id IN ($groups)) " : '';
         $query .= ($languageId) ? "AND (term4.term_taxonomy_id IN ($languageId)) " : '';
         $query .= ($idString != null) ? "AND ($wpdb->posts.ID IN ($idString)) " : '';
-        $query .= "GROUP BY $wpdb->posts.ID, $db_table.start_date, $db_table.end_date ";
+        
+		$query .= "GROUP BY $wpdb->posts.ID, $db_table.start_date, $db_table.end_date ";
         $query .= "ORDER BY $db_table.start_date ASC";
+
         $query .= ($limit == -1) ? '' : ' LIMIT'.' '.$offset.','.$limit;
 
         $placeholders = array(
