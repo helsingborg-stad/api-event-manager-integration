@@ -18,13 +18,12 @@ document.addEventListener('DOMContentLoaded', e => {
   if (domElements.length > 0) {
     for (let i = 0; i < domElements.length; i++) {
       const element = domElements[i];
-      const { settings, categories, tags, groups, ageRange } = element.dataset;
+      const { settings, categories, tags, groups } = element.dataset;
       const resetButtonUrl = element.getAttribute("data-reset-url");
 
       ReactDOM.render(
         <FilterableEventsContainer
           {...element.dataset}
-          ageRange={JSON.parse(ageRange)}
           categories={JSON.parse(categories)}
           groups={JSON.parse(groups)}
           settings={JSON.parse(settings)}

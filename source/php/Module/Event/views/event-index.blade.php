@@ -25,9 +25,10 @@
              data-categories="{{ $categories }}"
              data-groups="{{ $groups }}"
              data-tags="{{ $tags }}"
-             data-age-range="{{ $age_range }}"
              data-lang="{{ $lang }}"
              data-reset-url="{{ $reset_url }}"
+             data-age-from="{{$age_from}}"
+             data-age-to="{{$age_to}}"
         >
         </div>
     </div>
