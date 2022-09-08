@@ -31,7 +31,6 @@ class FilterableEventsContainer extends React.Component {
       dateChanged: false,
 
     };
-
     this.myRef = createRef()
 
   }
