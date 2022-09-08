@@ -7,9 +7,9 @@ const SearchBar = ({ searchString, translation, updateSearchString }) => (
         id="filter-keyword"
         handleChange={updateSearchString}
         label={translation.search}
-        type="text"
+        type="search"
         value={searchString}
-        icon='search'
+        icon_suffix='search'
       />
   </div>
 );
