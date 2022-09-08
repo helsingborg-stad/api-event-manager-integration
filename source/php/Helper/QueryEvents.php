@@ -60,8 +60,8 @@ class QueryEvents
         $onlyTodaysDate = !empty($params['only_todays_date']) ? $params['only_todays_date'] : false;
 
         // Filter by age
-		$ageMin = ( '' !== $params['age_min'] ) ? (int) $params['age_min'] : false;
-		$ageMax = ( '' !== $params['age_max'] ) ? (int) $params['age_max'] : false;
+        $ageMin = ('' !== $params['age_min']) ? (int) $params['age_min'] : false;
+        $ageMax = ('' !== $params['age_max']) ? (int) $params['age_max'] : false;
 
         // Calculate offset
         $page = (!is_numeric($page)) ? 1 : $page;
@@ -74,9 +74,8 @@ class QueryEvents
         FROM        $wpdb->posts
         LEFT JOIN   $db_table ON ($wpdb->posts.ID = $db_table.event_id) ";
 
-		$query .= "LEFT JOIN $wpdb->postmeta AS mt1 ON ( $wpdb->posts.ID = mt1.post_id ) ";
-		$query .= "LEFT JOIN $wpdb->postmeta AS mt2 ON ( $wpdb->posts.ID = mt2.post_id AND mt2.meta_key = 'age_group_to' ) ";
-		$query .= "LEFT JOIN $wpdb->postmeta AS mt3 ON ( $wpdb->posts.ID = mt3.post_id AND mt3.meta_key = 'age_group_from' ) ";
+        $query .= "LEFT JOIN $wpdb->postmeta AS meta2 ON ( $wpdb->posts.ID = meta2.post_id AND meta2.meta_key = 'age_group_to' ) ";
+        $query .= "LEFT JOIN $wpdb->postmeta AS meta3 ON ( $wpdb->posts.ID = meta3.post_id AND meta3.meta_key = 'age_group_from' ) ";
 
         $query .= ($categories) ? "LEFT JOIN $wpdb->term_relationships term1 ON ($wpdb->posts.ID = term1.object_id) " : '';
         $query .= ($tags) ? "LEFT JOIN $wpdb->term_relationships term2 ON ($wpdb->posts.ID = term2.object_id) " : '';
@@ -88,39 +87,31 @@ class QueryEvents
         AND $wpdb->posts.post_status = %s
         AND ($db_table.start_date BETWEEN %s AND %s OR $db_table.end_date BETWEEN %s AND %s) ";
 
-		if ( $ageMin ) {
-			$query .= "AND ( 
+        if ($ageMin) {
+            $query .= "AND ( 
 				( 
-				  ( mt2.meta_key = 'age_group_from' AND mt2.meta_value <= $ageMin )
+					meta2.meta_key = 'age_group_from' AND meta2.meta_value <= $ageMin 
+				) OR ( 
+					meta2.meta_key = 'age_group_from' IS NULL 
 				) 
-				OR 
+			) ";
+        }
+        if ($ageMax) {
+            $query .= "AND ( 
 				( 
-				  mt2.post_id IS NULL 
-				  AND 
-				  mt3.post_id IS NULL
-				)
-			)";
-		}
-		if ( $ageMax ) {
-			$query .= "AND ( 
-				( 
-				  ( mt3.meta_key = 'age_group_to' AND mt3.meta_value >= $ageMax )
+					meta3.meta_key = 'age_group_to' AND meta3.meta_value <= $ageMax 
+				) OR ( 
+					meta3.meta_key = 'age_group_to' IS NULL 
 				) 
-				OR 
-				( 
-				  mt2.post_id IS NULL 
-				  AND 
-				  mt3.post_id IS NULL
-				)
-			)";
-		}
-
-        if ($hidePastEvents){
-            $query .= " AND $db_table.end_date > '". date('Y-m-d H:i:s')."' ";
+			) ";
         }
 
-        if($onlyTodaysDate) {
-            $query .= " AND $db_table.end_date <= '". date('Y-m-d H:i:s', strtotime('tomorrow - 1 second'))."' ";
+        if ($hidePastEvents) {
+            $query .= "AND $db_table.end_date > '". date('Y-m-d H:i:s')."' ";
+        }
+
+        if ($onlyTodaysDate) {
+            $query .= "AND $db_table.end_date <= '". date('Y-m-d H:i:s', strtotime('tomorrow - 1 second'))."' ";
         }
 
         $query .= ($searchString) ? "AND (($wpdb->posts.post_title LIKE %s) OR ($wpdb->posts.post_content LIKE %s))" : '';
@@ -278,5 +269,4 @@ class QueryEvents
             return $nearby_locations;
         }
     }
-
 }
