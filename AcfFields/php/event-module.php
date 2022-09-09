@@ -1,9 +1,7 @@
 <?php 
 
-
-if (function_exists('acf_add_local_field_group')) {
-
-    acf_add_local_field_group(array(
+if (function_exists('acf_add_local_field_group')) {
+    acf_add_local_field_group(array(
     'key' => 'group_583fe4ee88439',
     'title' => __('Display events', 'event-integration'),
     'fields' => array(
@@ -168,6 +166,25 @@ if (function_exists('acf_add_local_field_group')) {
             'ui_off_text' => '',
         ),
         6 => array(
+            'key' => 'field_6319fd34782d6',
+            'label' => __('Remove URL parameters', 'event-integration'),
+            'name' => 'mod_event_no_url',
+            'type' => 'true_false',
+            'instructions' => '',
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'message' => '',
+            'default_value' => 0,
+            'ui' => 0,
+            'ui_on_text' => '',
+            'ui_off_text' => '',
+        ),
+        7 => array(
             'key' => 'field_591af4eeb1561',
             'label' => __('Pagination button limit', 'event-integration'),
             'name' => 'mod_event_pagination_limit',
@@ -201,7 +218,7 @@ if (function_exists('acf_add_local_field_group')) {
             'max' => '',
             'step' => '',
         ),
-        7 => array(
+        8 => array(
             'key' => 'field_591b06d53284e',
             'label' => __('Show pagination arrows', 'event-integration'),
             'name' => 'mod_event_nav_arrows',
@@ -233,7 +250,7 @@ if (function_exists('acf_add_local_field_group')) {
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        8 => array(
+        9 => array(
             'key' => 'field_583ffd8d10925',
             'label' => __('Days interval', 'event-integration'),
             'name' => 'mod_event_interval',
@@ -254,7 +271,7 @@ if (function_exists('acf_add_local_field_group')) {
             'max' => '',
             'step' => '',
         ),
-        9 => array(
+        10 => array(
             'key' => 'field_5d5bda9c80adf',
             'label' => __('Only show events starting on todays date', 'event-integration'),
             'name' => 'mod_event_only_todays_date',
@@ -273,7 +290,7 @@ if (function_exists('acf_add_local_field_group')) {
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        10 => array(
+        11 => array(
             'key' => 'field_5d5bdb7f80ae0',
             'label' => __('Hide past events', 'event-integration'),
             'name' => 'mod_events_hide_past_events',
@@ -292,7 +309,7 @@ if (function_exists('acf_add_local_field_group')) {
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        11 => array(
+        12 => array(
             'key' => 'field_583fefb6634a1',
             'label' => __('Fields', 'event-integration'),
             'name' => 'mod_event_fields',
@@ -320,7 +337,7 @@ if (function_exists('acf_add_local_field_group')) {
             'return_format' => 'value',
             'save_custom' => 0,
         ),
-        12 => array(
+        13 => array(
             'key' => 'field_5b2ae170ae36f',
             'label' => __('Image ratio', 'event-integration'),
             'name' => 'mod_event_image_ratio',
@@ -359,7 +376,7 @@ if (function_exists('acf_add_local_field_group')) {
             'return_format' => 'value',
             'placeholder' => '',
         ),
-        13 => array(
+        14 => array(
             'key' => 'field_58de5b2d62d45',
             'label' => __('Occasion position', 'event-integration'),
             'name' => 'mod_event_occ_pos',
@@ -396,7 +413,7 @@ if (function_exists('acf_add_local_field_group')) {
             'layout' => 'vertical',
             'return_format' => 'value',
         ),
-        14 => array(
+        15 => array(
             'key' => 'field_583fee36634a0',
             'label' => __('Description letter limit', 'event-integration'),
             'name' => 'mod_event_descr_limit',
@@ -425,7 +442,7 @@ if (function_exists('acf_add_local_field_group')) {
             'max' => '',
             'step' => '',
         ),
-        15 => array(
+        16 => array(
             'key' => 'field_586cf5c8d3686',
             'label' => __('Groups', 'event-integration'),
             'name' => 'mod_event_groups_show',
@@ -444,7 +461,7 @@ if (function_exists('acf_add_local_field_group')) {
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        16 => array(
+        17 => array(
             'key' => 'field_586cf5d0d3687',
             'label' => __('Select groups', 'event-integration'),
             'name' => 'mod_event_groups_list',
@@ -474,7 +491,7 @@ if (function_exists('acf_add_local_field_group')) {
             'return_format' => 'id',
             'multiple' => 0,
         ),
-        17 => array(
+        18 => array(
             'key' => 'field_58455b0e93178',
             'label' => __('Categories', 'event-integration'),
             'name' => 'mod_event_categories_show',
@@ -493,7 +510,7 @@ if (function_exists('acf_add_local_field_group')) {
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        18 => array(
+        19 => array(
             'key' => 'field_5845578c5f0a0',
             'label' => __('Select categories', 'event-integration'),
             'name' => 'mod_event_categories_list',
@@ -523,7 +540,7 @@ if (function_exists('acf_add_local_field_group')) {
             'return_format' => 'id',
             'multiple' => 0,
         ),
-        19 => array(
+        20 => array(
             'key' => 'field_58458b20dde03',
             'label' => __('Tags', 'event-integration'),
             'name' => 'mod_event_tags_show',
@@ -542,7 +559,7 @@ if (function_exists('acf_add_local_field_group')) {
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        20 => array(
+        21 => array(
             'key' => 'field_58458b57dde04',
             'label' => __('Select tags', 'event-integration'),
             'name' => 'mod_event_tags_list',
@@ -572,7 +589,7 @@ if (function_exists('acf_add_local_field_group')) {
             'return_format' => 'id',
             'multiple' => 0,
         ),
-        21 => array(
+        22 => array(
             'key' => 'field_584f9e68aa31a',
             'label' => __('Default image', 'event-integration'),
             'name' => 'mod_event_def_image',
@@ -596,7 +613,7 @@ if (function_exists('acf_add_local_field_group')) {
             'max_size' => '',
             'mime_types' => 'jpg, jpeg, png, gif',
         ),
-        22 => array(
+        23 => array(
             'key' => 'field_58abf724d46f6',
             'label' => __('Location', 'event-integration'),
             'name' => 'mod_event_geographic',
@@ -614,7 +631,7 @@ if (function_exists('acf_add_local_field_group')) {
             'zoom' => 16,
             'height' => '',
         ),
-        23 => array(
+        24 => array(
             'key' => 'field_58abf72bd46f7',
             'label' => __('Distance from location', 'event-integration'),
             'name' => 'mod_event_distance',
@@ -635,7 +652,7 @@ if (function_exists('acf_add_local_field_group')) {
             'max' => '',
             'step' => '',
         ),
-        24 => array(
+        25 => array(
             'key' => 'field_5c6e698e8d331',
             'label' => __('Filters', 'event-integration'),
             'name' => '',
@@ -660,7 +677,7 @@ if (function_exists('acf_add_local_field_group')) {
             'new_lines' => 'wpautop',
             'esc_html' => 0,
         ),
-        25 => array(
+        26 => array(
             'key' => 'field_5c5d4dbd07268',
             'label' => __('Text search', 'event-integration'),
             'name' => 'mod_event_filter_search',
@@ -687,7 +704,7 @@ if (function_exists('acf_add_local_field_group')) {
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        26 => array(
+        27 => array(
             'key' => 'field_5c5d501e9acbb',
             'label' => __('Categories', 'event-integration'),
             'name' => 'mod_event_filter_categories',
@@ -714,7 +731,7 @@ if (function_exists('acf_add_local_field_group')) {
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        27 => array(
+        28 => array(
             'key' => 'field_5d1b26a7f03ff',
             'label' => __('Tags', 'event-integration'),
             'name' => 'mod_event_filter_tags',
@@ -741,7 +758,7 @@ if (function_exists('acf_add_local_field_group')) {
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        28 => array(
+        29 => array(
             'key' => 'field_5c5d50499acbc',
             'label' => __('Date search', 'event-integration'),
             'name' => 'mod_event_filter_dates',
@@ -768,7 +785,7 @@ if (function_exists('acf_add_local_field_group')) {
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        29 => array(
+        30 => array(
             'key' => 'field_5c765ee693303',
             'label' => __('Age', 'event-integration'),
             'name' => 'mod_event_filter_age_group',
@@ -795,7 +812,7 @@ if (function_exists('acf_add_local_field_group')) {
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        30 => array(
+        31 => array(
             'key' => 'field_5c7d24413bf80',
             'label' => __('Age range from', 'event-integration'),
             'name' => 'mod_event_filter_age_range_from',
@@ -824,7 +841,7 @@ if (function_exists('acf_add_local_field_group')) {
             'max' => '',
             'step' => '',
         ),
-        31 => array(
+        32 => array(
             'key' => 'field_5c7d25be3d7fd',
             'label' => __('Age range to', 'event-integration'),
             'name' => 'mod_event_filter_age_range_to',
@@ -885,5 +902,4 @@ if (function_exists('acf_add_local_field_group')) {
     'acfe_meta' => '',
     'acfe_note' => '',
 ));
-
-}
+}

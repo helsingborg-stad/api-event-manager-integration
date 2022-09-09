@@ -13,8 +13,6 @@ class FilterableEventsContainer extends React.Component {
     super(props);
 
     this.state = {
-      age: null,
-      ageRange: props.ageRange,
       categories: props.categories,
       currentPage: 1,
       endDate: props.endDate,
@@ -26,13 +24,16 @@ class FilterableEventsContainer extends React.Component {
       tags: props.tags,
       totalPages: 1,
       translate: '',
-      ageRangeFilter: { min: props.ageRange[0].id ? props.ageRange[0].id : 0, max: props.ageRange[0].id ? props.ageRange.splice(-1)[0].id : 0 },
+      ageRangeLimit: { min: props.ageFrom, max: props.ageTo },
+      ageRangeFilter: { min: props.ageFrom, max: props.ageTo },
       resetButton: false,
       resetButtonUrl: props.resetButtonUrl,
       dateChanged: false,
+      noUrl: props.noUrl,
 
     };
     this.myRef = createRef()
+
   }
 
   componentDidMount() {
@@ -43,8 +44,8 @@ class FilterableEventsContainer extends React.Component {
    * Collect query string parameters and set to state
    */
   collectUrlParams = () => {
-    const { categories, tags, ageRange } = this.state;
-    const taxonomies = { categories, tags, ageRange };
+    const { categories, tags } = this.state;
+    const taxonomies = { categories, tags };
 
     // Collect query string params
     const urlParams = new URLSearchParams(window.location.search);
@@ -110,36 +111,39 @@ class FilterableEventsContainer extends React.Component {
       endDate,
       categories,
       tags,
-      ageRange,
       translate,
       ageRangeFilter,
-      dateChanged
+      dateChanged,
+      ageRangeLimit,
+      noUrl
     } = this.state;
 
     const categoryIds = this.getTaxonomyIds(categories);
     const tagIds = this.getTaxonomyIds(tags);
-    const ageRangeIds = this.getTaxonomyIds(ageRange);
     const params = this.loadQueryString();
-   
-    const ageMinMax = ageRangeFilter.max && ageRangeFilter.min ? [ageRangeFilter.max, ageRangeFilter.min] : ageRangeFilter.max ? [ageRangeFilter.max] : ageRangeFilter.min ? [ageRangeFilter.min] : [];
 
-    categoryIds.length > 0 || tagIds.length > 0 || (ageRangeFilter.max - ageRangeFilter.min) !== ageRange.length || searchString.length > 0 || dateChanged ? this.setState({resetButton: true}) : this.setState({resetButton: false});
+
+    categoryIds.length > 0 || tagIds.length > 0  || ageRangeFilter.min > ageRangeLimit.min || ageRangeFilter.max < ageRangeLimit.max  || searchString.length > 0 || dateChanged ? this.setState({resetButton: true}) : this.setState({resetButton: false});
 
 
     // Set query parameters
-    setQuery(
-      {
-        currentPage,
-        searchString,
-        startDate,
-        endDate,
-        categories: categoryIds,
-        tags: tagIds,
-        ageRange: ageMinMax,
-        translate,
-      },
-      { pushState: true }
-    );
+if(!noUrl) {
+  setQuery(
+    {
+      currentPage,
+      searchString,
+      startDate,
+      endDate,
+      categories: categoryIds,
+      tags: tagIds,
+      minAge: ageRangeFilter.min,
+      maxAge: ageRangeFilter.max,
+      translate,
+    },
+    { pushState: true }
+  );
+}
+    
     if (params.translate) {
       location.hash = "#translate";
     }
@@ -177,8 +181,8 @@ class FilterableEventsContainer extends React.Component {
     }
 
     // Declare states and props
-    const { currentPage, searchString, startDate, endDate } = this.state;
-    let { categories, tags, ageRange } = this.state;
+    const { currentPage, searchString, startDate, endDate, ageRangeFilter } = this.state;
+    let { categories, tags } = this.state;
     const {
       distance,
       groups,
@@ -215,13 +219,12 @@ class FilterableEventsContainer extends React.Component {
     // Collect IDS
     tags = tags.map(tag => tag.id);
 
-    // Filter checked ages and return the values
-    const ageGroup = ageRange.filter(age => age.checked).map(age => age.value);
     // The API base url
     const url = `${restUrl}wp/v2/event/module`;
     // Create list of query parameters
     const params = {
-      age_group: ageGroup,
+      age_min: ageRangeFilter.min,
+      age_max: ageRangeFilter.max,
       categories,
       distance,
       end_date: endDate,
@@ -407,22 +410,13 @@ class FilterableEventsContainer extends React.Component {
    * @param id
    */
     onAgeRangeChange = ({ min, max, id }) => {
-    const { ageRange } = this.state;
     this.setState({ ageRangeFilter: { min, max } });
 
-    for (let i = 0; i < ageRange.length; i++){
-      if( i >= (min - 1) && i < max){
-        ageRange[i].checked = true;
-      } else {
-        ageRange[i].checked = false;
-      }
-    } 
   };
   
 
   render() {
     const {
-      ageRange,
       ageRangeFilter,
       categories,
       currentPage,
@@ -450,7 +444,6 @@ class FilterableEventsContainer extends React.Component {
 
           <div className="u-mb-3">
             <FilterContainer
-              ageRange={ageRange}
               ageRangeFilter={ageRangeFilter}
               onAgeRangeChange={this.onAgeRangeChange}
               categories={categories}
@@ -527,7 +520,6 @@ class FilterableEventsContainer extends React.Component {
 }
 
 FilterableEventsContainer.propTypes = {
-  ageRange: PropTypes.array,
   archiveUrl: PropTypes.string,
   categories: PropTypes.array,
   distance: PropTypes.string,
@@ -547,7 +539,6 @@ FilterableEventsContainer.propTypes = {
 };
 
 FilterableEventsContainer.defaultProps = {
-  ageRange: [],
   categories: [],
   groups: [],
   tags: [],
@@ -563,10 +554,6 @@ const availableQueryStringParams = [
   {
     param: 'searchString',
     type: 'string',
-  },
-  {
-    param: 'ageRange',
-    type: 'array',
   },
   {
     param: 'startDate',

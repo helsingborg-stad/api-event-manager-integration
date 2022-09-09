@@ -66,15 +66,15 @@ const FilterContainer = ({
         </div>
       )}
 
-      {settings.mod_event_filter_age_group && ageRange.length > 0 && (
+      {settings.mod_event_filter_age_range_from && settings.mod_event_filter_age_range_to && (
         <div className="o-grid-12@xs o-grid-4@md o-grid-4@lg">
           <AgeFilter 
             translation={translation} 
             onChange={onAgeRangeChange}
             minValue={ageRangeFilter.min}
             maxValue={ageRangeFilter.max}
-            minLimit={ageRange[0].id}
-            maxLimit={ageRange.slice(-1)[0].id}
+            minLimit={settings.mod_event_filter_age_range_from}
+            maxLimit={settings.mod_event_filter_age_range_to}
           />
         </div>
       )}
