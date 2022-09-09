@@ -128,7 +128,6 @@ class FilterableEventsContainer extends React.Component {
 
     // Set query parameters
 if(!noUrl) {
-  console.log("Körs");
   setQuery(
     {
       currentPage,
