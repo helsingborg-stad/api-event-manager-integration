@@ -29,6 +29,7 @@
              data-reset-url="{{ $reset_url }}"
              data-age-from="{{$age_from}}"
              data-age-to="{{$age_to}}"
+             data-no-url="{{$no_url}}"
         >
         </div>
     </div>

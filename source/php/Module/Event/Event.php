@@ -76,6 +76,7 @@ class Event extends \Modularity\Module
         $data['lat'] = (isset($data['mod_event_geographic']['lat'])) ? $data['mod_event_geographic']['lat'] : null;
         $data['lng'] = (isset($data['mod_event_geographic']['lng'])) ? $data['mod_event_geographic']['lng'] : null;
         $data['distance'] = (isset($data['mod_event_distance'])) ? $data['mod_event_distance'] : null;
+        $data['no_url'] = get_field('mod_event_no_url', $id);
 
         $data['age_from'] = ($this->template == 'index') ? (int)get_field('mod_event_filter_age_range_from', $id) : '';
         $data['age_to'] = ($this->template == 'index') ? (int)get_field('mod_event_filter_age_range_to', $id) : '';

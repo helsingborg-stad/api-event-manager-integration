@@ -29,6 +29,7 @@ class FilterableEventsContainer extends React.Component {
       resetButton: false,
       resetButtonUrl: props.resetButtonUrl,
       dateChanged: false,
+      noUrl: props.noUrl,
 
     };
     this.myRef = createRef()
@@ -114,6 +115,7 @@ class FilterableEventsContainer extends React.Component {
       ageRangeFilter,
       dateChanged,
       ageRangeLimit,
+      noUrl
     } = this.state;
 
     const categoryIds = this.getTaxonomyIds(categories);
@@ -125,20 +127,24 @@ class FilterableEventsContainer extends React.Component {
 
 
     // Set query parameters
-    setQuery(
-      {
-        currentPage,
-        searchString,
-        startDate,
-        endDate,
-        categories: categoryIds,
-        tags: tagIds,
-        minAge: ageRangeFilter.min,
-        maxAge: ageRangeFilter.max,
-        translate,
-      },
-      { pushState: true }
-    );
+if(!noUrl) {
+  console.log("Körs");
+  setQuery(
+    {
+      currentPage,
+      searchString,
+      startDate,
+      endDate,
+      categories: categoryIds,
+      tags: tagIds,
+      minAge: ageRangeFilter.min,
+      maxAge: ageRangeFilter.max,
+      translate,
+    },
+    { pushState: true }
+  );
+}
+    
     if (params.translate) {
       location.hash = "#translate";
     }

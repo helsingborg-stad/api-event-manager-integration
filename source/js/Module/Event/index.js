@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', e => {
   if (domElements.length > 0) {
     for (let i = 0; i < domElements.length; i++) {
       const element = domElements[i];
-      const { settings, categories, tags, groups, ageFrom, ageTo } = element.dataset;
+      const { settings, categories, tags, groups, ageFrom, ageTo, noUrl } = element.dataset;
       const resetButtonUrl = element.getAttribute("data-reset-url");
 
       ReactDOM.render(
@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', e => {
           resetButtonUrl={resetButtonUrl}
           ageFrom={ageFrom}
           ageTo={ageTo}
+          noUrl={noUrl}
         />,
         element
       );
