@@ -60,8 +60,8 @@ class QueryEvents
         $onlyTodaysDate = !empty($params['only_todays_date']) ? $params['only_todays_date'] : false;
 
         // Filter by age
-        $ageMin = ('' !== $params['age_min']) ? (int) $params['age_min'] : 0;
-        $ageMax = ('' !== $params['age_max']) ? (int) $params['age_max'] : 100;
+        $ageMin = ('' !== $params['age_min']) ? (int) $params['age_min'] : false;
+        $ageMax = ('' !== $params['age_max']) ? (int) $params['age_max'] : false;
 
         // Calculate offset
         $page = (!is_numeric($page)) ? 1 : $page;
