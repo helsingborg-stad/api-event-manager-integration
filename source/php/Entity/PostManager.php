@@ -356,7 +356,7 @@ abstract class PostManager
      */
     private function isUrl($url)
     {
-        if (is_string($url) && preg_match('/^(?:[;\/?:@&=+$,]|(?:[^\W_]|[-_.!~*\()\[\] ])|(?:%[\da-fA-F]{2}))*$/', $url)) {
+        if (filter_var($url, FILTER_VALIDATE_URL)) {
             return true;
         }
 
