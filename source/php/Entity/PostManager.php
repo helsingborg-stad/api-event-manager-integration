@@ -248,13 +248,14 @@ abstract class PostManager
      */
     public function setFeaturedImageFromUrl($url, $featured)
     {
+        
 
         if (!isset($this->ID)) {
-            return false;
+        return false;
         }
 
         if (!isset($url) || strlen($url) === 0 || !$this->isUrl($url)) {
-            return false;
+           return false;
         }
 
         // Upload path
@@ -355,7 +356,7 @@ abstract class PostManager
      */
     private function isUrl($url)
     {
-        if (is_string($url) && preg_match('/^(?:[;\/?:@&=+$,]|(?:[^\W_]|[-_.!~*\()\[\] ])|(?:%[\da-fA-F]{2}))*$/', $url)) {
+        if (filter_var($url, FILTER_VALIDATE_URL)) {
             return true;
         }
 
