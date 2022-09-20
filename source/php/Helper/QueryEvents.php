@@ -74,8 +74,8 @@ class QueryEvents
         FROM        $wpdb->posts
         LEFT JOIN   $db_table ON ($wpdb->posts.ID = $db_table.event_id) ";
 
-        $query .= "LEFT JOIN $wpdb->postmeta AS meta2 ON ( $wpdb->posts.ID = meta2.post_id ) ";
-        $query .= "LEFT JOIN $wpdb->postmeta AS meta3 ON ( $wpdb->posts.ID = meta3.post_id ) ";
+        $query .= "LEFT JOIN $wpdb->postmeta AS meta2 ON ( $wpdb->posts.ID = meta2.post_id AND meta2.meta_key = 'age_group_from' ) ";
+        $query .= "LEFT JOIN $wpdb->postmeta AS meta3 ON ( $wpdb->posts.ID = meta3.post_id AND meta3.meta_key = 'age_group_to' ) ";
 
         $query .= ($categories) ? "LEFT JOIN $wpdb->term_relationships term1 ON ($wpdb->posts.ID = term1.object_id) " : '';
         $query .= ($tags) ? "LEFT JOIN $wpdb->term_relationships term2 ON ($wpdb->posts.ID = term2.object_id) " : '';
@@ -87,12 +87,12 @@ class QueryEvents
         AND $wpdb->posts.post_status = %s
         AND ($db_table.start_date BETWEEN %s AND %s OR $db_table.end_date BETWEEN %s AND %s) ";
 
-        if ($ageMin) {
-            $query .= "AND ( ( meta2.meta_key = 'age_group_from' AND meta2.meta_value <= $ageMin ) OR ( meta2.meta_key = 'age_group_from' IS NULL ) ) ";
+		if ($ageMin) {
+            $query .= "AND ( meta2.meta_value <= $ageMin OR meta2.meta_value IS NULL ) ";
         } 
-        if ($ageMax) {
-            $query .= "AND ( ( meta3.meta_key = 'age_group_to' AND meta3.meta_value >= $ageMax ) OR ( meta3.meta_key = 'age_group_to' IS NULL ) ) ";
-        }
+		if ($ageMax) {
+            $query .= "AND ( meta3.meta_value >= $ageMax OR meta3.meta_value IS NULL ) ";
+        } 
 
         if ($hidePastEvents) {
             $query .= "AND $db_table.end_date > '". date('Y-m-d H:i:s')."' ";
