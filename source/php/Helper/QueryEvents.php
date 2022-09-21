@@ -91,10 +91,10 @@ class QueryEvents
         AND ($db_table.start_date BETWEEN %s AND %s OR $db_table.end_date BETWEEN %s AND %s) ";
 
         if ($ageMin) {
-            $query .= "AND ( meta2.meta_value <= $ageMin OR meta2.meta_value IS NULL ) ";
+            $query .= "AND ( meta2.meta_value >= $ageMin OR meta2.meta_value IS NULL ) ";
         }
         if ($ageMax) {
-            $query .= "AND ( meta3.meta_value >= $ageMax OR meta3.meta_value IS NULL ) ";
+            $query .= "AND ( meta3.meta_value <= $ageMax OR meta3.meta_value IS NULL ) ";
         }
 
         if ($hidePastEvents) {
