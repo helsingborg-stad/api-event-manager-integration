@@ -223,8 +223,8 @@ if(!noUrl) {
     const url = `${restUrl}wp/v2/event/module`;
     // Create list of query parameters
     const params = {
-      age_min: ageRangeFilter.min,
-      age_max: ageRangeFilter.max,
+      age_min: isNaN(ageRangeFilter.min) ? '' : ageRangeFilter.min,
+      age_max: isNaN(ageRangeFilter.max) ? '' : ageRangeFilter.max,
       categories,
       distance,
       end_date: endDate,
