@@ -4,13 +4,13 @@ import EventItem from './EventItem';
 
 class EventList extends React.Component {
   render() {
-    const { items, gridColumn, displayFields } = this.props;
-
+    const { items, gridColumn, displayFields, cardStyle } = this.props;
     return (
       <div className="o-grid">
         {items.map(event => (
           <div className={gridColumn ?? `o-grid-12 o-grid-4@md`}>
             <EventItem
+              cardStyle={cardStyle}
               key={uuidv4()}
               event={event}
               displayFields={displayFields}
