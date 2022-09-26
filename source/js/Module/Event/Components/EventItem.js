@@ -24,8 +24,8 @@ function getDateBadge(event, type) {
 
 }
 
-const EventItem = ({ event, displayFields }) => (
-  <a className="c-card c-card--action" href={event.permalink} style={{ textAlign: 'center', height: '100%' }}>
+const EventItem = ({ event, displayFields, cardStyle }) => (
+  <a className={"c-card c-card--action " + cardStyle} href={event.permalink} style={{ textAlign: 'center', height: '100%' }}>
     {displayFields.includes('image') && event.image_url && (
       <div className="c-card__image c-card__image--secondary">
         {displayFields.includes('dateBadge') ? (

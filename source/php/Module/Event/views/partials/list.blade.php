@@ -37,7 +37,7 @@
 					<div class="o-grid-12 o-grid-auto@sm u-display--none@xs">
 						@pagination([
 							'list' => $paginationList, 
-              'classList' => [],
+              				'classList' => [],
 							'buttonSize' => 'sm',
 							'current' => isset($_GET['paged']) ? $_GET['paged'] : 1,
 							'linkPrefix' => '?paged=',

@@ -30,6 +30,7 @@
              data-age-from="{{$age_from}}"
              data-age-to="{{$age_to}}"
              data-no-url="{{$no_url}}"
+             data-card-style="{{$card_style}}"
         >
         </div>
     </div>

@@ -102,6 +102,8 @@ class Event extends \Modularity\Module
             ' ',
             apply_filters('Modularity/Module/Classes', array('c-card--panel'), 'mod-event', $this->args)
         ) : array();
+        
+        $data['card_style'] = get_theme_mod('flat_ui_design') ? "c-card--flat" : "";
 
         $data['events'] = $this->setOccassion($data['events']);
         $data['events'] = $this->setLocation($data['events']);

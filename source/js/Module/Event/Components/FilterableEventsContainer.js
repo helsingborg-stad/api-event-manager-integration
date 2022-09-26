@@ -30,6 +30,7 @@ class FilterableEventsContainer extends React.Component {
       resetButtonUrl: props.resetButtonUrl,
       dateChanged: false,
       noUrl: props.noUrl,
+      cardStyle: props.cardStyle,
 
     };
     this.myRef = createRef()
@@ -430,6 +431,7 @@ if(!noUrl) {
       totalPages,
       resetButton,
       resetButtonUrl,
+      cardStyle
     } = this.state;
 
     const { settings, translation, gridColumn, archiveUrl } = this.props;
@@ -484,6 +486,7 @@ if(!noUrl) {
 
             {items.length > 0 && (
               <EventList
+                cardStyle={cardStyle}
                 items={items}
                 gridColumn={gridColumn}
                 displayFields={settings.mod_event_fields}
