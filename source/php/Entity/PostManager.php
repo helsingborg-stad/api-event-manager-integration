@@ -254,9 +254,9 @@ abstract class PostManager
             return false;
         }
 
-        if (!isset($url) || strlen($url) === 0 || !$this->isUrl($url)) {
+         if (!$this->isUrl($url)) {
             return false;
-        }
+        } 
 
         // Upload path
         $uploadDir = wp_upload_dir()['basedir'].'/events/' . date("Y"). "/" . date("m");
@@ -356,7 +356,23 @@ abstract class PostManager
      */
     private function isUrl($url)
     {
-        if (filter_var($url, FILTER_VALIDATE_URL)) {
+        $RemoveChars[] = '/å/';
+        $RemoveChars[] = '/ä/';
+        $RemoveChars[] = '/ö/';
+        $RemoveChars[] = '/Å/';
+        $RemoveChars[] = '/Ä/';
+        $RemoveChars[] = '/Ö/';
+
+        $ReplaceWith[] = 'a';
+        $ReplaceWith[] = 'a';
+        $ReplaceWith[] = 'o';
+        $ReplaceWith[] = 'A';
+        $ReplaceWith[] = 'A';
+        $ReplaceWith[] = 'O';
+
+        $text  = preg_replace($RemoveChars, $ReplaceWith, $url);
+
+        if (filter_var($text, FILTER_VALIDATE_URL)) {
             return true;
         }
 
