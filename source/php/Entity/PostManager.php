@@ -356,23 +356,8 @@ abstract class PostManager
      */
     private function isUrl($url)
     {
-        $RemoveChars[] = '/å/';
-        $RemoveChars[] = '/ä/';
-        $RemoveChars[] = '/ö/';
-        $RemoveChars[] = '/Å/';
-        $RemoveChars[] = '/Ä/';
-        $RemoveChars[] = '/Ö/';
 
-        $ReplaceWith[] = 'a';
-        $ReplaceWith[] = 'a';
-        $ReplaceWith[] = 'o';
-        $ReplaceWith[] = 'A';
-        $ReplaceWith[] = 'A';
-        $ReplaceWith[] = 'O';
-
-        $text  = preg_replace($RemoveChars, $ReplaceWith, $url);
-
-        if (filter_var($text, FILTER_VALIDATE_URL)) {
+        if (filter_var(remove_accents($url), FILTER_VALIDATE_URL)) {
             return true;
         }
 
