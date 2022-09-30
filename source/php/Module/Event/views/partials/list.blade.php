@@ -31,7 +31,7 @@
 	@endcollection
 
 	@if ($mod_event_pagination && $pagesCount > 1 || $mod_event_archive)
-		<div class="c-card__footer">
+		<div class="c-card__footer u-padding__x--2 u-margin--0">
 			<div class="o-grid">
 				@if ($mod_event_pagination && $pagesCount > 1)
 					<div class="o-grid-12 o-grid-auto@sm u-display--none@xs">
