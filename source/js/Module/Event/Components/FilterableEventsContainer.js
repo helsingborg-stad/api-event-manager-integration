@@ -13,8 +13,6 @@ class FilterableEventsContainer extends React.Component {
     super(props);
 
     this.state = {
-      age: null,
-      ageRange: props.ageRange,
       categories: props.categories,
       currentPage: 1,
       endDate: props.endDate,
@@ -26,11 +24,17 @@ class FilterableEventsContainer extends React.Component {
       tags: props.tags,
       totalPages: 1,
       translate: '',
+      ageRangeLimit: { min: props.ageFrom, max: props.ageTo },
+      ageRangeFilter: { min: props.ageFrom, max: props.ageTo },
       resetButton: false,
       resetButtonUrl: props.resetButtonUrl,
-    };
+      dateChanged: false,
+      noUrl: props.noUrl,
+      cardStyle: props.cardStyle,
 
+    };
     this.myRef = createRef()
+
   }
 
   componentDidMount() {
@@ -41,8 +45,8 @@ class FilterableEventsContainer extends React.Component {
    * Collect query string parameters and set to state
    */
   collectUrlParams = () => {
-    const { categories, tags, ageRange } = this.state;
-    const taxonomies = { categories, tags, ageRange };
+    const { categories, tags } = this.state;
+    const taxonomies = { categories, tags };
 
     // Collect query string params
     const urlParams = new URLSearchParams(window.location.search);
@@ -108,31 +112,39 @@ class FilterableEventsContainer extends React.Component {
       endDate,
       categories,
       tags,
-      ageRange,
       translate,
+      ageRangeFilter,
+      dateChanged,
+      ageRangeLimit,
+      noUrl
     } = this.state;
 
     const categoryIds = this.getTaxonomyIds(categories);
     const tagIds = this.getTaxonomyIds(tags);
-    const ageRangeIds = this.getTaxonomyIds(ageRange);
     const params = this.loadQueryString();
 
-    categoryIds > 0 || tagIds > 0 ? this.setState({resetButton: true}) : this.setState({resetButton: false});
+
+    categoryIds.length > 0 || tagIds.length > 0  || ageRangeFilter.min > ageRangeLimit.min || ageRangeFilter.max < ageRangeLimit.max  || searchString.length > 0 || dateChanged ? this.setState({resetButton: true}) : this.setState({resetButton: false});
+
 
     // Set query parameters
-    setQuery(
-      {
-        currentPage,
-        searchString,
-        startDate,
-        endDate,
-        categories: categoryIds,
-        tags: tagIds,
-        ageRange: ageRangeIds,
-        translate,
-      },
-      { pushState: true }
-    );
+if(!noUrl) {
+  setQuery(
+    {
+      currentPage,
+      searchString,
+      startDate,
+      endDate,
+      categories: categoryIds,
+      tags: tagIds,
+      minAge: ageRangeFilter.min,
+      maxAge: ageRangeFilter.max,
+      translate,
+    },
+    { pushState: true }
+  );
+}
+    
     if (params.translate) {
       location.hash = "#translate";
     }
@@ -170,8 +182,8 @@ class FilterableEventsContainer extends React.Component {
     }
 
     // Declare states and props
-    const { currentPage, searchString, startDate, endDate } = this.state;
-    let { categories, tags, ageRange } = this.state;
+    const { currentPage, searchString, startDate, endDate, ageRangeFilter } = this.state;
+    let { categories, tags } = this.state;
     const {
       distance,
       groups,
@@ -208,13 +220,12 @@ class FilterableEventsContainer extends React.Component {
     // Collect IDS
     tags = tags.map(tag => tag.id);
 
-    // Filter checked ages and return the values
-    const ageGroup = ageRange.filter(age => age.checked).map(age => age.value);
     // The API base url
     const url = `${restUrl}wp/v2/event/module`;
     // Create list of query parameters
     const params = {
-      age_group: ageGroup,
+      age_min: isNaN(ageRangeFilter.min) ? '' : ageRangeFilter.min,
+      age_max: isNaN(ageRangeFilter.max) ? '' : ageRangeFilter.max,
       categories,
       distance,
       end_date: endDate,
@@ -333,6 +344,7 @@ class FilterableEventsContainer extends React.Component {
    */
   fromDateChange = date => {
     this.setState({ startDate: this.formatDate(date) });
+    this.setState({ dateChanged: true});
   };
 
   /**
@@ -341,6 +353,7 @@ class FilterableEventsContainer extends React.Component {
    */
   toDateChange = date => {
     this.setState({ endDate: this.formatDate(date) });
+    this.setState({ dateChanged: true });
   };
 
   /**
@@ -392,30 +405,20 @@ class FilterableEventsContainer extends React.Component {
       })
     );
   };
-
+  
   /**
-   * Handle age range checkbox changes
+   * Handle age range number input changes
    * @param id
    */
-  onAgeChange = (e, id) => {
-    const { ageRange } = this.state;
-    // Get the index
-    const index = ageRange.findIndex(obj => obj.value === id);
-    // Update state
-    this.setState(
-      update(this.state, {
-        ageRange: {
-          [index]: {
-            checked: { $set: !ageRange[index].checked },
-          },
-        },
-      })
-    );
+    onAgeRangeChange = ({ min, max, id }) => {
+    this.setState({ ageRangeFilter: { min, max } });
+
   };
+  
 
   render() {
     const {
-      ageRange,
+      ageRangeFilter,
       categories,
       currentPage,
       endDate,
@@ -428,6 +431,7 @@ class FilterableEventsContainer extends React.Component {
       totalPages,
       resetButton,
       resetButtonUrl,
+      cardStyle
     } = this.state;
 
     const { settings, translation, gridColumn, archiveUrl } = this.props;
@@ -439,29 +443,31 @@ class FilterableEventsContainer extends React.Component {
           settings.mod_event_filter_age_group ||
           settings.mod_event_filter_tags ||
           settings.mod_event_filter_categories) && (
-            <div className="u-mb-3">
-              <FilterContainer
-                ageRange={ageRange}
-                categories={categories}
-                endDate={endDate}
-                formatDate={this.formatDate}
-                fromDateChange={this.fromDateChange}
-                onAgeChange={this.onAgeChange}
-                onCategoryChange={this.onCategoryChange}
-                onSubmit={this.onSubmit}
-                onTagChange={this.onTagChange}
-                searchString={searchString}
-                settings={settings}
-                startDate={startDate}
-                tags={tags}
-                toDateChange={this.toDateChange}
-                translation={translation}
-                updateSearchString={this.updateSearchString}
-                resetButton={resetButton}
-                resetButtonUrl={resetButtonUrl}
-              />
-            </div>
-          )}
+
+          <div className="u-mb-3">
+            <FilterContainer
+              ageRangeFilter={ageRangeFilter}
+              onAgeRangeChange={this.onAgeRangeChange}
+              categories={categories}
+              endDate={endDate}
+              formatDate={this.formatDate}
+              fromDateChange={this.fromDateChange}
+              onAgeChange={this.onAgeChange}
+              onCategoryChange={this.onCategoryChange}
+              onSubmit={this.onSubmit}
+              onTagChange={this.onTagChange}
+              searchString={searchString}
+              settings={settings}
+              startDate={startDate}
+              tags={tags}
+              toDateChange={this.toDateChange}
+              translation={translation}
+              updateSearchString={this.updateSearchString}
+              resetButton={resetButton}
+              resetButtonUrl={resetButtonUrl}
+            />
+          </div>
+        )}
 
         <div ref={this.myRef} className={`modularity-event-index__body ${!isLoaded && items.length > 0 ? 'is-disabled' : ''}`}>
           {!isLoaded && (
@@ -480,6 +486,7 @@ class FilterableEventsContainer extends React.Component {
 
             {items.length > 0 && (
               <EventList
+                cardStyle={cardStyle}
                 items={items}
                 gridColumn={gridColumn}
                 displayFields={settings.mod_event_fields}
@@ -516,7 +523,6 @@ class FilterableEventsContainer extends React.Component {
 }
 
 FilterableEventsContainer.propTypes = {
-  ageRange: PropTypes.array,
   archiveUrl: PropTypes.string,
   categories: PropTypes.array,
   distance: PropTypes.string,
@@ -536,7 +542,6 @@ FilterableEventsContainer.propTypes = {
 };
 
 FilterableEventsContainer.defaultProps = {
-  ageRange: [],
   categories: [],
   groups: [],
   tags: [],
@@ -552,10 +557,6 @@ const availableQueryStringParams = [
   {
     param: 'searchString',
     type: 'string',
-  },
-  {
-    param: 'ageRange',
-    type: 'array',
   },
   {
     param: 'startDate',

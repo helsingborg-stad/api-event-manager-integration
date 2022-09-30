@@ -6,6 +6,12 @@ import SearchBar from './SearchBar';
 
 const FilterContainer = ({
   ageRange,
+  ageRangeFilter,
+
+  minValue,
+  maxValue,
+  onAgeRangeChange,
+
   categories,
   endDate,
   formatDate,
@@ -60,59 +66,68 @@ const FilterContainer = ({
         </div>
       )}
 
-      {settings.mod_event_filter_age_group && ageRange.length > 0 && (
-        <div className="o-grid-fit u-mb-2 u-mb-2@md u-mb-0@lg u-mb-0@xl">
-          <AgeFilter translation={translation} ageRange={ageRange} onAgeChange={onAgeChange} />
-        </div>
-      )}
-
-      {settings.mod_event_filter_categories && categories.length > 0 && (
-        <div className="o-grid-fit">
-          <CategoriesFilter
-            title={translation.categories}
-            categories={categories}
-            onCategoryChange={onCategoryChange}
+      {settings.mod_event_filter_age_range_from && settings.mod_event_filter_age_range_to && (
+        <div className="o-grid-12@xs o-grid-4@md o-grid-4@lg">
+          <AgeFilter 
+            translation={translation} 
+            onChange={onAgeRangeChange}
+            minValue={ageRangeFilter.min}
+            maxValue={ageRangeFilter.max}
+            minLimit={settings.mod_event_filter_age_range_from}
+            maxLimit={settings.mod_event_filter_age_range_to}
           />
         </div>
       )}
 
-      {settings.mod_event_filter_tags && tags.length > 0 && (
-        <div className="o-grid-fit">
-          <CategoriesFilter
-            title={translation.tags}
-            categories={tags}
-            onCategoryChange={onTagChange}
-          />
-        </div>
-      )}
+      <div className="o-grid o-grid-8@md u-margin__top--1 u-margin__top--3@md u-margin__top--3@lg">
+        {settings.mod_event_filter_categories && categories.length > 0 && (
+          <div className="o-grid-fit">
+            <CategoriesFilter
+              title={translation.categories}
+              categories={categories}
+              onCategoryChange={onCategoryChange}
+            />
+          </div>
+        )}
 
-      <div className="o-grid-fit">
-        <button
-          className="c-button c-button__filled c-button__filled--primary c-button--md ripple ripple--before"
-          aria-pressed="false"
-          type="submit"
-          title={translation.search}>
-          <span class="c-button__label">
-            <span class="c-button__label-text">
-              {translation.search}
-            </span>
-          </span>
-        </button>
-      </div>
+        {settings.mod_event_filter_tags && tags.length > 0 && (
+          <div className="o-grid-fit">
+            <CategoriesFilter
+              title={translation.tags}
+              categories={tags}
+              onCategoryChange={onTagChange}
+            />
+          </div>
+        )}
 
-      {resetButton && (
         <div className="o-grid-fit">
-          <a
-            className="c-button c-button__filled c-button__filled--default c-button--md ripple ripple--before"
-            href={resetButtonUrl}>
-            <span class="c-button__label">
-              <span class="c-button__label-text">
-                {translation.resetFilters}
+          <button
+            className="c-button c-button__filled c-button__filled--primary c-button--md ripple ripple--before"
+            aria-pressed="false"
+            type="submit"
+            title={translation.search}>
+            <span className="c-button__label">
+              <span className="c-button__label-text">
+                {translation.search}
               </span>
             </span>
-          </a>
+          </button>
         </div>
-      )}
+
+        {resetButton && (
+          <div className="o-grid-fit">
+            <a
+              className="c-button c-button__filled c-button__filled--default c-button--md ripple ripple--before"
+              href={resetButtonUrl}>
+              <span className="c-button__label">
+                <span className="c-button__label-text">
+                  {translation.resetFilters}
+                </span>
+              </span>
+            </a>
+          </div>
+        )}
+      </div>
     </div>
   </form>
 );

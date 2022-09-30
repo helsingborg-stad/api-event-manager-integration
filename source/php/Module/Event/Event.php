@@ -76,11 +76,16 @@ class Event extends \Modularity\Module
         $data['lat'] = (isset($data['mod_event_geographic']['lat'])) ? $data['mod_event_geographic']['lat'] : null;
         $data['lng'] = (isset($data['mod_event_geographic']['lng'])) ? $data['mod_event_geographic']['lng'] : null;
         $data['distance'] = (isset($data['mod_event_distance'])) ? $data['mod_event_distance'] : null;
-        $data['age_range'] = ($this->template == 'index') ? json_encode($this->getAgeFilterRange($id)) : $this->getAgeFilterRange($id);
+        $data['no_url'] = get_field('mod_event_no_url', $id);
+
+        $data['age_from'] = ($this->template == 'index') ? (int)get_field('mod_event_filter_age_range_from', $id) : '';
+        $data['age_to'] = ($this->template == 'index') ? (int)get_field('mod_event_filter_age_range_to', $id) : '';
+
         // Taxonomies filter
         $data['categories'] = ($this->template == 'index') ? json_encode($this->getFilterableCategories($id)) : $this->getFilterableCategories($id);
         $data['groups'] = ($this->template == 'index') ? json_encode($this->getModuleGroups($id)) : $this->getModuleGroups($id);
         $data['tags'] = ($this->template == 'index') ? json_encode($this->getFilterableTags($id)) : $this->getFilterableTags($id);
+
         // List module data
         $data['pagesCount'] = $this->countPages($id);
         $data['events'] = $this->getEvents($id, $page);
@@ -97,6 +102,8 @@ class Event extends \Modularity\Module
             ' ',
             apply_filters('Modularity/Module/Classes', array('c-card--panel'), 'mod-event', $this->args)
         ) : array();
+        
+        $data['card_style'] = get_theme_mod('flat_ui_design') ? "c-card--flat" : "";
 
         $data['events'] = $this->setOccassion($data['events']);
         $data['events'] = $this->setLocation($data['events']);
@@ -402,31 +409,6 @@ class Event extends \Modularity\Module
         return $groups;
     }
 
-
-    /**
-     * Return list with filterable ages
-     * @param int $moduleId The module ID
-     * @return array
-     */
-    public function getAgeFilterRange($moduleId): array
-    {
-        $years = array();
-        $from = (int)get_field('mod_event_filter_age_range_from', $moduleId);
-        $to = (int)get_field('mod_event_filter_age_range_to', $moduleId);
-
-        if ($from < $to) {
-            foreach (range($from, $to) as $value) {
-                $years[] = array(
-                    'value' => $value,
-                    'id' => $value,
-                    'checked' => false,
-                );
-            }
-        }
-
-        return $years;
-    }
-
     /**
      * Enqueue your scripts and/or styles with wp_enqueue_script / wp_enqueue_style
      */
@@ -483,6 +465,8 @@ class Event extends \Modularity\Module
                 'years' => __('years', 'event-integration'),
                 'selectAge' => __('Select age', 'event-integration'),
                 'resetFilters' => __('Reset filters', 'event-integration'),
+                'fromAge' => __('From age', 'event-integration'),
+                'toAge' => __('To age', 'event-integration')
             )
         );
     }
@@ -493,12 +477,12 @@ class Event extends \Modularity\Module
      * @param  array $field An array containing all the field settings
      * @return array $args
      */
-    public function filterEventCategories($args, $field)
+     public function filterEventCategories($args, $field)
     {
         if (function_exists('pll_default_language')) {
             $args['lang'] = pll_default_language();
         }
 
         return $args;
-    }
+    } 
 }
