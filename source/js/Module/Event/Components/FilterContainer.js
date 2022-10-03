@@ -71,8 +71,6 @@ const FilterContainer = ({
           <AgeFilter 
             translation={translation} 
             onChange={onAgeRangeChange}
-            minValue={ageRangeFilter.min}
-            maxValue={ageRangeFilter.max}
           />
         </div>
       )}
