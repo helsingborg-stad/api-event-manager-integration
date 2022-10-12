@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2022-09-09 08:53+0200\n"
-"PO-Revision-Date: 2022-09-09 08:54+0200\n"
+"POT-Creation-Date: 2022-10-12 14:58+0200\n"
+"PO-Revision-Date: 2022-10-12 14:59+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.13\n"
+"X-Generator: Poedit 1.8.12\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: event-manager-integration.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -317,7 +317,7 @@ msgstr "Evenemangskategorier"
 
 #: AcfFields/php/event-form-module.php:1721 AcfFields/php/event-module.php:545
 #: AcfFields/php/event-module.php:736 source/php/Helper/SubmitEvent.php:152
-#: source/php/Module/Event/Event.php:457 source/php/PostTypes/Events.php:247
+#: source/php/Module/Event/Event.php:459 source/php/PostTypes/Events.php:247
 #: source/php/PostTypes/Events.php:603
 #: source/php/Shortcodes/SingleEventAdmin.php:593
 #: views/submit-form.blade.php:188
@@ -471,11 +471,11 @@ msgstr "Bildförhållande"
 
 #: AcfFields/php/event-module.php:367
 msgid "Square (1:1)"
-msgstr ""
+msgstr "Kvadrat (1:1)"
 
 #: AcfFields/php/event-module.php:368
 msgid "Standard Video (16:9)"
-msgstr ""
+msgstr "Standardvideo (16:9)"
 
 #: AcfFields/php/event-module.php:369
 msgid "Standard TV (4:3)"
@@ -528,7 +528,7 @@ msgid "Show events from the selected groups."
 msgstr "Visa evenemang inom angivna grupper."
 
 #: AcfFields/php/event-module.php:496 AcfFields/php/event-module.php:709
-#: source/php/Helper/SubmitEvent.php:144 source/php/Module/Event/Event.php:456
+#: source/php/Helper/SubmitEvent.php:144 source/php/Module/Event/Event.php:458
 #: source/php/PostTypes/Events.php:246 source/php/PostTypes/Events.php:566
 #: source/php/Shortcodes/SingleEventAdmin.php:587
 #: views/submit-form.blade.php:179
@@ -571,7 +571,7 @@ msgstr "Visas om bild saknas."
 msgid "Show events that occurs at a specified location."
 msgstr "Visa evenemang som inträffar vid en angiven plats."
 
-#: AcfFields/php/event-module.php:636 AcfFields/php/options.php:291
+#: AcfFields/php/event-module.php:636 AcfFields/php/options.php:293
 msgid "Distance from location"
 msgstr "Avstånd från plats"
 
@@ -599,7 +599,7 @@ msgstr "Textsök"
 msgid "Date search"
 msgstr "Datumfiltrering"
 
-#: AcfFields/php/event-module.php:790 source/php/Module/Event/Event.php:458
+#: AcfFields/php/event-module.php:790 source/php/Module/Event/Event.php:460
 #: source/php/PostTypes/Events.php:240
 #: source/php/Shortcodes/SingleEventAdmin.php:355
 #: source/php/Shortcodes/SingleEventAdmin.php:357
@@ -666,16 +666,11 @@ msgid ""
 "in the import. Communicate this url when you are requesting assistance."
 msgstr ""
 
-#. Plugin Name of the plugin/theme
-#: AcfFields/php/options.php:6
-msgid "Event Manager Integration"
-msgstr ""
-
-#: AcfFields/php/options.php:10
+#: AcfFields/php/options.php:12
 msgid "API url"
 msgstr "API-url"
 
-#: AcfFields/php/options.php:13
+#: AcfFields/php/options.php:15
 msgid ""
 "Url to Event Manager API wp/v2 namespace. <br> E.g. https://host/wp-json/wp/"
 "v2"
@@ -683,11 +678,11 @@ msgstr ""
 "Url till Event Manager API wp/v2 namespace.<br>T.ex. https://host/wp-json/wp/"
 "v2"
 
-#: AcfFields/php/options.php:26
+#: AcfFields/php/options.php:28
 msgid "Days ahead"
 msgstr "Dagar framåt"
 
-#: AcfFields/php/options.php:29
+#: AcfFields/php/options.php:31
 msgid ""
 "Import events that occurs within given number of days. Try to keep it as "
 "short as possible to avoid unnecessary datatransfer."
@@ -695,43 +690,39 @@ msgstr ""
 "Importera evenemang som inträffar inom angivet antal dagar. Försök hålla "
 "perioden så kort som möjligt för att undvika onödig dataöverföring."
 
-#: AcfFields/php/options.php:40
+#: AcfFields/php/options.php:42
 msgid "days"
 msgstr "dagar"
 
-#: AcfFields/php/options.php:47
+#: AcfFields/php/options.php:49
 msgid "Daily import"
 msgstr "Daglig import"
 
-#: AcfFields/php/options.php:58
+#: AcfFields/php/options.php:60
 msgid "Enable daily automatic import from Event Manager API"
 msgstr "Daglig automatisk import från Event Manager API"
 
-#: AcfFields/php/options.php:66
+#: AcfFields/php/options.php:68
 msgid "Post status"
 msgstr "Poststatus"
 
-#: AcfFields/php/options.php:69
+#: AcfFields/php/options.php:71
 msgid "Select status of imported events."
 msgstr "Välj status för importerade evenemang."
 
-#: AcfFields/php/options.php:78
+#: AcfFields/php/options.php:80
 msgid "Draft"
 msgstr "Utkast"
 
-#: AcfFields/php/options.php:79
+#: AcfFields/php/options.php:81
 msgid "Published"
 msgstr "Publicerad"
 
-#: AcfFields/php/options.php:84
-msgid "publish"
-msgstr ""
-
-#: AcfFields/php/options.php:90
+#: AcfFields/php/options.php:92
 msgid "Unpublish long lasting events"
 msgstr "Avpublicera långa evenemang"
 
-#: AcfFields/php/options.php:93
+#: AcfFields/php/options.php:95
 msgid ""
 "Automatically unpublish events lasting longer than given limit. Set to -1 to "
 "set no limit."
@@ -739,19 +730,19 @@ msgstr ""
 "Automatiskt avpublicrera evenemang som pågår längre än angivet antal dagar. "
 "1- för ingen gräns."
 
-#: AcfFields/php/options.php:111
+#: AcfFields/php/options.php:113
 msgid "Visa knapp för att uppdatera importerade evenemang"
 msgstr ""
 
-#: AcfFields/php/options.php:122
+#: AcfFields/php/options.php:124
 msgid "Visa uppdatera-knapp"
 msgstr ""
 
-#: AcfFields/php/options.php:130
+#: AcfFields/php/options.php:132
 msgid "OAuth1 end point root url"
 msgstr "OAuth1 endpoint hemkatalog"
 
-#: AcfFields/php/options.php:133
+#: AcfFields/php/options.php:135
 msgid ""
 "Url can be found under section \"authentication\" in your API root.<br> E.g. "
 "https://host/oauth1<br> <br> Authorization is only needed when you want to "
@@ -761,15 +752,15 @@ msgstr ""
 "hemkatalog.<br>T.ex. https://host/oauth1<br><br>Detta är valfritt och behövs "
 "endast om du vill kunna skicka evenemang till Event Manager API."
 
-#: AcfFields/php/options.php:146
+#: AcfFields/php/options.php:148
 msgid "Import filters"
 msgstr "Importfilter"
 
-#: AcfFields/php/options.php:163
+#: AcfFields/php/options.php:165
 msgid "Import from selected user groups"
 msgstr "Importera från angivna användargrupper"
 
-#: AcfFields/php/options.php:166
+#: AcfFields/php/options.php:168
 msgid ""
 "Select the user groups that you want to import events from. Leave empty to "
 "import from all groups."
@@ -777,11 +768,11 @@ msgstr ""
 "Välj användargrupper att importera evenemang ifrån. Lämna tomt för att "
 "importera från samtliga grupper."
 
-#: AcfFields/php/options.php:185
+#: AcfFields/php/options.php:187
 msgid "Import from selected categories"
 msgstr "Importera från angivna kategorier"
 
-#: AcfFields/php/options.php:188
+#: AcfFields/php/options.php:190
 msgid ""
 "Enter the name of the categories that you want to import events from. "
 "Separate with commas. Leave blank to import from all categories."
@@ -789,11 +780,11 @@ msgstr ""
 "Skriv namnet på de kategorier ni vill importera evenemang ifrån. Separera "
 "med kommatecken. Lämna tomt för att importera från samtliga kategorier."
 
-#: AcfFields/php/options.php:204
+#: AcfFields/php/options.php:206
 msgid "Import from selected tags"
 msgstr "Importera från angivna taggar"
 
-#: AcfFields/php/options.php:207
+#: AcfFields/php/options.php:209
 msgid ""
 "Enter the name of the tags that you want to import events from. Separate "
 "with commas. Leave blank to import from all tags."
@@ -801,43 +792,39 @@ msgstr ""
 "Skriv namnet på de taggar ni vill importera evenemang ifrån. Separera med "
 "kommatecken. Lämna tomt för att importera från samtliga taggar."
 
-#: AcfFields/php/options.php:223
+#: AcfFields/php/options.php:225
 msgid "Import internal events"
 msgstr "Importera interna evenemang"
 
-#: AcfFields/php/options.php:226
+#: AcfFields/php/options.php:228
 msgid "Select if only internal (organization) events should be imported."
 msgstr "Välj om endast interna(organisation) evenemang ska importeras."
 
-#: AcfFields/php/options.php:242
+#: AcfFields/php/options.php:244
 msgid "Import from geographic location"
 msgstr "Importera från platser"
 
-#: AcfFields/php/options.php:254
+#: AcfFields/php/options.php:256
 msgid "No"
 msgstr "Nej"
 
-#: AcfFields/php/options.php:255
+#: AcfFields/php/options.php:257
 msgid "Single point"
 msgstr "Enskild punkt"
 
-#: AcfFields/php/options.php:256 AcfFields/php/options.php:320
+#: AcfFields/php/options.php:258 AcfFields/php/options.php:322
 msgid "Drawn area"
 msgstr "Utritat område"
 
-#: AcfFields/php/options.php:259
-msgid "no"
-msgstr ""
-
-#: AcfFields/php/options.php:265
+#: AcfFields/php/options.php:267
 msgid "From a single point"
 msgstr "Från en enskild punkt"
 
-#: AcfFields/php/options.php:268
+#: AcfFields/php/options.php:270
 msgid "Import events that occurs at a specified location."
 msgstr "Importera evenemang som inträffar vid en specifik plats."
 
-#: AcfFields/php/options.php:294
+#: AcfFields/php/options.php:296
 msgid ""
 "To get events occurring nearby the given location, enter maximum distance in "
 "km. Leave blank to only get events from the exact position."
@@ -846,7 +833,7 @@ msgstr ""
 "maximalt avstånd i km. Lämna tomt för att importera evenemang från den "
 "exakta positionen."
 
-#: AcfFields/php/options.php:339
+#: AcfFields/php/options.php:341
 msgid ""
 "Import events that occurs inside the drawn area. Draw the area by clicking "
 "each point on the map. Maximum number of points is 8."
@@ -1088,11 +1075,11 @@ msgstr "Inga %s hittades i papperskorgen"
 msgid "Parent %s:"
 msgstr "Förälder %s:"
 
-#: source/php/Entity/PostManager.php:266
+#: source/php/Entity/PostManager.php:267
 msgid "Could not create folder"
 msgstr "Kunde inte skapa mappen"
 
-#: source/php/Entity/PostManager.php:266
+#: source/php/Entity/PostManager.php:267
 msgid "please go ahead and create it manually and rerun the import."
 msgstr "vänligen skapa den manuellt och gör om importen."
 
@@ -1346,47 +1333,47 @@ msgstr "Evenemang"
 msgid "Outputs a list if upcoming events"
 msgstr ""
 
-#: source/php/Module/Event/Event.php:448
+#: source/php/Module/Event/Event.php:450
 msgid "More events"
 msgstr "Fler evenemang"
 
-#: source/php/Module/Event/Event.php:449 source/php/Widget/DisplayEvents.php:56
+#: source/php/Module/Event/Event.php:451 source/php/Widget/DisplayEvents.php:56
 msgid "No events found"
 msgstr "Inga evenemang hittades"
 
-#: source/php/Module/Event/Event.php:450
+#: source/php/Module/Event/Event.php:452
 msgid "Next"
 msgstr "Nästa"
 
-#: source/php/Module/Event/Event.php:451
+#: source/php/Module/Event/Event.php:453
 msgid "Previous"
 msgstr "Föregående"
 
-#: source/php/Module/Event/Event.php:452
+#: source/php/Module/Event/Event.php:454
 msgid "Search"
 msgstr "Sök"
 
-#: source/php/Module/Event/Event.php:453
+#: source/php/Module/Event/Event.php:455
 #: source/php/Module/EventForm/Fields.php:590
 #: source/php/PostTypes/Events.php:171
 #: source/php/Shortcodes/SingleEventAdmin.php:357
 msgid "From"
 msgstr "Från"
 
-#: source/php/Module/Event/Event.php:454
+#: source/php/Module/Event/Event.php:456
 #: source/php/Module/EventForm/Fields.php:605
 msgid "To"
 msgstr "Till"
 
-#: source/php/Module/Event/Event.php:455
+#: source/php/Module/Event/Event.php:457
 msgid "date"
 msgstr "datum"
 
-#: source/php/Module/Event/Event.php:460
+#: source/php/Module/Event/Event.php:462
 msgid "Filter on events that is targeted for given the age"
 msgstr "Filtrera på evenemang som är riktade till en ålder"
 
-#: source/php/Module/Event/Event.php:463
+#: source/php/Module/Event/Event.php:465
 #: source/php/Module/EventForm/Fields.php:522
 #: source/php/Module/EventForm/Fields.php:562
 #: source/php/Module/EventForm/Fields.php:594
@@ -1400,19 +1387,19 @@ msgstr "Filtrera på evenemang som är riktade till en ålder"
 msgid "years"
 msgstr "år"
 
-#: source/php/Module/Event/Event.php:464
+#: source/php/Module/Event/Event.php:466
 msgid "Select age"
 msgstr "Välj ålder"
 
-#: source/php/Module/Event/Event.php:465
+#: source/php/Module/Event/Event.php:467
 msgid "Reset filters"
 msgstr "Återställ filter"
 
-#: source/php/Module/Event/Event.php:466
+#: source/php/Module/Event/Event.php:468
 msgid "From age"
 msgstr "Från ålder"
 
-#: source/php/Module/Event/Event.php:467
+#: source/php/Module/Event/Event.php:469
 msgid "To age"
 msgstr "Till ålder"
 
@@ -2366,15 +2353,6 @@ msgstr "Teckenbegränsning av beskrivning:"
 msgid "-1 equals no limit"
 msgstr "-1 är lika med ingen gräns"
 
-#: vendor/helsingborg-stad/acf-export-manager/src/AcfExportManager.php:364
-msgid "Export with AcfExportManager"
-msgstr ""
-
-#: vendor/helsingborg-stad/acf-export-manager/src/AcfExportManager.php:408
-#, php-format
-msgid "Exported %d fieldgroup(s)."
-msgstr ""
-
 #: views/submit-form.blade.php:29 views/submit-form.blade.php:39
 msgid "Single occurrence"
 msgstr "Enstaka datum"
@@ -2455,6 +2433,10 @@ msgstr "Klar? Klicka här för att skicka in ditt evenemang för granskning."
 #: views/submit-form.blade.php:252
 msgid "Send"
 msgstr "Skicka"
+
+#. Plugin Name of the plugin/theme
+msgid "Event Manager Integration"
+msgstr ""
 
 #. Plugin URI of the plugin/theme
 msgid "https://github.com/helsingborg-stad/api-event-manager-integration"
