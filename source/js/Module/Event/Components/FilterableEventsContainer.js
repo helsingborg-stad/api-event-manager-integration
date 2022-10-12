@@ -490,6 +490,7 @@ if(!noUrl) {
                 items={items}
                 gridColumn={gridColumn}
                 displayFields={settings.mod_event_fields}
+                imageRatio={settings.mod_event_image_ratio}
               />
             )}
 
