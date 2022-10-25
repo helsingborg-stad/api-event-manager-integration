@@ -266,13 +266,17 @@ class OAuthRequests
             wp_send_json_success($output);
         } else {
             // Something went wrong
-            wp_send_json_error(
-                [
-                    'message' => __('Something went wrong posting the event', 'event-integration'),
-                    'error' => (error_get_last()['message'] ?? ''),
-                    'response' => $output
-                ]
-            );
+            if (defined('DEV_MODE') && DEV_MODE === true) {
+                wp_send_json_error(
+                    [
+                        'message' => __('Something went wrong posting the event', 'event-integration'),
+                        'error' => (error_get_last()['message'] ?? ''),
+                        'response' => $output
+                    ]
+                );
+            } else {
+                wp_send_json_error(__('Something went wrong posting the event', 'event-integration'));
+            }
         }
     }
 
