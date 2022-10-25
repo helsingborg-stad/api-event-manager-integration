@@ -254,9 +254,9 @@ abstract class PostManager
             return false;
         }
 
-        if (!isset($url) || strlen($url) === 0 || !$this->isUrl($url)) {
+         if (!$this->isUrl($url)) {
             return false;
-        }
+        } 
 
         // Upload path
         $uploadDir = wp_upload_dir()['basedir'].'/events/' . date("Y"). "/" . date("m");
@@ -356,7 +356,8 @@ abstract class PostManager
      */
     private function isUrl($url)
     {
-        if (filter_var($url, FILTER_VALIDATE_URL)) {
+
+        if (filter_var(remove_accents($url), FILTER_VALIDATE_URL)) {
             return true;
         }
 

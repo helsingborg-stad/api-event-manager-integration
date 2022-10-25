@@ -59,7 +59,9 @@
             "ui": 0,
             "ajax": 0,
             "return_format": "value",
-            "placeholder": ""
+            "placeholder": "",
+            "allow_custom": 0,
+            "search_placeholder": ""
         },
         {
             "key": "field_583fe58262287",
@@ -370,7 +372,9 @@
             "ui": 0,
             "ajax": 0,
             "return_format": "value",
-            "placeholder": ""
+            "placeholder": "",
+            "allow_custom": 0,
+            "search_placeholder": ""
         },
         {
             "key": "field_58de5b2d62d45",
@@ -607,7 +611,9 @@
             "max_width": "",
             "max_height": "",
             "max_size": "",
-            "mime_types": "jpg, jpeg, png, gif"
+            "mime_types": "jpg, jpeg, png, gif",
+            "uploader": "",
+            "acfe_thumbnail": 0
         },
         {
             "key": "field_58abf724d46f6",
@@ -807,64 +813,6 @@
             "ui": 1,
             "ui_on_text": "",
             "ui_off_text": ""
-        },
-        {
-            "key": "field_5c7d24413bf80",
-            "label": "Age range from",
-            "name": "mod_event_filter_age_range_from",
-            "type": "number",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_5c765ee693303",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "25",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "year",
-            "min": "",
-            "max": "",
-            "step": ""
-        },
-        {
-            "key": "field_5c7d25be3d7fd",
-            "label": "Age range to",
-            "name": "mod_event_filter_age_range_to",
-            "type": "number",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_5c765ee693303",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "25",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "year",
-            "min": "",
-            "max": "",
-            "step": ""
         }
     ],
     "location": [

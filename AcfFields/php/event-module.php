@@ -63,6 +63,8 @@
             'ajax' => 0,
             'return_format' => 'value',
             'placeholder' => '',
+            'allow_custom' => 0,
+            'search_placeholder' => '',
         ),
         2 => array(
             'key' => 'field_583fe58262287',
@@ -375,6 +377,8 @@
             'ajax' => 0,
             'return_format' => 'value',
             'placeholder' => '',
+            'allow_custom' => 0,
+            'search_placeholder' => '',
         ),
         14 => array(
             'key' => 'field_58de5b2d62d45',
@@ -612,6 +616,8 @@
             'max_height' => '',
             'max_size' => '',
             'mime_types' => 'jpg, jpeg, png, gif',
+            'uploader' => '',
+            'acfe_thumbnail' => 0,
         ),
         23 => array(
             'key' => 'field_58abf724d46f6',
@@ -811,64 +817,6 @@
             'ui' => 1,
             'ui_on_text' => '',
             'ui_off_text' => '',
-        ),
-        31 => array(
-            'key' => 'field_5c7d24413bf80',
-            'label' => __('Age range from', 'event-integration'),
-            'name' => 'mod_event_filter_age_range_from',
-            'type' => 'number',
-            'instructions' => '',
-            'required' => 1,
-            'conditional_logic' => array(
-                0 => array(
-                    0 => array(
-                        'field' => 'field_5c765ee693303',
-                        'operator' => '==',
-                        'value' => '1',
-                    ),
-                ),
-            ),
-            'wrapper' => array(
-                'width' => '25',
-                'class' => '',
-                'id' => '',
-            ),
-            'default_value' => '',
-            'placeholder' => '',
-            'prepend' => '',
-            'append' => __('year', 'event-integration'),
-            'min' => '',
-            'max' => '',
-            'step' => '',
-        ),
-        32 => array(
-            'key' => 'field_5c7d25be3d7fd',
-            'label' => __('Age range to', 'event-integration'),
-            'name' => 'mod_event_filter_age_range_to',
-            'type' => 'number',
-            'instructions' => '',
-            'required' => 1,
-            'conditional_logic' => array(
-                0 => array(
-                    0 => array(
-                        'field' => 'field_5c765ee693303',
-                        'operator' => '==',
-                        'value' => '1',
-                    ),
-                ),
-            ),
-            'wrapper' => array(
-                'width' => '25',
-                'class' => '',
-                'id' => '',
-            ),
-            'default_value' => '',
-            'placeholder' => '',
-            'prepend' => '',
-            'append' => __('year', 'event-integration'),
-            'min' => '',
-            'max' => '',
-            'step' => '',
         ),
     ),
     'location' => array(
