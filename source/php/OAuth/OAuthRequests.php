@@ -335,7 +335,9 @@ class OAuthRequests
         $result = file_get_contents($apiResourceUrl, false, $context);
 
         if ($result === false) {
-            wp_send_json_error(__('Something went wrong uploading your image', 'event-integration'));
+            wp_send_json_error(
+                __('Something went wrong uploading your image', 'event-integration') . ": " . (error_get_last()['message'] ?? '')
+            );
         }
 
         // return uploaded media id
