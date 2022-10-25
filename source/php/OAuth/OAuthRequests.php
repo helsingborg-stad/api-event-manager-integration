@@ -266,7 +266,13 @@ class OAuthRequests
             wp_send_json_success($output);
         } else {
             // Something went wrong
-            wp_send_json_error(__('Something went wrong posting the event', 'event-integration'));
+            wp_send_json_error(
+                [
+                    'message' => __('Something went wrong posting the event', 'event-integration'),
+                    'error' => (error_get_last()['message'] ?? ''),
+                    'response' => $output
+                ]
+            );
         }
     }
 
@@ -336,7 +342,8 @@ class OAuthRequests
 
         if ($result === false) {
             wp_send_json_error(
-                __('Something went wrong uploading your image', 'event-integration') . ": " . (error_get_last()['message'] ?? '')
+                __('Something went wrong uploading your image', 'event-integration')
+                . ": " . (error_get_last()['message'] ?? '')
             );
         }
 
