@@ -24,8 +24,8 @@ function getDateBadge(event, type) {
 
 }
 
-const EventItem = ({ event, displayFields, cardStyle }) => (
-  <a className={"c-card c-card--action " + cardStyle} href={event.permalink} style={{ textAlign: 'center', height: '100%' }}>
+const EventItem = ({ event, displayFields, cardStyle, imageRatio }) => (
+  <a className={"c-card c-card--action c-card--event " + cardStyle + "c-card--image-" + imageRatio} href={event.permalink} style={{ textAlign: 'center', height: '100%' }}>
     {displayFields.includes('image') && event.image_url && (
       <div className="c-card__image c-card__image--secondary">
         {displayFields.includes('dateBadge') ? (
@@ -35,7 +35,7 @@ const EventItem = ({ event, displayFields, cardStyle }) => (
                   <span class="c-typography c-datebadge__month c-typography__variant--h4">{getDateBadge(event, "getMonth")}</span>
               </div>
           </div>) : ""}
-        <div className="c-card__image-background" style={{ backgroundImage: `url('${event.image_url}')` }}></div>
+        <div className={"c-card__image-background" } style={{ backgroundImage: `url('${event.image_url}')` }}></div>
       </div>
     )}
 
