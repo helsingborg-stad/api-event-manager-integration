@@ -52,7 +52,7 @@
     "react-dom": "^16.8.3",
     "react-onclickoutside": "^6.8.0",
     "reactify": "^1.1.1",
-    "rev-del": "^1.0.5",
+    "rev-del": "^2.0.0",
     "run-sequence": "^2.2.1",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0",
