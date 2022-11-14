@@ -111,8 +111,27 @@ class SingleEventData
         // Add one day to number of days if the diff is more than 24 hours but less than 1 week
         return $diff >= 24 && $diff < (24 * 7)
             ? sprintf(__('%d days', 'event-integration'), (floor($diff / 24)) + 1)
-            : human_time_diff($start, $end);
+            : self::eventOccasionDuration($start, $end);
     }
+
+    // Display hours + minutes if event duration is between 1 hour and 1 day, 
+    // otherwise use WP:s human_time_diff()
+    public function eventOccasionDuration($from, $to) {
+        $diff = (int)abs($to - $from);
+        if ($diff < DAY_IN_SECONDS && $diff >= HOUR_IN_SECONDS) {
+            $hours = round($diff / HOUR_IN_SECONDS );
+            $mins = round($diff / MINUTE_IN_SECONDS) - ($hours * 60);
+            $formattedDiff = sprintf(_n('%s hour', '%s hours', $hours), $hours);
+            if ($mins > 0) {
+                $formattedMins = sprintf(_n('%s min', '%s mins', $mins), $mins);
+                $formattedDiff .= ' ' . $formattedMins;
+            } 
+        } else {
+            $formattedDiff = human_time_diff($from, $to);
+        }
+        return $formattedDiff;
+    }
+
 
     /**
      * Get next event occasion date in time
