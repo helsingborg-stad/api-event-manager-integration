@@ -114,8 +114,9 @@ class SingleEventData
             : self::eventOccasionDuration($start, $end);
     }
 
-    // Display hours + minutes if event duration is between 1 hour and 1 day, 
-    // otherwise use WP:s human_time_diff()
+    // Display hours + minutes if event duration is between 1 hour and 1 day
+    // in order to avoid the excessive rounding that comes from displaying in hours only.
+    // For other cases use WP:s human_time_diff()
     public function eventOccasionDuration($from, $to) {
         $diff = (int)abs($to - $from);
         if ($diff < DAY_IN_SECONDS && $diff >= HOUR_IN_SECONDS) {
