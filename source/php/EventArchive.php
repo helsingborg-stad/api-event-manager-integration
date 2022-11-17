@@ -57,12 +57,22 @@ class EventArchive
      */
     public function filterEvents($query)
     {
-        if (is_admin() || !is_post_type_archive($this->eventPostType)) {
+        if (!is_post_type_archive($this->eventPostType)) {
             return $query;
         }
 
+        // Run these in both admin and frontend to enshure that posts
+        // will contain full dataset. This was made to add compability
+        // with WordPress 6.1 cache logic.
+        // See https://make.wordpress.org/core/2022/10/07/improvements-to-wp_query-performance-in-6-1/
+        // for more details about this feature.
         add_filter('posts_fields', array($this, 'eventFilterSelect'));
         add_filter('posts_join', array($this, 'eventFilterJoin'));
+
+        if (is_admin()) {
+            return $query;
+        }
+
         add_filter('posts_where', array($this, 'eventFilterWhere'), 10, 2);
         add_filter('posts_groupby', array($this, 'eventFilterGroupBy'));
         add_filter('posts_orderby', array($this, 'eventFilterOrderBy'));
