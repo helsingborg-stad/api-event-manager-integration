@@ -29,6 +29,12 @@ class EventForm extends \Modularity\Module
         $this->validateFields($data['fields']);
 
         $data['classes'] = implode(' ', apply_filters('Modularity/Module/Classes', array(), $this->post_type, $this->args));
+
+         $data['lang'] = [
+            'errorMessage' => __('Something went wrong. Please look over the provided information and try again.', 'event-integration'),
+            'validateMessage' => __('Form is successfully being sent.', 'event-integration'),
+        ];
+
         return $data;
     }
 

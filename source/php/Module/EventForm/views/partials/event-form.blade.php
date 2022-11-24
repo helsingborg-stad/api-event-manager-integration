@@ -1,8 +1,19 @@
-<form name="submit-event" class="submit-event-form js-event-form js-form-validation" enctype="multipart/form-data">
-    @include('partials.field-loop', ['fields' => $fields])
+{{-- <form name="submit-event" class="submit-event-form js-event-form js-form-validation" enctype="multipart/form-data"> --}}
+    @form([
+        'errorMessage' => $lang['errorMessage'],
+        'validateMessage' => $lang['validateMessage'],
+        'classList' => [
+            "submit-event-form",
+            "js-event-form",
+            "js-form-validation"
+        ],
+        'attributeList' => [
+            'name' => 'submit-event',
+            'enctype' => 'multipart/form-data',
+        ],
 
-    @include('components.notice_warning')
-    @include('components.notice_success')
+    ])
+    @include('partials.field-loop', ['fields' => $fields])
 
     @includeWhen($userGroups, 'partials.user_group')
 
@@ -14,4 +25,6 @@
         'classList' => ['event-submit__submit-button'],
     ])
     @endbutton
-</form>
+@endform
+{{-- </form> --}}
+
