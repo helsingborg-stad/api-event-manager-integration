@@ -45,9 +45,6 @@
         'fields.contact_details'
     )
 
-    @include('components.notice_warning')
-    @include('components.notice_success')
-
     {{-- Submit Button --}}
     @typography([
         "element" => "p",
