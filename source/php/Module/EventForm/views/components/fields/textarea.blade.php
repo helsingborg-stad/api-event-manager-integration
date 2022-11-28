@@ -1,9 +1,6 @@
 @include('components.fields.field', ['field' => array_merge($field, ['props' => [
-    'multiline'      => true,
-    'attributeList' => [
-        'type' => $field['type'],
-        'name' => $field['name'],
-        'rows' => $field['rows'] ?? '5',
-    ],
+    'multiline' => $field['rows'] ? $field['rows'] : true,
+    'type' => $field['type'],
+    'name' => $field['name'],
     'helperText' => $field['description'] ?? ''
 ]])])

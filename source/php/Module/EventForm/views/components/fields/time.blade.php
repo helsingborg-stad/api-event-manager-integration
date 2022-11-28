@@ -5,12 +5,11 @@
 @endphp
 
 @field([
-    'type' => 'time',
     'required' => $required,
+    'id' => $hourId ,
+    'type' => 'time',
+    'name' => $field['name'],
     'attributeList' => [
-        'id' => $hourId ,
-        'type' => 'time',
-        'name' => $field['name'],
         'min' => '0',
         'max' => '24',
     ],
