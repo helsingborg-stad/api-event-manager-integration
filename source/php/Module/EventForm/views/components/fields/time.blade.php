@@ -5,7 +5,6 @@
 @endphp
 
 @field([
-    'type' => 'time',
     'required' => $required,
     'id' => $hourId ,
     'type' => 'time',
