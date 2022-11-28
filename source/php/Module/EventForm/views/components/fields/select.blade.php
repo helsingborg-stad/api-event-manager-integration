@@ -8,6 +8,7 @@
 @endphp
 
 @select([
+    'id'   => $field['name'],
     'label' => $field['label'],
     'helperText' => $field['description'],
     'required' => $field['required'] ?? false,
