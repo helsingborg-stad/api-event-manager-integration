@@ -19,7 +19,7 @@
 					</span>
 				</span>
 				<span class="c-collection__content">
-					@typography(['element' => 'h4'])
+					@typography(['element' => 'h2', 'variant' => 'h4'])
 						{{$event->post_title}}
 						@typography(['variant' => 'meta', 'element' => 'p'])
 							{{$event->occasionDateFormatted}}
