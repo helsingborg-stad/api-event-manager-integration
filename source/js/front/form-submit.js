@@ -8,14 +8,17 @@ const eventFormSubmit = {
                 const submitButton = form.querySelector('.event-submit__submit-button');
                 submitButton.disabled = true;
 
-                form.querySelector('.event-submit__success').classList.add('u-display--none');
-                form.querySelector('.event-submit__error').classList.add('u-display--none');
+                form.querySelector('.c-form__notice-success').classList.add('u-display--none');
+                form.querySelector('.c-form__notice-failed').classList.add('u-display--none');
 
                 const imageInput = form.querySelector('input[name="image_input"]');
                 const formData = eventFormSubmit.formToJsonData(form);
 
                 const imageData = new FormData();
                 imageData.append('file', imageInput.files[0]);
+                console.log(imageData);
+                console.log(imageInput.files);
+
                 const formRequests = [];
                 formRequests.push(eventFormSubmit.submitImageData(imageData));
 
@@ -74,6 +77,7 @@ const eventFormSubmit = {
                         const errorResponses = [imageResponse, organizerResponse, locationResponse].filter(x => !Array.isArray(x) && !x.success).map(x => x.data);
                         if (errorResponses.length > 0) {
                             eventFormSubmit.displayErorrNotice(form, errorResponses.join('<br />'));
+                            console.log(77, errorResponses, imageResponse.data);
                         } else {
                             eventFormSubmit.submitFormData(formData, 'submit_event').then(response => {
                                 if (response.success) {
@@ -81,11 +85,13 @@ const eventFormSubmit = {
                                     form.reset();
                                 } else {
                                     eventFormSubmit.displayErorrNotice(form, response.data);
+                                    console.log(84, errorResponses);
                                 }
                             });
                         }
                     }).catch(e => {
                         eventFormSubmit.displayErorrNotice(form, e.message);
+                        console.log(90, errorResponses);
                     }).finally(x => {
                         submitButton.disabled = false;
                     });
@@ -93,16 +99,14 @@ const eventFormSubmit = {
         });
     },
     displayErorrNotice: (form, text) => {
-        form.querySelector('.event-submit__success').classList.add('u-display--none');
-        const errorNotice = form.querySelector('.event-submit__error');
+        form.querySelector('.c-form__notice-success').classList.add('u-display--none');
+        const errorNotice = form.querySelector('.c-form__notice-failed');
         errorNotice.classList.remove('u-display--none');
-        errorNotice.querySelector('[id^="notice__text__"]').innerHTML = text;
     },
     displaySuccessNotice: (form, text) => {
-        form.querySelector('.event-submit__error').classList.add('u-display--none');
-        const successNotice = form.querySelector('.event-submit__success');
+        form.querySelector('.c-form__notice-failed').classList.add('u-display--none');
+        const successNotice = form.querySelector('.c-form__notice-success');
         successNotice.classList.remove('u-display--none');
-        successNotice.querySelector('[id^="notice__text__"]').innerHTML = text;
     },
     submitImageData: (data) => {
         data.append('action', 'submit_image');
