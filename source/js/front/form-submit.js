@@ -16,8 +16,6 @@ const eventFormSubmit = {
 
                 const imageData = new FormData();
                 imageData.append('file', imageInput.files[0]);
-                console.log(imageData);
-                console.log(imageInput.files);
 
                 const formRequests = [];
                 formRequests.push(eventFormSubmit.submitImageData(imageData));
@@ -77,7 +75,6 @@ const eventFormSubmit = {
                         const errorResponses = [imageResponse, organizerResponse, locationResponse].filter(x => !Array.isArray(x) && !x.success).map(x => x.data);
                         if (errorResponses.length > 0) {
                             eventFormSubmit.displayErorrNotice(form, errorResponses.join('<br />'));
-                            console.log(77, errorResponses, imageResponse.data);
                         } else {
                             eventFormSubmit.submitFormData(formData, 'submit_event').then(response => {
                                 if (response.success) {
@@ -85,13 +82,11 @@ const eventFormSubmit = {
                                     form.reset();
                                 } else {
                                     eventFormSubmit.displayErorrNotice(form, response.data);
-                                    console.log(84, errorResponses);
                                 }
                             });
                         }
                     }).catch(e => {
                         eventFormSubmit.displayErorrNotice(form, e.message);
-                        console.log(90, errorResponses);
                     }).finally(x => {
                         submitButton.disabled = false;
                     });
