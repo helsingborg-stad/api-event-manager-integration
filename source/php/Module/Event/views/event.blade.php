@@ -10,7 +10,8 @@
     @if (!$hideTitle && !empty($postTitle))
         <div class="c-card__header">
             @typography([
-                'element' => "h4"
+                'element' => 'h2',
+                'variant' => 'h4'
             ])
                 {!! $postTitle !!}
             @endtypography
