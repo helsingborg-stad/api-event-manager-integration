@@ -26,6 +26,8 @@ class Event extends \Modularity\Module
             10,
             2
         );
+        
+        add_filter('the_content', array($this, 'renderEmails'), 10, 1);
     }
 
     public function template()
@@ -478,11 +480,36 @@ class Event extends \Modularity\Module
      * @return array $args
      */
      public function filterEventCategories($args, $field)
-    {
-        if (function_exists('pll_default_language')) {
-            $args['lang'] = pll_default_language();
-        }
+     {
+         if (function_exists('pll_default_language')) {
+             $args['lang'] = pll_default_language();
+         }
 
-        return $args;
-    } 
+         return $args;
+     }
+     
+     /**
+      * If the post type is an event, and the content contains an @ symbol, then explode the content
+      * into an array of words, and if any of those words are emails, then wrap them in a mailto: tag
+      *
+      * @param content The content of the post.
+      *
+      * @return The content of the post.
+      */
+     public function renderEmails($content)
+     {
+         if ('event' === get_post_type()) {
+             if (str_contains($content, '@')) {
+                 $textParts = explode(' ', $content);
+                
+                 foreach ($textParts as $key => $text) {
+                     if (is_email($text)) {
+                         $textParts[$key] = '<a href="mailto:'. $text. '">'. $text. '</a>';
+                     }
+                 }
+                 return implode(' ', $textParts);
+             }
+         }
+         return $content;
+     }
 }
