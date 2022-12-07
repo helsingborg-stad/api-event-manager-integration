@@ -257,6 +257,7 @@ class Events
         $defaultImage = (!empty($data['mod_event_def_image'])) ? $data['mod_event_def_image'] : $settingsData['mod_event_def_image'];
 
         foreach ($events as &$event) {
+        
             // Set permalink url with date parameter
             $event->permalink = esc_url(
                 add_query_arg('date', preg_replace('/\D/', '', $event->start_date), get_permalink($event->ID))

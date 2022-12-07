@@ -124,23 +124,25 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         // Gather event data
         $eventData = array();
 
-        $eventData['occasion'] = $occasion;
+        $eventData['occasion']  = $occasion;
         $eventData['occasions'] = $occasions;
 
-        $meta = $this->getMeta($post->ID);
-        $eventData['cancelled'] = !empty($eventData['occasion']['status']) && $eventData['occasion']['status'] === 'cancelled' ? __('Cancelled', 'event-integration') : null;
-        $eventData['rescheduled'] = !empty($eventData['occasion']['status']) && $eventData['occasion']['status'] === 'rescheduled' ? __('Rescheduled', 'event-integration') : null;
+        $meta                               = $this->getMeta($post->ID);
+        $eventData['cancelled']             = !empty($eventData['occasion']['status']) && $eventData['occasion']['status'] === 'cancelled' ? __('Cancelled', 'event-integration') : null;
+        $eventData['rescheduled']           = !empty($eventData['occasion']['status']) && $eventData['occasion']['status'] === 'rescheduled' ? __('Rescheduled', 'event-integration') : null;
         $eventData['exception_information'] = !empty($eventData['occasion']['exception_information']) ? $eventData['occasion']['exception_information'] : null;
-        $eventData['eventArchive'] = add_query_arg('s', urlencode($post->post_title), get_post_type_archive_link(self::$postTypeSlug));
-        $eventData['eventLink'] = $meta['event_link'] ?? false;
-        $eventData['introText'] = '';
+        $eventData['eventArchive']          = add_query_arg('s', urlencode($post->post_title), get_post_type_archive_link(self::$postTypeSlug));
+        $eventData['eventLink']             = $meta['event_link'] ?? false;
+        $eventData['introText']             = '';
+        
         $extendedContent = get_extended($post->post_content);
         if(!empty($extendedContent['main']) && !empty($extendedContent['extended'])) {
             $eventData['introText'] = self::createLeadElement($extendedContent['main']);
-            $eventData['content'] = $extendedContent['extended'];
+            $eventData['content']   = $extendedContent['extended'];
         } else {
-            $eventData['content'] = get_the_content($post->ID);
+            $eventData['content'] = $post->post_content;
         }
+        $eventData['content'] = apply_filters( 'the_content', $eventData['content'] );
 
         if (function_exists('municipio_get_thumbnail_source')) {
             $eventData['image_src'] = municipio_get_thumbnail_source(

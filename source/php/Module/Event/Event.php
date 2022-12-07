@@ -66,19 +66,23 @@ class Event extends \Modularity\Module
         global $wp;
 
         // Cards module data
-        $data['settings'] = $data;
-        $this->template = !empty($data['mod_event_display']) ? $data['mod_event_display'] : 'list';
-        $data['template'] = $this->template;
-        $data['post_id'] = $post->ID;
-        $data['archive_url'] = get_post_type_archive_link('event');
-        $data['rest_url'] = get_rest_url();
-        $days_ahead = isset($data['mod_event_interval']) ? $data['mod_event_interval'] : 0;
-        $data['end_date'] = date('Y-m-d', strtotime("today midnight +$days_ahead days"));
+        $data['settings']         = $data;
+        
+        $this->template     = !empty($data['mod_event_display']) ? $data['mod_event_display'] : 'list';
+        
+        $data['template']         = $this->template;
+        $data['post_id']          = $post->ID;
+        $data['archive_url']      = get_post_type_archive_link('event');
+        $data['rest_url']         = get_rest_url();
+              
+        $days_ahead         = isset($data['mod_event_interval']) ? $data['mod_event_interval'] : 0;
+        
+        $data['end_date']         = date('Y-m-d', strtotime("today midnight +$days_ahead days"));
         $data['only_todays_date'] = $data['mod_events_hide_past_events'] ?? false;
-        $data['lat'] = (isset($data['mod_event_geographic']['lat'])) ? $data['mod_event_geographic']['lat'] : null;
-        $data['lng'] = (isset($data['mod_event_geographic']['lng'])) ? $data['mod_event_geographic']['lng'] : null;
-        $data['distance'] = (isset($data['mod_event_distance'])) ? $data['mod_event_distance'] : null;
-        $data['no_url'] = get_field('mod_event_no_url', $id);
+        $data['lat']              = (isset($data['mod_event_geographic']['lat'])) ? $data['mod_event_geographic']['lat'] : null;
+        $data['lng']              = (isset($data['mod_event_geographic']['lng'])) ? $data['mod_event_geographic']['lng'] : null;
+        $data['distance']         = (isset($data['mod_event_distance'])) ? $data['mod_event_distance'] : null;
+        $data['no_url']           = get_field('mod_event_no_url', $id);
 
         $data['age_from'] = ($this->template == 'index') ? (int)get_field('mod_event_filter_age_range_from', $id) : '';
         $data['age_to'] = ($this->template == 'index') ? (int)get_field('mod_event_filter_age_range_to', $id) : '';
@@ -112,6 +116,7 @@ class Event extends \Modularity\Module
         $data['events'] = $this->setPermalink($data['events']);
         $data['paginationList'] = $this->getPagination($data['pagesCount']);
         $data['no_events'] = translate('No events found', 'event-integration');
+        
 
         return $data;
     }
