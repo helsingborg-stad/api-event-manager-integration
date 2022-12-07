@@ -35,7 +35,6 @@ class Event extends Entity\PostManager
                 $this->setFeaturedImageFromUrl($image['url'], false);
             }
         }
-
         return true;
     }
 

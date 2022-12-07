@@ -133,7 +133,7 @@ class QueryEvents
             $placeholders
         );
         $events = $wpdb->get_results($completeQuery);
-
+        
         return $events;
     }
 
