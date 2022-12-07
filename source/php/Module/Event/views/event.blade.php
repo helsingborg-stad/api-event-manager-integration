@@ -11,7 +11,7 @@
         <div class="c-card__header">
             @typography([
                 'element' => 'h2',
-                'variant' => 'h4'
+                'variant'   => 'h4'
             ])
                 {!! $postTitle !!}
             @endtypography

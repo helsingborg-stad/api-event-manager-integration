@@ -5,6 +5,7 @@
             'js-pagination-container' => ''
         ]
     ])
+
         @foreach ($events as $event)
             @php
                 $event->passed = isset($event->end_date) && strtotime($event->end_date) < $date_now ? true : false;
@@ -28,6 +29,7 @@
             </a>
         @endforeach
     @endcollection
+
 
     @if (($mod_event_pagination && $pagesCount > 1) || $mod_event_archive)
         <div class="c-card__footer u-padding__x--2 u-margin--0">
