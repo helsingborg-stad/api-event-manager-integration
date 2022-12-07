@@ -26,6 +26,8 @@ class Event extends \Modularity\Module
             10,
             2
         );
+        
+        add_filter('the_content', array($this, 'renderEmails'), 10, 1);
     }
 
     public function template()
@@ -64,19 +66,23 @@ class Event extends \Modularity\Module
         global $wp;
 
         // Cards module data
-        $data['settings'] = $data;
-        $this->template = !empty($data['mod_event_display']) ? $data['mod_event_display'] : 'list';
-        $data['template'] = $this->template;
-        $data['post_id'] = $post->ID;
-        $data['archive_url'] = get_post_type_archive_link('event');
-        $data['rest_url'] = get_rest_url();
-        $days_ahead = isset($data['mod_event_interval']) ? $data['mod_event_interval'] : 0;
-        $data['end_date'] = date('Y-m-d', strtotime("today midnight +$days_ahead days"));
+        $data['settings']         = $data;
+        
+        $this->template     = !empty($data['mod_event_display']) ? $data['mod_event_display'] : 'list';
+        
+        $data['template']         = $this->template;
+        $data['post_id']          = $post->ID;
+        $data['archive_url']      = get_post_type_archive_link('event');
+        $data['rest_url']         = get_rest_url();
+              
+        $days_ahead         = isset($data['mod_event_interval']) ? $data['mod_event_interval'] : 0;
+        
+        $data['end_date']         = date('Y-m-d', strtotime("today midnight +$days_ahead days"));
         $data['only_todays_date'] = $data['mod_events_hide_past_events'] ?? false;
-        $data['lat'] = (isset($data['mod_event_geographic']['lat'])) ? $data['mod_event_geographic']['lat'] : null;
-        $data['lng'] = (isset($data['mod_event_geographic']['lng'])) ? $data['mod_event_geographic']['lng'] : null;
-        $data['distance'] = (isset($data['mod_event_distance'])) ? $data['mod_event_distance'] : null;
-        $data['no_url'] = get_field('mod_event_no_url', $id);
+        $data['lat']              = (isset($data['mod_event_geographic']['lat'])) ? $data['mod_event_geographic']['lat'] : null;
+        $data['lng']              = (isset($data['mod_event_geographic']['lng'])) ? $data['mod_event_geographic']['lng'] : null;
+        $data['distance']         = (isset($data['mod_event_distance'])) ? $data['mod_event_distance'] : null;
+        $data['no_url']           = get_field('mod_event_no_url', $id);
 
         $data['age_from'] = ($this->template == 'index') ? (int)get_field('mod_event_filter_age_range_from', $id) : '';
         $data['age_to'] = ($this->template == 'index') ? (int)get_field('mod_event_filter_age_range_to', $id) : '';
@@ -110,6 +116,7 @@ class Event extends \Modularity\Module
         $data['events'] = $this->setPermalink($data['events']);
         $data['paginationList'] = $this->getPagination($data['pagesCount']);
         $data['no_events'] = translate('No events found', 'event-integration');
+        
 
         return $data;
     }
@@ -478,11 +485,36 @@ class Event extends \Modularity\Module
      * @return array $args
      */
      public function filterEventCategories($args, $field)
-    {
-        if (function_exists('pll_default_language')) {
-            $args['lang'] = pll_default_language();
-        }
+     {
+         if (function_exists('pll_default_language')) {
+             $args['lang'] = pll_default_language();
+         }
 
-        return $args;
-    } 
+         return $args;
+     }
+     
+     /**
+      * If the post type is an event, and the content contains an @ symbol, then explode the content
+      * into an array of words, and if any of those words are emails, then wrap them in a mailto: tag
+      *
+      * @param content The content of the post.
+      *
+      * @return The content of the post.
+      */
+     public function renderEmails($content)
+     {
+         if ('event' === get_post_type()) {
+             if (str_contains($content, '@')) {
+                 $textParts = explode(' ', $content);
+                
+                 foreach ($textParts as $key => $text) {
+                     if (is_email($text)) {
+                         $textParts[$key] = '<a href="mailto:'. $text. '">'. $text. '</a>';
+                     }
+                 }
+                 return implode(' ', $textParts);
+             }
+         }
+         return $content;
+     }
 }

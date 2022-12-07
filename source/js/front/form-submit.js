@@ -8,14 +8,15 @@ const eventFormSubmit = {
                 const submitButton = form.querySelector('.event-submit__submit-button');
                 submitButton.disabled = true;
 
-                form.querySelector('.event-submit__success').classList.add('u-display--none');
-                form.querySelector('.event-submit__error').classList.add('u-display--none');
+                form.querySelector('.c-form__notice-success').classList.add('u-display--none');
+                form.querySelector('.c-form__notice-failed').classList.add('u-display--none');
 
                 const imageInput = form.querySelector('input[name="image_input"]');
                 const formData = eventFormSubmit.formToJsonData(form);
 
                 const imageData = new FormData();
                 imageData.append('file', imageInput.files[0]);
+
                 const formRequests = [];
                 formRequests.push(eventFormSubmit.submitImageData(imageData));
 
@@ -93,16 +94,14 @@ const eventFormSubmit = {
         });
     },
     displayErorrNotice: (form, text) => {
-        form.querySelector('.event-submit__success').classList.add('u-display--none');
-        const errorNotice = form.querySelector('.event-submit__error');
+        form.querySelector('.c-form__notice-success').classList.add('u-display--none');
+        const errorNotice = form.querySelector('.c-form__notice-failed');
         errorNotice.classList.remove('u-display--none');
-        errorNotice.querySelector('[id^="notice__text__"]').innerHTML = text;
     },
     displaySuccessNotice: (form, text) => {
-        form.querySelector('.event-submit__error').classList.add('u-display--none');
-        const successNotice = form.querySelector('.event-submit__success');
+        form.querySelector('.c-form__notice-failed').classList.add('u-display--none');
+        const successNotice = form.querySelector('.c-form__notice-success');
         successNotice.classList.remove('u-display--none');
-        successNotice.querySelector('[id^="notice__text__"]').innerHTML = text;
     },
     submitImageData: (data) => {
         data.append('action', 'submit_image');
