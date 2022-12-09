@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2022-10-12 14:58+0200\n"
-"PO-Revision-Date: 2022-10-12 14:59+0200\n"
+"POT-Creation-Date: 2022-12-05 11:16+0100\n"
+"PO-Revision-Date: 2022-12-05 11:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 3.1.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: event-manager-integration.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -44,7 +44,7 @@ msgstr "Formulärnamn"
 msgid "Name the form for easier grouping of events."
 msgstr "Namnge formuläret för bättre gruppering av evenemang."
 
-#: AcfFields/php/event-form-module.php:66 AcfFields/php/event-module.php:314
+#: AcfFields/php/event-form-module.php:66 AcfFields/php/event-module.php:316
 msgid "Fields"
 msgstr "Fält"
 
@@ -107,10 +107,9 @@ msgstr "Etikett"
 #: AcfFields/php/event-form-module.php:1755
 #: AcfFields/php/event-form-module.php:1867
 #: AcfFields/php/event-form-module.php:1979
-#: AcfFields/php/event-form-module.php:2091 AcfFields/php/event-module.php:330
+#: AcfFields/php/event-form-module.php:2091 AcfFields/php/event-module.php:332
 #: source/php/Helper/SubmitEvent.php:27
-#: source/php/Module/EventForm/Fields.php:32 views/submit-form.blade.php:12
-#: views/submit-form.blade.php:20
+#: source/php/Module/EventForm/Fields.php:32
 msgid "Description"
 msgstr "Beskrivning"
 
@@ -141,7 +140,7 @@ msgstr "Dölj beskrivning"
 msgid "Content"
 msgstr "Innehåll"
 
-#: AcfFields/php/event-form-module.php:248 AcfFields/php/event-module.php:326
+#: AcfFields/php/event-form-module.php:248 AcfFields/php/event-module.php:328
 #: source/php/PostTypes/Events.php:44
 #: source/php/Shortcodes/SingleEventAdmin.php:322
 msgid "Occasion"
@@ -246,7 +245,6 @@ msgid "Select if the field is required."
 msgstr "Välj om fältet är obligatoriskt."
 
 #: AcfFields/php/event-form-module.php:434 source/php/Helper/SubmitEvent.php:56
-#: views/submit-form.blade.php:152 views/submit-form.blade.php:154
 msgid "Link to booking"
 msgstr "Länk till bokning"
 
@@ -287,12 +285,11 @@ msgstr "Åldersgrupp"
 #: source/php/PostTypes/Events.php:231
 #: source/php/Shortcodes/SingleEventAdmin.php:151
 #: source/php/Shortcodes/SingleEventAdmin.php:276
-#: views/submit-form.blade.php:164 views/submit-form.blade.php:166
 msgid "Organizer"
 msgstr "Arrangör"
 
-#: AcfFields/php/event-form-module.php:1423 AcfFields/php/event-module.php:329
-#: AcfFields/php/event-module.php:618 AcfFields/php/shortcodes.php:57
+#: AcfFields/php/event-form-module.php:1423 AcfFields/php/event-module.php:331
+#: AcfFields/php/event-module.php:624 AcfFields/php/shortcodes.php:57
 #: source/php/Admin/AdminDisplayEvent.php:146
 #: source/php/Helper/SubmitEvent.php:128
 #: source/php/Module/EventForm/Fields.php:333
@@ -301,7 +298,6 @@ msgstr "Arrangör"
 #: source/php/PostTypes/Events.php:233
 #: source/php/Shortcodes/SingleEventAdmin.php:101
 #: source/php/Shortcodes/SingleEventAdmin.php:251
-#: views/submit-form.blade.php:171 views/submit-form.blade.php:173
 msgid "Location"
 msgstr "Plats"
 
@@ -315,22 +311,20 @@ msgstr "Tillgänglighet"
 msgid "Event categories"
 msgstr "Evenemangskategorier"
 
-#: AcfFields/php/event-form-module.php:1721 AcfFields/php/event-module.php:545
-#: AcfFields/php/event-module.php:736 source/php/Helper/SubmitEvent.php:152
+#: AcfFields/php/event-form-module.php:1721 AcfFields/php/event-module.php:549
+#: AcfFields/php/event-module.php:742 source/php/Helper/SubmitEvent.php:152
 #: source/php/Module/Event/Event.php:459 source/php/PostTypes/Events.php:247
 #: source/php/PostTypes/Events.php:603
 #: source/php/Shortcodes/SingleEventAdmin.php:593
-#: views/submit-form.blade.php:188
 msgid "Tags"
 msgstr "Taggar"
 
-#: AcfFields/php/event-form-module.php:1833 AcfFields/php/event-module.php:328
+#: AcfFields/php/event-form-module.php:1833 AcfFields/php/event-module.php:330
 msgid "Image"
 msgstr "Bild"
 
 #: AcfFields/php/event-form-module.php:1945
 #: source/php/Helper/SubmitEvent.php:171 source/php/Helper/SubmitEvent.php:193
-#: views/submit-form.blade.php:229 views/submit-form.blade.php:230
 msgid "Email"
 msgstr "E-postadress"
 
@@ -340,8 +334,7 @@ msgstr "E-postadress till personen som skickat in evenemanget."
 
 #: AcfFields/php/event-form-module.php:2057
 #: source/php/Helper/SubmitEvent.php:179 source/php/Helper/SubmitEvent.php:192
-#: source/php/Module/EventForm/Fields.php:312 views/submit-form.blade.php:237
-#: views/submit-form.blade.php:238
+#: source/php/Module/EventForm/Fields.php:312
 msgid "Phone number"
 msgstr "Telefonnummer"
 
@@ -389,193 +382,192 @@ msgstr "Tre kolumner"
 msgid "Four column"
 msgstr "Fyra kolumner"
 
-#: AcfFields/php/event-module.php:69
+#: AcfFields/php/event-module.php:71
 msgid "Number of events to show"
 msgstr "Visa antal evenemang"
 
-#: AcfFields/php/event-module.php:72
+#: AcfFields/php/event-module.php:74
 msgid "Set to -1 to show all."
 msgstr "-1 för att visa alla."
 
-#: AcfFields/php/event-module.php:98 AcfFields/php/event-module.php:109
+#: AcfFields/php/event-module.php:100 AcfFields/php/event-module.php:111
 msgid "Show pagination"
 msgstr "Visa paginering"
 
-#: AcfFields/php/event-module.php:101
+#: AcfFields/php/event-module.php:103
 msgid "Display pagination below the event list."
 msgstr "Visar paginering under evenemangslistan."
 
-#: AcfFields/php/event-module.php:117
+#: AcfFields/php/event-module.php:119
 msgid "Per page"
 msgstr "Per sida"
 
-#: AcfFields/php/event-module.php:120
+#: AcfFields/php/event-module.php:122
 msgid "Number of events to display per page."
 msgstr "Antal evenemang att visa per sida."
 
-#: AcfFields/php/event-module.php:151
+#: AcfFields/php/event-module.php:153
 msgid "Archive link"
 msgstr "Länk till arkiv"
 
-#: AcfFields/php/event-module.php:154
+#: AcfFields/php/event-module.php:156
 msgid "Show link to event archive page."
 msgstr "Visa länk till arkivsida för evenemang."
 
-#: AcfFields/php/event-module.php:162
+#: AcfFields/php/event-module.php:164
 msgid "Show link"
 msgstr "Visa länk"
 
-#: AcfFields/php/event-module.php:170
+#: AcfFields/php/event-module.php:172
 msgid "Remove URL parameters"
 msgstr "Ta bort URL-parametrar"
 
-#: AcfFields/php/event-module.php:189
+#: AcfFields/php/event-module.php:191
 msgid "Pagination button limit"
 msgstr "Begränsa pagineringssidor"
 
-#: AcfFields/php/event-module.php:192
+#: AcfFields/php/event-module.php:194
 msgid "Limit number of pagination buttons. -1 to show all."
 msgstr "Begränsa antal pagineringssidor. -1 för att visa alla."
 
-#: AcfFields/php/event-module.php:223
+#: AcfFields/php/event-module.php:225
 msgid "Show pagination arrows"
 msgstr "Visa navigeringspilar"
 
-#: AcfFields/php/event-module.php:247
+#: AcfFields/php/event-module.php:249
 msgid "Show previous and next page arrows on pagination"
 msgstr "Visa navigeringspilar på sidnumrering"
 
-#: AcfFields/php/event-module.php:255
+#: AcfFields/php/event-module.php:257
 msgid "Days interval"
 msgstr "Tidsperiod"
 
-#: AcfFields/php/event-module.php:258
+#: AcfFields/php/event-module.php:260
 msgid "Include events from today to the given number of days."
 msgstr "Visa evenemang som inträffar inom angivet antal dagar."
 
-#: AcfFields/php/event-module.php:276 AcfFields/php/event-module.php:279
+#: AcfFields/php/event-module.php:278 AcfFields/php/event-module.php:281
 msgid "Only show events starting on todays date"
 msgstr "Visa bara evenemang som startar på dagens datum"
 
-#: AcfFields/php/event-module.php:295 AcfFields/php/event-module.php:298
+#: AcfFields/php/event-module.php:297 AcfFields/php/event-module.php:300
 msgid "Hide past events"
 msgstr "Dölj tidigare evenemang"
 
-#: AcfFields/php/event-module.php:327
+#: AcfFields/php/event-module.php:329
 msgid "Date badge"
 msgstr "Datumbricka"
 
-#: AcfFields/php/event-module.php:342
+#: AcfFields/php/event-module.php:344
 msgid "Image ratio"
 msgstr "Bildförhållande"
 
-#: AcfFields/php/event-module.php:367
+#: AcfFields/php/event-module.php:369
 msgid "Square (1:1)"
 msgstr "Kvadrat (1:1)"
 
-#: AcfFields/php/event-module.php:368
+#: AcfFields/php/event-module.php:370
 msgid "Standard Video (16:9)"
 msgstr "Standardvideo (16:9)"
 
-#: AcfFields/php/event-module.php:369
+#: AcfFields/php/event-module.php:371
 msgid "Standard TV (4:3)"
 msgstr ""
 
-#: AcfFields/php/event-module.php:371
+#: AcfFields/php/event-module.php:373
 msgid "1-1"
 msgstr ""
 
-#: AcfFields/php/event-module.php:381
+#: AcfFields/php/event-module.php:385
 msgid "Occasion position"
 msgstr "Position för datum"
 
-#: AcfFields/php/event-module.php:406
+#: AcfFields/php/event-module.php:410
 msgid "Below title"
 msgstr "Under titel"
 
-#: AcfFields/php/event-module.php:407
+#: AcfFields/php/event-module.php:411
 msgid "Left column"
 msgstr "Vänsterkolumn"
 
-#: AcfFields/php/event-module.php:412
+#: AcfFields/php/event-module.php:416
 msgid "below : Below title"
 msgstr ""
 
-#: AcfFields/php/event-module.php:418
+#: AcfFields/php/event-module.php:422
 msgid "Description letter limit"
 msgstr "Teckenbegränsning av beskrivning"
 
-#: AcfFields/php/event-module.php:421
+#: AcfFields/php/event-module.php:425
 msgid "Set to -1 to show the whole description."
 msgstr "-1 för att visa hela beskrivningen."
 
-#: AcfFields/php/event-module.php:447 source/php/PostTypes/Events.php:245
+#: AcfFields/php/event-module.php:451 source/php/PostTypes/Events.php:245
 #: source/php/PostTypes/Events.php:640
 #: source/php/Shortcodes/SingleEventAdmin.php:581
 msgid "Groups"
 msgstr "Grupper"
 
-#: AcfFields/php/event-module.php:458
+#: AcfFields/php/event-module.php:462
 msgid "Show events from all groups"
 msgstr "Visa evenemang inom samtliga grupper"
 
-#: AcfFields/php/event-module.php:466
+#: AcfFields/php/event-module.php:470
 msgid "Select groups"
 msgstr "Välj grupper"
 
-#: AcfFields/php/event-module.php:469
+#: AcfFields/php/event-module.php:473
 msgid "Show events from the selected groups."
 msgstr "Visa evenemang inom angivna grupper."
 
-#: AcfFields/php/event-module.php:496 AcfFields/php/event-module.php:709
+#: AcfFields/php/event-module.php:500 AcfFields/php/event-module.php:715
 #: source/php/Helper/SubmitEvent.php:144 source/php/Module/Event/Event.php:458
 #: source/php/PostTypes/Events.php:246 source/php/PostTypes/Events.php:566
 #: source/php/Shortcodes/SingleEventAdmin.php:587
-#: views/submit-form.blade.php:179
 msgid "Categories"
 msgstr "Kategorier"
 
-#: AcfFields/php/event-module.php:507
+#: AcfFields/php/event-module.php:511
 msgid "Show events from all categories"
 msgstr "Visa evenemang inom samtliga kategorier"
 
-#: AcfFields/php/event-module.php:515
+#: AcfFields/php/event-module.php:519
 msgid "Select categories"
 msgstr "Välj kategorier"
 
-#: AcfFields/php/event-module.php:518
+#: AcfFields/php/event-module.php:522
 msgid "Show events from the selected categories."
 msgstr "Visa evenemang inom angivna kategorier."
 
-#: AcfFields/php/event-module.php:556
+#: AcfFields/php/event-module.php:560
 msgid "Show events from all tags"
 msgstr "Visa evenemang inom samtliga taggar"
 
-#: AcfFields/php/event-module.php:564
+#: AcfFields/php/event-module.php:568
 msgid "Select tags"
 msgstr "Välj taggar"
 
-#: AcfFields/php/event-module.php:567
+#: AcfFields/php/event-module.php:571
 msgid "Show events from the selected tags."
 msgstr "Visa evenemang inom angivna taggar."
 
-#: AcfFields/php/event-module.php:594
+#: AcfFields/php/event-module.php:598
 msgid "Default image"
 msgstr "Standardbild"
 
-#: AcfFields/php/event-module.php:597
+#: AcfFields/php/event-module.php:601
 msgid "Will display if event image is missing."
 msgstr "Visas om bild saknas."
 
-#: AcfFields/php/event-module.php:621
+#: AcfFields/php/event-module.php:627
 msgid "Show events that occurs at a specified location."
 msgstr "Visa evenemang som inträffar vid en angiven plats."
 
-#: AcfFields/php/event-module.php:636 AcfFields/php/options.php:293
+#: AcfFields/php/event-module.php:642 AcfFields/php/options.php:293
 msgid "Distance from location"
 msgstr "Avstånd från plats"
 
-#: AcfFields/php/event-module.php:639
+#: AcfFields/php/event-module.php:645
 msgid ""
 "To show events occurring nearby the given location, enter maximum distance "
 "in km. Leave blank to only show events from the exact position."
@@ -583,41 +575,29 @@ msgstr ""
 "För att visa evenemang i närheten av den angivna platsen, fyll i maximalt "
 "avstånd i km. Lämna tomt för att visa evenemang från den exakta positionen."
 
-#: AcfFields/php/event-module.php:657
+#: AcfFields/php/event-module.php:663
 msgid "Filters"
 msgstr "Filter"
 
-#: AcfFields/php/event-module.php:676
+#: AcfFields/php/event-module.php:682
 msgid "Activate search and filters."
 msgstr "Aktivera sök och olika filter."
 
-#: AcfFields/php/event-module.php:682
+#: AcfFields/php/event-module.php:688
 msgid "Text search"
 msgstr "Textsök"
 
-#: AcfFields/php/event-module.php:763
+#: AcfFields/php/event-module.php:769
 msgid "Date search"
 msgstr "Datumfiltrering"
 
-#: AcfFields/php/event-module.php:790 source/php/Module/Event/Event.php:460
+#: AcfFields/php/event-module.php:796 source/php/Module/Event/Event.php:460
 #: source/php/PostTypes/Events.php:240
 #: source/php/Shortcodes/SingleEventAdmin.php:355
 #: source/php/Shortcodes/SingleEventAdmin.php:357
 #: source/php/Shortcodes/SingleEventAdmin.php:359
 msgid "Age"
 msgstr "Ålder"
-
-#: AcfFields/php/event-module.php:817
-msgid "Age range from"
-msgstr "Från ålder"
-
-#: AcfFields/php/event-module.php:839 AcfFields/php/event-module.php:868
-msgid "year"
-msgstr "år"
-
-#: AcfFields/php/event-module.php:846
-msgid "Age range to"
-msgstr "Till ålder"
 
 #: AcfFields/php/location-module.php:10
 msgid "Display information"
@@ -996,8 +976,7 @@ msgstr "Återställ kartan"
 msgid "No events could be found."
 msgstr "Inga evenemang hittades."
 
-#: source/php/App.php:99 views/submit-form.blade.php:182
-#: views/submit-form.blade.php:191
+#: source/php/App.php:99
 msgid "Loading"
 msgstr "Hämtar"
 
@@ -1088,9 +1067,22 @@ msgstr "vänligen skapa den manuellt och gör om importen."
 msgid "%d days"
 msgstr "%d dagar"
 
+#: source/php/Helper/SingleEventData.php:125
+#, php-format
+msgid "%s hour"
+msgid_plural "%s hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: source/php/Helper/SingleEventData.php:127
+#, php-format
+msgid "%s min"
+msgid_plural "%s mins"
+msgstr[0] ""
+msgstr[1] ""
+
 #: source/php/Helper/SubmitEvent.php:19
-#: source/php/Module/EventForm/Fields.php:25 views/submit-form.blade.php:7
-#: views/submit-form.blade.php:8
+#: source/php/Module/EventForm/Fields.php:25
 msgid "Event name"
 msgstr "Namn på evenemang"
 
@@ -1100,31 +1092,31 @@ msgid "Name of the event."
 msgstr "Namn på evenemang."
 
 #: source/php/Helper/SubmitEvent.php:29
-#: source/php/Module/EventForm/Fields.php:34 views/submit-form.blade.php:13
+#: source/php/Module/EventForm/Fields.php:34
 msgid "Describe your event. What happens and why should you visit it?"
 msgstr "Beskriv ditt evenemang. Vad händer där och varför ska man besöka det?"
 
-#: source/php/Helper/SubmitEvent.php:30 views/submit-form.blade.php:14
+#: source/php/Helper/SubmitEvent.php:30
 msgid "Plain language tips"
 msgstr "Klarspråkstips"
 
-#: source/php/Helper/SubmitEvent.php:31 views/submit-form.blade.php:16
+#: source/php/Helper/SubmitEvent.php:31
 msgid "Write the most important first."
 msgstr "Skriv det viktigaste först."
 
-#: source/php/Helper/SubmitEvent.php:32 views/submit-form.blade.php:17
+#: source/php/Helper/SubmitEvent.php:32
 msgid "Use words that you think the readers understand."
 msgstr "Använd ord som du tror att läsarna förstår."
 
-#: source/php/Helper/SubmitEvent.php:33 views/submit-form.blade.php:18
+#: source/php/Helper/SubmitEvent.php:33
 msgid "Write short and concise."
 msgstr "Skriv kort och koncist."
 
-#: source/php/Helper/SubmitEvent.php:40 views/submit-form.blade.php:24
+#: source/php/Helper/SubmitEvent.php:40
 msgid "Event occurrence"
 msgstr "Evenemanget inträffar"
 
-#: source/php/Helper/SubmitEvent.php:41 views/submit-form.blade.php:26
+#: source/php/Helper/SubmitEvent.php:41
 msgid ""
 "Add occasions to this event. Does the event occur each week? Then add a rule "
 "for recurring events. Note that end time for the event can't be the same as "
@@ -1137,11 +1129,10 @@ msgstr ""
 #: source/php/Helper/SubmitEvent.php:48
 #: source/php/Module/EventForm/Fields.php:429
 #: source/php/Module/Location/views/location.blade.php:65
-#: views/submit-form.blade.php:146 views/submit-form.blade.php:148
 msgid "Website"
 msgstr "Hemsida"
 
-#: source/php/Helper/SubmitEvent.php:49 views/submit-form.blade.php:147
+#: source/php/Helper/SubmitEvent.php:49
 msgid "Link to event website."
 msgstr "Länk till evenemangets webbplats."
 
@@ -1189,7 +1180,7 @@ msgstr "Pensionärspris är giltigt från angiven ålder."
 msgid "Age group that the activity is addressed to."
 msgstr "Åldersgrupp som aktiviteten är riktad till."
 
-#: source/php/Helper/SubmitEvent.php:121 views/submit-form.blade.php:165
+#: source/php/Helper/SubmitEvent.php:121
 msgid ""
 "Type name of organizer, select from suggestions. If your business is not "
 "available, please add an organizer to the description."
@@ -1197,7 +1188,7 @@ msgstr ""
 "Skriv arrangörens namn och välj från de förslag som vi ger dig. Dyker inte "
 "arrangörens namn upp, kan du nämna det i din beskrivning."
 
-#: source/php/Helper/SubmitEvent.php:129 views/submit-form.blade.php:172
+#: source/php/Helper/SubmitEvent.php:129
 msgid ""
 "Type location name and select from suggestions. If the location is not "
 "available, please add an address in the description."
@@ -1209,7 +1200,7 @@ msgstr ""
 msgid "Select which accessibility actions that exist for the event."
 msgstr "Välj vilka tillgänglighetsåtgärder som finns för platsen."
 
-#: source/php/Helper/SubmitEvent.php:145 views/submit-form.blade.php:180
+#: source/php/Helper/SubmitEvent.php:145
 msgid ""
 "Select appropriate categories for your event or activity. To select multiple "
 "categories, press Ctrl (Windows) / command (macOS) at the same time as you "
@@ -1230,23 +1221,22 @@ msgstr ""
 "respektive tagg."
 
 #: source/php/Helper/SubmitEvent.php:160
-#: source/php/Module/EventForm/Fields.php:43 views/submit-form.blade.php:197
-#: views/submit-form.blade.php:207 views/submit-form.blade.php:220
+#: source/php/Module/EventForm/Fields.php:43
 msgid "Upload an image"
 msgstr "Ladda upp en bild"
 
 #: source/php/Helper/SubmitEvent.php:162
-#: source/php/Module/EventForm/Fields.php:46 views/submit-form.blade.php:201
+#: source/php/Module/EventForm/Fields.php:46
 msgid "Keep in mind that the image may be cropped, so avoid text in the image."
 msgstr "Tänk på att bilden kan bli beskuren, undvik därför text i bilden."
 
 #: source/php/Helper/SubmitEvent.php:163
-#: source/php/Module/EventForm/Fields.php:50 views/submit-form.blade.php:202
+#: source/php/Module/EventForm/Fields.php:50
 msgid "Images with identifiable persons are not accepted and will be replaced."
 msgstr "Bilder med igenkännbara personer godkänns inte och kommer ersättas."
 
 #: source/php/Helper/SubmitEvent.php:164
-#: source/php/Module/EventForm/Fields.php:53 views/submit-form.blade.php:203
+#: source/php/Module/EventForm/Fields.php:53
 msgid "You must also have the right to use and distribute the image."
 msgstr "Du måste även ha rätt att använda och sprida bilden."
 
@@ -1415,6 +1405,17 @@ msgstr "Eventformulär v2"
 msgid "Displays submit event form"
 msgstr "Visar formuläret för att skicka evenemang"
 
+#: source/php/Module/EventForm/EventForm.php:34
+msgid ""
+"Something went wrong. Please look over the provided information and try "
+"again."
+msgstr ""
+"Något gick fel. Var god och se över din angivna information och försök igen."
+
+#: source/php/Module/EventForm/EventForm.php:35
+msgid "Form is successfully being sent."
+msgstr "Formuläret lyckades och skickas in."
+
 #: source/php/Module/EventForm/Fields.php:19
 msgid "1. Describe the event"
 msgstr "1. Beskriv evenemanget"
@@ -1475,26 +1476,22 @@ msgstr "Enstaka datum"
 msgid "Recurring occasions"
 msgstr "Återkommande tillfällen"
 
-#: source/php/Module/EventForm/Fields.php:145 views/submit-form.blade.php:43
-#: views/submit-form.blade.php:124 views/submit-form.blade.php:126
+#: source/php/Module/EventForm/Fields.php:145
 msgid "Start date"
 msgstr "Startdatum"
 
 #: source/php/Module/EventForm/Fields.php:152
-#: source/php/Module/EventForm/Fields.php:228 views/submit-form.blade.php:47
-#: views/submit-form.blade.php:104
+#: source/php/Module/EventForm/Fields.php:228
 msgid "Start time"
 msgstr "Starttid"
 
 #: source/php/Module/EventForm/Fields.php:159
-#: source/php/Module/EventForm/Fields.php:236 views/submit-form.blade.php:57
-#: views/submit-form.blade.php:130 views/submit-form.blade.php:132
+#: source/php/Module/EventForm/Fields.php:236
 msgid "End date"
 msgstr "Slutdatum"
 
 #: source/php/Module/EventForm/Fields.php:166
-#: source/php/Module/EventForm/Fields.php:243 views/submit-form.blade.php:61
-#: views/submit-form.blade.php:114
+#: source/php/Module/EventForm/Fields.php:243
 msgid "End time"
 msgstr "Sluttid"
 
@@ -1506,48 +1503,47 @@ msgstr "Lägg till datum"
 msgid "Remove date"
 msgstr "Ta bort datum"
 
-#: source/php/Module/EventForm/Fields.php:190 views/submit-form.blade.php:86
+#: source/php/Module/EventForm/Fields.php:190
 msgid "Weekday"
 msgstr "Veckodag"
 
-#: source/php/Module/EventForm/Fields.php:192 views/submit-form.blade.php:87
+#: source/php/Module/EventForm/Fields.php:192
 msgid "The event will occur on this weekday."
 msgstr "Evenemanget inträffar på vald veckodag."
 
-#: source/php/Module/EventForm/Fields.php:198 views/submit-form.blade.php:89
+#: source/php/Module/EventForm/Fields.php:198
 msgid "Monday"
 msgstr "Måndag"
 
-#: source/php/Module/EventForm/Fields.php:199 views/submit-form.blade.php:90
+#: source/php/Module/EventForm/Fields.php:199
 msgid "Tuesday"
 msgstr "Tisdag"
 
-#: source/php/Module/EventForm/Fields.php:200 views/submit-form.blade.php:91
+#: source/php/Module/EventForm/Fields.php:200
 msgid "Wednesday"
 msgstr "Onsdag"
 
-#: source/php/Module/EventForm/Fields.php:201 views/submit-form.blade.php:92
+#: source/php/Module/EventForm/Fields.php:201
 msgid "Thursday"
 msgstr "Torsdag"
 
-#: source/php/Module/EventForm/Fields.php:202 views/submit-form.blade.php:93
+#: source/php/Module/EventForm/Fields.php:202
 msgid "Friday"
 msgstr "Fredag"
 
-#: source/php/Module/EventForm/Fields.php:203 views/submit-form.blade.php:94
+#: source/php/Module/EventForm/Fields.php:203
 msgid "Saturday"
 msgstr "Lördag"
 
-#: source/php/Module/EventForm/Fields.php:204 views/submit-form.blade.php:95
+#: source/php/Module/EventForm/Fields.php:204
 msgid "Sunday"
 msgstr "Söndag"
 
-#: source/php/Module/EventForm/Fields.php:209 views/submit-form.blade.php:99
-#: views/submit-form.blade.php:101
+#: source/php/Module/EventForm/Fields.php:209
 msgid "Weekly interval"
 msgstr "Veckointervall"
 
-#: source/php/Module/EventForm/Fields.php:211 views/submit-form.blade.php:100
+#: source/php/Module/EventForm/Fields.php:211
 msgid "Enter the weekly interval when the event occurs. 1 equals every week."
 msgstr ""
 "Ange med vilken veckointervall händelsen inträffar. 1 motsvarar varje vecka."
@@ -1558,11 +1554,11 @@ msgstr ""
 msgid "start date"
 msgstr "Startdatum"
 
-#: source/php/Module/EventForm/Fields.php:229 views/submit-form.blade.php:105
+#: source/php/Module/EventForm/Fields.php:229
 msgid "Start time for the event"
 msgstr "Evenemangets starttid"
 
-#: source/php/Module/EventForm/Fields.php:244 views/submit-form.blade.php:115
+#: source/php/Module/EventForm/Fields.php:244
 msgid "End time for the event"
 msgstr "Evenemangets sluttid"
 
@@ -1623,8 +1619,7 @@ msgid "Event booking page"
 msgstr "Bokningssida för evenemang"
 
 #: source/php/Module/EventForm/Fields.php:441
-#: source/php/PostTypes/Events.php:216 views/submit-form.blade.php:158
-#: views/submit-form.blade.php:160
+#: source/php/PostTypes/Events.php:216
 msgid "Price"
 msgstr "Pris"
 
@@ -1841,15 +1836,16 @@ msgstr "Du är nu auktoriserad!"
 msgid "Form data is missing, please try again."
 msgstr "Formulärdata saknas, försök igen."
 
-#: source/php/OAuth/OAuthRequests.php:269
+#: source/php/OAuth/OAuthRequests.php:272
+#: source/php/OAuth/OAuthRequests.php:278
 msgid "Something went wrong posting the event"
 msgstr "Något gick fel med att skicka evenemanget"
 
-#: source/php/OAuth/OAuthRequests.php:279
+#: source/php/OAuth/OAuthRequests.php:289
 msgid "Image is not selected, please try again."
 msgstr "Bild saknas, vänligen försök igen."
 
-#: source/php/OAuth/OAuthRequests.php:338
+#: source/php/OAuth/OAuthRequests.php:349
 msgid "Something went wrong uploading your image"
 msgstr "Något gick fel med att ladda upp din bild"
 
@@ -1880,7 +1876,6 @@ msgid "Deny"
 msgstr "Neka"
 
 #: source/php/PostTypes/Events.php:78 source/php/PostTypes/Events.php:241
-#: views/submit-form.blade.php:44 views/submit-form.blade.php:58
 msgid "Date"
 msgstr "Datum"
 
@@ -2353,86 +2348,14 @@ msgstr "Teckenbegränsning av beskrivning:"
 msgid "-1 equals no limit"
 msgstr "-1 är lika med ingen gräns"
 
-#: views/submit-form.blade.php:29 views/submit-form.blade.php:39
-msgid "Single occurrence"
-msgstr "Enstaka datum"
-
-#: views/submit-form.blade.php:32
-msgctxt "Event recurrence rules"
-msgid "Schedule"
-msgstr "Schema"
-
-#: views/submit-form.blade.php:72 views/submit-form.blade.php:138
-msgid "Add"
-msgstr "Lägg till"
-
-#: views/submit-form.blade.php:82
-msgid "Recurrence rules for weekly recurring event"
-msgstr "Schema för återkommande evenemang"
-
-#: views/submit-form.blade.php:125
-msgid "When the recurring event period starts"
-msgstr "Evenemanget inträffar löpande fr.o.m. detta datum"
-
-#: views/submit-form.blade.php:131
-msgid "When the recurring event period ends"
-msgstr "Evenemanget inträffar löpande t.o.m. detta datum"
-
-#: views/submit-form.blade.php:153
-msgid "Link to the event's booking page, e.g. ticketmaster."
-msgstr "Länk till evenemangets bokningssida, exempelvis Ticketmaster."
-
-#: views/submit-form.blade.php:159
-msgid ""
-"For adults. Are there multiple price ranges? Please add it in the "
-"description."
+#: vendor/helsingborg-stad/acf-export-manager/src/AcfExportManager.php:364
+msgid "Export with AcfExportManager"
 msgstr ""
-"För vuxen. Finns det flera olika prisklasser? Informera gärna om det i "
-"beskrivningen."
 
-#: views/submit-form.blade.php:189
-msgid ""
-"Select appropriate categories for your event or activity. To select multiple "
-"tags, press Ctrl (Windows) / command (macOS) at the same time as you click "
-"on the categories."
+#: vendor/helsingborg-stad/acf-export-manager/src/AcfExportManager.php:408
+#, php-format
+msgid "Exported %d fieldgroup(s)."
 msgstr ""
-"Välj passande kategorier för ditt evenemang eller aktivitet. För att välja "
-"flera kategorier håll in Ctrl (Windows) / command (macOS) samtidigt som du "
-"klickar på respektive kategori."
-
-#: views/submit-form.blade.php:211
-msgid "Before you can upload an image, you need to confirm the following terms"
-msgstr ""
-"Innan du kan ladda upp en bild behöver du bekräfta nedanstående punkter"
-
-#: views/submit-form.blade.php:213
-msgid "I have the right to use this image to promote this event."
-msgstr ""
-"Jag har rätt att använda denna bild för att marknadsföra detta evenemang."
-
-#: views/submit-form.blade.php:216
-msgid "There are no identifiable persons on the image."
-msgstr "Det finns inga identifierbara personer på bilden."
-
-#: views/submit-form.blade.php:225
-msgid "Contact details"
-msgstr "Kontaktuppgifter"
-
-#: views/submit-form.blade.php:226
-msgid "Enter your contact details below for eventual questions."
-msgstr "Ange dina kontaktuppgifter nedan för eventuella frågor."
-
-#: views/submit-form.blade.php:233 views/submit-form.blade.php:234
-msgid "Repeat email"
-msgstr "Upprepa e-postadress"
-
-#: views/submit-form.blade.php:242
-msgid "Done? Click here to submit your event for review."
-msgstr "Klar? Klicka här för att skicka in ditt evenemang för granskning."
-
-#: views/submit-form.blade.php:252
-msgid "Send"
-msgstr "Skicka"
 
 #. Plugin Name of the plugin/theme
 msgid "Event Manager Integration"
@@ -2453,6 +2376,80 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "http://www.helsingborg.se"
 msgstr ""
+
+#~ msgid "Age range from"
+#~ msgstr "Från ålder"
+
+#~ msgid "year"
+#~ msgstr "år"
+
+#~ msgid "Age range to"
+#~ msgstr "Till ålder"
+
+#~ msgid "Single occurrence"
+#~ msgstr "Enstaka datum"
+
+#~ msgctxt "Event recurrence rules"
+#~ msgid "Schedule"
+#~ msgstr "Schema"
+
+#~ msgid "Add"
+#~ msgstr "Lägg till"
+
+#~ msgid "Recurrence rules for weekly recurring event"
+#~ msgstr "Schema för återkommande evenemang"
+
+#~ msgid "When the recurring event period starts"
+#~ msgstr "Evenemanget inträffar löpande fr.o.m. detta datum"
+
+#~ msgid "When the recurring event period ends"
+#~ msgstr "Evenemanget inträffar löpande t.o.m. detta datum"
+
+#~ msgid "Link to the event's booking page, e.g. ticketmaster."
+#~ msgstr "Länk till evenemangets bokningssida, exempelvis Ticketmaster."
+
+#~ msgid ""
+#~ "For adults. Are there multiple price ranges? Please add it in the "
+#~ "description."
+#~ msgstr ""
+#~ "För vuxen. Finns det flera olika prisklasser? Informera gärna om det i "
+#~ "beskrivningen."
+
+#~ msgid ""
+#~ "Select appropriate categories for your event or activity. To select "
+#~ "multiple tags, press Ctrl (Windows) / command (macOS) at the same time as "
+#~ "you click on the categories."
+#~ msgstr ""
+#~ "Välj passande kategorier för ditt evenemang eller aktivitet. För att "
+#~ "välja flera kategorier håll in Ctrl (Windows) / command (macOS) samtidigt "
+#~ "som du klickar på respektive kategori."
+
+#~ msgid ""
+#~ "Before you can upload an image, you need to confirm the following terms"
+#~ msgstr ""
+#~ "Innan du kan ladda upp en bild behöver du bekräfta nedanstående punkter"
+
+#~ msgid "I have the right to use this image to promote this event."
+#~ msgstr ""
+#~ "Jag har rätt att använda denna bild för att marknadsföra detta evenemang."
+
+#~ msgid "There are no identifiable persons on the image."
+#~ msgstr "Det finns inga identifierbara personer på bilden."
+
+#~ msgid "Contact details"
+#~ msgstr "Kontaktuppgifter"
+
+#~ msgid "Enter your contact details below for eventual questions."
+#~ msgstr "Ange dina kontaktuppgifter nedan för eventuella frågor."
+
+#~ msgid "Repeat email"
+#~ msgstr "Upprepa e-postadress"
+
+#~ msgid "Done? Click here to submit your event for review."
+#~ msgstr "Klar? Klicka här för att skicka in ditt evenemang för granskning."
+
+#~ msgid "Send"
+#~ msgstr "Skicka"
 
 #~ msgid "Link"
 #~ msgstr "Länk"
