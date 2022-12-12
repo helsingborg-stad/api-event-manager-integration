@@ -33,6 +33,7 @@ class EventForm extends \Modularity\Module
          $data['lang'] = [
             'errorMessage' => __('Something went wrong. Please look over the provided information and try again.', 'event-integration'),
             'validateMessage' => __('Form is successfully being sent.', 'event-integration'),
+            'submitButtonText' => __('Send', 'event-integration'),
         ];
 
         return $data;
