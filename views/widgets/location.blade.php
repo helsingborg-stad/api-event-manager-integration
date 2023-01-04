@@ -4,21 +4,23 @@
             <div class="c-card__body">
                 @include('partials.heading', ['heading' => $eventLang->location])
                 
+                <p>
+                    {{ $locationInfo['title'] }} <br/>
+                    {{ $locationInfo['street_address'] }} <br/>
+                    {{ $locationInfo['postal_code'] }} {{ $locationInfo['city'] }}
+                </p>
+
                 @link([
                     'attributeList' => ['aria-label' => $eventLang->locationMapAriaLabel],
-                    'href' => 'https://www.google.com/maps/dir//' . urlencode(
+                    'href' => 'https://www.google.com/maps/dir/' . urlencode(
                         implode(' ', [
                             $locationInfo['street_address'],
                             $locationInfo['postal_code'],
                             $locationInfo['city']
                         ])
                     )
-                ])
-                    <p>
-                        {{ $locationInfo['title'] }} <br/>
-                        {{ $locationInfo['street_address'] }} <br/>
-                        {{ $locationInfo['postal_code'] }} {{ $locationInfo['city'] }}
-                    </p>
+                ])    
+                {{ $eventLang->locationShowOnMap }}               
                 @endlink
 
                 @if($locationInfo['additional_locations'])

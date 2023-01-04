@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2022-12-01 16:47+0100\n"
+"POT-Creation-Date: 2022-12-02 10:05+0100\n"
 "PO-Revision-Date: 2016-12-13 15:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -202,8 +202,8 @@ msgid "Event categories"
 msgstr ""
 
 #: AcfFields/php/event-form-module.php:1721 AcfFields/php/event-module.php:549 AcfFields/php/event-module.php:742
-#: source/php/Helper/SubmitEvent.php:152 source/php/Module/Event/Event.php:459 source/php/PostTypes/Events.php:256
-#: source/php/PostTypes/Events.php:612 source/php/Shortcodes/SingleEventAdmin.php:593
+#: source/php/Helper/SubmitEvent.php:152 source/php/Module/Event/Event.php:459 source/php/PostTypes/Events.php:257
+#: source/php/PostTypes/Events.php:613 source/php/Shortcodes/SingleEventAdmin.php:593
 msgid "Tags"
 msgstr ""
 
@@ -388,7 +388,7 @@ msgstr ""
 msgid "Set to -1 to show the whole description."
 msgstr ""
 
-#: AcfFields/php/event-module.php:451 source/php/PostTypes/Events.php:254 source/php/PostTypes/Events.php:649
+#: AcfFields/php/event-module.php:451 source/php/PostTypes/Events.php:255 source/php/PostTypes/Events.php:650
 #: source/php/Shortcodes/SingleEventAdmin.php:581
 msgid "Groups"
 msgstr ""
@@ -406,7 +406,7 @@ msgid "Show events from the selected groups."
 msgstr ""
 
 #: AcfFields/php/event-module.php:500 AcfFields/php/event-module.php:715 source/php/Helper/SubmitEvent.php:144
-#: source/php/Module/Event/Event.php:458 source/php/PostTypes/Events.php:255 source/php/PostTypes/Events.php:575
+#: source/php/Module/Event/Event.php:458 source/php/PostTypes/Events.php:256 source/php/PostTypes/Events.php:576
 #: source/php/Shortcodes/SingleEventAdmin.php:587
 msgid "Categories"
 msgstr ""
@@ -473,7 +473,7 @@ msgstr ""
 msgid "Date search"
 msgstr ""
 
-#: AcfFields/php/event-module.php:796 source/php/Module/Event/Event.php:460 source/php/PostTypes/Events.php:249
+#: AcfFields/php/event-module.php:796 source/php/Module/Event/Event.php:460 source/php/PostTypes/Events.php:250
 #: source/php/Shortcodes/SingleEventAdmin.php:355 source/php/Shortcodes/SingleEventAdmin.php:357
 #: source/php/Shortcodes/SingleEventAdmin.php:359
 msgid "Age"
@@ -706,7 +706,7 @@ msgstr ""
 msgid "Booking information"
 msgstr ""
 
-#: AcfFields/php/shortcodes.php:63 source/php/Admin/AdminDisplayEvent.php:159 source/php/PostTypes/Events.php:251
+#: AcfFields/php/shortcodes.php:63 source/php/Admin/AdminDisplayEvent.php:159 source/php/PostTypes/Events.php:252
 #: source/php/Shortcodes/SingleEventAdmin.php:135 source/php/Shortcodes/SingleEventAdmin.php:268
 msgid "Contact"
 msgstr ""
@@ -1600,16 +1600,16 @@ msgstr ""
 msgid "Deny"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:78 source/php/PostTypes/Events.php:250
+#: source/php/PostTypes/Events.php:78 source/php/PostTypes/Events.php:251
 msgid "Date"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:131 source/php/PostTypes/Events.php:245 source/php/Shortcodes/SingleEventAdmin.php:316
+#: source/php/PostTypes/Events.php:131 source/php/PostTypes/Events.php:246 source/php/Shortcodes/SingleEventAdmin.php:316
 #: source/php/Shortcodes/SingleEventAdmin.php:542
 msgid "Cancelled"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:132 source/php/PostTypes/Events.php:246 source/php/Shortcodes/SingleEventAdmin.php:317
+#: source/php/PostTypes/Events.php:132 source/php/PostTypes/Events.php:247 source/php/Shortcodes/SingleEventAdmin.php:317
 #: source/php/Shortcodes/SingleEventAdmin.php:543
 msgid "Rescheduled"
 msgstr ""
@@ -1763,185 +1763,189 @@ msgstr ""
 msgid "Link to map"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:247
-msgid "Show all occasions"
+#: source/php/PostTypes/Events.php:245
+msgid "Show on map"
 msgstr ""
 
 #: source/php/PostTypes/Events.php:248
+msgid "Show all occasions"
+msgstr ""
+
+#: source/php/PostTypes/Events.php:249
 msgid "Duration"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:252
+#: source/php/PostTypes/Events.php:253
 msgid "Phone"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:253
+#: source/php/PostTypes/Events.php:254
 msgid "E-mail"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:257
+#: source/php/PostTypes/Events.php:258
 msgid "Social links"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:562
+#: source/php/PostTypes/Events.php:563
 msgctxt "Taxonomy plural name"
 msgid "Event categories"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:563
+#: source/php/PostTypes/Events.php:564
 msgctxt "Taxonomy singular name"
 msgid "Event category"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:564
+#: source/php/PostTypes/Events.php:565
 msgid "Search categories"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:565
+#: source/php/PostTypes/Events.php:566
 msgid "Popular categories"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:566
+#: source/php/PostTypes/Events.php:567
 msgid "All categories"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:567 source/php/PostTypes/Events.php:568
+#: source/php/PostTypes/Events.php:568 source/php/PostTypes/Events.php:569
 msgid "Parent category"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:569
+#: source/php/PostTypes/Events.php:570
 msgid "Edit category"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:570
+#: source/php/PostTypes/Events.php:571
 msgid "Update category"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:571
+#: source/php/PostTypes/Events.php:572
 msgid "Add new category"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:572
+#: source/php/PostTypes/Events.php:573
 msgid "New category"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:573
+#: source/php/PostTypes/Events.php:574
 msgid "Add or remove categories"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:574
+#: source/php/PostTypes/Events.php:575
 msgid "Choose from most used categories"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:599
+#: source/php/PostTypes/Events.php:600
 msgctxt "Taxonomy plural name"
 msgid "Event tags"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:600
+#: source/php/PostTypes/Events.php:601
 msgctxt "Taxonomy singular name"
 msgid "Event tag"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:601
+#: source/php/PostTypes/Events.php:602
 msgid "Search tags"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:602
+#: source/php/PostTypes/Events.php:603
 msgid "Popular tags"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:603
+#: source/php/PostTypes/Events.php:604
 msgid "All tags"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:604 source/php/PostTypes/Events.php:605
+#: source/php/PostTypes/Events.php:605 source/php/PostTypes/Events.php:606
 msgid "Parent"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:606
+#: source/php/PostTypes/Events.php:607
 msgid "Edit tag"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:607
+#: source/php/PostTypes/Events.php:608
 msgid "Update"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:608
+#: source/php/PostTypes/Events.php:609
 msgid "Add new tag"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:609
+#: source/php/PostTypes/Events.php:610
 msgid "New tag"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:610
+#: source/php/PostTypes/Events.php:611
 msgid "Add or remove tags"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:611
+#: source/php/PostTypes/Events.php:612
 msgid "Choose from most used tags"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:636
+#: source/php/PostTypes/Events.php:637
 msgctxt "Taxonomy plural name"
 msgid "Event groups"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:637
+#: source/php/PostTypes/Events.php:638
 msgctxt "Taxonomy singular name"
 msgid "Event group"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:638
+#: source/php/PostTypes/Events.php:639
 msgid "Search groups"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:639
+#: source/php/PostTypes/Events.php:640
 msgid "Popular groups"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:640
+#: source/php/PostTypes/Events.php:641
 msgid "All groups"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:641 source/php/PostTypes/Events.php:642
+#: source/php/PostTypes/Events.php:642 source/php/PostTypes/Events.php:643
 msgid "Parent group"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:643
+#: source/php/PostTypes/Events.php:644
 msgid "Edit group"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:644
+#: source/php/PostTypes/Events.php:645
 msgid "Update group"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:645
+#: source/php/PostTypes/Events.php:646
 msgid "Add new group"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:646
+#: source/php/PostTypes/Events.php:647
 msgid "New group"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:647
+#: source/php/PostTypes/Events.php:648
 msgid "Add or remove groups"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:648
+#: source/php/PostTypes/Events.php:649
 msgid "Choose from most used groups"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:691
+#: source/php/PostTypes/Events.php:692
 msgid "Import events"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:721
+#: source/php/PostTypes/Events.php:722
 msgid "Something went wrong!"
 msgstr ""
 
-#: source/php/PostTypes/Events.php:738
+#: source/php/PostTypes/Events.php:739
 msgid "Error"
 msgstr ""
 
