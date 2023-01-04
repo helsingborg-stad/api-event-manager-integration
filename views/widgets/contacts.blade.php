@@ -3,13 +3,13 @@
         <div class="c-card__body">
             @include('partials.heading', ['heading' => $eventLang->contact])
             
-            <ul class="unlist u-margin__top--2">
+            <ul role="list" class="unlist u-margin__top--2">
                 @if($contactInfo['contact_information'])
-                    <li>{{ $contactInfo['contact_information'] }}</li>
+                    <li role="listitem">{{ $contactInfo['contact_information'] }}</li>
                 @endif
                 
                 @if($contactInfo['contact_phone'])
-                    <li>
+                    <li role="listitem">
                         {{ $eventLang->contactPhone }}:
                         @link(['href' => 'tel:' . $contactInfo['contact_phone']])
                             {{ $contactInfo['contact_phone'] }}
@@ -18,7 +18,7 @@
                 @endif
                 
                 @if($contactInfo['contact_email'])
-                    <li>
+                    <li role="listitem">
                         {{ $eventLang->contactEmail }}:
                         @link(['href' => 'mailto:' . $contactInfo['contact_email']])
                             {{ $contactInfo['contact_email'] }}

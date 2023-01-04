@@ -4,16 +4,16 @@
             @include('partials.heading', ['heading' => $eventLang->organizer])
 
             @if(!empty($event['organizers']))
-                @foreach($event['organizers'] as $organizer)
+                @foreach($event['organizers'] as $orgindex => $organizer)
                     @if(!empty($organizer['organizer']))
-                        @typography([])
+                        @typography(['id' => 'single-event-organizer-' . $orgindex])
                             <strong>{{ $organizer['organizer'] }}</strong>
                         @endtypography
                     @endif
                     @if(!empty($organizer['organizer_phone']) || !empty($organizer['organizer_email']) || !empty($organizer['organizer_link']))
-                        <ul>
+                        <ul role="list" aria-labelledby="single-event-organizer-{{$orgindex}}">
                             @if(!empty($organizer['organizer_phone']))
-                                <li>
+                                <li role="listitem">
                                     @link(['href' => 'tel:' . $organizer['organizer_phone']])
                                         {{ $organizer['organizer_phone'] }}
                                     @endlink
@@ -21,7 +21,7 @@
                             @endif
 
                             @if(!empty($organizer['organizer_email']))
-                                <li>
+                                <li role="listitem">
                                     @link(['href' => 'mailto:' . $organizer['organizer_email']])
                                         {{ $organizer['organizer_email'] }}
                                     @endlink
@@ -29,9 +29,11 @@
                             @endif
 
                             @if($parsedUrl = parse_url($organizer['organizer_link']))
-                                @link(['href' => $organizer['organizer_link']])
-                                    <li>{{ ucfirst($parsedUrl['host']) }}</li>
-                                @endlink
+                                <li role="listitem">
+                                    @link(['href' => $organizer['organizer_link']])
+                                        {{ ucfirst($parsedUrl['host']) }}
+                                    @endlink
+                                </li>
                             @endif
                         </ul>
                     @endif
@@ -39,14 +41,14 @@
             @endif
 
             @if(!empty($event['supporters']))
-                @typography([])
+                @typography(['id' => 'single-event-organizer-supporters'])
                     <strong>{{ $eventLang->supporters }}</strong>
                 @endtypography
 
-                <ul>
+                <ul role="list" aria-labelledby="single-event-organizer-supporters">
                     @foreach($event['supporters'] as $supporter)
                         @if(!empty($supporter['post_title']))
-                            <li>{{ $supporter['post_title'] }}</li>
+                            <li role="listitem">{{ $supporter['post_title'] }}</li>
                         @endif
                     @endforeach
                 </ul>
