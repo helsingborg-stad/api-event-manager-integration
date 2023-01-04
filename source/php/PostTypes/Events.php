@@ -196,6 +196,12 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             'submit_interest'   => __('Submit interest', 'event-integration'),
             'book_free'         => __('Book free ticket', 'event-integration')
         ];
+        $bookingLinkAriaLabels = [
+            'buy'               => __('External link for buying ticket', 'event-integration'),
+            'book'              => __('External link for booking a ticket', 'event-integration'),
+            'submit_interest'   => __('External link for submitting interest', 'event-integration'),
+            'book_free'         => __('External link for booking a free ticket', 'event-integration')
+        ];
 
          $accessibilityLabels = [
             'Accessible toilet' => __('Accessible toilet', 'event-integration'),
@@ -209,10 +215,12 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             'goToEventWebsite'          => __('Go to event website', 'event-integration'),
             'ticketIncludes'            => __('The ticket includes %s.', 'event-integration'),
             'bookingLinkButton'         => $bookingLinkButtonLabels[$bookingLinkType] ?? '',
+            'bookingLinkAriaLabel'      => $bookingLinkAriaLabels[$bookingLinkType] ?? '',
             'ticketRetailers'           => __('Ticket retailers', 'event-integration'),
             'ticketReleaseDate'         => __('Ticket release date', 'event-integration'),
             'ticketStopDate'            => __('Ticket stop date', 'event-integration'),
             'ticketTypes'               => __('Ticket types', 'event-integration'),
+            'ticketType'                => __('Ticket type', 'event-integration'),
             'ticketSeated'              => __('Seated', 'event-integration'),
             'ticketStanding'            => __('Standing', 'event-integration'),
             'price'                     => __('Price', 'event-integration'),
@@ -235,6 +243,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             'location'                  => __('Location', 'event-integration'),
             'locationAccessibility'     => __('Accessibility on the location', 'event-integration'),
             'locationOthers'            => __('Other locations', 'event-integration'),
+            'locationMapAriaLabel'      => __('Link to map', 'event-integration'),
             'cancelled'                 => __('Cancelled', 'event-integration'),
             'rescheduled'               => __('Rescheduled', 'event-integration'),
             'occasionShowAll'           => __('Show all occasions', 'event-integration'),

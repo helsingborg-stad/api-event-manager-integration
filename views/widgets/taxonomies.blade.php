@@ -9,9 +9,9 @@
                 ])
                     {{ $eventLang->groups }}
                 @endtypography
-                <ul>
+                <ul role="list">
                     @foreach ($groups as $group)
-                        <li>{{ $group['name'] }}</li>
+                        <li role="listitem">{{ $group['name'] }}</li>
                     @endforeach
                 </ul>
             @endif
@@ -24,9 +24,9 @@
                 ])
                     {{ $eventLang->categories }}
                 @endtypography
-                <ul>
+                <ul role="list">
                     @foreach ($categories as $category)
-                        <li>{{ $category }}</li>
+                        <li role="listitem">{{ $category }}</li>
                     @endforeach
                 </ul>
             @endif
@@ -39,9 +39,9 @@
                 ])
                     {{ $eventLang->tags }}
                 @endtypography
-                <ul>
+                <ul role="list">
                     @foreach ($tags as $tag)
-                        <li>{{ $tag }}</li>
+                        <li role="listitem">{{ $tag }}</li>
                     @endforeach
                 </ul>
             @endif

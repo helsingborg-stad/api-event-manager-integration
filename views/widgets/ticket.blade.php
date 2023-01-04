@@ -24,7 +24,8 @@
                     'classList' => ['u-margin__top--3'],
                     'icon' => 'arrow_forward',
                     'fullWidth' => true,
-                    'text' => $eventLang->bookingLinkButton
+                    'text' => $eventLang->bookingLinkButton,
+                    'attributeList' => ['aria-label' => $eventLang->bookingLinkAriaLabel]
                 ])
                 @endbutton
             @endif
