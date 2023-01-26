@@ -114,7 +114,6 @@ const eventFormSubmit = {
         return formData;
     },
     submitForm: (body) => {
-        sentForm.querySelector
         return new Promise((resolve, reject) => {
             if (!eventintegration?.ajaxurl) {
                 return reject('[submitImageData] No ajax url defined');

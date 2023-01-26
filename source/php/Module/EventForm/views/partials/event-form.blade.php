@@ -30,7 +30,7 @@
         'color' => 'default',
         'style' => 'filled',
         'type' => 'submit',
-        'classList' => ['event-reload__button'],
+        'classList' => ['event-reload__button', 'u-display--none'],
     ])
     @endbutton
 
