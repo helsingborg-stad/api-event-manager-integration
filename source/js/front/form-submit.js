@@ -1,15 +1,19 @@
+let sentForm = false;
+
 const eventFormSubmit = {
     setupFormSubmit: () => {
         const forms = document.querySelectorAll('.js-event-form');
         forms.forEach(form => {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
+            form.querySelector('.event-reload__button').addEventListener('click', () => {
+                window.location.reload();
+            });
 
+            form.addEventListener('submit', (e) => {
+                
+                e.preventDefault();
+                sentForm = form;
                 const submitButton = form.querySelector('.event-submit__submit-button');
                 submitButton.disabled = true;
-
-                form.querySelector('.c-form__notice-success').classList.add('u-display--none');
-                form.querySelector('.c-form__notice-failed').classList.add('u-display--none');
 
                 const imageInput = form.querySelector('input[name="image_input"]');
                 const formData = eventFormSubmit.formToJsonData(form);
@@ -73,35 +77,19 @@ const eventFormSubmit = {
                         }
 
                         const errorResponses = [imageResponse, organizerResponse, locationResponse].filter(x => !Array.isArray(x) && !x.success).map(x => x.data);
-                        if (errorResponses.length > 0) {
-                            eventFormSubmit.displayErorrNotice(form, errorResponses.join('<br />'));
-                        } else {
+                        if (!errorResponses.length > 0) {
                             eventFormSubmit.submitFormData(formData, 'submit_event').then(response => {
                                 if (response.success) {
-                                    eventFormSubmit.displaySuccessNotice(form, eventIntegrationFront.event_submitted_message);
                                     form.reset();
-                                } else {
-                                    eventFormSubmit.displayErorrNotice(form, response.data);
-                                }
+                                } 
                             });
                         }
                     }).catch(e => {
-                        eventFormSubmit.displayErorrNotice(form, e.message);
                     }).finally(x => {
                         submitButton.disabled = false;
                     });
             });
         });
-    },
-    displayErorrNotice: (form, text) => {
-        form.querySelector('.c-form__notice-success').classList.add('u-display--none');
-        const errorNotice = form.querySelector('.c-form__notice-failed');
-        errorNotice.classList.remove('u-display--none');
-    },
-    displaySuccessNotice: (form, text) => {
-        form.querySelector('.c-form__notice-failed').classList.add('u-display--none');
-        const successNotice = form.querySelector('.c-form__notice-success');
-        successNotice.classList.remove('u-display--none');
     },
     submitImageData: (data) => {
         data.append('action', 'submit_image');
@@ -126,6 +114,7 @@ const eventFormSubmit = {
         return formData;
     },
     submitForm: (body) => {
+        sentForm.querySelector
         return new Promise((resolve, reject) => {
             if (!eventintegration?.ajaxurl) {
                 return reject('[submitImageData] No ajax url defined');
@@ -136,8 +125,16 @@ const eventFormSubmit = {
                     body
                 }).then(res => res.json())
                 .then(json => resolve(json))
+                .then(() => {
+                    eventFormSubmit.formSentHandler();
+                })
                 .catch(err => reject(err));
         });
+    },
+    formSentHandler: () => {
+        sentForm.querySelector('button[type="submit"]').classList.add('u-display--none');
+        sentForm.querySelector('.o-grid.o-grid--form').classList.add('u-display--none');
+        sentForm.querySelector('.event-reload__button').classList.remove('u-display--none');
     },
     formToJsonData: (form) => {
         const formArray = eventFormSubmit.serializeArray(form);
