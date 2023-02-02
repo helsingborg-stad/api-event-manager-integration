@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
 "POT-Creation-Date: 2023-01-24 15:19+0100\n"
-"PO-Revision-Date: 2023-01-24 15:19+0100\n"
+"PO-Revision-Date: 2023-02-02 08:20+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -2059,16 +2059,12 @@ msgid "Other locations"
 msgstr "Fler platser"
 
 #: source/php/PostTypes/Events.php:246
-#, fuzzy
-#| msgid "Link to booking"
 msgid "Link to map"
-msgstr "Länk till bokning"
+msgstr "Länk till karta"
 
 #: source/php/PostTypes/Events.php:247
-#, fuzzy
-#| msgid "Show map"
 msgid "Show on map"
-msgstr "Visa karta"
+msgstr "Visa på karta"
 
 #: source/php/PostTypes/Events.php:250
 msgid "Show all occasions"
