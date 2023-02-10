@@ -103,11 +103,6 @@ class Event extends \Modularity\Module
 
         // Language
         $data['lang'] = $this->lang;
-
-        $data['classes'] = !empty($this->args) ? implode(
-            ' ',
-            apply_filters('Modularity/Module/Classes', array('c-card--panel'), 'mod-event', $this->args)
-        ) : array();
         
         $data['card_style'] = get_theme_mod('flat_ui_design') ? "c-card--flat" : "";
 

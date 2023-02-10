@@ -5,7 +5,8 @@
     'attributeList' => [
         'modularity-event' => '',
         'js-pagination-target' => ''
-    ]
+    ],
+    'context' => ['module.posts.list']
 ])
     @if (!$hideTitle && !empty($postTitle))
         <div class="c-card__header">
