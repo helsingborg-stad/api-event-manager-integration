@@ -5,7 +5,7 @@ namespace EventManagerIntegration;
 class Event extends Entity\PostManager
 {
     public $post_type = 'event';
-    
+
     /**
      * Stuff to do before save
      * @return void
@@ -46,7 +46,7 @@ class Event extends Entity\PostManager
     {
         if ($this->location != null) {
             if (!empty($this->location['parent']) && $this->location['parent']['id'] > 0) {
-                $this->location['title'] = $this->location['parent']['title'].', '.$this->location['title'];
+                $this->location['title'] = $this->location['parent']['title'] . ', ' . $this->location['title'];
             }
 
             if (!empty($location['latitude']) && !empty($location['longitude'])) {
@@ -66,7 +66,7 @@ class Event extends Entity\PostManager
         if (is_array($this->additional_locations) && !empty($this->additional_locations)) {
             foreach ($this->additional_locations as &$location) {
                 if (!empty($location['parent']) && $location['parent']['id'] > 0) {
-                    $location['title'] = $location['parent']['title'].', '.$location['title'];
+                    $location['title'] = $location['parent']['title'] . ', ' . $location['title'];
                 }
             }
             update_post_meta($this->ID, 'additional_locations', $this->additional_locations);
@@ -136,7 +136,7 @@ class Event extends Entity\PostManager
         global $wpdb;
 
         // Delete all occasions related to the event
-        $db_table = $wpdb->prefix."integrate_occasions";
+        $db_table = $wpdb->prefix . "integrate_occasions";
         $wpdb->delete($db_table, array('event_id' => $this->ID), array('%d'));
 
         // Remove post if occasions is missing
@@ -157,6 +157,7 @@ class Event extends Entity\PostManager
             $content = !empty($o['content']) ? $o['content'] : null;
             $location_mode = !empty($o['location_mode']) ? $o['location_mode'] : null;
             $location = !empty($o['location']) ? maybe_serialize($o['location']) : null;
+            $oc_booking_link = !empty($o['booking_link']) ? $o['booking_link'] : null;
 
             $wpdb->insert(
                 $db_table,
@@ -171,6 +172,7 @@ class Event extends Entity\PostManager
                     'content' => ($content),
                     'location_mode' => ($location_mode),
                     'location' => ($location),
+                    'booking_link' => ($oc_booking_link),
                 )
             );
         }

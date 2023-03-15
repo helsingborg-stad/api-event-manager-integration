@@ -3,7 +3,7 @@
 namespace EventManagerIntegration;
 
 global $eventDatabaseVersion;
-$eventDatabaseVersion = '1.1';
+$eventDatabaseVersion = '1.2';
 
 /**
  * Creates/updates necessary database tables
@@ -52,6 +52,7 @@ class Install
         content_mode VARCHAR(50) DEFAULT NULL,
         content LONGTEXT DEFAULT NULL,
         location_mode VARCHAR(50) DEFAULT NULL,
+        booking_link VARCHAR(400) DEFAULT NULL,
         location LONGTEXT DEFAULT NULL,
         PRIMARY KEY  (ID)
         ) $charsetCollate;";

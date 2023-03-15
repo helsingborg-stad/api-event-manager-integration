@@ -65,14 +65,14 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
                 } elseif ($post_status == 'draft' || $post_status == 'trash') {
                     $second = 'hidden';
                 }
-                echo '<a href="#" class="accept button-primary '.$first.'" postid="'.$postId.'">'.__(
+                echo '<a href="#" class="accept button-primary ' . $first . '" postid="' . $postId . '">' . __(
                     'Accept',
                     'event-integration'
-                    ).'</a>
-            <a href="#" class="deny button-primary '.$second.'" postid="'.$postId.'">'.__(
-                        'Deny',
-                        'event-integration'
-                    ).'</a>';
+                ) . '</a>
+            <a href="#" class="deny button-primary ' . $second . '" postid="' . $postId . '">' . __(
+                    'Deny',
+                    'event-integration'
+                ) . '</a>';
             }
         );
         $this->addTableColumn('date', __('Date', 'event-integration'));
@@ -114,9 +114,9 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($post->ID);
 
         // If event date has passed, redirect to next occasion
-        if(empty($occasion)) {
+        if (empty($occasion)) {
             $nextOccasion = $occasions[0] ?? false;
-            if(isset($nextOccasion->permalink)) {
+            if (isset($nextOccasion->permalink)) {
                 wp_redirect($nextOccasion->permalink);
             }
         }
@@ -134,15 +134,15 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         $eventData['eventArchive']          = add_query_arg('s', urlencode($post->post_title), get_post_type_archive_link(self::$postTypeSlug));
         $eventData['eventLink']             = $meta['event_link'] ?? false;
         $eventData['introText']             = '';
-        
+
         $extendedContent = get_extended($post->post_content);
-        if(!empty($extendedContent['main']) && !empty($extendedContent['extended'])) {
+        if (!empty($extendedContent['main']) && !empty($extendedContent['extended'])) {
             $eventData['introText'] = self::createLeadElement($extendedContent['main']);
             $eventData['content']   = $extendedContent['extended'];
         } else {
             $eventData['content'] = $post->post_content;
         }
-        $eventData['content'] = apply_filters( 'the_content', $eventData['content'] );
+        $eventData['content'] = apply_filters('the_content', $eventData['content']);
 
         if (function_exists('municipio_get_thumbnail_source')) {
             $eventData['image_src'] = municipio_get_thumbnail_source(
@@ -160,7 +160,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         $eventData['organizers'] = $meta['organizers'] ?? [];
         $eventData['supporters'] = $meta['supporters'] ?? [];
 
-        $bookingLink = get_post_meta($post->ID, 'booking_link', true);
+        $bookingLink = !empty($occasion['booking_link']) ? $occasion['booking_link'] : get_post_meta($post->ID, 'booking_link', true);
         $eventData['booking_link'] = !empty($bookingLink) ? $bookingLink : null;
 
         $ageGroupFrom = get_post_meta($post->ID, 'age_group_from', true);
@@ -174,7 +174,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         } elseif (!empty($ageGroupTo)) {
             $eventData['age_group'] = sprintf('%s %s %s', __('Up to', 'event-integration'), $ageGroupTo, __('years', 'event-integration'));
         }
-        
+
         $locationInfo = is_array($meta['location']) ? $meta['location'] : [];
         $locationInfo['additional_locations'] = $meta['additional_locations'] ?? null;
         $locationInfo['accessibility'] = $meta['accessibility'] ?? null;
@@ -206,9 +206,9 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
          $accessibilityLabels = [
             'Accessible toilet' => __('Accessible toilet', 'event-integration'),
             'Elevator/ramp' => __('Elevator/ramp', 'event-integration')
-        ];
+         ];
 
-        $data['eventLang'] = (object) array(
+         $data['eventLang'] = (object) array(
             'accessibilityLabels'       => array_filter($accessibilityLabels, fn($key) => in_array($key, $locationInfo['accessibility']), ARRAY_FILTER_USE_KEY),
             'link'                      => __('Event link', 'event-integration'),
             'ticket'                    => __('Ticket', 'event-integration'),
@@ -258,9 +258,9 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             'categories'                => __('Categories', 'event-integration'),
             'tags'                      => __('Tags', 'event-integration'),
             'socialLinks'               => __('Social links', 'event-integration')
-        );
+         );
 
-        return $data;
+         return $data;
     }
 
     public function getSocialLinks($meta)
@@ -276,7 +276,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             'youtube' => 'YouTube',
             'vimeo' => 'Vimeo',
         ];
-        
+
         return [
             'links' => $this->extractMetaFields($meta, array_keys($fields)),
             'labels' => $fields
@@ -286,8 +286,8 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
     public function extractMetaFields($meta, $fields)
     {
         $extracted = [];
-        foreach($fields as $field) {
-            if(isset($meta[$field])) {
+        foreach ($fields as $field) {
+            if (isset($meta[$field])) {
                 $extracted[$field] = $meta[$field];
             }
         }
@@ -297,7 +297,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
     public function getMeta($id)
     {
         $meta = [];
-        foreach(get_post_meta($id) ?: [] as $key => $value) {
+        foreach (get_post_meta($id) ?: [] as $key => $value) {
             $meta[$key] = isset($value[0]) ? maybe_unserialize($value[0]) : $value;
         }
         return $meta;
@@ -311,7 +311,8 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
      * @param string $replace   What to replace with
      * @return string           The new lead string
      */
-    private static function createLeadElement($lead, $search = '<p>', $replace = '<p class="lead">') {
+    private static function createLeadElement($lead, $search = '<p>', $replace = '<p class="lead">')
+    {
 
         $pos = strpos($lead, $search);
 
@@ -330,7 +331,8 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
      * @param string $string    A string that may contain empty ptags
      * @return string           A string that not contain empty ptags
      */
-    private static function removeEmptyPTag($string) {
+    private static function removeEmptyPTag($string)
+    {
         return preg_replace("/<p[^>]*>(?:\s|&nbsp;)*<\/p>/", '', $string);
     }
 
@@ -341,7 +343,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             'contact_email',
             'contact_phone'
         ];
-        
+
         return $this->extractMetaFields($meta, $fields);
     }
 
@@ -386,14 +388,14 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
 
         $bookingInfo = $this->addPriceInfo($priceFields, $bookingInfo);
 
-        if(isset($bookingInfo['booking_group']) && !empty($bookingInfo['booking_group'])) {
-            foreach($bookingInfo['booking_group'] as &$bookingGroup) {
+        if (isset($bookingInfo['booking_group']) && !empty($bookingInfo['booking_group'])) {
+            foreach ($bookingInfo['booking_group'] as &$bookingGroup) {
                 $bookingGroup = $this->addPriceInfo(['price_group'], $bookingGroup);
             }
         }
 
-        if(isset($bookingInfo['additional_ticket_types']) && !empty($bookingInfo['additional_ticket_types'])) {
-            foreach($bookingInfo['additional_ticket_types'] as &$ticketType) {
+        if (isset($bookingInfo['additional_ticket_types']) && !empty($bookingInfo['additional_ticket_types'])) {
+            foreach ($bookingInfo['additional_ticket_types'] as &$ticketType) {
                 $ticketType = $this->addPriceInfo(['minimum_price', 'maximum_price'], $ticketType);
             }
         }
@@ -403,12 +405,12 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
 
     public function addPriceInfo($priceFields, $data)
     {
-        foreach($priceFields as $key => $priceField) {
-            if(is_array($priceField)) {
-                if(isset($data[$key])) {
+        foreach ($priceFields as $key => $priceField) {
+            if (is_array($priceField)) {
+                if (isset($data[$key])) {
                     $data[$key] = $this->addPriceInfo($priceField, $data[$key]);
                 }
-            } elseif(isset($data[$priceField]) && !empty($data[$priceField])) {
+            } elseif (isset($data[$priceField]) && !empty($data[$priceField])) {
                 $data[$priceField] = [
                     'price'         => $data[$priceField],
                     'formatted_price'  => \EventManagerIntegration\App::formatPrice($data[$priceField]),
