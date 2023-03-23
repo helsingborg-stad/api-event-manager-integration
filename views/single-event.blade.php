@@ -33,7 +33,7 @@
         @typography([
             'variant' => 'h1',
             'element' => 'span',
-            'classList' => ['modularity-event-title', 'u-align-self--center', 'u-margin__left--2']
+            'classList' => ['modularity-event-title', 'u-align-self--center', 'u-margin__left--2', 'u-margin__top--0']
         ])
             {{ the_title() }}
         @endtypography
