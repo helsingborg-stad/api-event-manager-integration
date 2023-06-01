@@ -23,7 +23,7 @@ class Events
     {
         register_rest_route(
             'wp/v2',
-            '/'.$this->postType.'/'.'module',
+            '/' . $this->postType . '/' . 'module',
             array(
                 'methods' => \WP_REST_Server::READABLE,
                 'callback' => array($this, 'getEvents'),
@@ -196,7 +196,7 @@ class Events
         }
 
         // Get events
-        $events = \EventManagerIntegration\Helper\QueryEvents::getEventsByInterval($params, 1);
+        $events = \EventManagerIntegration\Helper\QueryEvents::getEventsByIntervalCached($params, 1);
         // Return error if result is empty
         if (empty($events)) {
             return new \WP_REST_Response(
@@ -245,7 +245,7 @@ class Events
 
         $template = $data['mod_event_display'] ?? $settingsData['mod_event_display'] ?? 'list';
 
-        $class = '\EventManagerIntegration\Module\Event\TemplateController\\'.ucwords($template).'Template';
+        $class = '\EventManagerIntegration\Module\Event\TemplateController\\' . ucwords($template) . 'Template';
 
         if (class_exists($class)) {
             $controller = new $class(array(), array(), $data);
@@ -257,7 +257,6 @@ class Events
         $defaultImage = (!empty($data['mod_event_def_image'])) ? $data['mod_event_def_image'] : $settingsData['mod_event_def_image'];
 
         foreach ($events as &$event) {
-        
             // Set permalink url with date parameter
             $event->permalink = esc_url(
                 add_query_arg('date', preg_replace('/\D/', '', $event->start_date), get_permalink($event->ID))
@@ -273,11 +272,13 @@ class Events
             // Get image url
             switch ($template) {
                 case 'index':
-                    if (function_exists('municipio_get_thumbnail_source') && municipio_get_thumbnail_source(
-                        $event->ID,
-                        array($data['imageDimensions']['width'], $data['imageDimensions']['height']),
-                        $data['imageRatio']
-                    )) {
+                    if (
+                        function_exists('municipio_get_thumbnail_source') && municipio_get_thumbnail_source(
+                            $event->ID,
+                            array($data['imageDimensions']['width'], $data['imageDimensions']['height']),
+                            $data['imageRatio']
+                        )
+                    ) {
                         $event->image_url = municipio_get_thumbnail_source(
                             $event->ID,
                             array($data['imageDimensions']['width'], $data['imageDimensions']['height']),
@@ -295,9 +296,11 @@ class Events
                     }
                     break;
                 default:
-                    if (function_exists('municipio_get_thumbnail_source') && municipio_get_thumbnail_source(
-                        $event->ID
-                    )) {
+                    if (
+                        function_exists('municipio_get_thumbnail_source') && municipio_get_thumbnail_source(
+                            $event->ID
+                        )
+                    ) {
                         $event->image_url = municipio_get_thumbnail_source($event->ID);
                     } elseif (!empty($defaultImage)) {
                         $src = wp_get_attachment_image_src(
