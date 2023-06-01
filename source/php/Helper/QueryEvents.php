@@ -6,24 +6,24 @@ class QueryEvents
 {
     public static function getEventsByIntervalCached($params, $page = 1)
     {
-    // Create a unique key for this set of parameters
+        // Create a unique key for this set of parameters
         $paramsKey = hash('sha256', serialize($params));
 
-    // Try to get the cached events
+        // Try to get the cached events
         $cachedEvents = get_transient("events_interval_$paramsKey");
 
-    // If the cache is found and is valid, return it
+        // If the cache is found and is valid, return it
         if ($cachedEvents !== false) {
             return $cachedEvents;
         }
 
-    // If the cache is not found or is expired, fetch the events
+        // If the cache is not found or is expired, fetch the events
         $events = self::getEventsByInterval($params, $page);
 
-    // Cache the fetched events for 24 hours
+        // Cache the fetched events for 24 hours
         set_transient("events_interval_$paramsKey", $events, DAY_IN_SECONDS);
 
-    // Return the fetched events
+        // Return the fetched events
         return $events;
     }
 
