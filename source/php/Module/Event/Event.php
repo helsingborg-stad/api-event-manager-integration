@@ -6,7 +6,7 @@ class Event extends \Modularity\Module
 {
     public $slug = 'event';
     public $supports = array();
-    public $templateDir = EVENTMANAGERINTEGRATION_PATH.'source/php/Module/Event/views/';
+    public $templateDir = EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/Event/views/';
     public $template;
     public $lang;
 
@@ -26,7 +26,7 @@ class Event extends \Modularity\Module
             10,
             2
         );
-        
+
         add_filter('the_content', array($this, 'renderEmails'), 10, 1);
     }
 
@@ -34,7 +34,7 @@ class Event extends \Modularity\Module
     {
         $this->getTemplateData($this->template);
 
-        return 'event-'.$this->template.'.blade.php';
+        return 'event-' . $this->template . '.blade.php';
     }
 
     public function getTemplateData($template)
@@ -42,7 +42,7 @@ class Event extends \Modularity\Module
         $template = explode('-', $template);
         $template = array_map('ucwords', $template);
         $template = implode('', $template);
-        $class = '\EventManagerIntegration\Module\Event\TemplateController\\'.$template.'Template';
+        $class = '\EventManagerIntegration\Module\Event\TemplateController\\' . $template . 'Template';
 
         if (class_exists($class)) {
             $controller = new $class($this, $this->args, $this->data);
@@ -67,16 +67,16 @@ class Event extends \Modularity\Module
 
         // Cards module data
         $data['settings']         = $data;
-        
+
         $this->template     = !empty($data['mod_event_display']) ? $data['mod_event_display'] : 'list';
-        
+
         $data['template']         = $this->template;
         $data['post_id']          = $post->ID;
         $data['archive_url']      = get_post_type_archive_link('event');
         $data['rest_url']         = get_rest_url();
-              
+
         $days_ahead         = isset($data['mod_event_interval']) ? $data['mod_event_interval'] : 0;
-        
+
         $data['end_date']         = date('Y-m-d', strtotime("today midnight +$days_ahead days"));
         $data['only_todays_date'] = $data['mod_events_hide_past_events'] ?? false;
         $data['lat']              = (isset($data['mod_event_geographic']['lat'])) ? $data['mod_event_geographic']['lat'] : null;
@@ -103,7 +103,7 @@ class Event extends \Modularity\Module
 
         // Language
         $data['lang'] = $this->lang;
-        
+
         $data['card_style'] = get_theme_mod('flat_ui_design') ? "c-card--flat" : "";
 
         $data['events'] = $this->setOccassion($data['events']);
@@ -111,7 +111,7 @@ class Event extends \Modularity\Module
         $data['events'] = $this->setPermalink($data['events']);
         $data['paginationList'] = $this->getPagination($data['pagesCount']);
         $data['no_events'] = translate('No events found', 'event-integration');
-        
+
 
         return $data;
     }
@@ -143,8 +143,10 @@ class Event extends \Modularity\Module
         $total_posts = count($posts);
         $pages = ceil($total_posts / $max_per_page);
 
-        if (isset($fields->mod_event_pagination_limit) && $fields->mod_event_pagination_limit >= 0
-            && $fields->mod_event_pagination_limit <= $pages) {
+        if (
+            isset($fields->mod_event_pagination_limit) && $fields->mod_event_pagination_limit >= 0
+            && $fields->mod_event_pagination_limit <= $pages
+        ) {
             $pages = $fields->mod_event_pagination_limit;
         }
 
@@ -194,7 +196,7 @@ class Event extends \Modularity\Module
 
         $params = array_merge($default_params, $params);
 
-        $events = \EventManagerIntegration\Helper\QueryEvents::getEventsByInterval($params, $page);
+        $events = \EventManagerIntegration\Helper\QueryEvents::getEventsByIntervalCached($params, $page);
 
         return $events;
     }
@@ -251,7 +253,7 @@ class Event extends \Modularity\Module
 
         if ($numberOfPages > 1) {
             for ($i = 1; $i <= $numberOfPages; $i++) {
-                $href = $archiveUrl . '?' . $this->setQueryString($i). "#event";
+                $href = $archiveUrl . '?' . $this->setQueryString($i) . "#event";
 
                 $pagination[] = array(
                     'href' => $href,
@@ -418,7 +420,7 @@ class Event extends \Modularity\Module
     {
         wp_enqueue_script(
             'vendor-pagination',
-            EVENTMANAGERINTEGRATION_URL.'/source/js/vendor/simple-pagination/jquery.simplePagination.min.js',
+            EVENTMANAGERINTEGRATION_URL . '/source/js/vendor/simple-pagination/jquery.simplePagination.min.js',
             'jquery',
             false,
             true
@@ -428,8 +430,8 @@ class Event extends \Modularity\Module
         \EventManagerIntegration\Helper\React::enqueue();
 
         wp_enqueue_script(
-            'modularity-'.$this->slug,
-            EVENTMANAGERINTEGRATION_URL.'/dist/'.\EventManagerIntegration\Helper\CacheBust::name(
+            'modularity-' . $this->slug,
+            EVENTMANAGERINTEGRATION_URL . '/dist/' . \EventManagerIntegration\Helper\CacheBust::name(
                 'js/event-integration-module-event.js'
             ),
             array('jquery', 'react', 'react-dom'),
@@ -438,15 +440,15 @@ class Event extends \Modularity\Module
         );
 
         wp_enqueue_style(
-            'modularity-'.$this->slug,
-            EVENTMANAGERINTEGRATION_URL.'/dist/'.\EventManagerIntegration\Helper\CacheBust::name(
+            'modularity-' . $this->slug,
+            EVENTMANAGERINTEGRATION_URL . '/dist/' . \EventManagerIntegration\Helper\CacheBust::name(
                 'js/event-integration-module-event.css'
             ),
             array()
         );
 
         wp_localize_script(
-            'modularity-'.$this->slug,
+            'modularity-' . $this->slug,
             'modEvent',
             array(
                 'moreEvents' => __('More events', 'event-integration'),
@@ -479,15 +481,15 @@ class Event extends \Modularity\Module
      * @param  array $field An array containing all the field settings
      * @return array $args
      */
-     public function filterEventCategories($args, $field)
-     {
-         if (function_exists('pll_default_language')) {
-             $args['lang'] = pll_default_language();
-         }
+    public function filterEventCategories($args, $field)
+    {
+        if (function_exists('pll_default_language')) {
+            $args['lang'] = pll_default_language();
+        }
 
-         return $args;
-     }
-     
+        return $args;
+    }
+
      /**
       * If the post type is an event, and the content contains an @ symbol, then explode the content
       * into an array of words, and if any of those words are emails, then wrap them in a mailto: tag
@@ -496,20 +498,20 @@ class Event extends \Modularity\Module
       *
       * @return The content of the post.
       */
-     public function renderEmails($content)
-     {
-         if ('event' === get_post_type()) {
-             if (str_contains($content, '@')) {
-                 $textParts = explode(' ', $content);
-                
-                 foreach ($textParts as $key => $text) {
-                     if (is_email($text)) {
-                         $textParts[$key] = '<a href="mailto:'. $text. '">'. $text. '</a>';
-                     }
-                 }
-                 return implode(' ', $textParts);
-             }
-         }
-         return $content;
-     }
+    public function renderEmails($content)
+    {
+        if ('event' === get_post_type()) {
+            if (str_contains($content, '@')) {
+                $textParts = explode(' ', $content);
+
+                foreach ($textParts as $key => $text) {
+                    if (is_email($text)) {
+                        $textParts[$key] = '<a href="mailto:' . $text . '">' . $text . '</a>';
+                    }
+                }
+                return implode(' ', $textParts);
+            }
+        }
+        return $content;
+    }
 }
