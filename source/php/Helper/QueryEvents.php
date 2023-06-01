@@ -4,6 +4,29 @@ namespace EventManagerIntegration\Helper;
 
 class QueryEvents
 {
+    public static function getEventsByIntervalCached($params)
+    {
+    // Create a unique key for this set of parameters
+        $paramsKey = md5(serialize($params));
+
+    // Try to get the cached events
+        $cachedEvents = get_transient("events_interval_$paramsKey");
+
+    // If the cache is found and is valid, return it
+        if ($cachedEvents !== false) {
+            return $cachedEvents;
+        }
+
+    // If the cache is not found or is expired, fetch the events
+        $events = self::getEventsByInterval($params);
+
+    // Cache the fetched events for 24 hours
+        set_transient("events_interval_$paramsKey", $events, DAY_IN_SECONDS);
+
+    // Return the fetched events
+        return $events;
+    }
+
     /**
      * Get events with occurance date within date range and other parameters
      * @param  array       $params      array of query arguments:
@@ -68,7 +91,7 @@ class QueryEvents
         $limit = intval($params['display_limit']);
         $offset = ($page - 1) * $limit;
 
-        $db_table = $wpdb->prefix."integrate_occasions";
+        $db_table = $wpdb->prefix . "integrate_occasions";
         $query = "
         SELECT      *, $wpdb->posts.ID AS ID
         FROM        $wpdb->posts
@@ -98,11 +121,11 @@ class QueryEvents
         }
 
         if ($hidePastEvents) {
-            $query .= "AND $db_table.end_date > '". date('Y-m-d H:i:s')."' ";
+            $query .= "AND $db_table.end_date > '" . date('Y-m-d H:i:s') . "' ";
         }
 
         if ($onlyTodaysDate) {
-            $query .= "AND $db_table.end_date <= '". date('Y-m-d H:i:s', strtotime('tomorrow - 1 second'))."' ";
+            $query .= "AND $db_table.end_date <= '" . date('Y-m-d H:i:s', strtotime('tomorrow - 1 second')) . "' ";
         }
 
         $query .= ($searchString) ? "AND (($wpdb->posts.post_title LIKE %s) OR ($wpdb->posts.post_content LIKE %s))" : '';
@@ -113,7 +136,7 @@ class QueryEvents
         $query .= ($idString != null) ? "AND ($wpdb->posts.ID IN ($idString)) " : '';
         $query .= "GROUP BY $wpdb->posts.ID, $db_table.start_date, $db_table.end_date ";
         $query .= "ORDER BY $db_table.start_date ASC";
-        $query .= ($limit == -1) ? '' : ' LIMIT'.' '.$offset.','.$limit;
+        $query .= ($limit == -1) ? '' : ' LIMIT' . ' ' . $offset . ',' . $limit;
 
         $placeholders = array(
             'event',
@@ -124,8 +147,8 @@ class QueryEvents
             $params['end_date'],
         );
         if ($searchString) {
-            $placeholders[] = '%'.$wpdb->esc_like($searchString).'%';
-            $placeholders[] = '%'.$wpdb->esc_like($searchString).'%';
+            $placeholders[] = '%' . $wpdb->esc_like($searchString) . '%';
+            $placeholders[] = '%' . $wpdb->esc_like($searchString) . '%';
         }
 
         $completeQuery = $wpdb->prepare(
@@ -133,7 +156,7 @@ class QueryEvents
             $placeholders
         );
         $events = $wpdb->get_results($completeQuery);
-        
+
         return $events;
     }
 
@@ -146,7 +169,7 @@ class QueryEvents
     public static function getEventOccasions($post_id, $custom = false)
     {
         global $wpdb;
-        $db_table = $wpdb->prefix."integrate_occasions";
+        $db_table = $wpdb->prefix . "integrate_occasions";
 
         $query = "
         SELECT      *
@@ -207,7 +230,7 @@ class QueryEvents
         if (strlen($string) <= $limit || $limit == -1) {
             return $string;
         } else {
-            $y = mb_substr($string, 0, $limit, "utf-8").'...';
+            $y = mb_substr($string, 0, $limit, "utf-8") . '...';
 
             return $y;
         }
