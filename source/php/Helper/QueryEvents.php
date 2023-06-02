@@ -21,7 +21,7 @@ class QueryEvents
         $events = self::getEventsByInterval($params, $page);
 
         // Cache the fetched events for 24 hours
-        set_transient("events_interval_$paramsKey", $events, DAY_IN_SECONDS);
+        set_transient("events_interval_$paramsKey", $events, 30 * MINUTE_IN_SECONDS);
 
         // Return the fetched events
         return $events;
