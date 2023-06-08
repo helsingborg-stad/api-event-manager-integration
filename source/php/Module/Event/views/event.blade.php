@@ -4,7 +4,7 @@
     'classList' => [$classes],
     'attributeList' => [
         'modularity-event' => '',
-        'js-pagination-target' => ''
+        'data-js-pagination-target' => ''
     ],
     'context' => ['module.posts.list']
 ])
