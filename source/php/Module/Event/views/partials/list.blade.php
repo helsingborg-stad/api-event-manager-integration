@@ -2,7 +2,7 @@
     @collection([
         'classList' => ['c-collection--event', 'c-collection--bordered'],
         'attributeList' => [
-            'js-pagination-container' => ''
+            'data-js-pagination-container' => ''
         ]
     ])
 
@@ -11,7 +11,7 @@
                 $event->passed = isset($event->end_date) && strtotime($event->end_date) < $date_now ? true : false;
             @endphp
             <a class="c-collection__item c-collection__item--action {{ $event->passed ? 'c-collection__item--passed' : '' }}"
-                href="{{ $event->permalink }}" js-pagination-item>
+                href="{{ $event->permalink }}" data-js-pagination-item>
                 <span class="c-collection__icon c-collection__icon--date">
                     <span class="c-collection__date">
                         <strong class="c-collection__day"><span>{{ $event->occasionStart['date'] }}</span></strong>
