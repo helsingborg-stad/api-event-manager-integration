@@ -16,7 +16,7 @@ class EventForm extends \Modularity\Module
         $this->nameSingular = __('Event form v2', 'event-integration'); // TODO: Remove v2!
         $this->namePlural = __('Event forms v2', 'event-integration'); // TODO: Remove v2!
         $this->description = __('Displays submit event form', 'event-integration');
-        $this->validator = new \JsonSchema\Validator;
+        $this->validator = new \JsonSchema\Validator();
     }
 
     public function data(): array
@@ -35,9 +35,9 @@ class EventForm extends \Modularity\Module
             'validateMessage' => __('Form is successfully being sent.', 'event-integration'),
             'submitButtonText' => __('Send', 'event-integration'),
             'reloadButtonText' => __('Go back', 'event-integration'),
-        ];
+         ];
 
-        return $data;
+         return $data;
     }
 
     public function template()
