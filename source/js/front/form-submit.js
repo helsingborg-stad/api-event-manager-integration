@@ -24,12 +24,17 @@ const eventFormSubmit = {
                 const formRequests = [];
                 formRequests.push(eventFormSubmit.submitImageData(imageData));
 
+                const formUserGroups = formData.user_groups.join(',');
+
                 if (formData.event_organizer === 'new') {
-                    const organizerData = { title: '', phone: '', email: '' };
+                    const organizerData = { title: '', phone: '', email: '', user_groups: formUserGroups };
                     Object.keys(organizerData).forEach(key => {
+                        
                         const organizerField = form.querySelector(`[name="organizer-${key}"]`);
                         if (organizerField) {
                             organizerData[key] = organizerField.value;
+                        } else if(key === 'user_groups') {
+                            organizerData['user_groups'] = formUserGroups;
                         }
                     });
 
@@ -43,11 +48,13 @@ const eventFormSubmit = {
                 }
 
                 if (formData.event_location === 'new') {
-                    const locationData = { title: '', street_address: '', city: '', postal_code: '' };
+                    const locationData = { title: '', street_address: '', city: '', postal_code: '', user_groups: formUserGroups };
                     Object.keys(locationData).forEach(key => {
                         const locationField = form.querySelector(`[name="location-${key.replace('_', '-')}"]`);
                         if (locationField) {
                             locationData[key] = locationField.value;
+                        } else if(key === 'user_groups') {
+                            locationData['user_groups'] = formUserGroups;
                         }
                     });
 
