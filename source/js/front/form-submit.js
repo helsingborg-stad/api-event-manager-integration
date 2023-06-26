@@ -25,7 +25,7 @@ const eventFormSubmit = {
                 formRequests.push(eventFormSubmit.submitImageData(imageData));
 
                 if (formData.event_organizer === 'new') {
-                    const organizerData = { title: '', phone: '', email: '' };
+                    const organizerData = { title: '', phone: '', email: '', user_groups: '' };
                     Object.keys(organizerData).forEach(key => {
                         const organizerField = form.querySelector(`[name="organizer-${key}"]`);
                         if (organizerField) {
@@ -43,7 +43,7 @@ const eventFormSubmit = {
                 }
 
                 if (formData.event_location === 'new') {
-                    const locationData = { title: '', street_address: '', city: '', postal_code: '' };
+                    const locationData = { title: '', street_address: '', city: '', postal_code: '', user_groups: '' };
                     Object.keys(locationData).forEach(key => {
                         const locationField = form.querySelector(`[name="location-${key.replace('_', '-')}"]`);
                         if (locationField) {
