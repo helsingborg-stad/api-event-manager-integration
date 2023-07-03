@@ -274,7 +274,7 @@ abstract class PostManager
             $mimes = new \Mimey\MimeTypes;
 
             //Temp name
-            $filenameTemp = $filename . ".tmp"; 
+            $filenameTemp = urlencode($filename) . ".tmp";
             
             // Get the file content
             $options = array(
