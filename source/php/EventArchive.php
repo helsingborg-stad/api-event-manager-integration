@@ -21,6 +21,17 @@ class EventArchive
 
         add_filter('post_type_link', array($this, 'addEventDateArgsToPermalinks'), 10, 3);
         add_filter('get_the_time', array($this, 'filterEventDate'), 10, 3);
+
+        add_filter('Municipio/Archive/showFilter', [$this, 'showFilter'], 999, 2);
+    }
+
+    public function showFilter($enabledFilters, $args)
+    {
+        $current = get_queried_object();
+        if (is_a($current, 'WP_Term') && ('event_categories' === $current->taxonomy || 'event_tags' === $current->taxonomy)) {
+            return true;
+        }
+        return $enabledFilters;
     }
 
     /**
@@ -109,6 +120,8 @@ class EventArchive
     {
         $fromDate = null;
         $toDate = null;
+
+        global $wp_query;
 
         if (isset($_GET['from']) && !empty($_GET['from'])) {
             $fromDate = str_replace('/', '-', sanitize_text_field($_GET['from']));
