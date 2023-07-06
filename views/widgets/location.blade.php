@@ -11,7 +11,7 @@
                 </p>
 
                 @link([
-                    'attributeList' => ['aria-label' => $eventLang->locationMapAriaLabel],
+                    'attributeList' => ['aria-label' => $eventLang->locationShowOnMap],
                     'href' => 'https://www.google.com/maps/dir/' . urlencode(
                         implode(' ', [
                             $locationInfo['street_address'],

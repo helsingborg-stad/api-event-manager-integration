@@ -243,7 +243,6 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             'location'                  => __('Location', 'event-integration'),
             'locationAccessibility'     => __('Accessibility on the location', 'event-integration'),
             'locationOthers'            => __('Other locations', 'event-integration'),
-            'locationMapAriaLabel'      => __('Link to map', 'event-integration'),
             'locationShowOnMap'         => __('Show on map', 'event-integration'),
             'cancelled'                 => __('Cancelled', 'event-integration'),
             'rescheduled'               => __('Rescheduled', 'event-integration'),
