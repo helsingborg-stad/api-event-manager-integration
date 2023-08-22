@@ -1,4 +1,4 @@
-@if($bookingInfo['membership_cards'])
+@if(!empty($bookingInfo['membership_cards']))
     @foreach($bookingInfo['membership_cards'] as $card)
         @card([])
             <div class="c-card__body">

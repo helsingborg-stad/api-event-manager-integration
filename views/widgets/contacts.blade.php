@@ -4,7 +4,7 @@
             @include('partials.heading', ['heading' => $eventLang->contact])
             
             <ul role="list" class="unlist u-margin__top--2">
-                @if($contactInfo['contact_information'])
+                @if(!empty($contactInfo['contact_information']))
                     <li role="listitem">{{ $contactInfo['contact_information'] }}</li>
                 @endif
                 

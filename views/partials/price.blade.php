@@ -38,7 +38,7 @@
     </ul>
 @endif
 
-@if($bookingInfo['membership_cards'])
+@if(!empty($bookingInfo['membership_cards']))
     @typography(['id' => 'single-event-membership-card'])
         <strong>{{ $eventLang->membershipCardsIncluded }}</strong>
     @endtypography
