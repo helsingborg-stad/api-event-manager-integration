@@ -1,9 +1,9 @@
-@if($bookingInfo['additional_ticket_types'] && !empty($bookingInfo['additional_ticket_types']))
+@if(!empty($bookingInfo['additional_ticket_types']))
     @card([])
         <div class="c-card__body">
             @include('partials.heading', ['heading' => $eventLang->ticketTypes])
 
-            @if(!empty($bookingInfo['additional_ticket_types']) && is_array($bookingInfo['additional_ticket_types']))
+            @if(is_array($bookingInfo['additional_ticket_types']))
                 @foreach ($bookingInfo['additional_ticket_types'] as $index => $ticketType)
                     @if(!empty($ticketType['ticket_name']))
                         @typography(['id' => 'single-event-tickettypes-' . $index])

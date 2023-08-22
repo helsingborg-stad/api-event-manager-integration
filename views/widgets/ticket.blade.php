@@ -4,19 +4,19 @@
 
             @include('partials.heading', ['heading' => $eventLang->ticket])
 
-            @if($bookingInfo['price_information'])
+            @if(!empty($bookingInfo['price_information']))
                 @typography
                     {{ $bookingInfo['price_information'] }}
                 @endtypography
             @endif
 
-            @if($bookingInfo['ticket_includes'])
+            @if(!empty($bookingInfo['ticket_includes']))
                 @typography
                     {{ sprintf($eventLang->ticketIncludes, $bookingInfo['ticket_includes']) }}
                 @endtypography
             @endif
             
-            @if($event['booking_link'])
+            @if(!empty($event['booking_link']))
                 @button([
                     'color' => 'primary',
                     'style' => 'filled',
