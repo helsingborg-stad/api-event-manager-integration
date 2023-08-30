@@ -20,5 +20,10 @@
         "philo/laravel-blade": "^3.1",
         "ralouphie/mimey": "^2.1",
         "justinrainbow/json-schema": "^5.2"
+    },
+    "autoload": {
+        "psr-4": {
+          "EventManagerIntegration\\": "source/php/"
+        }
     }
 }

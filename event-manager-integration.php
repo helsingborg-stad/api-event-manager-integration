@@ -39,14 +39,11 @@ define('EVENTMANAGERINTEGRATION_CACHE_DIR', trailingslashit(wp_upload_dir()['bas
 
 load_plugin_textdomain('event-integration', false, plugin_basename(dirname(__FILE__)) . '/languages');
 
-require_once EVENTMANAGERINTEGRATION_PATH . 'source/php/Vendor/Psr4ClassLoader.php';
+// Autoload from plugin
+if (file_exists(EVENTMANAGERINTEGRATION_PATH . 'vendor/autoload.php')) {
+    require_once EVENTMANAGERINTEGRATION_PATH . 'vendor/autoload.php';
+}
 require_once EVENTMANAGERINTEGRATION_PATH . 'Public.php';
-
-// Instantiate and register the autoloader
-$loader = new EventManagerIntegration\Vendor\Psr4ClassLoader();
-$loader->addPrefix('EventManagerIntegration', EVENTMANAGERINTEGRATION_PATH);
-$loader->addPrefix('EventManagerIntegration', EVENTMANAGERINTEGRATION_PATH . 'source/php/');
-$loader->register();
 
 // Acf auto import and export
 $acfExportManager = new AcfExportManager\AcfExportManager();
