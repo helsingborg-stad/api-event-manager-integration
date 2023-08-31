@@ -13,6 +13,7 @@
     'helperText' => $field['description'],
     'required' => $field['required'] ?? false,
     'preselected' => $preselected,
+    'placeholder' => $field['placeholder']?? false,
     'options' => $field['options'],
     'name' => $field['name'],
     'selectAttributeList' => ['data-source' => json_encode($field['dataSource'])],
