@@ -9,5 +9,5 @@
     'suffix' => $field['suffix'] ?? '',
     'helperText' => $field['description'] ?? '',
     'placeholder' => $field['placeholder'] ?? '',
-], (array) $field['props'] ?? []))
+], !empty($field['props']) ? (array) $field['props'] : []))
 @endfield

@@ -6,17 +6,16 @@
             'type' => 'radio',
             'checked' => $loop->index === 0,
             'attributeList' => [
-                'data-id' => $option->id,
+                'data-id' => !empty($option->id) ? $option->id : uniqid(),
                 'name' => $field['name'],
                 'value' => $value,
             ],
             'classList' => ['u-display--inline-block'],
             'label' => $label,
-            'size' => $field['size'],
-            'required' => $field['required']
+            'required' => !empty($field['required']) ? true : false,
         ])
         @endoption
     @endforeach
 
-    @include('components.fields.helper', ['helper' => $field['description']])
+    @include('components.fields.helper', ['helper' => !empty($field['description']) ? $field['description'] : false])
 </div>
