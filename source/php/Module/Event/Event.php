@@ -419,14 +419,7 @@ class Event extends \Modularity\Module
      */
     public function script()
     {
-        wp_enqueue_script(
-            'vendor-pagination',
-            EVENTMANAGERINTEGRATION_URL . '/dist/' . \EventManagerIntegration\Helper\CacheBust::name('js/vendor/simple-pagination/jquery.simplePagination.js'),
-            'jquery',
-            false,
-            true
-        );
-        
+ 
         // Enqueue React
         \EventManagerIntegration\Helper\React::enqueue();
 
