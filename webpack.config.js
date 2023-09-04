@@ -14,21 +14,33 @@ const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 const { getIfUtils, removeEmpty } = require('webpack-config-utils');
 const { ifProduction } = getIfUtils(process.env.NODE_ENV);
 
+const isProduction = ifProduction(true, false);
+
+// Define entry points based on environment
+const entry = {
+  'js/event-integration-module-event': ['./source/js/Module/Event/index.js'],
+  'js/event-integration-front': ['./source/js/front/index.js'],
+  'js/event-integration-admin': ['./source/js/admin/index.js'],
+  'css/event-manager-integration': './source/sass/event-manager-integration.scss',
+  'css/event-manager-integration-admin': './source/sass/event-manager-integration-admin.scss',
+};
+
+// Conditionally add React and React DOM entries based on environment
+if (!isProduction) {
+  entry['js/event-integration-react'] = './source/js/front/react/react.production.min.js';
+  entry['js/event-integration-react-dom'] = './source/js/front/react/react-dom.production.min.js';
+} else {
+  entry['js/event-integration-react'] = './source/js/front/react/react.js';
+  entry['js/event-integration-react-dom'] = './source/js/front/react/react-dom.js';
+}
+
 
 module.exports = {
   mode: ifProduction('production', 'development'),
   /**
    * Add your entry files here
    */
-  entry: {
-    'js/event-integration-module-event': ['./source/js/Module/Event/index.js'],
-    'js/event-integration-front': ['./source/js/front/index.js'],
-    'js/event-integration-react': './source/js/front/react/react.js',
-    'js/event-integration-react-dom': './source/js/front/react/react-dom.js',
-    'js/event-integration-admin': './source/js/admin/index.js',
-    'css/event-manager-integration': './source/sass/event-manager-integration.scss',
-    'css/event-manager-integration-admin': './source/sass/event-manager-integration-admin.scss'
-  },
+  entry: entry,
   /**
    * Output settings
    */

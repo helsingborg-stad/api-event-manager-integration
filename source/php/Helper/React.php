@@ -6,10 +6,6 @@ class React
 {
     public static function enqueue()
     {
-        // Use minified libraries if SCRIPT_DEBUG is turned off
-        $suffix = (defined('DEV_MODE') && DEV_MODE) ? 'development' : 'production.min';
-        $version = '17.0.1';
-
         //Enqueue react    
         wp_enqueue_script(
             'react',
