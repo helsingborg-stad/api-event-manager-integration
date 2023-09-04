@@ -24,14 +24,14 @@ class React
         //Enqueue react        
         wp_enqueue_script(
             'react',
-            EVENTMANAGERINTEGRATION_URL . '/dist/' . Helper\CacheBust::name('js/front/react/react.' . $suffix  . '.js'),
+            EVENTMANAGERINTEGRATION_URL . '/dist/' . \EventManagerIntegration\Helper\CacheBust::name('js/front/react/react.' . $suffix  . '.js'),
             'jquery',
             array(),
             null
         );
         wp_enqueue_script(
             'react-dom',
-            EVENTMANAGERINTEGRATION_URL . '/dist/' . Helper\CacheBust::name('js/front/react/react-dom.' . $suffix  . '.js'),
+            EVENTMANAGERINTEGRATION_URL . '/dist/' . \EventManagerIntegration\Helper\CacheBust::name('js/front/react/react-dom.' . $suffix  . '.js'),
             'jquery',
             array(),
             null

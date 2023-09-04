@@ -421,7 +421,7 @@ class Event extends \Modularity\Module
     {
         wp_enqueue_script(
             'vendor-pagination',
-            EVENTMANAGERINTEGRATION_URL . '/dist/' . Helper\CacheBust::name('js/vendor/simple-pagination/jquery.simplePagination.js'),
+            EVENTMANAGERINTEGRATION_URL . '/dist/' . \EventManagerIntegration\Helper\CacheBust::name('js/vendor/simple-pagination/jquery.simplePagination.js'),
             'jquery',
             false,
             true
