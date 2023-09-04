@@ -21,9 +21,22 @@ class React
         $suffix = (defined('DEV_MODE') && DEV_MODE) ? 'development' : 'production.min';
         $version = '17.0.1';
 
-        //Enqueue react
-        wp_enqueue_script('react', EVENTMANAGERINTEGRATION_URL.'/source/js/front/react/react.' . $suffix  . '.js', array(), null);
-        wp_enqueue_script('react-dom', EVENTMANAGERINTEGRATION_URL.'/source/js/front/react/react-dom.' . $suffix  . '.js', array(), null);      
+        //Enqueue react        
+        wp_enqueue_script(
+            'react',
+            EVENTMANAGERINTEGRATION_URL . '/dist/' . Helper\CacheBust::name('js/front/react/react.' . $suffix  . '.js'),
+            'jquery',
+            array(),
+            null
+        );
+        wp_enqueue_script(
+            'react-dom',
+            EVENTMANAGERINTEGRATION_URL . '/dist/' . Helper\CacheBust::name('js/front/react/react-dom.' . $suffix  . '.js'),
+            'jquery',
+            array(),
+            null
+        );
+        
 
     }
 }

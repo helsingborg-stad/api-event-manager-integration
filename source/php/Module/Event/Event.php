@@ -28,6 +28,7 @@ class Event extends \Modularity\Module
         );
 
         add_filter('the_content', array($this, 'renderEmails'), 10, 1);
+
     }
 
     public function template()
@@ -420,12 +421,12 @@ class Event extends \Modularity\Module
     {
         wp_enqueue_script(
             'vendor-pagination',
-            EVENTMANAGERINTEGRATION_URL . '/source/js/vendor/simple-pagination/jquery.simplePagination.min.js',
+            EVENTMANAGERINTEGRATION_URL . '/dist/' . Helper\CacheBust::name('js/vendor/simple-pagination/jquery.simplePagination.js'),
             'jquery',
             false,
             true
         );
-
+        
         // Enqueue React
         \EventManagerIntegration\Helper\React::enqueue();
 

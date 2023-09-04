@@ -126,7 +126,8 @@ class App
 
         wp_enqueue_script('auto-complete');
 
-        wp_register_script('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/' . Helper\CacheBust::name('js/event-integration-front.js'), 'jquery', false, true);
+        wp_register_script('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/' . $this->cacheBust->name('js/event-integration-front.js'), 'jquery', false, true);
+        
         wp_localize_script('event-integration', 'eventintegration', array(
             'ajaxurl' => admin_url('admin-ajax.php'),
             'apiurl' => get_field('event_api_url', 'option'),
