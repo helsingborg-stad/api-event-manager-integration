@@ -279,7 +279,7 @@ class Fields
                         'type' => 'select',
                         'required' => true,
                         'options' => [
-                            '' => __('Loading...', 'event-integration'),
+                            '' => __('Choose an orginizer', 'event-integration'),
                         ],
                         'dataSource' => [
                             'type' => 'post',
@@ -346,7 +346,7 @@ class Fields
                         'type' => 'select',
                         'required' => true,
                         'options' => [
-                            '' => __('Loading...', 'event-integration'),
+                            '' => __('Choose a location', 'event-integration'),
                         ],
                         'dataSource' => [
                             'type' => 'post',
@@ -638,6 +638,7 @@ class Fields
                     [
                         'name' => 'event_categories',
                         'label' => __('Choose categories that fit the event', 'event-integration'),
+                        'placeholder' => __('Choose categories', 'event-integration'),
                         'type' => 'select',
                         'multiple' => true,
                         'required' => true,
@@ -649,6 +650,7 @@ class Fields
                     [
                         'name' => 'event_tags',
                         'label' => __('Choose tags that fit the event', 'event-integration'),
+                        'placeholder' => __('Choose tags', 'event-integration'),
                         'type' => 'select',
                         'multiple' => true,
                         'required' => false,
