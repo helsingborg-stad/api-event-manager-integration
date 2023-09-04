@@ -23,8 +23,8 @@ module.exports = {
   entry: {
     'js/event-integration-module-event': ['./source/js/Module/Event/index.js'],
     'js/event-integration-front': ['./source/js/front/index.js'],
-    'js/event-integration-react': './source/js/front/react/react.development.js',
-    'js/event-integration-react-dom': './source/js/front/react/react-dom.development.js',
+    'js/event-integration-react': './source/js/front/react/react.js',
+    'js/event-integration-react-dom': './source/js/front/react/react-dom.js',
     'js/event-integration-admin': './source/js/admin/index.js',
     'css/event-manager-integration': './source/sass/event-manager-integration.scss',
     'css/event-manager-integration-admin': './source/sass/event-manager-integration-admin.scss'
