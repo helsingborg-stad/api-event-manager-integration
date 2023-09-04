@@ -26,7 +26,7 @@ const entry = {
 };
 
 // Conditionally add React and React DOM entries based on environment
-if (!isProduction) {
+if (isProduction) {
   entry['js/event-integration-react'] = './source/js/front/react/react.production.min.js';
   entry['js/event-integration-react-dom'] = './source/js/front/react/react-dom.production.min.js';
 } else {
