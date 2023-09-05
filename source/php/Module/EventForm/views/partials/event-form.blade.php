@@ -24,7 +24,7 @@
         'classList' => ['event-submit__submit-button'],
     ])
     @endbutton
-    
+
     @button([
         'text' => $lang['reloadButtonText'],
         'color' => 'default',

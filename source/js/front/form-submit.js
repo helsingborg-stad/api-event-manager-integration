@@ -134,13 +134,19 @@ const eventFormSubmit = {
                 .then(() => {
                     eventFormSubmit.formSentHandler();
                 })
-                .catch(err => reject(err));
+                .catch(err => {
+                    sentForm.querySelector('.c-form__notice-failed').style.display = 'block';
+                    sentForm.querySelector('.c-form__notice-failed').setAttribute('aria-hidden', 'false');
+                    reject(err)
+                });
         });
     },
     formSentHandler: () => {
         sentForm.querySelector('button[type="submit"]').classList.add('u-display--none');
         sentForm.querySelector('.o-grid.o-grid--form').classList.add('u-display--none');
         sentForm.querySelector('.event-reload__button').classList.remove('u-display--none');
+        sentForm.querySelector('.c-form__notice-success').style.display = 'block';
+        sentForm.querySelector('.c-form__notice-success').setAttribute('aria-hidden', 'false');
     },
     formToJsonData: (form) => {
         const formArray = eventFormSubmit.serializeArray(form);
