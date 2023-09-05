@@ -16,7 +16,6 @@ const { ifProduction } = getIfUtils(process.env.NODE_ENV);
 
 const isProduction = ifProduction(true, false);
 
-// Define entry points based on environment
 const entry = {
   'js/event-integration-module-event': ['./source/js/Module/Event/index.js'],
   'js/event-integration-front': ['./source/js/front/index.js'],
@@ -25,7 +24,6 @@ const entry = {
   'css/event-manager-integration-admin': './source/sass/event-manager-integration-admin.scss',
 };
 
-// Conditionally add React and React DOM entries based on environment
 if (isProduction) {
   entry['js/event-integration-react'] = './source/js/front/react/react.production.min.js';
   entry['js/event-integration-react-dom'] = './source/js/front/react/react-dom.production.min.js';
