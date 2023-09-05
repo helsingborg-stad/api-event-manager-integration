@@ -108,10 +108,12 @@ class SingleEventData
     {
         $diff = ($end - $start) / 60 / 60;
 
+        $singleEventData = new SingleEventData();
+
         // Add one day to number of days if the diff is more than 24 hours but less than 1 week
         return $diff >= 24 && $diff < (24 * 7)
             ? sprintf(__('%d days', 'event-integration'), (floor($diff / 24)) + 1)
-            : self::eventOccasionDuration($start, $end);
+            : $singleEventData->eventOccasionDuration($start, $end);
     }
 
     // Display hours + minutes if event duration is between 1 hour and 1 day
