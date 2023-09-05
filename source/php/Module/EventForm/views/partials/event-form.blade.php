@@ -1,6 +1,4 @@
     @form([
-        'errorMessage' => $lang['errorMessage'],
-        'validateMessage' => $lang['validateMessage'],
         'classList' => [
             "submit-event-form",
             "js-event-form",
@@ -24,6 +22,8 @@
         'classList' => ['event-submit__submit-button'],
     ])
     @endbutton
+
+    @include('components.form-notices')
     
     @button([
         'text' => $lang['reloadButtonText'],
