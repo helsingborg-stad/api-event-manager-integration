@@ -1,4 +1,3 @@
-import './event-pagination';
 import './event-map';
 import './event-widget';
 import './form';
