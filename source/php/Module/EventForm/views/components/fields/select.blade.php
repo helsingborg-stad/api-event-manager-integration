@@ -15,10 +15,8 @@
     'preselected' => !empty($preselected) ? true : false,
     'placeholder' => !empty($field['placeholder']) ? $field['placeholder'] : false,
     'options' => !empty($field['options']) ? $field['options'] : [],
-    'attributeList' => [
-        'data-source' => json_encode($field['dataSource']),
-        'name' => $field['name']
-    ],
+    'name' => $field['name'],
+    'selectAttributeList' => ['data-source' => json_encode($field['dataSource'])],
     'multiple' => !empty($field['multiple']) ? true : false,
 ])
 @endselect

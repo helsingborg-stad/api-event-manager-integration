@@ -57,6 +57,8 @@ class App
                 add_filter('Municipio/blade/view_paths', array($this, 'addViewPaths'), 2, 1);
             }
         }, 10);
+
+        $this->cacheBust = new \EventManagerIntegration\Helper\CacheBust();
     }
 
     /**
@@ -117,10 +119,8 @@ class App
         );
 
         // Scripts
-        wp_register_script('auto-complete', EVENTMANAGERINTEGRATION_URL . '/source/js/vendor/auto-complete/auto-complete.min.js', 'jquery', false, true);
-        wp_enqueue_script('auto-complete');
-
-        wp_register_script('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/' . Helper\CacheBust::name('js/event-integration-front.js'), 'jquery', false, true);
+        wp_register_script('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/' . $this->cacheBust->name('js/event-integration-front.js'), 'jquery', false, true);
+        
         wp_localize_script('event-integration', 'eventintegration', array(
             'ajaxurl' => admin_url('admin-ajax.php'),
             'apiurl' => get_field('event_api_url', 'option'),
