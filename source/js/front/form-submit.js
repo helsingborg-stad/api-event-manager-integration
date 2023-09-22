@@ -18,11 +18,15 @@ const eventFormSubmit = {
                 const imageInput = form.querySelector('input[name="image_input"]');
                 const formData = eventFormSubmit.formToJsonData(form);
 
-                const imageData = new FormData();
-                imageData.append('file', imageInput.files[0]);
-
                 const formRequests = [];
-                formRequests.push(eventFormSubmit.submitImageData(imageData));
+                const imageData = new FormData();
+                if (imageInput.files[0]) {
+                    imageData.append('file', imageInput.files[0]);
+                    formRequests.push(eventFormSubmit.submitImageData(imageData));
+                } else {
+                    formRequests.push(true);
+                }
+    
 
                 const formUserGroups = formData.user_groups.join(',');
 
@@ -135,6 +139,7 @@ const eventFormSubmit = {
                     eventFormSubmit.formSentHandler();
                 })
                 .catch(err => {
+                    console.log("Didnt work");
                     sentForm.querySelector('.c-form__notice-failed').style.display = 'block';
                     sentForm.querySelector('.c-form__notice-failed').setAttribute('aria-hidden', 'false');
                     reject(err)
