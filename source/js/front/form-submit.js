@@ -18,15 +18,14 @@ const eventFormSubmit = {
                 const imageInput = form.querySelector('input[name="image_input"]');
                 const formData = eventFormSubmit.formToJsonData(form);
 
-                const formRequests = [];
                 const imageData = new FormData();
+                let image = false;
+                imageData.append('file', imageInput.files[0]);
+
+                const formRequests = [];
                 if (imageInput.files[0]) {
-                    imageData.append('file', imageInput.files[0]);
-                    formRequests.push(eventFormSubmit.submitImageData(imageData));
-                } else {
-                    formRequests.push(true);
+                    image = eventFormSubmit.submitImageData(imageData);
                 }
-    
 
                 const formUserGroups = formData.user_groups.join(',');
 
@@ -69,9 +68,9 @@ const eventFormSubmit = {
                 }
 
                 Promise.all(formRequests)
-                    .then(([imageResponse, organizerResponse, locationResponse]) => {
-                        if (imageResponse?.success) {
-                            formData['featured_media'] = imageResponse.data;
+                    .then(([organizerResponse, locationResponse]) => {
+                        if (image) {
+                            formData['featured_media'] = image.data;
                         }
 
                         if (organizerResponse?.success) {
@@ -87,7 +86,7 @@ const eventFormSubmit = {
                             formData['location'] = locationResponse.data.id;
                         }
 
-                        const errorResponses = [imageResponse, organizerResponse, locationResponse].filter(x => !Array.isArray(x) && !x.success).map(x => x.data);
+                        const errorResponses = [organizerResponse, locationResponse].filter(x => !Array.isArray(x) && !x.success).map(x => x.data);
                         if (!errorResponses.length > 0) {
                             eventFormSubmit.submitFormData(formData, 'submit_event').then(response => {
                                 if (response.success) {
@@ -96,6 +95,7 @@ const eventFormSubmit = {
                             });
                         }
                     }).catch(e => {
+                        console.log(e);
                     }).finally(x => {
                         submitButton.disabled = false;
                     });
@@ -139,7 +139,6 @@ const eventFormSubmit = {
                     eventFormSubmit.formSentHandler();
                 })
                 .catch(err => {
-                    console.log("Didnt work");
                     sentForm.querySelector('.c-form__notice-failed').style.display = 'block';
                     sentForm.querySelector('.c-form__notice-failed').setAttribute('aria-hidden', 'false');
                     reject(err)
