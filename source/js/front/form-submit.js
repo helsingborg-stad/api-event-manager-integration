@@ -19,10 +19,13 @@ const eventFormSubmit = {
                 const formData = eventFormSubmit.formToJsonData(form);
 
                 const imageData = new FormData();
+                let image = false;
                 imageData.append('file', imageInput.files[0]);
 
                 const formRequests = [];
-                formRequests.push(eventFormSubmit.submitImageData(imageData));
+                if (imageInput.files[0]) {
+                    image = eventFormSubmit.submitImageData(imageData);
+                }
 
                 const formUserGroups = formData.user_groups.join(',');
 
@@ -65,9 +68,9 @@ const eventFormSubmit = {
                 }
 
                 Promise.all(formRequests)
-                    .then(([imageResponse, organizerResponse, locationResponse]) => {
-                        if (imageResponse?.success) {
-                            formData['featured_media'] = imageResponse.data;
+                    .then(([organizerResponse, locationResponse]) => {
+                        if (image) {
+                            formData['featured_media'] = image.data;
                         }
 
                         if (organizerResponse?.success) {
@@ -83,7 +86,7 @@ const eventFormSubmit = {
                             formData['location'] = locationResponse.data.id;
                         }
 
-                        const errorResponses = [imageResponse, organizerResponse, locationResponse].filter(x => !Array.isArray(x) && !x.success).map(x => x.data);
+                        const errorResponses = [organizerResponse, locationResponse].filter(x => !Array.isArray(x) && !x.success).map(x => x.data);
                         if (!errorResponses.length > 0) {
                             eventFormSubmit.submitFormData(formData, 'submit_event').then(response => {
                                 if (response.success) {
@@ -92,6 +95,7 @@ const eventFormSubmit = {
                             });
                         }
                     }).catch(e => {
+                        console.log(e);
                     }).finally(x => {
                         submitButton.disabled = false;
                     });
