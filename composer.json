@@ -23,7 +23,8 @@
     },
     "autoload": {
         "psr-4": {
-          "EventManagerIntegration\\": "source/php/"
+            "EventManagerIntegration\\": "source/php/"
         }
-    }
+    },
+    "version": "1.0.0"
 }
