@@ -19,12 +19,13 @@ const eventFormSubmit = {
                 const formData = eventFormSubmit.formToJsonData(form);
 
                 const imageData = new FormData();
-                let image = false;
                 imageData.append('file', imageInput.files[0]);
 
                 const formRequests = [];
                 if (imageInput.files[0]) {
-                    image = eventFormSubmit.submitImageData(imageData);
+                    formRequests.push(eventFormSubmit.submitImageData(imageData));
+                } else {
+                    formRequests.push(null);
                 }
 
                 const formUserGroups = formData.user_groups.join(',');
@@ -68,9 +69,9 @@ const eventFormSubmit = {
                 }
 
                 Promise.all(formRequests)
-                    .then(([organizerResponse, locationResponse]) => {
-                        if (image) {
-                            formData['featured_media'] = image.data;
+                    .then(([imageResponse, organizerResponse, locationResponse]) => {
+                        if (imageResponse?.success) {
+                            formData['featured_media'] = imageResponse.data;
                         }
 
                         if (organizerResponse?.success) {
