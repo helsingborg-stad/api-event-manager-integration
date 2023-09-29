@@ -52,7 +52,7 @@ class Fields
                             ) . '<br>' .
                             __('You must also have the right to use and distribute the image.', 'event-integration'),
                         'type' => 'image',
-                        'required' => false,
+                        'required' => !empty($data['image_input']['required']),
                         'aspectRatio' => '16:9'
                     ],
                     [
@@ -428,13 +428,13 @@ class Fields
                         'name' => 'event_link',
                         'label' => __('Website', 'event-integration'),
                         'type' => 'url',
-                        'required' => false,
+                        'required' => !empty($data['event_link']['required']),
                     ],
                     [
                         'name' => 'booking_link',
                         'label' => __('Event booking page', 'event-integration'),
                         'type' => 'url',
-                        'required' => false,
+                        'required' => !empty($data['booking_link']['required']),
                     ],
                     [
                         'name' => 'event_price_heading',
@@ -478,7 +478,7 @@ class Fields
                         'name' => 'price_student',
                         'label' => __('Students', 'event-integration'),
                         'type' => 'number',
-                        'required' => false,
+                        'required' => !empty($data['price_student']['required']),
                         'suffix' => 'kr',
                         'condition' => [
                             [
@@ -498,7 +498,7 @@ class Fields
                         'name' => 'price_children',
                         'label' => __('Child price', 'event-integration'),
                         'type' => 'number',
-                        'required' => false,
+                        'required' => !empty($data['price_children']['required']),
                         'suffix' => 'kr',
                         'condition' => [
                             [
@@ -518,7 +518,7 @@ class Fields
                         'name' => 'children_age',
                         'label' => __('Age limit for child price', 'event-integration'),
                         'type' => 'number',
-                        'required' => false,
+                        'required' => !empty($data['children_age']['required']),
                         'suffix' => __('years', 'event-integration'),
                         'condition' => [
                             [
@@ -538,7 +538,7 @@ class Fields
                         'name' => 'price_senior',
                         'label' => __('Pensioner price', 'event-integration'),
                         'type' => 'number',
-                        'required' => false,
+                        'required' => !empty($data['price_senior']['required']),
                         'suffix' => 'kr',
                         'condition' => [
                             [
@@ -558,7 +558,7 @@ class Fields
                         'name' => 'senior_age',
                         'label' => __('Age limit for pensioner price', 'event-integration'),
                         'type' => 'number',
-                        'required' => false,
+                        'required' => !empty($data['senior_age']['required']),
                         'suffix' => __('years', 'event-integration'),
                         'condition' => [
                             [
@@ -578,7 +578,7 @@ class Fields
                         'name' => 'event_target_age',
                         'label' => __('Age group that the event is aimed at', 'event-integration'),
                         'type' => 'radio',
-                        'required' => false,
+                        'required' => !empty($data['event_target_age']['required']),
                         'options' => [
                             'all' => __('All ages', 'event-integration'),
                             'specified' => __('Specified age group', 'event-integration'),
@@ -590,7 +590,7 @@ class Fields
                         'label' => __('From', 'event-integration'),
                         'description' => __('Leave "From" or "To" blank if the upper or lower limit is missing.', 'event-integration'),
                         'type' => 'number',
-                        'required' => false,
+                        'required' => !empty($data['age_group_from']['required']),
                         'suffix' => __('years', 'event-integration'),
                         'condition' => [
                             [
@@ -604,7 +604,7 @@ class Fields
                         'name' => 'age_group_to',
                         'label' => __('To', 'event-integration'),
                         'type' => 'number',
-                        'required' => false,
+                        'required' => !empty($data['age_group_to']['required']),
                         'suffix' => __('years', 'event-integration'),
                         'condition' => [
                             [
@@ -653,7 +653,7 @@ class Fields
                         'placeholder' => __('Choose tags', 'event-integration'),
                         'type' => 'select',
                         'multiple' => true,
-                        'required' => false,
+                        'required' => !empty($data['event_tags']['required']),
                         'dataSource' => [
                             'type' => 'taxonomy',
                             'name' => 'event_tags'
