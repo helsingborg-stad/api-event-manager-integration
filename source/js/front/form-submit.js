@@ -22,11 +22,7 @@ const eventFormSubmit = {
                 imageData.append('file', imageInput.files[0]);
 
                 const formRequests = [];
-                if (imageInput.files[0]) {
-                    formRequests.push(eventFormSubmit.submitImageData(imageData));
-                } else {
-                    formRequests.push(null);
-                }
+                formRequests.push(eventFormSubmit.submitImageData(imageData));
 
                 const formUserGroups = formData.user_groups.join(',');
 
@@ -87,7 +83,7 @@ const eventFormSubmit = {
                             formData['location'] = locationResponse.data.id;
                         }
 
-                        const errorResponses = [organizerResponse, locationResponse].filter(x => !Array.isArray(x) && !x.success).map(x => x.data);
+                        const errorResponses = [imageResponse, organizerResponse, locationResponse].filter(x => !Array.isArray(x) && !x.success).map(x => x.data);
                         if (!errorResponses.length > 0) {
                             eventFormSubmit.submitFormData(formData, 'submit_event').then(response => {
                                 if (response.success) {
