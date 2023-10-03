@@ -67,7 +67,7 @@ const FilterContainer = ({
       )}
 
       {settings.mod_event_filter_age_group && (
-        <div className="o-grid-12@xs o-grid-4@md o-grid-4@lg">
+        <div className="o-grid-12@xs o-grid-4@md o-grid-4@lg o-grid-4@xl">
           <AgeFilter 
             translation={translation} 
             onChange={onAgeRangeChange}
@@ -75,7 +75,7 @@ const FilterContainer = ({
         </div>
       )}
 
-      <div className="o-grid o-grid-8@md u-margin__top--1 u-margin__top--3@md u-margin__top--3@lg">
+      <div className="o-grid o-grid-8@md u-margin__top--1 u-margin__top--3@md u-margin__top--3@lg u-margin__top--3@xl">
         {settings.mod_event_filter_categories && categories.length > 0 && (
           <div className="o-grid-fit">
             <CategoriesFilter
