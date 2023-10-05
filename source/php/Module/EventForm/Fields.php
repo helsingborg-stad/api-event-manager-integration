@@ -52,7 +52,7 @@ class Fields
                             ) . '<br>' .
                             __('You must also have the right to use and distribute the image.', 'event-integration'),
                         'type' => 'image',
-                        'required' => true,
+                        'required' => !empty($data['image_input']['required']),
                         'aspectRatio' => '16:9'
                     ],
                     [
