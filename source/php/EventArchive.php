@@ -6,6 +6,7 @@ class EventArchive
 {
     private $eventPostType = 'event';
     private $dbTable;
+    private $db;
 
     public function __construct()
     {
@@ -15,7 +16,7 @@ class EventArchive
         $this->dbTable = $wpdb->prefix . "integrate_occasions";
 
         //Run functions if table exists
-        if ($this->db->get_var("SHOW TABLES LIKE '" . $this->dbTable . "'") !== null) {
+        if($this->occasionsTableExist()) {
             add_action('pre_get_posts', array($this, 'filterEvents'), 100);
         }
 
@@ -24,6 +25,17 @@ class EventArchive
 
         add_filter('Municipio/Archive/showFilter', [$this, 'showFilter'], 999);
         add_filter('Municipio/Archive/getTaxonomyFilters/taxonomies', [$this, 'taxonomyFilters'], 999, 2);
+    }
+
+    private function occasionsTableExist() {
+        if (wp_cache_get($this->dbTable) !== false) {
+            return true;
+        }
+        if ($this->db->get_var("SHOW TABLES LIKE '" . $this->dbTable . "'") !== null) {
+            wp_cache_set($this->dbTable, true);
+            return true;
+        }
+        return false;
     }
 
     public function showFilter($enabledFilters)
