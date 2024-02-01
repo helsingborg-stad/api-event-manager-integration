@@ -303,7 +303,7 @@ abstract class PostManager
                 : null;
 
             if( !$filetype ) {
-                false;
+                return false;
             }
 
             // Move to real extension
