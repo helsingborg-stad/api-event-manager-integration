@@ -315,7 +315,8 @@ class EventManagerApi extends \EventManagerIntegration\Parser
             $createSuccess = $event->save();
 
             if ($createSuccess && !empty($featured_media)) {
-                $event->setFeaturedImageFromUrl($featured_media, true);
+                $helperService = \EventManagerIntegration\Helper\HelperServiceFactory::create();
+                $event->setFeaturedImageFromUrl($featured_media, true, $helperService);
             }
         }
     }

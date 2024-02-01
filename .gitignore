@@ -48,6 +48,9 @@ Thumbs.db
 *.tar
 *.zip
 
+# phpunit cache
+.phpunit.result.cache
+
 # -------------------------
 # BEGIN Whitelisted Files
 # -------------------------
