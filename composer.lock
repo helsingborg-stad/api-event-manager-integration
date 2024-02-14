@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8149ec310357fbf09c0680d2d0ebf39f",
+    "content-hash": "c6af6b9bbc5bff98b34cf1ad5bc7cbdf",
     "packages": [
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -204,29 +204,32 @@
         },
         {
             "name": "helsingborg-stad/blade",
-            "version": "2.0.0",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/helsingborg-stad/Blade.git",
-                "reference": "57835a8cadc58dbcb74f696b5cf7c8f6b63c27fc"
+                "reference": "e63dc57cfd8b173ec716807e83bb071ca97e901b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/helsingborg-stad/Blade/zipball/57835a8cadc58dbcb74f696b5cf7c8f6b63c27fc",
-                "reference": "57835a8cadc58dbcb74f696b5cf7c8f6b63c27fc",
+                "url": "https://api.github.com/repos/helsingborg-stad/Blade/zipball/e63dc57cfd8b173ec716807e83bb071ca97e901b",
+                "reference": "e63dc57cfd8b173ec716807e83bb071ca97e901b",
                 "shasum": ""
             },
             "require": {
-                "illuminate/view": "8.*",
-                "php": "^8.3"
+                "illuminate/view": "^8.0.0",
+                "php": "^7.4|^8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "8.*"
+                "helsingborg-stad/phpcs": "^0.3.5",
+                "mockery/mockery": "^1.6",
+                "php-mock/php-mock-mockery": "^1.4",
+                "phpunit/phpunit": "^9.6"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "BC\\Blade\\": "src"
+                    "HelsingborgStad\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -235,8 +238,8 @@
             ],
             "authors": [
                 {
-                    "name": "Benjamin Crozat",
-                    "email": "benjamincrozat@me.com"
+                    "name": "Thor Brink",
+                    "email": "thor.brink@helsingborg.se"
                 }
             ],
             "description": "Use Laravel Blade in any PHP project.",
@@ -249,9 +252,9 @@
             ],
             "support": {
                 "issues": "https://github.com/helsingborg-stad/blade/issues",
-                "source": "https://github.com/helsingborg-stad/Blade/tree/2.0.0"
+                "source": "https://github.com/helsingborg-stad/Blade/tree/3.1.0"
             },
-            "time": "2024-01-30T10:36:45+00:00"
+            "time": "2024-02-14T08:38:48+00:00"
         },
         {
             "name": "illuminate/bus",
