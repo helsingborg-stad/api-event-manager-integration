@@ -68,8 +68,9 @@ class Event extends \Modularity\Module
 
         // Cards module data
         $data['settings']         = $data;
+        $data['ID']               = $this->ID ?? uniqid();
 
-        $this->template     = !empty($data['mod_event_display']) ? $data['mod_event_display'] : 'list';
+        $this->template           = !empty($data['mod_event_display']) ? $data['mod_event_display'] : 'list';
 
         $data['template']         = $this->template;
         $data['post_id']          = $post->ID;
