@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": "^8.3",
+        "php": "^8.0",
         "helsingborg-stad/acf-export-manager": ">=1.0.0",
         "helsingborg-stad/blade": "^3.1",
         "justinrainbow/json-schema": "^5.2"
