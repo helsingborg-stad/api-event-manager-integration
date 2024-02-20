@@ -2,6 +2,9 @@
 
 namespace EventManagerIntegration\Entity;
 
+use EventManagerIntegration\Helper\HelperService;
+use WP_Error;
+
 abstract class PostManager
 {
     /**
@@ -246,7 +249,7 @@ abstract class PostManager
      * @param $featured
      * @return bool|object
      */
-    public function setFeaturedImageFromUrl($url, $featured)
+    public function setFeaturedImageFromUrl($url, $featured, HelperService $helperService)
     {
         
 
@@ -271,8 +274,6 @@ abstract class PostManager
         //Get slug & validate that post exists
         if(is_string(get_post_status($this->ID)) && $filename = get_post($this->ID)->post_name) {
 
-            $mimes = new \Mimey\MimeTypes;
-
             //Temp name
             $filenameTemp = urlencode($filename) . ".tmp";
             
@@ -296,9 +297,14 @@ abstract class PostManager
             fclose($tempStoreFile);
 
             // Detect file type
-            $filetype = $mimes->getExtension(
-                $mimeFileType = mime_content_type($uploadDir . '/' . $filenameTemp)
-            );
+            $mimeFileType = mime_content_type($uploadDir . '/' . $filenameTemp);
+            $filetype = is_string($mimeFileType) 
+                ? $helperService->getImageExtensionFromMimeType($mimeFileType) 
+                : null;
+
+            if( !$filetype ) {
+                return false;
+            }
 
             // Move to real extension
             rename($uploadDir . '/' . $filenameTemp, $uploadDir . '/' . $filename . '.' . $filetype);

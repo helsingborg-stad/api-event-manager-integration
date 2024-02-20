@@ -6,6 +6,8 @@ class App
 {
     /* Set to 'dev' or 'min' */
     public static $assetSuffix = 'min';
+    private $cacheBust;
+
 
     public function __construct()
     {

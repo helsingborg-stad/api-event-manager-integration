@@ -2,7 +2,7 @@
 
 namespace EventManagerIntegration\Helper;
 
-use Philo\Blade\Blade;
+use HelsingborgStad\GlobalBladeService\GlobalBladeService;
 
 class RenderBlade
 {
@@ -19,7 +19,7 @@ class RenderBlade
             mkdir(EVENTMANAGERINTEGRATION_CACHE_DIR, 0777, true);
         }
 
-        $blade = new Blade($viewPath, EVENTMANAGERINTEGRATION_CACHE_DIR);
-        return $blade->view()->make($view, $data)->render();
+        $blade = GlobalBladeService::getInstance([$viewPath]);
+        return $blade->makeView($view, $data)->render();
     }
 }
