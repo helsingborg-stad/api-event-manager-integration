@@ -41,7 +41,7 @@
                             'classList' => [],
                             'buttonSize' => 'sm',
                             'current' => isset($_GET['paged']) ? $_GET['paged'] : 1,
-                            'linkPrefix' => '?paged=',
+                            'linkPrefix' => 'paged',
                             'anchorTag' => '#event-' . $ID,
                             'useJS' => true,
                             'perPage' => $mod_event_limit,
