@@ -27,7 +27,7 @@ class GetImageExtensionFromMimeTypeTest extends TestCase {
         return HelperServiceFactory::create();
     }
 
-    private function validMimeTypesDataProvider() {
+    public function validMimeTypesDataProvider() {
         return [
             ['image/jpeg', 'jpg'],
             ['image/png', 'png'],
