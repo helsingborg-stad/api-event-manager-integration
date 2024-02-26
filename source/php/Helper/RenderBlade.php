@@ -2,7 +2,7 @@
 
 namespace EventManagerIntegration\Helper;
 
-use HelsingborgStad\GlobalBladeService\GlobalBladeService;
+use ComponentLibrary\Init as ComponentLibraryInit;
 
 class RenderBlade
 {
@@ -19,7 +19,8 @@ class RenderBlade
             mkdir(EVENTMANAGERINTEGRATION_CACHE_DIR, 0777, true);
         }
 
-        $blade = GlobalBladeService::getInstance([$viewPath]);
-        return $blade->makeView($view, $data)->render();
+        $componentLibrary = new ComponentLibraryInit([]);
+        $blade = $componentLibrary->getEngine();
+        return $blade->makeView($view, $data, [], $viewPath)->render();
     }
 }
