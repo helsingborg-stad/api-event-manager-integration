@@ -55,7 +55,10 @@ class EventForm extends \Modularity\Module
             if (!file_exists($schemaFilePath)) {
                 continue;
             }
-            $this->validator->validate(json_decode(json_encode($field)), (object)['$ref' => 'file://' . realpath($schemaFilePath)]);
+
+            $fieldAsAssocArray = json_decode(json_encode($field));
+
+            $this->validator->validate($fieldAsAssocArray, (object)['$ref' => 'file://' . realpath($schemaFilePath)]);
             if (!$this->validator->isValid()) {
                 echo "JSON does not validate. Violations:\n";
                 foreach ($this->validator->getErrors() as $error) {
