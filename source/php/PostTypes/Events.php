@@ -209,7 +209,7 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
          ];
 
          $data['eventLang'] = (object) array(
-            'accessibilityLabels'       => array_filter($accessibilityLabels, fn($key) => in_array($key, $locationInfo['accessibility']), ARRAY_FILTER_USE_KEY),
+            'accessibilityLabels'       => array_filter($accessibilityLabels, fn($key) => in_array($key, $locationInfo['accessibility'] ?? []), ARRAY_FILTER_USE_KEY),
             'link'                      => __('Event link', 'event-integration'),
             'ticket'                    => __('Ticket', 'event-integration'),
             'goToEventWebsite'          => __('Go to event website', 'event-integration'),
