@@ -4,21 +4,21 @@
 @stop
 
 @section('above')
-    @if(!empty($event['image_src']))
-        @segment([
-            'layout'            => 'full-width',
-            'image'             => $event['image_src'],
-            'background'        => 'primary',
-            'textColor'         => 'light',
-            'overlay'           => 'dark',
-            'classList'         => ['modularity-event-hero', 'u-margin__bottom--5'],
-            'textAlignment'     => 'center',
-            'title'             => get_the_title(),
-            'subTitle'          => 123,
-            'content'           => $event['occasion']['formatted'] ?? false,
-        ])
-        @endsegment
-    @endif
+@if(!empty($event['image_src']))
+    @segment([
+        'layout'            => 'full-width',
+        'image'             => $event['image_src'],
+        'background'        => 'primary',
+        'textColor'         => 'light',
+        'overlay'           => 'dark',
+        'classList'         => ['modularity-event-hero', 'u-margin__bottom--5'],
+        'textAlignment'     => 'center',
+        'title'             => get_the_title(),
+        'subTitle'          => 123,
+        'content'           => $event['occasion']['formatted'] ?? false,
+    ])
+    @endsegment
+@endif
 @stop
 
 @section('content')
@@ -29,7 +29,7 @@
             ])
             @enddatebadge
         @endif
-
+        
         @typography([
             'variant' => 'h1',
             'element' => 'span',
@@ -45,7 +45,7 @@
         @if(!empty($event['introText']))
             {!! $event['introText'] !!}
         @endif
-
+        
         @if(!empty($event['booking_link']) || !empty($event['ticket_includes']))
             <div class="{{ !empty($event['introText']) ? 'u-margin__y--4' : 'u-margin__bottom--4'}}">
                 @include('widgets.ticket')
