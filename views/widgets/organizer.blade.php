@@ -7,7 +7,7 @@
                 @foreach($event['organizers'] as $orgindex => $organizer)
                     @if(!empty($organizer['organizer']))
                         @typography(['id' => 'single-event-organizer-' . $orgindex])
-                            <strong>{{ $organizer['organizer'] }}</strong>
+                            <strong>{!! $organizer['organizer'] !!}</strong>
                         @endtypography
                     @endif
                     @if(!empty($organizer['organizer_phone']) || !empty($organizer['organizer_email']) || !empty($organizer['organizer_link']))
