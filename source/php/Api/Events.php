@@ -269,46 +269,10 @@ class Events
             $location = get_post_meta($event->ID, 'location', true);
             $event->location = !empty($location['title']) ? $location['title'] : null;
 
-            // Get image url
-            switch ($template) {
-                case 'index':
-                    if (
-                        function_exists('municipio_get_thumbnail_source') && municipio_get_thumbnail_source(
-                            $event->ID,
-                            array($data['imageDimensions']['width'], $data['imageDimensions']['height']),
-                            $data['imageRatio']
-                        )
-                    ) {
-                        $event->image_url = municipio_get_thumbnail_source(
-                            $event->ID,
-                            array($data['imageDimensions']['width'], $data['imageDimensions']['height']),
-                            $data['imageRatio']
-                        );
-                    } elseif (!empty($defaultImage)) {
-                        $src = wp_get_attachment_image_src(
-                            $defaultImage['ID'],
-                            municipio_to_aspect_ratio(
-                                $data['imageRatio'],
-                                array($data['imageDimensions']['width'], $data['imageDimensions']['height'])
-                            )
-                        );
-                        $event->image_url = $src[0] ?? null;
-                    }
-                    break;
-                default:
-                    if (
-                        function_exists('municipio_get_thumbnail_source') && municipio_get_thumbnail_source(
-                            $event->ID
-                        )
-                    ) {
-                        $event->image_url = municipio_get_thumbnail_source($event->ID);
-                    } elseif (!empty($defaultImage)) {
-                        $src = wp_get_attachment_image_src(
-                            $defaultImage['ID']
-                        );
-                        $event->image_url = $src[0] ?? null;
-                    }
-            }
+            if (class_exists('Municipio\Helper\Image') && $template == 'index') {
+                $image = \Municipio\Helper\Image::getImageAttachmentData(get_post_thumbnail_id($event->ID), [1280, 720]);
+                $event->image_url = !empty($image['src']) ? $image['src'] : null;
+            } 
         }
 
         return $events;
