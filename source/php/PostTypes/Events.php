@@ -144,16 +144,9 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         }
         $eventData['content'] = apply_filters('the_content', $eventData['content']);
 
-        if (function_exists('municipio_get_thumbnail_source')) {
-            $eventData['image_src'] = municipio_get_thumbnail_source(
-                null,
-                array(750, 750),
-                '16:9'
-            );
-        } else {
-            $thumbnailId = get_post_thumbnail_id($post->ID);
-            $image = wp_get_attachment_image_src($thumbnailId, 'medium');
-            $eventData['image_src'] = $image[0] ?? null;
+        if (class_exists('Municipio\Helper\Image')) {
+            $image = \Municipio\Helper\Image::getImageAttachmentData(get_post_thumbnail_id($post->ID), [1280, 720]);
+            $eventData['image_src'] = !empty($image['src']) ? $image['src'] : null;
         }
 
         $eventData['location'] = \EventManagerIntegration\Helper\SingleEventData::getEventLocation($post->ID);
