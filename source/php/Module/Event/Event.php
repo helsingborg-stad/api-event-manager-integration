@@ -465,7 +465,9 @@ class Event extends \Modularity\Module
                 'selectAge' => __('Select age', 'event-integration'),
                 'resetFilters' => __('Reset filters', 'event-integration'),
                 'fromAge' => __('From age', 'event-integration'),
-                'toAge' => __('To age', 'event-integration')
+                'toAge' => __('To age', 'event-integration'),
+                'nextPage' => __('Next page', 'event-integration'),
+                'previousPage' => __('Previous page', 'event-integration')
             )
         );
     }

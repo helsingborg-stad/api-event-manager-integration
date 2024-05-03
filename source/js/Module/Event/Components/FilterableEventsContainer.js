@@ -508,6 +508,8 @@ if(!noUrl) {
                   next={this.nextPage}
                   prev={this.prevPage}
                   total={totalPages}
+                  langPrev={translation.previousPage}
+                  langNext={translation.nextPage}
                 />
               }
             </div>
