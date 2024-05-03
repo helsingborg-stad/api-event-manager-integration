@@ -467,7 +467,8 @@ class Event extends \Modularity\Module
                 'fromAge' => __('From age', 'event-integration'),
                 'toAge' => __('To age', 'event-integration'),
                 'nextPage' => __('Next page', 'event-integration'),
-                'previousPage' => __('Previous page', 'event-integration')
+                'previousPage' => __('Previous page', 'event-integration'),
+                'goToPage' => __('Go to page', 'event-integration'),
             )
         );
     }

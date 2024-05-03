@@ -510,6 +510,7 @@ if(!noUrl) {
                   total={totalPages}
                   langPrev={translation.previousPage}
                   langNext={translation.nextPage}
+                  langGoToPage={translation.goToPage}
                 />
               }
             </div>
