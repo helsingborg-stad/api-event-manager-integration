@@ -2,6 +2,8 @@
 
 namespace EventManagerIntegration;
 
+use EventManagerIntegration\Helper\HelperService;
+
 class Event extends Entity\PostManager
 {
     public $post_type = 'event';
@@ -31,8 +33,9 @@ class Event extends Entity\PostManager
         $this->saveLanguage();
 
         if (!empty($this->gallery)) {
+            $helperService = \EventManagerIntegration\Helper\HelperServiceFactory::create();
             foreach ($this->gallery as $key => $image) {
-                $this->setFeaturedImageFromUrl($image['url'], false);
+                $this->setFeaturedImageFromUrl($image['url'], false, $helperService);
             }
         }
         return true;
