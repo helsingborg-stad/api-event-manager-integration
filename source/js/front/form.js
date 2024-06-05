@@ -183,7 +183,6 @@ const eventForm = {
                             page++;
                             fetchNextPage();
                         } else {
-                            console.log(allItems);
                             eventForm.setupSelectOptions(
                                 select_string,
                                 select,
