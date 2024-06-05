@@ -159,22 +159,47 @@ const eventForm = {
         selects.forEach((select) => {
             const dataSource = JSON.parse(select.dataset.source);
             let url = apiUrl + '/' + dataSource.name;
+
             if (dataSource.type === 'post') {
                 url += '/complete';
-            } else {
-                url += '?per_page=100';
-            }
-            fetch(url)
-                .then((data) => data.json())
-                .then((items) =>
+                eventForm.fetchSelectItems(url)
+                .then((items) => {
                     eventForm.setupSelectOptions(
                         select_string,
                         select,
                         dataSource,
                         items
-                    )
-                );
+                    );
+                });
+            } else {
+                let page = 1;
+                let allItems = [];
+                const fetchNextPage = () => {
+                    url = `${apiUrl}/${dataSource.name}?page=${page}&per_page=100`;
+                    eventForm.fetchSelectItems(url)
+                    .then((items) => {
+                        if (items.length > 0) {
+                            allItems.push(...items);
+                            page++;
+                            fetchNextPage();
+                        } else {
+                            console.log(allItems);
+                            eventForm.setupSelectOptions(
+                                select_string,
+                                select,
+                                dataSource,
+                                allItems
+                            );
+                        }
+                    });
+                };
+                fetchNextPage();
+            }
         });
+    },
+    fetchSelectItems: (url) => {
+        return fetch(url)
+        .then((data) => data.json());
     },
     setupSelectOptions: (select_string, select, dataSource, items) => {
         select.querySelectorAll('option').forEach((option) => option.remove());
