@@ -25,6 +25,7 @@ class EventArchive
 
         add_filter('Municipio/Archive/showFilter', [$this, 'showFilter'], 999);
         add_filter('Municipio/Archive/getTaxonomyFilters/taxonomies', [$this, 'taxonomyFilters'], 999, 2);
+        add_filter('Municipio/Controller/Archive/getDate', [$this, 'getDate'], 10, 2);
     }
 
     private function occasionsTableExist() {
@@ -53,6 +54,16 @@ class EventArchive
             $taxonomies[] = $taxonomy;
         }
         return $taxonomies;
+    }
+
+    public function getDate($date, $post)
+    {
+
+        if ($post->postType !== $this->eventPostType || empty($post->startDate)) {
+            return $date;
+        }
+
+        return $post->startDate;
     }
 
     /**
