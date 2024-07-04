@@ -58,12 +58,11 @@ class EventArchive
 
     public function getDate($date, $post)
     {
-
         if ($post->postType !== $this->eventPostType || empty($post->startDate)) {
             return $date;
         }
 
-        return $post->startDate;
+        return get_gmt_from_date($post->startDate);
     }
 
     /**
