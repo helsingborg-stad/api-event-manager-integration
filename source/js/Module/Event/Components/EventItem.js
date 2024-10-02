@@ -35,6 +35,12 @@ const EventItem = ({ event, displayFields, cardStyle, imageRatio }) => (
                   <span class="c-typography c-datebadge__month c-typography__variant--h4">{getDateBadge(event, "getMonth")}</span>
               </div>
           </div>) : ""}
+
+          <div class="c-card__image-container">
+            <figure class="c-image c-card__image c-image--type-svg c-image--cover" data-uid="66fd335a1c996">
+                <img loading="lazy" class="c-image__image" src="/assets/img/component.svg" alt="ALT" />
+            </figure>
+          </div>
         <div className={"c-card__image-background" } style={{ backgroundImage: `url('${event.image_url}')` }}></div>
       </div>
     )}
