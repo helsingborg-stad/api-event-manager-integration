@@ -25,21 +25,19 @@ function getDateBadge(event, type) {
 }
 
 const EventItem = ({ event, displayFields, cardStyle, imageRatio }) => (
-  <a className={"c-card c-card--action c-card--event " + cardStyle + " c-card--image-" + imageRatio} href={event.permalink} style={{ textAlign: 'center', height: '100%' }}>
+  <a className={"c-card c-card--action c-card--event " + cardStyle + " c-card--ratio-" + imageRatio} href={event.permalink} style={{ textAlign: 'center', height: '100%' }}>
     {displayFields.includes('image') && event.image_url && (
-      <div className="c-card__image c-card__image--secondary">
+      <div className="c-card__image-container">
         {displayFields.includes('dateBadge') ? (
-          <div class="c-datebadge c-datebadge--md u-position--absolute u-margin--2 u-level-2">
-              <div class="c-datebadge__daymonth">
-                  <span class="c-typography c-datebadge__date c-typography__variant--h1">{getDateBadge(event, "getDay")}</span>
-                  <span class="c-typography c-datebadge__month c-typography__variant--h4">{getDateBadge(event, "getMonth")}</span>
-              </div>
-          </div>) : ""}
-          <div className="c-card__image-container">
-            <figure className="c-image c-card__image c-image--cover">
-                <img loading="lazy" className="c-image__image" src="${event.image_url}"/>
-            </figure>
-          </div>
+        <div class="c-datebadge c-datebadge--md u-position--absolute u-margin--2 u-level-2">
+            <div class="c-datebadge__daymonth">
+                <span class="c-typography c-datebadge__date c-typography__variant--h1">{getDateBadge(event, "getDay")}</span>
+                <span class="c-typography c-datebadge__month c-typography__variant--h4">{getDateBadge(event, "getMonth")}</span>
+            </div>
+        </div>) : ""}
+        <figure className="c-image c-card__image c-image--cover">
+            <img loading="lazy" className="c-image__image" src={event.image_url} alt={event.post_title}/>
+        </figure>
       </div>
     )}
 
