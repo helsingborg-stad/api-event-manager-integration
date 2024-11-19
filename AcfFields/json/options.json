@@ -3,9 +3,27 @@
     "title": "Event Manager Integration",
     "fields": [
         {
+            "key": "field_673c3cb443698",
+            "label": "General settings",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
             "key": "field_588f3ef76094c",
             "label": "API url",
             "name": "event_api_url",
+            "aria-label": "",
             "type": "url",
             "instructions": "Url to Event Manager API wp\/v2 namespace. <br> E.g. https:\/\/host\/wp-json\/wp\/v2",
             "required": 1,
@@ -22,6 +40,7 @@
             "key": "field_5835579f883ff",
             "label": "Days ahead",
             "name": "days_ahead",
+            "aria-label": "",
             "type": "number",
             "instructions": "Import events that occurs within given number of days. Try to keep it as short as possible to avoid unnecessary datatransfer.",
             "required": 1,
@@ -43,6 +62,7 @@
             "key": "field_5835581488400",
             "label": "Daily import",
             "name": "event_daily_import",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -62,6 +82,7 @@
             "key": "field_587f86dc8f7b7",
             "label": "Post status",
             "name": "event_post_status",
+            "aria-label": "",
             "type": "radio",
             "instructions": "Select status of imported events.",
             "required": 1,
@@ -86,6 +107,7 @@
             "key": "field_58feee2f256cd",
             "label": "Unpublish long lasting events",
             "name": "event_unpublish_limit",
+            "aria-label": "",
             "type": "number",
             "instructions": "Automatically unpublish events lasting longer than given limit. Set to -1 to set no limit.",
             "required": 1,
@@ -107,6 +129,7 @@
             "key": "field_58e380646fa6f",
             "label": "Visa knapp f\u00f6r att uppdatera importerade evenemang",
             "name": "event_update_button",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -126,6 +149,7 @@
             "key": "field_58a56eaa0c2ad",
             "label": "OAuth1 end point root url",
             "name": "event_api_oauth_url",
+            "aria-label": "",
             "type": "url",
             "instructions": "Url can be found under section \"authentication\" in your API root.<br> E.g. https:\/\/host\/oauth1<br> <br> Authorization is only needed when you want to post data to the API.",
             "required": 0,
@@ -142,6 +166,7 @@
             "key": "field_5b0e5b3be7bf7",
             "label": "Import filters",
             "name": "",
+            "aria-label": "",
             "type": "message",
             "instructions": "",
             "required": 0,
@@ -159,6 +184,7 @@
             "key": "field_586bc598f2777",
             "label": "Import from selected user groups",
             "name": "event_filter_group",
+            "aria-label": "",
             "type": "taxonomy",
             "instructions": "Select the user groups that you want to import events from. Leave empty to import from all groups.",
             "required": 0,
@@ -175,12 +201,14 @@
             "save_terms": 1,
             "load_terms": 0,
             "return_format": "object",
-            "multiple": 0
+            "multiple": 0,
+            "bidirectional_target": []
         },
         {
             "key": "field_5846ca031ffcb",
             "label": "Import from selected categories",
             "name": "event_filter_cat",
+            "aria-label": "",
             "type": "text",
             "instructions": "Enter the name of the categories that you want to import events from. Separate with commas. Leave blank to import from all categories.",
             "required": 0,
@@ -200,6 +228,7 @@
             "key": "field_5846db8b3cf78",
             "label": "Import from selected tags",
             "name": "event_filter_tag",
+            "aria-label": "",
             "type": "text",
             "instructions": "Enter the name of the tags that you want to import events from. Separate with commas. Leave blank to import from all tags.",
             "required": 0,
@@ -219,6 +248,7 @@
             "key": "field_5b1e890a063c4",
             "label": "Import internal events",
             "name": "event_internal_events",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "Select if only internal (organization) events should be imported.",
             "required": 0,
@@ -238,6 +268,7 @@
             "key": "field_5b0e5a49c8fab",
             "label": "Import from geographic location",
             "name": "event_import_from_location",
+            "aria-label": "",
             "type": "button_group",
             "instructions": "",
             "required": 0,
@@ -261,6 +292,7 @@
             "key": "field_58aaeaa46781b",
             "label": "From a single point",
             "name": "event_import_geographic",
+            "aria-label": "",
             "type": "google_map",
             "instructions": "Import events that occurs at a specified location.",
             "required": 0,
@@ -287,6 +319,7 @@
             "key": "field_58aaec066781c",
             "label": "Distance from location",
             "name": "event_geographic_distance",
+            "aria-label": "",
             "type": "number",
             "instructions": "To get events occurring nearby the given location, enter maximum distance in km. Leave blank to only get events from the exact position.",
             "required": 0,
@@ -316,6 +349,7 @@
             "key": "field_5b0e6394d6399",
             "label": "Drawn area",
             "name": "",
+            "aria-label": "",
             "type": "message",
             "instructions": "",
             "required": 0,
@@ -336,6 +370,43 @@
             "message": "Import events that occurs inside the drawn area. Draw the area by clicking each point on the map. Maximum number of points is 8.",
             "new_lines": "wpautop",
             "esc_html": 0
+        },
+        {
+            "key": "field_673c3cc743699",
+            "label": "Details page",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_673c3cf64369a",
+            "label": "Clean hero image",
+            "name": "event_single_clean_hero",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Skip detailed information in hero image",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Yes",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
@@ -353,7 +424,13 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
-    "description": ""
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "acfe_display_title": "",
+    "acfe_autosync": "",
+    "acfe_form": 0,
+    "acfe_meta": "",
+    "acfe_note": ""
 }]
-
+

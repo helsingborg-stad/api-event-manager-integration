@@ -13,9 +13,9 @@
         'overlay'           => 'dark',
         'classList'         => ['modularity-event-hero', 'u-margin__bottom--5'],
         'textAlignment'     => 'center',
-        'title'             => get_the_title(),
+        'title'             => !$settings->cleanHero ? get_the_title() : null,
         'subTitle'          => 123,
-        'content'           => $event['occasion']['formatted'] ?? false,
+        'content'           => !$settings->cleanHero ? ($event['occasion']['formatted'] ?? false) : null,
     ])
     @endsegment
 @endif
@@ -32,7 +32,7 @@
         
         @typography([
             'variant' => 'h1',
-            'element' => 'span',
+            'element' => !$settings->cleanHero ? 'span' : 'h1',
             'classList' => ['modularity-event-title', 'u-align-self--center', 'u-margin__left--2', 'u-margin__top--0']
         ])
             {{ the_title() }}

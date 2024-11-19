@@ -252,6 +252,8 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
             'socialLinks'               => __('Social links', 'event-integration')
          );
 
+         $data['settings'] = \EventManagerIntegration\Helper\Settings::getEventSettings();
+
          return $data;
     }
 
