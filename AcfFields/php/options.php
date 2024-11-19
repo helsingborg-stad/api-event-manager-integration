@@ -1,16 +1,32 @@
 <?php 
 
-
-if (function_exists('acf_add_local_field_group')) {
-
-    acf_add_local_field_group(array(
+if (function_exists('acf_add_local_field_group')) {
+    acf_add_local_field_group(array(
     'key' => 'group_583557753bd73',
-    'title' => 'Event Manager Integration',
+    'title' => __('Event Manager Integration', 'event-integration'),
     'fields' => array(
         0 => array(
+            'key' => 'field_673c3cb443698',
+            'label' => __('General settings', 'event-integration'),
+            'name' => '',
+            'aria-label' => '',
+            'type' => 'tab',
+            'instructions' => '',
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'placement' => 'top',
+            'endpoint' => 0,
+        ),
+        1 => array(
             'key' => 'field_588f3ef76094c',
             'label' => __('API url', 'event-integration'),
             'name' => 'event_api_url',
+            'aria-label' => '',
             'type' => 'url',
             'instructions' => __('Url to Event Manager API wp/v2 namespace. <br> E.g. https://host/wp-json/wp/v2', 'event-integration'),
             'required' => 1,
@@ -23,10 +39,11 @@ if (function_exists('acf_add_local_field_group')) {
             'default_value' => '',
             'placeholder' => '',
         ),
-        1 => array(
+        2 => array(
             'key' => 'field_5835579f883ff',
             'label' => __('Days ahead', 'event-integration'),
             'name' => 'days_ahead',
+            'aria-label' => '',
             'type' => 'number',
             'instructions' => __('Import events that occurs within given number of days. Try to keep it as short as possible to avoid unnecessary datatransfer.', 'event-integration'),
             'required' => 1,
@@ -44,10 +61,11 @@ if (function_exists('acf_add_local_field_group')) {
             'max' => 730,
             'step' => '',
         ),
-        2 => array(
+        3 => array(
             'key' => 'field_5835581488400',
             'label' => __('Daily import', 'event-integration'),
             'name' => 'event_daily_import',
+            'aria-label' => '',
             'type' => 'true_false',
             'instructions' => '',
             'required' => 0,
@@ -63,10 +81,11 @@ if (function_exists('acf_add_local_field_group')) {
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        3 => array(
+        4 => array(
             'key' => 'field_587f86dc8f7b7',
             'label' => __('Post status', 'event-integration'),
             'name' => 'event_post_status',
+            'aria-label' => '',
             'type' => 'radio',
             'instructions' => __('Select status of imported events.', 'event-integration'),
             'required' => 1,
@@ -83,14 +102,15 @@ if (function_exists('acf_add_local_field_group')) {
             'allow_null' => 0,
             'other_choice' => 0,
             'save_other_choice' => 0,
-            'default_value' => 'publish',
+            'default_value' => __('publish', 'event-integration'),
             'layout' => 'vertical',
             'return_format' => 'value',
         ),
-        4 => array(
+        5 => array(
             'key' => 'field_58feee2f256cd',
             'label' => __('Unpublish long lasting events', 'event-integration'),
             'name' => 'event_unpublish_limit',
+            'aria-label' => '',
             'type' => 'number',
             'instructions' => __('Automatically unpublish events lasting longer than given limit. Set to -1 to set no limit.', 'event-integration'),
             'required' => 1,
@@ -112,6 +132,7 @@ if (function_exists('acf_add_local_field_group')) {
             'key' => 'field_58e380646fa6f',
             'label' => __('Visa knapp för att uppdatera importerade evenemang', 'event-integration'),
             'name' => 'event_update_button',
+            'aria-label' => '',
             'type' => 'true_false',
             'instructions' => '',
             'required' => 0,
@@ -131,6 +152,7 @@ if (function_exists('acf_add_local_field_group')) {
             'key' => 'field_58a56eaa0c2ad',
             'label' => __('OAuth1 end point root url', 'event-integration'),
             'name' => 'event_api_oauth_url',
+            'aria-label' => '',
             'type' => 'url',
             'instructions' => __('Url can be found under section "authentication" in your API root.<br> E.g. https://host/oauth1<br> <br> Authorization is only needed when you want to post data to the API.', 'event-integration'),
             'required' => 0,
@@ -147,6 +169,7 @@ if (function_exists('acf_add_local_field_group')) {
             'key' => 'field_5b0e5b3be7bf7',
             'label' => __('Import filters', 'event-integration'),
             'name' => '',
+            'aria-label' => '',
             'type' => 'message',
             'instructions' => '',
             'required' => 0,
@@ -164,6 +187,7 @@ if (function_exists('acf_add_local_field_group')) {
             'key' => 'field_586bc598f2777',
             'label' => __('Import from selected user groups', 'event-integration'),
             'name' => 'event_filter_group',
+            'aria-label' => '',
             'type' => 'taxonomy',
             'instructions' => __('Select the user groups that you want to import events from. Leave empty to import from all groups.', 'event-integration'),
             'required' => 0,
@@ -181,11 +205,14 @@ if (function_exists('acf_add_local_field_group')) {
             'load_terms' => 0,
             'return_format' => 'object',
             'multiple' => 0,
+            'bidirectional_target' => array(
+            ),
         ),
         10 => array(
             'key' => 'field_5846ca031ffcb',
             'label' => __('Import from selected categories', 'event-integration'),
             'name' => 'event_filter_cat',
+            'aria-label' => '',
             'type' => 'text',
             'instructions' => __('Enter the name of the categories that you want to import events from. Separate with commas. Leave blank to import from all categories.', 'event-integration'),
             'required' => 0,
@@ -205,6 +232,7 @@ if (function_exists('acf_add_local_field_group')) {
             'key' => 'field_5846db8b3cf78',
             'label' => __('Import from selected tags', 'event-integration'),
             'name' => 'event_filter_tag',
+            'aria-label' => '',
             'type' => 'text',
             'instructions' => __('Enter the name of the tags that you want to import events from. Separate with commas. Leave blank to import from all tags.', 'event-integration'),
             'required' => 0,
@@ -224,6 +252,7 @@ if (function_exists('acf_add_local_field_group')) {
             'key' => 'field_5b1e890a063c4',
             'label' => __('Import internal events', 'event-integration'),
             'name' => 'event_internal_events',
+            'aria-label' => '',
             'type' => 'true_false',
             'instructions' => __('Select if only internal (organization) events should be imported.', 'event-integration'),
             'required' => 0,
@@ -243,6 +272,7 @@ if (function_exists('acf_add_local_field_group')) {
             'key' => 'field_5b0e5a49c8fab',
             'label' => __('Import from geographic location', 'event-integration'),
             'name' => 'event_import_from_location',
+            'aria-label' => '',
             'type' => 'button_group',
             'instructions' => '',
             'required' => 0,
@@ -258,7 +288,7 @@ if (function_exists('acf_add_local_field_group')) {
                 'area' => __('Drawn area', 'event-integration'),
             ),
             'allow_null' => 0,
-            'default_value' => 'no',
+            'default_value' => __('no', 'event-integration'),
             'layout' => 'horizontal',
             'return_format' => 'value',
         ),
@@ -266,6 +296,7 @@ if (function_exists('acf_add_local_field_group')) {
             'key' => 'field_58aaeaa46781b',
             'label' => __('From a single point', 'event-integration'),
             'name' => 'event_import_geographic',
+            'aria-label' => '',
             'type' => 'google_map',
             'instructions' => __('Import events that occurs at a specified location.', 'event-integration'),
             'required' => 0,
@@ -292,6 +323,7 @@ if (function_exists('acf_add_local_field_group')) {
             'key' => 'field_58aaec066781c',
             'label' => __('Distance from location', 'event-integration'),
             'name' => 'event_geographic_distance',
+            'aria-label' => '',
             'type' => 'number',
             'instructions' => __('To get events occurring nearby the given location, enter maximum distance in km. Leave blank to only get events from the exact position.', 'event-integration'),
             'required' => 0,
@@ -321,6 +353,7 @@ if (function_exists('acf_add_local_field_group')) {
             'key' => 'field_5b0e6394d6399',
             'label' => __('Drawn area', 'event-integration'),
             'name' => '',
+            'aria-label' => '',
             'type' => 'message',
             'instructions' => '',
             'required' => 0,
@@ -342,6 +375,43 @@ if (function_exists('acf_add_local_field_group')) {
             'new_lines' => 'wpautop',
             'esc_html' => 0,
         ),
+        17 => array(
+            'key' => 'field_673c3cc743699',
+            'label' => __('Details page', 'event-integration'),
+            'name' => '',
+            'aria-label' => '',
+            'type' => 'tab',
+            'instructions' => '',
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'placement' => 'top',
+            'endpoint' => 0,
+        ),
+        18 => array(
+            'key' => 'field_673c3cf64369a',
+            'label' => __('Clean hero image', 'event-integration'),
+            'name' => 'event_single_clean_hero',
+            'aria-label' => '',
+            'type' => 'true_false',
+            'instructions' => __('Skip detailed information in hero image', 'event-integration'),
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'message' => __('Yes', 'event-integration'),
+            'default_value' => 0,
+            'ui' => 0,
+            'ui_on_text' => '',
+            'ui_off_text' => '',
+        ),
     ),
     'location' => array(
         0 => array(
@@ -358,8 +428,13 @@ if (function_exists('acf_add_local_field_group')) {
     'label_placement' => 'top',
     'instruction_placement' => 'label',
     'hide_on_screen' => '',
-    'active' => 1,
+    'active' => true,
     'description' => '',
+    'show_in_rest' => 0,
+    'acfe_display_title' => '',
+    'acfe_autosync' => '',
+    'acfe_form' => 0,
+    'acfe_meta' => '',
+    'acfe_note' => '',
 ));
-
-}
+}
