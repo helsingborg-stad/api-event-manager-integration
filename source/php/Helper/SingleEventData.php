@@ -106,7 +106,7 @@ class SingleEventData
      */
     public static function getFormattedTimeDiff($start, $end)
     {
-        $diff = ($end - $start) / 60 / 60;
+        $diff = ($end - $start) / 3600;
 
         $singleEventData = new SingleEventData();
 
@@ -122,8 +122,8 @@ class SingleEventData
     public function eventOccasionDuration($from, $to) {
         $diff = (int)abs($to - $from);
         if ($diff < DAY_IN_SECONDS && $diff >= HOUR_IN_SECONDS) {
-            $hours = round($diff / HOUR_IN_SECONDS );
-            $mins = round($diff / MINUTE_IN_SECONDS) - ($hours * 60);
+            $hours = floor($diff / HOUR_IN_SECONDS );
+            $mins = floor($diff / MINUTE_IN_SECONDS) - ($hours * 60);
             $formattedDiff = sprintf(_n('%s hour', '%s hours', $hours), $hours);
             if ($mins > 0) {
                 $formattedMins = sprintf(_n('%s min', '%s mins', $mins), $mins);
