@@ -85,9 +85,6 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         add_filter('the_content', array($this, 'eventContent'));
         add_filter('the_lead', array($this, 'eventContentLead'));
         add_filter('query_vars', array($this, 'addDateQueryVar'));
-        add_filter('Modularity/Module/Posts/Date', array($this, 'formatPostDate'), 10, 3);
-        add_filter('Municipio/Helper/Post/postObject', array($this, 'formatPublishDate'), 10);
-
 
         add_filter('Municipio/viewData', array($this, 'singleViewData'));
 
@@ -413,24 +410,6 @@ class Events extends \EventManagerIntegration\Entity\CustomPostType
         }
 
         return $data;
-    }
-
-    public function formatPostDate($date, $postId, $postType)
-    {
-        if ($postType !== self::$postTypeSlug) {
-            return $date;
-        }
-        $occasions = get_post_meta($postId, 'occasions_complete', true);
-
-        return $occasions[0]['start_date'] ?? '';
-    }
-
-    public function formatPublishDate($post)
-    {
-        if (isset($post->start_date)) {
-            $post->post_date_gmt = get_gmt_from_date($post->start_date);
-        }
-        return $post;
     }
 
     /**
