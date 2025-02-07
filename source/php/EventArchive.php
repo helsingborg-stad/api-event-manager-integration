@@ -25,7 +25,7 @@ class EventArchive
 
         add_filter('Municipio/Archive/showFilter', [$this, 'showFilter'], 999);
         add_filter('Municipio/Archive/getTaxonomyFilters/taxonomies', [$this, 'taxonomyFilters'], 999, 2);
-        add_filter('Municipio/Controller/Archive/getDate', [$this, 'getDate'], 10, 2);
+        add_filter('Municipio/Helper/Post/postObject', [$this, 'getDate'], 10, 1);
     }
 
     private function occasionsTableExist() {
@@ -56,13 +56,54 @@ class EventArchive
         return $taxonomies;
     }
 
-    public function getDate($date, $post)
+    public function getDate($post)
     {
-        if ($post->postType !== $this->eventPostType || empty($post->startDate)) {
-            return $date;
+        if ($post->post_type != $this->eventPostType) {
+            return $post;
         }
 
-        return get_gmt_from_date($post->startDate);
+        if (isset($post->start_date)) {
+            $post->post_date_gmt = get_gmt_from_date($post->start_date);
+            $post->post_date = $post->post_date_gmt;
+        } else {
+            $timeNow = time();
+            $eventOccasions = get_post_meta($post->ID, 'occasions_complete', true);
+            
+            if (empty($eventOccasions)) {
+                return $post;
+            }
+
+            $selectedOccasion = array_reduce($eventOccasions, function ($carry, $item) use ($timeNow) {
+                $itemTime = strtotime($item['start_date']);
+                $carryTime = $carry ? strtotime($carry['start_date']) : null;
+             
+                if ($itemTime > $timeNow) {
+                    // Select the closest future event
+                    $isFirstFutureEvent = !$carry || $carryTime <= $timeNow;
+                    $isEarlierFutureEvent = $carryTime && $itemTime < $carryTime;
+             
+                    if ($isFirstFutureEvent || $isEarlierFutureEvent) {
+                        return $item;
+                    }
+                } else {
+                    // Select the latest past event (only if no future event exists)
+                    $isFirstPastEvent = !$carry;
+                    $isLaterPastEvent = $carryTime && $itemTime > $carryTime;
+             
+                    if ($isFirstPastEvent || $isLaterPastEvent) {
+                        return $item;
+                    }
+                }
+             
+                return $carry;
+            }, null);
+
+            $post->start_date = $selectedOccasion['start_date'];
+            $post->post_date_gmt = get_gmt_from_date($selectedOccasion['start_date']);
+            $post->post_date = $post->post_date_gmt;
+        }
+
+        return $post;
     }
 
     /**
