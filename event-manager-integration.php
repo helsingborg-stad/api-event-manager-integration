@@ -37,7 +37,7 @@ define('EVENTMANAGERINTEGRATION_SUBMIT_FORM_MODULE_VIEW_PATH', EVENTMANAGERINTEG
 define('EVENTMANAGERINTEGRATION_EVENT_FORM_MODULE_VIEW_PATH', EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/EventForm/views');
 define('EVENTMANAGERINTEGRATION_CACHE_DIR', trailingslashit(wp_upload_dir()['basedir']) . 'cache/blade-cache/');
 
-add_action('plugins_loaded', function () {
+add_action('init', function () {
     load_plugin_textdomain('event-integration', false, plugin_basename(dirname(__FILE__)) . '/languages');
 });
 
