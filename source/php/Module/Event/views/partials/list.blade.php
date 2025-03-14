@@ -18,14 +18,14 @@
                         <span class="c-collection__month">{{ $event->occasionStart['month'] }}</span>
                     </span>
                 </span>
-                <span class="c-collection__content">
+                <div class="c-collection__content">
                     @typography(['element' => 'h2', 'variant' => 'h4'])
                         {{ $event->post_title }}
                         @typography(['variant' => 'meta', 'element' => 'p'])
                             {{ $event->occasionDateFormatted }}
                         @endtypography
                     @endtypography
-                </span>
+                </div>
             </a>
         @endforeach
     @endcollection
