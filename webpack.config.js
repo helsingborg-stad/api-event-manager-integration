@@ -24,15 +24,6 @@ const entry = {
   'css/event-manager-integration-admin': './source/sass/event-manager-integration-admin.scss',
 };
 
-if (isProduction) {
-  entry['js/event-integration-react'] = './source/js/front/react/react.production.min.js';
-  entry['js/event-integration-react-dom'] = './source/js/front/react/react-dom.production.min.js';
-} else {
-  entry['js/event-integration-react'] = './source/js/front/react/react.js';
-  entry['js/event-integration-react-dom'] = './source/js/front/react/react-dom.js';
-}
-
-
 module.exports = {
   mode: ifProduction('production', 'development'),
   /**
