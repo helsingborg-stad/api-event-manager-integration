@@ -420,10 +420,6 @@ class Event extends \Modularity\Module
      */
     public function script()
     {
- 
-        // Enqueue React
-        \EventManagerIntegration\Helper\React::enqueue();
-
         wp_enqueue_script(
             'modularity-' . $this->slug,
             EVENTMANAGERINTEGRATION_URL . '/dist/' . \EventManagerIntegration\Helper\CacheBust::name(
