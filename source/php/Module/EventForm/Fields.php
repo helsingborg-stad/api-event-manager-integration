@@ -53,7 +53,10 @@ class Fields
                             __('You must also have the right to use and distribute the image.', 'event-integration'),
                         'type' => 'image',
                         'required' => !empty($data['image_input']['required']),
-                        'aspectRatio' => '16:9'
+                        'aspectRatio' => '16:9',
+                        'buttonLabel' => __('Upload image', 'event-integration'),
+                        'buttonRemoveLabel' => __('Remove', 'event-integration'),
+                        'buttonDropLabel' => __('Drop image here', 'event-integration'),
                     ],
                     [
                         'name' => 'event_image_copyright_compliance',
