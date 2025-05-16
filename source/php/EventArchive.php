@@ -63,8 +63,8 @@ class EventArchive
         }
 
         if (isset($post->start_date)) {
-            $post->post_date_gmt = get_gmt_from_date($post->start_date);
-            $post->post_date = $post->post_date_gmt;
+            $post->post_date_gmt = $post->start_date;
+            $post->post_date = $post->start_date;
         } else {
             $timeNow = time();
             $eventOccasions = get_post_meta($post->ID, 'occasions_complete', true);
