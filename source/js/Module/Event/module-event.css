@@ -19,3 +19,18 @@
   width: 100%;
   z-index: 2;
 }
+
+@media screen and (max-width: 895px) {
+  .modularity-event-index--mobile-slider 
+    .modularity-event-index__content > .o-grid {
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    width: calc(100vw - calc(var(--base, 8px) * 2));
+    padding-right: calc(var(--base, 8px) * 2);
+  }
+
+  .modularity-event-index--mobile-slider 
+    .modularity-event-index__content > .o-grid > .grid-xs-12 {
+    flex: 0 0 85%;
+  }
+}
