@@ -5,10 +5,10 @@
         @option([
             'type' => 'radio',
             'checked' => $loop->index === 0,
+            'value' => $value,
+            'name' => $field['name'],
             'attributeList' => [
-                'data-id' => !empty($option->id) ? $option->id : uniqid(),
-                'name' => $field['name'],
-                'value' => $value,
+                'data-id' => !empty($option->id) ? $option->id : uniqid()
             ],
             'classList' => ['u-display--inline-block'],
             'label' => $label,
