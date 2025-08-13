@@ -15,10 +15,10 @@ class IndexTemplate
         $this->args = $args;
         $this->data = $data;
 
-
         $this->data['gridColumn'] = $this->gridColumn();
         $this->data['imageRatio'] = (isset($this->data['mod_event_image_ratio'])) ? str_replace('-', ':', $this->data['mod_event_image_ratio']) : '1:1';
         $this->data['imageDimensions'] = $this->imageDimensions(400);
+        $this->data['mobileHorizontalTrack'] = $this->data['mod_event_mobile_horizontal_track'] ?? false;
 
         $this->data['classes'] = !empty($this->args) ? implode(' ', apply_filters('Modularity/Module/Classes', array(), 'mod-event', $this->args)) : '';
     }

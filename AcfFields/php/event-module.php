@@ -9,6 +9,7 @@
             'key' => 'field_5b2ace4dc65a8',
             'label' => __('Show as', 'event-integration'),
             'name' => 'mod_event_display',
+            'aria-label' => '',
             'type' => 'radio',
             'instructions' => '',
             'required' => 0,
@@ -33,6 +34,7 @@
             'key' => 'field_5b2ad8bc7cf90',
             'label' => __('Columns', 'event-integration'),
             'name' => 'mod_event_columns',
+            'aria-label' => '',
             'type' => 'select',
             'instructions' => '',
             'required' => 1,
@@ -70,6 +72,7 @@
             'key' => 'field_583fe58262287',
             'label' => __('Number of events to show', 'event-integration'),
             'name' => 'mod_event_limit',
+            'aria-label' => '',
             'type' => 'number',
             'instructions' => __('Set to -1 to show all.', 'event-integration'),
             'required' => 1,
@@ -99,6 +102,7 @@
             'key' => 'field_584ec8318df1d',
             'label' => __('Show pagination', 'event-integration'),
             'name' => 'mod_event_pagination',
+            'aria-label' => '',
             'type' => 'true_false',
             'instructions' => __('Display pagination below the event list.', 'event-integration'),
             'required' => 0,
@@ -118,6 +122,7 @@
             'key' => 'field_5c5d4a3f27386',
             'label' => __('Per page', 'event-integration'),
             'name' => 'mod_event_per_page',
+            'aria-label' => '',
             'type' => 'number',
             'instructions' => __('Number of events to display per page.', 'event-integration'),
             'required' => 1,
@@ -152,6 +157,7 @@
             'key' => 'field_58e6370d4f34c',
             'label' => __('Archive link', 'event-integration'),
             'name' => 'mod_event_archive',
+            'aria-label' => '',
             'type' => 'true_false',
             'instructions' => __('Show link to event archive page.', 'event-integration'),
             'required' => 0,
@@ -168,9 +174,38 @@
             'ui_off_text' => '',
         ),
         6 => array(
+            'key' => 'field_685e55bfddc4e',
+            'label' => __('Show as horizontal track on mobile', 'event-integration'),
+            'name' => 'mod_event_mobile_horizontal_track',
+            'aria-label' => '',
+            'type' => 'true_false',
+            'instructions' => __('Allow mobile users to scroll event list horizontally instead of stacked vertically.', 'event-integration'),
+            'required' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_5b2ace4dc65a8',
+                        'operator' => '==',
+                        'value' => 'index',
+                    ),
+                ),
+            ),
+            'wrapper' => array(
+                'width' => '100',
+                'class' => '',
+                'id' => '',
+            ),
+            'message' => __('Yes', 'event-integration'),
+            'default_value' => 0,
+            'ui' => 0,
+            'ui_on_text' => '',
+            'ui_off_text' => '',
+        ),
+        7 => array(
             'key' => 'field_6319fd34782d6',
             'label' => __('Remove URL parameters', 'event-integration'),
             'name' => 'mod_event_no_url',
+            'aria-label' => '',
             'type' => 'true_false',
             'instructions' => '',
             'required' => 0,
@@ -186,10 +221,11 @@
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        7 => array(
+        8 => array(
             'key' => 'field_591af4eeb1561',
             'label' => __('Pagination button limit', 'event-integration'),
             'name' => 'mod_event_pagination_limit',
+            'aria-label' => '',
             'type' => 'number',
             'instructions' => __('Limit number of pagination buttons. -1 to show all.', 'event-integration'),
             'required' => 1,
@@ -220,10 +256,11 @@
             'max' => '',
             'step' => '',
         ),
-        8 => array(
+        9 => array(
             'key' => 'field_591b06d53284e',
             'label' => __('Show pagination arrows', 'event-integration'),
             'name' => 'mod_event_nav_arrows',
+            'aria-label' => '',
             'type' => 'true_false',
             'instructions' => '',
             'required' => 0,
@@ -252,10 +289,11 @@
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        9 => array(
+        10 => array(
             'key' => 'field_583ffd8d10925',
             'label' => __('Days interval', 'event-integration'),
             'name' => 'mod_event_interval',
+            'aria-label' => '',
             'type' => 'number',
             'instructions' => __('Include events from today to the given number of days.', 'event-integration'),
             'required' => 1,
@@ -273,10 +311,11 @@
             'max' => '',
             'step' => '',
         ),
-        10 => array(
+        11 => array(
             'key' => 'field_5d5bda9c80adf',
             'label' => __('Only show events starting on todays date', 'event-integration'),
             'name' => 'mod_event_only_todays_date',
+            'aria-label' => '',
             'type' => 'true_false',
             'instructions' => __('Only show events starting on todays date', 'event-integration'),
             'required' => 0,
@@ -292,10 +331,11 @@
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        11 => array(
+        12 => array(
             'key' => 'field_5d5bdb7f80ae0',
             'label' => __('Hide past events', 'event-integration'),
             'name' => 'mod_events_hide_past_events',
+            'aria-label' => '',
             'type' => 'true_false',
             'instructions' => __('Hide past events', 'event-integration'),
             'required' => 0,
@@ -311,10 +351,11 @@
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        12 => array(
+        13 => array(
             'key' => 'field_583fefb6634a1',
             'label' => __('Fields', 'event-integration'),
             'name' => 'mod_event_fields',
+            'aria-label' => '',
             'type' => 'checkbox',
             'instructions' => '',
             'required' => 0,
@@ -338,11 +379,13 @@
             'toggle' => 1,
             'return_format' => 'value',
             'save_custom' => 0,
+            'custom_choice_button_text' => 'Add new choice',
         ),
-        13 => array(
+        14 => array(
             'key' => 'field_5b2ae170ae36f',
             'label' => __('Image ratio', 'event-integration'),
             'name' => 'mod_event_image_ratio',
+            'aria-label' => '',
             'type' => 'select',
             'instructions' => '',
             'required' => 0,
@@ -380,10 +423,11 @@
             'allow_custom' => 0,
             'search_placeholder' => '',
         ),
-        14 => array(
+        15 => array(
             'key' => 'field_58de5b2d62d45',
             'label' => __('Occasion position', 'event-integration'),
             'name' => 'mod_event_occ_pos',
+            'aria-label' => '',
             'type' => 'radio',
             'instructions' => '',
             'required' => 0,
@@ -417,10 +461,11 @@
             'layout' => 'vertical',
             'return_format' => 'value',
         ),
-        15 => array(
+        16 => array(
             'key' => 'field_583fee36634a0',
             'label' => __('Description letter limit', 'event-integration'),
             'name' => 'mod_event_descr_limit',
+            'aria-label' => '',
             'type' => 'number',
             'instructions' => __('Set to -1 to show the whole description.', 'event-integration'),
             'required' => 0,
@@ -446,10 +491,11 @@
             'max' => '',
             'step' => '',
         ),
-        16 => array(
+        17 => array(
             'key' => 'field_586cf5c8d3686',
             'label' => __('Groups', 'event-integration'),
             'name' => 'mod_event_groups_show',
+            'aria-label' => '',
             'type' => 'true_false',
             'instructions' => '',
             'required' => 0,
@@ -465,10 +511,11 @@
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        17 => array(
+        18 => array(
             'key' => 'field_586cf5d0d3687',
             'label' => __('Select groups', 'event-integration'),
             'name' => 'mod_event_groups_list',
+            'aria-label' => '',
             'type' => 'taxonomy',
             'instructions' => __('Show events from the selected groups.', 'event-integration'),
             'required' => 1,
@@ -494,11 +541,14 @@
             'load_terms' => 0,
             'return_format' => 'id',
             'multiple' => 0,
+            'bidirectional_target' => array(
+            ),
         ),
-        18 => array(
+        19 => array(
             'key' => 'field_58455b0e93178',
             'label' => __('Categories', 'event-integration'),
             'name' => 'mod_event_categories_show',
+            'aria-label' => '',
             'type' => 'true_false',
             'instructions' => '',
             'required' => 0,
@@ -514,10 +564,11 @@
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        19 => array(
+        20 => array(
             'key' => 'field_5845578c5f0a0',
             'label' => __('Select categories', 'event-integration'),
             'name' => 'mod_event_categories_list',
+            'aria-label' => '',
             'type' => 'taxonomy',
             'instructions' => __('Show events from the selected categories.', 'event-integration'),
             'required' => 1,
@@ -543,11 +594,14 @@
             'load_terms' => 0,
             'return_format' => 'id',
             'multiple' => 0,
+            'bidirectional_target' => array(
+            ),
         ),
-        20 => array(
+        21 => array(
             'key' => 'field_58458b20dde03',
             'label' => __('Tags', 'event-integration'),
             'name' => 'mod_event_tags_show',
+            'aria-label' => '',
             'type' => 'true_false',
             'instructions' => '',
             'required' => 0,
@@ -563,10 +617,11 @@
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        21 => array(
+        22 => array(
             'key' => 'field_58458b57dde04',
             'label' => __('Select tags', 'event-integration'),
             'name' => 'mod_event_tags_list',
+            'aria-label' => '',
             'type' => 'taxonomy',
             'instructions' => __('Show events from the selected tags.', 'event-integration'),
             'required' => 1,
@@ -592,11 +647,14 @@
             'load_terms' => 0,
             'return_format' => 'id',
             'multiple' => 0,
+            'bidirectional_target' => array(
+            ),
         ),
-        22 => array(
+        23 => array(
             'key' => 'field_584f9e68aa31a',
             'label' => __('Default image', 'event-integration'),
             'name' => 'mod_event_def_image',
+            'aria-label' => '',
             'type' => 'image',
             'instructions' => __('Will display if event image is missing.', 'event-integration'),
             'required' => 0,
@@ -619,10 +677,11 @@
             'uploader' => '',
             'acfe_thumbnail' => 0,
         ),
-        23 => array(
+        24 => array(
             'key' => 'field_58abf724d46f6',
             'label' => __('Location', 'event-integration'),
             'name' => 'mod_event_geographic',
+            'aria-label' => '',
             'type' => 'google_map',
             'instructions' => __('Show events that occurs at a specified location.', 'event-integration'),
             'required' => 0,
@@ -637,10 +696,11 @@
             'zoom' => 16,
             'height' => '',
         ),
-        24 => array(
+        25 => array(
             'key' => 'field_58abf72bd46f7',
             'label' => __('Distance from location', 'event-integration'),
             'name' => 'mod_event_distance',
+            'aria-label' => '',
             'type' => 'number',
             'instructions' => __('To show events occurring nearby the given location, enter maximum distance in km. Leave blank to only show events from the exact position.', 'event-integration'),
             'required' => 0,
@@ -658,10 +718,11 @@
             'max' => '',
             'step' => '',
         ),
-        25 => array(
+        26 => array(
             'key' => 'field_5c6e698e8d331',
             'label' => __('Filters', 'event-integration'),
             'name' => '',
+            'aria-label' => '',
             'type' => 'message',
             'instructions' => '',
             'required' => 0,
@@ -683,37 +744,11 @@
             'new_lines' => 'wpautop',
             'esc_html' => 0,
         ),
-        26 => array(
+        27 => array(
             'key' => 'field_5c5d4dbd07268',
             'label' => __('Text search', 'event-integration'),
             'name' => 'mod_event_filter_search',
-            'type' => 'true_false',
-            'instructions' => '',
-            'required' => 0,
-            'conditional_logic' => array(
-                0 => array(
-                    0 => array(
-                        'field' => 'field_5b2ace4dc65a8',
-                        'operator' => '==',
-                        'value' => 'index',
-                    ),
-                ),
-            ),
-            'wrapper' => array(
-                'width' => '20',
-                'class' => '',
-                'id' => '',
-            ),
-            'message' => '',
-            'default_value' => 0,
-            'ui' => 1,
-            'ui_on_text' => '',
-            'ui_off_text' => '',
-        ),
-        27 => array(
-            'key' => 'field_5c5d501e9acbb',
-            'label' => __('Categories', 'event-integration'),
-            'name' => 'mod_event_filter_categories',
+            'aria-label' => '',
             'type' => 'true_false',
             'instructions' => '',
             'required' => 0,
@@ -738,9 +773,10 @@
             'ui_off_text' => '',
         ),
         28 => array(
-            'key' => 'field_5d1b26a7f03ff',
-            'label' => __('Tags', 'event-integration'),
-            'name' => 'mod_event_filter_tags',
+            'key' => 'field_5c5d501e9acbb',
+            'label' => __('Categories', 'event-integration'),
+            'name' => 'mod_event_filter_categories',
+            'aria-label' => '',
             'type' => 'true_false',
             'instructions' => '',
             'required' => 0,
@@ -765,9 +801,10 @@
             'ui_off_text' => '',
         ),
         29 => array(
-            'key' => 'field_5c5d50499acbc',
-            'label' => __('Date search', 'event-integration'),
-            'name' => 'mod_event_filter_dates',
+            'key' => 'field_5d1b26a7f03ff',
+            'label' => __('Tags', 'event-integration'),
+            'name' => 'mod_event_filter_tags',
+            'aria-label' => '',
             'type' => 'true_false',
             'instructions' => '',
             'required' => 0,
@@ -792,9 +829,38 @@
             'ui_off_text' => '',
         ),
         30 => array(
+            'key' => 'field_5c5d50499acbc',
+            'label' => __('Date search', 'event-integration'),
+            'name' => 'mod_event_filter_dates',
+            'aria-label' => '',
+            'type' => 'true_false',
+            'instructions' => '',
+            'required' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_5b2ace4dc65a8',
+                        'operator' => '==',
+                        'value' => 'index',
+                    ),
+                ),
+            ),
+            'wrapper' => array(
+                'width' => '20',
+                'class' => '',
+                'id' => '',
+            ),
+            'message' => '',
+            'default_value' => 0,
+            'ui' => 1,
+            'ui_on_text' => '',
+            'ui_off_text' => '',
+        ),
+        31 => array(
             'key' => 'field_5c765ee693303',
             'label' => __('Age', 'event-integration'),
             'name' => 'mod_event_filter_age_group',
+            'aria-label' => '',
             'type' => 'true_false',
             'instructions' => '',
             'required' => 0,
