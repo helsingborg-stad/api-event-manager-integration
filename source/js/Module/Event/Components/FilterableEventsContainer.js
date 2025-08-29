@@ -154,20 +154,14 @@ if(!noUrl) {
   /**
    * Return list of taxonomy IDs
    */
-  getTaxonomyIds = taxonomies => {
-    let taxonomyIds = [];
-
-    if (!Array.isArray(taxonomies) && taxonomies.length) {
-      return taxonomyIds;
+  getTaxonomyIds = (taxonomies) => {
+    if (!Array.isArray(taxonomies) || taxonomies.length === 0) {
+      return [];
     }
 
-    const checkedValues = taxonomies.filter(tax => tax.checked);
-
-    if (checkedValues.length) {
-      taxonomyIds = checkedValues.reduce((acc, curr) => [...acc, curr.id], []);
-    }
-
-    return taxonomyIds;
+    return taxonomies
+      .filter(tax => tax.checked)
+      .map(tax => tax.id);
   };
 
   /**
