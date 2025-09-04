@@ -11,7 +11,7 @@
 
 <div class="o-grid {{ $classes }}">
     <div class="o-grid-12">
-        <div class="modularity-event-{{ $template }}"
+        <div class="modularity-event-{{ $template }}{{ $mobileHorizontalTrack ? ' modularity-event-index--mobile-slider' : '' }}"
              data-module-id="{{ $ID }}"
              data-post-id="{{ $post_id }}"
              data-settings="{{ json_encode($settings) }}"
@@ -31,6 +31,7 @@
              data-age-to="{{$age_to}}"
              data-no-url="{{$no_url}}"
              data-card-style="{{$card_style}}"
+             data-mobile-slider="{{$mobileHorizontalTrack ? 'true' : 'false'}}"
         >
         </div>
     </div>

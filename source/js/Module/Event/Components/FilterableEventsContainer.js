@@ -428,7 +428,7 @@ if(!noUrl) {
       cardStyle
     } = this.state;
 
-    const { settings, translation, gridColumn, archiveUrl } = this.props;
+    const { settings, translation, gridColumn, archiveUrl, mobileSlider } = this.props;
 
     return (
       <div class="o-grid">
@@ -485,6 +485,8 @@ if(!noUrl) {
                 gridColumn={gridColumn}
                 displayFields={settings.mod_event_fields}
                 imageRatio={settings.mod_event_image_ratio}
+                mobileSlider={mobileSlider}
+                translation={translation}
               />
             )}
 
@@ -530,6 +532,7 @@ FilterableEventsContainer.propTypes = {
   lang: PropTypes.string,
   lat: PropTypes.string,
   lng: PropTypes.string,
+  mobileSlider: PropTypes.bool,
   moduleId: PropTypes.string.isRequired,
   postId: PropTypes.string,
   restUrl: PropTypes.string.isRequired,
@@ -542,6 +545,7 @@ FilterableEventsContainer.propTypes = {
 FilterableEventsContainer.defaultProps = {
   categories: [],
   groups: [],
+  mobileSlider: false,
   tags: [],
 };
 
