@@ -3,6 +3,7 @@ import AgeFilter from './AgeFilter';
 import CategoriesFilter from './CategoriesFilter';
 import DateFilter from './DateFilter';
 import SearchBar from './SearchBar';
+import ErrorBoundary from './ErrorBoundary';
 
 const FilterContainer = ({
   ageRange,
@@ -78,21 +79,25 @@ const FilterContainer = ({
       <div className="o-grid o-grid-8@md u-margin__top--1 u-margin__top--3@md u-margin__top--3@lg u-margin__top--3@xl">
         {settings.mod_event_filter_categories && categories.length > 0 && (
           <div className="o-grid-fit">
-            <CategoriesFilter
-              title={translation.categories}
-              categories={categories}
-              onCategoryChange={onCategoryChange}
-            />
+            <ErrorBoundary>
+              <CategoriesFilter
+                title={translation.categories}
+                categories={categories}
+                onCategoryChange={onCategoryChange}
+              />
+            </ErrorBoundary>
           </div>
         )}
 
         {settings.mod_event_filter_tags && tags.length > 0 && (
           <div className="o-grid-fit">
-            <CategoriesFilter
-              title={translation.tags}
-              categories={tags}
-              onCategoryChange={onTagChange}
-            />
+            <ErrorBoundary>
+              <CategoriesFilter
+                title={translation.tags}
+                categories={tags}
+                onCategoryChange={onTagChange}
+              />
+            </ErrorBoundary>
           </div>
         )}
 
