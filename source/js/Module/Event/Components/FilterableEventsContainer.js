@@ -366,9 +366,7 @@ if(!noUrl) {
    */
   onCategoryChange = (e, id) => {
     const { categories } = this.state;
-    // Get the index
     const index = categories.findIndex(obj => obj.id === id);
-    // Update state
     this.setState(
       update(this.state, {
         categories: {
@@ -376,7 +374,8 @@ if(!noUrl) {
             checked: { $set: !categories[index].checked },
           },
         },
-      })
+      }),
+      () => this.getEvents()
     );
   };
 

@@ -1,9 +1,8 @@
-import { Dropdown } from '@helsingborg-stad/hbg-react';
+import DropdownNew from './Dropdown';
 import PropTypes from 'prop-types';
 
 const CategoriesFilter = ({ categories, onCategoryChange, title }) => (
-  <div className='c-dropdown c-dropdown--scrollable'>
-    <Dropdown title={title} id="filter-categories">
+    <DropdownNew title={title} id="filter-categories">
       {categories.map(item => (
         <div key={item.id} style={{ maxWidth: '250px', width: 'max-content' }}>
           <label className="checkbox u-px-1">
@@ -17,8 +16,7 @@ const CategoriesFilter = ({ categories, onCategoryChange, title }) => (
           </label>
         </div>
       ))}
-    </Dropdown>
-  </div>
+    </DropdownNew>
 );
 
 CategoriesFilter.propTypes = {
