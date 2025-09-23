@@ -1,23 +1,21 @@
-import DropdownNew from './Dropdown';
+import CheckboxList from './Checkbox';
 import PropTypes from 'prop-types';
 
-const CategoriesFilter = ({ categories, onCategoryChange, title }) => (
-    <DropdownNew title={title} id="filter-categories">
-      {categories.map(item => (
-        <div key={item.id} style={{ maxWidth: '250px', width: 'max-content' }}>
-          <label className="checkbox u-px-1">
-            <input
-              type="checkbox"
-              value={item.id}
-              onChange={e => onCategoryChange(e, item.id)}
-              checked={item.checked}
-            />{' '}
-            {item.title}
-          </label>
-        </div>
-      ))}
-    </DropdownNew>
-);
+const CategoriesFilter = ({ categories, onCategoryChange, title }) => {
+  // Convert categories array to a checkedItems map
+  const checkedItems = {};
+  categories.forEach(c => (checkedItems[c.id] = c.checked));
+
+  return (
+    <CheckboxList
+      title={title}
+      items={categories}
+      onChange={onCategoryChange}
+      checkedItems={checkedItems}
+      id="filter-categories"
+    />
+  );
+};
 
 CategoriesFilter.propTypes = {
   categories: PropTypes.array.isRequired,

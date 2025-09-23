@@ -75,7 +75,7 @@ const FilterContainer = ({
         </div>
       )}
 
-      <div className="o-grid o-grid-8@md u-margin__top--1 u-margin__top--3@md u-margin__top--3@lg u-margin__top--3@xl">
+      <div className="o-grid o-grid-12@md u-margin__top--1 u-margin__top--3@md u-margin__top--3@lg u-margin__top--3@xl">
         {settings.mod_event_filter_categories && categories.length > 0 && (
           <div className="o-grid-fit">
             <CategoriesFilter

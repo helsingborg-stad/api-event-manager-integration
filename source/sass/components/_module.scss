@@ -12,3 +12,22 @@
         margin-bottom: 1rem;
     }
 }
+
+.modularity-mod-event .checkbox-list ul {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: calc(var(--base, 8px) * 2);
+    row-gap: calc(var(--base, 8px) * .5);
+    margin-top: calc(var(--base, 8px) * 1);
+    list-style: none;
+    padding: 0;
+
+    li {
+        margin-top: 0;
+
+        label {
+            display: flex;
+            gap: calc(var(--base, 8px) * .5);
+        }
+    }
+}
