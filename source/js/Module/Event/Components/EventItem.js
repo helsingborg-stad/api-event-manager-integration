@@ -36,10 +36,8 @@ const EventItem = ({ event, displayFields, cardStyle, imageRatio }) => (
 
     {displayFields.includes('dateBadge') ? (
     <div class="c-datebadge c-datebadge--md u-position--absolute u-margin--2 u-level-2">
-        <div class="c-datebadge__daymonth">
-            <span class="c-typography c-datebadge__date c-typography__variant--h1">{getDateBadge(event, "getDay")}</span>
-            <span class="c-typography c-datebadge__month c-typography__variant--h4">{getDateBadge(event, "getMonth")}</span>
-        </div>
+          <span class="c-typography c-datebadge__date c-typography__variant--h1">{getDateBadge(event, "getDay")}</span>
+          <span class="c-typography c-datebadge__month c-typography__variant--h4">{getDateBadge(event, "getMonth")}</span>
     </div>) : ""}
 
     <div className="c-card__body">
