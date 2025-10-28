@@ -30,7 +30,7 @@ class App
         new Shortcodes\SubmitForm();
 
         /* Register Modularity v2 modules */
-        add_action('plugins_loaded', function () {
+        add_action('init', function () {
             if (function_exists('modularity_register_module')) {
                 modularity_register_module(
                     EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/Event',
