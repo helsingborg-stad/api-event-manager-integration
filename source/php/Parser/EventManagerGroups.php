@@ -97,15 +97,15 @@ class EventManagerGroups extends \EventManagerIntegration\Parser
         $term = get_term_by('slug', $slug, $taxonomy);
         if ($term == false) {
             $new_term = wp_insert_term($name, $taxonomy, array('slug' => $slug, 'parent' => $parent));
-            $term_id = $new_term['term_id'];
-
-            $this->activateNewGroup($term_id, $parent);
-        } else {
-            wp_update_term($term->term_id, $taxonomy, array('name' => $name, 'parent' => $parent));
-            $term_id = $term->term_id;
+            if (!is_wp_error($new_term)) {
+                $term_id = $new_term['term_id'];
+                $this->activateNewGroup($term_id, $parent);
+                return $term_id;
+            }
+            return 0;
         }
-
-        return $term_id;
+        wp_update_term($term->term_id, $taxonomy, array('name' => $name, 'parent' => $parent));
+        return $term->term_id ?? 0;
     }
 
     /**
