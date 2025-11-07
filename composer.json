@@ -4,6 +4,16 @@
     "type": "wordpress-plugin",
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "extra": {
+        "installer-paths": {
+            "vendor/{$vendor}/{$name}": [
+                "type:wordpress-muplugin",
+                "type:wordpress-theme",
+                "type:wordpress-plugin",
+                "type:acf-plugin"
+            ]
+        }
+    },
     "license": "MIT",
     "authors": [
         {
