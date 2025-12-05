@@ -2,20 +2,18 @@
 
 namespace EventManagerIntegration;
 
-use Municipio\PostObject\Decorators\AbstractPostObjectDecorator;
-use Municipio\PostObject\PostObject;
 use Municipio\PostObject\PostObjectInterface;
 use PHPUnit\Framework\TestCase;
 
 class EventPostObjectTest extends TestCase {
     /**
-     * @testdox creates a EventPostObject with given archive date timestamp
+     * @testdox creates a EventPostObject with given published time
      */
-    public function testGetArchiveDateTimestamp() {
-        $archiveDateTimestamp = 1672531199; // Example timestamp
+    public function testGetPublishedTime() {
+        $publishedTime = 1672531199; // Example timestamp
         $postObject = $this->createMock(PostObjectInterface::class);
-        $eventPostObject = EventPostObject::create($postObject, $archiveDateTimestamp);
+        $eventPostObject = EventPostObject::create($postObject, $publishedTime);
 
-        $this->assertEquals($archiveDateTimestamp, $eventPostObject->getArchiveDateTimestamp());
+        $this->assertEquals($publishedTime, $eventPostObject->getPublishedTime());
     }
 }
