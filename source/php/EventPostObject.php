@@ -6,18 +6,18 @@ use Municipio\PostObject\Decorators\AbstractPostObjectDecorator;
 use Municipio\PostObject\PostObjectInterface;
 
 class EventPostObject extends AbstractPostObjectDecorator implements PostObjectInterface {
-    public function __construct(PostObjectInterface $postObject, private int $archiveDateTimestamp)
+    public function __construct(PostObjectInterface $postObject, private int $publishedTime)
     {
         return parent::__construct($postObject);
     }
 
-    public function getArchiveDateTimestamp(): ?int
+    public function getPublishedTime(bool $gmt = false): int
     {
-        return $this->archiveDateTimestamp;
+        return $this->publishedTime;
     }
 
-    public static function create(PostObjectInterface $innerPost, int $archiveDateTimestamp): PostObjectInterface
+    public static function create(PostObjectInterface $innerPost, int $publishedTime): PostObjectInterface
     {
-        return new self($innerPost, $archiveDateTimestamp);
+        return new self($innerPost, $publishedTime);
     }
 }
