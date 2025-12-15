@@ -152,32 +152,30 @@ class EventArchive
      * @param  string $where current where statement
      * @return string        updated statement
      */
-    public function eventFilterWhere($where)
+    public function eventFilterWhere($where, \WP_Query $query)
     {
-        $fromDate = null;
-        $toDate = null;
+        /** @var \string|string[] $postType */
+        $postType = $query->get('post_type');
+        $postType = is_array($postType) ? $postType : [$postType];
 
-        global $wp_query;
-
-        if (isset($_GET['from']) && !empty($_GET['from'])) {
-            $fromDate = str_replace('/', '-', sanitize_text_field($_GET['from']));
-            $fromDate = date('Y-m-d', strtotime($fromDate));
+        if (!in_array($this->eventPostType, $postType) || $query->query['date_query'] === null) {
+            return $where;
         }
 
-        if (isset($_GET['to']) && !empty($_GET['to'])) {
-            $toDate = str_replace('/', '-', sanitize_text_field($_GET['to']));
-            $toDate = date('Y-m-d', strtotime("+1 day", strtotime($toDate)));
-        }
+        $dateQuery = $query->query['date_query'];
+        $fromDate = $dateQuery['after'] ?? null;
+        $toDate = $dateQuery['before'] ?? null;
 
         if (!is_null($fromDate) && !is_null($toDate)) {
             // USE BETWEEN ON START DATE
+            $toDatePlusOneDay = date('Y-m-d', strtotime($toDate . ' +1 day'));
             $where = str_replace(
-                "{$this->db->posts}.post_date >= '{$fromDate}'",
-                "{$this->dbTable}.start_date BETWEEN CAST('{$fromDate}' AS DATE) AND CAST('{$toDate}' AS DATE)",
+                "{$this->db->posts}.post_date >= '{$fromDate} 00:00:00'",
+                "{$this->dbTable}.start_date BETWEEN CAST('{$fromDate}' AS DATE) AND CAST('{$toDatePlusOneDay}' AS DATE)",
                 $where
             );
             $where = str_replace(
-                "AND {$this->db->posts}.post_date <= '{$toDate}'",
+                "AND {$this->db->posts}.post_date <= '{$toDate} 23:59:59'",
                 "",
                 $where
             );
