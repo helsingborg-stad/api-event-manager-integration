@@ -18,12 +18,13 @@ class OAuthAdmin
      */
     public function createOauthPage() {
         add_submenu_page(
-            'edit.php?post_type=event',
-            __( 'API authentication', 'event-integration' ),
-            __( 'API authentication', 'event-integration' ),
+            'options-general.php',
+            __( 'Event Manager Integration: API authentication', 'event-integration' ),
+            __( 'Event Manager Integration: API authentication', 'event-integration' ),
             'manage_options',
             'oauth-request',
-            array($this, 'oauthRequestCallback')
+            array($this, 'oauthRequestCallback'),
+            1
         );
     }
 

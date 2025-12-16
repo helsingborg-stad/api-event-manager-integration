@@ -11,23 +11,28 @@ class App
 
     public function __construct()
     {
+        $eventsPostTypeIsEnabled = get_field('enable_events_post_type', 'option') ?? true;
+
         add_action('wp_enqueue_scripts', array($this, 'enqueueFront'), 950);
         add_action('admin_enqueue_scripts', array($this, 'enqueueAdmin'));
 
         new Install();
-        new Cron();
-        new Api\Events();
         new OAuth\OAuthAdmin();
         new OAuth\OAuthRequests();
-        new PostTypes\Events();
-        new EventArchive();
         new Acf\AcfConfig();
-        new Widget\DisplayEvents();
         new Admin\Options();
-        new Admin\AdminDisplayEvent();
         new Admin\MediaLibrary();
-        new Shortcodes\SingleEventAdmin();
         new Shortcodes\SubmitForm();
+        
+        if($eventsPostTypeIsEnabled) {
+            new Cron();
+            new Api\Events();
+            new PostTypes\Events();
+            new EventArchive();
+            new Widget\DisplayEvents();
+            new Admin\AdminDisplayEvent();
+            new Shortcodes\SingleEventAdmin();
+        }
 
         /* Register Modularity v2 modules */
         add_action('init', function () {

@@ -39,7 +39,10 @@
         }
     },
     "scripts": {
-        "test": "@php vendor/bin/phpunit"
+        "test": "@php vendor/bin/phpunit",
+        "make-pot": "wp i18n make-pot . languages/event-integration-sv_SE.pot --domain=event-integration --allow-root --include=source/php/,AcfFields/",
+        "update-po": "wp i18n update-po languages/event-integration-sv_SE.pot languages/event-integration-sv_SE.po --allow-root",
+        "make-mo": "wp i18n make-mo languages/event-integration-sv_SE.po languages/event-integration-sv_SE.mo --allow-root"
     },
     "require-dev": {
         "lucatume/function-mocker": "^1.3",

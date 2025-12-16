@@ -17,7 +17,29 @@
                 "id": ""
             },
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_6940f72eaa279",
+            "label": "Event post type, sync and presentation enabled",
+            "name": "enable_events_post_type",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Disabling this switch will prevent registration of the post type for events and every function using the post type. This is useful when only the event submission form is what you need from this plugin.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "allow_in_bindings": 0,
+            "ui_on_text": "Enabled",
+            "ui_off_text": "Disabled",
+            "ui": 1
         },
         {
             "key": "field_588f3ef76094c",
@@ -27,13 +49,22 @@
             "type": "url",
             "instructions": "Url to Event Manager API wp\/v2 namespace. <br> E.g. https:\/\/host\/wp-json\/wp\/v2",
             "required": 1,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6940f72eaa279",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
             "default_value": "",
+            "allow_in_bindings": 1,
             "placeholder": ""
         },
         {
@@ -44,19 +75,28 @@
             "type": "number",
             "instructions": "Import events that occurs within given number of days. Try to keep it as short as possible to avoid unnecessary datatransfer.",
             "required": 1,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6940f72eaa279",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "50",
                 "class": "",
                 "id": ""
             },
             "default_value": 30,
-            "placeholder": "",
-            "prepend": "",
-            "append": "days",
             "min": 1,
             "max": 730,
-            "step": ""
+            "allow_in_bindings": 1,
+            "placeholder": "",
+            "step": "",
+            "prepend": "",
+            "append": "days"
         },
         {
             "key": "field_5835581488400",
@@ -66,7 +106,15 @@
             "type": "true_false",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6940f72eaa279",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "50",
                 "class": "",
@@ -74,6 +122,7 @@
             },
             "message": "Enable daily automatic import from Event Manager API",
             "default_value": 0,
+            "allow_in_bindings": 1,
             "ui": 0,
             "ui_on_text": "",
             "ui_off_text": ""
@@ -86,7 +135,15 @@
             "type": "radio",
             "instructions": "Select status of imported events.",
             "required": 1,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6940f72eaa279",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "50",
                 "class": "",
@@ -96,12 +153,13 @@
                 "draft": "Draft",
                 "publish": "Published"
             },
+            "default_value": "publish",
+            "return_format": "value",
             "allow_null": 0,
             "other_choice": 0,
-            "save_other_choice": 0,
-            "default_value": "publish",
+            "allow_in_bindings": 1,
             "layout": "vertical",
-            "return_format": "value"
+            "save_other_choice": 0
         },
         {
             "key": "field_58feee2f256cd",
@@ -111,19 +169,28 @@
             "type": "number",
             "instructions": "Automatically unpublish events lasting longer than given limit. Set to -1 to set no limit.",
             "required": 1,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6940f72eaa279",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "50",
                 "class": "",
                 "id": ""
             },
             "default_value": 5,
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
             "min": -1,
             "max": "",
-            "step": ""
+            "allow_in_bindings": 1,
+            "placeholder": "",
+            "step": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_58e380646fa6f",
@@ -133,7 +200,15 @@
             "type": "true_false",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6940f72eaa279",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -141,6 +216,7 @@
             },
             "message": "Visa uppdatera-knapp",
             "default_value": 0,
+            "allow_in_bindings": 1,
             "ui": 0,
             "ui_on_text": "",
             "ui_off_text": ""
@@ -170,7 +246,15 @@
             "type": "message",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6940f72eaa279",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -188,20 +272,30 @@
             "type": "taxonomy",
             "instructions": "Select the user groups that you want to import events from. Leave empty to import from all groups.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6940f72eaa279",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
             "taxonomy": "event_groups",
-            "field_type": "checkbox",
-            "allow_null": 0,
             "add_term": 0,
             "save_terms": 1,
             "load_terms": 0,
             "return_format": "object",
+            "field_type": "checkbox",
+            "allow_in_bindings": 1,
+            "bidirectional": 0,
             "multiple": 0,
+            "allow_null": 0,
             "bidirectional_target": []
         },
         {
@@ -212,17 +306,26 @@
             "type": "text",
             "instructions": "Enter the name of the categories that you want to import events from. Separate with commas. Leave blank to import from all categories.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6940f72eaa279",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
             "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 1,
             "placeholder": "",
             "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "append": ""
         },
         {
             "key": "field_5846db8b3cf78",
@@ -232,17 +335,26 @@
             "type": "text",
             "instructions": "Enter the name of the tags that you want to import events from. Separate with commas. Leave blank to import from all tags.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6940f72eaa279",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
             "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 1,
             "placeholder": "",
             "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "append": ""
         },
         {
             "key": "field_5b1e890a063c4",
@@ -252,7 +364,15 @@
             "type": "true_false",
             "instructions": "Select if only internal (organization) events should be imported.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6940f72eaa279",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -260,9 +380,10 @@
             },
             "message": "",
             "default_value": 0,
-            "ui": 1,
+            "allow_in_bindings": 1,
             "ui_on_text": "",
-            "ui_off_text": ""
+            "ui_off_text": "",
+            "ui": 1
         },
         {
             "key": "field_5b0e5a49c8fab",
@@ -272,7 +393,15 @@
             "type": "button_group",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6940f72eaa279",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -283,10 +412,11 @@
                 "point": "Single point",
                 "area": "Drawn area"
             },
-            "allow_null": 0,
             "default_value": "no",
-            "layout": "horizontal",
-            "return_format": "value"
+            "return_format": "value",
+            "allow_null": 0,
+            "allow_in_bindings": 1,
+            "layout": "horizontal"
         },
         {
             "key": "field_58aaeaa46781b",
@@ -302,6 +432,11 @@
                         "field": "field_5b0e5a49c8fab",
                         "operator": "==",
                         "value": "point"
+                    },
+                    {
+                        "field": "field_6940f72eaa279",
+                        "operator": "==",
+                        "value": "1"
                     }
                 ]
             ],
@@ -313,7 +448,8 @@
             "center_lat": "56.046467",
             "center_lng": "12.694512",
             "zoom": 16,
-            "height": ""
+            "height": "",
+            "allow_in_bindings": 1
         },
         {
             "key": "field_58aaec066781c",
@@ -329,6 +465,11 @@
                         "field": "field_5b0e5a49c8fab",
                         "operator": "==",
                         "value": "point"
+                    },
+                    {
+                        "field": "field_6940f72eaa279",
+                        "operator": "==",
+                        "value": "1"
                     }
                 ]
             ],
@@ -338,12 +479,13 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
             "min": "",
             "max": "",
-            "step": ""
+            "allow_in_bindings": 1,
+            "placeholder": "",
+            "step": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_5b0e6394d6399",
@@ -359,6 +501,11 @@
                         "field": "field_5b0e5a49c8fab",
                         "operator": "==",
                         "value": "area"
+                    },
+                    {
+                        "field": "field_6940f72eaa279",
+                        "operator": "==",
+                        "value": "1"
                     }
                 ]
             ],
@@ -379,14 +526,23 @@
             "type": "tab",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6940f72eaa279",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "selected": 0
         },
         {
             "key": "field_673c3cf64369a",
@@ -396,7 +552,15 @@
             "type": "true_false",
             "instructions": "Skip detailed information in hero image",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6940f72eaa279",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -404,6 +568,7 @@
             },
             "message": "Yes",
             "default_value": 0,
+            "allow_in_bindings": 1,
             "ui": 0,
             "ui_on_text": "",
             "ui_off_text": ""
@@ -427,10 +592,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "acfe_display_title": "",
-    "acfe_autosync": "",
-    "acfe_form": 0,
-    "acfe_meta": "",
-    "acfe_note": ""
+    "display_title": ""
 }]
 
