@@ -35,17 +35,20 @@ class App
         }
 
         /* Register Modularity v2 modules */
-        add_action('init', function () {
+        add_action('init', function () use ($eventsPostTypeIsEnabled) {
             if (function_exists('modularity_register_module')) {
-                modularity_register_module(
-                    EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/Event',
-                    'Event'
-                );
 
-                modularity_register_module(
-                    EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/Location',
-                    'Location'
-                );
+                if($eventsPostTypeIsEnabled) {
+                    modularity_register_module(
+                        EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/Event',
+                        'Event'
+                    );
+
+                    modularity_register_module(
+                        EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/Location',
+                        'Location'
+                    );
+                }
 
                 modularity_register_module(
                     EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/EventForm',
@@ -54,16 +57,20 @@ class App
             }
         });
 
-        add_action('widgets_init', function () {
-            register_widget('EventManagerIntegration\Widget\DisplayEvents');
-        });
+        if ($eventsPostTypeIsEnabled) {
+            add_action('widgets_init', function () {
+                register_widget('EventManagerIntegration\Widget\DisplayEvents');
+            });
+        }
 
         // Add view paths
-        add_action('template_redirect', function () {
-            if (get_post_type() === 'event') {
-                add_filter('Municipio/viewPaths', array($this, 'addViewPaths'), 2, 1);
-            }
-        }, 10);
+        if ($eventsPostTypeIsEnabled) {
+            add_action('template_redirect', function () {
+                if (get_post_type() === 'event') {
+                    add_filter('Municipio/viewPaths', array($this, 'addViewPaths'), 2, 1);
+                }
+            }, 10);
+        }
     }
 
     /**
