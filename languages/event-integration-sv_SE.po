@@ -1,22 +1,21 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Event Manager Integration\n"
-"POT-Creation-Date: 2025-04-14 13:46+0200\n"
-"PO-Revision-Date: 2025-04-14 13:47+0200\n"
+"Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-04-14 13:46+0200\n"
+"PO-Revision-Date: 2025-04-14 13:47+0200\n"
+"Language: sv\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.5\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: event-manager-integration.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
@@ -44,7 +43,8 @@ msgstr "Formulärnamn"
 msgid "Name the form for easier grouping of events."
 msgstr "Namnge formuläret för bättre gruppering av evenemang."
 
-#: AcfFields/php/event-form-module.php:66 AcfFields/php/event-module.php:316
+#: AcfFields/php/event-form-module.php:66
+#: AcfFields/php/event-module.php:358
 msgid "Fields"
 msgstr "Fält"
 
@@ -57,11 +57,11 @@ msgid ""
 "Add custom field labels and descriptions. Leave empty to use default texts.\n"
 "You can hide whole fields that are not required."
 msgstr ""
-"Lägg till anpassade fältetiketter och beskrivningar. Lämna tomt om du vill "
-"använda standardtexter.\n"
+"Lägg till anpassade fältetiketter och beskrivningar. Lämna tomt om du vill använda standardtexter.\n"
 "Man kan dölja fält som inte är obligatoriska."
 
-#: AcfFields/php/event-form-module.php:100 source/php/PostTypes/Events.php:41
+#: AcfFields/php/event-form-module.php:100
+#: source/php/PostTypes/Events.php:41
 msgid "Title"
 msgstr "Titel"
 
@@ -107,7 +107,8 @@ msgstr "Etikett"
 #: AcfFields/php/event-form-module.php:1755
 #: AcfFields/php/event-form-module.php:1867
 #: AcfFields/php/event-form-module.php:1979
-#: AcfFields/php/event-form-module.php:2091 AcfFields/php/event-module.php:332
+#: AcfFields/php/event-form-module.php:2091
+#: AcfFields/php/event-module.php:375
 #: source/php/Helper/SubmitEvent.php:27
 #: source/php/Module/EventForm/Fields.php:32
 msgid "Description"
@@ -140,13 +141,15 @@ msgstr "Dölj beskrivning"
 msgid "Content"
 msgstr "Innehåll"
 
-#: AcfFields/php/event-form-module.php:248 AcfFields/php/event-module.php:328
+#: AcfFields/php/event-form-module.php:248
+#: AcfFields/php/event-module.php:371
 #: source/php/PostTypes/Events.php:44
 #: source/php/Shortcodes/SingleEventAdmin.php:322
 msgid "Occasion"
 msgstr "Tidpunkt"
 
-#: AcfFields/php/event-form-module.php:322 source/php/PostTypes/Events.php:203
+#: AcfFields/php/event-form-module.php:322
+#: source/php/PostTypes/Events.php:203
 msgid "Event link"
 msgstr "Hemsida"
 
@@ -244,19 +247,23 @@ msgstr "Obligatoriskt"
 msgid "Select if the field is required."
 msgstr "Välj om fältet är obligatoriskt."
 
-#: AcfFields/php/event-form-module.php:434 source/php/Helper/SubmitEvent.php:56
+#: AcfFields/php/event-form-module.php:434
+#: source/php/Helper/SubmitEvent.php:56
 msgid "Link to booking"
 msgstr "Länk till bokning"
 
-#: AcfFields/php/event-form-module.php:546 source/php/Helper/SubmitEvent.php:64
+#: AcfFields/php/event-form-module.php:546
+#: source/php/Helper/SubmitEvent.php:64
 msgid "Price adult"
 msgstr "Vuxenpris"
 
-#: AcfFields/php/event-form-module.php:658 source/php/Helper/SubmitEvent.php:72
+#: AcfFields/php/event-form-module.php:658
+#: source/php/Helper/SubmitEvent.php:72
 msgid "Price student"
 msgstr "Studentpris"
 
-#: AcfFields/php/event-form-module.php:770 source/php/Helper/SubmitEvent.php:80
+#: AcfFields/php/event-form-module.php:770
+#: source/php/Helper/SubmitEvent.php:80
 msgid "Price children"
 msgstr "Barnpris"
 
@@ -264,7 +271,8 @@ msgstr "Barnpris"
 msgid "Children age"
 msgstr "Ålder för barnpris"
 
-#: AcfFields/php/event-form-module.php:994 source/php/Helper/SubmitEvent.php:96
+#: AcfFields/php/event-form-module.php:994
+#: source/php/Helper/SubmitEvent.php:96
 msgid "Price senior"
 msgstr "Pensionärspris"
 
@@ -288,8 +296,10 @@ msgstr "Åldersgrupp"
 msgid "Organizer"
 msgstr "Arrangör"
 
-#: AcfFields/php/event-form-module.php:1423 AcfFields/php/event-module.php:331
-#: AcfFields/php/event-module.php:624 AcfFields/php/shortcodes.php:57
+#: AcfFields/php/event-form-module.php:1423
+#: AcfFields/php/event-module.php:374
+#: AcfFields/php/event-module.php:684
+#: AcfFields/php/shortcodes.php:59
 #: source/php/Admin/AdminDisplayEvent.php:146
 #: source/php/Helper/SubmitEvent.php:128
 #: source/php/Module/EventForm/Fields.php:336
@@ -311,20 +321,25 @@ msgstr "Tillgänglighet"
 msgid "Event categories"
 msgstr "Evenemangskategorier"
 
-#: AcfFields/php/event-form-module.php:1721 AcfFields/php/event-module.php:549
-#: AcfFields/php/event-module.php:742 source/php/Helper/SubmitEvent.php:152
-#: source/php/Module/Event/Event.php:454 source/php/PostTypes/Events.php:248
+#: AcfFields/php/event-form-module.php:1721
+#: AcfFields/php/event-module.php:604
+#: AcfFields/php/event-module.php:807
+#: source/php/Helper/SubmitEvent.php:152
+#: source/php/Module/Event/Event.php:454
+#: source/php/PostTypes/Events.php:248
 #: source/php/PostTypes/Events.php:590
 #: source/php/Shortcodes/SingleEventAdmin.php:593
 msgid "Tags"
 msgstr "Taggar"
 
-#: AcfFields/php/event-form-module.php:1833 AcfFields/php/event-module.php:330
+#: AcfFields/php/event-form-module.php:1833
+#: AcfFields/php/event-module.php:373
 msgid "Image"
 msgstr "Bild"
 
 #: AcfFields/php/event-form-module.php:1945
-#: source/php/Helper/SubmitEvent.php:171 source/php/Helper/SubmitEvent.php:193
+#: source/php/Helper/SubmitEvent.php:171
+#: source/php/Helper/SubmitEvent.php:193
 msgid "Email"
 msgstr "E-postadress"
 
@@ -333,7 +348,8 @@ msgid "Email address to the person who submitted the event."
 msgstr "E-postadress till personen som skickat in evenemanget."
 
 #: AcfFields/php/event-form-module.php:2057
-#: source/php/Helper/SubmitEvent.php:179 source/php/Helper/SubmitEvent.php:192
+#: source/php/Helper/SubmitEvent.php:179
+#: source/php/Helper/SubmitEvent.php:192
 #: source/php/Module/EventForm/Fields.php:315
 msgid "Phone number"
 msgstr "Telefonnummer"
@@ -342,256 +358,261 @@ msgstr "Telefonnummer"
 msgid "Phone numer to the person who submitted the event."
 msgstr "Telefonnummer till personen som skickat in evenemanget."
 
-#: AcfFields/php/event-module.php:6
+#: AcfFields/php/event-module.php:8
 msgid "Display events"
 msgstr "Visning av evenemang"
 
-#: AcfFields/php/event-module.php:10
+#: AcfFields/php/event-module.php:12
 msgid "Show as"
 msgstr "Visa som"
 
-#: AcfFields/php/event-module.php:22
+#: AcfFields/php/event-module.php:25
 msgid "Lista"
 msgstr ""
 
-#: AcfFields/php/event-module.php:23
+#: AcfFields/php/event-module.php:26
 msgid "Index"
 msgstr ""
 
-#: AcfFields/php/event-module.php:28
+#: AcfFields/php/event-module.php:31
 msgid "list"
 msgstr ""
 
-#: AcfFields/php/event-module.php:34
+#: AcfFields/php/event-module.php:37
 msgid "Columns"
 msgstr "Kolumner"
 
-#: AcfFields/php/event-module.php:54
+#: AcfFields/php/event-module.php:58
 msgid "One Column"
 msgstr "En kolumn"
 
-#: AcfFields/php/event-module.php:55
+#: AcfFields/php/event-module.php:59
 msgid "Two column"
 msgstr "Två kolumner"
 
-#: AcfFields/php/event-module.php:56
+#: AcfFields/php/event-module.php:60
 msgid "Three column"
 msgstr "Tre kolumner"
 
-#: AcfFields/php/event-module.php:57
+#: AcfFields/php/event-module.php:61
 msgid "Four column"
 msgstr "Fyra kolumner"
 
-#: AcfFields/php/event-module.php:71
+#: AcfFields/php/event-module.php:75
 msgid "Number of events to show"
 msgstr "Visa antal evenemang"
 
-#: AcfFields/php/event-module.php:74
+#: AcfFields/php/event-module.php:79
 msgid "Set to -1 to show all."
 msgstr "-1 för att visa alla."
 
-#: AcfFields/php/event-module.php:100 AcfFields/php/event-module.php:111
+#: AcfFields/php/event-module.php:105
+#: AcfFields/php/event-module.php:117
 msgid "Show pagination"
 msgstr "Visa paginering"
 
-#: AcfFields/php/event-module.php:103
+#: AcfFields/php/event-module.php:109
 msgid "Display pagination below the event list."
 msgstr "Visar paginering under evenemangslistan."
 
-#: AcfFields/php/event-module.php:119
+#: AcfFields/php/event-module.php:125
 msgid "Per page"
 msgstr "Per sida"
 
-#: AcfFields/php/event-module.php:122
+#: AcfFields/php/event-module.php:129
 msgid "Number of events to display per page."
 msgstr "Antal evenemang att visa per sida."
 
-#: AcfFields/php/event-module.php:153
+#: AcfFields/php/event-module.php:160
 msgid "Archive link"
 msgstr "Länk till arkiv"
 
-#: AcfFields/php/event-module.php:156
+#: AcfFields/php/event-module.php:164
 msgid "Show link to event archive page."
 msgstr "Visa länk till arkivsida för evenemang."
 
-#: AcfFields/php/event-module.php:164
+#: AcfFields/php/event-module.php:172
 msgid "Show link"
 msgstr "Visa länk"
 
-#: AcfFields/php/event-module.php:172
+#: AcfFields/php/event-module.php:208
 msgid "Remove URL parameters"
 msgstr "Ta bort URL-parametrar"
 
-#: AcfFields/php/event-module.php:191
+#: AcfFields/php/event-module.php:228
 msgid "Pagination button limit"
 msgstr "Begränsa pagineringssidor"
 
-#: AcfFields/php/event-module.php:194
+#: AcfFields/php/event-module.php:232
 msgid "Limit number of pagination buttons. -1 to show all."
 msgstr "Begränsa antal pagineringssidor. -1 för att visa alla."
 
-#: AcfFields/php/event-module.php:225
+#: AcfFields/php/event-module.php:263
 msgid "Show pagination arrows"
 msgstr "Visa navigeringspilar"
 
-#: AcfFields/php/event-module.php:249
+#: AcfFields/php/event-module.php:288
 msgid "Show previous and next page arrows on pagination"
 msgstr "Visa navigeringspilar på sidnumrering"
 
-#: AcfFields/php/event-module.php:257
+#: AcfFields/php/event-module.php:296
 msgid "Days interval"
 msgstr "Tidsperiod"
 
-#: AcfFields/php/event-module.php:260
+#: AcfFields/php/event-module.php:300
 msgid "Include events from today to the given number of days."
 msgstr "Visa evenemang som inträffar inom angivet antal dagar."
 
-#: AcfFields/php/event-module.php:278 AcfFields/php/event-module.php:281
+#: AcfFields/php/event-module.php:318
+#: AcfFields/php/event-module.php:322
 msgid "Only show events starting on todays date"
 msgstr "Visa bara evenemang som startar på dagens datum"
 
-#: AcfFields/php/event-module.php:297 AcfFields/php/event-module.php:300
+#: AcfFields/php/event-module.php:338
+#: AcfFields/php/event-module.php:342
 msgid "Hide past events"
 msgstr "Dölj tidigare evenemang"
 
-#: AcfFields/php/event-module.php:329
+#: AcfFields/php/event-module.php:372
 msgid "Date badge"
 msgstr "Datumbricka"
 
-#: AcfFields/php/event-module.php:344
+#: AcfFields/php/event-module.php:388
 msgid "Image ratio"
 msgstr "Bildförhållande"
 
-#: AcfFields/php/event-module.php:369
+#: AcfFields/php/event-module.php:414
 msgid "Square (1:1)"
 msgstr "Kvadrat (1:1)"
 
-#: AcfFields/php/event-module.php:370
+#: AcfFields/php/event-module.php:415
 msgid "Standard Video (16:9)"
 msgstr "Standardvideo (16:9)"
 
-#: AcfFields/php/event-module.php:371
+#: AcfFields/php/event-module.php:416
 msgid "Standard TV (4:3)"
 msgstr ""
 
-#: AcfFields/php/event-module.php:373
+#: AcfFields/php/event-module.php:418
 msgid "1-1"
 msgstr ""
 
-#: AcfFields/php/event-module.php:385
+#: AcfFields/php/event-module.php:430
 msgid "Occasion position"
 msgstr "Position för datum"
 
-#: AcfFields/php/event-module.php:410
+#: AcfFields/php/event-module.php:456
 msgid "Below title"
 msgstr "Under titel"
 
-#: AcfFields/php/event-module.php:411
+#: AcfFields/php/event-module.php:457
 msgid "Left column"
 msgstr "Vänsterkolumn"
 
-#: AcfFields/php/event-module.php:416
+#: AcfFields/php/event-module.php:462
 msgid "below : Below title"
 msgstr ""
 
-#: AcfFields/php/event-module.php:422
+#: AcfFields/php/event-module.php:468
 msgid "Description letter limit"
 msgstr "Teckenbegränsning av beskrivning"
 
-#: AcfFields/php/event-module.php:425
+#: AcfFields/php/event-module.php:472
 msgid "Set to -1 to show the whole description."
 msgstr "-1 för att visa hela beskrivningen."
 
-#: AcfFields/php/event-module.php:451 source/php/PostTypes/Events.php:246
+#: AcfFields/php/event-module.php:498
+#: source/php/PostTypes/Events.php:246
 #: source/php/PostTypes/Events.php:627
 #: source/php/Shortcodes/SingleEventAdmin.php:581
 msgid "Groups"
 msgstr "Grupper"
 
-#: AcfFields/php/event-module.php:462
+#: AcfFields/php/event-module.php:510
 msgid "Show events from all groups"
 msgstr "Visa evenemang inom samtliga grupper"
 
-#: AcfFields/php/event-module.php:470
+#: AcfFields/php/event-module.php:518
 msgid "Select groups"
 msgstr "Välj grupper"
 
-#: AcfFields/php/event-module.php:473
+#: AcfFields/php/event-module.php:522
 msgid "Show events from the selected groups."
 msgstr "Visa evenemang inom angivna grupper."
 
-#: AcfFields/php/event-module.php:500 AcfFields/php/event-module.php:715
-#: source/php/Helper/SubmitEvent.php:144 source/php/Module/Event/Event.php:453
-#: source/php/PostTypes/Events.php:247 source/php/PostTypes/Events.php:553
+#: AcfFields/php/event-module.php:551
+#: AcfFields/php/event-module.php:779
+#: source/php/Helper/SubmitEvent.php:144
+#: source/php/Module/Event/Event.php:453
+#: source/php/PostTypes/Events.php:247
+#: source/php/PostTypes/Events.php:553
 #: source/php/Shortcodes/SingleEventAdmin.php:587
 msgid "Categories"
 msgstr "Kategorier"
 
-#: AcfFields/php/event-module.php:511
+#: AcfFields/php/event-module.php:563
 msgid "Show events from all categories"
 msgstr "Visa evenemang inom samtliga kategorier"
 
-#: AcfFields/php/event-module.php:519
+#: AcfFields/php/event-module.php:571
 msgid "Select categories"
 msgstr "Välj kategorier"
 
-#: AcfFields/php/event-module.php:522
+#: AcfFields/php/event-module.php:575
 msgid "Show events from the selected categories."
 msgstr "Visa evenemang inom angivna kategorier."
 
-#: AcfFields/php/event-module.php:560
+#: AcfFields/php/event-module.php:616
 msgid "Show events from all tags"
 msgstr "Visa evenemang inom samtliga taggar"
 
-#: AcfFields/php/event-module.php:568
+#: AcfFields/php/event-module.php:624
 msgid "Select tags"
 msgstr "Välj taggar"
 
-#: AcfFields/php/event-module.php:571
+#: AcfFields/php/event-module.php:628
 msgid "Show events from the selected tags."
 msgstr "Visa evenemang inom angivna taggar."
 
-#: AcfFields/php/event-module.php:598
+#: AcfFields/php/event-module.php:657
 msgid "Default image"
 msgstr "Standardbild"
 
-#: AcfFields/php/event-module.php:601
+#: AcfFields/php/event-module.php:661
 msgid "Will display if event image is missing."
 msgstr "Visas om bild saknas."
 
-#: AcfFields/php/event-module.php:627
+#: AcfFields/php/event-module.php:688
 msgid "Show events that occurs at a specified location."
 msgstr "Visa evenemang som inträffar vid en angiven plats."
 
-#: AcfFields/php/event-module.php:642 AcfFields/php/options.php:324
+#: AcfFields/php/event-module.php:703
+#: AcfFields/php/options.php:462
 msgid "Distance from location"
 msgstr "Avstånd från plats"
 
-#: AcfFields/php/event-module.php:645
-msgid ""
-"To show events occurring nearby the given location, enter maximum distance "
-"in km. Leave blank to only show events from the exact position."
-msgstr ""
-"För att visa evenemang i närheten av den angivna platsen, fyll i maximalt "
-"avstånd i km. Lämna tomt för att visa evenemang från den exakta positionen."
+#: AcfFields/php/event-module.php:707
+msgid "To show events occurring nearby the given location, enter maximum distance in km. Leave blank to only show events from the exact position."
+msgstr "För att visa evenemang i närheten av den angivna platsen, fyll i maximalt avstånd i km. Lämna tomt för att visa evenemang från den exakta positionen."
 
-#: AcfFields/php/event-module.php:663
+#: AcfFields/php/event-module.php:725
 msgid "Filters"
 msgstr "Filter"
 
-#: AcfFields/php/event-module.php:682
+#: AcfFields/php/event-module.php:745
 msgid "Activate search and filters."
 msgstr "Aktivera sök och olika filter."
 
-#: AcfFields/php/event-module.php:688
+#: AcfFields/php/event-module.php:751
 msgid "Text search"
 msgstr "Textsök"
 
-#: AcfFields/php/event-module.php:769
+#: AcfFields/php/event-module.php:835
 msgid "Date search"
 msgstr "Datumfiltrering"
 
-#: AcfFields/php/event-module.php:796 source/php/Module/Event/Event.php:455
+#: AcfFields/php/event-module.php:863
+#: source/php/Module/Event/Event.php:455
 #: source/php/PostTypes/Events.php:241
 #: source/php/Shortcodes/SingleEventAdmin.php:355
 #: source/php/Shortcodes/SingleEventAdmin.php:357
@@ -599,31 +620,34 @@ msgstr "Datumfiltrering"
 msgid "Age"
 msgstr "Ålder"
 
-#: AcfFields/php/location-module.php:10
+#: AcfFields/php/location-module.php:12
 msgid "Display information"
 msgstr "Visa information"
 
-#: AcfFields/php/location-module.php:13
+#: AcfFields/php/location-module.php:15
 msgid "Choose which information to display."
 msgstr "Välj vilken information som ska visas."
 
-#: AcfFields/php/location-module.php:22
+#: AcfFields/php/location-module.php:24
 msgid "Address"
 msgstr "Adress"
 
-#: AcfFields/php/location-module.php:23
+#: AcfFields/php/location-module.php:25
 msgid "Open hours"
 msgstr "Öppettider"
 
-#: AcfFields/php/location-module.php:24 AcfFields/php/shortcodes.php:59
+#: AcfFields/php/location-module.php:26
+#: AcfFields/php/shortcodes.php:61
 msgid "Organizers"
 msgstr "Arrangörer"
 
-#: AcfFields/php/location-module.php:25
+#: AcfFields/php/location-module.php:27
+#: source/php/Module/Location/views/location.blade.php:78
 msgid "Prices"
 msgstr "Priser"
 
-#: AcfFields/php/location-module.php:26 AcfFields/php/shortcodes.php:62
+#: AcfFields/php/location-module.php:28
+#: AcfFields/php/shortcodes.php:64
 #: source/php/Admin/AdminDisplayEvent.php:175
 #: source/php/Module/EventForm/Fields.php:426
 #: source/php/Shortcodes/SingleEventAdmin.php:187
@@ -631,339 +655,270 @@ msgstr "Priser"
 msgid "Links"
 msgstr "Länkar"
 
-#: AcfFields/php/options-debug-info.php:6
+#: AcfFields/php/options-debug-info.php:8
 msgid "Api-URL"
 msgstr ""
 
-#: AcfFields/php/options-debug-info.php:10
-#: AcfFields/php/options-debug-info.php:27
+#: AcfFields/php/options-debug-info.php:12
+#: AcfFields/php/options-debug-info.php:29
 msgid "API Request URL"
 msgstr ""
 
-#: AcfFields/php/options-debug-info.php:21
-msgid ""
-"The api provider may request you to send the request url if any issues arise "
-"in the import. Communicate this url when you are requesting assistance."
+#: AcfFields/php/options-debug-info.php:23
+msgid "The api provider may request you to send the request url if any issues arise in the import. Communicate this url when you are requesting assistance."
 msgstr ""
 
-#. Plugin Name of the plugin/theme
-#: AcfFields/php/options.php:6
+#. Plugin Name of the plugin
+#: event-manager-integration.php
+#: AcfFields/php/options.php:8
 msgid "Event Manager Integration"
 msgstr ""
 
-#: AcfFields/php/options.php:10
+#: AcfFields/php/options.php:12
 msgid "General settings"
 msgstr "Allmänna inställningar"
 
-#: AcfFields/php/options.php:27
+#: AcfFields/php/options.php:51
 msgid "API url"
 msgstr "API-url"
 
-#: AcfFields/php/options.php:31
-msgid ""
-"Url to Event Manager API wp/v2 namespace. <br> E.g. https://host/wp-json/wp/"
-"v2"
-msgstr ""
-"Url till Event Manager API wp/v2 namespace.<br>T.ex. https://host/wp-json/wp/"
-"v2"
+#: AcfFields/php/options.php:55
+msgid "Url to Event Manager API wp/v2 namespace. <br> E.g. https://host/wp-json/wp/v2"
+msgstr "Url till Event Manager API wp/v2 namespace.<br>T.ex. https://host/wp-json/wp/v2"
 
-#: AcfFields/php/options.php:44
+#: AcfFields/php/options.php:77
 msgid "Days ahead"
 msgstr "Dagar framåt"
 
-#: AcfFields/php/options.php:48
-msgid ""
-"Import events that occurs within given number of days. Try to keep it as "
-"short as possible to avoid unnecessary datatransfer."
-msgstr ""
-"Importera evenemang som inträffar inom angivet antal dagar. Försök hålla "
-"perioden så kort som möjligt för att undvika onödig dataöverföring."
+#: AcfFields/php/options.php:81
+msgid "Import events that occurs within given number of days. Try to keep it as short as possible to avoid unnecessary datatransfer."
+msgstr "Importera evenemang som inträffar inom angivet antal dagar. Försök hålla perioden så kort som möjligt för att undvika onödig dataöverföring."
 
-#: AcfFields/php/options.php:59
+#: AcfFields/php/options.php:104
 msgid "days"
 msgstr "dagar"
 
-#: AcfFields/php/options.php:66
+#: AcfFields/php/options.php:108
 msgid "Daily import"
 msgstr "Daglig import"
 
-#: AcfFields/php/options.php:78
+#: AcfFields/php/options.php:128
 msgid "Enable daily automatic import from Event Manager API"
 msgstr "Daglig automatisk import från Event Manager API"
 
-#: AcfFields/php/options.php:86
+#: AcfFields/php/options.php:137
 msgid "Post status"
 msgstr "Poststatus"
 
-#: AcfFields/php/options.php:90
+#: AcfFields/php/options.php:141
 msgid "Select status of imported events."
 msgstr "Välj status för importerade evenemang."
 
-#: AcfFields/php/options.php:99
+#: AcfFields/php/options.php:158
 msgid "Draft"
 msgstr "Utkast"
 
-#: AcfFields/php/options.php:100
+#: AcfFields/php/options.php:159
 msgid "Published"
 msgstr "Publicerad"
 
-#: AcfFields/php/options.php:105
-msgid "publish"
-msgstr ""
-
-#: AcfFields/php/options.php:111
+#: AcfFields/php/options.php:171
 msgid "Unpublish long lasting events"
 msgstr "Avpublicera långa evenemang"
 
-#: AcfFields/php/options.php:115
-msgid ""
-"Automatically unpublish events lasting longer than given limit. Set to -1 to "
-"set no limit."
-msgstr ""
-"Automatiskt avpublicrera evenemang som pågår längre än angivet antal dagar. "
-"1- för ingen gräns."
+#: AcfFields/php/options.php:175
+msgid "Automatically unpublish events lasting longer than given limit. Set to -1 to set no limit."
+msgstr "Automatiskt avpublicrera evenemang som pågår längre än angivet antal dagar. 1- för ingen gräns."
 
-#: AcfFields/php/options.php:133
+#: AcfFields/php/options.php:202
 msgid "Visa knapp för att uppdatera importerade evenemang"
 msgstr ""
 
-#: AcfFields/php/options.php:145
+#: AcfFields/php/options.php:222
 msgid "Visa uppdatera-knapp"
 msgstr ""
 
-#: AcfFields/php/options.php:153
+#: AcfFields/php/options.php:231
 msgid "OAuth1 end point root url"
 msgstr "OAuth1 endpoint hemkatalog"
 
-#: AcfFields/php/options.php:157
-msgid ""
-"Url can be found under section \"authentication\" in your API root.<br> E.g. "
-"https://host/oauth1<br> <br> Authorization is only needed when you want to "
-"post data to the API."
-msgstr ""
-"OAuth1 endpoint hittas under sektionen \"authentication\" i API:ets "
-"hemkatalog.<br>T.ex. https://host/oauth1<br><br>Detta är valfritt och behövs "
-"endast om du vill kunna skicka evenemang till Event Manager API."
+#: AcfFields/php/options.php:235
+msgid "Url can be found under section \"authentication\" in your API root.<br> E.g. https://host/oauth1<br> <br> Authorization is only needed when you want to post data to the API."
+msgstr "OAuth1 endpoint hittas under sektionen \"authentication\" i API:ets hemkatalog.<br>T.ex. https://host/oauth1<br><br>Detta är valfritt och behövs endast om du vill kunna skicka evenemang till Event Manager API."
 
-#: AcfFields/php/options.php:170
+#: AcfFields/php/options.php:248
 msgid "Import filters"
 msgstr "Importfilter"
 
-#: AcfFields/php/options.php:188
+#: AcfFields/php/options.php:274
 msgid "Import from selected user groups"
 msgstr "Importera från angivna användargrupper"
 
-#: AcfFields/php/options.php:192
-msgid ""
-"Select the user groups that you want to import events from. Leave empty to "
-"import from all groups."
-msgstr ""
-"Välj användargrupper att importera evenemang ifrån. Lämna tomt för att "
-"importera från samtliga grupper."
+#: AcfFields/php/options.php:278
+msgid "Select the user groups that you want to import events from. Leave empty to import from all groups."
+msgstr "Välj användargrupper att importera evenemang ifrån. Lämna tomt för att importera från samtliga grupper."
 
-#: AcfFields/php/options.php:213
+#: AcfFields/php/options.php:309
 msgid "Import from selected categories"
 msgstr "Importera från angivna kategorier"
 
-#: AcfFields/php/options.php:217
-msgid ""
-"Enter the name of the categories that you want to import events from. "
-"Separate with commas. Leave blank to import from all categories."
-msgstr ""
-"Skriv namnet på de kategorier ni vill importera evenemang ifrån. Separera "
-"med kommatecken. Lämna tomt för att importera från samtliga kategorier."
+#: AcfFields/php/options.php:313
+msgid "Enter the name of the categories that you want to import events from. Separate with commas. Leave blank to import from all categories."
+msgstr "Skriv namnet på de kategorier ni vill importera evenemang ifrån. Separera med kommatecken. Lämna tomt för att importera från samtliga kategorier."
 
-#: AcfFields/php/options.php:233
+#: AcfFields/php/options.php:338
 msgid "Import from selected tags"
 msgstr "Importera från angivna taggar"
 
-#: AcfFields/php/options.php:237
-msgid ""
-"Enter the name of the tags that you want to import events from. Separate "
-"with commas. Leave blank to import from all tags."
-msgstr ""
-"Skriv namnet på de taggar ni vill importera evenemang ifrån. Separera med "
-"kommatecken. Lämna tomt för att importera från samtliga taggar."
+#: AcfFields/php/options.php:342
+msgid "Enter the name of the tags that you want to import events from. Separate with commas. Leave blank to import from all tags."
+msgstr "Skriv namnet på de taggar ni vill importera evenemang ifrån. Separera med kommatecken. Lämna tomt för att importera från samtliga taggar."
 
-#: AcfFields/php/options.php:253
+#: AcfFields/php/options.php:367
 msgid "Import internal events"
 msgstr "Importera interna evenemang"
 
-#: AcfFields/php/options.php:257
+#: AcfFields/php/options.php:371
 msgid "Select if only internal (organization) events should be imported."
 msgstr "Välj om endast interna(organisation) evenemang ska importeras."
 
-#: AcfFields/php/options.php:273
+#: AcfFields/php/options.php:396
 msgid "Import from geographic location"
 msgstr "Importera från platser"
 
-#: AcfFields/php/options.php:286
+#: AcfFields/php/options.php:417
 msgid "No"
 msgstr "Nej"
 
-#: AcfFields/php/options.php:287
+#: AcfFields/php/options.php:418
 msgid "Single point"
 msgstr "Enskild punkt"
 
-#: AcfFields/php/options.php:288 AcfFields/php/options.php:354
+#: AcfFields/php/options.php:419
+#: AcfFields/php/options.php:498
 msgid "Drawn area"
 msgstr "Utritat område"
 
-#: AcfFields/php/options.php:291
-msgid "no"
-msgstr ""
-
-#: AcfFields/php/options.php:297
+#: AcfFields/php/options.php:429
 msgid "From a single point"
 msgstr "Från en enskild punkt"
 
-#: AcfFields/php/options.php:301
+#: AcfFields/php/options.php:433
 msgid "Import events that occurs at a specified location."
 msgstr "Importera evenemang som inträffar vid en specifik plats."
 
-#: AcfFields/php/options.php:328
-msgid ""
-"To get events occurring nearby the given location, enter maximum distance in "
-"km. Leave blank to only get events from the exact position."
-msgstr ""
-"För att importera evenemang i närheten av den angivna platsen, fyll i "
-"maximalt avstånd i km. Lämna tomt för att importera evenemang från den "
-"exakta positionen."
+#: AcfFields/php/options.php:466
+msgid "To get events occurring nearby the given location, enter maximum distance in km. Leave blank to only get events from the exact position."
+msgstr "För att importera evenemang i närheten av den angivna platsen, fyll i maximalt avstånd i km. Lämna tomt för att importera evenemang från den exakta positionen."
 
-#: AcfFields/php/options.php:374
-msgid ""
-"Import events that occurs inside the drawn area. Draw the area by clicking "
-"each point on the map. Maximum number of points is 8."
-msgstr ""
-"Importera händelser som sker inuti det utritade området. Rita området genom "
-"att klicka på punkter i kartan. Maximalt antal punkter är 8."
+#: AcfFields/php/options.php:523
+msgid "Import events that occurs inside the drawn area. Draw the area by clicking each point on the map. Maximum number of points is 8."
+msgstr "Importera händelser som sker inuti det utritade området. Rita området genom att klicka på punkter i kartan. Maximalt antal punkter är 8."
 
-#: AcfFields/php/options.php:380
+#: AcfFields/php/options.php:529
 msgid "Details page"
 msgstr "Detaljsida"
 
-#: AcfFields/php/options.php:397
+#: AcfFields/php/options.php:555
 msgid "Clean hero image"
 msgstr "Ren hero-bild"
 
-#: AcfFields/php/options.php:401
+#: AcfFields/php/options.php:559
 msgid "Skip detailed information in hero image"
 msgstr "Undvik detaljerad information i hero-bild"
 
-#: AcfFields/php/options.php:409
+#: AcfFields/php/event-module.php:200
+#: AcfFields/php/options.php:575
 msgid "Yes"
 msgstr "Ja"
 
-#: AcfFields/php/shortcodes.php:6
+#: AcfFields/php/shortcodes.php:8
 msgid "Shortcode settings"
 msgstr "Shortcode inställningar"
 
-#: AcfFields/php/shortcodes.php:10 AcfFields/php/shortcodes.php:55
+#: AcfFields/php/shortcodes.php:12
+#: AcfFields/php/shortcodes.php:57
 #: source/php/Admin/AdminDisplayEvent.php:139
 #: source/php/Shortcodes/SingleEventAdmin.php:85
 #: source/php/Shortcodes/SingleEventAdmin.php:243
 msgid "Information"
 msgstr "Information"
 
-#: AcfFields/php/shortcodes.php:26
+#: AcfFields/php/shortcodes.php:28
 msgid "Shortcodes"
 msgstr "Shortcodes"
 
-#: AcfFields/php/shortcodes.php:37
-msgid ""
-"Shortcodes to display event information. Add the shortcode to your single "
-"event template file.<br><br>Display as accordion:"
-"<br>[single_event_accordion]<br><br>Display as table:"
-"<br>[single_event_information]"
-msgstr ""
-"Shortcode som visar information om evenemanget. Lägg till shortcode i "
-"template för enskilda evenemang.<br><br>Visa som “accordion”:"
-"<br>[single_event_accordion]<br><br>Visa som lista:"
-"<br>[single_event_information]"
+#: AcfFields/php/shortcodes.php:39
+msgid "Shortcodes to display event information. Add the shortcode to your single event template file.<br><br>Display as accordion:<br>[single_event_accordion]<br><br>Display as table:<br>[single_event_information]"
+msgstr "Shortcode som visar information om evenemanget. Lägg till shortcode i template för enskilda evenemang.<br><br>Visa som “accordion”:<br>[single_event_accordion]<br><br>Visa som lista:<br>[single_event_information]"
 
-#: AcfFields/php/shortcodes.php:43
+#: AcfFields/php/shortcodes.php:45
 msgid "Display fields"
 msgstr "Visa fält"
 
-#: AcfFields/php/shortcodes.php:56 source/php/Admin/AdminDisplayEvent.php:77
+#: AcfFields/php/shortcodes.php:58
+#: source/php/Admin/AdminDisplayEvent.php:77
 #: source/php/Shortcodes/SingleEventAdmin.php:167
 #: source/php/Shortcodes/SingleEventAdmin.php:284
 msgid "Occasions"
 msgstr "Datum"
 
-#: AcfFields/php/shortcodes.php:58
+#: AcfFields/php/shortcodes.php:60
 msgid "Additional locations"
 msgstr "Fler platser"
 
-#: AcfFields/php/shortcodes.php:60
+#: AcfFields/php/shortcodes.php:62
 #: source/php/Shortcodes/SingleEventAdmin.php:523
 msgid "Sponsors"
 msgstr "Sponsorer"
 
-#: AcfFields/php/shortcodes.php:61
+#: AcfFields/php/shortcodes.php:63
 msgid "Booking information"
 msgstr "Information om bokning"
 
-#: AcfFields/php/shortcodes.php:63 source/php/Admin/AdminDisplayEvent.php:159
+#: AcfFields/php/shortcodes.php:65
+#: source/php/Admin/AdminDisplayEvent.php:159
 #: source/php/PostTypes/Events.php:243
 #: source/php/Shortcodes/SingleEventAdmin.php:135
 #: source/php/Shortcodes/SingleEventAdmin.php:268
 msgid "Contact"
 msgstr "Kontakt"
 
-#: AcfFields/php/shortcodes.php:64
+#: AcfFields/php/shortcodes.php:66
 msgid "Map"
 msgstr "Karta"
 
-#: AcfFields/php/shortcodes.php:86
+#: AcfFields/php/shortcodes.php:88
 msgid "Wrapper div class"
 msgstr "Wrapper div-klass"
 
-#: AcfFields/php/shortcodes.php:89
-msgid ""
-"Add custom classes to div that wraps around the info boxes on shortcode: "
-"[single_event_information]. Useful when creating responsive grids. Separate "
-"with comma."
-msgstr ""
-"Lägg till klasser för \"wrapper div\" som omsluter shortcoden "
-"[single_event_information]. Användbart för att göra responsivt. Separera med "
-"kommatecken."
+#: AcfFields/php/shortcodes.php:91
+msgid "Add custom classes to div that wraps around the info boxes on shortcode: [single_event_information]. Useful when creating responsive grids. Separate with comma."
+msgstr "Lägg till klasser för \"wrapper div\" som omsluter shortcoden [single_event_information]. Användbart för att göra responsivt. Separera med kommatecken."
 
-#: AcfFields/php/shortcodes.php:105
+#: AcfFields/php/shortcodes.php:107
 msgid "Inner div box class"
 msgstr "Inner div-klass"
 
-#: AcfFields/php/shortcodes.php:108
-msgid ""
-"Add custom classes to inner div boxes that contains the event information on "
-"shortcode: [single_event_information]. Useful when creating responsive "
-"grids. Separate with comma."
-msgstr ""
-"Lägg till klasser för \"div boxar\" som finns inuti \"wrapper div\" på "
-"shortcoden [single_event_information]. Användbart för att göra responsivt. "
-"Separera med kommatecken."
+#: AcfFields/php/shortcodes.php:110
+msgid "Add custom classes to inner div boxes that contains the event information on shortcode: [single_event_information]. Useful when creating responsive grids. Separate with comma."
+msgstr "Lägg till klasser för \"div boxar\" som finns inuti \"wrapper div\" på shortcoden [single_event_information]. Användbart för att göra responsivt. Separera med kommatecken."
 
-#: AcfFields/php/shortcodes.php:124 source/php/Admin/AdminDisplayEvent.php:59
+#: AcfFields/php/shortcodes.php:126
+#: source/php/Admin/AdminDisplayEvent.php:59
 msgid "Gallery"
 msgstr "Bildgalleri"
 
-#: AcfFields/php/shortcodes.php:140
+#: AcfFields/php/shortcodes.php:142
 msgid "Gallery shortcode"
 msgstr "Shortcode för galleri"
 
-#: AcfFields/php/shortcodes.php:151
-msgid ""
-"Gallery images is stored as attached images. You can use WordPress own "
-"shortcode [gallery] to display the images."
-msgstr ""
-"Galleribilder är sparade som \"attached images\", ni kan därför använda "
-"WordPress inbyggda shortcode [gallery] för att visa bilderna."
+#: AcfFields/php/shortcodes.php:153
+msgid "Gallery images is stored as attached images. You can use WordPress own shortcode [gallery] to display the images."
+msgstr "Galleribilder är sparade som \"attached images\", ni kan därför använda WordPress inbyggda shortcode [gallery] för att visa bilderna."
 
 #: source/php/Acf/AcfConfig.php:21
-msgid ""
-"To get the full expirience of the <strong>Event Manager Integration</strong> "
-"plugin, please activate the <a href=\"http://www.advancedcustomfields.com/"
-"pro/\" target=\"_blank\">Advanced Custom Fields Pro</a> plugin."
+msgid "To get the full expirience of the <strong>Event Manager Integration</strong> plugin, please activate the <a href=\"http://www.advancedcustomfields.com/pro/\" target=\"_blank\">Advanced Custom Fields Pro</a> plugin."
 msgstr ""
 
 #: source/php/Admin/AdminDisplayEvent.php:41
@@ -991,17 +946,7 @@ msgstr "Taxonomier"
 msgid "Image missing"
 msgstr "Bild saknas"
 
-#: source/php/Admin/Options.php:11
-msgctxt "ACF"
-msgid "Event Manager Integration settings"
-msgstr "Event Manager Integration inställningar"
-
-#: source/php/Admin/Options.php:12
-msgctxt "Event Manager Integration settings"
-msgid "Options"
-msgstr "Inställningar"
-
-#: source/php/Admin/Options.php:39
+#: source/php/Admin/Options.php:40
 msgid "Clear map"
 msgstr "Återställ kartan"
 
@@ -1009,39 +954,40 @@ msgstr "Återställ kartan"
 msgid "No events could be found."
 msgstr "Inga evenemang hittades."
 
-#: source/php/App.php:93
+#: source/php/App.php:98
 msgid "Loading"
 msgstr "Hämtar"
 
-#: source/php/App.php:121
+#: source/php/App.php:126
 msgid "Something went wrong, please try again later."
 msgstr "Något gick fel, vänligen försök igen senare."
 
-#: source/php/App.php:122
+#: source/php/App.php:127
 msgid "The email addresses does not match."
 msgstr "E-postadresserna matchar inte."
 
-#: source/php/App.php:123
+#: source/php/App.php:128
 msgid "You must upload an image."
 msgstr "Du måste ladda upp en bild."
 
-#: source/php/App.php:124
+#: source/php/App.php:129
 msgid "Select..."
 msgstr "Välj…"
 
-#: source/php/App.php:125
+#: source/php/App.php:130
 msgid "The event has been submitted!"
 msgstr "Evenemanget har skickats in!"
 
-#: source/php/App.php:126
+#: source/php/App.php:131
 msgid "End date can not be before or equal to the start date."
 msgstr "Slutdatum får inte vara före eller lika med startdatum."
 
-#: source/php/App.php:141
+#: source/php/App.php:146
 msgid "to"
 msgstr "till"
 
-#: source/php/App.php:189 source/php/Shortcodes/SingleEventAdmin.php:611
+#: source/php/App.php:194
+#: source/php/Shortcodes/SingleEventAdmin.php:611
 msgctxt "Free event entrance"
 msgid "Free"
 msgstr "Gratis"
@@ -1100,20 +1046,6 @@ msgstr "vänligen skapa den manuellt och gör om importen."
 msgid "%d days"
 msgstr "%d dagar"
 
-#: source/php/Helper/SingleEventData.php:127
-#, php-format
-msgid "%s hour"
-msgid_plural "%s hours"
-msgstr[0] ""
-msgstr[1] ""
-
-#: source/php/Helper/SingleEventData.php:129
-#, php-format
-msgid "%s min"
-msgid_plural "%s mins"
-msgstr[0] ""
-msgstr[1] ""
-
 #: source/php/Helper/SubmitEvent.php:19
 #: source/php/Module/EventForm/Fields.php:25
 msgid "Event name"
@@ -1125,7 +1057,7 @@ msgid "Name of the event."
 msgstr "Namn på evenemang."
 
 #: source/php/Helper/SubmitEvent.php:29
-#: source/php/Module/EventForm/Fields.php:34
+#: source/php/Module/EventForm/Fields.php:33
 msgid "Describe your event. What happens and why should you visit it?"
 msgstr "Beskriv ditt evenemang. Vad händer där och varför ska man besöka det?"
 
@@ -1150,18 +1082,13 @@ msgid "Event occurrence"
 msgstr "Evenemanget inträffar"
 
 #: source/php/Helper/SubmitEvent.php:41
-msgid ""
-"Add occasions to this event. Does the event occur each week? Then add a rule "
-"for recurring events. Note that end time for the event can't be the same as "
-"the start time."
-msgstr ""
-"Lägg till tidpunkter för evenemanget. Återkommer evenemanget varje vecka? "
-"Lägg då till ett schema för återkommande evenemang. Observera att sluttiden "
-"för evenemanget inte kan vara samma som starttiden."
+msgid "Add occasions to this event. Does the event occur each week? Then add a rule for recurring events. Note that end time for the event can't be the same as the start time."
+msgstr "Lägg till tidpunkter för evenemanget. Återkommer evenemanget varje vecka? Lägg då till ett schema för återkommande evenemang. Observera att sluttiden för evenemanget inte kan vara samma som starttiden."
 
 #: source/php/Helper/SubmitEvent.php:48
 #: source/php/Module/EventForm/Fields.php:432
 #: source/php/Module/Location/views/location.blade.php:65
+#: source/php/Module/Location/views/location.blade.php:70
 msgid "Website"
 msgstr "Hemsida"
 
@@ -1174,12 +1101,8 @@ msgid "Link to the event's booking page."
 msgstr "Länk till evenemangets bokningssida."
 
 #: source/php/Helper/SubmitEvent.php:65
-msgid ""
-"Price for adults. Are there multiple price ranges? Please add it in the "
-"description."
-msgstr ""
-"Pris för vuxen. Finns det flera olika prisklasser? Informera gärna om det i "
-"beskrivningen."
+msgid "Price for adults. Are there multiple price ranges? Please add it in the description."
+msgstr "Pris för vuxen. Finns det flera olika prisklasser? Informera gärna om det i beskrivningen."
 
 #: source/php/Helper/SubmitEvent.php:73
 msgid "Price for students."
@@ -1214,44 +1137,24 @@ msgid "Age group that the activity is addressed to."
 msgstr "Åldersgrupp som aktiviteten är riktad till."
 
 #: source/php/Helper/SubmitEvent.php:121
-msgid ""
-"Type name of organizer, select from suggestions. If your business is not "
-"available, please add an organizer to the description."
-msgstr ""
-"Skriv arrangörens namn och välj från de förslag som vi ger dig. Dyker inte "
-"arrangörens namn upp, kan du nämna det i din beskrivning."
+msgid "Type name of organizer, select from suggestions. If your business is not available, please add an organizer to the description."
+msgstr "Skriv arrangörens namn och välj från de förslag som vi ger dig. Dyker inte arrangörens namn upp, kan du nämna det i din beskrivning."
 
 #: source/php/Helper/SubmitEvent.php:129
-msgid ""
-"Type location name and select from suggestions. If the location is not "
-"available, please add an address in the description."
-msgstr ""
-"Skriv platsens namn och välj från de förslag som vi ger dig. Dyker inte "
-"platsens namn upp, kan du nämna det i din beskrivning."
+msgid "Type location name and select from suggestions. If the location is not available, please add an address in the description."
+msgstr "Skriv platsens namn och välj från de förslag som vi ger dig. Dyker inte platsens namn upp, kan du nämna det i din beskrivning."
 
 #: source/php/Helper/SubmitEvent.php:137
 msgid "Select which accessibility actions that exist for the event."
 msgstr "Välj vilka tillgänglighetsåtgärder som finns för platsen."
 
 #: source/php/Helper/SubmitEvent.php:145
-msgid ""
-"Select appropriate categories for your event or activity. To select multiple "
-"categories, press Ctrl (Windows) / command (macOS) at the same time as you "
-"click on the categories."
-msgstr ""
-"Välj passande kategorier för ditt evenemang eller aktivitet. För att välja "
-"flera kategorier håll in Ctrl (Windows) / command (macOS) samtidigt som du "
-"klickar på respektive kategori."
+msgid "Select appropriate categories for your event or activity. To select multiple categories, press Ctrl (Windows) / command (macOS) at the same time as you click on the categories."
+msgstr "Välj passande kategorier för ditt evenemang eller aktivitet. För att välja flera kategorier håll in Ctrl (Windows) / command (macOS) samtidigt som du klickar på respektive kategori."
 
 #: source/php/Helper/SubmitEvent.php:153
-msgid ""
-"Select appropriate tags for your event or activity. To select multiple tags, "
-"press Ctrl (Windows) / command (macOS) at the same time as you click on the "
-"tags."
-msgstr ""
-"Välj passande taggar för ditt evenemang eller aktivitet. För att välja flera "
-"taggar håll in Ctrl (Windows) / command (macOS) samtidigt som du klickar på "
-"respektive tagg."
+msgid "Select appropriate tags for your event or activity. To select multiple tags, press Ctrl (Windows) / command (macOS) at the same time as you click on the tags."
+msgstr "Välj passande taggar för ditt evenemang eller aktivitet. För att välja flera taggar håll in Ctrl (Windows) / command (macOS) samtidigt som du klickar på respektive tagg."
 
 #: source/php/Helper/SubmitEvent.php:160
 #: source/php/Module/EventForm/Fields.php:43
@@ -1259,12 +1162,12 @@ msgid "Upload an image"
 msgstr "Ladda upp en bild"
 
 #: source/php/Helper/SubmitEvent.php:162
-#: source/php/Module/EventForm/Fields.php:46
+#: source/php/Module/EventForm/Fields.php:45
 msgid "Keep in mind that the image may be cropped, so avoid text in the image."
 msgstr "Tänk på att bilden kan bli beskuren, undvik därför text i bilden."
 
 #: source/php/Helper/SubmitEvent.php:163
-#: source/php/Module/EventForm/Fields.php:50
+#: source/php/Module/EventForm/Fields.php:49
 msgid "Images with identifiable persons are not accepted and will be replaced."
 msgstr "Bilder med igenkännbara personer godkänns inte och kommer ersättas."
 
@@ -1326,29 +1229,27 @@ msgstr "Befintlig arrangör"
 msgid "Elevator/ramp"
 msgstr "Hiss/ramp"
 
-#: source/php/Helper/SubmitEvent.php:199 source/php/PostTypes/Events.php:197
+#: source/php/Helper/SubmitEvent.php:199
+#: source/php/PostTypes/Events.php:197
 msgid "Accessible toilet"
 msgstr "Handikapptoalett"
 
 #: source/php/Helper/SubmitEvent.php:200
+#: source/php/Module/SubmitForm/views/fields/image.blade.php:45
 msgid "Are there identifiable persons on the image?"
 msgstr "Finns det identifierbara personer på bilden?"
 
 #: source/php/Helper/SubmitEvent.php:201
-msgid ""
-"They have accepted that the image is used to promote this event and have "
-"been informed that after the image has been added to the database, it may "
-"appear in different channels to promote the event."
-msgstr ""
-"De har godkänt att bilden används för att marknadsföra detta evenemang och "
-"har informerats om att efter att bilden lagts in i databasen kan komma att "
-"synas i olika kanaler för att marknadsföra evenemanget."
+#: source/php/Module/SubmitForm/views/fields/image.blade.php:73
+msgid "They have accepted that the image is used to promote this event and have been informed that after the image has been added to the database, it may appear in different channels to promote the event."
+msgstr "De har godkänt att bilden används för att marknadsföra detta evenemang och har informerats om att efter att bilden lagts in i databasen kan komma att synas i olika kanaler för att marknadsföra evenemanget."
 
 #: source/php/Helper/SubmitEvent.php:202
 msgid "Recurring"
 msgstr "Återkommande"
 
-#: source/php/Module/Event/Event.php:16 source/php/Widget/DisplayEvents.php:13
+#: source/php/Module/Event/Event.php:16
+#: source/php/Widget/DisplayEvents.php:13
 msgid "Events"
 msgstr "Evenemang"
 
@@ -1360,7 +1261,8 @@ msgstr ""
 msgid "More events"
 msgstr "Fler evenemang"
 
-#: source/php/Module/Event/Event.php:446 source/php/Widget/DisplayEvents.php:56
+#: source/php/Module/Event/Event.php:446
+#: source/php/Widget/DisplayEvents.php:56
 msgid "No events found"
 msgstr "Inga evenemang hittades"
 
@@ -1392,7 +1294,7 @@ msgstr "Till"
 msgid "date"
 msgstr "datum"
 
-#: source/php/Module/Event/Event.php:457
+#: source/php/Module/Event/Event.php:456
 msgid "Filter on events that is targeted for given the age"
 msgstr "Filtrera på evenemang som är riktade till en ålder"
 
@@ -1401,12 +1303,14 @@ msgstr "Filtrera på evenemang som är riktade till en ålder"
 #: source/php/Module/EventForm/Fields.php:565
 #: source/php/Module/EventForm/Fields.php:597
 #: source/php/Module/EventForm/Fields.php:611
-#: source/php/PostTypes/Events.php:161 source/php/PostTypes/Events.php:163
+#: source/php/PostTypes/Events.php:161
+#: source/php/PostTypes/Events.php:163
 #: source/php/PostTypes/Events.php:165
 #: source/php/Shortcodes/SingleEventAdmin.php:355
 #: source/php/Shortcodes/SingleEventAdmin.php:357
 #: source/php/Shortcodes/SingleEventAdmin.php:359
 #: source/php/Shortcodes/SingleEventAdmin.php:423
+#: source/php/Module/Location/views/location.blade.php:100
 msgid "years"
 msgstr "år"
 
@@ -1451,11 +1355,8 @@ msgid "Displays submit event form"
 msgstr "Visar formuläret för att skicka evenemang"
 
 #: source/php/Module/EventForm/EventForm.php:34
-msgid ""
-"Something went wrong. Please look over the provided information and try "
-"again."
-msgstr ""
-"Något gick fel. Var god och se över din angivna information och försök igen."
+msgid "Something went wrong. Please look over the provided information and try again."
+msgstr "Något gick fel. Var god och se över din angivna information och försök igen."
 
 #: source/php/Module/EventForm/EventForm.php:35
 msgid "Form is successfully being sent."
@@ -1474,12 +1375,8 @@ msgid "1. Describe the event"
 msgstr "1. Beskriv evenemanget"
 
 #: source/php/Module/EventForm/Fields.php:20
-msgid ""
-"Your event needs to have a name and a brief description and you also have "
-"the option to attach an image that will be visible along with the text."
-msgstr ""
-"Ditt evenemang behöver ha ett namn och en kortfattad beskrivning och du har "
-"även möjligheten att bifoga en bild som kommer synas tillsammans med texten."
+msgid "Your event needs to have a name and a brief description and you also have the option to attach an image that will be visible along with the text."
+msgstr "Ditt evenemang behöver ha ett namn och en kortfattad beskrivning och du har även möjligheten att bifoga en bild som kommer synas tillsammans med texten."
 
 #: source/php/Module/EventForm/Fields.php:57
 msgid "Upload image"
@@ -1499,7 +1396,7 @@ msgstr "Släpp bilden här"
 msgid "Rights"
 msgstr "Rättigheter"
 
-#: source/php/Module/EventForm/Fields.php:68
+#: source/php/Module/EventForm/Fields.php:67
 msgid "I have the right to use the image to promote this event."
 msgstr "Jag har rätt att använda bilden för att marknadsföra detta evenemang."
 
@@ -1511,15 +1408,9 @@ msgstr "Ingen person är identifierbar på bilden"
 msgid "There are identifiable people in the picture"
 msgstr "Det finns identifierbara personer på bilden"
 
-#: source/php/Module/EventForm/Fields.php:105
-msgid ""
-"They have approved that the image is used to market this event and have been "
-"informed that after the image has been added to the database, it may appear "
-"in various channels to market the event."
-msgstr ""
-"De har godkänt att bilden används för att marknadsföra detta evenemang och "
-"har informerats om att efter att bilden lagts in i databasen kan komma att "
-"synas i olika kanaler för att marknadsföra evenemanget."
+#: source/php/Module/EventForm/Fields.php:104
+msgid "They have approved that the image is used to market this event and have been informed that after the image has been added to the database, it may appear in various channels to market the event."
+msgstr "De har godkänt att bilden används för att marknadsföra detta evenemang och har informerats om att efter att bilden lagts in i databasen kan komma att synas i olika kanaler för att marknadsföra evenemanget."
 
 #: source/php/Module/EventForm/Fields.php:123
 msgid "2. Add schedule"
@@ -1542,21 +1433,27 @@ msgid "Recurring occasions"
 msgstr "Återkommande tillfällen"
 
 #: source/php/Module/EventForm/Fields.php:148
+#: source/php/Module/SubmitForm/views/fields/occasion.blade.php:283
 msgid "Start date"
 msgstr "Startdatum"
 
 #: source/php/Module/EventForm/Fields.php:155
 #: source/php/Module/EventForm/Fields.php:231
+#: source/php/Module/SubmitForm/views/fields/occasion.blade.php:80
+#: source/php/Module/SubmitForm/views/fields/occasion.blade.php:111
+#: source/php/Module/SubmitForm/views/fields/occasion.blade.php:224
 msgid "Start time"
 msgstr "Starttid"
 
 #: source/php/Module/EventForm/Fields.php:162
 #: source/php/Module/EventForm/Fields.php:239
+#: source/php/Module/SubmitForm/views/fields/occasion.blade.php:321
 msgid "End date"
 msgstr "Slutdatum"
 
 #: source/php/Module/EventForm/Fields.php:169
 #: source/php/Module/EventForm/Fields.php:246
+#: source/php/Module/SubmitForm/views/fields/occasion.blade.php:253
 msgid "End time"
 msgstr "Sluttid"
 
@@ -1569,10 +1466,12 @@ msgid "Remove date"
 msgstr "Ta bort datum"
 
 #: source/php/Module/EventForm/Fields.php:193
+#: source/php/Module/SubmitForm/views/fields/occasion.blade.php:151
 msgid "Weekday"
 msgstr "Veckodag"
 
-#: source/php/Module/EventForm/Fields.php:195
+#: source/php/Module/EventForm/Fields.php:194
+#: source/php/Module/SubmitForm/views/fields/occasion.blade.php:161
 msgid "The event will occur on this weekday."
 msgstr "Evenemanget inträffar på vald veckodag."
 
@@ -1605,25 +1504,27 @@ msgid "Sunday"
 msgstr "Söndag"
 
 #: source/php/Module/EventForm/Fields.php:212
+#: source/php/Module/SubmitForm/views/fields/occasion.blade.php:188
 msgid "Weekly interval"
 msgstr "Veckointervall"
 
-#: source/php/Module/EventForm/Fields.php:214
+#: source/php/Module/EventForm/Fields.php:213
+#: source/php/Module/SubmitForm/views/fields/occasion.blade.php:198
 msgid "Enter the weekly interval when the event occurs. 1 equals every week."
-msgstr ""
-"Ange med vilken veckointervall händelsen inträffar. 1 motsvarar varje vecka."
+msgstr "Ange med vilken veckointervall händelsen inträffar. 1 motsvarar varje vecka."
 
 #: source/php/Module/EventForm/Fields.php:224
 #, fuzzy
-#| msgid "Start date"
 msgid "start date"
 msgstr "Startdatum"
 
 #: source/php/Module/EventForm/Fields.php:232
+#: source/php/Module/SubmitForm/views/fields/occasion.blade.php:234
 msgid "Start time for the event"
 msgstr "Evenemangets starttid"
 
 #: source/php/Module/EventForm/Fields.php:247
+#: source/php/Module/SubmitForm/views/fields/occasion.blade.php:263
 msgid "End time for the event"
 msgstr "Evenemangets sluttid"
 
@@ -1632,8 +1533,7 @@ msgid "Location information"
 msgstr "Platsinformation"
 
 #: source/php/Module/EventForm/Fields.php:270
-msgid ""
-"Write the name of the organizer and choose from the suggestions we give you."
+msgid "Write the name of the organizer and choose from the suggestions we give you."
 msgstr "Skriv arrangörens namn och välj från de förslag som vi ger dig."
 
 #: source/php/Module/EventForm/Fields.php:275
@@ -1642,7 +1542,6 @@ msgstr "Lägg till en ny arrangör"
 
 #: source/php/Module/EventForm/Fields.php:285
 #, fuzzy
-#| msgid "Add a new organizer"
 msgid "Choose an orginizer"
 msgstr "Lägg till en ny arrangör"
 
@@ -1652,8 +1551,7 @@ msgid "E-mail address"
 msgstr "E-postadress"
 
 #: source/php/Module/EventForm/Fields.php:337
-msgid ""
-"Write the name of the place and choose from the suggestions we give you."
+msgid "Write the name of the place and choose from the suggestions we give you."
 msgstr "Skriv platsens namn och välj från de förslag som vi ger dig."
 
 #: source/php/Module/EventForm/Fields.php:342
@@ -1662,7 +1560,6 @@ msgstr "Lägg till ny plats"
 
 #: source/php/Module/EventForm/Fields.php:352
 #, fuzzy
-#| msgid "Choose location"
 msgid "Choose a location"
 msgstr "Välj plats"
 
@@ -1679,12 +1576,8 @@ msgid "3. More information about the event"
 msgstr "3. Mer information om evenemanget"
 
 #: source/php/Module/EventForm/Fields.php:421
-msgid ""
-"Where can you read more about the event, buy tickets and information about "
-"the event's availability."
-msgstr ""
-"Var kan du läsa mer om evenemanget, köpa biljetter och information om "
-"evenemangets tillgänglighet."
+msgid "Where can you read more about the event, buy tickets and information about the event's availability."
+msgstr "Var kan du läsa mer om evenemanget, köpa biljetter och information om evenemangets tillgänglighet."
 
 #: source/php/Module/EventForm/Fields.php:438
 msgid "Event booking page"
@@ -1699,7 +1592,7 @@ msgstr "Pris"
 msgid "Free event"
 msgstr "Gratis evenemang"
 
-#: source/php/Module/EventForm/Fields.php:455
+#: source/php/Module/EventForm/Fields.php:454
 msgid "The event is free"
 msgstr "Evenemanget är gratis"
 
@@ -1742,8 +1635,7 @@ msgstr "Specificerad åldersgrupp"
 
 #: source/php/Module/EventForm/Fields.php:594
 msgid "Leave \"From\" or \"To\" blank if the upper or lower limit is missing."
-msgstr ""
-"Lämna \"Från\" eller \"Till\" tomt om den övre eller nedre gränsen saknas."
+msgstr "Lämna \"Från\" eller \"Till\" tomt om den övre eller nedre gränsen saknas."
 
 #: source/php/Module/EventForm/Fields.php:626
 msgid "4. Other"
@@ -1757,13 +1649,9 @@ msgstr "Hur hittas händelsen och vem är ansvarig?"
 msgid "Categorize the event"
 msgstr "Kategorisera ditt evenemang"
 
-#: source/php/Module/EventForm/Fields.php:634
-msgid ""
-"Add tags and categories to make it easier to show the event in the right "
-"place and make it easier to find for visitors."
-msgstr ""
-"Lägg till taggar och kategorier för att göra det enklare att visa "
-"evenemanget på rätt platser och enklare att hitta för besökare."
+#: source/php/Module/EventForm/Fields.php:633
+msgid "Add tags and categories to make it easier to show the event in the right place and make it easier to find for visitors."
+msgstr "Lägg till taggar och kategorier för att göra det enklare att visa evenemanget på rätt platser och enklare att hitta för besökare."
 
 #: source/php/Module/EventForm/Fields.php:643
 msgid "Choose categories that fit the event"
@@ -1771,7 +1659,6 @@ msgstr "Välj kategorier som passar evenemanget"
 
 #: source/php/Module/EventForm/Fields.php:644
 #, fuzzy
-#| msgid "Categories"
 msgid "Choose categories"
 msgstr "Kategorier"
 
@@ -1781,7 +1668,6 @@ msgstr "Välj taggar som passar evenemanget"
 
 #: source/php/Module/EventForm/Fields.php:656
 #, fuzzy
-#| msgid "Choose location"
 msgid "Choose tags"
 msgstr "Välj plats"
 
@@ -1789,7 +1675,7 @@ msgstr "Välj plats"
 msgid "Contact information"
 msgstr "Kontaktinformation"
 
-#: source/php/Module/EventForm/Fields.php:669
+#: source/php/Module/EventForm/Fields.php:668
 msgid "Add your contact details below."
 msgstr "Fyll i din kontaktinformation nedan."
 
@@ -1826,59 +1712,56 @@ msgid "Show map"
 msgstr "Visa karta"
 
 #: source/php/Module/Location/views/location.blade.php:30
+#: source/php/Module/Location/views/location.blade.php:31
 msgid "Closed"
 msgstr "Stängt"
 
-#: source/php/OAuth/OAuthAdmin.php:22 source/php/OAuth/OAuthAdmin.php:23
-#: source/php/OAuth/OAuthAdmin.php:36
+#: source/php/OAuth/OAuthAdmin.php:37
 msgid "API authentication"
 msgstr "API autentisering"
 
-#: source/php/OAuth/OAuthAdmin.php:44
+#: source/php/OAuth/OAuthAdmin.php:45
 msgid "Request authorization"
 msgstr "Autentiseringsbegäran"
 
-#: source/php/OAuth/OAuthAdmin.php:45
-msgid ""
-"To publish events from this client to the API you need authentication. Enter "
-"your given client keys and send request."
-msgstr ""
-"För att publicera evenemang från din klient till API:et behövs godkänd "
-"autentisering. Fyll i dina nycklar och skicka begäran."
+#: source/php/OAuth/OAuthAdmin.php:46
+msgid "To publish events from this client to the API you need authentication. Enter your given client keys and send request."
+msgstr "För att publicera evenemang från din klient till API:et behövs godkänd autentisering. Fyll i dina nycklar och skicka begäran."
 
-#: source/php/OAuth/OAuthAdmin.php:50 source/php/OAuth/OAuthAdmin.php:99
+#: source/php/OAuth/OAuthAdmin.php:51
+#: source/php/OAuth/OAuthAdmin.php:100
 msgid "Client key"
 msgstr ""
 
-#: source/php/OAuth/OAuthAdmin.php:58
+#: source/php/OAuth/OAuthAdmin.php:59
 msgid "Client secret"
 msgstr ""
 
-#: source/php/OAuth/OAuthAdmin.php:66
+#: source/php/OAuth/OAuthAdmin.php:67
 msgid "Send request"
 msgstr "Skicka begäran"
 
-#: source/php/OAuth/OAuthAdmin.php:72
+#: source/php/OAuth/OAuthAdmin.php:73
 msgid "Enter verification token"
 msgstr "Ange verifieringskod"
 
-#: source/php/OAuth/OAuthAdmin.php:77
+#: source/php/OAuth/OAuthAdmin.php:78
 msgid "Verification token"
 msgstr "Verifieringskod"
 
-#: source/php/OAuth/OAuthAdmin.php:85
+#: source/php/OAuth/OAuthAdmin.php:86
 msgid "Grant access"
 msgstr "Bevilja åtkomst"
 
-#: source/php/OAuth/OAuthAdmin.php:93
+#: source/php/OAuth/OAuthAdmin.php:94
 msgid "Authorized"
 msgstr "Autentiserad"
 
-#: source/php/OAuth/OAuthAdmin.php:94
+#: source/php/OAuth/OAuthAdmin.php:95
 msgid "This client is authorized to submit events to the API."
 msgstr "Denna klient är autentiserad för att publicera evenemang till API."
 
-#: source/php/OAuth/OAuthAdmin.php:109
+#: source/php/OAuth/OAuthAdmin.php:110
 msgid "Remove client"
 msgstr "Ta bort klient"
 
@@ -1887,10 +1770,8 @@ msgid "Request credentials is missing"
 msgstr "Nycklar saknas"
 
 #: source/php/OAuth/OAuthRequests.php:79
-msgid ""
-"You must enter OAuth1 endpoint url found under Event settings to proceed."
-msgstr ""
-"Du måste ange \"OAuth1 endpoint URL\" under inställningar för att fortsätta."
+msgid "You must enter OAuth1 endpoint url found under Event settings to proceed."
+msgstr "Du måste ange \"OAuth1 endpoint URL\" under inställningar för att fortsätta."
 
 #: source/php/OAuth/OAuthRequests.php:112
 msgid "The credentials you supplied were not correct"
@@ -1951,25 +1832,28 @@ msgstr "Evenemang"
 msgid "Public"
 msgstr "Offentlig"
 
-#: source/php/PostTypes/Events.php:69
+#: source/php/PostTypes/Events.php:68
 msgid "Accept"
 msgstr "Godkänn"
 
-#: source/php/PostTypes/Events.php:73
+#: source/php/PostTypes/Events.php:72
 msgid "Deny"
 msgstr "Neka"
 
-#: source/php/PostTypes/Events.php:78 source/php/PostTypes/Events.php:242
+#: source/php/PostTypes/Events.php:78
+#: source/php/PostTypes/Events.php:242
 msgid "Date"
 msgstr "Datum"
 
-#: source/php/PostTypes/Events.php:128 source/php/PostTypes/Events.php:237
+#: source/php/PostTypes/Events.php:128
+#: source/php/PostTypes/Events.php:237
 #: source/php/Shortcodes/SingleEventAdmin.php:316
 #: source/php/Shortcodes/SingleEventAdmin.php:542
 msgid "Cancelled"
 msgstr "Inställt"
 
-#: source/php/PostTypes/Events.php:129 source/php/PostTypes/Events.php:238
+#: source/php/PostTypes/Events.php:129
+#: source/php/PostTypes/Events.php:238
 #: source/php/Shortcodes/SingleEventAdmin.php:317
 #: source/php/Shortcodes/SingleEventAdmin.php:543
 msgid "Rescheduled"
@@ -2048,7 +1932,6 @@ msgstr "Biljettyper"
 
 #: source/php/PostTypes/Events.php:213
 #, fuzzy
-#| msgid "Ticket types"
 msgid "Ticket type"
 msgstr "Biljettyper"
 
@@ -2117,6 +2000,7 @@ msgstr "Maximipris:"
 
 #: source/php/PostTypes/Events.php:230
 #: source/php/Shortcodes/SingleEventAdmin.php:485
+#: source/php/Module/Location/views/location.blade.php:106
 msgid "Included in membership cards"
 msgstr "Ingår i medlemskort"
 
@@ -2180,7 +2064,8 @@ msgstr "Populära kategorier"
 msgid "All categories"
 msgstr "Alla kategorier"
 
-#: source/php/PostTypes/Events.php:545 source/php/PostTypes/Events.php:546
+#: source/php/PostTypes/Events.php:545
+#: source/php/PostTypes/Events.php:546
 msgid "Parent category"
 msgstr "Huvudkategori"
 
@@ -2230,7 +2115,8 @@ msgstr "Populära taggar"
 msgid "All tags"
 msgstr "Alla taggar"
 
-#: source/php/PostTypes/Events.php:582 source/php/PostTypes/Events.php:583
+#: source/php/PostTypes/Events.php:582
+#: source/php/PostTypes/Events.php:583
 msgid "Parent"
 msgstr "Förälder"
 
@@ -2280,7 +2166,8 @@ msgstr "Populära grupper"
 msgid "All groups"
 msgstr "Alla grupper"
 
-#: source/php/PostTypes/Events.php:619 source/php/PostTypes/Events.php:620
+#: source/php/PostTypes/Events.php:619
+#: source/php/PostTypes/Events.php:620
 msgid "Parent group"
 msgstr "Föräldergrupp"
 
@@ -2342,30 +2229,39 @@ msgid "Book here"
 msgstr "Boka här"
 
 #: source/php/Shortcodes/SingleEventAdmin.php:417
+#: source/php/Module/Location/views/location.blade.php:80
 msgid "Adult"
 msgstr "Vuxen"
 
 #: source/php/Shortcodes/SingleEventAdmin.php:418
+#: source/php/Module/Location/views/location.blade.php:84
 msgid "below"
 msgstr "under"
 
 #: source/php/Shortcodes/SingleEventAdmin.php:419
+#: source/php/Module/Location/views/location.blade.php:84
+#: source/php/Module/Location/views/location.blade.php:86
 msgid "Children"
 msgstr "Barn"
 
 #: source/php/Shortcodes/SingleEventAdmin.php:420
+#: source/php/Module/Location/views/location.blade.php:94
 msgid "above"
 msgstr "över"
 
 #: source/php/Shortcodes/SingleEventAdmin.php:421
+#: source/php/Module/Location/views/location.blade.php:94
+#: source/php/Module/Location/views/location.blade.php:96
 msgid "Senior"
 msgstr "Pensionär"
 
 #: source/php/Shortcodes/SingleEventAdmin.php:422
+#: source/php/Module/Location/views/location.blade.php:90
 msgid "Student"
 msgstr "Student"
 
 #: source/php/Shortcodes/SingleEventAdmin.php:423
+#: source/php/Module/Location/views/location.blade.php:100
 msgid "Age restriction"
 msgstr "Åldersgräns"
 
@@ -2413,10 +2309,6 @@ msgstr "Ingår i biljett"
 msgid "Display upcoming events from Event Manager API."
 msgstr "Visa kommande evenemang från Event Manager API."
 
-#: source/php/Widget/DisplayEvents.php:31
-msgid "Recent Posts"
-msgstr "Senaste inläggen"
-
 #: source/php/Widget/DisplayEvents.php:75
 #, php-format
 msgid "Location: %s"
@@ -2458,291 +2350,97 @@ msgstr "Teckenbegränsning av beskrivning:"
 msgid "-1 equals no limit"
 msgstr "-1 är lika med ingen gräns"
 
-#. Plugin URI of the plugin/theme
+#. Plugin URI of the plugin
+#: event-manager-integration.php
 msgid "https://github.com/helsingborg-stad/api-event-manager-integration"
 msgstr ""
 
-#. Description of the plugin/theme
+#. Description of the plugin
+#: event-manager-integration.php
 msgid "Integrate and display events from Event Manager API."
 msgstr ""
 
-#. Author of the plugin/theme
+#. Author of the plugin
+#: event-manager-integration.php
 msgid "Jonatan Hanson, Sebastian Thulin"
 msgstr ""
 
-#. Author URI of the plugin/theme
+#. Author URI of the plugin
+#: event-manager-integration.php
 msgid "http://www.helsingborg.se"
 msgstr ""
 
-#~ msgid "Loading..."
-#~ msgstr "Laddar…"
-
-#~ msgid "Link to map"
-#~ msgstr "Länk till karta"
-
-#~ msgid "Age range from"
-#~ msgstr "Från ålder"
-
-#~ msgid "year"
-#~ msgstr "år"
-
-#~ msgid "Age range to"
-#~ msgstr "Till ålder"
-
+#: source/php/Module/SubmitForm/views/fields/occasion.blade.php:50
 #~ msgid "Single occurrence"
 #~ msgstr "Enstaka datum"
 
-#~ msgctxt "Event recurrence rules"
-#~ msgid "Schedule"
-#~ msgstr "Schema"
-
-#~ msgid "Add"
-#~ msgstr "Lägg till"
-
+#: source/php/Module/SubmitForm/views/fields/occasion.blade.php:142
 #~ msgid "Recurrence rules for weekly recurring event"
 #~ msgstr "Schema för återkommande evenemang"
 
+#: source/php/Module/SubmitForm/views/fields/occasion.blade.php:293
 #~ msgid "When the recurring event period starts"
 #~ msgstr "Evenemanget inträffar löpande fr.o.m. detta datum"
 
+#: source/php/Module/SubmitForm/views/fields/occasion.blade.php:331
 #~ msgid "When the recurring event period ends"
 #~ msgstr "Evenemanget inträffar löpande t.o.m. detta datum"
 
-#~ msgid "Link to the event's booking page, e.g. ticketmaster."
-#~ msgstr "Länk till evenemangets bokningssida, exempelvis Ticketmaster."
+#: source/php/Module/SubmitForm/views/fields/image.blade.php:33
+#~ msgid "Before you can upload an image, you need to confirm the following terms"
+#~ msgstr "Innan du kan ladda upp en bild behöver du bekräfta nedanstående punkter"
 
-#~ msgid ""
-#~ "For adults. Are there multiple price ranges? Please add it in the "
-#~ "description."
-#~ msgstr ""
-#~ "För vuxen. Finns det flera olika prisklasser? Informera gärna om det i "
-#~ "beskrivningen."
-
-#~ msgid ""
-#~ "Select appropriate categories for your event or activity. To select "
-#~ "multiple tags, press Ctrl (Windows) / command (macOS) at the same time as "
-#~ "you click on the categories."
-#~ msgstr ""
-#~ "Välj passande kategorier för ditt evenemang eller aktivitet. För att "
-#~ "välja flera kategorier håll in Ctrl (Windows) / command (macOS) samtidigt "
-#~ "som du klickar på respektive kategori."
-
-#~ msgid ""
-#~ "Before you can upload an image, you need to confirm the following terms"
-#~ msgstr ""
-#~ "Innan du kan ladda upp en bild behöver du bekräfta nedanstående punkter"
-
+#: source/php/Module/SubmitForm/views/fields/image.blade.php:39
 #~ msgid "I have the right to use this image to promote this event."
-#~ msgstr ""
-#~ "Jag har rätt att använda denna bild för att marknadsföra detta evenemang."
+#~ msgstr "Jag har rätt att använda denna bild för att marknadsföra detta evenemang."
 
-#~ msgid "There are no identifiable persons on the image."
-#~ msgstr "Det finns inga identifierbara personer på bilden."
-
+#: source/php/Module/SubmitForm/views/fields/contact_details.blade.php:6
 #~ msgid "Contact details"
 #~ msgstr "Kontaktuppgifter"
 
+#: source/php/Module/SubmitForm/views/fields/contact_details.blade.php:14
 #~ msgid "Enter your contact details below for eventual questions."
 #~ msgstr "Ange dina kontaktuppgifter nedan för eventuella frågor."
 
-#~ msgid "Repeat email"
-#~ msgstr "Upprepa e-postadress"
-
+#: source/php/Module/SubmitForm/views/formfields.blade.php:53
 #~ msgid "Done? Click here to submit your event for review."
 #~ msgstr "Klar? Klicka här för att skicka in ditt evenemang för granskning."
 
-#~ msgid "Link"
-#~ msgstr "Länk"
+#: AcfFields/php/event-module.php:180
+msgid "Show as horizontal track on mobile"
+msgstr ""
 
-#~ msgid "Event forms"
-#~ msgstr "Evenemangsformulär"
+#: AcfFields/php/event-module.php:184
+msgid "Allow mobile users to scroll event list horizontally instead of stacked vertically."
+msgstr ""
 
-#~ msgid "Displays an event submit form"
-#~ msgstr "Visning ett formulär för inskickning av evenemang"
+#: AcfFields/php/options.php:30
+msgid "Event post type, sync and presentation enabled"
+msgstr "Evenemangsposttyp, synkronisering och presentation aktiverad"
 
-#~ msgid "For adults"
-#~ msgstr "För vuxna"
+#: AcfFields/php/options.php:34
+msgid "Disabling this switch will prevent registration of the post type for events and every function using the post type. This is useful when only the event submission form is what you need from this plugin."
+msgstr "Avaktivera denna inställning för att förhindra registrering av evenemangsposttypen och alla funktioner som använder posttypen. Detta är användbart när endast evenemangsformuläret är det du behöver från detta tillägg."
 
-#~ msgid "Age:"
-#~ msgstr "Ålder:"
+#: AcfFields/php/options.php:45
+msgid "Enabled"
+msgstr "Aktiverad"
 
-#~ msgid "Today"
-#~ msgstr "Idag"
+#: AcfFields/php/options.php:46
+msgid "Disabled"
+msgstr "Inaktiverad"
 
-#~ msgid "Event tags"
-#~ msgstr "Taggar"
+#: source/php/Admin/Options.php:11
+msgctxt "ACF"
+msgid "Event Manager Integration: Settings"
+msgstr "Event Manager Integration: Inställningar"
 
-#~ msgid "Show update button on edit event page"
-#~ msgstr "Visa knapp för att uppdatera importerade evenemang"
+#: source/php/Admin/Options.php:12
+msgctxt "Event Manager Integration settings"
+msgid "Event Manager Integration: Settings"
+msgstr "Event Manager Integration: Inställningar"
 
-#~ msgid "Show update button"
-#~ msgstr "Visa uppdatera-knapp"
-
-#~ msgid "From date"
-#~ msgstr "Från datum"
-
-#~ msgid "To date"
-#~ msgstr "Till datum"
-
-#~ msgid "Year"
-#~ msgstr "År"
-
-#, fuzzy
-#~| msgid ""
-#~| "Images with identifiable persons are not accepted and will be replaced."
-#~ msgid ""
-#~ "Images with identifiable persons are not accepted and will be replaced.."
-#~ msgstr "Bilder med igenkännbara personer godkänns inte och kommer ersättas."
-
-#, fuzzy
-#~| msgid "Organizer"
-#~ msgid "Type-organizer"
-#~ msgstr "Arrangör"
-
-#, fuzzy
-#~| msgid "Location"
-#~ msgid "Type-location"
-#~ msgstr "Plats"
-
-#~ msgid "Inside drawn area"
-#~ msgstr "I utritad area"
-
-#~ msgid "Import events that occurs inside the drawn area."
-#~ msgstr "Importera evenemang som inträffar inom det utritade området."
-
-#~ msgid "Internal events"
-#~ msgstr "Interna evenemang"
-
-#~ msgid "Internal"
-#~ msgstr "Intern"
-
-#~ msgid ""
-#~ "They have approved that the image is used to promote this event and has "
-#~ "been informed that after the image has been added to the location and "
-#~ "event database, it may appear in different channels to promote the event."
-#~ msgstr ""
-#~ "De har godkänt att bilden används för att marknadsföra detta evenemang "
-#~ "och har informerats om att efter att bilden lagts in i plats- och "
-#~ "evenemangsdatabasen kan komma att synas i olika kanaler för att "
-#~ "marknadsföra evenemanget."
-
-#~ msgid "Ticket stock"
-#~ msgstr "Biljettlager"
-
-#~ msgid "Information shortcode"
-#~ msgstr "Shortcode för information"
-
-#~ msgid "Import Groups"
-#~ msgstr "Importera grupper"
-
-#~ msgid "Import groups"
-#~ msgstr "Importera grupper"
-
-#~ msgid "Single event image"
-#~ msgstr "Bild för enskilt evenemang"
-
-#~ msgid "Display attached event image below title header on single events."
-#~ msgstr "Visa utvald bild under rubriken på enskilda evenemang."
-
-#~ msgid "Status"
-#~ msgstr "Status"
-
-#~ msgid "Exception information"
-#~ msgstr "Information om undantaget."
-
-#~ msgid "Custom content"
-#~ msgstr "Eget innehåll"
-
-#~ msgid ""
-#~ "Url to Event Manager API wp/v2 namespace.\n"
-#~ "\t\tE.g. https://host/wp-json/wp/v2"
-#~ msgstr ""
-#~ "Url till Event Manager API wp/v2 namespace.\n"
-#~ "\t\tT.ex. https://host/wp-json/wp/v2"
-
-#~ msgid "OAuth1 endpoint URL"
-#~ msgstr "OAuth1 endpoint hemkatalog"
-
-#~ msgid ""
-#~ "OAuth1 endpoint can be found under section \"authentication\" in your API "
-#~ "root.\n"
-#~ "\t\tE.g. https://host/oauth1\n"
-#~ "\n"
-#~ "\t\tThis is optional and only needed when you want to post data to the "
-#~ "API."
-#~ msgstr ""
-#~ "OAuth1 endpoint hittas under sektionen \"authentication\" i API:ets "
-#~ "hemkatalog.\n"
-#~ "\t\tT.ex. https://host/oauth1\n"
-#~ "\n"
-#~ "\tDetta är valfritt och behövs endast om du vill kunna skicka evenemang "
-#~ "till Event Manager API."
-
-#~ msgid ""
-#~ "Enter your Event Manager API OAuth credentials to be able to submit "
-#~ "events to the API."
-#~ msgstr ""
-#~ "Fyll i dina Event Manager API OAuth1 uppgifter för att kunna skicka "
-#~ "evenemang till API:et."
-
-#~ msgid ""
-#~ "Url can be found under section \"authentication\" in your API root.\n"
-#~ "\t\tE.g. https://host/oauth1\n"
-#~ "\n"
-#~ "\t\tThis is optional and only needed when you want to post data to the "
-#~ "API."
-#~ msgstr ""
-#~ "OAuth1 hemkatalog hittas under sektionen \"authentication\" i API root.\n"
-#~ "\t\tT.ex. https://host/oauth1\n"
-#~ "\n"
-#~ "\t\tFältet är valfritt och behövs endast om du vill kunna skapa evenemang "
-#~ "till Event Manager API."
-
-#~ msgid "Link to Event Manager API root"
-#~ msgstr "Länk till Event Manager API"
-
-#~ msgid "Link to Event Manager API"
-#~ msgstr "Länk till Event Manager API"
-
-#~ msgid "Upcoming events"
-#~ msgstr "Kommande evenemang"
-
-#~ msgctxt "Event manager integration options"
-#~ msgid "Options"
-#~ msgstr "Inställningar"
-
-#~ msgid "Wrapper class"
-#~ msgstr "Wrapper div-klass"
-
-#~ msgid "Event information shortcode"
-#~ msgstr "Shortcode för information"
-
-#~ msgid "Event manager integration settings"
-#~ msgstr "Event Manager Integration inställningar"
-
-#~ msgid "Start %s"
-#~ msgstr "Börjar %s"
-
-#~ msgid "End %s"
-#~ msgstr "Slutar %s"
-
-#~ msgid "Door time %s"
-#~ msgstr "Lokalen öppnar %s"
-
-#~ msgid "Import"
-#~ msgstr "Importera"
-
-#~ msgid "Start"
-#~ msgstr "Startdatum"
-
-#~ msgid "End"
-#~ msgstr "Slut"
-
-#~ msgid "Start: %s"
-#~ msgstr "Börjar: %s"
-
-#~ msgid "End: %s"
-#~ msgstr "Slutar: %s"
-
-#~ msgid "Door time: %s"
-#~ msgstr "Lokalen öppnar: %s"
+#: source/php/OAuth/OAuthAdmin.php:22
+#: source/php/OAuth/OAuthAdmin.php:23
+msgid "Event Manager Integration: API authentication"
+msgstr "Event Manager Integration: API autentisering"

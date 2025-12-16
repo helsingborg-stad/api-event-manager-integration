@@ -21,8 +21,30 @@
             ),
             'placement' => 'top',
             'endpoint' => 0,
+            'selected' => 0,
         ),
         1 => array(
+            'key' => 'field_6940f72eaa279',
+            'label' => __('Event post type, sync and presentation enabled', 'event-integration'),
+            'name' => 'enable_events_post_type',
+            'aria-label' => '',
+            'type' => 'true_false',
+            'instructions' => __('Disabling this switch will prevent registration of the post type for events and every function using the post type. This is useful when only the event submission form is what you need from this plugin.', 'event-integration'),
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'message' => '',
+            'default_value' => 1,
+            'allow_in_bindings' => 0,
+            'ui_on_text' => __('Enabled', 'event-integration'),
+            'ui_off_text' => __('Disabled', 'event-integration'),
+            'ui' => 1,
+        ),
+        2 => array(
             'key' => 'field_588f3ef76094c',
             'label' => __('API url', 'event-integration'),
             'name' => 'event_api_url',
@@ -30,16 +52,25 @@
             'type' => 'url',
             'instructions' => __('Url to Event Manager API wp/v2 namespace. <br> E.g. https://host/wp-json/wp/v2', 'event-integration'),
             'required' => 1,
-            'conditional_logic' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_6940f72eaa279',
+                        'operator' => '==',
+                        'value' => '1',
+                    ),
+                ),
+            ),
             'wrapper' => array(
                 'width' => '',
                 'class' => '',
                 'id' => '',
             ),
             'default_value' => '',
+            'allow_in_bindings' => 1,
             'placeholder' => '',
         ),
-        2 => array(
+        3 => array(
             'key' => 'field_5835579f883ff',
             'label' => __('Days ahead', 'event-integration'),
             'name' => 'days_ahead',
@@ -47,21 +78,30 @@
             'type' => 'number',
             'instructions' => __('Import events that occurs within given number of days. Try to keep it as short as possible to avoid unnecessary datatransfer.', 'event-integration'),
             'required' => 1,
-            'conditional_logic' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_6940f72eaa279',
+                        'operator' => '==',
+                        'value' => '1',
+                    ),
+                ),
+            ),
             'wrapper' => array(
                 'width' => '50',
                 'class' => '',
                 'id' => '',
             ),
             'default_value' => 30,
-            'placeholder' => '',
-            'prepend' => '',
-            'append' => __('days', 'event-integration'),
             'min' => 1,
             'max' => 730,
+            'allow_in_bindings' => 1,
+            'placeholder' => '',
             'step' => '',
+            'prepend' => '',
+            'append' => __('days', 'event-integration'),
         ),
-        3 => array(
+        4 => array(
             'key' => 'field_5835581488400',
             'label' => __('Daily import', 'event-integration'),
             'name' => 'event_daily_import',
@@ -69,7 +109,15 @@
             'type' => 'true_false',
             'instructions' => '',
             'required' => 0,
-            'conditional_logic' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_6940f72eaa279',
+                        'operator' => '==',
+                        'value' => '1',
+                    ),
+                ),
+            ),
             'wrapper' => array(
                 'width' => '50',
                 'class' => '',
@@ -77,11 +125,12 @@
             ),
             'message' => __('Enable daily automatic import from Event Manager API', 'event-integration'),
             'default_value' => 0,
+            'allow_in_bindings' => 1,
             'ui' => 0,
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        4 => array(
+        5 => array(
             'key' => 'field_587f86dc8f7b7',
             'label' => __('Post status', 'event-integration'),
             'name' => 'event_post_status',
@@ -89,7 +138,15 @@
             'type' => 'radio',
             'instructions' => __('Select status of imported events.', 'event-integration'),
             'required' => 1,
-            'conditional_logic' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_6940f72eaa279',
+                        'operator' => '==',
+                        'value' => '1',
+                    ),
+                ),
+            ),
             'wrapper' => array(
                 'width' => '50',
                 'class' => '',
@@ -99,14 +156,15 @@
                 'draft' => __('Draft', 'event-integration'),
                 'publish' => __('Published', 'event-integration'),
             ),
+            'default_value' => 'publish',
+            'return_format' => 'value',
             'allow_null' => 0,
             'other_choice' => 0,
-            'save_other_choice' => 0,
-            'default_value' => __('publish', 'event-integration'),
+            'allow_in_bindings' => 1,
             'layout' => 'vertical',
-            'return_format' => 'value',
+            'save_other_choice' => 0,
         ),
-        5 => array(
+        6 => array(
             'key' => 'field_58feee2f256cd',
             'label' => __('Unpublish long lasting events', 'event-integration'),
             'name' => 'event_unpublish_limit',
@@ -114,21 +172,30 @@
             'type' => 'number',
             'instructions' => __('Automatically unpublish events lasting longer than given limit. Set to -1 to set no limit.', 'event-integration'),
             'required' => 1,
-            'conditional_logic' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_6940f72eaa279',
+                        'operator' => '==',
+                        'value' => '1',
+                    ),
+                ),
+            ),
             'wrapper' => array(
                 'width' => '50',
                 'class' => '',
                 'id' => '',
             ),
             'default_value' => 5,
-            'placeholder' => '',
-            'prepend' => '',
-            'append' => '',
             'min' => -1,
             'max' => '',
+            'allow_in_bindings' => 1,
+            'placeholder' => '',
             'step' => '',
+            'prepend' => '',
+            'append' => '',
         ),
-        6 => array(
+        7 => array(
             'key' => 'field_58e380646fa6f',
             'label' => __('Visa knapp för att uppdatera importerade evenemang', 'event-integration'),
             'name' => 'event_update_button',
@@ -136,7 +203,15 @@
             'type' => 'true_false',
             'instructions' => '',
             'required' => 0,
-            'conditional_logic' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_6940f72eaa279',
+                        'operator' => '==',
+                        'value' => '1',
+                    ),
+                ),
+            ),
             'wrapper' => array(
                 'width' => '',
                 'class' => '',
@@ -144,11 +219,12 @@
             ),
             'message' => __('Visa uppdatera-knapp', 'event-integration'),
             'default_value' => 0,
+            'allow_in_bindings' => 1,
             'ui' => 0,
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        7 => array(
+        8 => array(
             'key' => 'field_58a56eaa0c2ad',
             'label' => __('OAuth1 end point root url', 'event-integration'),
             'name' => 'event_api_oauth_url',
@@ -165,7 +241,7 @@
             'default_value' => '',
             'placeholder' => '',
         ),
-        8 => array(
+        9 => array(
             'key' => 'field_5b0e5b3be7bf7',
             'label' => __('Import filters', 'event-integration'),
             'name' => '',
@@ -173,7 +249,15 @@
             'type' => 'message',
             'instructions' => '',
             'required' => 0,
-            'conditional_logic' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_6940f72eaa279',
+                        'operator' => '==',
+                        'value' => '1',
+                    ),
+                ),
+            ),
             'wrapper' => array(
                 'width' => '',
                 'class' => '',
@@ -183,7 +267,7 @@
             'new_lines' => 'wpautop',
             'esc_html' => 0,
         ),
-        9 => array(
+        10 => array(
             'key' => 'field_586bc598f2777',
             'label' => __('Import from selected user groups', 'event-integration'),
             'name' => 'event_filter_group',
@@ -191,24 +275,34 @@
             'type' => 'taxonomy',
             'instructions' => __('Select the user groups that you want to import events from. Leave empty to import from all groups.', 'event-integration'),
             'required' => 0,
-            'conditional_logic' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_6940f72eaa279',
+                        'operator' => '==',
+                        'value' => '1',
+                    ),
+                ),
+            ),
             'wrapper' => array(
                 'width' => '',
                 'class' => '',
                 'id' => '',
             ),
             'taxonomy' => 'event_groups',
-            'field_type' => 'checkbox',
-            'allow_null' => 0,
             'add_term' => 0,
             'save_terms' => 1,
             'load_terms' => 0,
             'return_format' => 'object',
+            'field_type' => 'checkbox',
+            'allow_in_bindings' => 1,
+            'bidirectional' => 0,
             'multiple' => 0,
+            'allow_null' => 0,
             'bidirectional_target' => array(
             ),
         ),
-        10 => array(
+        11 => array(
             'key' => 'field_5846ca031ffcb',
             'label' => __('Import from selected categories', 'event-integration'),
             'name' => 'event_filter_cat',
@@ -216,19 +310,28 @@
             'type' => 'text',
             'instructions' => __('Enter the name of the categories that you want to import events from. Separate with commas. Leave blank to import from all categories.', 'event-integration'),
             'required' => 0,
-            'conditional_logic' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_6940f72eaa279',
+                        'operator' => '==',
+                        'value' => '1',
+                    ),
+                ),
+            ),
             'wrapper' => array(
                 'width' => '',
                 'class' => '',
                 'id' => '',
             ),
             'default_value' => '',
+            'maxlength' => '',
+            'allow_in_bindings' => 1,
             'placeholder' => '',
             'prepend' => '',
             'append' => '',
-            'maxlength' => '',
         ),
-        11 => array(
+        12 => array(
             'key' => 'field_5846db8b3cf78',
             'label' => __('Import from selected tags', 'event-integration'),
             'name' => 'event_filter_tag',
@@ -236,19 +339,28 @@
             'type' => 'text',
             'instructions' => __('Enter the name of the tags that you want to import events from. Separate with commas. Leave blank to import from all tags.', 'event-integration'),
             'required' => 0,
-            'conditional_logic' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_6940f72eaa279',
+                        'operator' => '==',
+                        'value' => '1',
+                    ),
+                ),
+            ),
             'wrapper' => array(
                 'width' => '',
                 'class' => '',
                 'id' => '',
             ),
             'default_value' => '',
+            'maxlength' => '',
+            'allow_in_bindings' => 1,
             'placeholder' => '',
             'prepend' => '',
             'append' => '',
-            'maxlength' => '',
         ),
-        12 => array(
+        13 => array(
             'key' => 'field_5b1e890a063c4',
             'label' => __('Import internal events', 'event-integration'),
             'name' => 'event_internal_events',
@@ -256,7 +368,15 @@
             'type' => 'true_false',
             'instructions' => __('Select if only internal (organization) events should be imported.', 'event-integration'),
             'required' => 0,
-            'conditional_logic' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_6940f72eaa279',
+                        'operator' => '==',
+                        'value' => '1',
+                    ),
+                ),
+            ),
             'wrapper' => array(
                 'width' => '',
                 'class' => '',
@@ -264,11 +384,12 @@
             ),
             'message' => '',
             'default_value' => 0,
-            'ui' => 1,
+            'allow_in_bindings' => 1,
             'ui_on_text' => '',
             'ui_off_text' => '',
+            'ui' => 1,
         ),
-        13 => array(
+        14 => array(
             'key' => 'field_5b0e5a49c8fab',
             'label' => __('Import from geographic location', 'event-integration'),
             'name' => 'event_import_from_location',
@@ -276,7 +397,15 @@
             'type' => 'button_group',
             'instructions' => '',
             'required' => 0,
-            'conditional_logic' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_6940f72eaa279',
+                        'operator' => '==',
+                        'value' => '1',
+                    ),
+                ),
+            ),
             'wrapper' => array(
                 'width' => '',
                 'class' => '',
@@ -287,12 +416,13 @@
                 'point' => __('Single point', 'event-integration'),
                 'area' => __('Drawn area', 'event-integration'),
             ),
-            'allow_null' => 0,
-            'default_value' => __('no', 'event-integration'),
-            'layout' => 'horizontal',
+            'default_value' => 'no',
             'return_format' => 'value',
+            'allow_null' => 0,
+            'allow_in_bindings' => 1,
+            'layout' => 'horizontal',
         ),
-        14 => array(
+        15 => array(
             'key' => 'field_58aaeaa46781b',
             'label' => __('From a single point', 'event-integration'),
             'name' => 'event_import_geographic',
@@ -307,6 +437,11 @@
                         'operator' => '==',
                         'value' => 'point',
                     ),
+                    1 => array(
+                        'field' => 'field_6940f72eaa279',
+                        'operator' => '==',
+                        'value' => '1',
+                    ),
                 ),
             ),
             'wrapper' => array(
@@ -318,8 +453,9 @@
             'center_lng' => '12.694512',
             'zoom' => 16,
             'height' => '',
+            'allow_in_bindings' => 1,
         ),
-        15 => array(
+        16 => array(
             'key' => 'field_58aaec066781c',
             'label' => __('Distance from location', 'event-integration'),
             'name' => 'event_geographic_distance',
@@ -334,6 +470,11 @@
                         'operator' => '==',
                         'value' => 'point',
                     ),
+                    1 => array(
+                        'field' => 'field_6940f72eaa279',
+                        'operator' => '==',
+                        'value' => '1',
+                    ),
                 ),
             ),
             'wrapper' => array(
@@ -342,14 +483,15 @@
                 'id' => '',
             ),
             'default_value' => '',
-            'placeholder' => '',
-            'prepend' => '',
-            'append' => '',
             'min' => '',
             'max' => '',
+            'allow_in_bindings' => 1,
+            'placeholder' => '',
             'step' => '',
+            'prepend' => '',
+            'append' => '',
         ),
-        16 => array(
+        17 => array(
             'key' => 'field_5b0e6394d6399',
             'label' => __('Drawn area', 'event-integration'),
             'name' => '',
@@ -364,6 +506,11 @@
                         'operator' => '==',
                         'value' => 'area',
                     ),
+                    1 => array(
+                        'field' => 'field_6940f72eaa279',
+                        'operator' => '==',
+                        'value' => '1',
+                    ),
                 ),
             ),
             'wrapper' => array(
@@ -375,7 +522,7 @@
             'new_lines' => 'wpautop',
             'esc_html' => 0,
         ),
-        17 => array(
+        18 => array(
             'key' => 'field_673c3cc743699',
             'label' => __('Details page', 'event-integration'),
             'name' => '',
@@ -383,7 +530,15 @@
             'type' => 'tab',
             'instructions' => '',
             'required' => 0,
-            'conditional_logic' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_6940f72eaa279',
+                        'operator' => '==',
+                        'value' => '1',
+                    ),
+                ),
+            ),
             'wrapper' => array(
                 'width' => '',
                 'class' => '',
@@ -391,8 +546,9 @@
             ),
             'placement' => 'top',
             'endpoint' => 0,
+            'selected' => 0,
         ),
-        18 => array(
+        19 => array(
             'key' => 'field_673c3cf64369a',
             'label' => __('Clean hero image', 'event-integration'),
             'name' => 'event_single_clean_hero',
@@ -400,7 +556,15 @@
             'type' => 'true_false',
             'instructions' => __('Skip detailed information in hero image', 'event-integration'),
             'required' => 0,
-            'conditional_logic' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_6940f72eaa279',
+                        'operator' => '==',
+                        'value' => '1',
+                    ),
+                ),
+            ),
             'wrapper' => array(
                 'width' => '',
                 'class' => '',
@@ -408,6 +572,7 @@
             ),
             'message' => __('Yes', 'event-integration'),
             'default_value' => 0,
+            'allow_in_bindings' => 1,
             'ui' => 0,
             'ui_on_text' => '',
             'ui_off_text' => '',
@@ -431,10 +596,6 @@
     'active' => true,
     'description' => '',
     'show_in_rest' => 0,
-    'acfe_display_title' => '',
-    'acfe_autosync' => '',
-    'acfe_form' => 0,
-    'acfe_meta' => '',
-    'acfe_note' => '',
+    'display_title' => '',
 ));
 }

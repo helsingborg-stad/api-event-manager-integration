@@ -333,7 +333,7 @@ class Event extends \Modularity\Module
             );
         }
 
-        return $categories;
+        return is_wp_error($categories) ? [] : $categories;
     }
 
 
@@ -376,7 +376,7 @@ class Event extends \Modularity\Module
             );
         }
 
-        return $tags;
+        return is_wp_error($tags) ? [] : $tags;
     }
 
 
