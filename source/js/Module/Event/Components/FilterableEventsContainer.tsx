@@ -4,7 +4,7 @@ import update from 'immutability-helper';
 import PropTypes from 'prop-types';
 import setQuery from 'set-query-string';
 import { getEvents } from '../../../Api/events';
-import EventList from './EventList';
+import EventList from './EventList.jsx';
 import FilterContainer from './FilterContainer';
 import scrollIntoView from 'scroll-into-view-if-needed';
 

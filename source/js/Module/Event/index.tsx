@@ -2,7 +2,7 @@
 import 'es6-promise';
 import 'isomorphic-fetch';
 // Components
-import FilterableEventsContainer from './Components/FilterableEventsContainer';
+import FilterableEventsContainer from './Components/FilterableEventsContainer.jsx';
 import './module-event.css';
 
 document.addEventListener('DOMContentLoaded', e => {
