@@ -1,5 +1,8 @@
 <?php
 
+declare(strict_types=1);
+
+
 /**
  * Admin page with forms to authenticate with OAuth1 server
  */

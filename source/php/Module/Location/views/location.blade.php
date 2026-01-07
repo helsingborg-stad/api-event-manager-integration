@@ -1,3 +1,8 @@
+<?php
+
+declare(strict_types=1);
+
+?>
 <div class="{{ $classes }} {{ isset($font_size) ? $font_size : '' }}">
     @if (!$hideTitle && !empty($postTitle))
     <h4 class="box-title">{!! $postTitle !!}</h4>

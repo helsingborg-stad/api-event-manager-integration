@@ -1,5 +1,8 @@
 <?php
 
+declare(strict_types=1);
+
+
 /**
  * Shortcodes to display events with meta data
  */

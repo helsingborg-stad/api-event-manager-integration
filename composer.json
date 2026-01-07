@@ -31,26 +31,38 @@
         "php": "^8.0",
         "helsingborg-stad/acf-export-manager": ">=1.0.0",
         "justinrainbow/json-schema": "^5.2",
-        "helsingborg-stad/municipio": "^6.0.0"
+        "helsingborg-stad/wpservice": "^2.0",
+        "helsingborg-stad/acfservice": "^1.0",
+        "helsingborg-stad/wputilservice": "^0.2.44"
     },
     "autoload": {
         "psr-4": {
             "EventManagerIntegration\\": "source/php/"
         }
     },
+    "suggest": {
+        "helsingborg-stad/municipio": "^6.0.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.6",
+        "carthage-software/mago": "^1.0.0-rc.3",
+        "lucatume/function-mocker": "^1.3",
+        "10up/wp_mock": "^1.1.0"
+    },
     "scripts": {
-        "test": "@php vendor/bin/phpunit",
+        "test": "vendor/bin/phpunit",
+        "test:coverage": "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-html .coverage/html --coverage-clover .coverage/clover.xml",
+        "lint": "vendor/bin/mago lint",
+        "fix": "vendor/bin/mago lint --format-after-fix --fix",
+        "format": "vendor/bin/mago fmt",
         "make-pot": "wp i18n make-pot . languages/event-integration-sv_SE.pot --domain=event-integration --allow-root --include=source/php/,AcfFields/",
         "update-po": "wp i18n update-po languages/event-integration-sv_SE.pot languages/event-integration-sv_SE.po --allow-root",
         "make-mo": "wp i18n make-mo languages/event-integration-sv_SE.po languages/event-integration-sv_SE.mo --allow-root"
     },
-    "require-dev": {
-        "lucatume/function-mocker": "^1.3",
-        "10up/wp_mock": "^0.5.0"
-    },
     "config": {
         "allow-plugins": {
-            "composer/installers": true
+            "composer/installers": true,
+            "carthage-software/mago": true
         }
     }
 }

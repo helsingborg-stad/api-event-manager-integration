@@ -1,5 +1,8 @@
 <?php
 
+declare(strict_types=1);
+
+
 namespace EventManagerIntegration\Admin;
 
 class Options

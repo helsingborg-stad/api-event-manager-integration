@@ -1,5 +1,8 @@
 <?php
 
+declare(strict_types=1);
+
+
 namespace EventManagerIntegration\Widget;
 
 use EventManagerIntegration\Helper\QueryEvents as QueryEvents;

@@ -1,5 +1,8 @@
 <?php
 
+declare(strict_types=1);
+
+
 /**
  * Customizes the admin edit event view to show complete event data
  */

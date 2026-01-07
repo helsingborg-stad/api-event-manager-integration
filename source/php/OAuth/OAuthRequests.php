@@ -1,5 +1,8 @@
 <?php
 
+declare(strict_types=1);
+
+
 /**
  * OAuth1 functions to authenticate clients and publish to wp rest api
  */

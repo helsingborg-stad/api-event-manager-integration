@@ -31,6 +31,10 @@ halstead = { effort-threshold = 7000 }
 no-empty = { level = "warning" }
 too-many-properties = { level = "warning" }
 too-many-methods = { level = "warning" }
+no-global = { level = "warning" }
+cyclomatic-complexity = { level = "warning" }
+kan-defect = { level = "warning" }
+no-error-control-operator = { level = "warning" }
 
 # End IMPORTANT!
 

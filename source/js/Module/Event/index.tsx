@@ -5,40 +5,40 @@ import 'isomorphic-fetch';
 import FilterableEventsContainer from './Components/FilterableEventsContainer.jsx';
 import './module-event.css';
 
-document.addEventListener('DOMContentLoaded', e => {
-  if (!modEvent) {
-    return;
-  }
+document.addEventListener('DOMContentLoaded', (e) => {
+	if (!modEvent) {
+		return;
+	}
 
-  const domElements = document.getElementsByClassName('modularity-event-index');
-  const translation = modEvent;
-  const todaysDate = new Date();
-  const startDate = todaysDate.toLocaleDateString('sv-SE');
+	const domElements = document.getElementsByClassName('modularity-event-index');
+	const translation = modEvent;
+	const todaysDate = new Date();
+	const startDate = todaysDate.toLocaleDateString('sv-SE');
 
-  if (domElements.length > 0) {
-    for (let i = 0; i < domElements.length; i++) {
-      const element = domElements[i];
-      const { settings, categories, tags, groups, ageFrom, ageTo, noUrl, cardStyle, mobileSlider } = element.dataset;
-      const resetButtonUrl = element.getAttribute("data-reset-url");
+	if (domElements.length > 0) {
+		for (let i = 0; i < domElements.length; i++) {
+			const element = domElements[i];
+			const { settings, categories, tags, groups, ageFrom, ageTo, noUrl, cardStyle, mobileSlider } = element.dataset;
+			const resetButtonUrl = element.getAttribute('data-reset-url');
 
-      ReactDOM.render(
-        <FilterableEventsContainer
-          {...element.dataset}
-          categories={JSON.parse(categories)}
-          groups={JSON.parse(groups)}
-          settings={JSON.parse(settings)}
-          tags={JSON.parse(tags)}
-          translation={translation}
-          startDate={startDate}
-          resetButtonUrl={resetButtonUrl}
-          ageFrom={ageFrom}
-          ageTo={ageTo}
-          noUrl={noUrl}
-          cardStyle={cardStyle}
-          mobileSlider={mobileSlider === 'true' ? true : false}
-        />,
-        element
-      );
-    }
-  }
+			ReactDOM.render(
+				<FilterableEventsContainer
+					{...element.dataset}
+					categories={JSON.parse(categories)}
+					groups={JSON.parse(groups)}
+					settings={JSON.parse(settings)}
+					tags={JSON.parse(tags)}
+					translation={translation}
+					startDate={startDate}
+					resetButtonUrl={resetButtonUrl}
+					ageFrom={ageFrom}
+					ageTo={ageTo}
+					noUrl={noUrl}
+					cardStyle={cardStyle}
+					mobileSlider={mobileSlider === 'true' ? true : false}
+				/>,
+				element,
+			);
+		}
+	}
 });

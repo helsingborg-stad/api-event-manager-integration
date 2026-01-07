@@ -1,58 +1,54 @@
 .DayPicker {
-  position: absolute;
-  z-index: 9999;
-  background: white;
-  border-radius: 12.5px;
-  box-shadow: 0px 7px 29px -15px black;
+	position: absolute;
+	z-index: 9999;
+	background: white;
+	border-radius: 12.5px;
+	box-shadow: 0px 7px 29px -15px black;
 }
 
 .modularity-event-index .modularity-event-index__body.is-disabled .modularity-event-index__content {
-  opacity: 0.3;
-  user-select: none;
-  pointer-events: none;
+	opacity: 0.3;
+	user-select: none;
+	pointer-events: none;
 }
 
 .modularity-event-index .modularity-event-index__loader.modularity-event-index__loader--float {
-  position: absolute;
-  width: 100%;
-  z-index: 2;
+	position: absolute;
+	width: 100%;
+	z-index: 2;
 }
 
 @media screen and (max-width: 895px) {
-  .modularity-event-index--mobile-slider 
-    .modularity-event-index__content>.o-grid {
-    flex-wrap: nowrap;
-    overflow-x: scroll;
-    width: calc(100vw - calc(var(--base, 8px) * 2));
-    padding-right: calc(var(--base, 8px) * 2);
-    will-change: scroll-position;
-  }
+	.modularity-event-index--mobile-slider .modularity-event-index__content > .o-grid {
+		flex-wrap: nowrap;
+		overflow-x: scroll;
+		width: calc(100vw - calc(var(--base, 8px) * 2));
+		padding-right: calc(var(--base, 8px) * 2);
+		will-change: scroll-position;
+	}
 
-  .modularity-event-index--mobile-slider 
-    .modularity-event-index__content>.o-grid>.grid-xs-12 {
-    flex: 0 0 85%;
-  }
+	.modularity-event-index--mobile-slider .modularity-event-index__content > .o-grid > .grid-xs-12 {
+		flex: 0 0 85%;
+	}
 
-  .modularity-event-index__mobile-scroll-nav {
-    --base: 6px;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: var(--grid-gap, 8px);
-  }
+	.modularity-event-index__mobile-scroll-nav {
+		--base: 6px;
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: var(--grid-gap, 8px);
+	}
 
-  .modularity-event-index__mobile-scroll-nav
-    .c-button.c-button--sm {
-      min-width: 0;
-    }
+	.modularity-event-index__mobile-scroll-nav .c-button.c-button--sm {
+		min-width: 0;
+	}
 
-  .modularity-event-index__mobile-scroll-nav 
-    .c-icon {
-      display: inline-flex;
-  }
+	.modularity-event-index__mobile-scroll-nav .c-icon {
+		display: inline-flex;
+	}
 }
 
 @media screen and (min-width: 896px) {
-  .modularity-event-index__mobile-scroll-nav {
-    display: none;
-  }
+	.modularity-event-index__mobile-scroll-nav {
+		display: none;
+	}
 }
