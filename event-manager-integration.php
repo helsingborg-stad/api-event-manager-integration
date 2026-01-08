@@ -13,6 +13,9 @@
  * Domain Path:       /languages
  */
 
+use WpService\Implementations\NativeWpService;
+use WpUtilService\WpUtilService;
+
  // Protect agains direct file access
 if (! defined('WPINC')) {
     die;
@@ -81,5 +84,8 @@ register_deactivation_hook(plugin_basename(__FILE__), '\EventManagerIntegration\
 // Create database table when plugin is activated
 register_activation_hook(plugin_basename(__FILE__), '\EventManagerIntegration\Install::createTables');
 
+$wpService = new NativeWpService();
+$wpUtilService = new WpUtilService($wpService);
+
 // Start application
-new EventManagerIntegration\App();
+new EventManagerIntegration\App($wpUtilService->enqueue(__DIR__));

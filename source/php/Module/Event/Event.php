@@ -417,30 +417,11 @@ class Event extends \Modularity\Module
      */
     public function script()
     {
-        wp_enqueue_script(
-            'modularity-' . $this->slug,
-            EVENTMANAGERINTEGRATION_URL . '/dist/'
-                . \EventManagerIntegration\Helper\CacheBust::name(
-                    'js/event-integration-module-event.js',
-                ),
-            array('jquery', 'react', 'react-dom'),
-            false,
-            true,
-        );
-
-        wp_enqueue_style(
-            'modularity-' . $this->slug,
-            EVENTMANAGERINTEGRATION_URL . '/dist/'
-                . \EventManagerIntegration\Helper\CacheBust::name(
-                    'js/event-integration-module-event.css',
-                ),
-            array(),
-        );
-
-        wp_localize_script(
-            'modularity-' . $this->slug,
-            'modEvent',
-            array(
+        $this->wpEnqueue->add('js/event-integration-module-event.js', array('jquery', 'react', 'react-dom'), null, true);
+        $this->wpEnqueue
+            ->add('css/event-integration-module-event.css')
+            ->with()
+            ->translation('modEvent', array(
                 'moreEvents' => __('More events', 'event-integration'),
                 'noEventsFound' => __('No events found', 'event-integration'),
                 'next' => __('Next', 'event-integration'),
@@ -464,8 +445,7 @@ class Event extends \Modularity\Module
                 'nextPage' => __('Next page', 'event-integration'),
                 'previousPage' => __('Previous page', 'event-integration'),
                 'goToPage' => __('Go to page', 'event-integration'),
-            ),
-        );
+            ));
     }
 
     /**

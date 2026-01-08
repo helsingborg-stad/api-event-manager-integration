@@ -47,8 +47,7 @@
         "typescript": "^5.9.2",
         "uuid": "^8.3.2",
         "vite": "^7.1.2",
-        "vite-config-factory": "^1.0.1",
-        "@vitejs/plugin-react": "^5.1.2"
+        "vite-config-factory": "^1.1.1"
     },
     "jest": {
         "testEnvironment": "jsdom",

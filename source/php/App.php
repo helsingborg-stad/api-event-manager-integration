@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace EventManagerIntegration;
 
+use WpUtilService\Features\Enqueue\EnqueueManager;
+
 class App
 {
     /* Set to 'dev' or 'min' */
     public static $assetSuffix = 'min';
     private $cacheBust;
 
-    public function __construct()
-    {
+    public function __construct(
+        private EnqueueManager $wpEnqueue,
+    ) {
         $eventsPostTypeIsEnabled = get_field('enable_events_post_type', 'option') ?? true;
 
         add_action('wp_enqueue_scripts', array($this, 'enqueueFront'), 950);
@@ -94,24 +97,22 @@ class App
     public function enqueueAdmin()
     {
         // Styles
-        wp_register_style(
-            'event-integration-admin',
-            EVENTMANAGERINTEGRATION_URL . '/dist/' . Helper\CacheBust::name('css/event-manager-integration-admin.css'),
-        );
-        wp_enqueue_style('event-integration-admin');
+        $this->wpEnqueue->add('css/event-manager-integration-admin.css');
 
         // Scripts
-        wp_register_script('event-integration-admin', EVENTMANAGERINTEGRATION_URL . '/dist/' . Helper\CacheBust::name('js/event-integration-admin.js'), true);
-        wp_localize_script('event-integration-admin', 'eventintegration', array(
-            'ajaxurl' => admin_url('admin-ajax.php'),
-        ));
-        wp_localize_script('event-integration-admin', 'eventIntegrationAdmin', array(
-            'loading' => __('Loading', 'event-integration'),
-            'options' => array(
-                'areaCoordinates' => get_option('event_import_area') ? get_option('event_import_area') : null,
-            ),
-        ));
-        wp_enqueue_script('event-integration-admin');
+        $this->wpEnqueue
+            ->add('js/event-integration-admin.js', [], null, true)
+            ->with()
+            ->translation('eventintegration', array(
+                'ajaxurl' => admin_url('admin-ajax.php'),
+            ))
+            ->with()
+            ->translation('eventIntegrationAdmin', array(
+                'loading' => __('Loading', 'event-integration'),
+                'options' => array(
+                    'areaCoordinates' => get_option('event_import_area') ? get_option('event_import_area') : null,
+                ),
+            ));
     }
 
     /**
@@ -121,27 +122,25 @@ class App
     public function enqueueFront()
     {
         // Styles
-        wp_enqueue_style(
-            'event-integration',
-            EVENTMANAGERINTEGRATION_URL . '/dist/' . Helper\CacheBust::name('css/event-manager-integration.css'),
-        );
+        $this->wpEnqueue->add('css/event-manager-integration.css');
 
         // Scripts
-        wp_register_script('event-integration', EVENTMANAGERINTEGRATION_URL . '/dist/' . Helper\CacheBust::name('js/event-integration-front.js'), 'jquery', false, true);
-
-        wp_localize_script('event-integration', 'eventintegration', array(
-            'ajaxurl' => admin_url('admin-ajax.php'),
-            'apiurl' => get_field('event_api_url', 'option'),
-        ));
-        wp_localize_script('event-integration', 'eventIntegrationFront', array(
-            'event_pagination_error' => __('Something went wrong, please try again later.', 'event-integration'),
-            'email_not_matching' => __('The email addresses does not match.', 'event-integration'),
-            'must_upload_image' => __('You must upload an image.', 'event-integration'),
-            'select_string' => __('Select...', 'event-integration'),
-            'event_submitted_message' => __('The event has been submitted!', 'event-integration'),
-            'event_end_date_invalid' => __('End date can not be before or equal to the start date.', 'event-integration'),
-        ));
-        wp_enqueue_script('event-integration');
+        $this->wpEnqueue
+            ->add('js/event-integration-front.js', ['jquery'], null, true)
+            ->with()
+            ->translation('eventintegration', array(
+                'ajaxurl' => admin_url('admin-ajax.php'),
+                'apiurl' => get_field('event_api_url', 'option'),
+            ))
+            ->with()
+            ->translation('eventIntegrationFront', array(
+                'event_pagination_error' => __('Something went wrong, please try again later.', 'event-integration'),
+                'email_not_matching' => __('The email addresses does not match.', 'event-integration'),
+                'must_upload_image' => __('You must upload an image.', 'event-integration'),
+                'select_string' => __('Select...', 'event-integration'),
+                'event_submitted_message' => __('The event has been submitted!', 'event-integration'),
+                'event_end_date_invalid' => __('End date can not be before or equal to the start date.', 'event-integration'),
+            ));
     }
 
     /**
