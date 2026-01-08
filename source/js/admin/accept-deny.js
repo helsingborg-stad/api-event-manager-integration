@@ -2,7 +2,7 @@ export default (() => {
 	var EventManagerIntegration = EventManagerIntegration || {};
 	EventManagerIntegration.Admin = EventManagerIntegration.Admin || {};
 
-	EventManagerIntegration.Admin.AcceptDeny = (function ($) {
+	EventManagerIntegration.Admin.AcceptDeny = (($) => {
 		function AcceptDeny() {
 			$(
 				function () {
@@ -17,7 +17,7 @@ export default (() => {
 		 * @param  int postId     event object id
 		 * @return {void}
 		 */
-		AcceptDeny.prototype.changeAccepted = function (postStatus, postId) {
+		AcceptDeny.prototype.changeAccepted = (postStatus, postId) => {
 			$.ajax({
 				url: eventintegration.ajaxurl,
 				type: 'post',
@@ -26,7 +26,7 @@ export default (() => {
 					value: postStatus,
 					postId: postId,
 				},
-				beforeSend: function (response) {
+				beforeSend: (response) => {
 					var postElement = $('#post-' + postId);
 					if (postStatus == 1) {
 						postElement.find('.deny').removeClass('hidden');
@@ -47,21 +47,21 @@ export default (() => {
 			$(document).on(
 				'click',
 				'.accept',
-				function (e) {
+				((e) => {
 					e.preventDefault();
 					var postId = $(e.target).attr('postid');
 					AcceptDeny.prototype.changeAccepted(1, postId);
-				}.bind(this),
+				}).bind(this),
 			);
 
 			$(document).on(
 				'click',
 				'.deny',
-				function (e) {
+				((e) => {
 					e.preventDefault();
 					var postId = $(e.target).attr('postid');
 					AcceptDeny.prototype.changeAccepted(0, postId);
-				}.bind(this),
+				}).bind(this),
 			);
 		};
 

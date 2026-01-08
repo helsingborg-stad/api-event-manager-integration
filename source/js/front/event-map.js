@@ -5,14 +5,14 @@ export default (() => {
 	// EventManagerIntegration = EventManagerIntegration || {};
 	EventManagerIntegration.Event = EventManagerIntegration.Event || {};
 
-	EventManagerIntegration.Event.Map = (function () {
+	EventManagerIntegration.Event.Map = (() => {
 		function Map() {
 			if (typeof google === 'object' && typeof google.maps === 'object') {
 				this.init();
 			}
 		}
 
-		Map.prototype.init = function () {
+		Map.prototype.init = () => {
 			var mapElement, position, mapOptions, map, marker, infowindow, locationTitle;
 
 			mapElement = document.getElementById('event-map');
@@ -45,7 +45,7 @@ export default (() => {
 			});
 
 			if (locationTitle) {
-				marker.addListener('click', function () {
+				marker.addListener('click', () => {
 					infowindow.open(map, marker);
 				});
 			}

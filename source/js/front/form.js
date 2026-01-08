@@ -135,7 +135,7 @@ const eventForm = {
 				});
 			} else {
 				let page = 1;
-				let allItems = [];
+				const allItems = [];
 				const fetchNextPage = () => {
 					url = `${apiUrl}/${dataSource.name}?page=${page}&per_page=100`;
 					eventForm.fetchSelectItems(url).then((items) => {
@@ -209,6 +209,6 @@ const eventForm = {
 	},
 };
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
 	eventForm.setupForms();
 });

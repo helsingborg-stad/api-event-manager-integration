@@ -1,9 +1,14 @@
 // Polyfills
 import 'es6-promise';
 import 'isomorphic-fetch';
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 // Components
-import FilterableEventsContainer from './Components/FilterableEventsContainer.jsx';
+import FilterableEventsContainer from './Components/FilterableEventsContainer';
 import './module-event.css';
+
+declare const modEvent: any;
 
 document.addEventListener('DOMContentLoaded', (e) => {
 	if (!modEvent) {

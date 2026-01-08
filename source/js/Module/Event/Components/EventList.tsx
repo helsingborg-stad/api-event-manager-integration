@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 import { Button } from '@helsingborg-stad/hbg-react';
 import EventItem from './EventItem';
+import React from 'react';
 
 class EventList extends React.Component {
 	constructor(props) {

@@ -1,10 +1,8 @@
-'use strict';
-
 export default (() => {
 	var EventManagerIntegration = EventManagerIntegration || {};
 	EventManagerIntegration.Admin = EventManagerIntegration.Admin || {};
 
-	EventManagerIntegration.Admin.DrawMap = (function ($) {
+	EventManagerIntegration.Admin.DrawMap = (($) => {
 		var drawingManager,
 			drawnPolygon,
 			savedPoints = eventIntegrationAdmin.options.areaCoordinates;
@@ -100,7 +98,7 @@ export default (() => {
 			}
 		};
 
-		DrawMap.prototype.saveDrawOptions = function (coordinates) {
+		DrawMap.prototype.saveDrawOptions = (coordinates) => {
 			$.ajax({
 				url: eventintegration.ajaxurl,
 				type: 'post',
@@ -109,7 +107,7 @@ export default (() => {
 					action: 'save_draw_points',
 					coordinates: coordinates,
 				},
-				error: function (error) {
+				error: (error) => {
 					console.log(error);
 				},
 			});

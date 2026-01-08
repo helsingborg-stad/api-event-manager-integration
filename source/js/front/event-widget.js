@@ -7,7 +7,7 @@ export default (() => {
 	EventManagerIntegration.Widget = EventManagerIntegration.Widget || {};
 
 	//Component
-	EventManagerIntegration.Widget.TemplateParser = (function ($) {
+	EventManagerIntegration.Widget.TemplateParser = (($) => {
 		var date = new Date();
 		var dd = date.getDate();
 		var mm = date.getMonth() + 1;
@@ -51,22 +51,22 @@ export default (() => {
 			);
 		};
 
-		TemplateParser.prototype.storeTemplate = function (module) {
+		TemplateParser.prototype.storeTemplate = (module) => {
 			module.data('template', $('.template', module).html());
 			module.find('.template').remove();
 		};
 
-		TemplateParser.prototype.storeErrorTemplate = function (module) {
+		TemplateParser.prototype.storeErrorTemplate = (module) => {
 			module.data('error-template', $('.error-template', module).html());
 			module.find('.error-template').remove();
 		};
 
-		TemplateParser.prototype.storeModalTemplate = function (module) {
+		TemplateParser.prototype.storeModalTemplate = (module) => {
 			module.data('modal-template', $('.modal-template', module).html());
 			module.find('.modal-template').remove();
 		};
 
-		TemplateParser.prototype.loadEvent = function (module, resource) {
+		TemplateParser.prototype.loadEvent = (module, resource) => {
 			$.ajax({
 				type: 'GET',
 				url: resource,
@@ -74,17 +74,17 @@ export default (() => {
 				dataType: 'jsonp',
 				jsonpCallback: 'getevents',
 				crossDomain: true,
-				success: function (response) {
+				success: (response) => {
 					//Store response on module
 					module.data('json-response', response);
 
 					//Clear target div
 					TemplateParser.prototype.clear(module);
 
-					$(response).each(function (index, event) {
+					$(response).each((index, event) => {
 						// Get the correct occasion
 						var eventOccasion = '';
-						$.each(event.occasions, function (occationindex, occation) {
+						$.each(event.occasions, (occationindex, occation) => {
 							if (typeof occation.current_occasion != 'undefined' && occation.current_occasion == true) {
 								eventOccasion = occation;
 								return false;
@@ -113,18 +113,18 @@ export default (() => {
 					//bind click
 					TemplateParser.prototype.click(module);
 				},
-				error: function (response) {
+				error: (response) => {
 					TemplateParser.prototype.clear(module);
 					module.html(module.data('error-template'));
 				},
 			});
 		};
 
-		TemplateParser.prototype.clear = function (module) {
+		TemplateParser.prototype.clear = (module) => {
 			jQuery(module).html('');
 		};
 
-		TemplateParser.prototype.addZero = function (i) {
+		TemplateParser.prototype.addZero = (i) => {
 			if (i < 10) {
 				i = '0' + i;
 			}
@@ -253,9 +253,9 @@ export default (() => {
 								var membershipCards = '';
 								$.each(
 									object.membership_cards,
-									function (cardindex, card) {
+									((cardindex, card) => {
 										membershipCards = membershipCards + '<li>' + card.post_title + '</li>';
-									}.bind(this),
+									}).bind(this),
 								);
 								bookingData += membershipCards
 									? '<li>&nbsp;</li><li><strong>Ingår i medlemskort</strong></li>' + membershipCards

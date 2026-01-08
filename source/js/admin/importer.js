@@ -4,15 +4,15 @@ export default (() => {
 	EventManagerIntegration.data = { action: 'import_events', value: '' };
 	EventManagerIntegration.timerId = null;
 
-	jQuery(document).ready(function ($) {
+	jQuery(document).ready(($) => {
 		$('#importevents').click(function () {
 			if (!EventManagerIntegration.loadingOccasions) {
 				EventManagerIntegration.loadingOccasions = true;
 				var button = $(this);
 				var storedCss = collectCssFromButton(button);
-				redLoadingButton(button, function () {
+				redLoadingButton(button, () => {
 					EventManagerIntegration.data.value = button.attr('id');
-					jQuery.post(ajaxurl, EventManagerIntegration.data, function (response) {
+					jQuery.post(ajaxurl, EventManagerIntegration.data, (response) => {
 						var newPosts = response;
 						EventManagerIntegration.loadingOccasions = false;
 						restoreButton(button, storedCss);
@@ -36,7 +36,7 @@ export default (() => {
 	}
 
 	function redLoadingButton(button, callback) {
-		button.fadeOut(500, function () {
+		button.fadeOut(500, () => {
 			var texts = [
 				eventIntegrationAdmin.loading + '&nbsp;&nbsp;&nbsp;',
 				eventIntegrationAdmin.loading + '.&nbsp;&nbsp;',
@@ -56,7 +56,7 @@ export default (() => {
 			button.fadeIn(500);
 
 			var counter = 1;
-			EventManagerIntegration.timerId = setInterval(function () {
+			EventManagerIntegration.timerId = setInterval(() => {
 				if (counter > 3) counter = 0;
 				button.html(texts[counter]);
 				++counter;
@@ -66,7 +66,7 @@ export default (() => {
 	}
 
 	function restoreButton(button, storedCss) {
-		button.fadeOut(500, function () {
+		button.fadeOut(500, () => {
 			button.css('background-color', storedCss.bgColor);
 			button.css('color', storedCss.textColor);
 			button.css('border-color', storedCss.borderColor);

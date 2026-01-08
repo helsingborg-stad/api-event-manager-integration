@@ -3,6 +3,7 @@ import AgeFilter from './AgeFilter';
 import CategoriesFilter from './CategoriesFilter';
 import DateFilter from './DateFilter';
 import SearchBar from './SearchBar';
+import React from 'react';
 
 const FilterContainer = ({
 	ageRange,

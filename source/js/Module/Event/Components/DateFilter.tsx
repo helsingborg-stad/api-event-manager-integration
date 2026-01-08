@@ -4,6 +4,8 @@ import DayPickerInput from 'react-day-picker/DayPickerInput';
 import DayPicker from 'react-day-picker';
 import { months, weekdaysLong, weekdaysShort } from '../../../Config/dateLocalization';
 import 'react-day-picker/lib/style.css';
+import React from 'react';
+
 class DateFilter extends React.Component {
 	constructor(props) {
 		super(props);

@@ -30,6 +30,6 @@ const eventFormDateValidation = {
 	},
 };
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
 	eventFormDateValidation.setupEventDateValidation();
 });

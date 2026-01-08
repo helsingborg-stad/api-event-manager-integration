@@ -7,6 +7,7 @@ import { getEvents } from '../../../Api/events';
 import EventList from './EventList.jsx';
 import FilterContainer from './FilterContainer';
 import scrollIntoView from 'scroll-into-view-if-needed';
+import React from 'react';
 
 class FilterableEventsContainer extends React.Component {
 	constructor(props) {
@@ -57,7 +58,7 @@ class FilterableEventsContainer extends React.Component {
 					case 'int':
 						value = parseInt(urlParams.get(param));
 						break;
-					case 'array':
+					case 'array': {
 						// Get all parameter values
 						const queryStringArrayParameters = urlParams.getAll(param);
 						// Type cast values to integers
@@ -68,6 +69,7 @@ class FilterableEventsContainer extends React.Component {
 							return taxonomy;
 						});
 						break;
+					}
 					default:
 						value = urlParams.get(param);
 				}
@@ -83,14 +85,14 @@ class FilterableEventsContainer extends React.Component {
 	};
 
 	loadQueryString = () => {
-		let parameters = {};
-		let searchString = location.search.substr(1);
-		let pairs = searchString.split('&');
+		const parameters = {};
+		const searchString = location.search.substr(1);
+		const pairs = searchString.split('&');
 		let parts;
 		for (let i = 0; i < pairs.length; i++) {
 			parts = pairs[i].split('=');
-			let name = parts[0];
-			let data = decodeURI(parts[1]);
+			const name = parts[0];
+			const data = decodeURI(parts[1]);
 			parameters[name] = data;
 		}
 		return parameters;

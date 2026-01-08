@@ -167,7 +167,7 @@ const eventFormSubmit = {
 	},
 	formToJsonData: (form) => {
 		const formArray = eventFormSubmit.serializeArray(form);
-		let formData = {};
+		const formData = {};
 		let groups;
 		const categories = [];
 		const tags = [];
@@ -257,12 +257,12 @@ const eventFormSubmit = {
 	},
 	formatDate: (date, time) => {
 		let dateTime = '';
-		let hh = time.split(':')[0];
-		let mm = time.split(':')[1];
+		const hh = time.split(':')[0];
+		const mm = time.split(':')[1];
 
 		//Format from datepicker (dd/mm/yyyy) to wp format (yyyy-mm-dd)
 		if (date.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/)) {
-			let dateExploded = date.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+			const dateExploded = date.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
 
 			// Pads date with 0 eg. 06 for june
 			dateExploded[2] = dateExploded[2].padStart(2, '0');
@@ -283,6 +283,6 @@ const eventFormSubmit = {
 	},
 };
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
 	eventFormSubmit.setupFormSubmit();
 });

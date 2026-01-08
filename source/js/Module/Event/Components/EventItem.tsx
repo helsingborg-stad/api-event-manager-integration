@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import React from 'react';
 
 function getDateBadge(event, type) {
 	const date = new Date();
