@@ -24,7 +24,7 @@ class EventManagerGroups extends \EventManagerIntegration\Parser
 
         // Request first page to determine total pages
         $args = [
-            'timeout'   => 120,
+            'timeout' => 120,
             'sslverify' => defined('DEV_MODE') && DEV_MODE === true ? false : true,
         ];
 
@@ -49,7 +49,7 @@ class EventManagerGroups extends \EventManagerIntegration\Parser
                 return; // abort: no update
             }
 
-            $body   = wp_remote_retrieve_body($request);
+            $body = wp_remote_retrieve_body($request);
             $groups = json_decode($body);
 
             if (empty($groups)) {
@@ -58,9 +58,9 @@ class EventManagerGroups extends \EventManagerIntegration\Parser
 
             foreach ($groups as $group) {
                 $optionList[$group->id] = [
-                    'id'     => $group->id,
-                    'name'   => $group->name,
-                    'slug'   => $group->slug,
+                    'id' => $group->id,
+                    'name' => $group->name,
+                    'slug' => $group->slug,
                     'parent' => $group->parent,
                 ];
 

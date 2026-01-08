@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace EventManagerIntegration\Module;
 
 class EventForm extends \Modularity\Module
@@ -33,19 +32,19 @@ class EventForm extends \Modularity\Module
 
         $data['classes'] = implode(' ', apply_filters('Modularity/Module/Classes', array(), $this->post_type, $this->args));
 
-         $data['lang'] = [
+        $data['lang'] = [
             'errorMessage' => __('Something went wrong. Please look over the provided information and try again.', 'event-integration'),
             'validateMessage' => __('Form is successfully being sent.', 'event-integration'),
             'submitButtonText' => __('Send', 'event-integration'),
             'reloadButtonText' => __('Go back', 'event-integration'),
-         ];
+        ];
 
-         return $data;
+        return $data;
     }
 
     public function template()
     {
-        return "mod-event-form.blade.php";
+        return 'mod-event-form.blade.php';
     }
 
     private function validateFields(array $fields)
@@ -61,7 +60,7 @@ class EventForm extends \Modularity\Module
 
             $fieldAsAssocArray = json_decode(json_encode($field));
 
-            $this->validator->validate($fieldAsAssocArray, (object)['$ref' => 'file://' . realpath($schemaFilePath)]);
+            $this->validator->validate($fieldAsAssocArray, (object) ['$ref' => 'file://' . realpath($schemaFilePath)]);
             if (!$this->validator->isValid()) {
                 echo "JSON does not validate. Violations:\n";
                 foreach ($this->validator->getErrors() as $error) {

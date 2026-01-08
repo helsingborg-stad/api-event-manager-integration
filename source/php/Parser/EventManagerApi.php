@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace EventManagerIntegration\Parser;
 
 use \EventManagerIntegration\Event as Event;
@@ -25,7 +24,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
         // Import publishing groups from API
         \EventManagerIntegration\App::importPublishingGroups();
         // Get site languages
-        $languages = is_plugin_active('polylang-pro/polylang.php') ? (array)pll_languages_list() : array();
+        $languages = is_plugin_active('polylang-pro/polylang.php') ? (array) pll_languages_list() : array();
         $eventIds = array();
         $checkApiDiff = true;
         $i = 0;
@@ -40,7 +39,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
                         'per_page' => 25,
                         'lang' => $language,
                     ),
-                    $this->url
+                    $this->url,
                 );
 
                 $events = \EventManagerIntegration\Parser::requestApi($url);
@@ -54,13 +53,13 @@ class EventManagerApi extends \EventManagerIntegration\Parser
                     // Save events to database
                     foreach ($events as $event) {
                         $event['lang'] = !empty($event['lang']) ? $event['lang'] : $language;
-                        
+
                         // Add additional membership card data
-                        if(isset($event['membership_cards']) && is_array($event['membership_cards']) && !empty($event['membership_cards'])) {
-                            foreach($event['membership_cards'] as $key => $card) {
-                                if(isset($card['ID'])) {
+                        if (isset($event['membership_cards']) && is_array($event['membership_cards']) && !empty($event['membership_cards'])) {
+                            foreach ($event['membership_cards'] as $key => $card) {
+                                if (isset($card['ID'])) {
                                     $cardData = $this->getMembershipCardById($card['ID']);
-                                    if(isset($cardData['website'])) {
+                                    if (isset($cardData['website'])) {
                                         $event['membership_cards'][$key]['website'] = $cardData['website'];
                                     }
                                 }
@@ -79,7 +78,6 @@ class EventManagerApi extends \EventManagerIntegration\Parser
             }
 
             $i++;
-
         } while (count($languages) > $i);
 
         // Delete events that has been deleted from the API
@@ -103,9 +101,9 @@ class EventManagerApi extends \EventManagerIntegration\Parser
     {
         $membershipCards = $this->getMembershipCards();
 
-        if(is_array($membershipCards)) {
-            foreach($membershipCards as $card) {
-                if(isset($card['id']) && $card['id'] === $id) {
+        if (is_array($membershipCards)) {
+            foreach ($membershipCards as $card) {
+                if (isset($card['id']) && $card['id'] === $id) {
                     return $card;
                 }
             }
@@ -121,7 +119,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
     public function fetchMembershipCards()
     {
         // Check API url
-        if (!$apiUrl = get_field('event_api_url', 'option')) {
+        if (!($apiUrl = get_field('event_api_url', 'option'))) {
             return false;
         }
 
@@ -129,12 +127,12 @@ class EventManagerApi extends \EventManagerIntegration\Parser
             array(
                 'per_page' => 100,
             ),
-            untrailingslashit($apiUrl) . '/membership-card'
+            untrailingslashit($apiUrl) . '/membership-card',
         );
 
         $membershipCards = \EventManagerIntegration\Parser::requestApi($apiUrl);
 
-        if(is_wp_error($membershipCards)) {
+        if (is_wp_error($membershipCards)) {
             return false;
         }
 
@@ -147,10 +145,10 @@ class EventManagerApi extends \EventManagerIntegration\Parser
      */
     public function getMembershipCards()
     {
-        if(isset($this->membershipCards)) {
+        if (isset($this->membershipCards)) {
             return $this->membershipCards;
         }
-        
+
         $this->membershipCards = $this->fetchMembershipCards();
 
         return $this->membershipCards;
@@ -164,68 +162,68 @@ class EventManagerApi extends \EventManagerIntegration\Parser
      */
     public function saveEvent($event)
     {
-        $post_title                     = !empty($event['title']['rendered']) ? $event['title']['rendered'] : null;
-        $post_content                   = !empty($event['content']['rendered']) ? $event['content']['rendered'] : null;
-        $featured_media                 = !empty($event['featured_media']['source_url']) ? $event['featured_media']['source_url'] : null;
-        $categories                     = !empty($event['event_categories']) ? $this->sanitizeCategories($event['event_categories']) : array();
-        $tags                           = !empty($event['event_tags']) ? array_map('strtolower', array_map('trim', $event['event_tags'])) : array();
-        $groups                         = !empty($event['user_groups']) ? $event['user_groups'] : array();
-        $occasions                      = !empty($event['occasions']) ? $event['occasions'] : null;
-        $event_link                     = !empty($event['event_link']) ? $event['event_link'] : null;
-        $additional_links               = !empty($event['additional_links']) ? $event['additional_links'] : null;
-        $related_events                 = !empty($event['related_events']) ? $event['related_events'] : null;
-        $organizers                     = !empty($event['organizers']) ? $event['organizers'] : null;
-        $supporters                     = !empty($event['supporters']) ? $event['supporters'] : null;
-        $booking_link                   = !empty($event['booking_link']) ? $event['booking_link'] : null;
-        $booking_link_type              = !empty($event['booking_link_type']) ? $event['booking_link_type'] : null;
-        $booking_phone                  = !empty($event['booking_phone']) ? $event['booking_phone'] : null;
-        $booking_email                  = !empty($event['booking_email']) ? $event['booking_email'] : null;
-        $age_restriction                = !empty($event['age_restriction']) ? $event['age_restriction'] : null;
-        $membership_cards               = !empty($event['membership_cards']) ? $event['membership_cards'] : null;
-        $price_information              = !empty($event['price_information']) ? $event['price_information'] : null;
-        $ticket_includes                = !empty($event['ticket_includes']) ? $event['ticket_includes'] : null;
-        $price_adult                    = isset($event['price_adult']) && $event['price_adult'] !== '' ? $event['price_adult'] : null;
-        $price_children                 = isset($event['price_children']) && $event['price_children'] !== '' ? $event['price_children'] : null;
-        $children_age                   = !empty($event['children_age']) ? $event['children_age'] : null;
-        $price_student                  = isset($event['price_student']) && $event['price_student'] !== '' ? $event['price_student'] : null;
-        $price_senior                   = isset($event['price_senior']) && $event['price_senior'] !== '' ? $event['price_senior'] : null;
-        $senior_age                     = !empty($event['senior_age']) ? $event['senior_age'] : null;
-        $booking_group                  = !empty($event['booking_group']) ? $event['booking_group'] : null;
-        $gallery                        = !empty($event['gallery']) ? $event['gallery'] : null;
-        $facebook                       = !empty($event['facebook']) ? $event['facebook'] : null;
-        $twitter                        = !empty($event['twitter']) ? $event['twitter'] : null;
-        $instagram                      = !empty($event['instagram']) ? $event['instagram'] : null;
-        $google_music                   = !empty($event['google_music']) ? $event['google_music'] : null;
-        $spotify                        = !empty($event['spotify']) ? $event['spotify'] : null;
-        $soundcloud                     = !empty($event['soundcloud']) ? $event['soundcloud'] : null;
-        $deezer                         = !empty($event['deezer']) ? $event['deezer'] : null;
-        $youtube                        = !empty($event['youtube']) ? $event['youtube'] : null;
-        $vimeo                          = !empty($event['vimeo']) ? $event['vimeo'] : null;
-        $post_status                    = get_field('event_post_status', 'option') ? get_field('event_post_status', 'option') : 'publish';
-        $location                       = !empty($event['location']) ? $event['location'] : null;
-        $additional_locations           = !empty($event['additional_locations']) ? $event['additional_locations'] : null;
-        $latitude                       = is_array($location) && ! empty($location['latitude']) ? $location['latitude'] : null;
-        $longitude                      = is_array($location) && ! empty($location['longitude']) ? $location['longitude'] : null;
-        $last_update                    = !empty($event['modified_gmt']) ? $event['modified_gmt'] : null;
-        $ticket_stock                   = isset($event['ticket_stock']) && $event['ticket_stock'] !== '' ? $event['ticket_stock'] : null;
-        $tickets_remaining              = isset($event['tickets_remaining']) && $event['tickets_remaining'] !== '' ? $event['tickets_remaining'] : null;
-        $additional_ticket_retailers    = !empty($event['additional_ticket_retailers']) ? $event['additional_ticket_retailers'] : null;
-        $additional_ticket_types        = !empty($event['additional_ticket_types']) ? $event['additional_ticket_types'] : null;
-        $price_range                    = !empty($event['price_range']) ? $event['price_range'] : null;
-        $ticket_release_date            = !empty($event['ticket_release_date']) ? $event['ticket_release_date'] : null;
-        $contact_information            = !empty($event['contact_information']) ? $event['contact_information'] : null;
-        $contact_phone                  = !empty($event['contact_phone']) ? $event['contact_phone'] : null;
-        $contact_email                  = !empty($event['contact_email']) ? $event['contact_email'] : null;
-        $age_group_from                 = !empty($event['age_group_from']) ? $event['age_group_from'] : null;
-        $age_group_to                   = !empty($event['age_group_to']) ? $event['age_group_to'] : null;
-        $accessibility                  = !empty($event['accessibility']) ? $event['accessibility'] : null;
-        $lang                           = !empty($event['lang']) ? $event['lang'] : null;
-        $translations                   = !empty($event['translations']) ? $event['translations'] : null;
+        $post_title = !empty($event['title']['rendered']) ? $event['title']['rendered'] : null;
+        $post_content = !empty($event['content']['rendered']) ? $event['content']['rendered'] : null;
+        $featured_media = !empty($event['featured_media']['source_url']) ? $event['featured_media']['source_url'] : null;
+        $categories = !empty($event['event_categories']) ? $this->sanitizeCategories($event['event_categories']) : array();
+        $tags = !empty($event['event_tags']) ? array_map('strtolower', array_map('trim', $event['event_tags'])) : array();
+        $groups = !empty($event['user_groups']) ? $event['user_groups'] : array();
+        $occasions = !empty($event['occasions']) ? $event['occasions'] : null;
+        $event_link = !empty($event['event_link']) ? $event['event_link'] : null;
+        $additional_links = !empty($event['additional_links']) ? $event['additional_links'] : null;
+        $related_events = !empty($event['related_events']) ? $event['related_events'] : null;
+        $organizers = !empty($event['organizers']) ? $event['organizers'] : null;
+        $supporters = !empty($event['supporters']) ? $event['supporters'] : null;
+        $booking_link = !empty($event['booking_link']) ? $event['booking_link'] : null;
+        $booking_link_type = !empty($event['booking_link_type']) ? $event['booking_link_type'] : null;
+        $booking_phone = !empty($event['booking_phone']) ? $event['booking_phone'] : null;
+        $booking_email = !empty($event['booking_email']) ? $event['booking_email'] : null;
+        $age_restriction = !empty($event['age_restriction']) ? $event['age_restriction'] : null;
+        $membership_cards = !empty($event['membership_cards']) ? $event['membership_cards'] : null;
+        $price_information = !empty($event['price_information']) ? $event['price_information'] : null;
+        $ticket_includes = !empty($event['ticket_includes']) ? $event['ticket_includes'] : null;
+        $price_adult = isset($event['price_adult']) && $event['price_adult'] !== '' ? $event['price_adult'] : null;
+        $price_children = isset($event['price_children']) && $event['price_children'] !== '' ? $event['price_children'] : null;
+        $children_age = !empty($event['children_age']) ? $event['children_age'] : null;
+        $price_student = isset($event['price_student']) && $event['price_student'] !== '' ? $event['price_student'] : null;
+        $price_senior = isset($event['price_senior']) && $event['price_senior'] !== '' ? $event['price_senior'] : null;
+        $senior_age = !empty($event['senior_age']) ? $event['senior_age'] : null;
+        $booking_group = !empty($event['booking_group']) ? $event['booking_group'] : null;
+        $gallery = !empty($event['gallery']) ? $event['gallery'] : null;
+        $facebook = !empty($event['facebook']) ? $event['facebook'] : null;
+        $twitter = !empty($event['twitter']) ? $event['twitter'] : null;
+        $instagram = !empty($event['instagram']) ? $event['instagram'] : null;
+        $google_music = !empty($event['google_music']) ? $event['google_music'] : null;
+        $spotify = !empty($event['spotify']) ? $event['spotify'] : null;
+        $soundcloud = !empty($event['soundcloud']) ? $event['soundcloud'] : null;
+        $deezer = !empty($event['deezer']) ? $event['deezer'] : null;
+        $youtube = !empty($event['youtube']) ? $event['youtube'] : null;
+        $vimeo = !empty($event['vimeo']) ? $event['vimeo'] : null;
+        $post_status = get_field('event_post_status', 'option') ? get_field('event_post_status', 'option') : 'publish';
+        $location = !empty($event['location']) ? $event['location'] : null;
+        $additional_locations = !empty($event['additional_locations']) ? $event['additional_locations'] : null;
+        $latitude = is_array($location) && !empty($location['latitude']) ? $location['latitude'] : null;
+        $longitude = is_array($location) && !empty($location['longitude']) ? $location['longitude'] : null;
+        $last_update = !empty($event['modified_gmt']) ? $event['modified_gmt'] : null;
+        $ticket_stock = isset($event['ticket_stock']) && $event['ticket_stock'] !== '' ? $event['ticket_stock'] : null;
+        $tickets_remaining = isset($event['tickets_remaining']) && $event['tickets_remaining'] !== '' ? $event['tickets_remaining'] : null;
+        $additional_ticket_retailers = !empty($event['additional_ticket_retailers']) ? $event['additional_ticket_retailers'] : null;
+        $additional_ticket_types = !empty($event['additional_ticket_types']) ? $event['additional_ticket_types'] : null;
+        $price_range = !empty($event['price_range']) ? $event['price_range'] : null;
+        $ticket_release_date = !empty($event['ticket_release_date']) ? $event['ticket_release_date'] : null;
+        $contact_information = !empty($event['contact_information']) ? $event['contact_information'] : null;
+        $contact_phone = !empty($event['contact_phone']) ? $event['contact_phone'] : null;
+        $contact_email = !empty($event['contact_email']) ? $event['contact_email'] : null;
+        $age_group_from = !empty($event['age_group_from']) ? $event['age_group_from'] : null;
+        $age_group_to = !empty($event['age_group_to']) ? $event['age_group_to'] : null;
+        $accessibility = !empty($event['accessibility']) ? $event['accessibility'] : null;
+        $lang = !empty($event['lang']) ? $event['lang'] : null;
+        $translations = !empty($event['translations']) ? $event['translations'] : null;
 
         // Check if event passes taxonomy filters
         $pass_tax_filter = $this->checkFilters(
             $this->filterTaxonomies($categories, 0),
-            $this->filterTaxonomies($tags, 1)
+            $this->filterTaxonomies($tags, 1),
         );
 
         // Check if event already exist and get the post status
@@ -238,8 +236,8 @@ class EventManagerApi extends \EventManagerIntegration\Parser
             foreach ($occasions as $occasion) {
                 $start = new \DateTime($occasion['start_date']);
                 $end = new \Datetime($occasion['end_date']);
-                $difference = $end->diff($start)->format("%a");
-                if ($unpublish_limit != null && $unpublish_limit >= 0 && ($difference > $unpublish_limit)) {
+                $difference = $end->diff($start)->format('%a');
+                if ($unpublish_limit != null && $unpublish_limit >= 0 && $difference > $unpublish_limit) {
                     $post_status = 'draft';
                 }
             }
@@ -308,8 +306,8 @@ class EventManagerApi extends \EventManagerIntegration\Parser
                         'age_group_to' => $age_group_to,
                         'accessibility' => $accessibility,
                         'lang' => $lang,
-                        'translations' => $translations
-                    )
+                        'translations' => $translations,
+                    ),
                 );
             } catch (\Exception $e) {
                 error_log(print_r($e, true));
@@ -340,7 +338,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
             function ($category) {
                 return ucfirst(trim(htmlspecialchars_decode($category)));
             },
-            $categories
+            $categories,
         );
     }
 
@@ -352,12 +350,13 @@ class EventManagerApi extends \EventManagerIntegration\Parser
      */
     public function checkFilters($cat_filter, $tag_filter): bool
     {
-        $tax_filter = (empty(get_field('event_filter_cat', 'options')) && empty(
-            get_field(
-                'event_filter_tag',
-                'options'
-            )
-            )) ? true : false;
+        $tax_filter = empty(get_field('event_filter_cat', 'options'))
+        && empty(get_field(
+            'event_filter_tag',
+            'options',
+        ))
+            ? true
+            : false;
 
         // Check category filters
         if (!empty(get_field('event_filter_cat', 'options'))) {
@@ -378,9 +377,9 @@ class EventManagerApi extends \EventManagerIntegration\Parser
     public function removeExpiredOccasions()
     {
         global $wpdb;
-        $date_limit = strtotime("midnight now") - 1;
+        $date_limit = strtotime('midnight now') - 1;
         // Get all occasions from database
-        $db_table = $wpdb->prefix."integrate_occasions";
+        $db_table = $wpdb->prefix . 'integrate_occasions';
         $occasions = $wpdb->get_results("SELECT * FROM $db_table ORDER BY start_date DESC", ARRAY_A);
 
         if (count($occasions) == 0) {
@@ -405,20 +404,20 @@ class EventManagerApi extends \EventManagerIntegration\Parser
     public function removeDeletedEvents($ids)
     {
         global $wpdb;
-        $table = $wpdb->prefix . "integrate_occasions";
+        $table = $wpdb->prefix . 'integrate_occasions';
         // Get all locally stored events
         $localEvents = $wpdb->get_results("SELECT event_id FROM {$table} GROUP BY event_id", ARRAY_N);
-        $localEvents = array_map(function($id) {
+        $localEvents = array_map(function ($id) {
             return $id[0];
         }, $localEvents);
         // Collect local IDs of the API events
-        $apiEvents = array_map(function($id) {
+        $apiEvents = array_map(function ($id) {
             $post = get_posts(array(
                 'post_type' => 'event',
                 'post_status' => array('publish', 'draft'),
                 'meta_key' => '_event_manager_id',
                 'meta_value' => $id,
-                'posts_per_page' => 1
+                'posts_per_page' => 1,
             ));
             return $post[0]->ID ?? null;
         }, array_unique($ids));
@@ -450,7 +449,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
             return;
         }
 
-        $db_table = $wpdb->prefix."integrate_occasions";
+        $db_table = $wpdb->prefix . 'integrate_occasions';
         $query = "SELECT ID, event_id FROM $db_table WHERE event_id = %s";
         // Loop through events and check if occasions exist
         foreach ($events as $e) {
@@ -474,7 +473,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
     public function filterTaxonomies($taxonomies, $type)
     {
         $passes = true;
-        $tax_array = ($type == 0) ? get_field('event_filter_cat', 'options') : get_field('event_filter_tag', 'options');
+        $tax_array = $type == 0 ? get_field('event_filter_cat', 'options') : get_field('event_filter_tag', 'options');
 
         if (!empty($tax_array)) {
             $filters = array_map('trim', explode(',', $tax_array));
@@ -509,7 +508,7 @@ class EventManagerApi extends \EventManagerIntegration\Parser
                         'taxonomy' => $taxonomy,
                         'hide_empty' => false,
                         'childless' => true,
-                    )
+                    ),
                 );
 
                 foreach ($terms as $term) {

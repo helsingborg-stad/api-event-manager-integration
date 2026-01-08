@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace EventManagerIntegration\Module;
 
 class Event extends \Modularity\Module
@@ -27,11 +26,10 @@ class Event extends \Modularity\Module
             'acf/fields/taxonomy/wp_list_categories/name=mod_event_categories_list',
             array($this, 'filterEventCategories'),
             10,
-            2
+            2,
         );
 
         add_filter('the_content', array($this, 'renderEmails'), 10, 1);
-
     }
 
     public function template()
@@ -70,38 +68,37 @@ class Event extends \Modularity\Module
         global $wp;
 
         // Cards module data
-        $data['settings']         = $data;
-        $data['ID']               = $this->ID ?? uniqid();
+        $data['settings'] = $data;
+        $data['ID'] = $this->ID ?? uniqid();
 
-        $this->template           = !empty($data['mod_event_display']) ? $data['mod_event_display'] : 'list';
+        $this->template = !empty($data['mod_event_display']) ? $data['mod_event_display'] : 'list';
 
-        $data['template']         = $this->template;
-        $data['post_id']          = $post->ID;
-        $data['archive_url']      = get_post_type_archive_link('event');
-        $data['rest_url']         = get_rest_url();
+        $data['template'] = $this->template;
+        $data['post_id'] = $post->ID;
+        $data['archive_url'] = get_post_type_archive_link('event');
+        $data['rest_url'] = get_rest_url();
 
-        $days_ahead         = isset($data['mod_event_interval']) ? $data['mod_event_interval'] : 0;
+        $days_ahead = isset($data['mod_event_interval']) ? $data['mod_event_interval'] : 0;
 
-        $data['end_date']         = date('Y-m-d', strtotime("today midnight +$days_ahead days"));
+        $data['end_date'] = date('Y-m-d', strtotime("today midnight +$days_ahead days"));
         $data['only_todays_date'] = $data['mod_events_hide_past_events'] ?? false;
-        $data['lat']              = (isset($data['mod_event_geographic']['lat'])) ? $data['mod_event_geographic']['lat'] : null;
-        $data['lng']              = (isset($data['mod_event_geographic']['lng'])) ? $data['mod_event_geographic']['lng'] : null;
-        $data['distance']         = (isset($data['mod_event_distance'])) ? $data['mod_event_distance'] : null;
-        $data['no_url']           = get_field('mod_event_no_url', $id);
+        $data['lat'] = isset($data['mod_event_geographic']['lat']) ? $data['mod_event_geographic']['lat'] : null;
+        $data['lng'] = isset($data['mod_event_geographic']['lng']) ? $data['mod_event_geographic']['lng'] : null;
+        $data['distance'] = isset($data['mod_event_distance']) ? $data['mod_event_distance'] : null;
+        $data['no_url'] = get_field('mod_event_no_url', $id);
 
-        $data['age_from'] = ($this->template == 'index') ? (int)get_field('mod_event_filter_age_range_from', $id) : '';
-        $data['age_to'] = ($this->template == 'index') ? (int)get_field('mod_event_filter_age_range_to', $id) : '';
+        $data['age_from'] = $this->template == 'index' ? (int) get_field('mod_event_filter_age_range_from', $id) : '';
+        $data['age_to'] = $this->template == 'index' ? (int) get_field('mod_event_filter_age_range_to', $id) : '';
 
         // Taxonomies filter
-        $data['categories'] = ($this->template == 'index') ? json_encode($this->getFilterableCategories($id)) : $this->getFilterableCategories($id);
-        $data['groups'] = ($this->template == 'index') ? json_encode($this->getModuleGroups($id)) : $this->getModuleGroups($id);
-        $data['tags'] = ($this->template == 'index') ? json_encode($this->getFilterableTags($id)) : $this->getFilterableTags($id);
+        $data['categories'] = $this->template == 'index' ? json_encode($this->getFilterableCategories($id)) : $this->getFilterableCategories($id);
+        $data['groups'] = $this->template == 'index' ? json_encode($this->getModuleGroups($id)) : $this->getModuleGroups($id);
+        $data['tags'] = $this->template == 'index' ? json_encode($this->getFilterableTags($id)) : $this->getFilterableTags($id);
 
         // List module data
         $data['pagesCount'] = $this->countPages($id);
         $data['events'] = $this->getEvents($id, $page);
-        $data['mod_event_fields'] = isset($data['mod_event_fields']) && is_array($data['mod_event_fields'])
-            ? $data['mod_event_fields'] : array();
+        $data['mod_event_fields'] = isset($data['mod_event_fields']) && is_array($data['mod_event_fields']) ? $data['mod_event_fields'] : array();
         $data['descr_limit'] = !empty($data['mod_event_descr_limit']) ? $data['mod_event_descr_limit'] : null;
         $data['date_now'] = strtotime('now');
         $data['reset_url'] = home_url($wp->request);
@@ -109,14 +106,13 @@ class Event extends \Modularity\Module
         // Language
         $data['lang'] = $this->lang;
 
-        $data['card_style'] = get_theme_mod('flat_ui_design') ? "c-card--flat" : "";
+        $data['card_style'] = get_theme_mod('flat_ui_design') ? 'c-card--flat' : '';
 
         $data['events'] = $this->setOccassion($data['events']);
         $data['events'] = $this->setLocation($data['events']);
         $data['events'] = $this->setPermalink($data['events']);
         $data['paginationList'] = $this->getPagination($data['pagesCount']);
         $data['no_events'] = translate('No events found', 'event-integration');
-
 
         return $data;
     }
@@ -126,11 +122,13 @@ class Event extends \Modularity\Module
      */
     public function ajaxPagination()
     {
-        echo \EventManagerIntegration\Helper\RenderBlade::blade(
-            'partials/list',
-            $this->data(),
-            $this->templateDir
-        );
+        echo
+            \EventManagerIntegration\Helper\RenderBlade::blade(
+                'partials/list',
+                $this->data(),
+                $this->templateDir,
+            )
+        ;
 
         wp_die();
     }
@@ -143,15 +141,12 @@ class Event extends \Modularity\Module
             return $fields->mod_event_limit;
         }
 
-        $max_per_page = (isset($fields->mod_event_limit)) ? $fields->mod_event_limit : 10;
+        $max_per_page = isset($fields->mod_event_limit) ? $fields->mod_event_limit : 10;
         $posts = self::getEvents($module_id, 1, array('display_limit' => -1));
         $total_posts = count($posts);
         $pages = ceil($total_posts / $max_per_page);
 
-        if (
-            isset($fields->mod_event_pagination_limit) && $fields->mod_event_pagination_limit >= 0
-            && $fields->mod_event_pagination_limit <= $pages
-        ) {
+        if (isset($fields->mod_event_pagination_limit) && $fields->mod_event_pagination_limit >= 0 && $fields->mod_event_pagination_limit <= $pages) {
             $pages = $fields->mod_event_pagination_limit;
         }
 
@@ -173,7 +168,7 @@ class Event extends \Modularity\Module
         $days_ahead = isset($fields->mod_event_interval) ? $fields->mod_event_interval : 0;
 
         // Set start and end date
-        $start_date = date('Y-m-d H:i:s', strtotime("today midnight"));
+        $start_date = date('Y-m-d H:i:s', strtotime('today midnight'));
         $end_date = date('Y-m-d H:i:s', strtotime("tomorrow midnight +$days_ahead days") - 1);
 
         $mod_events_hide_past_events = $fields->mod_events_hide_past_events ?? false;
@@ -184,7 +179,7 @@ class Event extends \Modularity\Module
         $tags = $this->getModuleTags($module_id);
         $groups = $this->getModuleGroups($module_id);
 
-        $taxonomies = (!empty($taxonomies)) ? $taxonomies : null;
+        $taxonomies = !empty($taxonomies) ? $taxonomies : null;
         $default_params = array(
             'start_date' => $start_date,
             'end_date' => $end_date,
@@ -192,11 +187,11 @@ class Event extends \Modularity\Module
             'categories' => $categories,
             'tags' => $tags,
             'groups' => $groups,
-            'location' => (isset($fields->mod_event_geographic)) ? $fields->mod_event_geographic : null,
-            'distance' => (isset($fields->mod_event_distance)) ? $fields->mod_event_distance : null,
+            'location' => isset($fields->mod_event_geographic) ? $fields->mod_event_geographic : null,
+            'distance' => isset($fields->mod_event_distance) ? $fields->mod_event_distance : null,
             'lang' => $this->lang,
             'hide_past_events' => $mod_events_hide_past_events,
-            'only_todays_date' => $mod_event_only_todays_date
+            'only_todays_date' => $mod_event_only_todays_date,
         );
 
         $params = array_merge($default_params, $params);
@@ -224,10 +219,11 @@ class Event extends \Modularity\Module
     private function setLocation($events)
     {
         foreach ($events as $event) {
-            $event->location_name = \EventManagerIntegration\Helper\SingleEventData::getEventLocation(
-                $event->ID,
-                $event->start_date
-            )['title'] ?? '';
+            $event->location_name =
+                \EventManagerIntegration\Helper\SingleEventData::getEventLocation(
+                    $event->ID,
+                    $event->start_date,
+                )['title'] ?? '';
         }
 
         return $events;
@@ -240,8 +236,8 @@ class Event extends \Modularity\Module
                 add_query_arg(
                     'date',
                     preg_replace('/\D/', '', $event->start_date),
-                    get_permalink($event->ID)
-                )
+                    get_permalink($event->ID),
+                ),
             );
         }
 
@@ -254,15 +250,15 @@ class Event extends \Modularity\Module
         $pagination = [];
         $archiveUrl = get_post_type_archive_link('mod-event');
         $href = '';
-        $currentPage = (get_query_var('paged')) ? get_query_var('paged') : 1;
+        $currentPage = get_query_var('paged') ? get_query_var('paged') : 1;
 
         if ($numberOfPages > 1) {
             for ($i = 1; $i <= $numberOfPages; $i++) {
-                $href = $archiveUrl . '?' . $this->setQueryString($i) . "#event";
+                $href = $archiveUrl . '?' . $this->setQueryString($i) . '#event';
 
                 $pagination[] = array(
                     'href' => $href,
-                    'label' => (string) $i
+                    'label' => (string) $i,
                 );
             }
         }
@@ -322,7 +318,7 @@ class Event extends \Modularity\Module
                 'event_categories',
                 array(
                     'hide_empty' => false,
-                )
+                ),
             );
         }
 
@@ -338,7 +334,6 @@ class Event extends \Modularity\Module
 
         return is_wp_error($categories) ? [] : $categories;
     }
-
 
     /**
      * Return tags available for filtering
@@ -365,7 +360,7 @@ class Event extends \Modularity\Module
                 'event_tags',
                 array(
                     'hide_empty' => false,
-                )
+                ),
             );
         }
 
@@ -381,7 +376,6 @@ class Event extends \Modularity\Module
 
         return is_wp_error($tags) ? [] : $tags;
     }
-
 
     /**
      * Return tags filter
@@ -425,20 +419,22 @@ class Event extends \Modularity\Module
     {
         wp_enqueue_script(
             'modularity-' . $this->slug,
-            EVENTMANAGERINTEGRATION_URL . '/dist/' . \EventManagerIntegration\Helper\CacheBust::name(
-                'js/event-integration-module-event.js'
-            ),
+            EVENTMANAGERINTEGRATION_URL . '/dist/'
+                . \EventManagerIntegration\Helper\CacheBust::name(
+                    'js/event-integration-module-event.js',
+                ),
             array('jquery', 'react', 'react-dom'),
             false,
-            true
+            true,
         );
 
         wp_enqueue_style(
             'modularity-' . $this->slug,
-            EVENTMANAGERINTEGRATION_URL . '/dist/' . \EventManagerIntegration\Helper\CacheBust::name(
-                'js/event-integration-module-event.css'
-            ),
-            array()
+            EVENTMANAGERINTEGRATION_URL . '/dist/'
+                . \EventManagerIntegration\Helper\CacheBust::name(
+                    'js/event-integration-module-event.css',
+                ),
+            array(),
         );
 
         wp_localize_script(
@@ -458,7 +454,7 @@ class Event extends \Modularity\Module
                 'age' => __('Age', 'event-integration'),
                 'ageGroupDescription' => __(
                     'Filter on events that is targeted for given the age',
-                    'event-integration'
+                    'event-integration',
                 ),
                 'years' => __('years', 'event-integration'),
                 'selectAge' => __('Select age', 'event-integration'),
@@ -468,7 +464,7 @@ class Event extends \Modularity\Module
                 'nextPage' => __('Next page', 'event-integration'),
                 'previousPage' => __('Previous page', 'event-integration'),
                 'goToPage' => __('Go to page', 'event-integration'),
-            )
+            ),
         );
     }
 
@@ -487,14 +483,14 @@ class Event extends \Modularity\Module
         return $args;
     }
 
-     /**
-      * If the post type is an event, and the content contains an @ symbol, then explode the content
-      * into an array of words, and if any of those words are emails, then wrap them in a mailto: tag
-      *
-      * @param content The content of the post.
-      *
-      * @return The content of the post.
-      */
+    /**
+     * If the post type is an event, and the content contains an @ symbol, then explode the content
+     * into an array of words, and if any of those words are emails, then wrap them in a mailto: tag
+     *
+     * @param content The content of the post.
+     *
+     * @return The content of the post.
+     */
     public function renderEmails($content)
     {
         if ('event' === get_post_type()) {

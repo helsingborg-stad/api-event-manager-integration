@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace EventManagerIntegration\Helper;
 
 use ComponentLibrary\Init as ComponentLibraryInit;

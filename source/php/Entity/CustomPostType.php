@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace EventManagerIntegration\Entity;
 
 abstract class CustomPostType
@@ -44,18 +43,18 @@ abstract class CustomPostType
     public function registerPostType()
     {
         $labels = array(
-            'name'                => $this->nameSingular,
-            'singular_name'       => $this->nameSingular,
-            'add_new'             => sprintf(__('Add new %s', 'event-integration'), $this->nameSingular),
-            'add_new_item'        => sprintf(__('Add new %s', 'event-integration'), $this->nameSingular),
-            'edit_item'           => sprintf(__('Edit %s', 'event-integration'), $this->nameSingular),
-            'new_item'            => sprintf(__('New %s', 'event-integration'), $this->nameSingular),
-            'view_item'           => sprintf(__('View %s', 'event-integration'), $this->nameSingular),
-            'search_items'        => sprintf(__('Search %s', 'event-integration'), $this->namePlural),
-            'not_found'           => sprintf(__('No %s found', 'event-integration'), $this->namePlural),
-            'not_found_in_trash'  => sprintf(__('No %s found in trash', 'event-integration'), $this->namePlural),
-            'parent_item_colon'   => sprintf(__('Parent %s:', 'event-integration'), $this->nameSingular),
-            'menu_name'           => $this->namePlural,
+            'name' => $this->nameSingular,
+            'singular_name' => $this->nameSingular,
+            'add_new' => sprintf(__('Add new %s', 'event-integration'), $this->nameSingular),
+            'add_new_item' => sprintf(__('Add new %s', 'event-integration'), $this->nameSingular),
+            'edit_item' => sprintf(__('Edit %s', 'event-integration'), $this->nameSingular),
+            'new_item' => sprintf(__('New %s', 'event-integration'), $this->nameSingular),
+            'view_item' => sprintf(__('View %s', 'event-integration'), $this->nameSingular),
+            'search_items' => sprintf(__('Search %s', 'event-integration'), $this->namePlural),
+            'not_found' => sprintf(__('No %s found', 'event-integration'), $this->namePlural),
+            'not_found_in_trash' => sprintf(__('No %s found in trash', 'event-integration'), $this->namePlural),
+            'parent_item_colon' => sprintf(__('Parent %s:', 'event-integration'), $this->nameSingular),
+            'menu_name' => $this->namePlural,
         );
 
         $this->args['labels'] = $labels;

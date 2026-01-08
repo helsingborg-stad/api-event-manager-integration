@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace EventManagerIntegration;
 
 class Cron
@@ -44,10 +43,7 @@ class Cron
     public function checkCronActivation()
     {
         global $pagenow;
-        if (wp_doing_ajax()
-            || !get_field('event_daily_import', 'option')
-            || !('edit.php' === $pagenow && isset($_GET['post_type']) && 'event' === $_GET['post_type'])
-          ) {
+        if (wp_doing_ajax() || !get_field('event_daily_import', 'option') || !('edit.php' === $pagenow && isset($_GET['post_type']) && 'event' === $_GET['post_type'])) {
             return;
         }
 

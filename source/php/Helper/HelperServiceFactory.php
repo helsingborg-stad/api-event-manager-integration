@@ -2,15 +2,13 @@
 
 declare(strict_types=1);
 
-
 namespace EventManagerIntegration\Helper;
 
 class HelperServiceFactory
 {
     public static function create(): HelperService
     {
-        return new class implements HelperService
-        {
+        return new class implements HelperService {
             public function getImageExtensionFromMimeType(string $mimeType): ?string
             {
                 $mimeTypeToExtensionMap = [
@@ -21,10 +19,10 @@ class HelperServiceFactory
                     'image/tiff' => 'tiff',
                     'image/x-icon' => 'ico',
                     'image/svg+xml' => 'svg',
-                    'image/webp' => 'webp'
+                    'image/webp' => 'webp',
                 ];
 
-                if( !isset($mimeTypeToExtensionMap[$mimeType]) ) {
+                if (!isset($mimeTypeToExtensionMap[$mimeType])) {
                     return null;
                 }
 

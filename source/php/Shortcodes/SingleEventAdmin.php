@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 /**
  * Shortcodes to display events with meta data
  */
@@ -56,8 +55,8 @@ class SingleEventAdmin
         $fields = is_array(get_field('event_shortc_fields', 'options')) ? get_field('event_shortc_fields', 'options') : array();
         $get_meta = get_post_meta($id);
         $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($id);
-        
-        $query_var_date = (!empty(get_query_var('date'))) ? get_query_var('date') : false;
+
+        $query_var_date = !empty(get_query_var('date')) ? get_query_var('date') : false;
         $meta = array();
 
         if (is_array($get_meta) && !empty($get_meta)) {
@@ -82,15 +81,15 @@ class SingleEventAdmin
         if (in_array('information', $fields) && !empty($event_info)) {
             $i++;
             $ret .= '<div class="c-accordion__section">';
-                $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="1" aria-pressed="false">';
-                $ret .= '<button class="c-accordion__button" aria-controls="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-expanded="false" js-expand-button="">';
-                $ret .= '<span class="c-accordion__button-wrapper" tabindex="-1">';
-                $ret .= __('Information', 'event-integration');
-                $ret .= '<i id="" class="c-icon c-accordion__icon c-icon--color- c-icon--size-md material-icons" data-uid="5fa9395f2efc3">keyboard_arrow_down</i>';
-                $ret .= '</span></button></div>';
-                $ret .= '<div class="c-accordion__content" id="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-hidden="true">';
-                    $ret .= $event_info;
-                $ret .= '</div>';
+            $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="1" aria-pressed="false">';
+            $ret .= '<button class="c-accordion__button" aria-controls="c-accordion__aria-5fa9395f2ea66-' . $i . '" aria-expanded="false" js-expand-button="">';
+            $ret .= '<span class="c-accordion__button-wrapper" tabindex="-1">';
+            $ret .= __('Information', 'event-integration');
+            $ret .= '<i id="" class="c-icon c-accordion__icon c-icon--color- c-icon--size-md material-icons" data-uid="5fa9395f2efc3">keyboard_arrow_down</i>';
+            $ret .= '</span></button></div>';
+            $ret .= '<div class="c-accordion__content" id="c-accordion__aria-5fa9395f2ea66-' . $i . '" aria-hidden="true">';
+            $ret .= $event_info;
+            $ret .= '</div>';
             $ret .= '</div>';
         }
 
@@ -99,12 +98,12 @@ class SingleEventAdmin
             $i++;
             $ret .= '<div class="c-accordion__section">';
             $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="1" aria-pressed="false">';
-            $ret .= '<button class="c-accordion__button" aria-controls="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-expanded="false" js-expand-button="">';
+            $ret .= '<button class="c-accordion__button" aria-controls="c-accordion__aria-5fa9395f2ea66-' . $i . '" aria-expanded="false" js-expand-button="">';
             $ret .= '<span class="c-accordion__button-wrapper" tabindex="-1">';
             $ret .= __('Location', 'event-integration');
             $ret .= '<i id="" class="c-icon c-accordion__icon c-icon--color- c-icon--size-md material-icons" data-uid="5fa9395f2efc3">keyboard_arrow_down</i>';
             $ret .= '</span></button></div>';
-            $ret .= '<div class="c-accordion__content" id="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-hidden="true">';
+            $ret .= '<div class="c-accordion__content" id="c-accordion__aria-5fa9395f2ea66-' . $i . '" aria-hidden="true">';
             $ret .= $this->eventLocation($meta, $fields);
             $ret .= '</div>';
             $ret .= '</div>';
@@ -116,12 +115,12 @@ class SingleEventAdmin
             $i++;
             $ret .= '<div class="c-accordion__section">';
             $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="1" aria-pressed="false">';
-            $ret .= '<button class="c-accordion__button" aria-controls="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-expanded="false" js-expand-button="">';
+            $ret .= '<button class="c-accordion__button" aria-controls="c-accordion__aria-5fa9395f2ea66-' . $i . '" aria-expanded="false" js-expand-button="">';
             $ret .= '<span class="c-accordion__button-wrapper" tabindex="-1">';
-            $ret .=  __('Booking and tickets', 'event-integration');
+            $ret .= __('Booking and tickets', 'event-integration');
             $ret .= '<i id="" class="c-icon c-accordion__icon c-icon--color- c-icon--size-md material-icons" data-uid="5fa9395f2efc3">keyboard_arrow_down</i>';
             $ret .= '</span></button></div>';
-            $ret .= '<div class="c-accordion__content" id="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-hidden="true">';
+            $ret .= '<div class="c-accordion__content" id="c-accordion__aria-5fa9395f2ea66-' . $i . '" aria-hidden="true">';
             $ret .= $booking_info;
             $ret .= '</div>';
             $ret .= '</div>';
@@ -133,12 +132,12 @@ class SingleEventAdmin
             $i++;
             $ret .= '<div class="c-accordion__section">';
             $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="1" aria-pressed="false">';
-            $ret .= '<button class="c-accordion__button" aria-controls="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-expanded="false" js-expand-button="">';
+            $ret .= '<button class="c-accordion__button" aria-controls="c-accordion__aria-5fa9395f2ea66-' . $i . '" aria-expanded="false" js-expand-button="">';
             $ret .= '<span class="c-accordion__button-wrapper" tabindex="-1">';
-            $ret .=  __('Contact', 'event-integration');
+            $ret .= __('Contact', 'event-integration');
             $ret .= '<i id="" class="c-icon c-accordion__icon c-icon--color- c-icon--size-md material-icons" data-uid="5fa9395f2efc3">keyboard_arrow_down</i>';
             $ret .= '</span></button></div>';
-            $ret .= '<div class="c-accordion__content" id="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-hidden="true">';
+            $ret .= '<div class="c-accordion__content" id="c-accordion__aria-5fa9395f2ea66-' . $i . '" aria-hidden="true">';
             $ret .= '<ul>' . $contact_info . '</ul>';
             $ret .= '</div>';
             $ret .= '</div>';
@@ -149,12 +148,12 @@ class SingleEventAdmin
             $i++;
             $ret .= '<div class="c-accordion__section">';
             $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="1" aria-pressed="false">';
-            $ret .= '<button class="c-accordion__button" aria-controls="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-expanded="false" js-expand-button="">';
+            $ret .= '<button class="c-accordion__button" aria-controls="c-accordion__aria-5fa9395f2ea66-' . $i . '" aria-expanded="false" js-expand-button="">';
             $ret .= '<span class="c-accordion__button-wrapper" tabindex="-1">';
-            $ret .=  __('Organizer', 'event-integration');
+            $ret .= __('Organizer', 'event-integration');
             $ret .= '<i id="" class="c-icon c-accordion__icon c-icon--color- c-icon--size-md material-icons" data-uid="5fa9395f2efc3">keyboard_arrow_down</i>';
             $ret .= '</span></button></div>';
-            $ret .= '<div class="c-accordion__content" id="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-hidden="true">';
+            $ret .= '<div class="c-accordion__content" id="c-accordion__aria-5fa9395f2ea66-' . $i . '" aria-hidden="true">';
             $ret .= $this->eventOrganizer($meta, $fields);
             $ret .= '</div>';
             $ret .= '</div>';
@@ -164,33 +163,33 @@ class SingleEventAdmin
         if (in_array('occasion', $fields)) {
             $i++;
             $ret .= '<div class="c-accordion__section">';
-                $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="1" aria-pressed="false">';
-                $ret .= '<button class="c-accordion__button" aria-controls="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-expanded="false" js-expand-button="">';
-                $ret .= '<span class="c-accordion__button-wrapper" tabindex="-1">';
-                $ret .=  __('Occasions', 'event-integration');
-                $ret .= '<i id="" class="c-icon c-accordion__icon c-icon--color- c-icon--size-md material-icons" data-uid="5fa9395f2efc3">keyboard_arrow_down</i>';
-                $ret .= '</span></button></div>';
-                $ret .= '<div class="c-accordion__content" id="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-hidden="true">';
-                $ret .= $this->eventOccasions($occasions);
-                $ret .= '</div>';
+            $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="1" aria-pressed="false">';
+            $ret .= '<button class="c-accordion__button" aria-controls="c-accordion__aria-5fa9395f2ea66-' . $i . '" aria-expanded="false" js-expand-button="">';
+            $ret .= '<span class="c-accordion__button-wrapper" tabindex="-1">';
+            $ret .= __('Occasions', 'event-integration');
+            $ret .= '<i id="" class="c-icon c-accordion__icon c-icon--color- c-icon--size-md material-icons" data-uid="5fa9395f2efc3">keyboard_arrow_down</i>';
+            $ret .= '</span></button></div>';
+            $ret .= '<div class="c-accordion__content" id="c-accordion__aria-5fa9395f2ea66-' . $i . '" aria-hidden="true">';
+            $ret .= $this->eventOccasions($occasions);
+            $ret .= '</div>';
             $ret .= '</div>';
         }
 
         // Check if any links exist in array
         $link_keys = array('facebook', 'twitter', 'instagram', 'google_music', 'spotify', 'soundcloud', 'deezer', 'youtube', 'vimeo');
-        $links_exist = (count(array_intersect_key(array_flip($link_keys), $meta)) > 0) ? true : false;
+        $links_exist = count(array_intersect_key(array_flip($link_keys), $meta)) > 0 ? true : false;
 
         // Social media and streaming links
         if ($links_exist && in_array('links', $fields)) {
             $i++;
             $ret .= '<div class="c-accordion__section">';
             $ret .= '<div class="event-accordion__trigger" name="active-section" id="accordion-section-' . $i . '" js-toggle-trigger="1" aria-pressed="false">';
-            $ret .= '<button class="c-accordion__button" aria-controls="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-expanded="false" js-expand-button="">';
+            $ret .= '<button class="c-accordion__button" aria-controls="c-accordion__aria-5fa9395f2ea66-' . $i . '" aria-expanded="false" js-expand-button="">';
             $ret .= '<span class="c-accordion__button-wrapper" tabindex="-1">';
-            $ret .=  __('Links', 'event-integration');
+            $ret .= __('Links', 'event-integration');
             $ret .= '<i id="" class="c-icon c-accordion__icon c-icon--color- c-icon--size-md material-icons" data-uid="5fa9395f2efc3">keyboard_arrow_down</i>';
             $ret .= '</span></button></div>';
-            $ret .= '<div class="c-accordion__content" id="c-accordion__aria-5fa9395f2ea66-'. $i .'" aria-hidden="true">';
+            $ret .= '<div class="c-accordion__content" id="c-accordion__aria-5fa9395f2ea66-' . $i . '" aria-hidden="true">';
             $ret .= $this->eventLinks($meta);
             $ret .= '</div>';
             $ret .= '</div>';
@@ -215,16 +214,16 @@ class SingleEventAdmin
 
         $id = $post->ID;
         // Get custom wrapper and div box classes
-        $class = (!empty(get_field('event_shortc_wrapper', 'options'))) ? get_field('event_shortc_wrapper', 'options') : '';
+        $class = !empty(get_field('event_shortc_wrapper', 'options')) ? get_field('event_shortc_wrapper', 'options') : '';
         $class = str_replace(' ', '', $class);
         $wrapper_class = str_replace(',', ' ', $class);
-        $class = (!empty(get_field('event_shortc_inner', 'options'))) ? get_field('event_shortc_inner', 'options') : '';
+        $class = !empty(get_field('event_shortc_inner', 'options')) ? get_field('event_shortc_inner', 'options') : '';
         $class = str_replace(' ', '', $class);
         $box_class = str_replace(',', ' ', $class);
         $fields = is_array(get_field('event_shortc_fields', 'options')) ? get_field('event_shortc_fields', 'options') : array();
         $get_meta = get_post_meta($id);
         $occasions = \EventManagerIntegration\Helper\QueryEvents::getEventOccasions($id);
-        $query_var_date = (!empty(get_query_var('date'))) ? get_query_var('date') : false;
+        $query_var_date = !empty(get_query_var('date')) ? get_query_var('date') : false;
 
         $meta = array();
         foreach ($get_meta as $key => $value) {
@@ -291,7 +290,7 @@ class SingleEventAdmin
 
         // Check if any links exist in array
         $link_keys = array('facebook', 'twitter', 'instagram', 'google_music', 'spotify', 'soundcloud', 'deezer', 'youtube', 'vimeo');
-        $links_exist = (count(array_intersect_key(array_flip($link_keys), $meta)) > 0) ? true : false;
+        $links_exist = count(array_intersect_key(array_flip($link_keys), $meta)) > 0 ? true : false;
 
         // Social media and streaming links
         if ($links_exist && in_array('links', $fields)) {
@@ -316,23 +315,23 @@ class SingleEventAdmin
                 if ($query_var_date == $event_date) {
                     if (isset($occasion->status) && ($occasion->status != 'scheduled' || !$occasion->status)) {
                         $ret .= '<ul>';
-                        $ret .= ($occasion->status == 'cancelled') ? '<li><strong>' . __('Cancelled', 'event-integration') . '</strong></li>' : '';
-                        $ret .= ($occasion->status == 'rescheduled') ? '<li><strong>' . __('Rescheduled', 'event-integration') . '</strong></li>' : '';
-                        $ret .= (!empty($occasion->exception_information)) ? '<li>' . $occasion->exception_information . '</li>' : '';
+                        $ret .= $occasion->status == 'cancelled' ? '<li><strong>' . __('Cancelled', 'event-integration') . '</strong></li>' : '';
+                        $ret .= $occasion->status == 'rescheduled' ? '<li><strong>' . __('Rescheduled', 'event-integration') . '</strong></li>' : '';
+                        $ret .= !empty($occasion->exception_information) ? '<li>' . $occasion->exception_information . '</li>' : '';
                         $ret .= '</ul>';
                     }
                     $ret .= '<ul>';
                     $ret .= '<li><strong>' . __('Occasion', 'event-integration') . '</strong></li>';
-                    $ret .= (!empty($occasion->start_date) && !empty($occasion->end_date)) ? '<li>' . \EventManagerIntegration\App::formatEventDate($occasion->start_date, $occasion->end_date) . '</li>' : '';
-                    $ret .= (!empty($occasion->door_time)) ? '<li><strong>' . __('Door time', 'event-integration') . '</strong></li>' : '';
-                    $ret .= (!empty($occasion->door_time)) ? '<li>' . \EventManagerIntegration\App::formatDoorTime($occasion->door_time) . '</li>' : '';
+                    $ret .= !empty($occasion->start_date) && !empty($occasion->end_date) ? '<li>' . \EventManagerIntegration\App::formatEventDate($occasion->start_date, $occasion->end_date) . '</li>' : '';
+                    $ret .= !empty($occasion->door_time) ? '<li><strong>' . __('Door time', 'event-integration') . '</strong></li>' : '';
+                    $ret .= !empty($occasion->door_time) ? '<li>' . \EventManagerIntegration\App::formatDoorTime($occasion->door_time) . '</li>' : '';
                     $ret .= '</ul>';
                 }
             }
         }
 
         if (!empty($meta['event_link'])) {
-            $link = preg_replace("(^https?://)", "", $meta['event_link']);
+            $link = preg_replace('(^https?://)', '', $meta['event_link']);
             $ret .= '<ul><li><a href="' . $meta['event_link'] . '" class="link-item link-item-outbound" itemprop="telephone">' . $link . '</a></li></ul>';
         }
 
@@ -377,19 +376,19 @@ class SingleEventAdmin
     public static function eventLocation($meta = array(), $fields = array('additional_locations'))
     {
         $ret = '';
-        $location = (!empty($meta['location']) && is_array($meta['location'])) ? $meta['location'] : null;
+        $location = !empty($meta['location']) && is_array($meta['location']) ? $meta['location'] : null;
 
         // Google Map
-        if (in_array('map', $fields) && !empty($location) && !empty($location['title'])  && !empty($location['latitude']) && !empty($location['longitude']) ) {
+        if (in_array('map', $fields) && !empty($location) && !empty($location['title']) && !empty($location['latitude']) && !empty($location['longitude'])) {
             $ret .= '<div id="event-map" data-lat="' . $location['latitude'] . '" data-lng="' . $location['longitude'] . '" data-title="' . $location['title'] . '"></div>';
         }
 
         if (!empty($location)) {
             $ret .= '<ul>';
-            $ret .= (!empty($location['title'])) ? '<li><strong>' . $location['title'] . '</strong></li>' : '';
-            $ret .= (!empty($location['street_address'])) ? '<li>' . $location['street_address'] . '</li>' : '';
-            $ret .= (!empty($location['postal_code'])) ? '<li>' . $location['postal_code'] . '</li>' : '';
-            $ret .= (!empty($location['city'])) ? '<li>' . $location['city'] . '</li>' : '';
+            $ret .= !empty($location['title']) ? '<li><strong>' . $location['title'] . '</strong></li>' : '';
+            $ret .= !empty($location['street_address']) ? '<li>' . $location['street_address'] . '</li>' : '';
+            $ret .= !empty($location['postal_code']) ? '<li>' . $location['postal_code'] . '</li>' : '';
+            $ret .= !empty($location['city']) ? '<li>' . $location['city'] . '</li>' : '';
             $ret .= '</ul>';
         }
 
@@ -399,10 +398,10 @@ class SingleEventAdmin
             if (is_array($meta['additional_locations']) && !empty($meta['additional_locations'])) {
                 foreach ($meta['additional_locations'] as $location) {
                     $ret .= '<ul>';
-                    $ret .= (!empty($location['title'])) ? '<li><strong>' . $location['title'] . '</strong></li>' : '';
-                    $ret .= (!empty($location['street_address'])) ? '<li>' . $location['street_address'] . '</li>' : '';
-                    $ret .= (!empty($location['postal_code'])) ? '<li>' . $location['postal_code'] . '</li>' : '';
-                    $ret .= (!empty($location['city'])) ? '<li>' . $location['city'] . '</li>' : '';
+                    $ret .= !empty($location['title']) ? '<li><strong>' . $location['title'] . '</strong></li>' : '';
+                    $ret .= !empty($location['street_address']) ? '<li>' . $location['street_address'] . '</li>' : '';
+                    $ret .= !empty($location['postal_code']) ? '<li>' . $location['postal_code'] . '</li>' : '';
+                    $ret .= !empty($location['city']) ? '<li>' . $location['city'] . '</li>' : '';
                     $ret .= '</ul>';
                 }
             }
@@ -414,36 +413,36 @@ class SingleEventAdmin
     public static function eventBooking($meta = array())
     {
         $ret = '<ul>';
-        $ret .= (!empty($meta['booking_link'])) ? '<li><a href="' . $meta['booking_link'] . '" class="link-item link-item-outbound">' . __('Book here', 'event-integration') . '</a></li>' : '';
-        $ret .= (!empty($meta['booking_phone'])) ? '<li><a href="tel:' . $meta['booking_phone'] . '" class="link-item link-item-outbound" itemprop="telephone">' . $meta['booking_phone'] . '</a></li>' : '';
-        $ret .= (!empty($meta['booking_email'])) ? '<li><a href="mailto:' . $meta['booking_email'] . '" class="link-item link-item-outbound" itemprop="email">' . $meta['booking_email'] . '</a></li><br>' : '';
-        $ret .= (isset($meta['price_adult']) && $meta['price_adult'] != '') ? '<li>' . __('Adult', 'event-integration') . ': ' . self::priceOutput($meta['price_adult']) . '</li>' : '';
-        $children_age = (!empty($meta['children_age'])) ? ' (' . __('below', 'event-integration') . ' ' . $meta['children_age'] . ')' : '';
-        $ret .= (isset($meta['price_children']) && $meta['price_children'] != '') ? '<li>' . __('Children', 'event-integration') . $children_age . ': ' . self::priceOutput($meta['price_children']) . '</li>' : '';
-        $senior_age = (!empty($meta['senior_age'])) ? ' (' . __('above', 'event-integration') . ' ' . $meta['senior_age'] . ')' : '';
-        $ret .= (isset($meta['price_senior']) && $meta['price_senior'] != '') ? '<li>' . __('Senior', 'event-integration') . $senior_age . ': ' . self::priceOutput($meta['price_senior']) . '</li>' : '';
-        $ret .= (isset($meta['price_student']) && $meta['price_student'] != '') ? '<li>' . __('Student', 'event-integration') . ': ' . self::priceOutput($meta['price_student']) . '</li>' : '';
-        $ret .= (!empty($meta['age_restriction'])) ? '<li>' . __('Age restriction', 'event-integration') . ': ' . $meta['age_restriction'] . ' ' . __('years', 'event-integration') . '</li>' : '';
-        $ret .= (!empty($meta['ticket_release_date'])) ? '<li>' . __('Ticket release date', 'event-integration') . ': ' . mysql2date('j F Y, H:i', $meta['ticket_release_date'], true) . '</li>' : '';
-        $ret .= (isset($meta['tickets_remaining']) && $meta['tickets_remaining'] != '') ? '<li>' . __('Tickets remaining', 'event-integration') . ': ' . $meta['tickets_remaining'] . '</li>' : '';
+        $ret .= !empty($meta['booking_link']) ? '<li><a href="' . $meta['booking_link'] . '" class="link-item link-item-outbound">' . __('Book here', 'event-integration') . '</a></li>' : '';
+        $ret .= !empty($meta['booking_phone']) ? '<li><a href="tel:' . $meta['booking_phone'] . '" class="link-item link-item-outbound" itemprop="telephone">' . $meta['booking_phone'] . '</a></li>' : '';
+        $ret .= !empty($meta['booking_email']) ? '<li><a href="mailto:' . $meta['booking_email'] . '" class="link-item link-item-outbound" itemprop="email">' . $meta['booking_email'] . '</a></li><br>' : '';
+        $ret .= isset($meta['price_adult']) && $meta['price_adult'] != '' ? '<li>' . __('Adult', 'event-integration') . ': ' . self::priceOutput($meta['price_adult']) . '</li>' : '';
+        $children_age = !empty($meta['children_age']) ? ' (' . __('below', 'event-integration') . ' ' . $meta['children_age'] . ')' : '';
+        $ret .= isset($meta['price_children']) && $meta['price_children'] != '' ? '<li>' . __('Children', 'event-integration') . $children_age . ': ' . self::priceOutput($meta['price_children']) . '</li>' : '';
+        $senior_age = !empty($meta['senior_age']) ? ' (' . __('above', 'event-integration') . ' ' . $meta['senior_age'] . ')' : '';
+        $ret .= isset($meta['price_senior']) && $meta['price_senior'] != '' ? '<li>' . __('Senior', 'event-integration') . $senior_age . ': ' . self::priceOutput($meta['price_senior']) . '</li>' : '';
+        $ret .= isset($meta['price_student']) && $meta['price_student'] != '' ? '<li>' . __('Student', 'event-integration') . ': ' . self::priceOutput($meta['price_student']) . '</li>' : '';
+        $ret .= !empty($meta['age_restriction']) ? '<li>' . __('Age restriction', 'event-integration') . ': ' . $meta['age_restriction'] . ' ' . __('years', 'event-integration') . '</li>' : '';
+        $ret .= !empty($meta['ticket_release_date']) ? '<li>' . __('Ticket release date', 'event-integration') . ': ' . mysql2date('j F Y, H:i', $meta['ticket_release_date'], true) . '</li>' : '';
+        $ret .= isset($meta['tickets_remaining']) && $meta['tickets_remaining'] != '' ? '<li>' . __('Tickets remaining', 'event-integration') . ': ' . $meta['tickets_remaining'] . '</li>' : '';
         $ret .= '</ul>';
         if (!empty($meta['additional_ticket_types']) && is_array($meta['additional_ticket_types'])) {
             $ret .= '<ul><li><strong>' . __('Ticket types', 'event-integration') . '</strong></li></ul>';
             foreach ($meta['additional_ticket_types'] as $index => $ticketType) {
                 $ret .= '<ul>';
-                $ret .= (!empty($ticketType['ticket_name'])) ? '<li><strong>' . $ticketType['ticket_name'] . '</strong></li>' : '';
+                $ret .= !empty($ticketType['ticket_name']) ? '<li><strong>' . $ticketType['ticket_name'] . '</strong></li>' : '';
                 if (!empty($ticketType['ticket_type'])) {
                     switch (strtolower($ticketType['ticket_type'])) {
-                        case('seated'):
+                        case 'seated':
                             $ret .= '<li>' . __('Seated', 'event-integration') . '</li>';
                             break;
-                        case('standing'):
+                        case 'standing':
                             $ret .= '<li>' . __('Standing', 'event-integration') . '</li>';
                             break;
                     }
                 }
-                $ret .= (isset($ticketType['minimum_price']) && $ticketType['minimum_price'] != '') ? '<li>' . __('Minimum price', 'event-integration') . ': ' . self::priceOutput($ticketType['minimum_price']) . '</li>' : '';
-                $ret .= (isset($ticketType['maximum_price']) && $ticketType['maximum_price'] != '') ? '<li>' . __('Maximum price', 'event-integration') . ': ' . self::priceOutput($ticketType['maximum_price']) . '</li>' : '';
+                $ret .= isset($ticketType['minimum_price']) && $ticketType['minimum_price'] != '' ? '<li>' . __('Minimum price', 'event-integration') . ': ' . self::priceOutput($ticketType['minimum_price']) . '</li>' : '';
+                $ret .= isset($ticketType['maximum_price']) && $ticketType['maximum_price'] != '' ? '<li>' . __('Maximum price', 'event-integration') . ': ' . self::priceOutput($ticketType['maximum_price']) . '</li>' : '';
                 $ret .= '</ul>';
             }
         }
@@ -453,10 +452,10 @@ class SingleEventAdmin
         if (!empty($meta['price_range']) && is_array($meta['price_range']) && !empty(array_filter($meta['price_range']))) {
             $ret .= '<ul><li><strong>' . __('Price range', 'event-integration') . '</strong></li></ul>';
             $ret .= '<ul>';
-            $ret .= (isset($meta['price_range']['seated_minimum_price']) && $meta['price_range']['seated_minimum_price'] != '') ? '<li>' . __('Seated minimum price', 'event-integration') . ': ' . self::priceOutput($meta['price_range']['seated_minimum_price']) . '</li>' : '';
-            $ret .= (isset($meta['price_range']['seated_maximum_price']) && $meta['price_range']['seated_maximum_price'] != '') ? '<li>' . __('Seated maximum price', 'event-integration') . ': ' . self::priceOutput($meta['price_range']['seated_maximum_price']) . '</li>' : '';
-            $ret .= (isset($meta['price_range']['standing_minimum_price']) && $meta['price_range']['standing_minimum_price'] != '') ? '<li>' . __('Standing minimum price', 'event-integration') . ': ' . self::priceOutput($meta['price_range']['standing_minimum_price']) . '</li>' : '';
-            $ret .= (isset($meta['price_range']['standing_maximum_price']) && $meta['price_range']['standing_maximum_price'] != '') ? '<li>' . __('Standing maximum price', 'event-integration') . ': ' . self::priceOutput($meta['price_range']['standing_maximum_price']) . '</li>' : '';
+            $ret .= isset($meta['price_range']['seated_minimum_price']) && $meta['price_range']['seated_minimum_price'] != '' ? '<li>' . __('Seated minimum price', 'event-integration') . ': ' . self::priceOutput($meta['price_range']['seated_minimum_price']) . '</li>' : '';
+            $ret .= isset($meta['price_range']['seated_maximum_price']) && $meta['price_range']['seated_maximum_price'] != '' ? '<li>' . __('Seated maximum price', 'event-integration') . ': ' . self::priceOutput($meta['price_range']['seated_maximum_price']) . '</li>' : '';
+            $ret .= isset($meta['price_range']['standing_minimum_price']) && $meta['price_range']['standing_minimum_price'] != '' ? '<li>' . __('Standing minimum price', 'event-integration') . ': ' . self::priceOutput($meta['price_range']['standing_minimum_price']) . '</li>' : '';
+            $ret .= isset($meta['price_range']['standing_maximum_price']) && $meta['price_range']['standing_maximum_price'] != '' ? '<li>' . __('Standing maximum price', 'event-integration') . ': ' . self::priceOutput($meta['price_range']['standing_maximum_price']) . '</li>' : '';
             $ret .= '</ul>';
         }
         $ret .= '</ul>';
@@ -465,10 +464,10 @@ class SingleEventAdmin
             $ret .= '<ul><li><strong>' . __('Ticket retailers', 'event-integration') . '</strong></li></ul>';
             foreach ($meta['additional_ticket_retailers'] as $index => $retailer) {
                 $ret .= '<ul>';
-                $ret .= (!empty($retailer['retailer_name'])) ? '<li><strong>' . $retailer['retailer_name'] . '</strong></li>' : '';
-                $ret .= (!empty($retailer['booking_url'])) ? '<li><a href="' . $retailer['booking_url'] . '" class="link-item link-item-outbound">' . preg_replace("(^https?://)", "", $retailer['booking_url']) . '</a></li>' : '';
-                $ret .= (!empty($retailer['ticket_release_date'])) ? '<li>' . __('Ticket release date', 'event-integration') . ': ' . mysql2date('j F Y, H:i', $retailer['ticket_release_date'], true) . '</li>' : '';
-                $ret .= (!empty($retailer['ticket_stop_date'])) ? '<li>' . __('Ticket release date', 'event-integration') . ': ' . mysql2date('j F Y, H:i', $retailer['ticket_stop_date'], true) . '</li>' : '';
+                $ret .= !empty($retailer['retailer_name']) ? '<li><strong>' . $retailer['retailer_name'] . '</strong></li>' : '';
+                $ret .= !empty($retailer['booking_url']) ? '<li><a href="' . $retailer['booking_url'] . '" class="link-item link-item-outbound">' . preg_replace('(^https?://)', '', $retailer['booking_url']) . '</a></li>' : '';
+                $ret .= !empty($retailer['ticket_release_date']) ? '<li>' . __('Ticket release date', 'event-integration') . ': ' . mysql2date('j F Y, H:i', $retailer['ticket_release_date'], true) . '</li>' : '';
+                $ret .= !empty($retailer['ticket_stop_date']) ? '<li>' . __('Ticket release date', 'event-integration') . ': ' . mysql2date('j F Y, H:i', $retailer['ticket_stop_date'], true) . '</li>' : '';
 
                 $ret .= '</ul>';
             }
@@ -492,8 +491,8 @@ class SingleEventAdmin
             }
             $ret .= '</ul>';
         }
-        $ret .= (!empty($meta['price_information'])) ? '<ul><li><strong>' . __('Price information', 'event-integration') . '</strong></li></ul><ul><li> ' . $meta['price_information'] . '</li></ul>' : '';
-        $ret .= (!empty($meta['ticket_includes'])) ? '<ul><li><strong>' . __('Ticket includes', 'event-integration') . '</strong></li></ul><ul><li> ' . $meta['ticket_includes'] . '</li></ul>' : '';
+        $ret .= !empty($meta['price_information']) ? '<ul><li><strong>' . __('Price information', 'event-integration') . '</strong></li></ul><ul><li> ' . $meta['price_information'] . '</li></ul>' : '';
+        $ret .= !empty($meta['ticket_includes']) ? '<ul><li><strong>' . __('Ticket includes', 'event-integration') . '</strong></li></ul><ul><li> ' . $meta['ticket_includes'] . '</li></ul>' : '';
 
         return $ret;
     }
@@ -501,9 +500,9 @@ class SingleEventAdmin
     public static function eventContact($meta = array())
     {
         $ret = '';
-        $ret .= (!empty($meta['contact_information'])) ? '<li>' . $meta['contact_information'] . '</li><br>' : '';
-        $ret .= (!empty($meta['contact_phone'])) ? '<li><a href="tel:' . $meta['contact_phone'] . '" class="link-item link-item-outbound" itemprop="telephone">' . $meta['contact_phone'] . '</a></li>' : '';
-        $ret .= (!empty($meta['contact_email'])) ? '<li><a href="mailto:' . $meta['contact_email'] . '" class="link-item link-item-outbound" itemprop="email">' . $meta['contact_email'] . '</a></li>' : '';
+        $ret .= !empty($meta['contact_information']) ? '<li>' . $meta['contact_information'] . '</li><br>' : '';
+        $ret .= !empty($meta['contact_phone']) ? '<li><a href="tel:' . $meta['contact_phone'] . '" class="link-item link-item-outbound" itemprop="telephone">' . $meta['contact_phone'] . '</a></li>' : '';
+        $ret .= !empty($meta['contact_email']) ? '<li><a href="mailto:' . $meta['contact_email'] . '" class="link-item link-item-outbound" itemprop="email">' . $meta['contact_email'] . '</a></li>' : '';
 
         return $ret;
     }
@@ -514,10 +513,10 @@ class SingleEventAdmin
         if (!empty($meta['organizers']) && is_array($meta['organizers'])) {
             foreach ($meta['organizers'] as $organizer) {
                 $ret .= '<ul>';
-                $ret .= (!empty($organizer['organizer'])) ? '<li><strong>' . $organizer['organizer'] . '</strong></li>' : '';
-                $ret .= (!empty($organizer['organizer_phone'])) ? '<li><a href="tel:' . $organizer['organizer_phone'] . '" class="link-item link-item-outbound" itemprop="telephone">' . $organizer['organizer_phone'] . '</a></li>' : '';
-                $ret .= (!empty($organizer['organizer_email'])) ? '<li><a href="mailto:' . $organizer['organizer_email'] . '" class="link-item link-item-outbound" itemprop="email" itemprop="email">' . $organizer['organizer_email'] . '</a></li>' : '';
-                $ret .= (!empty($organizer['organizer_link'])) ? '<li><a href="' . $organizer['organizer_link'] . '" class="link-item link-item-outbound">' . preg_replace("(^https?://)", "", $organizer['organizer_link']) . '</a></li>' : '';
+                $ret .= !empty($organizer['organizer']) ? '<li><strong>' . $organizer['organizer'] . '</strong></li>' : '';
+                $ret .= !empty($organizer['organizer_phone']) ? '<li><a href="tel:' . $organizer['organizer_phone'] . '" class="link-item link-item-outbound" itemprop="telephone">' . $organizer['organizer_phone'] . '</a></li>' : '';
+                $ret .= !empty($organizer['organizer_email']) ? '<li><a href="mailto:' . $organizer['organizer_email'] . '" class="link-item link-item-outbound" itemprop="email" itemprop="email">' . $organizer['organizer_email'] . '</a></li>' : '';
+                $ret .= !empty($organizer['organizer_link']) ? '<li><a href="' . $organizer['organizer_link'] . '" class="link-item link-item-outbound">' . preg_replace('(^https?://)', '', $organizer['organizer_link']) . '</a></li>' : '';
                 $ret .= '</ul>';
             }
 
@@ -527,7 +526,7 @@ class SingleEventAdmin
                 if (is_array($meta['supporters']) && !empty($meta['supporters'])) {
                     foreach ($meta['supporters'] as $sponsor) {
                         $ret .= '<ul>';
-                        $ret .= (!empty($sponsor['post_title'])) ? '<li>' . $sponsor['post_title'] . '</li>' : '';
+                        $ret .= !empty($sponsor['post_title']) ? '<li>' . $sponsor['post_title'] . '</li>' : '';
                         $ret .= '</ul>';
                     }
                 }
@@ -541,9 +540,9 @@ class SingleEventAdmin
     {
         $ret = '';
         foreach ($occasions as $occasion) {
-            $date = (!empty($occasion->start_date) && !empty($occasion->end_date)) ? \EventManagerIntegration\App::formatEventDate($occasion->start_date, $occasion->end_date) : '';
-            $date .= (isset($occasion->status) && $occasion->status == 'cancelled') ? ' - <strong>' . __('Cancelled', 'event-integration') . '</strong>' : '';
-            $date .= (isset($occasion->status) && $occasion->status == 'rescheduled') ? ' - <strong>' . __('Rescheduled', 'event-integration') . '</strong>' : '';
+            $date = !empty($occasion->start_date) && !empty($occasion->end_date) ? \EventManagerIntegration\App::formatEventDate($occasion->start_date, $occasion->end_date) : '';
+            $date .= isset($occasion->status) && $occasion->status == 'cancelled' ? ' - <strong>' . __('Cancelled', 'event-integration') . '</strong>' : '';
+            $date .= isset($occasion->status) && $occasion->status == 'rescheduled' ? ' - <strong>' . __('Rescheduled', 'event-integration') . '</strong>' : '';
             $ret .= '<ul><li>';
             $ret .= $date;
             $ret .= '</li></ul>';
@@ -555,13 +554,13 @@ class SingleEventAdmin
     public static function eventLinks($meta = array())
     {
         $ret = '<ul>';
-        $ret .= (!empty($meta['facebook'])) ? '<li><a href="' . $meta['facebook'] . '" class="link-item link-item-outbound">Facebook</a></li>' : '';
-        $ret .= (!empty($meta['twitter'])) ? '<li><a href="' . $meta['twitter'] . '" class="link-item link-item-outbound">Twitter</a></li>' : '';
-        $ret .= (!empty($meta['instagram'])) ? '<li><a href="' . $meta['instagram'] . '" class="link-item link-item-outbound">Instagram</a></li>' : '';
-        $ret .= (!empty($meta['google_music'])) ? '<li><a href="' . $meta['google_music'] . '" class="link-item link-item-outbound">Google Music</a></li>' : '';
-        $ret .= (!empty($meta['spotify'])) ? '<li><a href="' . $meta['spotify'] . '" class="link-item link-item-outbound">Spotify</a></li>' : '';
-        $ret .= (!empty($meta['soundcloud'])) ? '<li><a href="' . $meta['soundcloud'] . '" class="link-item link-item-outbound">Soundcloud</a></li>' : '';
-        $ret .= (!empty($meta['deezer'])) ? '<li><a href="' . $meta['deezer'] . '" class="link-item link-item-outbound">Deezer</a></li>' : '';
+        $ret .= !empty($meta['facebook']) ? '<li><a href="' . $meta['facebook'] . '" class="link-item link-item-outbound">Facebook</a></li>' : '';
+        $ret .= !empty($meta['twitter']) ? '<li><a href="' . $meta['twitter'] . '" class="link-item link-item-outbound">Twitter</a></li>' : '';
+        $ret .= !empty($meta['instagram']) ? '<li><a href="' . $meta['instagram'] . '" class="link-item link-item-outbound">Instagram</a></li>' : '';
+        $ret .= !empty($meta['google_music']) ? '<li><a href="' . $meta['google_music'] . '" class="link-item link-item-outbound">Google Music</a></li>' : '';
+        $ret .= !empty($meta['spotify']) ? '<li><a href="' . $meta['spotify'] . '" class="link-item link-item-outbound">Spotify</a></li>' : '';
+        $ret .= !empty($meta['soundcloud']) ? '<li><a href="' . $meta['soundcloud'] . '" class="link-item link-item-outbound">Soundcloud</a></li>' : '';
+        $ret .= !empty($meta['deezer']) ? '<li><a href="' . $meta['deezer'] . '" class="link-item link-item-outbound">Deezer</a></li>' : '';
         if (!empty($meta['youtube']) && is_array($meta['youtube'])) {
             foreach ($meta['youtube'] as $youtube) {
                 $ret .= '<li><a href="' . $youtube['youtube_link'] . '" class="link-item link-item-outbound">YouTube</a></li>';

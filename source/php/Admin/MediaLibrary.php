@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 /**
  * Customizes the admin edit event view to show complete event data
  */
@@ -11,12 +10,12 @@ namespace EventManagerIntegration\Admin;
 
 class MediaLibrary
 {
-    private $metaBlockKey = "event-manager-media"; 
+    private $metaBlockKey = 'event-manager-media';
 
     public function __construct()
     {
         add_action('pre_get_posts', array($this, 'hideEventAttachmentsList'), 10, 1);
-        add_filter('ajax_query_attachments_args', array($this, 'hideEventAttachmentsModal'), 10, 2 );
+        add_filter('ajax_query_attachments_args', array($this, 'hideEventAttachmentsModal'), 10, 2);
         add_action('before_delete_post', array($this, 'deleteConnectedFeaturedImage'), 5, 1);
     }
 
@@ -26,8 +25,8 @@ class MediaLibrary
      * @param  string $glue   used to separate array objects
      * @return string
      */
-    public function hideEventAttachmentsModal($args) {
-
+    public function hideEventAttachmentsModal($args)
+    {
         if (!is_admin()) {
             return;
         }
@@ -35,9 +34,9 @@ class MediaLibrary
         // Modify the query.
         $args['meta_query'] = array(
             array(
-                'key'     => $this->metaBlockKey,
+                'key' => $this->metaBlockKey,
                 'compare' => 'NOT EXISTS',
-            )
+            ),
         );
 
         return $args;
@@ -49,8 +48,8 @@ class MediaLibrary
      * @param  string $glue   used to separate array objects
      * @return string
      */
-    public function hideEventAttachmentsList($query) {
-
+    public function hideEventAttachmentsList($query)
+    {
         // Bail if this is not the admin area.
         if (!is_admin()) {
             return;
@@ -68,14 +67,12 @@ class MediaLibrary
         }
 
         // Modify the query.
-        $query->set('meta_query', 
+        $query->set('meta_query', array(
             array(
-                array(
-                    'key'     => $this->metaBlockKey,
-                    'compare' => 'NOT EXISTS',
-                )
-            )
-        );
+                'key' => $this->metaBlockKey,
+                'compare' => 'NOT EXISTS',
+            ),
+        ));
 
         return;
     }
@@ -83,32 +80,31 @@ class MediaLibrary
     /**
      * Deletes the featured image attachment when the event is about to be removed
      * @param  integer      $postId     The post id
-     * @return bool                     True if there was deletions made, otherwise false                     
+     * @return bool                     True if there was deletions made, otherwise false
      */
-    public function deleteConnectedFeaturedImage($postId) : bool
+    public function deleteConnectedFeaturedImage($postId): bool
     {
-        if(get_post_type($postId) == "event") {
-
+        if (get_post_type($postId) == 'event') {
             //Get all attachments with parent post being deleted
             $postAttachments = get_posts(
                 array(
-                    'post_type'      => 'attachment',
+                    'post_type' => 'attachment',
                     'posts_per_page' => -1,
-                    'post_status'    => 'any',
-                    'post_parent'    => $postId
-                )
-            ); 
+                    'post_status' => 'any',
+                    'post_parent' => $postId,
+                ),
+            );
 
-            //Loop and delete 
-            if(is_array($postAttachments) && !empty($postAttachments)) {
-                foreach($postAttachments as $attachment) {
+            //Loop and delete
+            if (is_array($postAttachments) && !empty($postAttachments)) {
+                foreach ($postAttachments as $attachment) {
                     wp_delete_attachment($attachment->ID, true);
                 }
             }
 
-            return true; 
+            return true;
         }
 
-        return false; 
+        return false;
     }
 }

@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace EventManagerIntegration\Api;
 
 /**
@@ -32,7 +31,7 @@ class Events
                 'callback' => array($this, 'getEvents'),
                 'args' => $this->getCollectionParams(),
                 'permission_callback' => '__return_true',
-            )
+            ),
         );
     }
 
@@ -58,13 +57,13 @@ class Events
             'start_date' => array(
                 'description' => 'Get events from this date',
                 'type' => 'string',
-                'default' => date('Y-m-d H:i:s', strtotime("today midnight")),
+                'default' => date('Y-m-d H:i:s', strtotime('today midnight')),
                 'sanitize_callback' => array($this, 'sanitizeDate'),
             ),
             'end_date' => array(
                 'description' => 'Get events to this date',
                 'type' => 'string',
-                'default' => date('Y-m-d H:i:s', strtotime("today midnight")),
+                'default' => date('Y-m-d H:i:s', strtotime('today midnight')),
                 'sanitize_callback' => array($this, 'sanitizeEndDate'),
             ),
             'categories' => array(
@@ -146,7 +145,7 @@ class Events
             $data = strtotime('today midnight');
         }
 
-        return date('Y-m-d H:i:s', (int)$data);
+        return date('Y-m-d H:i:s', (int) $data);
     }
 
     /**
@@ -207,7 +206,7 @@ class Events
                     'message' => __('No events could be found.', 'event-integration'),
                     'state' => 'empty_result',
                 ),
-                404
+                404,
             );
         }
 
@@ -243,7 +242,7 @@ class Events
      */
     public function mapEventModuleData($moduleId, $settings, $events)
     {
-        $data = (!empty(get_fields($moduleId))) ? get_fields($moduleId) : array();
+        $data = !empty(get_fields($moduleId)) ? get_fields($moduleId) : array();
         $settingsData = json_decode($settings, true);
 
         $template = $data['mod_event_display'] ?? $settingsData['mod_event_display'] ?? 'list';
@@ -257,12 +256,12 @@ class Events
             }
         }
         // Default image
-        $defaultImage = (!empty($data['mod_event_def_image'])) ? $data['mod_event_def_image'] : $settingsData['mod_event_def_image'];
+        $defaultImage = !empty($data['mod_event_def_image']) ? $data['mod_event_def_image'] : $settingsData['mod_event_def_image'];
 
         foreach ($events as &$event) {
             // Set permalink url with date parameter
             $event->permalink = esc_url(
-                add_query_arg('date', preg_replace('/\D/', '', $event->start_date), get_permalink($event->ID))
+                add_query_arg('date', preg_replace('/\D/', '', $event->start_date), get_permalink($event->ID)),
             );
 
             // Format occasion date
@@ -275,7 +274,7 @@ class Events
             if (class_exists('Municipio\Helper\Image') && $template == 'index') {
                 $image = \Municipio\Helper\Image::getImageAttachmentData(get_post_thumbnail_id($event->ID), [1280, 720]);
                 $event->image_url = !empty($image['src']) ? $image['src'] : null;
-            } 
+            }
         }
 
         return $events;

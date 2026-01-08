@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace EventManagerIntegration\Helper;
 
 class Translations
@@ -18,7 +17,7 @@ class Translations
         }
 
         // Build request URL
-        $apiUrl = rtrim($apiUrl, '/').'/event_categories?per_page=100';
+        $apiUrl = rtrim($apiUrl, '/') . '/event_categories?per_page=100';
 
         // Get categories from Event Manager API
         $result = \EventManagerIntegration\Parser::requestApi($apiUrl);
@@ -34,7 +33,7 @@ class Translations
 
                 return $category;
             },
-            $result
+            $result,
         );
 
         // Get all local categories
@@ -43,7 +42,7 @@ class Translations
                 'taxonomy' => 'event_categories',
                 'hide_empty' => false,
                 'lang' => '',
-            )
+            ),
         );
 
         // Collect list of matched new and original term ID
@@ -54,7 +53,7 @@ class Translations
             $category->lang = '';
             $category->translations = array();
             // See if the term exists in both(local and external API) lists
-            if (false !== $key = array_search(strtolower($category->name), array_column($result, 'name'))) {
+            if (false !== ($key = array_search(strtolower($category->name), array_column($result, 'name')))) {
                 $categoryIds[$result[$key]['id']] = $category->term_id;
                 $category->lang = $result[$key]['lang'] ?? '';
                 $category->translations = $result[$key]['translations'] ?? array();
@@ -70,15 +69,14 @@ class Translations
             // Define translations
             if (!empty($category->translations)) {
                 // Replace the original IDs from translations array with the local terms IDs
-                $translations =
-                    array_filter(
-                        array_map(
-                            function ($lang) use ($categoryIds) {
-                                return array_key_exists($lang, $categoryIds) ? $categoryIds[$lang] : false;
-                            },
-                            $category->translations
-                        )
-                    );
+                $translations = array_filter(
+                    array_map(
+                        function ($lang) use ($categoryIds) {
+                            return array_key_exists($lang, $categoryIds) ? $categoryIds[$lang] : false;
+                        },
+                        $category->translations,
+                    ),
+                );
 
                 if (empty($translations)) {
                     continue;
@@ -130,7 +128,7 @@ class Translations
 
                     if ($translatedTerm != false && !is_wp_error($translatedTerm)) {
                         // Add to the terms list if not already exists
-                        if (!in_array($translatedTerm->term_id, array_column((array)$terms, 'term_id'))) {
+                        if (!in_array($translatedTerm->term_id, array_column((array) $terms, 'term_id'))) {
                             $terms[] = $translatedTerm;
                         }
                     }

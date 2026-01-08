@@ -48,7 +48,3 @@
     'label' => $translations['city']
 ])
 @endfield
-
-
-
-

@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace EventManagerIntegration\Module\EventForm;
 
 class Fields
@@ -35,7 +34,7 @@ class Fields
                         'label' => __('Description', 'event-integration'),
                         'description' => __(
                             'Describe your event. What happens and why should you visit it?',
-                            'event-integration'
+                            'event-integration',
                         ),
                         'type' => 'textarea',
                         'required' => true,
@@ -45,15 +44,17 @@ class Fields
                         'name' => 'image_input',
                         'label' => __('Upload an image', 'event-integration'),
                         'description' =>
-                        __(
-                            'Keep in mind that the image may be cropped, so avoid text in the image.',
-                            'event-integration'
-                        ) . '<br>' .
                             __(
+                                'Keep in mind that the image may be cropped, so avoid text in the image.',
+                                'event-integration',
+                            )
+                            . '<br>'
+                            . __(
                                 'Images with identifiable persons are not accepted and will be replaced.',
-                                'event-integration'
-                            ) . '<br>' .
-                            __('You must also have the right to use and distribute the image.', 'event-integration'),
+                                'event-integration',
+                            )
+                            . '<br>'
+                            . __('You must also have the right to use and distribute the image.', 'event-integration'),
                         'type' => 'image',
                         'required' => !empty($data['image_input']['required']),
                         'aspectRatio' => '16:9',
@@ -69,16 +70,16 @@ class Fields
                         'options' => [
                             'approved' => __(
                                 'I have the right to use the image to promote this event.',
-                                'event-integration'
-                            )
+                                'event-integration',
+                            ),
                         ],
                         'condition' => [
                             [
                                 'key' => 'image_input',
                                 'compare' => '!=',
-                                'compareValue' => ''
-                            ]
-                        ]
+                                'compareValue' => '',
+                            ],
+                        ],
                     ],
                     [
                         'name' => 'event_image_gdpr_compliance',
@@ -93,9 +94,9 @@ class Fields
                             [
                                 'key' => 'image_input',
                                 'compare' => '!=',
-                                'compareValue' => ''
-                            ]
-                        ]
+                                'compareValue' => '',
+                            ],
+                        ],
                     ],
                     [
                         'name' => 'event_image_marketing_compliance',
@@ -106,16 +107,16 @@ class Fields
                         'options' => [
                             'approved' => __(
                                 'They have approved that the image is used to market this event and have been informed that after the image has been added to the database, it may appear in various channels to market the event.',
-                                'event-integration'
-                            )
+                                'event-integration',
+                            ),
                         ],
                         'condition' => [
                             [
                                 'key' => 'event_image_gdpr_compliance',
                                 'compare' => '=',
-                                'compareValue' => 'yes'
-                            ]
-                        ]
+                                'compareValue' => 'yes',
+                            ],
+                        ],
                     ],
                     // End Section 1
                 ],
@@ -179,8 +180,8 @@ class Fields
                             [
                                 'key' => 'event_schema_type',
                                 'compare' => '=',
-                                'compareValue' => 'single-date'
-                            ]
+                                'compareValue' => 'single-date',
+                            ],
                         ],
                         'labels' => [
                             'addButton' => __('Add date', 'event-integration'),
@@ -196,7 +197,7 @@ class Fields
                                 'label' => __('Weekday', 'event-integration'),
                                 'description' => __(
                                     'The event will occur on this weekday.',
-                                    'event-integration'
+                                    'event-integration',
                                 ),
                                 'type' => 'select',
                                 'required' => true,
@@ -215,7 +216,7 @@ class Fields
                                 'label' => __('Weekly interval', 'event-integration'),
                                 'description' => __(
                                     'Enter the weekly interval when the event occurs. 1 equals every week.',
-                                    'event-integration'
+                                    'event-integration',
                                 ),
                                 'type' => 'number',
                                 'required' => true,
@@ -257,8 +258,8 @@ class Fields
                             [
                                 'key' => 'event_schema_type',
                                 'compare' => '=',
-                                'compareValue' => 'recurring-event'
-                            ]
+                                'compareValue' => 'recurring-event',
+                            ],
                         ],
                     ],
                     [
@@ -292,15 +293,15 @@ class Fields
                             'name' => 'organizer',
                             'hiddenFields' => [
                                 'contact_email' => 'contact_email',
-                                'contact_phone' => 'contact_phone'
-                            ]
+                                'contact_phone' => 'contact_phone',
+                            ],
                         ],
                         'condition' => [
                             [
                                 'key' => 'event_organizer',
                                 'compare' => '=',
-                                'compareValue' => 'existing'
-                            ]
+                                'compareValue' => 'existing',
+                            ],
                         ],
                     ],
                     [
@@ -330,8 +331,8 @@ class Fields
                             [
                                 'key' => 'event_organizer',
                                 'compare' => '=',
-                                'compareValue' => 'new'
-                            ]
+                                'compareValue' => 'new',
+                            ],
                         ],
                     ],
                     [
@@ -356,14 +357,14 @@ class Fields
                         ],
                         'dataSource' => [
                             'type' => 'post',
-                            'name' => 'location'
+                            'name' => 'location',
                         ],
                         'condition' => [
                             [
                                 'key' => 'event_location',
                                 'compare' => '=',
-                                'compareValue' => 'existing'
-                            ]
+                                'compareValue' => 'existing',
+                            ],
                         ],
                     ],
                     [
@@ -399,8 +400,8 @@ class Fields
                             [
                                 'key' => 'event_location',
                                 'compare' => '=',
-                                'compareValue' => 'new'
-                            ]
+                                'compareValue' => 'new',
+                            ],
                         ],
                     ],
                     [
@@ -412,7 +413,7 @@ class Fields
                             'elevator_ ramp' => __('Elevator/ramp', 'event-integration'),
                             'accessible_toilet' => __('Handicap toilet', 'event-integration'),
                         ],
-                        'value' => []
+                        'value' => [],
                     ],
                     // End Section 2
                 ],
@@ -447,7 +448,7 @@ class Fields
                         'label' => __('Price', 'event-integration'),
                         'element' => 'h3',
                         'type' => 'heading',
-                        'marginTop' => true
+                        'marginTop' => true,
                     ],
                     [
                         'name' => 'event_price_free',
@@ -456,9 +457,9 @@ class Fields
                         'options' => [
                             'free' => __(
                                 'The event is free',
-                                'event-integration'
-                            )
-                        ]
+                                'event-integration',
+                            ),
+                        ],
                     ],
                     [
                         'name' => 'price_adult',
@@ -470,14 +471,14 @@ class Fields
                             [
                                 'key' => 'event_price_free',
                                 'compare' => '=',
-                                'compareValue' => false
-                            ]
+                                'compareValue' => false,
+                            ],
                         ],
                         'conditionValue' => [
                             'key' => 'event_price_free',
                             'compare' => '=',
                             'compareValue' => true,
-                            'value' => 0
+                            'value' => 0,
                         ],
                     ],
                     [
@@ -490,14 +491,14 @@ class Fields
                             [
                                 'key' => 'event_price_free',
                                 'compare' => '=',
-                                'compareValue' => false
-                            ]
+                                'compareValue' => false,
+                            ],
                         ],
                         'conditionValue' => [
                             'key' => 'event_price_free',
                             'compare' => '=',
                             'compareValue' => true,
-                            'value' => 0
+                            'value' => 0,
                         ],
                     ],
                     [
@@ -510,14 +511,14 @@ class Fields
                             [
                                 'key' => 'event_price_free',
                                 'compare' => '=',
-                                'compareValue' => false
-                            ]
+                                'compareValue' => false,
+                            ],
                         ],
                         'conditionValue' => [
                             'key' => 'event_price_free',
                             'compare' => '=',
                             'compareValue' => true,
-                            'value' => 0
+                            'value' => 0,
                         ],
                     ],
                     [
@@ -530,14 +531,14 @@ class Fields
                             [
                                 'key' => 'event_price_free',
                                 'compare' => '=',
-                                'compareValue' => false
-                            ]
+                                'compareValue' => false,
+                            ],
                         ],
                         'conditionValue' => [
                             'key' => 'event_price_free',
                             'compare' => '=',
                             'compareValue' => true,
-                            'value' => 0
+                            'value' => 0,
                         ],
                     ],
                     [
@@ -550,14 +551,14 @@ class Fields
                             [
                                 'key' => 'event_price_free',
                                 'compare' => '=',
-                                'compareValue' => false
-                            ]
+                                'compareValue' => false,
+                            ],
                         ],
                         'conditionValue' => [
                             'key' => 'event_price_free',
                             'compare' => '=',
                             'compareValue' => true,
-                            'value' => 0
+                            'value' => 0,
                         ],
                     ],
                     [
@@ -570,14 +571,14 @@ class Fields
                             [
                                 'key' => 'event_price_free',
                                 'compare' => '=',
-                                'compareValue' => false
-                            ]
+                                'compareValue' => false,
+                            ],
                         ],
                         'conditionValue' => [
                             'key' => 'event_price_free',
                             'compare' => '=',
                             'compareValue' => true,
-                            'value' => 0
+                            'value' => 0,
                         ],
                     ],
                     [
@@ -602,8 +603,8 @@ class Fields
                             [
                                 'key' => 'event_target_age',
                                 'compare' => '=',
-                                'compareValue' => 'specified'
-                            ]
+                                'compareValue' => 'specified',
+                            ],
                         ],
                     ],
                     [
@@ -616,8 +617,8 @@ class Fields
                             [
                                 'key' => 'event_target_age',
                                 'compare' => '=',
-                                'compareValue' => 'specified'
-                            ]
+                                'compareValue' => 'specified',
+                            ],
                         ],
                     ],
                     // End Section 3
@@ -635,7 +636,7 @@ class Fields
                         'label' => __('Categorize the event', 'event-integration'),
                         'description' => __(
                             'Add tags and categories to make it easier to show the event in the right place and make it easier to find for visitors.',
-                            'event-integration'
+                            'event-integration',
                         ),
                         'element' => 'h3',
                         'marginBottom' => false,
@@ -650,7 +651,7 @@ class Fields
                         'required' => true,
                         'dataSource' => [
                             'type' => 'taxonomy',
-                            'name' => 'event_categories'
+                            'name' => 'event_categories',
                         ],
                     ],
                     [
@@ -662,7 +663,7 @@ class Fields
                         'required' => !empty($data['event_tags']['required']),
                         'dataSource' => [
                             'type' => 'taxonomy',
-                            'name' => 'event_tags'
+                            'name' => 'event_tags',
                         ],
                     ],
                     [
@@ -670,7 +671,7 @@ class Fields
                         'label' => __('Contact information', 'event-integration'),
                         'description' => __(
                             'Add your contact details below.',
-                            'event-integration'
+                            'event-integration',
                         ),
                         'element' => 'h3',
                         'marginTop' => true,
@@ -698,7 +699,7 @@ class Fields
         return apply_filters(
             'EventManagerIntegration/Module/EventForm/Fields',
             $fields,
-            $data
+            $data,
         );
     }
 }

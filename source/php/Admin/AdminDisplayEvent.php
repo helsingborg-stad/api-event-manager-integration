@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 /**
  * Customizes the admin edit event view to show complete event data
  */
@@ -11,7 +10,6 @@ namespace EventManagerIntegration\Admin;
 
 class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
 {
-
     public $post_type = 'event';
 
     public function __construct()
@@ -45,7 +43,7 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
             array($this, 'eventInfo'),
             $this->post_type,
             'normal',
-            'high'
+            'high',
         );
 
         add_meta_box(
@@ -54,7 +52,7 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
             array($this, 'eventMeta'),
             $this->post_type,
             'normal',
-            'low'
+            'low',
         );
 
         add_meta_box(
@@ -63,7 +61,7 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
             array($this, 'eventGallery'),
             $this->post_type,
             'normal',
-            'low'
+            'low',
         );
 
         add_meta_box(
@@ -72,7 +70,7 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
             array($this, 'eventImage'),
             $this->post_type,
             'side',
-            'high'
+            'high',
         );
 
         add_meta_box(
@@ -81,7 +79,7 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
             array($this, 'eventOccasions'),
             $this->post_type,
             'side',
-            'high'
+            'high',
         );
     }
 
@@ -138,7 +136,7 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
 
         // Information
         $event_info = \EventManagerIntegration\Shortcodes\SingleEventAdmin::eventInfo(false, false, $meta);
-        if (! empty($event_info)) {
+        if (!empty($event_info)) {
             $ret .= '<ul><li><h3>' . __('Information', 'event-integration') . '</h3></li></ul>';
             $ret .= $event_info;
         }
@@ -146,33 +144,33 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
         // Location
         $event_location = \EventManagerIntegration\Shortcodes\SingleEventAdmin::eventLocation($meta);
         if (isset($meta['location'])) {
-            $ret .= '<ul><li><h3>'.__('Location', 'event-integration').'</h3></li></ul>';
+            $ret .= '<ul><li><h3>' . __('Location', 'event-integration') . '</h3></li></ul>';
             $ret .= $event_location;
         }
 
         // Booking information
         $booking_info = \EventManagerIntegration\Shortcodes\SingleEventAdmin::eventBooking($meta);
         if (strpos($booking_info, '<li>')) {
-            $ret .= '<ul><li><h3>'.__('Booking', 'event-integration').'</h3></li></ul>';
+            $ret .= '<ul><li><h3>' . __('Booking', 'event-integration') . '</h3></li></ul>';
             $ret .= $booking_info;
         }
 
         // Contact
-        if (! empty($contact = \EventManagerIntegration\Shortcodes\SingleEventAdmin::eventContact($meta))) {
-            $ret .= '<ul><li><h3>'.__('Contact', 'event-integration').'</h3></li></ul>';
+        if (!empty($contact = \EventManagerIntegration\Shortcodes\SingleEventAdmin::eventContact($meta))) {
+            $ret .= '<ul><li><h3>' . __('Contact', 'event-integration') . '</h3></li></ul>';
             $ret .= '<ul>' . $contact . '</ul>';
         }
 
         // Organizers
         $event_organizer = \EventManagerIntegration\Shortcodes\SingleEventAdmin::eventOrganizer($meta);
-        if (! empty($meta['organizers'])) {
-            $ret .= '<ul><li><h3>'.__('Organizer', 'event-integration').'</h3></li></ul>';
+        if (!empty($meta['organizers'])) {
+            $ret .= '<ul><li><h3>' . __('Organizer', 'event-integration') . '</h3></li></ul>';
             $ret .= $event_organizer;
         }
 
         // Social media and streaming links
         $link_keys = array('facebook', 'twitter', 'instagram', 'google_music', 'spotify', 'soundcloud', 'deezer', 'youtube', 'vimeo');
-        $links_exist = (count(array_intersect_key(array_flip($link_keys), $meta)) > 0) ? true : false;
+        $links_exist = count(array_intersect_key(array_flip($link_keys), $meta)) > 0 ? true : false;
         $event_links = \EventManagerIntegration\Shortcodes\SingleEventAdmin::eventLinks($meta);
         if ($links_exist) {
             $ret .= '<ul><li><h3>' . __('Links', 'event-integration') . '</h3></li></ul>';
@@ -193,19 +191,19 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
     {
         $id = $object->ID;
         $args = array(
-            'post_parent'    => $id,
-            'post_type'      => 'attachment',
-            'numberposts'    => -1,
-            'post_status'    => 'any',
+            'post_parent' => $id,
+            'post_type' => 'attachment',
+            'numberposts' => -1,
+            'post_status' => 'any',
             'post_mime_type' => 'image',
-            'orderby'        => 'menu_order',
-            'order'           => 'ASC'
+            'orderby' => 'menu_order',
+            'order' => 'ASC',
         );
 
         $images = get_posts($args);
 
         if ($images) {
-            foreach($images as $image) {
+            foreach ($images as $image) {
                 echo wp_get_attachment_image($image->ID, array('300', '200'), '');
             }
         }
@@ -215,24 +213,23 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
      * Display event-image-box
      */
     public function eventImage($object, $box)
-    {
-        ?>
+    { ?>
         <div class="event-integration-box">
             <?php if (get_the_post_thumbnail($object->ID)): ?>
-                <?php echo get_the_post_thumbnail( $object->ID, array( 266, 266), array('class' => 'featured-image')); ?>
+                <?php echo get_the_post_thumbnail($object->ID, array(266, 266), array('class' => 'featured-image')); ?>
             <?php else: ?>
                 <p><?php _e('Image missing', 'event-integration') ?></p>
             <?php endif; ?>
         </div>
-    <?php
-    }
+    <?php }
 
     /**
      * Unserialize and implode arrays
      * @param  mixed $data data to be formatted
      * @return string
      */
-    public function outputMeta($data) {
+    public function outputMeta($data)
+    {
         $unserialized = @unserialize($data);
         if ($unserialized !== false) {
             return $this->multiImplode($unserialized, ', ');
@@ -247,22 +244,22 @@ class AdminDisplayEvent extends \EventManagerIntegration\PostTypes\Events
      * @param  string $glue   used to separate array objects
      * @return string
      */
-    public function multiImplode($array, $glue) {
-    $string = '';
+    public function multiImplode($array, $glue)
+    {
+        $string = '';
 
-    foreach ($array as $key => $item) {
-        if (empty($item)) {
-            continue;
+        foreach ($array as $key => $item) {
+            if (empty($item)) {
+                continue;
+            }
+            if (is_array($item)) {
+                $string .= '<p>' . $this->multiImplode($item, $glue) . '</p>';
+            } else {
+                $string .= $item . $glue;
+            }
         }
-        if (is_array($item)) {
-            $string .= '<p>' . $this->multiImplode($item, $glue) . '</p>';
-        } else {
-            $string .= $item . $glue;
-        }
-    }
-    $string = substr($string, 0, 0-strlen($glue));
+        $string = substr($string, 0, 0 - strlen($glue));
 
-    return $string;
+        return $string;
     }
-
 }

@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace EventManagerIntegration\Helper;
 
 class QueryEvents
@@ -48,11 +47,11 @@ class QueryEvents
 
         $idString = null;
         // Get event near a location
-        $location = !empty($params['location']) ? (array)$params['location'] : null;
+        $location = !empty($params['location']) ? (array) $params['location'] : null;
         if (!empty($location['lat']) && !empty($location['lng'])) {
-            $distance = (!empty($params['distance'])) ? $params['distance'] : 0;
+            $distance = !empty($params['distance']) ? $params['distance'] : 0;
             $locationIds = self::getNearbyLocations($location['lat'], $location['lng'], floatval($distance));
-            $idString = ($locationIds) ? implode(',', array_column($locationIds, 'post_id')) : "0";
+            $idString = $locationIds ? implode(',', array_column($locationIds, 'post_id')) : '0';
         }
 
         // Get events in given language
@@ -63,22 +62,25 @@ class QueryEvents
         }
 
         // Build categories string
-        $categories = (!empty($params['categories']) && is_array($params['categories'])) ? implode(
-            ",",
-            $params['categories']
-        ) : null;
+        $categories = !empty($params['categories']) && is_array($params['categories'])
+            ? implode(
+                ',',
+                $params['categories'],
+            ) : null;
 
         // Build tags string
-        $tags = (!empty($params['tags']) && is_array($params['tags'])) ? implode(
-            ",",
-            $params['tags']
-        ) : null;
+        $tags = !empty($params['tags']) && is_array($params['tags'])
+            ? implode(
+                ',',
+                $params['tags'],
+            ) : null;
 
         // Build groups string
-        $groups = (!empty($params['groups']) && is_array($params['groups'])) ? implode(
-            ",",
-            $params['groups']
-        ) : null;
+        $groups = !empty($params['groups']) && is_array($params['groups'])
+            ? implode(
+                ',',
+                $params['groups'],
+            ) : null;
 
         // Search by text string
         $searchString = !empty($params['search_string']) ? $params['search_string'] : null;
@@ -86,15 +88,15 @@ class QueryEvents
         $onlyTodaysDate = !empty($params['only_todays_date']) ? $params['only_todays_date'] : false;
 
         // Filter by age
-        $ageMin = (isset($params['age_min']) && '' !== $params['age_min']) ? (int) $params['age_min'] : false;
-        $ageMax = (isset($params['age_max']) && '' !== $params['age_max']) ? (int) $params['age_max'] : false;
+        $ageMin = isset($params['age_min']) && '' !== $params['age_min'] ? (int) $params['age_min'] : false;
+        $ageMax = isset($params['age_max']) && '' !== $params['age_max'] ? (int) $params['age_max'] : false;
 
         // Calculate offset
-        $page = (!is_numeric($page)) ? 1 : $page;
+        $page = !is_numeric($page) ? 1 : $page;
         $limit = intval($params['display_limit']);
         $offset = ($page - 1) * $limit;
 
-        $db_table = $wpdb->prefix . "integrate_occasions";
+        $db_table = $wpdb->prefix . 'integrate_occasions';
         $query = "
         SELECT      *, $wpdb->posts.ID AS ID
         FROM        $wpdb->posts
@@ -106,10 +108,10 @@ class QueryEvents
         if ($ageMax) {
             $query .= "LEFT JOIN $wpdb->postmeta AS meta3 ON ( $wpdb->posts.ID = meta3.post_id AND meta3.meta_key = 'age_group_to' ) ";
         }
-        $query .= ($categories) ? "LEFT JOIN $wpdb->term_relationships term1 ON ($wpdb->posts.ID = term1.object_id) " : '';
-        $query .= ($tags) ? "LEFT JOIN $wpdb->term_relationships term2 ON ($wpdb->posts.ID = term2.object_id) " : '';
-        $query .= ($groups) ? "LEFT JOIN $wpdb->term_relationships term3 ON ($wpdb->posts.ID = term3.object_id) " : '';
-        $query .= ($languageId) ? "LEFT JOIN $wpdb->term_relationships term4 ON ($wpdb->posts.ID = term4.object_id) " : '';
+        $query .= $categories ? "LEFT JOIN $wpdb->term_relationships term1 ON ($wpdb->posts.ID = term1.object_id) " : '';
+        $query .= $tags ? "LEFT JOIN $wpdb->term_relationships term2 ON ($wpdb->posts.ID = term2.object_id) " : '';
+        $query .= $groups ? "LEFT JOIN $wpdb->term_relationships term3 ON ($wpdb->posts.ID = term3.object_id) " : '';
+        $query .= $languageId ? "LEFT JOIN $wpdb->term_relationships term4 ON ($wpdb->posts.ID = term4.object_id) " : '';
 
         $query .= "
         WHERE $wpdb->posts.post_type = %s
@@ -131,15 +133,15 @@ class QueryEvents
             $query .= "AND $db_table.end_date <= '" . date('Y-m-d H:i:s', strtotime('tomorrow - 1 second')) . "' ";
         }
 
-        $query .= ($searchString) ? "AND (($wpdb->posts.post_title LIKE %s) OR ($wpdb->posts.post_content LIKE %s))" : '';
-        $query .= ($categories) ? "AND (term1.term_taxonomy_id IN ($categories)) " : '';
-        $query .= ($tags) ? "AND (term2.term_taxonomy_id IN ($tags)) " : '';
-        $query .= ($groups) ? "AND (term3.term_taxonomy_id IN ($groups)) " : '';
-        $query .= ($languageId) ? "AND (term4.term_taxonomy_id IN ($languageId)) " : '';
-        $query .= ($idString != null) ? "AND ($wpdb->posts.ID IN ($idString)) " : '';
+        $query .= $searchString ? "AND (($wpdb->posts.post_title LIKE %s) OR ($wpdb->posts.post_content LIKE %s))" : '';
+        $query .= $categories ? "AND (term1.term_taxonomy_id IN ($categories)) " : '';
+        $query .= $tags ? "AND (term2.term_taxonomy_id IN ($tags)) " : '';
+        $query .= $groups ? "AND (term3.term_taxonomy_id IN ($groups)) " : '';
+        $query .= $languageId ? "AND (term4.term_taxonomy_id IN ($languageId)) " : '';
+        $query .= $idString != null ? "AND ($wpdb->posts.ID IN ($idString)) " : '';
         $query .= "GROUP BY $wpdb->posts.ID, $db_table.start_date, $db_table.end_date ";
         $query .= "ORDER BY $db_table.start_date ASC";
-        $query .= ($limit == -1) ? '' : ' LIMIT' . ' ' . $offset . ',' . $limit;
+        $query .= $limit == -1 ? '' : ' LIMIT' . ' ' . $offset . ',' . $limit;
 
         $placeholders = array(
             'event',
@@ -156,7 +158,7 @@ class QueryEvents
 
         $completeQuery = $wpdb->prepare(
             $query,
-            $placeholders
+            $placeholders,
         );
         $events = $wpdb->get_results($completeQuery);
 
@@ -172,14 +174,14 @@ class QueryEvents
     public static function getEventOccasions($post_id, $custom = false)
     {
         global $wpdb;
-        $db_table = $wpdb->prefix . "integrate_occasions";
+        $db_table = $wpdb->prefix . 'integrate_occasions';
 
         $query = "
         SELECT      *
         FROM        $db_table
         WHERE       $db_table.event_id = %d
         ";
-        $query .= ($custom == true) ? "AND $db_table.content_mode = 'custom'" : '';
+        $query .= $custom == true ? "AND $db_table.content_mode = 'custom'" : '';
         $query .= "ORDER BY $db_table.start_date ASC";
 
         $completeQuery = $wpdb->prepare($query, $post_id);
@@ -194,7 +196,7 @@ class QueryEvents
             $occasion->permalink = add_query_arg(
                 'date',
                 preg_replace('/\D/', '', $occasion->start_date),
-                get_permalink($occasion->event_id)
+                get_permalink($occasion->event_id),
             );
         }
 
@@ -233,7 +235,7 @@ class QueryEvents
         if (strlen($string) <= $limit || $limit == -1) {
             return $string;
         } else {
-            $y = mb_substr($string, 0, $limit, "utf-8") . '...';
+            $y = mb_substr($string, 0, $limit, 'utf-8') . '...';
 
             return $y;
         }
@@ -277,7 +279,7 @@ class QueryEvents
             $lat,
             $lng,
             $lat,
-            $distance
+            $distance,
         );
 
         $nearby_locations = $wpdb->get_results($sql, ARRAY_A);

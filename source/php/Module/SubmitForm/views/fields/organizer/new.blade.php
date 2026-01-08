@@ -35,7 +35,3 @@
     'label' => $translations['email']
 ])
 @endfield
-
-
-
-

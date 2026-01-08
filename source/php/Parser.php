@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace EventManagerIntegration;
 
 abstract class Parser
@@ -34,7 +33,7 @@ abstract class Parser
         global $wpdb;
         $results = $wpdb->get_results(
             "SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '_event_manager_id' AND meta_value = $event_manager_id LIMIT 1",
-            ARRAY_A
+            ARRAY_A,
         );
         if (!empty($results[0]['post_id'])) {
             return $results[0]['post_id'];
@@ -60,7 +59,7 @@ abstract class Parser
             'timeout' => 120,
             'sslverify' => defined('DEV_MODE') && DEV_MODE == true ? false : true,
             'headers' => array(
-                'ClientSolution' => 'WordPress Integration '.EVENTMANAGERINTEGRATION_ID,
+                'ClientSolution' => 'WordPress Integration ' . EVENTMANAGERINTEGRATION_ID,
                 'PhpVersion' => phpversion(),
                 'referrer' => get_home_url(),
             ),
@@ -84,5 +83,4 @@ abstract class Parser
 
         return $body;
     }
-
 }

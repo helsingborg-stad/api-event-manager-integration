@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace EventManagerIntegration\Acf;
 
 class AcfConfig
@@ -20,9 +19,7 @@ class AcfConfig
     {
         if (!class_exists('acf')) {
             add_action('admin_notices', function () {
-                echo '<div class="notice error"><p>' .
-                        __('To get the full expirience of the <strong>Event Manager Integration</strong> plugin, please activate the <a href="http://www.advancedcustomfields.com/pro/" target="_blank">Advanced Custom Fields Pro</a> plugin.', 'event-integration') .
-                     '</p></div>';
+                echo '<div class="notice error"><p>' . __('To get the full expirience of the <strong>Event Manager Integration</strong> plugin, please activate the <a href="http://www.advancedcustomfields.com/pro/" target="_blank">Advanced Custom Fields Pro</a> plugin.', 'event-integration') . '</p></div>';
             });
         }
     }

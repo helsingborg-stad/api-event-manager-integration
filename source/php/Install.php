@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace EventManagerIntegration;
 
 global $eventDatabaseVersion;
@@ -60,7 +59,7 @@ class Install
         PRIMARY KEY  (ID)
         ) $charsetCollate;";
 
-        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+        require_once ABSPATH . 'wp-admin/includes/upgrade.php';
         dbDelta($sql);
 
         update_option('event_manager_integration_version', $eventDatabaseVersion);

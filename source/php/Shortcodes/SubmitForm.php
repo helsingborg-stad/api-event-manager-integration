@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 /**
  * Shortcodes to display event submit form
  */
@@ -34,19 +33,23 @@ class SubmitForm
     public function submitFormCallback($atts = [], $content = null, $tag = '')
     {
         // Normalize attribute keys, lowercase
-        $atts = array_change_key_case((array)$atts, CASE_LOWER);
+        $atts = array_change_key_case((array) $atts, CASE_LOWER);
 
         // Override default attributes with user attributes
-        $data = shortcode_atts([
-            'user_groups' => '',
-        ], $atts, $tag);
+        $data = shortcode_atts(
+            [
+                'user_groups' => '',
+            ],
+            $atts,
+            $tag,
+        );
 
         $data = array_merge($data, \EventManagerIntegration\Helper\SubmitEvent::geFields());
 
         return \EventManagerIntegration\Helper\RenderBlade::blade(
             'formfields',
-             $data,
-            EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/SubmitForm/views/'
+            $data,
+            EVENTMANAGERINTEGRATION_PATH . 'source/php/Module/SubmitForm/views/',
         );
     }
 }

@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace EventManagerIntegration\Admin;
 
 class Options
@@ -77,7 +76,7 @@ class Options
     public function saveDrawPoints()
     {
         if (!isset($_POST['coordinates']) && !empty($_POST['coordinates'])) {
-            wp_send_json_error("Missing coordinates");
+            wp_send_json_error('Missing coordinates');
         }
 
         $points = $_POST['coordinates'];

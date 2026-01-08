@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace EventManagerIntegration\Helper;
 
 class SingleEventData
@@ -19,7 +18,7 @@ class SingleEventData
         // Get post ID global object if param is empty
         if (!$postId) {
             global $post;
-            if (!$postId = $post->ID ?? null) {
+            if (!($postId = $post->ID ?? null)) {
                 return;
             }
         }
@@ -31,12 +30,7 @@ class SingleEventData
         $occasion = self::singleEventDate($postId, $dateTime);
 
         // Override location with current occasion lovation if set
-        if (is_array($occasion)
-            && isset($occasion['location_mode'])
-            && isset($occasion['location'])
-            && $occasion['location_mode'] === 'custom'
-            && !empty($occasion['location'])) {
-
+        if (is_array($occasion) && isset($occasion['location_mode']) && isset($occasion['location']) && $occasion['location_mode'] === 'custom' && !empty($occasion['location'])) {
             $location = $occasion['location'];
         }
 
@@ -55,7 +49,7 @@ class SingleEventData
         // Get post ID global object if param is empty
         if (!$postId) {
             global $post;
-            if (!$postId = $post->ID ?? null) {
+            if (!($postId = $post->ID ?? null)) {
                 return;
             }
         }
@@ -70,7 +64,7 @@ class SingleEventData
 
         // Try to get date from query string
         if (!$dateTime) {
-            $dateTime = (!empty(get_query_var('date'))) ? get_query_var('date') : null;
+            $dateTime = !empty(get_query_var('date')) ? get_query_var('date') : null;
         }
 
         //Get nearest occasions from time if no date arg
@@ -79,12 +73,12 @@ class SingleEventData
         }
 
         if (is_array($occasions) && count($occasions) == 1) {
-            $singleOccasion = (array)$occasions[0];
+            $singleOccasion = (array) $occasions[0];
             $singleOccasion['formatted'] = \EventManagerIntegration\App::formatEventDate($singleOccasion['start_date'], $singleOccasion['end_date']);
             $singleOccasion['date_parts'] = self::dateParts($singleOccasion['start_date']);
         } elseif (is_array($occasions) && $dateTime != false) {
             foreach ($occasions as $occasion) {
-                $occasion = (array)$occasion;
+                $occasion = (array) $occasion;
                 $event_date = preg_replace('/\D/', '', $occasion['start_date']);
                 if ($dateTime === $event_date) {
                     $singleOccasion = $occasion;
@@ -93,8 +87,8 @@ class SingleEventData
                 }
             }
         }
-        
-        if(!empty($singleOccasion)) {
+
+        if (!empty($singleOccasion)) {
             $singleOccasion['duration_formatted'] = self::getFormattedTimeDiff(strtotime($singleOccasion['start_date']), strtotime($singleOccasion['end_date']));
         }
 
@@ -105,7 +99,7 @@ class SingleEventData
      * Get a formatted time diff for two dates
      * @param  integer  $start  Event start date timestamp
      * @param  integer  $end  Event end date timestamp
-     * @return string 
+     * @return string
      */
     public static function getFormattedTimeDiff($start, $end)
     {
@@ -114,30 +108,28 @@ class SingleEventData
         $singleEventData = new SingleEventData();
 
         // Add one day to number of days if the diff is more than 24 hours but less than 1 week
-        return $diff >= 24 && $diff < (24 * 7)
-            ? sprintf(__('%d days', 'event-integration'), (floor($diff / 24)) + 1)
-            : $singleEventData->eventOccasionDuration($start, $end);
+        return $diff >= 24 && $diff < (24 * 7) ? sprintf(__('%d days', 'event-integration'), floor($diff / 24) + 1) : $singleEventData->eventOccasionDuration($start, $end);
     }
 
     // Display hours + minutes if event duration is between 1 hour and 1 day
     // in order to avoid the excessive rounding that comes from displaying in hours only.
     // For other cases use WP:s human_time_diff()
-    public function eventOccasionDuration($from, $to) {
-        $diff = (int)abs($to - $from);
+    public function eventOccasionDuration($from, $to)
+    {
+        $diff = (int) abs($to - $from);
         if ($diff < DAY_IN_SECONDS && $diff >= HOUR_IN_SECONDS) {
-            $hours = floor($diff / HOUR_IN_SECONDS );
+            $hours = floor($diff / HOUR_IN_SECONDS);
             $mins = floor($diff / MINUTE_IN_SECONDS) - ($hours * 60);
             $formattedDiff = sprintf(_n('%s hour', '%s hours', $hours), $hours);
             if ($mins > 0) {
                 $formattedMins = sprintf(_n('%s min', '%s mins', $mins), $mins);
                 $formattedDiff .= ' ' . $formattedMins;
-            } 
+            }
         } else {
             $formattedDiff = human_time_diff($from, $to);
         }
         return $formattedDiff;
     }
-
 
     /**
      * Get next event occasion date in time

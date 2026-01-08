@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace EventManagerIntegration;
 
 use EventManagerIntegration\Helper\HelperService;
@@ -142,7 +141,7 @@ class Event extends Entity\PostManager
         global $wpdb;
 
         // Delete all occasions related to the event
-        $db_table = $wpdb->prefix . "integrate_occasions";
+        $db_table = $wpdb->prefix . 'integrate_occasions';
         $wpdb->delete($db_table, array('event_id' => $this->ID), array('%d'));
 
         // Remove post if occasions is missing
@@ -175,11 +174,11 @@ class Event extends Entity\PostManager
                     'status' => $status,
                     'exception_information' => $occ_exeption_information,
                     'content_mode' => $content_mode,
-                    'content' => ($content),
-                    'location_mode' => ($location_mode),
-                    'location' => ($location),
-                    'booking_link' => ($oc_booking_link),
-                )
+                    'content' => $content,
+                    'location_mode' => $location_mode,
+                    'location' => $location,
+                    'booking_link' => $oc_booking_link,
+                ),
             );
         }
 
@@ -213,7 +212,7 @@ class Event extends Entity\PostManager
                 function ($translation) use ($localLangs) {
                     return in_array($translation, $localLangs);
                 },
-                ARRAY_FILTER_USE_KEY
+                ARRAY_FILTER_USE_KEY,
             );
 
             // Replace the old IDs with new events IDs

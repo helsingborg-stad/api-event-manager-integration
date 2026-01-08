@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 /**
  * Admin page with forms to authenticate with OAuth1 server
  */
@@ -19,25 +18,26 @@ class OAuthAdmin
     /**
      * Adds submenu page "API authentication", under custom post type parent.
      */
-    public function createOauthPage() {
+    public function createOauthPage()
+    {
         add_submenu_page(
             'options-general.php',
-            __( 'Event Manager Integration: API authentication', 'event-integration' ),
-            __( 'Event Manager Integration: API authentication', 'event-integration' ),
+            __('Event Manager Integration: API authentication', 'event-integration'),
+            __('Event Manager Integration: API authentication', 'event-integration'),
             'manage_options',
             'oauth-request',
             array($this, 'oauthRequestCallback'),
-            1
+            1,
         );
     }
 
     /**
      * Callback for the submenu page. Forms to complete authorization.
      */
-    public function oauthRequestCallback() {
-        ?>
+    public function oauthRequestCallback()
+    { ?>
         <div class="wrap">
-            <h1><?php _e('API authentication', 'event-integration' ); ?></h1>
+            <h1><?php _e('API authentication', 'event-integration'); ?></h1>
         </div>
 
         <div class="error notice hidden"></div>
@@ -46,12 +46,12 @@ class OAuthAdmin
         <?php if (get_option('_event_authorized') == false): ?>
         <div class="wrap oauth-request">
         <h3><?php _e('Request authorization', 'event-integration'); ?></h3>
-        <p><?php _e('To publish events from this client to the API you need authentication. Enter your given client keys and send request.', 'event-integration' ); ?></p>
+        <p><?php _e('To publish events from this client to the API you need authentication. Enter your given client keys and send request.', 'event-integration'); ?></p>
             <form method="post" id="oauth-request" action="/wp-admin/admin-ajax.php">
                 <table class="form-table">
                     <tr>
                         <th scope="row">
-                            <label for="client-key"><?php _e( 'Client key', 'event-integration' )?></label>
+                            <label for="client-key"><?php _e('Client key', 'event-integration') ?></label>
                         </th>
                         <td>
                             <input type="text" class="client-key" name="client-key" id="client-key" value="<?php echo esc_attr(get_option('_event_client')); ?>" />
@@ -59,7 +59,7 @@ class OAuthAdmin
                     </tr>
                     <tr>
                         <th scope="row">
-                            <label for="client-secret"><?php _e( 'Client secret', 'event-integration' )?></label>
+                            <label for="client-secret"><?php _e('Client secret', 'event-integration') ?></label>
                         </th>
                         <td>
                             <input type="text" class="client-secret" name="client-secret" id="client-secret" value="<?php echo esc_attr(get_option('_event_secret')); ?>" />
@@ -86,7 +86,7 @@ class OAuthAdmin
                     </tr>
                 </table>
                 <p class="submit">
-                    <input name='submit' type='submit' class='button-primary' value='<?php _e('Grant access', 'event-integration');  ?>' />
+                    <input name='submit' type='submit' class='button-primary' value='<?php _e('Grant access', 'event-integration'); ?>' />
                 </p>
             </form>
         </div>
@@ -94,13 +94,13 @@ class OAuthAdmin
 
         <?php if (get_option('_event_authorized') == true): ?>
         <div class="wrap oauth-authorized">
-        <h3 class="message-success"><?php _e('Authorized', 'event-integration' ); ?></h3>
-        <p><?php _e('This client is authorized to submit events to the API.', 'event-integration' ); ?></p>
+        <h3 class="message-success"><?php _e('Authorized', 'event-integration'); ?></h3>
+        <p><?php _e('This client is authorized to submit events to the API.', 'event-integration'); ?></p>
             <form method="post" id="oauth-authorized" action="/wp-admin/admin-ajax.php">
                 <table class="form-table">
                     <tr>
                         <th scope="row">
-                            <?php _e( 'Client key', 'event-integration' ); ?>
+                            <?php _e('Client key', 'event-integration'); ?>
                         </th>
                         <td>
                             <code>
@@ -115,6 +115,5 @@ class OAuthAdmin
             </form>
         </div>
         <?php endif ?>
-    <?php
-    }
+    <?php }
 }

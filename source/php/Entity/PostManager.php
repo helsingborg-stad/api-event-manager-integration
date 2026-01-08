@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace EventManagerIntegration\Entity;
 
 use EventManagerIntegration\Helper\HelperService;
@@ -15,7 +14,7 @@ abstract class PostManager
      */
     public $post_type = null;
     public $post_status = 'publish';
-    public $ID; 
+    public $ID;
 
     /**
      * Keys that counts as post object properties
@@ -43,7 +42,7 @@ abstract class PostManager
         'post_parent',
         'menu_order',
         'post_mime_type',
-        'guid'
+        'guid',
     );
 
     /**
@@ -55,7 +54,7 @@ abstract class PostManager
     {
         if (is_null($this->post_type)) {
             throw new \Exception('You need to specify a post type by setting the class property $postType');
-            exit;
+            exit();
         }
 
         // Add post data as separate object parameters
@@ -83,10 +82,10 @@ abstract class PostManager
             'posts_per_page' => $count,
             'post_type' => $postType,
             'orderby' => 'date',
-            'order' => 'DESC'
+            'order' => 'DESC',
         );
 
-        $args['post_status'] = (array)$postStatus;
+        $args['post_status'] = (array) $postStatus;
 
         if (is_array($metaQuery)) {
             $args['meta_query'] = $metaQuery;
@@ -100,7 +99,6 @@ abstract class PostManager
 
         return $posts;
     }
-
 
     public function filterMeta($meta)
     {
@@ -119,7 +117,7 @@ abstract class PostManager
             return $metaValue;
         }
 
-        return ($metaValue !== null && $metaValue !== false && $metaValue !== '');
+        return $metaValue !== null && $metaValue !== false && $metaValue !== '';
     }
 
     /**
@@ -133,7 +131,7 @@ abstract class PostManager
             return $metaValue;
         }
 
-        return ($metaValue == null || $metaValue == false || $metaValue == '');
+        return $metaValue == null || $metaValue == false || $metaValue == '';
     }
 
     /**
@@ -169,9 +167,13 @@ abstract class PostManager
         $defaultData = get_class_vars(get_class($this));
         $forbiddenKeys = array_keys($defaultData);
 
-        $data = array_filter(get_object_vars($this), function ($item) use ($forbiddenKeys) {
-            return !in_array($item, $forbiddenKeys);
-        }, ARRAY_FILTER_USE_KEY);
+        $data = array_filter(
+            get_object_vars($this),
+            function ($item) use ($forbiddenKeys) {
+                return !in_array($item, $forbiddenKeys);
+            },
+            ARRAY_FILTER_USE_KEY,
+        );
 
         // If data key is allowed post field add to $post else add to $meta
         foreach ($data as $key => $value) {
@@ -201,25 +203,25 @@ abstract class PostManager
                     array(
                         'key' => '_event_manager_id',
                         'value' => $meta['_event_manager_id'],
-                        'compare' => '='
-                    )
+                        'compare' => '=',
+                    ),
                 ),
-                $this->post_type
+                $this->post_type,
             );
         }
 
         // Update if duplicate
         if (isset($duplicate->ID)) {
             /*
-            Check if event needs to be updated
-            Hours has intentianally been removed from compare,
-            as it is may cause timezone issues. 
-            Known flaws: 
-            - Unneccsesary update can be executed at new day
-            - Update may not go trough if post is saved 
-              exactly the same minute of any hour. 
-              But will work most of the time.
-            */
+             * Check if event needs to be updated
+             * Hours has intentianally been removed from compare,
+             * as it is may cause timezone issues.
+             * Known flaws:
+             * - Unneccsesary update can be executed at new day
+             * - Update may not go trough if post is saved
+             * exactly the same minute of any hour.
+             * But will work most of the time.
+             */
 
             $localTime = date("Y-m-d \H:i:s", strtotime(get_post_meta($duplicate->ID, 'last_update', true)));
             $remoteTime = date("Y-m-d \H:i:s", strtotime($meta['last_update']));
@@ -254,18 +256,16 @@ abstract class PostManager
      */
     public function setFeaturedImageFromUrl($url, $featured, HelperService $helperService)
     {
-        
-
         if (!isset($this->ID)) {
             return false;
         }
 
-         if (!$this->isUrl($url)) {
+        if (!$this->isUrl($url)) {
             return false;
-        } 
+        }
 
         // Upload path
-        $uploadDir = wp_upload_dir()['basedir'].'/events/' . date("Y"). "/" . date("m");
+        $uploadDir = wp_upload_dir()['basedir'] . '/events/' . date('Y') . '/' . date('m');
 
         //Create dir
         if (!is_dir($uploadDir)) {
@@ -275,23 +275,22 @@ abstract class PostManager
         }
 
         //Get slug & validate that post exists
-        if(is_string(get_post_status($this->ID)) && $filename = get_post($this->ID)->post_name) {
-
+        if (is_string(get_post_status($this->ID)) && ($filename = get_post($this->ID)->post_name)) {
             //Temp name
-            $filenameTemp = urlencode($filename) . ".tmp";
-            
+            $filenameTemp = urlencode($filename) . '.tmp';
+
             // Get the file content
             $options = array(
                 'ssl' => array(
                     'verify_peer' => defined('DEV_MODE') && DEV_MODE === true ? false : true,
-                    'verify_peer_name' => defined('DEV_MODE') && DEV_MODE === true ? false : true
-                )
+                    'verify_peer_name' => defined('DEV_MODE') && DEV_MODE === true ? false : true,
+                ),
             );
             $imgContent = file_get_contents($url, false, stream_context_create($options));
 
             //File is empty abort
-            if(!$imgContent) {
-                return; 
+            if (!$imgContent) {
+                return;
             }
 
             // Save file to temp
@@ -301,11 +300,9 @@ abstract class PostManager
 
             // Detect file type
             $mimeFileType = mime_content_type($uploadDir . '/' . $filenameTemp);
-            $filetype = is_string($mimeFileType) 
-                ? $helperService->getImageExtensionFromMimeType($mimeFileType) 
-                : null;
+            $filetype = is_string($mimeFileType) ? $helperService->getImageExtensionFromMimeType($mimeFileType) : null;
 
-            if( !$filetype ) {
+            if (!$filetype) {
                 return false;
             }
 
@@ -320,19 +317,19 @@ abstract class PostManager
                     'post_title' => $filename,
                     'post_content' => '',
                     'post_status' => 'inherit',
-                    'post_parent' => $this->ID
-                ), 
-                $uploadDir . '/' . $filename . "." . $filetype, 
-                $this->ID
+                    'post_parent' => $this->ID,
+                ),
+                $uploadDir . '/' . $filename . '.' . $filetype,
+                $this->ID,
             );
 
-            if($attachmentId) {
+            if ($attachmentId) {
                 update_post_meta($attachmentId, 'event-manager-media', 1); //Filter in [/Admin/MediaLibrary.php]
             }
 
             //Bind the image to the event
-            $this->bindImageToEvent($attachmentId, $featured); 
-        } 
+            $this->bindImageToEvent($attachmentId, $featured);
+        }
 
         return true;
     }
@@ -343,7 +340,8 @@ abstract class PostManager
      * @param $featured
      * @return bool|object
      */
-    public function bindImageToEvent($attachmentId, $featured = true) {
+    public function bindImageToEvent($attachmentId, $featured = true)
+    {
         // Set image as featured image or add to gallery
         if ($featured) {
             set_post_thumbnail($this->ID, $attachmentId);
@@ -365,7 +363,6 @@ abstract class PostManager
      */
     private function isUrl($url)
     {
-
         if (filter_var(remove_accents($url), FILTER_VALIDATE_URL)) {
             return true;
         }

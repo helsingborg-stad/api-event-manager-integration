@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace EventManagerIntegration;
 
 use Municipio\PostObject\Decorators\AbstractPostObjectDecorator;
@@ -19,10 +18,10 @@ class EventArchive
         //Setup local wpdb instance
         global $wpdb;
         $this->db = $wpdb;
-        $this->dbTable = $wpdb->prefix . "integrate_occasions";
+        $this->dbTable = $wpdb->prefix . 'integrate_occasions';
 
         //Run functions if table exists
-        if($this->occasionsTableExist()) {
+        if ($this->occasionsTableExist()) {
             add_action('pre_get_posts', array($this, 'filterEvents'), 100);
         }
 
@@ -35,7 +34,8 @@ class EventArchive
         add_filter('Municipio/DecoratePostObject', [$this, 'decoratePostObjectDate'], 10, 1);
     }
 
-    private function occasionsTableExist() {
+    private function occasionsTableExist()
+    {
         if (wp_cache_get($this->dbTable) !== false) {
             return true;
         }
@@ -54,6 +54,7 @@ class EventArchive
         }
         return $enabledFilters;
     }
+
     public function taxonomyFilters($taxonomies, $taxonomy)
     {
         $current = get_queried_object();
@@ -70,7 +71,7 @@ class EventArchive
         }
 
         $startDateTimestamp = strtotime($post->startDate);
-        return EventPostObject::create($post, $startDateTimestamp);        
+        return EventPostObject::create($post, $startDateTimestamp);
     }
 
     /**
@@ -175,12 +176,12 @@ class EventArchive
             $where = str_replace(
                 "{$this->db->posts}.post_date >= '{$fromDate} 00:00:00'",
                 "{$this->dbTable}.start_date BETWEEN CAST('{$fromDate}' AS DATE) AND CAST('{$toDatePlusOneDay}' AS DATE)",
-                $where
+                $where,
             );
             $where = str_replace(
                 "AND {$this->db->posts}.post_date <= '{$toDate} 23:59:59'",
-                "",
-                $where
+                '',
+                $where,
             );
         } elseif (!is_null($fromDate) || !is_null($toDate)) {
             // USE FROM OR TO

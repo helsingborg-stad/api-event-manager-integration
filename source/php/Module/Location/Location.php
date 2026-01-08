@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace EventManagerIntegration\Module;
 
 class Location extends \Modularity\Module
@@ -21,17 +20,17 @@ class Location extends \Modularity\Module
         add_action('save_post_mod-' . $this->slug, array($this, 'saveLocation'), 10, 3);
     }
 
-    public function data() : array
+    public function data(): array
     {
         $fields = json_decode(json_encode(get_fields($this->ID)));
         $data['location'] = get_field('mod_location_data', $this->ID);
 
-        $location_fields = (isset($fields->mod_location_fields) && is_array($fields->mod_location_fields)) ? $fields->mod_location_fields : array();
-        $data['address'] = (in_array('address', $location_fields)) ? true : false;
-        $data['open_hours'] = (in_array('open_hours', $location_fields)) ? true : false;
-        $data['organizers'] = (in_array('organizers', $location_fields)) ? true : false;
-        $data['prices'] = (in_array('prices', $location_fields)) ? true : false;
-        $data['links'] = (in_array('links', $location_fields)) ? true : false;
+        $location_fields = isset($fields->mod_location_fields) && is_array($fields->mod_location_fields) ? $fields->mod_location_fields : array();
+        $data['address'] = in_array('address', $location_fields) ? true : false;
+        $data['open_hours'] = in_array('open_hours', $location_fields) ? true : false;
+        $data['organizers'] = in_array('organizers', $location_fields) ? true : false;
+        $data['prices'] = in_array('prices', $location_fields) ? true : false;
+        $data['links'] = in_array('links', $location_fields) ? true : false;
 
         $data['classes'] = implode(' ', apply_filters('Modularity/Module/Classes', array('box', 'box-panel'), $this->post_type, $this->args));
         return $data;
@@ -49,7 +48,7 @@ class Location extends \Modularity\Module
             array($this, 'renderLocationList'),
             $post->post_type,
             'normal',
-            'default'
+            'default',
         );
     }
 
@@ -62,19 +61,19 @@ class Location extends \Modularity\Module
     {
         $api_url = get_field('event_api_url', 'option');
         $location_endpoint = rtrim($api_url, '/') . '/location/complete';
-        @$json = file_get_contents($location_endpoint);
+        @($json = file_get_contents($location_endpoint));
 
         if ($json == false) {
             $markup = '<em>' . __('Something went wrong, pleae check your API url.', 'event-integration') . '</em>';
         } else {
             $locations = json_decode($json);
             $location_data = get_field('mod_location_data', $post->ID);
-            $current = ($location_data) ? $location_data->id : false;
+            $current = $location_data ? $location_data->id : false;
 
             if (!empty($locations)) {
                 $markup = '<select name="mod_location">';
                 foreach ($locations as $location) {
-                    $selected = ($current == $location->id) ? 'selected' : '';
+                    $selected = $current == $location->id ? 'selected' : '';
                     $markup .= '<option value="' . $location->id . '" ' . $selected . '>' . $location->title . '</option>';
                 }
                 $markup .= '</select>';
@@ -99,7 +98,7 @@ class Location extends \Modularity\Module
 
         if (isset($_POST['mod_location'])) {
             $location_endpoint = rtrim($api_url, '/') . '/location/' . $_POST['mod_location'] . '?_embed';
-            @$json = file_get_contents($location_endpoint);
+            @($json = file_get_contents($location_endpoint));
             if ($json != false) {
                 $location = json_decode($json);
                 update_post_meta($post_id, 'mod_location_data', $location);
