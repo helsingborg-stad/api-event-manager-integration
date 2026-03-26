@@ -31,7 +31,7 @@
         "php": "^8.0",
         "helsingborg-stad/acf-export-manager": ">=1.0.0",
         "justinrainbow/json-schema": "^5.2",
-        "helsingborg-stad/municipio": "^6.0.0"
+        "helsingborg-stad/municipio": "*"
     },
     "autoload": {
         "psr-4": {

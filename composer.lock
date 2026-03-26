@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "856657fc239f6bae218d43d09a548567",
+    "content-hash": "aa96b92d4a3efc295bcbf8ba533925ab",
     "packages": [
         {
             "name": "astrotomic/php-deepface",
@@ -984,16 +984,16 @@
         },
         {
             "name": "helsingborg-stad/municipio",
-            "version": "6.4.14",
+            "version": "6.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/helsingborg-stad/Municipio.git",
-                "reference": "677b5a7f214e207f2b218cce00187b5502ef06a0"
+                "reference": "a7a0ac44387b95b781ed045da35d3079cd36e297"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/helsingborg-stad/Municipio/zipball/677b5a7f214e207f2b218cce00187b5502ef06a0",
-                "reference": "677b5a7f214e207f2b218cce00187b5502ef06a0",
+                "url": "https://api.github.com/repos/helsingborg-stad/Municipio/zipball/a7a0ac44387b95b781ed045da35d3079cd36e297",
+                "reference": "a7a0ac44387b95b781ed045da35d3079cd36e297",
                 "shasum": ""
             },
             "require": {
@@ -1024,6 +1024,7 @@
                 "symfony/polyfill-php80": "^1.27"
             },
             "require-dev": {
+                "carthage-software/mago": "^1.0.0-rc.3",
                 "helsingborg-stad/phpcs": "^0.3.1",
                 "php-stubs/acf-pro-stubs": "^6.5",
                 "php-stubs/wordpress-stubs": "^6.7",
@@ -1068,9 +1069,9 @@
             "description": "A bootstrap theme for creating municipality sites.",
             "support": {
                 "issues": "https://github.com/helsingborg-stad/Municipio/issues",
-                "source": "https://github.com/helsingborg-stad/Municipio/tree/6.4.14"
+                "source": "https://github.com/helsingborg-stad/Municipio/tree/6.5.1"
             },
-            "time": "2025-11-21T14:01:19+00:00"
+            "time": "2025-11-24T11:56:06+00:00"
         },
         {
             "name": "helsingborg-stad/schema-library",
