@@ -11,7 +11,8 @@ class App
 
     public function __construct()
     {
-        $eventsPostTypeIsEnabled = get_field('enable_events_post_type', 'option') ?? true;
+        $eventsPostTypeIsEnabled = get_option('enable_events_post_type') ?? true;
+        $eventsPostTypeIsEnabled = $this->formatLooseTypedAcfBooleanValue($eventsPostTypeIsEnabled);
 
         add_action('wp_enqueue_scripts', array($this, 'enqueueFront'), 950);
         add_action('admin_enqueue_scripts', array($this, 'enqueueAdmin'));
@@ -71,6 +72,11 @@ class App
                 }
             }, 10);
         }
+    }
+
+    public function formatLooseTypedAcfBooleanValue(mixed $value): bool
+    {
+        return filter_var($value, FILTER_VALIDATE_BOOLEAN);
     }
 
     /**
