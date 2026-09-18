@@ -11,7 +11,7 @@ class App
 
     public function __construct()
     {
-        $eventsPostTypeIsEnabled = get_option('enable_events_post_type') ?? true;
+        $eventsPostTypeIsEnabled = get_option('options_enable_events_post_type') ?? true;
         $eventsPostTypeIsEnabled = $this->formatLooseTypedAcfBooleanValue($eventsPostTypeIsEnabled);
 
         add_action('wp_enqueue_scripts', array($this, 'enqueueFront'), 950);
