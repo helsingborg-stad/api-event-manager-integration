@@ -1,197 +1,115 @@
 export default (() => {
+    const namespace = window.EventManagerIntegration = window.EventManagerIntegration || {};
+    namespace.Widget = namespace.Widget || {};
+    const months = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
 
-    //Init event widget
-    if(!EventManagerIntegration){ var EventManagerIntegration = {}; }
+    class TemplateParser {
+        constructor() { this.init(); }
 
-    EventManagerIntegration.Widget = EventManagerIntegration.Widget || {};
+        init() {
+            document.querySelectorAll('.event-api').forEach((module) => {
+                const date = new Date();
+                const apiBaseUrl = module.getAttribute('data-apiurl')?.replace(/\/$/, '');
+                if (!apiBaseUrl) return;
 
-    //Component
-    EventManagerIntegration.Widget.TemplateParser = (function ($) {
-        var date                = new Date();
-        var dd                  = date.getDate();
-        var mm                  = date.getMonth()+1;
-        var year                = date.getFullYear();
-        var months              = ["jan", "feb", "mar", "apr", "maj", "jun", "jul", "aug", "sep", "okt", "nov", "dec"];
-
-        var template            = {};
-        var errorTemplate       = {};
-
-        function TemplateParser() {
-            this.init();
+                const url = new URL(`${apiBaseUrl}/event/time`);
+                url.searchParams.set('start', `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`);
+                url.searchParams.set('end', `${date.getFullYear() + 1}-${date.getMonth() + 1}-${date.getDate()}`);
+                url.searchParams.set('post-limit', this.isNumeric(module.getAttribute('post-limit')) ? module.getAttribute('post-limit') : '10');
+                ['group-id', 'category-id', 'latlng', 'distance'].forEach((attribute) => {
+                    const value = module.getAttribute(attribute);
+                    if (value) url.searchParams.set(attribute, value);
+                });
+                this.storeTemplates(module);
+                this.loadEvents(module, url);
+            });
         }
 
-        TemplateParser.prototype.init = function () {
-            $(".event-api").each(function(index,module){
-                var dataApiurl          = ($(module).attr('data-apiurl'));
-                    dataApiurl          = dataApiurl.replace(/\/$/, "");
-                    dataApiurl          = dataApiurl + '/event/time?start=' + year + '-' + mm + '-' + dd + '&end=' + (year+1) + '-' + mm + '-' + dd;
-                var dataLimit           = ($(module).attr('post-limit'));
-                var dataGroupId         = ($(module).attr('group-id'));
-                var dataCategoryId      = ($(module).attr('category-id'));
-                var latlng              = ($(module).attr('latlng'));
-                var distance            = ($(module).attr('distance'));
-
-                var apiUrl = (typeof dataLimit != 'undefined' && $.isNumeric(dataLimit)) ? dataApiurl + '&post-limit=' + dataLimit : dataApiurl + '&post-limit=' + 10;
-                    apiUrl += (typeof dataGroupId != 'undefined' && dataGroupId) ? '&group-id=' + dataGroupId : '';
-                    apiUrl += (typeof dataCategoryId != 'undefined' && dataCategoryId) ? '&category-id=' + dataCategoryId : '';
-                    apiUrl += (typeof latlng != 'undefined' && latlng) ? '&latlng=' + latlng : '';
-                    apiUrl += (typeof distance != 'undefined' && distance) ? '&distance=' + distance : '';
-                    apiUrl += '&_jsonp=getevents';
-                this.storeErrorTemplate($(module));
-                this.storeTemplate($(module));
-                this.storeModalTemplate($(module));
-                this.loadEvent($(module),apiUrl);
-            }.bind(this));
-        };
-
-        TemplateParser.prototype.storeTemplate = function (module) {
-            module.data('template',$('.template',module).html());
-            module.find('.template').remove();
-        };
-
-        TemplateParser.prototype.storeErrorTemplate = function (module) {
-            module.data('error-template',$('.error-template',module).html());
-            module.find('.error-template').remove();
-        };
-
-        TemplateParser.prototype.storeModalTemplate = function (module) {
-            module.data('modal-template',$('.modal-template',module).html());
-            module.find('.modal-template').remove();
-        };
-
-        TemplateParser.prototype.loadEvent = function(module, resource) {
-            $.ajax({
-                type: "GET",
-                url: resource,
-                cache: false,
-                dataType: "jsonp",
-                jsonpCallback: 'getevents',
-                crossDomain: true,
-                success: function( response ) {
-                    //Store response on module
-                    module.data('json-response', response);
-
-                    //Clear target div
-                    TemplateParser.prototype.clear(module);
-
-                    $(response).each(function(index,event){
-
-                        // Get the correct occasion
-                        var eventOccasion = "";
-                        $.each(event.occasions, function(occationindex,occation) {
-                            if (typeof occation.current_occasion != 'undefined' && occation.current_occasion == true) {
-                                eventOccasion = occation;
-                                return false;
-                            }
-                        });
-
-                        var occasionDate    = new Date(eventOccasion.start_date);
-
-                        //Load template data
-                        var moduleTemplate  = module.data('template');
-
-                        //Replace with values
-                        moduleTemplate      = moduleTemplate.replace('{event-id}', event.id);
-                        moduleTemplate      = moduleTemplate.replace('{event-occasion}', occasionDate.getDate() + '<div class="clearfix"></div>' + months[occasionDate.getMonth()]);
-                        moduleTemplate      = moduleTemplate.replace('{event-title}', '<p class="link-item">' + event.title.rendered + '</p>');
-
-                        //Append
-                        module.append(moduleTemplate);
-                    });
-                    //bind click
-                    TemplateParser.prototype.click(module);
-                },
-                error: function( response ) {
-                    TemplateParser.prototype.clear(module);
-                    module.html(module.data('error-template'));
-                }
+        storeTemplates(module) {
+            ['template', 'error-template', 'modal-template'].forEach((className) => {
+                const template = module.querySelector(`.${className}`);
+                module.dataset[this.datasetKey(className)] = template?.innerHTML || '';
+                template?.remove();
             });
+        }
 
-
-        };
-
-        TemplateParser.prototype.clear = function(module){
-            jQuery(module).html('');
-        };
-
-        TemplateParser.prototype.addZero = function (i) {
-            if (i < 10) {
-                i = "0" + i;
+        async loadEvents(module, url) {
+            try {
+                const response = await this.getJsonp(url);
+                module._eventResponse = response;
+                module.replaceChildren();
+                response.forEach((event) => module.insertAdjacentHTML('beforeend', this.renderEvent(module, event)));
+                this.bindEventLinks(module);
+            } catch (error) {
+                module.innerHTML = module.dataset.errorTemplate || '';
             }
-            return i;
-        };
+        }
 
-        TemplateParser.prototype.click = function(module){
+        getJsonp(url) {
+            return new Promise((resolve, reject) => {
+                const callback = `eventIntegration${Date.now()}${Math.floor(Math.random() * 1000)}`;
+                const script = document.createElement('script');
+                let timeout;
+                const cleanup = (error) => {
+                    window.clearTimeout(timeout);
+                    delete window[callback];
+                    script.remove();
+                    if (error) reject(error);
+                };
+                timeout = window.setTimeout(() => cleanup(new Error('The event API request timed out.')), 10000);
+                url.searchParams.set('_jsonp', callback);
+                window[callback] = (response) => { cleanup(); resolve(response); };
+                script.src = url.toString();
+                script.onerror = () => cleanup(new Error('The event API request failed.'));
+                document.head.appendChild(script);
+            });
+        }
 
-            jQuery("li a",module).on('click',{},function(e){
+        renderEvent(module, event) {
+            const occasion = event.occasions.find((item) => item.current_occasion) || {};
+            const date = new Date(occasion.start_date);
+            return (module.dataset.template || '')
+                .replace('{event-id}', event.id)
+                .replace('{event-occasion}', `${date.getDate()}<div class="clearfix"></div>${months[date.getMonth()]}`)
+                .replace('{event-title}', `<p class="link-item">${event.title.rendered}</p>`);
+        }
 
-                var eventId = jQuery(e.target).closest("a.modal-event").data('event-id');
+        bindEventLinks(module) {
+            module.querySelectorAll('li a').forEach((link) => link.addEventListener('click', (event) => {
+                const eventId = event.target.closest('a.modal-event')?.dataset.eventId;
+                const selectedEvent = module._eventResponse?.find((item) => String(item.id) === eventId);
+                if (selectedEvent) this.renderModal(selectedEvent, module.dataset.modalTemplate || '');
+            }));
+        }
 
-                $.each(module.data('json-response'), function(index,object) {
+        renderModal(event, template) {
+            const occasions = event.occasions.map((occasion) => {
+                const start = new Date(occasion.start_date);
+                const end = new Date(occasion.end_date);
+                const startDate = `${this.addZero(start.getDate())} ${months[start.getMonth()]} ${start.getFullYear()} kl. ${this.addZero(start.getHours())}:${this.addZero(start.getMinutes())}`;
+                const endDate = start.getDate() === end.getDate() ? `kl. ${this.addZero(end.getHours())}:${this.addZero(end.getMinutes())}` : `${end.getDate()} ${months[end.getMonth()]} ${end.getFullYear()} kl. ${this.addZero(end.getHours())}:${this.addZero(end.getMinutes())}`;
+                return `<li class="text-sm gutter-sm gutter-vertical">${startDate} - ${endDate}</li>`;
+            }).join('');
+            const locationData = [event.location?.title && `<li><strong>${event.location.title}</strong></li>`, event.location?.street_address && `<li>${event.location.street_address}</li>`, event.location?.postal_code && `<li>${event.location.postal_code}</li>`, event.location?.city && `<li>${event.location.city}</li>`].filter(Boolean).join('');
+            const bookingData = [event.booking_phone && `<li>Telefon: ${event.booking_phone}</li>`, event.price_adult && `<li>Pris: ${event.price_adult} kr</li>`, event.price_children && `<li>Barnpris: ${event.price_children} kr</li>`, event.price_senior && `<li>Pensionärspris: ${event.price_senior} kr</li>`, event.price_student && `<li>Studentpris: ${event.price_student} kr</li>`, event.age_restriction && `<li>Åldersgräns: ${event.age_restriction} kr</li>`].filter(Boolean).join('');
+            const membershipCards = (event.membership_cards || []).map((card) => `<li>${card.post_title}</li>`).join('');
+            const booking = `${bookingData}${membershipCards ? `<li>&nbsp;</li><li><strong>Ingår i medlemskort</strong></li>${membershipCards}` : ''}${event.booking_link ? `<li>&nbsp;</li><li><a href="${event.booking_link}" class="link-item" target="_blank">Boka bljetter här</a></li>` : ''}`;
+            template = template
+                .replace('{event-modal-title}', event.title.rendered)
+                .replace('{event-modal-content}', event.content.rendered || '')
+                .replace('{event-modal-link}', event.event_link ? `<p><a href="${event.event_link}" target="_blank">${event.event_link}</a></p>` : '')
+                .replace('{event-modal-image}', event.featured_media ? `<img src="${event.featured_media.source_url}" alt="${event.title.rendered}" style="display:block; width:100%;">` : '')
+                .replace('{event-modal-occations}', `<section class="accordion-section"><input type="radio" name="active-section" id="accordion-section-1"><label class="accordion-toggle" for="accordion-section-1"><h2>Evenemanget inträffar</h2></label><div class="accordion-content"><ul id="modal-occations">${occasions}</ul></div></section>`)
+                .replace('{event-modal-location}', locationData ? `<section class="accordion-section"><input type="radio" name="active-section" id="accordion-section-2"><label class="accordion-toggle" for="accordion-section-2"><h2>Plats</h2></label><div class="accordion-content"><ul>${locationData}</ul></div></section>` : '')
+                .replace('{event-modal-booking}', booking ? `<section class="accordion-section"><input type="radio" name="active-section" id="accordion-section-3"><label class="accordion-toggle" for="accordion-section-3"><h2>Bokning</h2></label><div class="accordion-content"><ul>${booking}</ul></div></section>` : '');
+            document.getElementById('modal-event')?.remove();
+            document.body.insertAdjacentHTML('beforeend', template);
+        }
 
-                    if(object.id == eventId) {
+        datasetKey(className) { return className.replace(/-([a-z])/g, (_, character) => character.toUpperCase()); }
+        isNumeric(value) { return value !== null && value.trim() !== '' && Number.isFinite(Number(value)); }
+        addZero(value) { return value < 10 ? `0${value}` : value; }
+    }
 
-                        // Main modal
-                        var modalTemplate = module.data('modal-template');
-                            modalTemplate = modalTemplate.replace('{event-modal-title}', object.title.rendered);
-                            modalTemplate = modalTemplate.replace('{event-modal-content}', (object.content.rendered != null) ? object.content.rendered : '');
-                            modalTemplate = modalTemplate.replace('{event-modal-link}', (object.event_link != null) ? '<p><a href="' + object.event_link + '" target="_blank">' + object.event_link + '</a></p>' : '');
-                            modalTemplate = modalTemplate.replace('{event-modal-image}', (object.featured_media != null) ? '<img src=' + object.featured_media.source_url + ' alt="' + object.title.rendered + '" style="display:block; width:100%;">' : '');
-                            // Occations accordion section
-                            var modalOccationResult = "";
-                            $.each(object.occasions, function(occationindex,occation) {
-                                // Format start and end date
-                                var d = new Date(occation.start_date);
-                                var start = this.addZero(d.getDate()) + ' ' + months[d.getMonth()] + ' ' + d.getFullYear() + ' kl. ' + this.addZero(d.getHours()) + ':' + this.addZero(d.getMinutes());
-
-                                var e = new Date(occation.end_date);
-                                var end = "";
-                                if (e.getDate() === d.getDate()) {
-                                    end = 'kl. ' + this.addZero(e.getHours()) + ':' + this.addZero(e.getMinutes());
-                                } else {
-                                    end = e.getDate() + ' ' + months[e.getMonth()] + ' ' + e.getFullYear() + ' kl. ' + this.addZero(e.getHours()) + ':' + this.addZero(e.getMinutes());
-                                }
-                                modalOccationResult = modalOccationResult + '<li class="text-sm gutter-sm gutter-vertical">' + start + ' - ' + end + '</li>';
-
-                            }.bind(this));
-                            modalTemplate = modalTemplate.replace('{event-modal-occations}','<section class="accordion-section"><input type="radio" name="active-section" id="accordion-section-1"><label class="accordion-toggle" for="accordion-section-1"><h2>Evenemanget inträffar</h2></label><div class="accordion-content"><ul id="modal-occations">' + modalOccationResult + '</ul></div></section>');
-                            // Location accordion section
-                            var locationData = "";
-                                locationData += (object.location != null && object.location.title != null) ? '<li><strong>' + object.location.title + '</strong></li>' : '';
-                                locationData += (object.location != null && object.location.street_address != null) ? '<li>' + object.location.street_address + '</li>' : '';
-                                locationData += (object.location != null && object.location.postal_code != null) ? '<li>' + object.location.postal_code + '</li>' : '';
-                                locationData += (object.location != null && object.location.city != null) ? '<il>' + object.location.city + '</li>' : '';
-                            var location = (locationData) ? '<section class="accordion-section"><input type="radio" name="active-section" id="accordion-section-2"><label class="accordion-toggle" for="accordion-section-2"><h2>Plats</h2></label><div class="accordion-content"><ul>' + locationData + '</ul></div></section>' : '';
-                            modalTemplate = modalTemplate.replace('{event-modal-location}', location);
-                            // Boooking accordion section
-                            var bookingData = "";
-                                bookingData += (object.booking_phone != null) ? '<li>Telefon: ' + object.booking_phone + '</li>' : '';
-                                bookingData += (object.price_adult != null) ? '<li>Pris: ' + object.price_adult + ' kr</li>' : '';
-                                bookingData += (object.price_children != null) ? '<li>Barnpris: ' + object.price_children + ' kr</li>' : '';
-                                bookingData += (object.price_senior != null) ? '<li>Pensionärspris: ' + object.price_senior + ' kr</li>' : '';
-                                bookingData += (object.price_student != null) ? '<li>Studentpris: ' + object.price_student + ' kr</li>' : '';
-                                bookingData += (object.age_restriction != null) ? '<li>Åldersgräns: ' + object.age_restriction + ' kr</li>' : '';
-                            var membershipCards = "";
-                            $.each(object.membership_cards, function(cardindex,card) {
-                                membershipCards = membershipCards + '<li>' + card.post_title + '</li>';
-                            }.bind(this));
-                                bookingData += (membershipCards) ? '<li>&nbsp;</li><li><strong>Ingår i medlemskort</strong></li>' + membershipCards : '';
-                                bookingData += (object.booking_link != null) ? '<li>&nbsp;</li><li><a href="' + object.booking_link + '" class="link-item" target="_blank">Boka bljetter här</a></li>' : '';
-                            var booking = (bookingData) ? '<section class="accordion-section"><input type="radio" name="active-section" id="accordion-section-3"><label class="accordion-toggle" for="accordion-section-3"><h2>Bokning</h2></label><div class="accordion-content"><ul>' + bookingData + '</ul></div></section>' : '';
-                            modalTemplate = modalTemplate.replace('{event-modal-booking}', booking);
-
-                        $('#modal-event').remove();
-                        $('body').append(modalTemplate);
-                    }
-
-                }.bind(this));
-
-            }.bind(this));
-
-        };
-
-        return new TemplateParser();
-
-    })(jQuery);
-
+    namespace.Widget.TemplateParser = new TemplateParser();
 })();

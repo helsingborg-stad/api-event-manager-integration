@@ -425,7 +425,7 @@ class Event extends \Modularity\Module
             EVENTMANAGERINTEGRATION_URL . '/dist/' . \EventManagerIntegration\Helper\CacheBust::name(
                 'js/event-integration-module-event.js'
             ),
-            array('jquery', 'react', 'react-dom'),
+            array('react', 'react-dom'),
             false,
             true
         );
