@@ -33,7 +33,10 @@ const getEvents = (url, params) => {
 
                 return response.json();
             }
-            throw Error(response.statusText);
+            // Drain the body so failed requests can finish in browser network tracking.
+            return response.text().then(() => {
+                throw Error(response.statusText);
+            });
         })
         .then(response => {
             data.items = response;
